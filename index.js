@@ -59,6 +59,8 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
           twitchUserInfo = JSON.parse(body);
           console.log(twitchUserInfo);
           info.push(twitchUserInfo.display_name);
+          info.push(twitchUserInfo._id);
+          info.push(twitchUserInfo.email);
           console.log(info)  
           callback(null, info);
         }
