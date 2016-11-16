@@ -5,7 +5,7 @@ var express = require('express'),
     morgan = require('morgan')('dev'),
     waterfall = require('async-waterfall'),
     port = process.env.PORT || 3000,
-    redirectUri = process.env.REDIRECT,
+    // redirectUri = process.env.REDIRECT,
     clientSecret = process.env.twitch_client_secret;
 
 
