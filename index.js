@@ -31,7 +31,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
             client_id: 'cvmjz4nnl2lh1f30abf9hvgedsg6q6u',
             client_secret: clientSecret,
             grant_type: 'authorization_code',
-            redirect_uri: 'https://tweak-game-temp.herokuapp.com/twitch_oauth_endpoint',
+            redirect_uri: 'https://tweak-game-temp.herokuapp.com/twitch_oauth_endpoint/',
             code: code
           }
       }, 
