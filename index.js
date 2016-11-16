@@ -22,6 +22,8 @@ app.get('/', function(req, res) {
 
 app.get('/twitch_oauth_endpoint', function(req, res) {
   var code = req.query.code;
+  console.log(clientSecret)
+  console.log('client secret')
 
   waterfall([
   function(callback){
