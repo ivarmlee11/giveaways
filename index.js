@@ -49,27 +49,23 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
   },
   function(accessToken, callback) {
     var info;
-  var options = {
-    url: 'https://api.twitch.tv/kraken/user',
-    headers: {
-      'Accept': 'application/vnd.twitchtv.v3+json',
-      'Authorization': 'OAuth ' + accessToken
+    var options = {
+      url: 'https://api.twitch.tv/kraken/user',
+      headers: {
+        'Accept': 'application/vnd.twitchtv.v3+json',
+        'Authorization': 'OAuth ' + accessToken
+      }
+    };
+    console.log(options)
+    function callback(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        info = JSON.parse(body);
+        console.log(info);
+        console.log('infoooooooooooooooooooooo')
+      }
     }
-  };
-  console.log(options)
-  function callback(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      info = JSON.parse(body);
-      console.log(info);
-      console.log('infoooooooooooooooooooooo')
-      callback(null, info);
-    }
-  }
-
-  request(options, callback);
-
-
-    
+    request(options, callback);
+    callback(null, info);
     }
   ], function (err, result) {
     // result now equals 'done' 
