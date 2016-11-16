@@ -45,17 +45,14 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
 
   },
   function(accessToken, callback) {
-
-    callback(null, accessToken);
-  }
-], function (err, result) {
-  // result now equals 'done' 
-  console.log(result + ' final result');
-  var result = result;
-  res.render('twitch/twitchEndpoint', {result: result});
-});
-
- 
+      callback(null, accessToken);
+    }
+  ], function (err, result) {
+    // result now equals 'done' 
+    console.log(result + ' final result');
+    var result = result;
+    res.render('twitch/twitchEndpoint', {result: result});
+  });
 
 });
 
