@@ -45,6 +45,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
 
   },
   function(accessToken, callback) {
+    
     callback(null, accessToken);
   }
 ], function (err, result) {
