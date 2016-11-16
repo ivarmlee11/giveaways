@@ -3,6 +3,11 @@
   <div class="container">
     <h1>You've been authorized through Twitch</h1>
     <h3 class="text-center"><strong><%= result %></strong></h3>
+    <ul>
+      <% result.forEach(function(el) { %>
+      <li><%= result.display_name %> has an ID of <%= result.id %></li>
+      <% }); %>
+    </ul>
 
   </div>
 </div>
