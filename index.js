@@ -57,15 +57,15 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
       }
     };
     console.log(options)
-    function callback(error, response, body) {
+    function success(error, response, body) {
       if (!error && response.statusCode == 200) {
         info = JSON.parse(body);
         console.log(info);
         console.log('infoooooooooooooooooooooo')
+        callback(null, info);
       }
     }
-    request(options, callback);
-    callback(null, info);
+    request(options, success);
     }
   ], function (err, result) {
     // result now equals 'done' 
