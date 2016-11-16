@@ -53,7 +53,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
     url: 'https://api.twitch.tv/kraken/user',
     headers: {
       'Accept': 'application/vnd.twitchtv.v3+json',
-      'Authorization': 'OAuth ' + accessToken + "'"
+      'Authorization': 'OAuth ' + accessToken
     }
   };
   console.log(options)
