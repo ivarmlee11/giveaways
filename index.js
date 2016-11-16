@@ -59,6 +59,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
           console.log('type of body ', typeof body)
           info = JSON.parse(body);
           console.log(typeof info)
+          Object.keys(info)
             callback(null, info);
         }
       }
