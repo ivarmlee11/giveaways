@@ -58,7 +58,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
         if (!error && response.statusCode == 200) {
           twitchUserInfo = JSON.parse(body);
           info.push(twitchUserInfo.display_name);
-          info.push(twitchUserInfo.id);
+          console.log(info)  
           callback(null, info);
         }
       }
