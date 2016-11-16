@@ -61,6 +61,8 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
       if (!error && response.statusCode == 200) {
         info = JSON.parse(body);
         console.log(info);
+        info = info.display_name
+        console.log(info)
         console.log('infoooooooooooooooooooooo');
         callback(null, info);
       }
