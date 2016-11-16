@@ -46,7 +46,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
     },
 
     function(accessToken, callback) {
-      var info;
+      var info = {};
       var options = {
         url: 'https://api.twitch.tv/kraken/user',
         headers: {
@@ -57,7 +57,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
       function success(error, response, body) {
         if (!error && response.statusCode == 200) {
           // info = JSON.parse(body);
-          info = body;
+          info['name'] = body.['display_name'];
           callback(null, info);
         }
       }
