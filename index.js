@@ -68,7 +68,8 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
     request(options, success);
     }
   ], function (err, result) {
-    // result now equals 'done' 
+    // result now equals 'done'
+    console.log(JSON.stringify(result)) 
     console.log(result + ' final result');
     var result = result;
     res.render('twitch/twitchEndpoint', {result: result});
