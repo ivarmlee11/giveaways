@@ -60,7 +60,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
     function success(error, response, body) {
       if (!error && response.statusCode == 200) {
         info = JSON.parse(body);
-        console.log(info);
+        console.log(info.display_name);
         console.log('infoooooooooooooooooooooo')
         callback(null, info);
       }
@@ -69,7 +69,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
     }
   ], function (err, result) {
     // result now equals 'done'
-    console.log(JSON.stringify(result)) 
+    // console.log() 
     console.log(result + ' final result');
     var result = result;
     res.render('twitch/twitchEndpoint', {result: result});
