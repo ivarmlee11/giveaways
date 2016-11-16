@@ -4,7 +4,7 @@ var express = require('express'),
     request = require('request'),
     morgan = require('morgan')('dev'),
     waterfall = require('async-waterfall'),
-    port = 3000 || process.env.PORT,
+    port = process.env.PORT || 3000,
     redirectUri = process.env.REDIRECT,
     clientSecret = process.env.twitch_client_secret;
 
@@ -45,7 +45,7 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
 
   },
   function(accessToken, callback) {
-    
+
     callback(null, accessToken);
   }
 ], function (err, result) {
