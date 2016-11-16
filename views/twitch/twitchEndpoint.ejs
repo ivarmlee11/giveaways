@@ -3,5 +3,11 @@
   <div class="container">
     <h1>You've been authorized through Twitch</h1>
     <h3 class="text-center"><strong><%= result %></strong></h3>
+    <ul>
+      <% for (var prop in result) { %>
+      <li>Welcome, <%= result.display_name %></li>
+      <% }); %>
+    </ul>
+
   </div>
 </div>
