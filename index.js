@@ -62,13 +62,14 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
       info = JSON.parse(body);
       console.log(info);
       console.log('infoooooooooooooooooooooo')
+      callback(null, info);
     }
   }
 
   request(options, callback);
 
 
-    callback(null, accessToken);
+    
     }
   ], function (err, result) {
     // result now equals 'done' 
