@@ -48,7 +48,10 @@ app.get('/twitch_oauth_endpoint', function(req, res) {
 
   },
   function(accessToken, callback) {
-      callback(null, accessToken);
+    request.get({
+      url: "https://api.twitch.tv/kraken?oauth_token=" + accessToken + '"'
+    })
+    callback(null, accessToken);
     }
   ], function (err, result) {
     // result now equals 'done' 
