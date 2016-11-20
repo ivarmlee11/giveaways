@@ -23,8 +23,8 @@ var passport = require('passport');
 passport.use(new TwitchtvStrategy({
   clientID: twitchClientId,
   clientSecret: twitchClientSecret,
-  callbackURL: "https://tweak-game-temp.herokuapp.com/auth/twitch/callback",
-  scope: "user_read"
+  callbackURL: 'https://tweak-game-temp.herokuapp.com/auth/twitch/callback',
+  scope: 'user_read'
 },
   function(accessToken, refreshToken, profile, done) {
     if(profile.username !== ('dridor' || 'tweakgames')) {
@@ -53,7 +53,7 @@ passport.use(new TwitchtvStrategy({
 passport.use(new BeamStrategy({
     clientID: beamClientId,
     clientSecret: beamClientSecret,
-    callbackURL: "https://tweak-game-temp.herokuapp.com/auth/beam/callback",
+    callbackURL: 'https://tweak-game-temp.herokuapp.com/auth/beam/callback',
     scope: 'user:details:self'
   },
   function(accessToken, refreshToken, profile, done) {
@@ -193,6 +193,17 @@ app.get('/winner/:idx', function(req, res) {
       var playerList = giveaway.players;
       res.send({playerList: playerList});
     });
+  } else {
+    res.redirect('/');
+  }
+});
+
+app.get('/giveawayHistory', function(req, res) {
+  if(user) {
+    db.giveawayhistory.findAll({order: ['id', 'ASC'],}).then(function(giveaways) {
+      var giveaways = giveaways;
+      res.send({giveaways: giveaways});
+    });  
   } else {
     res.redirect('/');
   }
