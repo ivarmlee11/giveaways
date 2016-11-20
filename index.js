@@ -214,7 +214,7 @@ app.get('/deleteGiveaway/:idx', function(req, res) {
 
 app.get('/thanks', function(req, res) {
   if(user) {
-    res.rener('thanks');
+    res.render('thanks');
   } else {
     res.redirect('/');
   }
