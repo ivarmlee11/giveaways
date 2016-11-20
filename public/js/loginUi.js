@@ -1,9 +1,9 @@
 $(function() {
-  $('#twitchDiv').hover(function() {
-    $('#twitchDiv').css("background-color","silver");
-  },
-function() {
-    $('#twitchDiv').removeClass('hover');
-    $('#twitchDiv').css("background-color","white");
-  });
+$('#twitchDiv').hover(function() {
+  $('#twitchDiv').css("background-color","silver");
+}
+
+$('#beamDiv').hover(function() {
+   $('#beamDiv').css("background-color","silver");
+}
 }); 

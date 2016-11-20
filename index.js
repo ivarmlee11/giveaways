@@ -129,7 +129,6 @@ app.get('/auth/beam/callback',
   res.redirect('/auth/loggedIn');
 });
 
-
 app.get('/auth/loggedIn', function(req, res) {
   if(user) {
     if (user.admin) {
@@ -219,7 +218,6 @@ app.get('/thanks', function(req, res) {
     res.redirect('/');
   }
 });
-
 
 app.get('/giveaway/:idx', function(req,res) {
   if(user) {
