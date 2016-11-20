@@ -26,7 +26,7 @@ $(function() {
           url: url,
           type: 'GET',
           success: function(data) {       
-            window.location.href = 'http://localhost:3000' + url;       
+            window.location.href = 'https://tweak-game-temp.herokuapp.com' + url;       
           }
     });
   });
