@@ -8,11 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      twitchUserName: {
+      twitchid: {
+        type: Sequelize.INTEGER
+      },
+      username: {
         type: Sequelize.STRING
       },
-      accessToken: {
-        type: Sequelize.STRING
+      admin: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

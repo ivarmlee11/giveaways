@@ -1,80 +1,193 @@
 var express = require('express'),
     app = express(),
-    ejsLayouts = require('express-ejs-layouts'),
     request = require('request'),
     morgan = require('morgan')('dev'),
     waterfall = require('async-waterfall'),
     port = process.env.PORT || 3000,
-    cors = require('cors'),
-    // redirectUri = process.env.REDIRECT,
-    clientSecret = process.env.CLIENTSECRET;
+    db = require('./models'),
+    bodyParser = require('body-parser'),
+    ejsLayouts = require('express-ejs-layouts'),
+    twitchClientId = process.env.TWITCHCLIENTID,
+    twitchClientSecret = process.env.CLIENTSECRETTWITCH,
+    beamClienetSecret = process.env.CLIENTSECRETBEAM,
+    beamClientId = process.env.BEAMCLIENTID;
+    console.log(twitchClientSecret + ' twitch');
+    console.log(beamClienetSecret + ' beam');
+    console.log(beamClientId + ' beam id');
+    console.log(twitchClientId + ' twitch id');
 
+var TwitchtvStrategy = require('passport-twitchtv').Strategy;
+var passport = require('passport')
+passport.use(new TwitchtvStrategy({
+  clientID: twitchClientId,
+  clientSecret: twitchClientSecret,
+  callbackURL: "http://localhost:3000/auth/twitch/callback",
+  scope: "user_read"
+},
+  function(accessToken, refreshToken, profile, done) {
+    if(profile.username !== ('dridor' || 'tweakgames')) {
+      db.user.findOrCreate({
+        where: {
+          twitchid: profile.id,
+          username: profile.username
+        }
+      }).spread(function(user, created) {
+        return done(null, user);
+      });
+    } else {
+      db.user.findOrCreate({
+        where: {
+          twitchid: profile.id,
+          username: profile.username,
+          admin: true
+        }
+      }).spread(function(user, created) {
+        return done(null, user);
+      });
+    };
+  }
+));
 
+app.use(express.static(__dirname + '/public'));
+
+app.set('view engine', 'ejs');
+
+app.use(ejsLayouts);
 
 app.use(morgan);
-app.set('view engine', 'ejs');
-app.use(ejsLayouts);
-app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(passport.initialize());
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 app.get('/', function(req, res) {
   res.render('login');
 });
 
-app.get('/twitch_oauth_endpoint', function(req, res) {
-  var code = req.query.code;
-  console.log(clientSecret)
-  console.log('client secret')
+app.get('/auth/twitch', passport.authenticate('twitchtv'));
 
+app.get('/auth/twitch/callback', passport.authenticate('twitchtv'), function(req, res) {
+  user = req.user;
+  res.redirect('/auth/twitch/loggedIn');
+});
+
+app.get('/auth/twitch/loggedIn', function(req, res) {
+  if (user.admin) {
+    res.render('makeGame', {user: user});
+  } else {
+    res.redirect('/giveawayList');
+  }
+});
+
+app.get('/giveawayList', function(req, res) {
+  db.giveaway.findAll().then(function(giveaways) {
+    var giveaway = giveaways;
+    res.render('giveaways', {giveaways: giveaway});
+  });  
+});
+
+app.post('/admin/makeGame', function(req, res) {
+  db.giveaway.findOrCreate({
+    where: {
+      name: req.body.giveawayName
+    },
+    defaults: { players: [] }
+  }).spread(function(giveaway, created) {
+    res.redirect('/admin/adminControl');
+  });
+});
+
+app.get('/admin/adminControl', function(req, res) {
+  db.giveaway.findAll().then(function(giveaways) {
+    var giveaway = giveaways;
+    res.render('adminControl', {giveaways: giveaway});
+  });  
+});
+
+app.get('/playerList/:idx', function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.findById(id).then(function(giveaway) {
+    var playerList = giveaway.players;
+    res.render('showGiveaway', {playerList: playerList});
+  });
+});
+
+app.get('/winner/:idx', function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.findById(id).then(function(giveaway) {
+    var playerList = giveaway.players;
+    res.send({playerList: playerList});
+  });
+});
+
+app.get('/deleteGiveaway/:idx', function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.destroy({
+    where: { id: id }
+  }).then(function() {
+  });
+  res.redirect('/admin/adminControl');
+});
+
+app.get('/giveaway/:idx', function(req,res) {
+  var giveawayId = req.params.idx;  
   waterfall([
     function(callback){
-      var accessToken;
-      request.post({
-        url:'https://api.twitch.tv/kraken/oauth2/token',
-        form: {
-              client_id: 'cvmjz4nnl2lh1f30abf9hvgedsg6q6u',
-              client_secret: clientSecret,
-              grant_type: 'authorization_code',
-              redirect_uri: 'https://tweak-game-temp.herokuapp.com/twitch_oauth_endpoint',
-              code: code
-            }
-        }, 
-        function(err, httpResponse, body) {
-          var body = JSON.parse(body),
-          accessToken = body.access_token;
-          callback(null, accessToken);
+      db.giveaway.find({
+        where: {
+          id: giveawayId
+        }
+      }).then(function(giveaway) {
+        var players = giveaway.players;
+        callback(null, players);
       });
     },
+    function(players, callback){
+      var players = players,
+          playerObj = {};
 
-    function(accessToken, callback) {
-      var info = [];
-      var options = {
-        url: 'https://api.twitch.tv/kraken/user',
-        headers: {
-          'Accept': 'application/vnd.twitchtv.v3+json',
-          'Authorization': 'OAuth ' + accessToken
-        }
-      };
-      function success(error, response, body) {
-        if (!error && response.statusCode == 200) {
-          twitchUserInfo = JSON.parse(body);
-          console.log(twitchUserInfo);
-          info.push(twitchUserInfo.display_name);
-          info.push(twitchUserInfo._id);
-          info.push(twitchUserInfo.email);
-          console.log(info)  
-          callback(null, info);
-        }
+      if(!players) {
+        players = [];
       }
-      request(options, success);
-      }
-    ],
-    function (err, info) {
-      // result now equals 'done' 
-      console.log(info + ' final result');
-      var result = info;
-      res.render('twitch/twitchEndpoint', {result: result});
-    });
+      players.push(user.username);
 
+      players.forEach(function(player) {
+        playerObj[player] = player;
+      });
+
+      players = [];
+
+      Object.keys(playerObj).forEach(function(key,index) {
+        players.push(key);
+      });
+
+      db.giveaway.update({
+        players: players
+      }, {
+        where: {
+          id: giveawayId
+        }
+      }).then(function(updatedPlayers) {
+        callback(null, updatedPlayers);
+      });
+    }
+  ],
+  function (err, result) {
+    res.render('thanks');
+  });
 });
 
 app.listen(port);
+
+
+
+
+

@@ -19,3 +19,7 @@ a:active {
 .hover {
   background-color: #F0FF43 !important;
 };
+
+html {
+  height: 100%;
+};

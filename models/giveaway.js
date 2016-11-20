@@ -1,9 +1,8 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var user = sequelize.define('user', {
-    twitchid: DataTypes.INTEGER,
-    username: DataTypes.STRING,
-    admin: DataTypes.BOOLEAN
+  var giveaway = sequelize.define('giveaway', {
+    name: DataTypes.STRING,
+    players: DataTypes.ARRAY(DataTypes.STRING)
   }, {
     classMethods: {
       associate: function(models) {
@@ -11,5 +10,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return user;
+  return giveaway;
 };
