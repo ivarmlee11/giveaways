@@ -257,7 +257,7 @@ app.get('/giveaway/:idx', function(req,res) {
       }
     ],
     function (err, result) {
-      res.render('thanks');
+      res.redirect('/giveawayList');
     });
   } else {
     res.redirect('/');
