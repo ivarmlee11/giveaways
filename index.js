@@ -212,6 +212,15 @@ app.get('/deleteGiveaway/:idx', function(req, res) {
   }
 });
 
+app.get('/thanks', function(req, res) {
+  if(user) {
+    res.rener('thanks');
+  } else {
+    res.redirect('/');
+  }
+});
+
+
 app.get('/giveaway/:idx', function(req,res) {
   if(user) {
     var giveawayId = req.params.idx;  
@@ -257,7 +266,7 @@ app.get('/giveaway/:idx', function(req,res) {
       }
     ],
     function (err, result) {
-      res.redirect('/giveawayList');
+      res.redirect('/thanks');
     });
   } else {
     res.redirect('/');
