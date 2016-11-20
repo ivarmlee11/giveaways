@@ -19,11 +19,9 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-beam": "^1.0.4",
-    "passport-twitch": "^1.0.3",
     "passport-twitchtv": "^0.1.4",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
-    "pkginfo": "^0.4.0",
     "request": "^2.78.0",
     "sequelize": "^3.25.0"
   }
