@@ -1,10 +1,14 @@
+* {
+  font-family: 'Dosis', sans-serif;
+}
+
 input {
   color: black;
 }
 
 h5 {
   font-weight: bold;
-  font-size: .4em;
+  font-size: .1em;
 }
 
 a, a:hover, a:active {
