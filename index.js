@@ -132,7 +132,7 @@ app.get('/auth/beam/callback',
 app.get('/auth/loggedIn', function(req, res) {
   if(user) {
     if (user.admin) {
-      res.render('makeGame', {user: user});
+      res.render('adminControl', {user: user});
     } else {
       res.redirect('/giveawayList');
     }
@@ -152,7 +152,7 @@ app.get('/giveawayList', function(req, res) {
   }
 });
 
-app.post('/admin/makeGame', function(req, res) {
+app.post('/admin/adminControl', function(req, res) {
   if(user.admin) {
     db.giveaway.findOrCreate({
       where: {
