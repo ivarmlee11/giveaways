@@ -1,9 +1,16 @@
+a, a:hover, a:active {
+  color: #000 ;
+  text-decoration: none;
+  font-size: 5em;
+}
+
 .btn {
   border-radius: 0px;
 }
 
 body { 
   padding-top: 70px;
+  background-color: black;
 }
 
 html {
