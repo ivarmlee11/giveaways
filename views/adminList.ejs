@@ -1,0 +1,45 @@
+<nav class="navbar navbar-inverse">
+  <ul class="nav navbar-nav">
+    <li><a href="/auth/loggedIn"><h5>Make A Giveaway</h5></a></li>
+    <li><a href="/admin/adminGiveawayList"><h5>Giveaway List</h5></a></li>
+  </ul>
+</nav>
+
+<h1 class="text-center">Admin Privilege Panel</h1>
+
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <form action="/admin/adminListAdd" method="POST" accept-charset="utf-8">
+      <div class="form-group">
+        <label for="adminNameGive">Give Admin Privelegs</label>
+        <input type="text" class="form-control" id="adminNameGive" name="adminNameGive" required>
+      </div>
+      <button class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <form action="/admin/adminListRemove" method="POST" accept-charset="utf-8">
+      <div class="form-group">
+        <label for="adminNameRemove">Remove Admin Privelegs</label>
+        <input type="text" class="form-control" id="adminNameRemove" name="adminNameRemove" required>
+      </div>
+      <button class="btn btn-danger">Submit</button>
+    </form>
+  </div>
+</div>
+
+<h2 class="text-center">Current Admins</h1>
+
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <% allAdmins.forEach(function(admin) { %>
+      <div class="well">
+        <h3><strong><%=admin.username%></strong></h3>
+      </div>
+    <% }); %>
+  </div>
+</div>
+

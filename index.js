@@ -152,9 +152,33 @@ app.get('/giveawayList', function(req, res) {
   }
 });
 
-app.post('/admin/adminList', function(req, res) {
+app.post('/admin/adminListAdd', function(req, res) {
   if(user.admin) {
+    db.user.update({
+      admin: true
+    }, {
+      where: {
+        username: req.adminNameGive
+      }
+    }).then(function(user) {
+      res.redirect('/admin/adminList');
+    });
+  } else {
+    res.redirect('/');
+  }
+});
 
+app.post('/admin/adminListRemove', function(req, res) {
+  if(user.admin) {
+    db.user.update({
+      admin: false
+    }, {
+      where: {
+        username: req.adminNameRemove
+      }
+    }).then(function(user) {
+      res.redirect('/admin/adminList');
+    });
   } else {
     res.redirect('/');
   }
@@ -167,7 +191,8 @@ app.get('/admin/adminList', function(req, res) {
         admin: true
       }
     }).then(function(allAdmins) {
-      res.send(allAdmins);
+      var allAdmins = allAdmins;
+      res.render('adminList', {allAdmins: allAdmins});
     });
   } else {
     res.redirect('/');
