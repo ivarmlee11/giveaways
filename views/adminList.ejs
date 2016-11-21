@@ -35,11 +35,11 @@
 
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
-    <% allAdmins.forEach(function(admin) { %>
-      <div class="well">
-        <h3><strong><%=admin.username%></strong></h3>
-      </div>
-    <% }); %>
+    <div class="well">
+      <% allAdmins.forEach(function(admin) { %>
+          <h3><strong><%=admin.username%></strong></h3>
+      <% }); %>
+    </div>
   </div>
 </div>
 
