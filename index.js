@@ -171,7 +171,7 @@ app.get('/admin/adminGiveawayList', function(req, res) {
   if(user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
-      res.render('adminControl', {giveaways: giveaway});
+      res.render('adminGameList', {giveaways: giveaway});
     });
   } else {
     res.redirect('/');
