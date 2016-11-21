@@ -192,7 +192,7 @@ app.post('/admin/adminListRemove', function(req, res) {
       }
     }).then(function(user) {
       console.log(user)
-      console.log('working admin remove')
+      console.log('working admin removsse')
       res.redirect('/admin/adminList');
     });
   } else {
