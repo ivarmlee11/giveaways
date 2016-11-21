@@ -153,6 +153,7 @@ app.get('/giveawayList', function(req, res) {
 });
 
 app.post('/admin/adminListAdd', function(req, res) {
+  console.log('helllllllllllllllllllo')
   if(user.admin) {
     db.user.update({
       admin: true
