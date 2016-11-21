@@ -161,6 +161,7 @@ app.post('/admin/adminListAdd', function(req, res) {
         username: req.adminNameGive
       }
     }).then(function(user) {
+      console.log('working admin add')
       res.redirect('/admin/adminList');
     });
   } else {
@@ -177,6 +178,7 @@ app.post('/admin/adminListRemove', function(req, res) {
         username: req.adminNameRemove
       }
     }).then(function(user) {
+      console.log('working admin add')
       res.redirect('/admin/adminList');
     });
   } else {
