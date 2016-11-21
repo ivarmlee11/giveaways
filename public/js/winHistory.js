@@ -5,9 +5,10 @@ $(function() {
     type: 'GET',
     success: function(players) {
       console.log(players);
-      players.forEach(player) {
+      players.forEach(function(player) {
         $('#winBox').append('<h6>' + player + '</h6>');
-      };
+      });
     }
   });
+  
 };

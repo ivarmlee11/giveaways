@@ -22,4 +22,9 @@ a:active {
 
 html {
   height: 100%;
+  background-color: black;
+};
+
+body {
+  background-color: black;
 };

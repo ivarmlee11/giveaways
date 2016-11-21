@@ -200,10 +200,7 @@ app.get('/winner/:idx', function(req, res) {
 
 app.get('/giveawayHistory', function(req, res) {
   if(user) {
-    db.giveawayhistory.findAll().then(function(giveaways) {
-      var giveaways = giveaways;
-      res.send({giveaways: giveaways});
-    });  
+    res.render('winHistory');
   } else {
     res.redirect('/');
   }

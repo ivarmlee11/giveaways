@@ -1,5 +1,6 @@
 $(function() {
   var url = window.location.href;
+
   url = url.split('/');
 
   var idx = url[url.length -1];
@@ -8,26 +9,31 @@ $(function() {
     var url = '/winner/' + idx;
     var winner;
     $.ajax({
-          url: url,
-          type: 'GET',
-          success: function(players) {
-            var playerlist = players.playerList;
-            console.log(playerlist)
-            console.log(typeof playerlist)
-            winner = playerlist[Math.floor(Math.random()*playerlist.length)];
-            $('#winner').html('The winner is ' + winner + '!');      
-          }
+      url: url,
+      type: 'GET',
+      success: function(players) {
+        var playerlist = players.playerList;
+        winner = playerlist[Math.floor(Math.random()*playerlist.length)];
+        console.log(winner);
+        console.log(typeof winner);
+        if(winner.length > 0) {
+          $('#winner').html('The winner is ' + winner + '!');
+        } else {
+          $('#winner').html('Nobody has joined the competition yet!');
+        } 
+      }
     });
   });
 
   $('#deleteThis').on('click', function() {
     var url = '/deleteGiveaway/' + idx;
     $.ajax({
-          url: url,
-          type: 'GET',
-          success: function(data) {       
-            window.location.href = 'https://tweak-game-temp.herokuapp.com' + url;       
-          }
+      url: url,
+      type: 'GET',
+      success: function(data) {       
+        window.location.href = 'https://tweak-game-temp.herokuapp.com' + url;       
+      }
     });
   });
+
 });
