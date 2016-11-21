@@ -2,8 +2,12 @@
   color: white;
 }
 
+input,strong {
+  color: black;
+}
+
 a, a:hover, a:active {
-  color: #000 ;
+  color: white;
   text-decoration: none;
   font-size: 5em;
 }
