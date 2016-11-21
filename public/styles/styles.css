@@ -1,3 +1,7 @@
+* {
+  color: white;
+}
+
 a, a:hover, a:active {
   color: #000 ;
   text-decoration: none;
