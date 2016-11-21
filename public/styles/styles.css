@@ -20,3 +20,7 @@ html {
 text {
   color: white;
 }
+
+#loginBox {
+  background-color: #6CBBFF;
+}
