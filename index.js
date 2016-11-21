@@ -152,6 +152,35 @@ app.get('/giveawayList', function(req, res) {
   }
 });
 
+app.post('/admin/adminList', function(req, res) {
+  if(user.admin) {
+    db.giveaway.findOrCreate({
+      where: {
+        name: req.body.giveawayName
+      }
+    }).spread(function(giveaway, created) {
+      res.redirect('/auth/loggedIn');
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+app.get('/admin/adminList', function(req, res) {
+  if(user.admin) {
+    db.giveaway.findOrCreate({
+      where: {
+        admin: true
+      }
+    }).spread(function(giveaway, created) {
+      res.redirect('/auth/loggedIn');
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+
 app.post('/admin/adminGiveawayList', function(req, res) {
   if(user.admin) {
     db.giveaway.findOrCreate({
