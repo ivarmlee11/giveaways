@@ -4,14 +4,14 @@ $(function() {
     $('#twitchDiv').css('background-color','silver');
   },
   function() {
-    $('#twitchDiv').css('background-color','white');
+    $('#twitchDiv').css('background-color','black');
   });
 
   $('#beamDiv').hover(function() {
     $('#beamDiv').css('background-color','silver');
   },
   function() {
-    $('#beamDiv').css('background-color','white');
+    $('#beamDiv').css('background-color','black');
   });
   
 }); 
