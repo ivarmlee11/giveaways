@@ -217,7 +217,7 @@ app.get('/deleteGiveaway/:idx', function(req, res) {
       where: { id: id }
     }).then(function() {
     });
-    res.redirect('/admin/adminGameList');
+    res.redirect('/admin/adminGiveawayList');
   } else {
     res.redirect('/');
   }
