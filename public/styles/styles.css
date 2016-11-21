@@ -1,24 +1,5 @@
-*, h1 {
+* {
   font-family: 'Dosis', sans-serif;
-}
-
-input {
-  color: black;
-}
-
-h5 {
-  font-weight: bold;
-  font-size: .5em;
-}
-
-a, a:hover, a:active {
-  color: #6F4BFF;
-  text-decoration: none;
-  font-size: 5em;
-}
-
-.btn {
-  border-radius: 0px;
 }
 
 body { 
@@ -29,10 +10,25 @@ html {
   background-color: #9A9DA2;
 }
 
-text {
-  color: white;
+input {
+  color: black;
+}
+
+h5 {
+  font-weight: bold;
+  font-size: .25em;
+}
+
+a, a:hover, a:active {
+  color: #6F4BFF;
+  text-decoration: none;
+  font-size: 5em;
 }
 
 #loginBox, .well {
   background-color: #F9FFE1;
+}
+
+.btn {
+  border-radius: 0px;
 }
