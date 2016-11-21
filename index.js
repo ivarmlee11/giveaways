@@ -168,18 +168,17 @@ app.post('/admin/adminList', function(req, res) {
 
 app.get('/admin/adminList', function(req, res) {
   if(user.admin) {
-    db.giveaway.findOrCreate({
+    db.giveaway.findAll({
       where: {
         admin: true
       }
-    }).spread(function(giveaway, created) {
-      res.redirect('/auth/loggedIn');
+    }).then(function(allAdmins) {
+      res.send(allAdmins);
     });
   } else {
     res.redirect('/');
   }
 });
-
 
 app.post('/admin/adminGiveawayList', function(req, res) {
   if(user.admin) {
