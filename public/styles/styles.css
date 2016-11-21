@@ -6,6 +6,11 @@ input {
   color: black;
 }
 
+h5 {
+  font-weight: bold;
+  font-size: 2em;
+}
+
 a, a:hover, a:active {
   color: #6F4BFF;
   text-decoration: none;
