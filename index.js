@@ -152,7 +152,7 @@ app.get('/giveawayList', function(req, res) {
   }
 });
 
-app.post('/admin/adminControl', function(req, res) {
+app.post('/admin/adminGiveawayList', function(req, res) {
   if(user.admin) {
     db.giveaway.findOrCreate({
       where: {
@@ -160,14 +160,14 @@ app.post('/admin/adminControl', function(req, res) {
       },
       defaults: { players: [] }
     }).spread(function(giveaway, created) {
-      res.redirect('/admin/adminControl');
+      res.redirect('/admin/adminGiveawayList');
     });
   } else {
     res.redirect('/');
   }
 });
 
-app.get('/admin/adminControl', function(req, res) {
+app.get('/admin/adminGiveawayList', function(req, res) {
   if(user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
