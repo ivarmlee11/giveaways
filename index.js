@@ -159,7 +159,7 @@ app.post('/admin/adminListAdd', function(req, res) {
       admin: true
     }, {
       where: {
-        username: req.adminNameGive
+        username: req.body.adminNameGive
       }
     }).then(function(user) {
       console.log('working admin add')
@@ -176,10 +176,11 @@ app.post('/admin/adminListRemove', function(req, res) {
       admin: false
     }, {
       where: {
-        username: req.adminNameRemove
+        username: req.body.adminNameRemove
       }
     }).then(function(user) {
-      console.log('working admin add')
+      console.log(user)
+      console.log('working admin remove')
       res.redirect('/admin/adminList');
     });
   } else {
