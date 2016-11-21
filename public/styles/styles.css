@@ -1,30 +1,9 @@
-a, a:hover {
-  color: #000 ;
-  text-decoration: none;
-  font-size: 5em;
-};
-
-a:active {
-  color: #000 ;
-  text-decoration: none;
-  font-size: 5em;
-  font-weight: bold;
-};
-
-.container-full {
-  margin: 0 auto;
-  width: 100%;
-};
-
-.hover {
-  background-color: #F0FF43 !important;
-};
-
-html {
+/*html {
   height: 100%;
   background-color: black;
 };
 
 body {
   background-color: black;
-};
+  padding-top: 70px;
+};*/
