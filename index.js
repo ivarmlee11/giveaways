@@ -6,6 +6,7 @@ var express = require('express'),
     port = process.env.PORT || 3000,
     db = require('./models'),
     bodyParser = require('body-parser'),
+    session = require('express-session'),
     ejsLayouts = require('express-ejs-layouts'),
     twitchClientId = process.env.TWITCHCLIENTID,
     twitchClientSecret = process.env.CLIENTSECRETTWITCH,
@@ -16,9 +17,17 @@ var express = require('express'),
     console.log(beamClientId + ' beam id');
     console.log(twitchClientId + ' twitch id');
 
+
+
 var TwitchtvStrategy = require('passport-twitchtv').Strategy;
 var BeamStrategy = require('passport-beam').Strategy;
 var passport = require('passport');
+
+app.use(session({
+  secret: 'asdasdasdasdas',
+  resave: false,
+  saveUninitialized: true
+}));
 
 passport.use(new TwitchtvStrategy({
   clientID: twitchClientId,
@@ -93,12 +102,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 
+app.use(passport.session());
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser(function(id, cb) {
+  db.user.findById(id).then(function(user) {
+    cb(null, user);
+  }).catch(cb);
 });
 
 app.get('/', function(req, res) {
@@ -153,7 +166,6 @@ app.get('/giveawayList', function(req, res) {
 });
 
 app.post('/admin/adminListAdd', function(req, res) {
-  console.log('helllllllllllllllllllo')
   if(user.admin) {
     db.user.update({
       admin: true
@@ -189,6 +201,7 @@ app.post('/admin/adminListRemove', function(req, res) {
 });
 
 app.get('/admin/adminList', function(req, res) {
+  console.log(req.isAuthenticated());
   if(user.admin) {
     db.user.findAll({
       where: {
