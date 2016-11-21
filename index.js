@@ -154,13 +154,7 @@ app.get('/giveawayList', function(req, res) {
 
 app.post('/admin/adminList', function(req, res) {
   if(user.admin) {
-    db.giveaway.findOrCreate({
-      where: {
-        name: req.body.giveawayName
-      }
-    }).spread(function(giveaway, created) {
-      res.redirect('/auth/loggedIn');
-    });
+
   } else {
     res.redirect('/');
   }
@@ -168,7 +162,7 @@ app.post('/admin/adminList', function(req, res) {
 
 app.get('/admin/adminList', function(req, res) {
   if(user.admin) {
-    db.giveaway.findAll({
+    db.user.findAll({
       where: {
         admin: true
       }
