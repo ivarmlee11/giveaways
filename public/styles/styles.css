@@ -2,7 +2,7 @@
   color: white;
 }
 
-input,strong {
+input {
   color: black;
 }
 
@@ -29,6 +29,6 @@ text {
   color: white;
 }
 
-#loginBox {
-  background-color: #6CBBFF;
+#loginBox, .well {
+  background-color: #FF61F8;
 }
