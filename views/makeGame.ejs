@@ -1,6 +1,13 @@
-<div class="container">
-  <h1 class="text-center">Welcome, <%= user.username %></h1>
-</div>
+<nav class="navbar navbar-default navbar">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li><a href="/auth/loggedIn"><h5>Make A Giveaway</h5></a></li>
+      <li><a href="/admin/adminControl"><h5>Giveaway Control Panel</h5></a>
+</li>
+    </ol>
+  </div>
+</nav>
+
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
     <form action="/admin/makeGame" method="POST" accept-charset="utf-8">
@@ -8,7 +15,6 @@
       <input name="giveawayName" id="giveawayName" type="text" required/>
       <button class="btn btn-success">Submit</button>
     </form>
-  <a href="/admin/adminControl"><h3>Giveaway Control Panel</h3></a>
   </div>
 </div>
 
