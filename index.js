@@ -27,7 +27,7 @@ passport.use(new TwitchtvStrategy({
   scope: 'user_read'
 },
   function(accessToken, refreshToken, profile, done) {
-    if(profile.username !== ('dridor' || 'tweakgames')) {
+    if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames')) {
       db.user.findOrCreate({
         where: {
           twitchid: profile.id,
@@ -142,7 +142,7 @@ app.get('/auth/loggedIn', function(req, res) {
 });
 
 app.get('/giveawayList', function(req, res) {
-  if(user) {
+  if(user && !user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
       res.render('giveaways', {giveaways: giveaway});
