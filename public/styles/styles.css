@@ -22,7 +22,7 @@ h5 {
 a, a:hover, a:active {
   color: #6F4BFF;
   text-decoration: none;
-  font-size: .25em;
+  font-size: 1.5em;
 }
 
 #loginBox, .well {
