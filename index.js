@@ -153,18 +153,22 @@ app.get('/giveawayList', function(req, res) {
 });
 
 app.post('/admin/makeGame', function(req, res) {
-  db.giveaway.findOrCreate({
-    where: {
-      name: req.body.giveawayName
-    },
-    defaults: { players: [] }
-  }).spread(function(giveaway, created) {
-    res.redirect('/admin/adminControl');
-  });
+  if(user.admin) {
+    db.giveaway.findOrCreate({
+      where: {
+        name: req.body.giveawayName
+      },
+      defaults: { players: [] }
+    }).spread(function(giveaway, created) {
+      res.redirect('/admin/adminControl');
+    });
+  } else {
+    res.redirect('/');
+  }
 });
 
 app.get('/admin/adminControl', function(req, res) {
-  if(user) {
+  if(user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
       res.render('adminControl', {giveaways: giveaway});
@@ -176,11 +180,11 @@ app.get('/admin/adminControl', function(req, res) {
 
 app.get('/playerList/:idx', function(req, res) {
   if(user) {
-  var id = req.params.idx;
-  db.giveaway.findById(id).then(function(giveaway) {
-    var playerList = giveaway.players;
-    res.render('showGiveaway', {playerList: playerList});
-  });
+    var id = req.params.idx;
+    db.giveaway.findById(id).then(function(giveaway) {
+      var playerList = giveaway.players;
+      res.render('showGiveaway', {playerList: playerList});
+    });
   } else {
     res.redirect('/');
   }
@@ -207,7 +211,7 @@ app.get('/giveawayHistory', function(req, res) {
 });
 
 app.get('/deleteGiveaway/:idx', function(req, res) {
-  if(user) {
+  if(user.admin) {
     var id = req.params.idx;
     db.giveaway.destroy({
       where: { id: id }
