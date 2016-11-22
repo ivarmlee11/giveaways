@@ -1,7 +1,7 @@
 $(function() {
 
 $('#removeAdmin').on('click', function(e) {
-  e.preventDefault();
+  // e.preventDefault();
   var data = $('#adminNameGive').val();
   console.log(data);
   console.log(typeof data);

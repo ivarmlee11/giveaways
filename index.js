@@ -159,12 +159,9 @@ app.post('/admin/adminListAdd', function(req, res) {
 });
 
 app.post('/admin/adminListRemove', function(req, res) {
-  console.log('---------')
-  console.log(req.body)
   var admin = Object.keys(req.body);
   var adminName = admin[0];
   console.log(adminName)
-  console.log('---------')
   db.user.update({
     admin: false
   }, {
