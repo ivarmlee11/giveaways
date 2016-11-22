@@ -6,7 +6,7 @@ $('#removeAdmin').on('click', function(e) {
   var adminName = $('#adminNameGive').val();
   dataObj['adminName'] = adminName;
   console.log($('#authTwitch').val());
-  console.log($('#beamTwitch').val());
+  console.log($('#authBeam').val());
 
   $.ajax({
     method: 'POST',
