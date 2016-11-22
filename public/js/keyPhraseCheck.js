@@ -20,8 +20,10 @@ $(function() {
 
   });
 
+  // url<%=giveaway.id
   $(document).on('keyup', 'input', function(event) {
     console.log($(this).val());
+    console.log(%(this).attr(id));
   });
 
 });
