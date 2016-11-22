@@ -273,6 +273,15 @@ app.get('/thanks', function(req, res) {
   res.render('thanks');
 });
 
+app.post('/keyPhrase/:idx', function(req, res) {
+  var id = req.params.idx;
+  console.log(req.body.keyphrase)
+  // db.giveaway.findById(id).then(function(giveaway) {
+  //   var playerList = giveaway.players;
+  //   // res.redirect('showGiveaway', {playerList: playerList});
+  // });
+});
+
 app.get('/giveaway/:idx', function(req,res) {
   var giveawayId = req.params.idx;  
   waterfall([
