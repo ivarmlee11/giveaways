@@ -144,7 +144,6 @@ app.get('/auth/loggedIn', function(req, res) {
     } else {
       res.redirect('/giveawayList');
     }
-  }
 });
 
 app.get('/giveawayList', function(req, res) {
