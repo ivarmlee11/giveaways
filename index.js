@@ -177,7 +177,7 @@ app.post('/admin/adminListRemove', function(req, res) {
     }
   }).then(function(user) {
   });
-  res.redirect('/admin/adminList');
+  res.redirect('back');
 });
 
 app.get('/giveawayList', function(req, res) {
