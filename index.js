@@ -274,20 +274,19 @@ app.get('/thanks', function(req, res) {
 });
 
 app.post('/keyPhrase/:idx', function(req, res) {
-  console.log('---------------------------')
   var id = req.params.idx;
-  console.log(req.body)
-    console.log('---------------------------')
-  console.log('---------------------------')
-  console.log('---------------------------')
-  console.log('---------------------------')
-  console.log('---------------------------')
-  console.log('---------------------------')
-
-  // db.giveaway.findById(id).then(function(giveaway) {
-  //   var playerList = giveaway.players;
-  //   // res.redirect('showGiveaway', {playerList: playerList});
-  // });
+  var redirectOnSuccessUrl = '/giveaway/' + id;
+  var clientKeyPhraseAttempt = req.body.keyphrase;
+  db.giveaway.findById(id).then(function(giveaway) {
+    var keyPhraseFromDB = giveaway.keyphrase;
+    if(clientKeyPhraseAttempt === keyPhraseFromDB) {
+      res.redirect(redirectOnSuccessUrl);
+    } else {
+      res.render('wrongPass');
+    }
+    // res.redirect('showGiveaway', {playerList: playerList});
+  console.log(req.body.keyphrase)
+  });
 });
 
 app.get('/giveaway/:idx', function(req,res) {
