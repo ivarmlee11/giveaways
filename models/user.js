@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var user = sequelize.define('user', {
     twitchid: DataTypes.INTEGER,
     username: DataTypes.STRING,
+    auth: DataTypes.STRING,
     admin: DataTypes.BOOLEAN
   }, {
     classMethods: {

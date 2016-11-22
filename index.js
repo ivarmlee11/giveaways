@@ -12,12 +12,10 @@ var express = require('express'),
     twitchClientSecret = process.env.CLIENTSECRETTWITCH,
     beamClientSecret = process.env.CLIENTSECRETBEAM,
     beamClientId = process.env.BEAMCLIENTID;
-    console.log(twitchClientSecret + ' twitch');
-    console.log(beamClientSecret + ' beam');
-    console.log(beamClientId + ' beam id');
-    console.log(twitchClientId + ' twitch id');
-
-
+    // console.log(twitchClientSecret + ' twitch');
+    // console.log(beamClientSecret + ' beam');
+    // console.log(beamClientId + ' beam id');
+    // console.log(twitchClientId + ' twitch id');
 
 var TwitchtvStrategy = require('passport-twitchtv').Strategy;
 var BeamStrategy = require('passport-beam').Strategy;
@@ -30,17 +28,18 @@ app.use(session({
 }));
 
 passport.use(new TwitchtvStrategy({
-  clientID: twitchClientId,
-  clientSecret: twitchClientSecret,
-  callbackURL: 'https://tweak-game-temp.herokuapp.com/auth/twitch/callback',
-  scope: 'user_read'
-},
+    clientID: twitchClientId,
+    clientSecret: twitchClientSecret,
+    callbackURL: 'https://tweak-game-temp.herokuapp.com/auth/twitch/callback',
+    scope: 'user_read'
+  },
   function(accessToken, refreshToken, profile, done) {
-    if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames' || 'Dridor')) {
+    if(profile.username !== ('tweakgames' || 'TweakGames')) {
       db.user.findOrCreate({
         where: {
           twitchid: profile.id,
-          username: profile.username
+          username: profile.username,
+          auth: 'Twitch'
         }
       }).spread(function(user, created) {
         return done(null, user);
@@ -50,6 +49,7 @@ passport.use(new TwitchtvStrategy({
         where: {
           twitchid: profile.id,
           username: profile.username,
+          auth: 'Twitch',
           admin: true
         }
       }).spread(function(user, created) {
@@ -66,12 +66,12 @@ passport.use(new BeamStrategy({
     scope: 'user:details:self'
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log('beam strat initiated')
-     if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames' || 'Dridor')) {
+    if(profile.username !== ('tweakgames' || 'TweakGames')) {
       db.user.findOrCreate({
         where: {
           twitchid: profile.id,
-          username: profile.username
+          username: profile.username,
+          auth: 'Beam'
         }
       }).spread(function(user, created) {
         return done(null, user);
@@ -81,6 +81,7 @@ passport.use(new BeamStrategy({
         where: {
           twitchid: profile.id,
           username: profile.username,
+          auth: 'Beam',
           admin: true
         }
       }).spread(function(user, created) {
@@ -151,7 +152,8 @@ app.post('/admin/adminListAdd', function(req, res) {
     admin: true
   }, {
     where: {
-      username: req.body.adminNameGive
+      username: req.body.adminNameGive,
+      auth: req.body.auth
     }
   }).then(function(user) {
     res.redirect('/admin/adminList');
@@ -160,8 +162,11 @@ app.post('/admin/adminListAdd', function(req, res) {
 
 app.post('/admin/adminListRemove', function(req, res) {
   var admin = Object.keys(req.body);
+  console.log(admin);
   var adminName = admin[0];
+  var authName = admin[1];
   console.log(adminName);
+  console.log(authName);
   console.log('-------')
   if(adminName === req.user.username) {
     res.send('You cannot demod yourself.');

@@ -14,6 +14,9 @@ module.exports = {
       username: {
         type: Sequelize.STRING
       },
+      auth: {
+        type: Sequelize.STRING
+      },
       admin: {
         type: Sequelize.BOOLEAN
       },
