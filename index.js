@@ -146,13 +146,6 @@ app.get('/auth/loggedIn', function(req, res) {
   }
 });
 
-app.get('/giveawayList', function(req, res) {
-  db.giveaway.findAll().then(function(giveaways) {
-    var giveaway = giveaways;
-    res.render('giveaways', {giveaways: giveaway});
-  });  
-});
-
 app.post('/admin/adminListAdd', function(req, res) {
   db.user.update({
     admin: true
@@ -175,6 +168,13 @@ app.post('/admin/adminListRemove', function(req, res) {
   }).then(function(user) {
     res.redirect('/admin/adminList');
   });
+});
+
+app.get('/giveawayList', function(req, res) {
+  db.giveaway.findAll().then(function(giveaways) {
+    var giveaway = giveaways;
+    res.render('giveaways', {giveaways: giveaway});
+  });  
 });
 
 app.get('/admin/adminList', function(req, res) {
@@ -281,14 +281,14 @@ app.get('/giveaway/:idx', function(req,res) {
         playerObj[player] = player;
       });
 
-      players = [];
+      playersUnique = [];
 
       Object.keys(playerObj).forEach(function(key,index) {
-        players.push(key);
+        playersUnique.push(key);
       });
 
       db.giveaway.update({
-        players: players
+        players: playersUnique
       }, {
         where: {
           id: giveawayId
