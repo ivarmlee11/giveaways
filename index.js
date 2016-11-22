@@ -284,8 +284,6 @@ app.post('/keyPhrase/:idx', function(req, res) {
     } else {
       res.render('wrongPass');
     }
-    // res.redirect('showGiveaway', {playerList: playerList});
-  console.log(req.body.keyphrase)
   });
 });
 
