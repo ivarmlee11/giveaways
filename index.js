@@ -190,10 +190,6 @@ app.get('/giveawayData', function(req, res) {
     giveaways.forEach(function(value) {
       giveawayArray.push(value);
     });
-    var giveawayArray = JSON.parse(giveawayArray);
-    console.log('--------------')
-    console.log(typeof giveawayArray)
-    console.log('--------------')
     res.send(giveawayArray);
   });  
 });
