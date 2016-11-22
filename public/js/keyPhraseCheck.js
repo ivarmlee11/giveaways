@@ -1,5 +1,7 @@
 $(function() {
 
+  var keyPhraseListById = [];
+
   $.ajax({
     method: 'GET',
     url: '/giveawayData'
