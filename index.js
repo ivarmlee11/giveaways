@@ -161,10 +161,9 @@ app.post('/admin/adminListAdd', function(req, res) {
 app.post('/admin/adminListRemove', function(req, res) {
   console.log('---------')
   console.log(req.body)
-  var thing = req.body;
-  console.log(typeof thing)
-  console.log('---------')
-  console.log(req.body.data)
+  var admin = Object.keys(req.body);
+  var adminName = admin[0];
+  console.log(adminName)
   console.log('---------')
   var adminName = req.body.data;
   db.user.update({
