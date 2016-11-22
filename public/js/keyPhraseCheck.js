@@ -1,7 +1,7 @@
 $(function() {
 
   var keyPhraseListById = [];
-  var list = [];
+  var list = {};
 
   $.ajax({
     method: 'GET',
@@ -9,7 +9,8 @@ $(function() {
   }).done(function(data) {
     keyPhraseListById = data;
     keyPhraseListById.forEach(function(val) {
-      list.push(val.id + ',' + val.keyphrase);
+      list[val.id] = val.keyphrase;
+      // list.push(val.id + ',' + val.keyphrase);
     });
     console.log(list);
     console.log('list -----');
