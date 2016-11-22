@@ -21,7 +21,7 @@ $(function() {
   });
 
   $(document).on('keyup', 'input', function(event) {
-    console.log($this.val())
+    console.log(this.val())
   });
 
 });
