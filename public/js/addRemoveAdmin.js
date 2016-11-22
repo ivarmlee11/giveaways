@@ -2,14 +2,11 @@ $(function() {
 
 $('#removeAdmin').on('click', function(e) {
   // e.preventDefault();
-  var adminName = $('#adminNameGive').val();
-  console.log(adminName);
-  console.log(typeof adminName);
-
+  var data = $('#adminNameGive').val();
   $.ajax({
     method: 'POST',
     url: '/admin/adminListRemove',
-    data: adminName
+    data: data
   }).done(function(data) {
   });
 });
