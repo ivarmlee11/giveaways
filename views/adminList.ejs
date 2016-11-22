@@ -1,3 +1,4 @@
+<script src="js/addRemoveAdmin.js"></script>
 <nav class="navbar navbar-inverse">
   <ul class="nav navbar-nav">
     <li><a href="/auth/loggedIn"><h5>Make A Giveaway</h5></a></li>
@@ -11,23 +12,12 @@
   <div class="col-md-6 col-md-offset-3">
     <form action="/admin/adminListAdd" method="POST" accept-charset="utf-8">
       <div class="form-group">
-        <label for="adminNameGive">Give Admin Privelegs</label>
+        <label for="adminNameGive">Admin Privelegs</label>
         <input type="text" class="form-control" id="adminNameGive" name="adminNameGive" required>
       </div>
-      <button class="btn btn-success">Submit</button>
+      <button class="btn btn-success">Add</button>
     </form>
-  </div>
-</div>
-
-<div class="container">
-  <div class="col-md-6 col-md-offset-3">
-    <form action="/admin/adminListRemove" method="POST" accept-charset="utf-8">
-      <div class="form-group">
-        <label for="adminNameRemove">Remove Admin Privelegs</label>
-        <input type="text" class="form-control" id="adminNameRemove" name="adminNameRemove" required>
-      </div>
-      <button class="btn btn-danger">Submit</button>
-    </form>
+      <button id="removeAdmin" class="btn btn-danger">Remove</button>
   </div>
 </div>
 

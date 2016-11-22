@@ -159,11 +159,13 @@ app.post('/admin/adminListAdd', function(req, res) {
 });
 
 app.post('/admin/adminListRemove', function(req, res) {
+  console.log(req.body);
+  var adminName = req.body.data;
   db.user.update({
     admin: false
   }, {
     where: {
-      username: req.body.adminNameRemove
+      username: adminName
     }
   }).then(function(user) {
     res.redirect('/admin/adminList');
