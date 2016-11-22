@@ -186,7 +186,10 @@ app.get('/giveawayList', function(req, res) {
 
 app.get('/giveawayData', function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
-    var giveaway = giveaways;
+    var giveaway = [];
+    giveaways.forEach(function(value) {
+      giveaway.push(value);
+    });
     res.send(giveaway);
   });  
 });
