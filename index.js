@@ -203,7 +203,8 @@ app.post('/admin/adminGiveawayList', function(req, res) {
   if(req.user.admin) {
     db.giveaway.findOrCreate({
       where: {
-        name: req.body.giveawayName
+        name: req.body.giveawayName,
+        keyphrase: req.body.giveawayKeyPhrase
       },
       defaults: { players: [] }
     }).spread(function(giveaway, created) {
