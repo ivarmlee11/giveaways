@@ -184,6 +184,13 @@ app.get('/giveawayList', function(req, res) {
   });  
 });
 
+app.get('/giveawayData', function(req, res) {
+  db.giveaway.findAll().then(function(giveaways) {
+    var giveaway = giveaways;
+    res.render({giveaways: giveaway});
+  });  
+});
+
 app.get('/admin/adminList', function(req, res) {
   if(req.user.admin) {
     db.user.findAll({
