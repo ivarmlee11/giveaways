@@ -274,8 +274,16 @@ app.get('/thanks', function(req, res) {
 });
 
 app.post('/keyPhrase/:idx', function(req, res) {
+  console.log('---------------------------')
   var id = req.params.idx;
   console.log(req.body.keyphrase)
+    console.log('---------------------------')
+  console.log('---------------------------')
+  console.log('---------------------------')
+  console.log('---------------------------')
+  console.log('---------------------------')
+  console.log('---------------------------')
+
   // db.giveaway.findById(id).then(function(giveaway) {
   //   var playerList = giveaway.players;
   //   // res.redirect('showGiveaway', {playerList: playerList});
