@@ -215,9 +215,9 @@ app.post('/admin/adminGiveawayList', function(req, res) {
 });
 
 app.get('/admin/adminGiveawayList', function(req, res) {
-  var giveaway = giveaways;
   if(req.user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
+      var giveaway = giveaways;
       res.render('adminGameList', {giveaways: giveaway});
     });
   } else {
