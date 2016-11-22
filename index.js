@@ -109,7 +109,6 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, cb) {
-  console.log('--------')
   var id = user.id;
   db.user.findById(id).then(function(user) {
     cb(null, user);
