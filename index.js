@@ -163,7 +163,7 @@ app.post('/admin/adminListRemove', function(req, res) {
   var adminName = admin[0];
   console.log(adminName);
   console.log('-------')
-  if(adminName = req.user.username) {
+  if(adminName === req.user.username) {
     res.send('You cannot demod yourself.');
   }
   db.user.update({
