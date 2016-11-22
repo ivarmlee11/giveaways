@@ -2,7 +2,7 @@ $(function() {
 
   $.ajax({
     method: 'GET',
-    url: '/giveawayList'
+    url: '/giveawayData'
   }).done(function(data) {
     console.log(data);
   });
