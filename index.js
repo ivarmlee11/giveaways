@@ -277,55 +277,51 @@ app.get('/thanks', function(req, res) {
 });
 
 app.get('/giveaway/:idx', function(req,res) {
-  if(user) {
-    var giveawayId = req.params.idx;  
-    waterfall([
-      function(callback){
-        db.giveaway.find({
-          where: {
-            id: giveawayId
-          }
-        }).then(function(giveaway) {
-          var players = giveaway.players;
-          callback(null, players);
-        });
-      },
-      function(players, callback){
-        var players = players,
-            playerObj = {};
-
-        if(!players) {
-          players = [];
+  var giveawayId = req.params.idx;  
+  waterfall([
+    function(callback){
+      db.giveaway.find({
+        where: {
+          id: giveawayId
         }
-        players.push(user.username);
+      }).then(function(giveaway) {
+        var players = giveaway.players;
+        callback(null, players);
+      });
+    },
+    function(players, callback){
+      var players = players,
+          playerObj = {};
 
-        players.forEach(function(player) {
-          playerObj[player] = player;
-        });
-
+      if(!players) {
         players = [];
-
-        Object.keys(playerObj).forEach(function(key,index) {
-          players.push(key);
-        });
-
-        db.giveaway.update({
-          players: players
-        }, {
-          where: {
-            id: giveawayId
-          }
-        }).then(function(updatedPlayers) {
-          callback(null, updatedPlayers);
-        });
       }
-    ],
-    function (err, result) {
-      res.redirect('/thanks');
-    });
-  } else {
-    res.redirect('/');
-  }
+      players.push(user.username);
+
+      players.forEach(function(player) {
+        playerObj[player] = player;
+      });
+
+      players = [];
+
+      Object.keys(playerObj).forEach(function(key,index) {
+        players.push(key);
+      });
+
+      db.giveaway.update({
+        players: players
+      }, {
+        where: {
+          id: giveawayId
+        }
+      }).then(function(updatedPlayers) {
+        callback(null, updatedPlayers);
+      });
+    }
+  ],
+  function (err, result) {
+    res.redirect('/thanks');
+  });
 });
 
 app.listen(port);
