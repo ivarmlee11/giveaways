@@ -163,6 +163,8 @@ app.post('/admin/adminListAdd', function(req, res) {
 app.post('/admin/adminListRemove', function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
+  console.log(adminName);
+  console.log(auth);
   if(adminName === req.user.username) {
     res.send('You cannot demod yourself.');
   }
