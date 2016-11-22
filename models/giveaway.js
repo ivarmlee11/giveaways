@@ -2,7 +2,8 @@
 module.exports = function(sequelize, DataTypes) {
   var giveaway = sequelize.define('giveaway', {
     name: DataTypes.STRING,
-    players: DataTypes.ARRAY(DataTypes.STRING)
+    players: DataTypes.ARRAY(DataTypes.STRING),
+    keyphrase: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

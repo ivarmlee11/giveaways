@@ -14,6 +14,9 @@ module.exports = {
       players: {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
+      keyphrase: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
