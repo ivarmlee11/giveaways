@@ -165,7 +165,6 @@ app.post('/admin/adminListRemove', function(req, res) {
   var adminName = admin[0];
   console.log(adminName)
   console.log('---------')
-  var adminName = req.body.data;
   db.user.update({
     admin: false
   }, {
