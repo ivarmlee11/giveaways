@@ -1,3 +1,4 @@
+<script src="../js/keyPhraseCheck.js"></script>
 <nav class="navbar navbar-inverse">
   <ul class="nav navbar-nav">
   </ul>
@@ -8,7 +9,12 @@
     <h1 class="text-center">Current Running Giveaways</h1>
       <% giveaways.forEach(function(giveaway) { %>
         <div class="well">
-          <h6><a href="/giveaway/<%=giveaway.id%>"><%=giveaway.name%></a></h6>
+        <h3><strong><%=giveaway.name%></strong></h3>
+        <div class="form-group">
+          <label for="phrase">Giveaway Keyphrase</label>
+          <input type="text" class="form-control" id="phrase" name="phrase">
+        </div>
+        <a id="url<%=giveaway.id%>" href="/giveaway/<%=giveaway.id%>"><h6><%=giveaway.name%></h6></a>
         </div>
       <% }); %>  
   </div>
