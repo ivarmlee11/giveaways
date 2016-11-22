@@ -296,7 +296,7 @@ app.get('/giveaway/:idx', function(req,res) {
       if(!players) {
         players = [];
       }
-      players.push(user.username);
+      players.push(req.user.username);
 
       players.forEach(function(player) {
         playerObj[player] = player;
