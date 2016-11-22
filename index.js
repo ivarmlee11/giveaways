@@ -159,7 +159,7 @@ app.post('/admin/adminListAdd', function(req, res) {
 });
 
 app.post('/admin/adminListRemove', function(req, res) {
-  console.log(req.body);
+  console.log(req.data);
   var adminName = req.body.data;
   db.user.update({
     admin: false
