@@ -115,10 +115,6 @@ passport.deserializeUser(function(user, cb) {
   }).catch(cb);
 });
 
-app.get('*', function(req, res){
-  res.redirect('/');
-});
-
 app.get('/', function(req, res) {
   res.render('login');
 });
