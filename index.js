@@ -161,6 +161,8 @@ app.post('/admin/adminListAdd', function(req, res) {
 app.post('/admin/adminListRemove', function(req, res) {
   console.log('---------')
   console.log(req.body)
+  var thing = req.body;
+  console.log(typeof thing)
   console.log('---------')
   console.log(req.body.data)
   console.log('---------')
