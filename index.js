@@ -67,7 +67,7 @@ passport.use(new BeamStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log('beam strat initiated')
-     if(profile.username !== ('dridor' || 'tweakgames')) {
+     if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames')) {
       db.user.findOrCreate({
         where: {
           twitchid: profile.id,
