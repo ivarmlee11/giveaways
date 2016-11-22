@@ -3,6 +3,9 @@ $(function() {
   var keyPhraseListById = [];
   var list = {};
 
+  var $links = $('.links');
+  $links.hide();
+
   $.ajax({
     method: 'GET',
     url: '/giveawayData'
