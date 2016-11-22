@@ -176,8 +176,8 @@ app.post('/admin/adminListRemove', function(req, res) {
       auth: auth
     }
   }).then(function(user) {
-    res.redirect('/admin/adminList');
   });
+  res.redirect('/admin/adminList');
 });
 
 app.get('/giveawayList', function(req, res) {
