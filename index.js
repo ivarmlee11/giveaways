@@ -161,14 +161,8 @@ app.post('/admin/adminListAdd', function(req, res) {
 });
 
 app.post('/admin/adminListRemove', function(req, res) {
-  console.log(req.body);
-  // var admin = Object.keys(req.body);
-  // console.log(admin);
-  // var adminName = admin[0];
-  // var authName = admin[1];
-  // console.log(adminName);
-  // console.log(authName);
-  console.log('-------')
+  var adminName = req.body.adminName,
+      auth = req.body.auth;
   if(adminName === req.user.username) {
     res.send('You cannot demod yourself.');
   }
@@ -176,7 +170,8 @@ app.post('/admin/adminListRemove', function(req, res) {
     admin: false
   }, {
     where: {
-      username: adminName
+      username: adminName,
+      auth: auth
     }
   }).then(function(user) {
     res.redirect('/admin/adminList');
