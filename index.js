@@ -276,7 +276,7 @@ app.get('/thanks', function(req, res) {
 app.post('/keyPhrase/:idx', function(req, res) {
   console.log('---------------------------')
   var id = req.params.idx;
-  console.log(req.body.keyphrase)
+  console.log(req.body)
     console.log('---------------------------')
   console.log('---------------------------')
   console.log('---------------------------')
