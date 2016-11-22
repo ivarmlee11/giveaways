@@ -120,7 +120,6 @@ app.get('/', function(req, res) {
   res.render('login');
 });
 
-var user;
 
 app.get('/auth/twitch', 
   passport.authenticate('twitchtv'));
@@ -128,8 +127,6 @@ app.get('/auth/twitch',
 app.get('/auth/twitch/callback', 
   passport.authenticate('twitchtv',  { failureRedirect: '/' }), 
   function(req, res) {
-  user = req.user;
-  console.log(req.isAuthenticated());
   res.redirect('/auth/loggedIn');
 });
 
@@ -139,20 +136,15 @@ app.get('/auth/beam',
 app.get('/auth/beam/callback',
   passport.authenticate('beam', { failureRedirect: '/' }),
   function(req, res) {
-  user = req.user;
-  console.log(req.isAuthenticated());
   res.redirect('/auth/loggedIn');
 });
 
 app.get('/auth/loggedIn', function(req, res) {
-  if(user) {
-    if (user.admin) {
+    if (req.user.admin) {
       res.render('adminControl', {user: user});
     } else {
       res.redirect('/giveawayList');
     }
-  } else {
-    res.redirect('/');
   }
 });
 
