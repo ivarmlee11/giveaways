@@ -139,25 +139,18 @@ app.get('/auth/beam/callback',
 });
 
 app.get('/auth/loggedIn', function(req, res) {
-  console.log(req.user);
-  var user = req.user;
-
-    if (req.user.admin) {
-      res.render('adminControl', {user: user});
-    } else {
-      res.redirect('/giveawayList');
-    }
+  if (req.user.admin) {
+    res.render('adminControl', {user: user});
+  } else {
+    res.redirect('/giveawayList');
+  }
 });
 
 app.get('/giveawayList', function(req, res) {
-  if(req.user.admin) {
-    db.giveaway.findAll().then(function(giveaways) {
-      var giveaway = giveaways;
-      res.render('giveaways', {giveaways: giveaway});
-    });  
-  } else {
-    res.redirect('/');
-  }
+  db.giveaway.findAll().then(function(giveaways) {
+    var giveaway = giveaways;
+    res.render('giveaways', {giveaways: giveaway});
+  });  
 });
 
 app.post('/admin/adminListAdd', function(req, res) {
