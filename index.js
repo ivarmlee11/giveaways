@@ -139,11 +139,12 @@ app.get('/auth/beam/callback',
 });
 
 app.get('/auth/loggedIn', function(req, res) {
-  if (req.user.admin) {
-    res.render('adminControl', {user: user});
-  } else {
-    res.redirect('/giveawayList');
-  }
+  var user = req.user;
+    if (req.user.admin) {
+      res.render('adminControl', {user: user});
+    } else {
+      res.redirect('/giveawayList');
+    }
 });
 
 app.get('/giveawayList', function(req, res) {
