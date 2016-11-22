@@ -5,8 +5,8 @@ $('#removeAdmin').on('click', function(e) {
   var dataObj = {};
   var adminName = $('#adminNameGive').val();
   dataObj['adminName'] = adminName;
-  console.log($('#authTwitch').val());
-  console.log($('#authBeam').val());
+
+  $('input[name=auth]:checked').val();
 
   $.ajax({
     method: 'POST',
