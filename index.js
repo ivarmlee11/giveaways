@@ -104,12 +104,6 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
-app.use(function (err, req, res, next) {
-  if(err) {
-    res.redirect('/');
-  }
-});
-
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -121,10 +115,13 @@ passport.deserializeUser(function(user, cb) {
   }).catch(cb);
 });
 
+app.get('*', function(req, res){
+  res.redirect('/');
+});
+
 app.get('/', function(req, res) {
   res.render('login');
 });
-
 
 app.get('/auth/twitch', 
   passport.authenticate('twitchtv'));
