@@ -36,7 +36,7 @@ passport.use(new TwitchtvStrategy({
   scope: 'user_read'
 },
   function(accessToken, refreshToken, profile, done) {
-    if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames')) {
+    if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames' || 'Dridor')) {
       db.user.findOrCreate({
         where: {
           twitchid: profile.id,
@@ -67,7 +67,7 @@ passport.use(new BeamStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log('beam strat initiated')
-     if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames')) {
+     if(profile.username !== ('dridor' || 'tweakgames' || 'TweakGames' || 'Dridor')) {
       db.user.findOrCreate({
         where: {
           twitchid: profile.id,
