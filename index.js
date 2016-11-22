@@ -104,6 +104,12 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
+app.use(function (err, req, res, next) {
+  if(err) {
+    res.redirect('/');
+  }
+});
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -140,11 +146,11 @@ app.get('/auth/beam/callback',
 
 app.get('/auth/loggedIn', function(req, res) {
   var user = req.user;
-    if (req.user.admin) {
-      res.render('adminControl', {user: user});
-    } else {
-      res.redirect('/giveawayList');
-    }
+  if (req.user.admin) {
+    res.render('adminControl', {user: user});
+  } else {
+    res.redirect('/giveawayList');
+  }
 });
 
 app.get('/giveawayList', function(req, res) {
@@ -162,7 +168,6 @@ app.post('/admin/adminListAdd', function(req, res) {
       username: req.body.adminNameGive
     }
   }).then(function(user) {
-    console.log('working admin add')
     res.redirect('/admin/adminList');
   });
 });
@@ -175,14 +180,11 @@ app.post('/admin/adminListRemove', function(req, res) {
       username: req.body.adminNameRemove
     }
   }).then(function(user) {
-    console.log(user)
-    console.log('working admin removsse')
     res.redirect('/admin/adminList');
   });
 });
 
 app.get('/admin/adminList', function(req, res) {
-  console.log(req.isAuthenticated());
   if(req.user.admin) {
     db.user.findAll({
       where: {
@@ -224,35 +226,23 @@ app.get('/admin/adminGiveawayList', function(req, res) {
 });
 
 app.get('/playerList/:idx', function(req, res) {
-  // if(user) {
-    var id = req.params.idx;
-    db.giveaway.findById(id).then(function(giveaway) {
-      var playerList = giveaway.players;
-      res.render('showGiveaway', {playerList: playerList});
-    });
-  // } else {
-  //   res.redirect('/');
-  // }
+  var id = req.params.idx;
+  db.giveaway.findById(id).then(function(giveaway) {
+    var playerList = giveaway.players;
+    res.render('showGiveaway', {playerList: playerList});
+  });
 });
 
 app.get('/winner/:idx', function(req, res) {
-  // if (user) { 
-    var id = req.params.idx;
-    db.giveaway.findById(id).then(function(giveaway) {
-      var playerList = giveaway.players;
-      res.send({playerList: playerList});
-    });
-  // } else {
-  //   res.redirect('/');
-  // }
+  var id = req.params.idx;
+  db.giveaway.findById(id).then(function(giveaway) {
+    var playerList = giveaway.players;
+    res.send({playerList: playerList});
+  });
 });
 
 app.get('/giveawayHistory', function(req, res) {
-  // if(user) {
-    res.render('winHistory');
-  // } else {
-  //   res.redirect('/');
-  // }
+  res.render('winHistory');
 });
 
 app.get('/deleteGiveaway/:idx', function(req, res) {
@@ -269,11 +259,7 @@ app.get('/deleteGiveaway/:idx', function(req, res) {
 });
 
 app.get('/thanks', function(req, res) {
-  // if(user) {
-    res.render('thanks');
-  // } else {
-  //   res.redirect('/');
-  // }
+  res.render('thanks');
 });
 
 app.get('/giveaway/:idx', function(req,res) {
