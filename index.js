@@ -8,88 +8,25 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     ejsLayouts = require('express-ejs-layouts'),
-    twitchClientId = process.env.TWITCHCLIENTID,
-    twitchClientSecret = process.env.CLIENTSECRETTWITCH,
-    beamClientSecret = process.env.CLIENTSECRETBEAM,
-    beamClientId = process.env.BEAMCLIENTID;
-    // console.log(twitchClientSecret + ' twitch');
-    // console.log(beamClientSecret + ' beam');
-    // console.log(beamClientId + ' beam id');
-    // console.log(twitchClientId + ' twitch id');
+    sessionSecret = process.env.SESSION,
+    passport = require('./config/ppConfig');
 
-var TwitchtvStrategy = require('passport-twitchtv').Strategy;
-var BeamStrategy = require('passport-beam').Strategy;
-var passport = require('passport');
+// controllers
+var adminCtrl = require('./controllers/admin');
+app.use('/admin', adminCtrl);
+
+var authCtrl = require('./controllers/auth');
+app.use('/auth', authCtrl);
 
 app.use(session({
-  secret: 'asdasdasdasdas',
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: true
 }));
 
-passport.use(new TwitchtvStrategy({
-    clientID: twitchClientId,
-    clientSecret: twitchClientSecret,
-    callbackURL: 'https://tweak-game-temp.herokuapp.com/auth/twitch/callback',
-    scope: 'user_read'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    if(profile.username !== 'tweakgames') {
-      db.user.findOrCreate({
-        where: {
-          twitchid: profile.id,
-          username: profile.username,
-          auth: 'Twitch'
-        }
-      }).spread(function(user, created) {
-        return done(null, user);
-      });
-    } else {
-      db.user.findOrCreate({
-        where: {
-          twitchid: profile.id,
-          username: profile.username,
-          auth: 'Twitch',
-          admin: true
-        }
-      }).spread(function(user, created) {
-        return done(null, user);
-      });
-    };
-  }
-));
+app.use(passport.initialize());
 
-passport.use(new BeamStrategy({
-    clientID: beamClientId,
-    clientSecret: beamClientSecret,
-    callbackURL: 'https://tweak-game-temp.herokuapp.com/auth/beam/callback',
-    scope: 'user:details:self'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    if(profile.username !== 'TweakGames') {
-      db.user.findOrCreate({
-        where: {
-          twitchid: profile.id,
-          username: profile.username,
-          auth: 'Beam'
-        }
-      }).spread(function(user, created) {
-        return done(null, user);
-      });
-    } else {
-      db.user.findOrCreate({
-        where: {
-          twitchid: profile.id,
-          username: profile.username,
-          auth: 'Beam',
-          admin: true
-        }
-      }).spread(function(user, created) {
-        return done(null, user);
-      });
-    };
-  }
-));
+app.use(passport.session());
 
 app.use(express.static(__dirname + '/public'));
 
@@ -101,83 +38,8 @@ app.use(morgan);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(passport.initialize());
-
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, cb) {
-  var id = user.id;
-  db.user.findById(id).then(function(user) {
-    cb(null, user);
-  }).catch(cb);
-});
-
 app.get('/', function(req, res) {
   res.render('login');
-});
-
-app.get('/auth/twitch', 
-  passport.authenticate('twitchtv'));
-
-app.get('/auth/twitch/callback', 
-  passport.authenticate('twitchtv',  { failureRedirect: '/' }), 
-  function(req, res) {
-  res.redirect('/auth/loggedIn');
-});
-
-app.get('/auth/beam',
-  passport.authenticate('beam'));
-
-app.get('/auth/beam/callback',
-  passport.authenticate('beam', { failureRedirect: '/' }),
-  function(req, res) {
-  res.redirect('/auth/loggedIn');
-});
-
-app.get('/auth/loggedIn', function(req, res) {
-  var user = req.user;
-  if (req.user.admin) {
-    res.render('adminControl', {user: user});
-  } else {
-    res.redirect('/giveawayList');
-  }
-});
-
-app.post('/admin/adminListAdd', function(req, res) {
-  db.user.update({
-    admin: true
-  }, {
-    where: {
-      username: req.body.adminNameGive,
-      auth: req.body.auth
-    }
-  }).then(function(user) {
-    res.redirect('/admin/adminList');
-  });
-});
-
-app.post('/admin/adminListRemove', function(req, res) {
-  var adminName = req.body.adminName,
-      auth = req.body.auth;
-  console.log(adminName);
-  console.log(auth);
-  if(adminName === req.user.username) {
-    res.send('You cannot demod yourself.');
-  }
-  db.user.update({
-    admin: false
-  }, {
-    where: {
-      username: adminName,
-      auth: auth
-    }
-  }).then(function(user) {
-  });
-  res.redirect('back');
 });
 
 app.get('/giveawayList', function(req, res) {
@@ -197,48 +59,6 @@ app.get('/giveawayData', function(req, res) {
   });  
 });
 
-app.get('/admin/adminList', function(req, res) {
-  if(req.user.admin) {
-    db.user.findAll({
-      where: {
-        admin: true
-      }
-    }).then(function(allAdmins) {
-      var allAdmins = allAdmins;
-      res.render('adminList', {allAdmins: allAdmins});
-    });
-  } else {
-    res.redirect('/');
-  }
-});
-
-app.post('/admin/adminGiveawayList', function(req, res) {
-  if(req.user.admin) {
-    db.giveaway.findOrCreate({
-      where: {
-        name: req.body.giveawayName,
-        keyphrase: req.body.giveawayKeyPhrase
-      },
-      defaults: { players: [] }
-    }).spread(function(giveaway, created) {
-      res.redirect('/admin/adminGiveawayList');
-    });
-  } else {
-    res.redirect('/');
-  }
-});
-
-app.get('/admin/adminGiveawayList', function(req, res) {
-  if(req.user.admin) {
-    db.giveaway.findAll().then(function(giveaways) {
-      var giveaway = giveaways;
-      res.render('adminGameList', {giveaways: giveaway});
-    });
-  } else {
-    res.redirect('/');
-  }  
-});
-
 app.get('/playerList/:idx', function(req, res) {
   var id = req.params.idx;
   db.giveaway.findById(id).then(function(giveaway) {
@@ -255,39 +75,12 @@ app.get('/winner/:idx', function(req, res) {
   });
 });
 
-app.get('/giveawayHistory', function(req, res) {
-  res.render('winHistory');
-});
-
-app.get('/deleteGiveaway/:idx', function(req, res) {
-  if(req.user.admin) {
-    var id = req.params.idx;
-    db.giveaway.destroy({
-      where: { id: id }
-    }).then(function() {
-    });
-    res.redirect('/admin/adminGiveawayList');
-  } else {
-    res.redirect('/');
-  }
-});
-
 app.get('/thanks', function(req, res) {
   res.render('thanks');
 });
 
-app.post('/keyPhrase/:idx', function(req, res) {
-  var id = req.params.idx;
-  var redirectOnSuccessUrl = '/giveaway/' + id;
-  var clientKeyPhraseAttempt = req.body.keyphrase;
-  db.giveaway.findById(id).then(function(giveaway) {
-    var keyPhraseFromDB = giveaway.keyphrase;
-    if(clientKeyPhraseAttempt === keyPhraseFromDB) {
-      res.redirect(redirectOnSuccessUrl);
-    } else {
-      res.render('wrongPass');
-    }
-  });
+app.get('/giveawayHistory', function(req, res) {
+  res.render('winHistory');
 });
 
 app.get('/giveaway/:idx', function(req,res) {
