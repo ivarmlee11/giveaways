@@ -30,8 +30,7 @@ app.use(session({
 app.use(passport.initialize());
 
 app.use(passport.session());
-
-
+console.log(passport.session())
 app.set('view engine', 'ejs');
 
 app.use(ejsLayouts);
