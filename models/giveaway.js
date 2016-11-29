@@ -9,6 +9,12 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
       }
+    },
+    hooks: {
+      beforeCreate: function(giveaway, options, cb) {
+        giveaway.keyphrase = giveaway.keyphrase.toLowerCase();
+        cb(null, giveaway);
+      }
     }
   });
   return giveaway;

@@ -92,18 +92,4 @@ router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
   }
 });
 
-router.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-  var redirectOnSuccessUrl = '/giveaway/' + id;
-  var clientKeyPhraseAttempt = req.body.keyphrase;
-  db.giveaway.findById(id).then(function(giveaway) {
-    var keyPhraseFromDB = giveaway.keyphrase;
-    if(clientKeyPhraseAttempt === keyPhraseFromDB) {
-      res.redirect(redirectOnSuccessUrl);
-    } else {
-      res.render('wrongPass');
-    }
-  });
-});
-
 module.exports = router;

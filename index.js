@@ -85,10 +85,17 @@ app.get('/giveawayHistory', ensureAuthenticated, function(req, res) {
 });
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
-  var gameId = req.params.idx;
-  console.log(req.body.keyphrase)
-  console.log(req.body)
-  res.redirect('/thanks');
+  var id = req.params.idx;
+  var redirectOnSuccessUrl = '/giveaway/' + id;
+  var clientKeyPhraseAttempt = req.body.keyphrase;
+  db.giveaway.findById(id).then(function(giveaway) {
+    var keyPhraseFromDB = giveaway.keyphrase;
+    if(clientKeyPhraseAttempt === keyPhraseFromDB) {
+      res.redirect(redirectOnSuccessUrl);
+    } else {
+      res.render('wrongPass');
+    }
+  });
 });
 
 app.get('/giveaway/:idx', ensureAuthenticated, function(req,res) {
