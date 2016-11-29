@@ -91,7 +91,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   db.giveaway.findById(id).then(function(giveaway) {
     var keyPhraseFromDB = giveaway.keyphrase;
     console.log('----------');
-    console.log(keyPhraseFromDB);
+    console.log(req.user.username);
+    console.log(giveaway.players)
     console.log('----------');
     if(clientKeyPhraseAttempt === keyPhraseFromDB) {
       res.redirect(redirectOnSuccessUrl);
