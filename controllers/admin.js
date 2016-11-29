@@ -1,7 +1,7 @@
 var express = require("express"),
     router = express.Router(),
     passport = require('../config/ppConfig'),
-    db = require('./models');
+    db = require('../models');
 
 router.post('/adminListAdd', function(req, res) {
   db.user.update({
