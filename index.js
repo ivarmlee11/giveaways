@@ -10,18 +10,19 @@ var express = require('express'),
     ejsLayouts = require('express-ejs-layouts'),
     sessionSecret = process.env.SESSION,
     passport = require('./config/ppConfig');
-// controllers
-var adminCtrl = require('./controllers/admin');
-app.use('/admin', adminCtrl);
-
-var authCtrl = require('./controllers/auth');
-app.use('/auth', authCtrl);
 
 app.use(session({
   secret: sessionSecret,
   resave: false,
   saveUninitialized: true
 }));
+
+// controllers
+var adminCtrl = require('./controllers/admin');
+app.use('/admin', adminCtrl);
+
+var authCtrl = require('./controllers/auth');
+app.use('/auth', authCtrl);
 
 app.use(express.static(__dirname + '/public'));
 

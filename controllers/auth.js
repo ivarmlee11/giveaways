@@ -2,10 +2,6 @@ var express = require("express"),
     router = express.Router(),
     passport = require('../config/ppConfig');
 
-
-var TwitchtvStrategy = require('passport-twitchtv').Strategy;
-var BeamStrategy = require('passport-beam').Strategy;
-
 router.get('/twitch', 
   passport.authenticate('twitchtv'));
 
