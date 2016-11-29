@@ -18,6 +18,10 @@ app.use('/admin', adminCtrl);
 var authCtrl = require('./controllers/auth');
 app.use('/auth', authCtrl);
 
+app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(session({
   secret: sessionSecret,
   resave: false,
@@ -28,15 +32,11 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
-app.use(express.static(__dirname + '/public'));
-
 app.set('view engine', 'ejs');
 
 app.use(ejsLayouts);
 
 app.use(morgan);
-
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res) {
   res.render('login');
