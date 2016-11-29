@@ -79,7 +79,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
   }
 });
 
-app.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
+router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
   db.giveaway.findById(id).then(function(giveaway) {
     var playerList = giveaway.players;
