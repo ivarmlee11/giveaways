@@ -1,13 +1,10 @@
-<script src="../js/winSelector.js"></script>
-
 <nav class="navbar navbar-inverse">
   <ul class="nav navbar-nav">
-    <li><a class="nav-link" href="/auth/loggedIn"><h5>Make A Giveaway</h5></a></li>
-    <li><a href="/admin/adminGiveawayList"><h5>Giveaway List</h5></a></li>
+    <li><a href="/giveawayList"><h5>Giveaway List</h5></a></li>
   </ul>
 </nav>
 
-<h1 class="text-center">Giveaway Edit</h1>
+<h1 class="text-center">Entered Players</h1>
 
 <div class="container">
   <div class="col-md-6 col-md-offset-3">  
@@ -16,9 +13,5 @@
         <h6><%= player %></h6>
       </div>
     <% }); %>
-    <button id="selectWinner" class="btn btn-success">Pick A Winner</button>
-    <button id="deleteThis" class="btn btn-danger">Delete this Giveaway</button>
-    <h1 id="winner">
-    </h1>
   </div>
 </div>

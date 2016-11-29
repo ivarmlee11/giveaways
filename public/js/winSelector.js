@@ -22,16 +22,5 @@ $(function() {
       }
     });
   });
-
-  $('#deleteThis').on('click', function() {
-    var url = '/deleteGiveaway/' + idx;
-    $.ajax({
-      url: url,
-      type: 'GET',
-      success: function(data) {       
-        window.location.href = 'https://tweak-game-temp.herokuapp.com' + url;       
-      }
-    });
-  });
-
+  
 });
