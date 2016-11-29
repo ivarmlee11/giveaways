@@ -8,7 +8,7 @@ router.get('/twitch',
 router.get('/twitch/callback', 
   passport.authenticate('twitchtv',  { failureRedirect: '/' }), 
   function(req, res) {
-  res.redirect('/loggedIn');
+  res.redirect('/auth/loggedIn');
 });
 
 router.get('/beam',
