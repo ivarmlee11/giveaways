@@ -1,9 +1,10 @@
 var express = require("express"),
     router = express.Router(),
     passport = require('../config/ppConfig'),
+    ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models');
 
-router.post('/adminListAdd', function(req, res) {
+router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
   db.user.update({
     admin: true
   }, {
@@ -16,7 +17,7 @@ router.post('/adminListAdd', function(req, res) {
   });
 });
 
-router.post('/adminListRemove', function(req, res) {
+router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
   console.log(adminName);
@@ -36,7 +37,7 @@ router.post('/adminListRemove', function(req, res) {
   res.redirect('back');
 });
 
-router.get('/adminList', function(req, res) {
+router.get('/adminList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
     db.user.findAll({
       where: {
@@ -51,7 +52,7 @@ router.get('/adminList', function(req, res) {
   }
 });
 
-router.get('/adminGiveawayList', function(req, res) {
+router.get('/adminGiveawayList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
@@ -62,7 +63,7 @@ router.get('/adminGiveawayList', function(req, res) {
   }  
 });
 
-router.post('/adminGiveawayList', function(req, res) {
+router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
     db.giveaway.findOrCreate({
       where: {
@@ -78,7 +79,7 @@ router.post('/adminGiveawayList', function(req, res) {
   }
 });
 
-router.get('/deleteGiveaway/:idx', function(req, res) {
+router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
     var id = req.params.idx;
     db.giveaway.destroy({
@@ -91,7 +92,7 @@ router.get('/deleteGiveaway/:idx', function(req, res) {
   }
 });
 
-router.post('/keyPhrase/:idx', function(req, res) {
+router.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
   var redirectOnSuccessUrl = '/giveaway/' + id;
   var clientKeyPhraseAttempt = req.body.keyphrase;

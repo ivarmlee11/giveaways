@@ -1,5 +1,6 @@
 var express = require("express"),
     router = express.Router(),
+    ensureAuthenticated = require('../middleware/ensureAuth.js'),
     passport = require('../config/ppConfig');
 
 router.get('/twitch', 
@@ -20,7 +21,7 @@ router.get('/beam/callback',
   res.redirect('/auth/loggedIn');
 });
 
-router.get('/loggedIn', function(req, res) {
+router.get('/loggedIn', ensureAuthenticated, function(req, res) {
   var user = req.user;
   if (req.user.admin) {
     res.render('adminControl', {user: user});
