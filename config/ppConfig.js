@@ -6,10 +6,10 @@ var TwitchtvStrategy = require('passport-twitchtv').Strategy,
     twitchClientSecret = process.env.CLIENTSECRETTWITCH,
     beamClientSecret = process.env.CLIENTSECRETBEAM,
     beamClientId = process.env.BEAMCLIENTID;
-    // console.log(twitchClientSecret + ' twitch');
-    // console.log(beamClientSecret + ' beam');
-    // console.log(beamClientId + ' beam id');
-    // console.log(twitchClientId + ' twitch id');
+    console.log(twitchClientSecret + ' twitch');
+    console.log(beamClientSecret + ' beam');
+    console.log(beamClientId + ' beam id');
+    console.log(twitchClientId + ' twitch id');
 
 passport.serializeUser(function(user, done) {
   done(null, user);
