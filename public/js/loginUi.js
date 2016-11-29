@@ -1,5 +1,5 @@
 $(function() {
-
+  console.log('working');
   $('#twitchDiv').hover(function() {
     $('#twitchDiv').css('background-color','silver');
   },
