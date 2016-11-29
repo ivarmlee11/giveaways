@@ -87,9 +87,12 @@ app.get('/giveawayHistory', ensureAuthenticated, function(req, res) {
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
   var redirectOnSuccessUrl = '/giveaway/' + id;
-  var clientKeyPhraseAttempt = req.body.keyphrase;
+  var clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase();
   db.giveaway.findById(id).then(function(giveaway) {
     var keyPhraseFromDB = giveaway.keyphrase;
+    console.log('----------');
+    console.log(keyPhraseFromDB);
+    console.log('----------');
     if(clientKeyPhraseAttempt === keyPhraseFromDB) {
       res.redirect(redirectOnSuccessUrl);
     } else {
