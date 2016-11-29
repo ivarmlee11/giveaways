@@ -17,13 +17,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// controllers
-var adminCtrl = require('./controllers/admin');
-app.use('/admin', adminCtrl);
-
-var authCtrl = require('./controllers/auth');
-app.use('/auth', authCtrl);
-
 app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
@@ -37,6 +30,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 app.use(passport.session());
+
+// controllers
+var adminCtrl = require('./controllers/admin');
+app.use('/admin', adminCtrl);
+
+var authCtrl = require('./controllers/auth');
+app.use('/auth', authCtrl);
+
 
 /////////////////////////
 
