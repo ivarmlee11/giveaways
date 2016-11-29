@@ -50,103 +50,24 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   });  
 });
 
-app.get('/giveawayData', ensureAuthenticated, function(req, res) {
-  db.giveaway.findAll().then(function(giveaways) {
-    var giveawayArray = [];
-    giveaways.forEach(function(value) {
-      giveawayArray.push(value);
-    });
-    res.send(giveawayArray);
-  });  
-});
-
 app.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
-  db.giveaway.findById(id).then(function(giveaway) {
-    var playerList = giveaway.players;
+    // use the join table to get all users associated with a giveaway of idx
     res.render('showGiveaway', {playerList: playerList});
-  });
-});
-
-app.get('/winner/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-  db.giveaway.findById(id).then(function(giveaway) {
-    var playerList = giveaway.players;
-    res.send({playerList: playerList});
-  });
-});
-
-app.get('/thanks', ensureAuthenticated, function(req, res) {
-  res.render('thanks');
-});
-
-app.get('/giveawayHistory', ensureAuthenticated, function(req, res) {
-  res.render('winHistory');
 });
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-  var redirectOnSuccessUrl = '/giveaway/' + id;
-  var clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase();
+  var id = req.params.idx,
+      clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase();
+
   db.giveaway.findById(id).then(function(giveaway) {
     var keyPhraseFromDB = giveaway.keyphrase;
-    console.log('----------');
-    console.log(req.user.username);
-    console.log(giveaway.players)
-    console.log('----------');
     if(clientKeyPhraseAttempt === keyPhraseFromDB) {
-      res.redirect(redirectOnSuccessUrl);
+      // use the join table to link the user with the giveaway
+      res.render('thanks');
     } else {
       res.render('wrongPass');
     }
-  });
-});
-
-app.get('/giveaway/:idx', ensureAuthenticated, function(req,res) {
-  var giveawayId = req.params.idx;  
-  waterfall([
-    function(callback){
-      db.giveaway.find({
-        where: {
-          id: giveawayId
-        }
-      }).then(function(giveaway) {
-        var players = giveaway.players;
-        callback(null, players);
-      });
-    },
-    function(players, callback){
-      var players = players,
-          playerObj = {};
-
-      if(!players) {
-        players = [];
-      }
-      players.push(req.user.username);
-
-      players.forEach(function(player) {
-        playerObj[player] = player;
-      });
-
-      playersUnique = [];
-
-      Object.keys(playerObj).forEach(function(key,index) {
-        playersUnique.push(key);
-      });
-
-      db.giveaway.update({
-        players: playersUnique
-      }, {
-        where: {
-          id: giveawayId
-        }
-      }).then(function(updatedPlayers) {
-        callback(null, updatedPlayers);
-      });
-    }
-  ],
-  function (err, result) {
-    res.redirect('/thanks');
   });
 });
 

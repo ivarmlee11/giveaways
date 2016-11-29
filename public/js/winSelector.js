@@ -6,14 +6,14 @@ $(function() {
   var idx = url[url.length -1];
 
   $('#selectWinner').on('click', function() {
-    var url = '/winner/' + idx;
+    var url = '/admin/winner/' + idx;
     var winner;
     $.ajax({
       url: url,
       type: 'GET',
       success: function(players) {
-        var playerlist = players.playerList;
-        winner = playerlist[Math.floor(Math.random()*playerlist.length)];
+        var playerList = players;
+        winner = playerList[Math.floor(Math.random()*playerList.length)];
         if(winner) {
           $('#winner').html('The winner is ' + winner + '!');
         } else {

@@ -6,10 +6,10 @@ var TwitchtvStrategy = require('passport-twitchtv').Strategy,
     twitchClientSecret = process.env.CLIENTSECRETTWITCH,
     beamClientSecret = process.env.CLIENTSECRETBEAM,
     beamClientId = process.env.BEAMCLIENTID;
-    console.log(twitchClientSecret + ' twitch');
-    console.log(beamClientSecret + ' beam');
-    console.log(beamClientId + ' beam id');
-    console.log(twitchClientId + ' twitch id');
+    // console.log(twitchClientSecret + ' twitch');
+    // console.log(beamClientSecret + ' beam');
+    // console.log(beamClientId + ' beam id');
+    // console.log(twitchClientId + ' twitch id');
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -29,12 +29,13 @@ passport.use(new TwitchtvStrategy({
     scope: 'user_read'
   },
   function(accessToken, refreshToken, profile, done) {
-    if(profile.username !== 'tweakgames') {
+    if(profile.username === ('tweakgames' || 'dridor')) {
       db.user.findOrCreate({
         where: {
-          twitchid: profile.id,
+          userid: profile.id,
           username: profile.username,
-          auth: 'Twitch'
+          auth: 'Twitch',
+          admin: true
         }
       }).spread(function(user, created) {
         return done(null, user);
@@ -42,10 +43,9 @@ passport.use(new TwitchtvStrategy({
     } else {
       db.user.findOrCreate({
         where: {
-          twitchid: profile.id,
+          userid: profile.id,
           username: profile.username,
-          auth: 'Twitch',
-          admin: true
+          auth: 'Twitch'
         }
       }).spread(function(user, created) {
         return done(null, user);
@@ -61,12 +61,13 @@ passport.use(new BeamStrategy({
     scope: 'user:details:self'
   },
   function(accessToken, refreshToken, profile, done) {
-    if(profile.username !== 'TweakGames') {
+    if(profile.username === ('TweakGames' || 'Dridor')) {
       db.user.findOrCreate({
         where: {
-          twitchid: profile.id,
+          userid: profile.id,
           username: profile.username,
-          auth: 'Beam'
+          auth: 'Beam',
+          admin: true
         }
       }).spread(function(user, created) {
         return done(null, user);
@@ -74,10 +75,9 @@ passport.use(new BeamStrategy({
     } else {
       db.user.findOrCreate({
         where: {
-          twitchid: profile.id,
+          userid: profile.id,
           username: profile.username,
-          auth: 'Beam',
-          admin: true
+          auth: 'Beam'
         }
       }).spread(function(user, created) {
         return done(null, user);

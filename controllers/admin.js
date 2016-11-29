@@ -20,11 +20,11 @@ router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
 router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
-  console.log(adminName);
-  console.log(auth);
+
   if(adminName === req.user.username) {
     res.send('You cannot demod yourself.');
   }
+
   db.user.update({
     admin: false
   }, {
@@ -33,8 +33,9 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
       auth: auth
     }
   }).then(function(user) {
+    res.redirect('back');
   });
-  res.redirect('back');
+
 });
 
 router.get('/adminList', ensureAuthenticated, function(req, res) {
@@ -69,8 +70,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
       where: {
         name: req.body.giveawayName,
         keyphrase: req.body.giveawayKeyPhrase
-      },
-      defaults: { players: [] }
+      }
     }).spread(function(giveaway, created) {
       res.redirect('/admin/adminGiveawayList');
     });
@@ -81,10 +81,15 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
-  db.giveaway.findById(id).then(function(giveaway) {
-    var playerList = giveaway.players;
+    // use join table to get all players associated with the req params id
     res.render('adminShowGiveaway', {playerList: playerList});
-  });
+ 
+});
+
+router.get('/winner/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+    // use join table to get all players associated with the req params id
+    res.send({playerList: playerList});
 });
 
 router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
@@ -93,8 +98,8 @@ router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
     db.giveaway.destroy({
       where: { id: id }
     }).then(function() {
+      res.redirect('/admin/adminGiveawayList');
     });
-    res.redirect('/admin/adminGiveawayList');
   } else {
     res.redirect('/');
   }
