@@ -27,19 +27,15 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use(passport.initialize());
-
-app.use(passport.session());
-
-console.log('------');
-console.log(passport.session())
-console.log('------');
-
 app.set('view engine', 'ejs');
 
 app.use(ejsLayouts);
 
 app.use(morgan);
+
+app.use(passport.initialize());
+
+app.use(passport.session());
 
 app.get('/', function(req, res) {
   res.render('login');
