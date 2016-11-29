@@ -84,6 +84,13 @@ app.get('/giveawayHistory', ensureAuthenticated, function(req, res) {
   res.render('winHistory');
 });
 
+app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
+  var gameId = req.params.idx;
+  console.log(req.body.keyphrase)
+  console.log(req.body)
+  res.redirect('/thanks');
+});
+
 app.get('/giveaway/:idx', ensureAuthenticated, function(req,res) {
   var giveawayId = req.params.idx;  
   waterfall([
