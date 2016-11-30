@@ -69,9 +69,14 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   db.giveaway.findById(id).then(function(giveaway) {
     var keyPhraseFromDB = giveaway.keyphrase;
     if(clientKeyPhraseAttempt === keyPhraseFromDB) {
-      // use the join table to link the user with the giveaway
-      // if the user is already joined with the giveaway redirect
-      // them to alreadyEntere.ejs
+
+      console.log(req.user.id)
+  //       db.user.findById({
+  //   where: {name: "food"}
+  // }).spread(function(tag, created) {
+  //   console.log(tag.get());
+  // });
+
       res.render('thanks');
     } else {
       res.render('wrongPass');
