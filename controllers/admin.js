@@ -74,7 +74,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
       }
     }).spread(function(giveaway, created) {
         console.log(giveaway.get());
-      // res.redirect('/admin/adminGiveawayList');
+        res.redirect('/admin/adminGiveawayList');
     });
 
   } else {
