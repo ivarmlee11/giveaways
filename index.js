@@ -50,10 +50,16 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   });  
 });
 
-app.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
+app.get('/showPlayersInGiveaway/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
     // use the join table to get all users associated with a giveaway of idx
     res.render('showGiveaway', {playerList: playerList});
+});
+
+app.get('/giveawayPlayerData/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+    // use join table to get all players associated with the req params id
+    res.send({playerData: playerData});
 });
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
@@ -64,6 +70,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     var keyPhraseFromDB = giveaway.keyphrase;
     if(clientKeyPhraseAttempt === keyPhraseFromDB) {
       // use the join table to link the user with the giveaway
+      // if the user is already joined with the giveaway redirect
+      // them to alreadyEntere.ejs
       res.render('thanks');
     } else {
       res.render('wrongPass');

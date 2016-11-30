@@ -22,7 +22,7 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
       auth = req.body.auth;
 
   if(adminName === req.user.username) {
-    res.send('You cannot demod yourself.');
+    res.redirect('back');
   }
 
   db.user.update({
@@ -66,14 +66,17 @@ router.get('/adminGiveawayList', ensureAuthenticated, function(req, res) {
 
 router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
+
     db.giveaway.findOrCreate({
       where: {
         name: req.body.giveawayName,
         keyphrase: req.body.giveawayKeyPhrase
       }
     }).spread(function(giveaway, created) {
-      res.redirect('/admin/adminGiveawayList');
+        console.log(giveaway.get());
+      // res.redirect('/admin/adminGiveawayList');
     });
+
   } else {
     res.redirect('/');
   }
