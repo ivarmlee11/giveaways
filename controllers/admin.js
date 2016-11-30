@@ -85,6 +85,17 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
     // use join table to get all players associated with the req params id
+    db.giveaway.find({
+  where: {id: id}
+}).then(function(giveaway) {
+  giveaway.getUsers().then(function(users) {
+    console.log("These users are giged with " + giveaway.name + ":");
+    users.forEach(function(user) {
+      console.log("user title: " + user.username);
+    });
+  });
+});
+
     res.render('adminShowGiveaway', {playerList: playerList});
  
 });
