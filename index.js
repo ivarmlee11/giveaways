@@ -71,11 +71,11 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     if(clientKeyPhraseAttempt === keyPhraseFromDB) {
 
       console.log(req.user.id)
-  //       db.user.findById({
-  //   where: {name: "food"}
-  // }).spread(function(tag, created) {
-  //   console.log(tag.get());
-  // });
+      db.user.findById(req.user.id).then(function(user) {
+        console.log('---');
+        console.log('---');
+        console.log(user.get());
+      });
 
       res.render('thanks');
     } else {
