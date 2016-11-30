@@ -17,6 +17,7 @@
     "express-ejs-layouts": "^2.2.0",
     "express-session": "^1.14.2",
     "morgan": "^1.7.0",
+    "mysql": "^2.12.0",
     "passport": "^0.3.2",
     "passport-beam": "^1.0.4",
     "passport-twitchtv": "^0.1.4",
