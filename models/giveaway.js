@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        models.giveaway.belongsToMany(models.user, {through: 'giveawayUsers'});
+        models.giveaway.belongsToMany(models.user, {through: 'giveawaysUsers'});
       }
     },
     hooks: {
