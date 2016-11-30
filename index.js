@@ -93,6 +93,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       where: {id: reqUserId}
     }).spread(function(user, created) {
       console.log(user.get());
+      giveaway.addUser(user);
     });
   });
 
