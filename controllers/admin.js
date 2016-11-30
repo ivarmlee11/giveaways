@@ -89,14 +89,14 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   where: {id: id}
 }).then(function(giveaway) {
   giveaway.getUsers().then(function(users) {
-    console.log("These users are giged with " + giveaway.name + ":");
+    console.log("These users are associated with " + giveaway.name + ":");
     users.forEach(function(user) {
       console.log("user title: " + user.username);
     });
   });
 });
 
-    res.render('adminShowGiveaway', {playerList: playerList});
+    // res.render('adminShowGiveaway', {playerList: playerList});
  
 });
 
