@@ -12,9 +12,8 @@ $(function() {
         type: 'GET',
         success: function(playerList) {
           $('span[playerNumberId=' + val + ']').text('There are ' + playerList.length + ' entries.');
-          playerList.forEach(function(val) {
-            console.log(val)
-            $('ul[playListId=' + val + ']').append('<li>' + val + '</li>');
+          playerList.forEach(function(player) {
+            $('ul[playListId=' + val + ']').append('<li>' + player.username + '</li>');
           });
           if(playerList.length === 1) {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
