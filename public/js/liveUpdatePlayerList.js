@@ -15,7 +15,7 @@ $(function() {
           $('span[playerNumberId=' + val + ']').text('There are ' + playerList.length + ' entries.');
           playerList.forEach(function(player) {
             console.log(player.username);
-            $('ul[playerListId=' + val + ']').append('<li>' + player.username + <% if(player.auth === 'Twitch') { '<img src="img/Twitch.png" />' } else { '<img src="img/Beam.png" />' } %> + '</li>');
+            $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img src="img/Twitch.png" /></li>');
           });
           if(playerList.length === 1) {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
