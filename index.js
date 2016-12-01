@@ -84,7 +84,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       where: {id: reqUserId}
     }).spread(function(user, created) {
       var user = user.dataValues;
-      console.log(giveaway.getUser(user));
+      console.log(giveaway.getUsers());
 
       if(!created) {
         console.log('user already in db')
