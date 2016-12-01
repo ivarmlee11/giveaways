@@ -88,10 +88,10 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
     where: {id: id}
   }).then(function(giveaway) {
     giveaway.getUsers().then(function(users) {
-      var playerList = users;
-      console.log('-------------------------')
-      console.log(playerList);
-      console.log('-------------------------')
+      var playerList = [];
+      users.forEach(function(user) {
+        console.log(user.username);
+      });
       res.render('adminShowGiveaway', {playerList: playerList});
     });
   });
