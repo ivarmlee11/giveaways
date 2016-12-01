@@ -36,6 +36,20 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
   }
 });
 
+
+router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, function(req, res) {
+  var giveawayId = req.params.idx;
+  db.giveaway.update({
+    ended: true
+  }, {
+    where: {
+      id: giveawayId
+    }
+  }).then(function(user) {
+    res.redirect('/admin/adminGiveawayList');
+  });
+});
+
 router.get('/adminList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
     db.user.findAll({
