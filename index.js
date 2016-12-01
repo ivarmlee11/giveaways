@@ -93,13 +93,16 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
         
         db.user.findById(reqUserId)
           .then(function(user) {
-          giveaway.addUser(user);
-          console.log('added this user to this giveaway ' + user);
-          res.redirect('/thanks');
+            if(giveaway.getUser(user)) {
+              res.redirect('/alreadyEntered');
+            }
+            giveaway.addUser(user);
+            console.log('added this user to this giveaway ' + user);
+            res.redirect('/thanks');
         });
 
       } else {
-        res.redirect('/wrongPass')
+        res.redirect('/wrongPass');
       };
 
     });
