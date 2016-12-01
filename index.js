@@ -101,11 +101,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
               console.log('inside getusers')
               
               var users = users;
-
-              console.log(typeof users)
-              console.log(users)
-
-              res.send({users: users});
+              res.send(users);
 
               users.forEach(function(user) {
                 console.log(user)
