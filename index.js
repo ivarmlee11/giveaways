@@ -80,13 +80,15 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       id: id
     }
   }).spread(function(giveaway, created) {
-    if(!created) {
-      res.redirect('/alreadyEntered');
-    } 
     db.user.findOrCreate({
       where: {id: reqUserId}
     }).spread(function(user, created) {
-      console.log(user)
+      var user = user.dataValues;
+      console.log(giveaway.getUser(user));
+
+      if(!created) {
+        console.log('user already in db')
+      }
       giveaway.addUser(user);
       console.log('added this user to this giveaway ' + user);
       res.redirect('/thanks');
