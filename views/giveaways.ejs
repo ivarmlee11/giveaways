@@ -8,23 +8,21 @@
     <h1 class="text-center">Current Running Giveaways</h1>
       <% giveaways.forEach(function(giveaway) { %>
         <div class="well">
-          <div class="col-md-5">
-            <h3><strong><%=giveaway.name%></strong></h3>
-            <form action="/keyPhrase/<%=giveaway.id%>" method="POST" accept-charset="utf-8">
-              <div class="form-group">
-                <% if(!giveaway.ended) { %>
-                  <input name="keyphrase" type="text" class="form-control"/>
-                  <button type="submit" class="btn btn-info">Enter Giveaway</button>
-                <%}%>
-                <% if(giveaway.ended) { %>
-                  <h3>This giveaway is over!</h3>
-                <%}%>
-              </div>
-            </form>
-            <span id="numberOfPlayers<%=giveaway.id%>">
-              Number of players.
-            </span>
-          </div>
+          <h3><strong><%=giveaway.name%></strong></h3>
+          <form action="/keyPhrase/<%=giveaway.id%>" method="POST" accept-charset="utf-8">
+            <div class="form-group">
+              <% if(!giveaway.ended) { %>
+                <input name="keyphrase" type="text" class="form-control"/>
+                <button type="submit" class="btn btn-info">Enter Giveaway</button>
+              <%}%>
+              <% if(giveaway.ended) { %>
+                <h3>This giveaway is over!</h3>
+              <%}%>
+            </div>
+          </form>
+          <span id="numberOfPlayers<%=giveaway.id%>">
+            Number of players.
+          </span>
         </div>
       <% }); %>  
   </div>
