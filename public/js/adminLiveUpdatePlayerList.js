@@ -16,9 +16,7 @@ $(function() {
           if(playerList.length === 1) {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
           }
-          var $listContent = $('ul[playerListId=' + val + ']').html();
-          console.log($listContent);
-          $('ul[playerListId=' + val + ']').html($listContent);
+          $('ul[playerListId=' + val + ']').html('<li></li>');
           playerList.forEach(function(player) {
             console.log(player);
             console.log('val ' + val);
