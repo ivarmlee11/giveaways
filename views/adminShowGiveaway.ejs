@@ -14,7 +14,8 @@
   <div class="col-md-6 col-md-offset-3">  
     <% playerList.forEach(function(player) { %>
       <div class="well">
-        <h6><%= player %></h6>
+        <h6><%= player.username %></h6>
+        <h6><%= player.auth %></h6>
       </div>
     <% }); %>
     <button id="selectWinner" class="btn btn-info">End the Giveaway</button>
