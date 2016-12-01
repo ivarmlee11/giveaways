@@ -17,7 +17,7 @@ $(function() {
         console.log(playerList);
         console.log(winner);
         if(winner) {
-          $('#winner').html('The winner is ' + winner + '!');
+          $('#winner').html('The winner is ' + winner.username + '!');
         } else {
           $('#winner').html('Nobody has joined the competition yet!');
         } 
