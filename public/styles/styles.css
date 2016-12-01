@@ -31,3 +31,7 @@ a, a:hover, a:active {
 .btn {
   border-radius: 0px;
 }
+
+#logo {
+  width: 20px;
+}
