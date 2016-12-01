@@ -32,6 +32,15 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
+app.use(function(req, res) {
+     res.status(404).redirect('/');
+});
+
+
+app.use(function(error, req, res, next) {
+     res.status(500).redirect('/');
+});
+
 // controllers
 var adminCtrl = require('./controllers/admin');
 app.use('/admin', adminCtrl);
@@ -77,14 +86,11 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     console.log('found giveaway ' + giveaway.name);
 
     if(giveaway.ended) {
-      console.log('the giveaway was overrrrrrrrrrrrr')
       res.redirect('/giveawayOver');
     } else {
       if(giveaway.keyphrase === clientKeyPhraseAttempt) {
         db.user.findById(reqUserId).then(function(user) {
-          console.log('found user ' + user.username);
           giveaway.getUsers().then(function(users) {
-            console.log('inside getusers'); 
             var users = users;  
             users.forEach(function(user) {
               if(reqUserName === user.username) {
@@ -99,6 +105,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
         res.redirect('/wrongPass');
       };
     };
+
   });
 
 

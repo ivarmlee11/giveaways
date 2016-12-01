@@ -1,10 +1,10 @@
 $(function() {
 
   function getPlayerEntries(){
+    console.log('update run');
     var giveawayIds = $('.numberOfPlayer').map( function() {
         return $(this).attr('giveawayId');
     }).get();
-    console.log(giveawayIds);
     giveawayIds.forEach(function(val) {
       var url = '/admin/playerListData/' + val;
       $.ajax({
