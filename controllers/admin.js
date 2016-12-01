@@ -127,7 +127,7 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           auth: user.auth
         });
       });
-      res.send(playerList.length);
+      res.send(playerList);
     });
   });
 });
