@@ -86,7 +86,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     db.user.findOrCreate({
       where: {id: reqUserId}
     }).spread(function(user, created) {
-      var user = user;
+      var user = JSON.parse(user);
       giveaway.addUser(user);
       console.log('added this user to this giveaway ' + user);
       res.redirect('/thanks');
