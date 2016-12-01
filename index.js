@@ -82,30 +82,29 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase(),
       reqUserId = req.user.id;
 
-  db.giveaway.findOrCreate({
-    where: {
-      id: id
-    }
-  }).spread(function(giveaway, created) {
-    if(giveaway.ended === true) {
-      res.redirect('/giveawayOver');
-    }
+  db.giveaway.findById(id).
+    then(function(user) {
 
-    if(giveaway.keyphrase === clientKeyPhraseAttempt) {
-      db.user.findOrCreate({
-        where: {id: reqUserId}
-      }).spread(function(user, created) {
+      if(giveaway.ended === true) {
+        res.redirect('/giveawayOver');
+      }
 
-        console.log(created);
-        giveaway.addUser(user);
-        console.log('added this user to this giveaway ' + user);
-        res.redirect('/thanks');
-      });
-    } else {
-      res.redirect('/wrongPass')
-    };
+      if(giveaway.keyphrase === clientKeyPhraseAttempt) {
+        
+        db.user.findById(reqUserId)
+          .then(function(user) {
+          giveaway.addUser(user);
+          console.log('added this user to this giveaway ' + user);
+          res.redirect('/thanks');
+        });
+          
+      } else {
+        res.redirect('/wrongPass')
+      };
 
-  });
+    });
+
+
 
 });
 

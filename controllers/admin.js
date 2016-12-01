@@ -20,9 +20,6 @@ router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
 router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
-
-    console.log(adminName)
-    console.log(req.user.username)
   if(adminName === req.user.username) {
     res.redirect('back');
   } else {
@@ -37,7 +34,6 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
       res.redirect('back');
     });
   }
-
 });
 
 router.get('/adminList', ensureAuthenticated, function(req, res) {
