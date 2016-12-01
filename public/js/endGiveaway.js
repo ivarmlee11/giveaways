@@ -11,7 +11,6 @@ $(function() {
       url: url,
       type: 'GET',
       success: function(data) {  
-        console.log('giveaway ended');
         $('#endGiveaway').text('Giveaway has ended')
       }
     });
