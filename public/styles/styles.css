@@ -28,10 +28,15 @@ a, a:hover, a:active {
   background-color: #F9FFE1;
 }
 
+#logo {
+  width: 20px;
+}
+
+.playerList {
+  list-style-type: none;
+}
+
 .btn {
   border-radius: 0px;
 }
 
-#logo {
-  width: 20px;
-}
