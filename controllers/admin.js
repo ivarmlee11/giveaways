@@ -119,8 +119,15 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
     where: {id: id}
   }).then(function(giveaway) {
     giveaway.getUsers().then(function(users) {
-      var playerList = users;
-      res.send({playerList: playerList});
+      var playerList = [];
+      users.forEach(function(user) {
+        console.log(user.username);
+        playerList.push({
+          username: user.username,
+          auth: user.auth
+        });
+      });
+      res.send(playerList);
     });
   });
 });
