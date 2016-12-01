@@ -84,26 +84,26 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
-    // use join table to get all players associated with the req params id
-    db.giveaway.find({
-  where: {id: id}
-}).then(function(giveaway) {
-  giveaway.getUsers().then(function(users) {
-    users.forEach(function(user) {
-      // console.log()
-      console.log("user title: " + user.username);
+  db.giveaway.find({
+    where: {id: id}
+  }).then(function(giveaway) {
+    giveaway.getUsers().then(function(users) {
+      var playerList = users;
+      res.render('adninShowGiveaway', {playerList: playerList});
     });
   });
 });
 
-    // res.render('adminShowGiveaway', {playerList: playerList});
- 
-});
-
-router.get('/winner/:idx', ensureAuthenticated, function(req, res) {
+router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
-    // use join table to get all players associated with the req params id
-    res.send({playerList: playerList});
+  db.giveaway.find({
+    where: {id: id}
+  }).then(function(giveaway) {
+    giveaway.getUsers().then(function(users) {
+      var playerList = users;
+      res.send({playerList: playerList});
+    });
+  });
 });
 
 router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {

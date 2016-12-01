@@ -6,7 +6,7 @@ $(function() {
   var idx = url[url.length -1];
 
   $('#selectWinner').on('click', function() {
-    var url = '/admin/winner/' + idx;
+    var url = '/admin/playerListData/' + idx;
     var winner;
     $.ajax({
       url: url,
