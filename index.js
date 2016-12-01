@@ -93,9 +93,22 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
         
         db.user.findById(reqUserId)
           .then(function(user) {
-            if(giveaway.getUser(user)) {
-              res.redirect('/alreadyEntered');
-            }
+
+
+            giveaway.getUsers().then(function(users) {
+              var playerList = [];
+              users.forEach(function(user) {
+                console.log(user.username);
+                playerList.push(user.username);
+                playerList.forEach(function(player) {
+                  if(player === reqUserId) {
+                    res.redirect('/alreadyEntered');
+                  }
+                })
+              });
+            });
+
+
             giveaway.addUser(user);
             console.log('added this user to this giveaway ' + user);
             res.redirect('/thanks');
