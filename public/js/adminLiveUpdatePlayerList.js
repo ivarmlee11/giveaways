@@ -16,9 +16,10 @@ $(function() {
           if(playerList.length === 1) {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
           }
+          $('ul[playerListId=' + val + ']').clear();
           playerList.forEach(function(player) {
-            console.log(player)
-            console.log('val ' + val)
+            console.log(player);
+            console.log('val ' + val);
             $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png" /></li>');
           });
         }
@@ -27,6 +28,5 @@ $(function() {
   };
 
   var getPlayers = getPlayerEntries();
-  getPlayerEntries();
-  var intervalID = window.setInterval(getPlayers, 5000);
+  window.setInterval(getPlayers, 5000);
 });
