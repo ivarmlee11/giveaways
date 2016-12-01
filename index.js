@@ -32,6 +32,8 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
+app.use(express.errorHandler());
+
 // controllers
 var adminCtrl = require('./controllers/admin');
 app.use('/admin', adminCtrl);
