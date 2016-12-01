@@ -78,7 +78,6 @@ router.get('/adminGiveawayList', ensureAuthenticated, function(req, res) {
 
 router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
-
     db.giveaway.findOrCreate({
       where: {
         name: req.body.giveawayName,
@@ -88,7 +87,6 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
         console.log(giveaway.get());
         res.redirect('/admin/adminGiveawayList');
     });
-
   } else {
     res.redirect('/');
   }
@@ -127,6 +125,7 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           auth: user.auth
         });
       });
+      console.log(playerList);
       res.send(playerList);
     });
   });
