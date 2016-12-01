@@ -11,10 +11,8 @@ $(function() {
         url: url,
         type: 'GET',
         success: function(playerList) {
-          console.log('fuck')
           $('span[playerNumberId=' + val + ']').text('There are ' + playerList.length + ' entries.');
           playerList.forEach(function(player) {
-            console.log(player.username);
             $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="../img/' + player.auth + '.png" /></li>');
           });
           if(playerList.length === 1) {
