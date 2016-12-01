@@ -12,7 +12,7 @@ $(function() {
         type: 'GET',
         success: function(playerList) {
           console.log(playerList);
-          cosnole.log(playerList.length);
+          console.log(playerList.length);
           $('span[giveawayId=' + val + ']').text('There are ' + playerList.length + ' entries.');
 
         }
