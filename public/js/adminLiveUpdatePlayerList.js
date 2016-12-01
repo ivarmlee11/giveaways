@@ -12,7 +12,7 @@ $(function() {
         url: url,
         type: 'GET',
         success: function(playerList) {
-          $('span[playerNumberId=' + val + ']').text('There are ' + playerList.length + ' entries.');
+          $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
           if(playerList.length === 1) {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
           }
