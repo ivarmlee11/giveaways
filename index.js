@@ -83,7 +83,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       reqUserId = req.user.id;
 
   db.giveaway.findById(id).
-    then(function(user) {
+    then(function(giveaway) {
 
       if(giveaway.ended === true) {
         res.redirect('/giveawayOver');
@@ -97,7 +97,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
           console.log('added this user to this giveaway ' + user);
           res.redirect('/thanks');
         });
-          
+
       } else {
         res.redirect('/wrongPass')
       };
