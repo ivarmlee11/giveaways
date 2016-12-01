@@ -46,8 +46,21 @@ app.get('/', function(req, res) {
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
-    var giveaway = giveaways;
-    res.render('giveaways', {giveaways: giveaway});
+    giveaway.getUsers().then(function(users) {
+      var playerList = [];
+      users.forEach(function(user) {
+        console.log(user.username);
+        playerList.push({
+          username: user.username,
+          auth: user.auth
+        });
+      });
+      res.render('giveaways', 
+        {
+        playerList: playerList,
+        giveaway: giveaway
+      });
+    });
   });  
 });
 
