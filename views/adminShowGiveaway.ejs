@@ -19,7 +19,12 @@
         <h6><%= player.auth %></h6>
       </div>
     <% }); %>
-    <button id="endGiveaway" class="btn btn-info">End the Giveaway</button>
+    <% if(!giveaway.ended) { %>
+      <button id="endGiveaway" class="btn btn-info">End the Giveaway</button>
+    <% } %>
+    <% if(giveaway.ended) { %>
+      <h3>This giveaway has ended.</h3>
+    <% } %>
     <button id="selectWinner" class="btn btn-success">Pick A Winner</button>
     <button id="deleteThis" class="btn btn-danger">Delete this Giveaway</button>
     <h1 id="winner">
