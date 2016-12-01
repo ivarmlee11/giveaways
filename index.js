@@ -105,6 +105,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
               console.log(typeof users)
               console.log(users)
 
+              res.send({users: users});
+
               users.forEach(function(user) {
                 console.log(user)
                 console.log('0=------------------009090909')
