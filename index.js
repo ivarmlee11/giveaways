@@ -76,27 +76,28 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   db.giveaway.findById(id).then(function(giveaway) {
     console.log('found giveaway ' + giveaway.name);
 
-    if(giveaway.ended === true) {
+    if(giveaway.ended) {
+      console.log('the giveaway was overrrrrrrrrrrrr')
       res.redirect('/giveawayOver');
-    };
-
-    if(giveaway.keyphrase === clientKeyPhraseAttempt) {
-      db.user.findById(reqUserId).then(function(user) {
-        console.log('found user ' + user.username);
-        giveaway.getUsers().then(function(users) {
-          console.log('inside getusers'); 
-          var users = users;  
-          users.forEach(function(user) {
-            if(reqUserName === user.username) {
-              res.redirect('/alreadyEntered');
-            }
-          });
-          giveaway.addUser(user);
-          res.redirect('/thanks');
-        });
-      });
     } else {
-      res.redirect('/wrongPass');
+      if(giveaway.keyphrase === clientKeyPhraseAttempt) {
+        db.user.findById(reqUserId).then(function(user) {
+          console.log('found user ' + user.username);
+          giveaway.getUsers().then(function(users) {
+            console.log('inside getusers'); 
+            var users = users;  
+            users.forEach(function(user) {
+              if(reqUserName === user.username) {
+                res.redirect('/alreadyEntered');
+              }
+            });
+            giveaway.addUser(user);
+            res.redirect('/thanks');
+          });
+        });
+      } else {
+        res.redirect('/wrongPass');
+      };
     };
   });
 
