@@ -1,5 +1,4 @@
 $(function() {
-  console.log('working');
   $('#twitchDiv').hover(function() {
     $('#twitchDiv').css('background-color','silver');
   },
@@ -13,5 +12,4 @@ $(function() {
   function() {
     $('#beamDiv').css('background-color','#6CBBFF');
   });
-  
 }); 
