@@ -62,6 +62,14 @@ app.get('/giveawayPlayerData/:idx', ensureAuthenticated, function(req, res) {
     res.send({playerData: playerData});
 });
 
+app.get('/thanks', ensureAuthenticated, function(req, res) {
+  res.render('thanks');
+});
+
+app.get('/alreadyEntered', ensureAuthenticated, function(req, res) {
+  res.render('alreadyentered');
+});
+
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx,
       clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase(),
@@ -76,11 +84,11 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       where: {id: reqUserId}
     }).spread(function(user, created) {
       if(!created) {
-        res.render('alreadyEntered');
+        res.redirect('/alreadyEntered');
       }
-      console.log('added this user to this giveaway ' + user.get());
       giveaway.addUser(user);
-      res.render('thanks');
+      console.log('added this user to this giveaway ' + user;
+      res.redirect('/thanks');
     });
   });
 
