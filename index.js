@@ -32,15 +32,6 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
-app.use(function(req, res) {
-     res.status(404).redirect('/');
-});
-
-
-app.use(function(error, req, res, next) {
-     res.status(500).redirect('/');
-});
-
 // controllers
 var adminCtrl = require('./controllers/admin');
 app.use('/admin', adminCtrl);
