@@ -89,6 +89,7 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   }).then(function(giveaway) {
     giveaway.getUsers().then(function(users) {
       var playerList = users;
+      console.log(playerList);
       res.render('adminShowGiveaway', {playerList: playerList});
     });
   });
