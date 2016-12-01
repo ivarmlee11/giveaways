@@ -64,25 +64,8 @@ app.get('/giveawayPlayerData/:idx', ensureAuthenticated, function(req, res) {
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx,
-      clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase();
-
-  // db.giveaway.findById(id).then(function(giveaway) {
-  //   var keyPhraseFromDB = giveaway.keyphrase;
-  //   if(clientKeyPhraseAttempt === keyPhraseFromDB) {
-
-      console.log(req.user.id)
-      var reqUserId = req.user.id;
-  //     db.user.findById(req.user.id).then(function(user) {
-  //       console.log('---');
-  //       console.log('---');
-  //       console.log(user.get());
-  //     });
-
-  //     res.render('thanks');
-  //   } else {
-  //     res.render('wrongPass');
-  //   }
-  // });
+      clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase(),
+      reqUserId = req.user.id;
 
   db.giveaway.findOrCreate({
     where: {
@@ -92,7 +75,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     db.user.findOrCreate({
       where: {id: reqUserId}
     }).spread(function(user, created) {
-      console.log(user.get());
+      console.log('added this user to this giveaway ' + user.get());
       giveaway.addUser(user);
     });
   });
