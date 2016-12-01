@@ -1,6 +1,7 @@
 <script src="/js/winSelector.js"></script>
 <script src="/js/deleteGiveaway.js"></script>
 <script src="/js/endGiveaway.js"></script>
+<script src="/js/liveUpdatePlayerList.js"></script>
 
 <nav class="navbar navbar-inverse">
   <ul class="nav navbar-nav">
@@ -14,9 +15,8 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3"> 
     <div class="well">
-      <% playerList.forEach(function(player) { %>
-        <h6><%= player.username %><img id="logo" src="../../img/<%= player.auth %>.png" /></h6>
-      <% }); %>
+        <ul class="playerList" playerListId="<%=giveaway.id%>">
+        </ul>  
       <% if(!giveaway.ended) { %>
         <button id="endGiveaway" class="btn btn-info">End the Giveaway</button>
       <% } %>
