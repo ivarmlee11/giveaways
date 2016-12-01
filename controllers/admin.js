@@ -89,9 +89,6 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   where: {id: id}
 }).then(function(giveaway) {
   giveaway.getUsers().then(function(users) {
-    console.log("These users are associated with " + giveaway.name + ":");
-    console.log(users)
-    console.log('-----')
     users.forEach(function(user) {
       // console.log()
       console.log("user title: " + user.username);
