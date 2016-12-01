@@ -80,7 +80,8 @@ app.get('/giveawayOver', ensureAuthenticated, function(req, res) {
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx,
       clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase(),
-      reqUserId = req.user.id;
+      reqUserId = req.user.id,
+      reqUserName = req.user.username;
 
   db.giveaway.findById(id).
     then(function(giveaway) {
@@ -95,20 +96,16 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
         db.user.findById(reqUserId)
           .then(function(user) {
 
-             console.log('found user ' + user.username)
+            console.log('found user ' + user.username)
             giveaway.getUsers().then(function(users) {
-              var playerList = [];
-              console.log('inside getusers')
-              
-              var users = users;
-              res.send(users);
+              console.log('inside getusers'); 
+
+              var users = users;  
 
               users.forEach(function(user) {
-                console.log(user)
-                console.log('0=------------------009090909')
-                console.log(user.username);
-                playerList.push(user.username);
-
+                if(reqUserName === user.username) {
+                  res.redirect('/alreadyEntered');
+                }
               });
                 
                 res.redirect('/thanks');
