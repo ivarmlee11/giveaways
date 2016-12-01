@@ -83,7 +83,6 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
         keyphrase: req.body.giveawayKeyPhrase
       }
     }).spread(function(giveaway, created) {
-        console.log(giveaway.get());
         res.redirect('/admin/adminGiveawayList');
     });
   } else {
