@@ -100,7 +100,10 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
               var playerList = [];
               console.log('inside getusers')
               
-              var users = JSON.parse(users);
+              var users = users;
+
+              console.log(typeof users)
+              console.log(users)
 
               users.forEach(function(user) {
                 console.log(user)
