@@ -50,18 +50,6 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   });  
 });
 
-app.get('/showPlayersInGiveaway/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-    // use the join table to get all users associated with a giveaway of idx
-    res.render('showGiveaway', {playerList: playerList});
-});
-
-app.get('/giveawayPlayerData/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-    // use join table to get all players associated with the req params id
-    res.send({playerData: playerData});
-});
-
 app.get('/thanks', ensureAuthenticated, function(req, res) {
   res.render('thanks');
 });
@@ -84,46 +72,32 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       reqUserId = req.user.id,
       reqUserName = req.user.username;
 
-  db.giveaway.findById(id).
-    then(function(giveaway) {
-      console.log('found giveaway ' + giveaway.name)
+  db.giveaway.findById(id).then(function(giveaway) {
+    console.log('found giveaway ' + giveaway.name);
 
-      if(giveaway.ended === true) {
-        res.redirect('/giveawayOver');
-      }
+    if(giveaway.ended === true) {
+      res.redirect('/giveawayOver');
+    };
 
-      if(giveaway.keyphrase === clientKeyPhraseAttempt) {
-        
-        db.user.findById(reqUserId)
-          .then(function(user) {
-
-            console.log('found user ' + user.username)
-            giveaway.getUsers().then(function(users) {
-              console.log('inside getusers'); 
-
-              var users = users;  
-
-              users.forEach(function(user) {
-                if(reqUserName === user.username) {
-                  res.redirect('/alreadyEntered');
-                }
-              });
-                
-                res.redirect('/thanks');
-                giveaway.addUser(user);
-                console.log('added this user to this giveaway ' + user);
-
-            });
-
-
-            
+    if(giveaway.keyphrase === clientKeyPhraseAttempt) {
+      db.user.findById(reqUserId).then(function(user) {
+        console.log('found user ' + user.username);
+        giveaway.getUsers().then(function(users) {
+          console.log('inside getusers'); 
+          var users = users;  
+          users.forEach(function(user) {
+            if(reqUserName === user.username) {
+              res.redirect('/alreadyEntered');
+            }
+          });
+          giveaway.addUser(user);
+          res.redirect('/thanks');
         });
-
-      } else {
-        res.redirect('/wrongPass');
-      };
-
-    });
+      });
+    } else {
+      res.redirect('/wrongPass');
+    };
+  });
 
 
 

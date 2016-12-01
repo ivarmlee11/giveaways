@@ -14,6 +14,8 @@ $(function() {
       success: function(players) {
         var playerList = players;
         winner = playerList[Math.floor(Math.random()*playerList.length)];
+        console.log(playerList);
+        console.log(winner);
         if(winner) {
           $('#winner').html('The winner is ' + winner + '!');
         } else {
