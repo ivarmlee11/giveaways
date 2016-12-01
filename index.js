@@ -45,7 +45,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {
-  db.giveaway.findAll().then(function(giveaways) {
+  db.giveaway.findAll().then(function(giveaway) {
     giveaway.getUsers().then(function(users) {
       var playerList = [];
       users.forEach(function(user) {
