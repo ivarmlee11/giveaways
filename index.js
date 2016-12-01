@@ -10,7 +10,8 @@ var express = require('express'),
     session = require('express-session'),
     ejsLayouts = require('express-ejs-layouts'),
     sessionSecret = process.env.SESSION,
-    passport = require('./config/ppConfig');
+    passport = require('./config/ppConfig'),
+    errorhandler = require('errorhandler');
 
 app.use(session({
   secret: sessionSecret,
@@ -32,7 +33,7 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
-app.use(express.errorHandler());
+app.use(errorhandler());
 
 // controllers
 var adminCtrl = require('./controllers/admin');
