@@ -98,22 +98,26 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
              console.log('found user ' + user.username)
             giveaway.getUsers().then(function(users) {
               var playerList = [];
-              console.log('giveaway users ' + users)
+              console.log('inside getusers')
+              
+              var users = JSON.parse(users);
+
               users.forEach(function(user) {
+                console.log(user)
+                console.log('0=------------------009090909')
                 console.log(user.username);
                 playerList.push(user.username);
-                playerList.forEach(function(player) {
-                  if(player === reqUserId) {
-                    res.redirect('/alreadyEntered');
-                  }
-                })
+
               });
+                
+                res.redirect('/thanks');
+                giveaway.addUser(user);
+                console.log('added this user to this giveaway ' + user);
+
             });
 
 
-            giveaway.addUser(user);
-            console.log('added this user to this giveaway ' + user);
-            res.redirect('/thanks');
+            
         });
 
       } else {
