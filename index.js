@@ -77,6 +77,7 @@ app.get('/wrongPass', ensureAuthenticated, function(req, res) {
 app.get('/giveawayOver', ensureAuthenticated, function(req, res) {
   res.render('giveawayOver');
 });
+
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx,
       clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase(),

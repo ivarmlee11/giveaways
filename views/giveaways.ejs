@@ -12,7 +12,12 @@
           <form action="/keyPhrase/<%=giveaway.id%>" method="POST" accept-charset="utf-8">
             <div class="form-group">
               <input name="keyphrase" type="text" class="form-control"/>
-              <button type="submit" class="btn btn-info">Enter Giveaway</button>
+              <% if(!giveaway.ended) { %>
+                <button type="submit" class="btn btn-info">Enter Giveaway</button>
+              <%}%>
+              <% if(giveaway.ended) { %>
+                <h3>This giveaway is over!</h3>
+              <%}%>
             </div>
           </form>
         </div>
