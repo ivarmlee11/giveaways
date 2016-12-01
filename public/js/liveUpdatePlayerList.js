@@ -13,6 +13,8 @@ $(function() {
         success: function(playerList) {
           $('span[playerNumberId=' + val + ']').text('There are ' + playerList.length + ' entries.');
           playerList.forEach(function(player) {
+            console.log(player)
+            console.log('val ' + val)
             $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="../img/' + player.auth + '.png" /></li>');
           });
           if(playerList.length === 1) {
