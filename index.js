@@ -67,7 +67,7 @@ app.get('/thanks', ensureAuthenticated, function(req, res) {
 });
 
 app.get('/alreadyEntered', ensureAuthenticated, function(req, res) {
-  res.render('alreadyentered');
+  res.render('alreadyEntered');
 });
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
