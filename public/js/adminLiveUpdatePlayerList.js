@@ -19,13 +19,14 @@ $(function() {
           playerList.forEach(function(player) {
             console.log(player)
             console.log('val ' + val)
-            $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="../img/' + player.auth + '.png" /></li>');
+            $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png" /></li>');
           });
         }
       });
     });
   };
 
+  var getPlayers = getPlayerEntries();
   getPlayerEntries();
-
+  var intervalID = window.setInterval(getPlayers, 5000);
 });
