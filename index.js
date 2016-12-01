@@ -84,6 +84,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
 
   db.giveaway.findById(id).
     then(function(giveaway) {
+      console.log('found giveaway ' + giveaway.name)
 
       if(giveaway.ended === true) {
         res.redirect('/giveawayOver');
@@ -94,9 +95,10 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
         db.user.findById(reqUserId)
           .then(function(user) {
 
-
+             console.log('found user ' + user.username)
             giveaway.getUsers().then(function(users) {
               var playerList = [];
+              console.log('giveaway users ' + users;)
               users.forEach(function(user) {
                 console.log(user.username);
                 playerList.push(user.username);
