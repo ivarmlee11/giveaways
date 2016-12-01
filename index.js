@@ -98,7 +98,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
              console.log('found user ' + user.username)
             giveaway.getUsers().then(function(users) {
               var playerList = [];
-              console.log('giveaway users ' + users;)
+              console.log('giveaway users ' + users)
               users.forEach(function(user) {
                 console.log(user.username);
                 playerList.push(user.username);
