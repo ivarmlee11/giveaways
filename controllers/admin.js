@@ -96,6 +96,7 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   db.giveaway.find({
     where: {id: id}
   }).then(function(giveaway) {
+    var giveaway = giveaway;
     giveaway.getUsers().then(function(users) {
       var playerList = [];
       users.forEach(function(user) {
@@ -105,7 +106,11 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
           auth: user.auth
         });
       });
-      res.render('adminShowGiveaway', {playerList: playerList});
+      res.render('adminShowGiveaway', 
+        {
+        playerList: playerList,
+        giveaway: giveaway
+      });
     });
   });
 });
