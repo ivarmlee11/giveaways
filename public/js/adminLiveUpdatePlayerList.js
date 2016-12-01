@@ -28,5 +28,5 @@ $(function() {
   };
 
   var getPlayers = getPlayerEntries();
-  window.setInterval(getPlayers, 5000);
+  setInterval(getPlayers, 5000);
 });
