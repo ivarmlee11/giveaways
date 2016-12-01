@@ -36,7 +36,6 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
   }
 });
 
-
 router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, function(req, res) {
   var giveawayId = req.params.idx;
   db.giveaway.update({
@@ -125,7 +124,6 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           auth: user.auth
         });
       });
-      console.log(playerList);
       res.send(playerList);
     });
   });
