@@ -91,6 +91,10 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
       var playerList = [];
       users.forEach(function(user) {
         console.log(user.username);
+        playerList.push({
+          username: user.username,
+          auth: user.auth
+        });
       });
       res.render('adminShowGiveaway', {playerList: playerList});
     });
