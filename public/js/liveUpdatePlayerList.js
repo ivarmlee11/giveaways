@@ -11,6 +11,7 @@ $(function() {
         url: url,
         type: 'GET',
         success: function(playerList) {
+          console.log('fuck')
           $('span[playerNumberId=' + val + ']').text('There are ' + playerList.length + ' entries.');
           playerList.forEach(function(player) {
             console.log(player.username);
