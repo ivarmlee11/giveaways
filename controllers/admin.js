@@ -22,19 +22,21 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
       auth = req.body.auth;
 
   if(adminName === req.user.username) {
+    console.log(adminName)
+    console.log(req.user.username)
     res.redirect('back');
+  } else {
+    db.user.update({
+      admin: false
+    }, {
+      where: {
+        username: adminName,
+        auth: auth
+      }
+    }).then(function(user) {
+      res.redirect('back');
+    });
   }
-
-  db.user.update({
-    admin: false
-  }, {
-    where: {
-      username: adminName,
-      auth: auth
-    }
-  }).then(function(user) {
-    res.redirect('back');
-  });
 
 });
 
