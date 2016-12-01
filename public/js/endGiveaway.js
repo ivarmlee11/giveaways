@@ -12,7 +12,7 @@ $(function() {
       type: 'GET',
       success: function(data) {  
         console.log('giveaway ended');
-        $(this).text('Ended.')
+        $('#endGiveaway').text('Ended.')
       }
     });
   });
