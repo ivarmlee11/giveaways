@@ -18,7 +18,7 @@ $(function() {
           }
           var $listContent = $('ul[playerListId=' + val + ']').html();
           console.log($listContent);
-          $('ul[playerListId=' + val + ']').html('<li></li>');
+          // $('ul[playerListId=' + val + ']').html('<li></li>');
           playerList.forEach(function(player) {
             console.log(player)
             console.log('val ' + val)
