@@ -1,6 +1,6 @@
 $(function() {
 
-  function getPlayerEntries(){
+  var getPlayers = function(){
     console.log('update run');
     var giveawayIds = $('.numberOfPlayer').map( function() {
         return $(this).attr('giveawayId');
@@ -26,6 +26,6 @@ $(function() {
     });
   };
 
-  getPlayerEntries();
-
+  getPlayers();
+  setInterval(getPlayers, 5000);
 });

@@ -27,6 +27,6 @@ $(function() {
     });
   };
 
-  
+  getPlayers();
   setInterval(getPlayers, 5000);
 });
