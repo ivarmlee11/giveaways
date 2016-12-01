@@ -1,3 +1,5 @@
+<script src="/js/liveUpdatePlayerList.js"></script>
+
 <nav class="navbar navbar-inverse">
   <ul class="nav navbar-nav">
   </ul>
@@ -20,9 +22,9 @@
               <%}%>
             </div>
           </form>
-          <span giveawayId="<%=giveaway.id%>">
-            Number of players.
-          </span>
+        <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
+          Number of players.
+        </span>
         </div>
       <% }); %>  
   </div>

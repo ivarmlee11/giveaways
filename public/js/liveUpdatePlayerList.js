@@ -14,7 +14,9 @@ $(function() {
           console.log(playerList);
           console.log(playerList.length);
           $('span[giveawayId=' + val + ']').text('There are ' + playerList.length + ' entries.');
-
+          if(playerList.length === 1) {
+            $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
+          }
         }
       });
     });
