@@ -38,6 +38,7 @@ app.use('/admin', adminCtrl);
 
 var authCtrl = require('./controllers/auth');
 app.use('/auth', authCtrl);
+//
 
 app.get('/', function(req, res) {
   res.render('login');
