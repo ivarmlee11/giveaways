@@ -14,7 +14,7 @@ var express = require('express'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip');
  
-// app.use(requestIp.mw())
+app.use(requestIp.mw())
  
 // app.use(function(req, res) {
 //   var ip = req.clientIp;
@@ -52,6 +52,7 @@ app.use('/auth', authCtrl);
 
 app.get('/', function(req, res) {
   // console.log(ip + req.user.username);
+  console.log(req.clientIp)
   res.render('login');
 });
 
