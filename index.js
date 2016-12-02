@@ -50,7 +50,7 @@ var authCtrl = require('./controllers/auth');
 app.use('/auth', authCtrl);
 //
 
-app.get('/', ipMiddleware, function(req, res) {
+app.get('/', function(req, res) {
   console.log(ip + req.user.username);
   res.render('login');
 });
