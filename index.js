@@ -90,7 +90,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
             ip: userIp
           }, {
             where: {
-              username: reqUserName
+              username: req.user.username
             }
           }).then(function(user) {
             giveaway.getUsers().then(function(users) {
