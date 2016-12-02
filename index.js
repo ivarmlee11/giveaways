@@ -19,7 +19,7 @@ app.use(requestIp.mw())
 app.use(function(req, res) {
     var ip = req.clientIp;
     console.log(ip);
-    console.log('this it the users ip address');
+    next();
 });
 
 app.use(session({
