@@ -125,7 +125,8 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
         console.log(user.username);
         playerList.push({
           username: user.username,
-          auth: user.auth
+          auth: user.auth,
+          ip: user.ip
         });
       });
       res.send(playerList);

@@ -111,11 +111,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
         res.redirect('/wrongPass');
       };
     };
-
   });
-
-
-
 });
 
 app.listen(port);
