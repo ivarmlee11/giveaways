@@ -17,9 +17,8 @@ var express = require('express'),
 app.use(requestIp.mw())
  
 app.use(function(req, res) {
-    var ip = req.clientIp;
-    console.log(ip);
-    next();
+  var ip = req.clientIp;
+  console.log(ip);
 });
 
 app.use(session({
