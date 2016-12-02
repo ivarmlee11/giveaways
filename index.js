@@ -47,7 +47,6 @@ app.use('/auth', authCtrl);
 //
 
 app.get('/', function(req, res) {
-  console.log(req.clientIp + ' for this user ' + req.user.username);
   res.render('login');
 });
 
