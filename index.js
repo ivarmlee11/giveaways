@@ -14,11 +14,11 @@ var express = require('express'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip');
  
-// inside middleware handler 
-var ipMiddleware = function(req, res, next) {
-  var clientIp = requestIp.getClientIp(req); 
-  next();
-};
+app.use(requestIp.mw())
+ 
+app.use(function(req, res) {
+  var ip = req.clientIp;
+});
 
 app.use(session({
   secret: sessionSecret,
@@ -51,7 +51,7 @@ app.use('/auth', authCtrl);
 //
 
 app.get('/', ipMiddleware, function(req, res) {
-  console.log(clientIp);
+  console.log(ip + req.user.username);
   res.render('login');
 });
 
