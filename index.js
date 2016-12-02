@@ -85,7 +85,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     } else {
       if(giveaway.keyphrase === clientKeyPhraseAttempt) {
         db.user.findById(reqUserId).then(function(user) {
-          var user = user;
+          var userAdd = user;
 
           var userIp = req.clientIp.toString();
           db.user.update({
@@ -96,7 +96,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
             }
           }).then(function(user) {
             console.log('------------');
-            console.log(user);
+            console.log(userAdd);
             console.log('------------');
             giveaway.getUsers().then(function(users) {
               var users = users;  
@@ -106,7 +106,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
                 }
               });
             console.log('-------giveaway-----');
-            console.log(user);
+            console.log(userAdd);
             console.log('------------');
               giveaway.addUser(user);
               res.redirect('/thanks');
