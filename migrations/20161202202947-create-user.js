@@ -20,6 +20,9 @@ module.exports = {
       admin: {
         type: Sequelize.BOOLEAN
       },
+      ip: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
