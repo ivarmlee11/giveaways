@@ -15,10 +15,6 @@ var express = require('express'),
     requestIp = require('request-ip');
  
 app.use(requestIp.mw())
- 
-// app.use(function(req, res) {
-//   var ip = req.clientIp;
-// });
 
 app.use(session({
   secret: sessionSecret,
@@ -51,8 +47,7 @@ app.use('/auth', authCtrl);
 //
 
 app.get('/', function(req, res) {
-  // console.log(ip + req.user.username);
-  console.log(req.clientIp)
+  console.log(req.clientIp + ' for this user ' + req.user.username);
   res.render('login');
 });
 
@@ -93,7 +88,15 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     } else {
       if(giveaway.keyphrase === clientKeyPhraseAttempt) {
         db.user.findById(reqUserId).then(function(user) {
-          giveaway.getUsers().then(function(users) {
+          var userIp = req.clientIp.toString();
+          db.user.update({
+            ip: userIp
+          }, {
+            where: {
+              username: req.user.username
+            }
+          }).then(function(user) {
+            giveaway.getUsers().then(function(users) {
             var users = users;  
             users.forEach(function(user) {
               if(reqUserName === user.username) {
@@ -102,6 +105,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
             });
             giveaway.addUser(user);
             res.redirect('/thanks');
+            });
           });
         });
       } else {
