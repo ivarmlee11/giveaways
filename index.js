@@ -11,7 +11,16 @@ var express = require('express'),
     ejsLayouts = require('express-ejs-layouts'),
     sessionSecret = process.env.SESSION,
     passport = require('./config/ppConfig'),
-    errorhandler = require('errorhandler');
+    errorhandler = require('errorhandler'),
+    requestIp = require('request-ip');
+ 
+app.use(requestIp.mw())
+ 
+app.use(function(req, res) {
+    var ip = req.clientIp;
+    console.log(ip);
+    console.log('this it the users ip address');
+});
 
 app.use(session({
   secret: sessionSecret,
