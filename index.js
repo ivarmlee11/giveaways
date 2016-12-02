@@ -85,6 +85,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     } else {
       if(giveaway.keyphrase === clientKeyPhraseAttempt) {
         db.user.findById(reqUserId).then(function(user) {
+          var user = user;
+
           var userIp = req.clientIp.toString();
           db.user.update({
             ip: userIp
@@ -93,7 +95,6 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
               username: req.user.username
             }
           }).then(function(user) {
-            var user = user;
             console.log('------------');
             console.log(user);
             console.log('------------');
