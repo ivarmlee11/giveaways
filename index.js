@@ -94,6 +94,9 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
             }
           }).then(function(user) {
             var user = user;
+            console.log('------------');
+            console.log(user);
+            console.log('------------');
             giveaway.getUsers().then(function(users) {
               var users = users;  
               users.forEach(function(user) {
@@ -101,6 +104,9 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
                   res.redirect('/alreadyEntered');
                 }
               });
+            console.log('-------giveaway-----');
+            console.log(user);
+            console.log('------------');
               giveaway.addUser(user);
               res.redirect('/thanks');
             });
