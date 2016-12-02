@@ -80,8 +80,6 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       reqUserName = req.user.username;
 
   db.giveaway.findById(id).then(function(giveaway) {
-    console.log('found giveaway ' + giveaway.name);
-
     if(giveaway.ended) {
       res.redirect('/giveawayOver');
     } else {
@@ -92,18 +90,18 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
             ip: userIp
           }, {
             where: {
-              username: req.user.username
+              username: reqUserName
             }
           }).then(function(user) {
             giveaway.getUsers().then(function(users) {
-            var users = users;  
-            users.forEach(function(user) {
-              if(reqUserName === user.username) {
-                res.redirect('/alreadyEntered');
-              }
-            });
-            giveaway.addUser(user);
-            res.redirect('/thanks');
+              var users = users;  
+              users.forEach(function(user) {
+                if(reqUserName === user.username) {
+                  res.redirect('/alreadyEntered');
+                }
+              });
+              giveaway.addUser(user);
+              res.redirect('/thanks');
             });
           });
         });
