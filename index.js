@@ -93,6 +93,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
               username: req.user.username
             }
           }).then(function(user) {
+            var user = user;
             giveaway.getUsers().then(function(users) {
               var users = users;  
               users.forEach(function(user) {
