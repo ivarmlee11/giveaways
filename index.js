@@ -109,6 +109,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
             console.log(userAdd);
             console.log('------------');
               giveaway.addUser(userAdd);
+              console.log(giveaway.getUsers());
               res.redirect('/thanks');
             });
           });
