@@ -12,7 +12,8 @@ var express = require('express'),
     sessionSecret = process.env.SESSION,
     passport = require('./config/ppConfig'),
     errorhandler = require('errorhandler'),
-    requestIp = require('request-ip');
+    requestIp = require('request-ip'),
+    flash = require('connect-flash');
  
 app.use(requestIp.mw())
 
@@ -21,6 +22,14 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+app.use(flash());
+
+app.use(function(req, res, next) {
+  res.locals.alerts = req.flash();
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use(express.static(__dirname + '/public'));
 
@@ -38,13 +47,11 @@ app.use(passport.session());
 
 app.use(errorhandler());
 
-// controllers
 var adminCtrl = require('./controllers/admin');
 app.use('/admin', adminCtrl);
 
 var authCtrl = require('./controllers/auth');
 app.use('/auth', authCtrl);
-//
 
 app.get('/', function(req, res) {
   res.render('login');
@@ -53,24 +60,8 @@ app.get('/', function(req, res) {
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
-    res.render('giveaways', {giveaways: giveaway});
+    res.render('users/giveaways', {giveaways: giveaway});
   });
-});
-
-app.get('/thanks', ensureAuthenticated, function(req, res) {
-  res.render('thanks');
-});
-
-app.get('/alreadyEntered', ensureAuthenticated, function(req, res) {
-  res.render('alreadyEntered');
-});
-
-app.get('/wrongPass', ensureAuthenticated, function(req, res) {
-  res.render('wrongPass');
-});
-
-app.get('/giveawayOver', ensureAuthenticated, function(req, res) {
-  res.render('giveawayOver');
 });
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
@@ -81,7 +72,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
 
   db.giveaway.findById(id).then(function(giveaway) {
     if(giveaway.ended) {
-      res.redirect('/giveawayOver');
+      req.flash('error', 'Giveaway ended.');
+      res.redirect('back');
     } else {
       if(giveaway.keyphrase === clientKeyPhraseAttempt) {
         db.user.findById(reqUserId).then(function(user) {
@@ -102,7 +94,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
               var users = users;  
               users.forEach(function(user) {
                 if(reqUserName === user.username) {
-                  res.redirect('/alreadyEntered');
+                  req.flash('error', 'You have already entered this giveaway.');
+                  res.redirect('back');
                 }
               });
             console.log('-------giveaway-----');
@@ -110,7 +103,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
             console.log('------------');
               giveaway.addUser(userAdd);
               console.log(giveaway.getUsers());
-              res.redirect('/thanks');
+              req.flash('success', 'You have entered the giveaway.');
+              res.redirect('back');
             });
           });
         });

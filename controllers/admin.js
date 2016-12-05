@@ -2,6 +2,7 @@ var express = require("express"),
     router = express.Router(),
     passport = require('../config/ppConfig'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
+    // flash = require('connect-flash')
     db = require('../models');
 
 router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
@@ -57,7 +58,7 @@ router.get('/adminList', ensureAuthenticated, function(req, res) {
       }
     }).then(function(allAdmins) {
       var allAdmins = allAdmins;
-      res.render('adminList', {allAdmins: allAdmins});
+      res.render('admin/adminList', {allAdmins: allAdmins});
     });
   } else {
     res.redirect('/');
@@ -68,7 +69,7 @@ router.get('/adminGiveawayList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
-      res.render('adminGameList', {giveaways: giveaway});
+      res.render('admin/adminGameList', {giveaways: giveaway});
     });
   } else {
     res.redirect('/');
@@ -99,13 +100,12 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
     giveaway.getUsers().then(function(users) {
       var playerList = [];
       users.forEach(function(user) {
-        console.log(user.username);
         playerList.push({
           username: user.username,
           auth: user.auth
         });
       });
-      res.render('adminShowGiveaway', 
+      res.render('admin/adminShowGiveaway', 
         {
         playerList: playerList,
         giveaway: giveaway
