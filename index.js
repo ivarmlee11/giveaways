@@ -43,7 +43,7 @@ app.use(errorhandler());
 
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
-  if(req.user.username) {
+  if(req.user) {
     console.log(req.user.username)
     res.locals.currentUser = req.user.username;
   }
