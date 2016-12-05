@@ -88,7 +88,11 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
         keyphrase: req.body.giveawayKeyPhrase
       }
     }).spread(function(giveaway, created) {
-        res.redirect('/admin/adminGiveawayList');
+      req.flash('succes', 'You have created the giveaway.')
+      if(!created) {
+        req.flash('error', 'A giveaway with this name already exists.');
+      };
+      res.redirect('/admin/adminGiveawayList');
     });
   } else {
     res.redirect('/');
@@ -144,6 +148,7 @@ router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
     db.giveaway.destroy({
       where: { id: id }
     }).then(function() {
+      req.flash('succes', 'You have deleted the giveaway.')
       res.redirect('/admin/adminGiveawayList');
     });
   } else {
