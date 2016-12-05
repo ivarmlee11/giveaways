@@ -35,10 +35,10 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
       }
     }).then(function(user) {
       console.log('--removing admin privs----');
-      console.log(user);
+      console.log(user.username);
       console.log('------');
       req.flash('success', 'You removed admin status.');
-      res.render('admin/adminList');
+      res.render('/admin/adminList');
     });
   }
 });
