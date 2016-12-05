@@ -31,9 +31,7 @@ app.use(function(req, res, next) {
     res.locals.currentUser = req.username;
   }
   console.log('---------------')
-  console.log(req.user);
-  console.log(req.user.username)
-  console.log(req.username)
+  console.log(req);
     console.log('---------------')
   console.log(res.locals);
   console.log('currentUser middlleware')
