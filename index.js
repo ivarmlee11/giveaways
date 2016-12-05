@@ -25,17 +25,6 @@ app.use(session({
 
 app.use(flash());
 
-app.use(function(req, res, next) {
-  res.locals.alerts = req.flash();
-  if(req.user) {
-    console.log(req.user.username)
-    res.locals.currentUser = req.user.username;
-  }
-  console.log(res.locals);
-  console.log('currentUser middlleware')
-  next();
-});
-
 app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
@@ -51,6 +40,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(errorhandler());
+
+app.use(function(req, res, next) {
+  res.locals.alerts = req.flash();
+  if(req.user.username) {
+    console.log(req.user.username)
+    res.locals.currentUser = req.user.username;
+  }
+  console.log(res.locals);
+  console.log('currentUser middlleware')
+  next();
+});
 
 var adminCtrl = require('./controllers/admin');
 app.use('/admin', adminCtrl);
