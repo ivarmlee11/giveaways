@@ -24,7 +24,7 @@ router.get('/beam/callback',
 router.get('/loggedIn', ensureAuthenticated, function(req, res) {
   var user = req.user;
   if (req.user.admin) {
-    res.render('adminControl', {user: user});
+    res.render('admin/adminControl', {user: user});
   } else {
     res.redirect('/giveawayList');
   }
