@@ -109,7 +109,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
           });
         });
       } else {
-        res.redirect('/wrongPass');
+        req.flash('error', 'Incorrect keyphrase.');
+        res.redirect('back');
       };
     };
   });
