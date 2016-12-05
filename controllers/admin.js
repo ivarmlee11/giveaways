@@ -3,7 +3,8 @@ var express = require("express"),
     passport = require('../config/ppConfig'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     // flash = require('connect-flash')
-    db = require('../models');
+    db = require('../models'),
+    flash = require('connect-flash');
 
 router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
   db.user.update({
@@ -14,6 +15,7 @@ router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
       auth: req.body.auth
     }
   }).then(function(user) {
+    req.flash('success', 'Admin added.');
     res.redirect('/admin/adminList');
   });
 });
@@ -22,6 +24,7 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
   if(adminName === req.user.username) {
+    req.flash('error', 'You cannot demod yourself.');
     res.redirect('back');
   } else {
     db.user.update({
@@ -32,6 +35,7 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
         auth: auth
       }
     }).then(function(user) {
+      req.flash('success', 'You removed ' + user.username + "'s mod abilities.");
       res.redirect('back');
     });
   }
