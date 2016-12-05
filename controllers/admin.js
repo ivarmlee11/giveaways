@@ -34,7 +34,7 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
         auth: auth
       }
     }).then(function(user) {
-      console.log('------');
+      console.log('--removing admin privs----');
       console.log(user);
       console.log('------');
       req.flash('success', 'You removed admin status.');
