@@ -16,10 +16,6 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3"> 
     <div class="well">
-      <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
-      </span>
-      <ul class="playerList" playerListId="<%=giveaway.id%>">
-      </ul>
       <% if(!giveaway.ended) { %>
         <button id="endGiveaway" class="btn btn-info">End the Giveaway</button>
       <% } %>
@@ -28,6 +24,10 @@
       <% } %>
       <button id="selectWinner" class="btn btn-success">Pick A Winner</button>
       <button id="deleteThis" class="btn btn-danger">Delete this Giveaway</button>
+      <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
+      </span>
+      <ul class="playerList" playerListId="<%=giveaway.id%>">
+      </ul>
     </div>
     <div class="well text-center">
       <h1 id="winner">
