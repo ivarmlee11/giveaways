@@ -35,7 +35,8 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
         auth: auth
       }
     }).then(function(user) {
-      req.flash('success', 'You removed ' + user.username + "'s mod abilities.");
+      console.log(user.username);
+      req.flash('success', 'You removed admin status.");
       res.redirect('back');
     });
   }
