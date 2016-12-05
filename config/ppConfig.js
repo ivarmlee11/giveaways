@@ -29,7 +29,7 @@ passport.use(new TwitchtvStrategy({
     scope: 'user_read'
   },
   function(accessToken, refreshToken, profile, done) {
-    if(profile.username === ('tweakgames' || 'dridor')) {
+    if(profile.username === ('tweakgames')) {
       db.user.findOrCreate({
         where: {
           userid: profile.id,
@@ -61,7 +61,7 @@ passport.use(new BeamStrategy({
     scope: 'user:details:self'
   },
   function(accessToken, refreshToken, profile, done) {
-    if(profile.username === ('TweakGames' || 'Dridor')) {
+    if(profile.username === ('TweakGames')) {
       db.user.findOrCreate({
         where: {
           userid: profile.id,
