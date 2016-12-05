@@ -1,8 +1,7 @@
-var express = require("express"),
+var express = require('express'),
     router = express.Router(),
     passport = require('../config/ppConfig'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
-    // flash = require('connect-flash')
     db = require('../models'),
     flash = require('connect-flash');
 
@@ -35,7 +34,9 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
         auth: auth
       }
     }).then(function(user) {
+      console.log('------');
       console.log(user);
+      console.log('------');
       req.flash('success', 'You removed admin status.');
       res.redirect('/admin/adminList');
     });
