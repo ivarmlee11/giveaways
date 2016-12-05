@@ -27,12 +27,10 @@ app.use(flash());
 
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
-  if(req.username) {
-    res.locals.currentUser = req.username;
+  if(req.user) {
+    console.log(req.user)
+    res.locals.currentUser = req.user.username;
   }
-  console.log('---------------')
-  console.log(req);
-    console.log('---------------')
   console.log(res.locals);
   console.log('currentUser middlleware')
   next();
