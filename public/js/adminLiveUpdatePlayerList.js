@@ -6,10 +6,19 @@ $(function() {
     list.forEach(function(val) {
       if(!ipChecker[val]) {
         ipChecker[val] = 1;
-        val.ipsame = false;
+        val.ipsame = 1;
       } else {
         ipChecker[val]++;
-        val.ipsame = true;
+        val.ipsame++;
+      }
+    });
+    list.forEach(function(val) {
+      if(!ipChecker[val]) {
+        ipChecker[val] = 1;
+        val.ipsame = 1;
+      } else {
+        ipChecker[val]++;
+        val.ipsame++;
       }
     });
     return list;
