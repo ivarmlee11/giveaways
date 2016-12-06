@@ -1,7 +1,6 @@
 $(function() {
 
-$('#removeAdmin').on('click', function(e) {
-  e.preventDefault();
+$('#removeAdmin').on('click', function() {
   var dataObj = {};
   var adminName = $('#adminNameGive').val();
   var selected = $('input[name=auth]:checked').val();
@@ -13,7 +12,6 @@ $('#removeAdmin').on('click', function(e) {
     url: '/admin/adminListRemove',
     data: dataObj
   }).done(function(data) {
-    location.reload();
   });
 });
 
