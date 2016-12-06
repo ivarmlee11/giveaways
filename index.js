@@ -48,10 +48,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-var adminCtrl = require('./controllers/admin');
+var adminCtrl = require('./controllers/admin'),
+    authCtrl = require('./controllers/auth');
+
 app.use('/admin', adminCtrl);
 
-var authCtrl = require('./controllers/auth');
 app.use('/auth', authCtrl);
 
 app.get('/', function(req, res) {
@@ -63,6 +64,14 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
     res.render('users/giveaways', {giveaways: giveaway});
+  });
+});
+
+app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+  db.user.findById(id).then(function(user) {
+    var user = user;
+    res.render('profile', {user: user});
   });
 });
 
