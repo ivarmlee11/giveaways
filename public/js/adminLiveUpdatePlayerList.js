@@ -15,7 +15,11 @@ $(function() {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
           }
           $('ul[playerListId=' + val + ']').html('<li></li>');
+          var playerList = countDuplicateIps(playerList);
           playerList.forEach(function(player) {
+            if(player.sameip) {
+              $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+            }
             $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
           });
         }
