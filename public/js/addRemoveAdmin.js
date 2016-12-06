@@ -11,6 +11,7 @@ $('#removeAdmin').on('click', function() {
     url: '/admin/adminListRemove',
     data: dataObj
   }).done(function(data) {
+    location.reload();
   });
 });
 
