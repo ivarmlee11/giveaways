@@ -1,5 +1,5 @@
 <%=JSON.stringify(alerts) %>
-<%=JSON.stringify(alerts.currentUser.dataValues) %>
+<%=JSON.stringify(currentUser) %>
 <% if (alerts.error) { %>
   <% alerts.error.forEach(function(msg) { %>
     <div class="alert alert-danger"><%= msg %></div>
