@@ -34,10 +34,10 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
         auth: auth
       }
     }).then(function(user) {
+      req.flash('error', 'You removed admin status.');
+      res.redirect('/admin/adminList');
     });
   }
-  res.redirect('/admin/adminList');
-  req.flash('error', 'You removed admin status.');
 });
 
 router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, function(req, res) {
@@ -130,7 +130,6 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
     giveaway.getUsers().then(function(users) {
       var playerList = [];
       users.forEach(function(user) {
-        console.log(user.username);
         playerList.push({
           username: user.username,
           auth: user.auth,

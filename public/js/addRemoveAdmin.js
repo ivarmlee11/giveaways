@@ -6,7 +6,6 @@ $('#removeAdmin').on('click', function() {
   var selected = $('input[name=auth]:checked').val();
   dataObj['adminName'] = adminName;
   dataObj['auth'] = selected;
-  console.log(dataObj);
   $.ajax({
     method: 'POST',
     url: '/admin/adminListRemove',
