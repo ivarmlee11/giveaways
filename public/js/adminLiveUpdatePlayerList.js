@@ -10,12 +10,12 @@ $(function() {
         ipChecker[val]++;
       }
     });
-    var list = list.map(function(val) {
-      var username = val.username
+    var list = playerList.forEach(function(val) {
+      val['username'] = val.username;
       if(ipChecker[val] === 1) {
-        return { val['ipsame'] = false, val['username'] = username };
+        val['ipsame'] = false;
       } else {
-        return { val['ipsame'] = true, val['username'] = username }
+        val['ipsame'] = true;
       }      
     });
     console.log(list)
