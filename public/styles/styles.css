@@ -32,6 +32,12 @@ a, a:hover, a:active {
   width: 20px;
 }
 
+#footer {
+  background-color: black;
+  width: 100%;
+  height: 50px;
+}
+
 #beamLogo {
   width: 80px;
 }
