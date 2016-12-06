@@ -2,25 +2,32 @@ $(function() {
 
   var checkIps = function(playerList) {
     var ipChecker = {},
-    list = playerList.forEach(function(val) {
+    list = [];
+
+     playerList.forEach(function(val) {
       if(!ipChecker[val]) {
         ipChecker[val] = 1;
       } else {
         ipChecker[val]++;
       }
     });
-    console.log(list)
 
-    var playerList = list.forEach(function(val) {
-      val['username'] = val.username;
+
+    playerList.forEach(function(val) {
       if(ipChecker[val] === 1) {
-        val['ipsame'] = false;
+        list.push({
+          ipsame: false,
+          username: val.username
+        });
       } else {
-        val['ipsame'] = true;
-      }      
-    });
-    console.log(playerList)
-    return playerList;
+        list.push({
+          ipsame: true,
+          username: val.username
+        });
+      }
+    }      
+    console.log(list)
+    return list;
   }
 
   var getPlayers = function(){
