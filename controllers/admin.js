@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     passport = require('../config/ppConfig'),
-    addLocals = require('./middleware/addLocalVariables.js'),
+    addLocals = require('../middleware/addLocalVariables.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     flash = require('connect-flash');
@@ -73,7 +73,7 @@ router.get('/adminList', ensureAuthenticated, function(req, res) {
   }
 });
 
-router.get('/adminGiveawayList', ensureAuthenticated, function(req, res) {
+router.get('/adminGiveawayList', ensureAuthenticated, addLocals, function(req, res) {
   if(req.user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;

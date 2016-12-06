@@ -52,7 +52,7 @@ app.get('/', function(req, res) {
   res.render('login');
 });
 
-app.get('/giveawayList', ensureAuthenticated,cfunction(req, res) {
+app.get('/giveawayList', ensureAuthenticated, addLocals, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
     res.render('users/giveaways', {giveaways: giveaway});
