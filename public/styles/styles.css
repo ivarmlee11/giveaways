@@ -40,3 +40,8 @@ a, a:hover, a:active {
   border-radius: 0px;
 }
 
+#name {
+  color: white;
+  size: 2.5em;
+  vertical-align: center;
+}
