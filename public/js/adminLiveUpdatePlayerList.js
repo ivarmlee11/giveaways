@@ -1,9 +1,9 @@
 $(function() {
 
-  var checkIps = function(list) {
+  var checkIps = function(playerList) {
     var ipChecker = {},
-        list = list;
-    list.forEach(function(val) {
+        list = playerList;
+    playerList.forEach(function(val) {
       if(!ipChecker[val]) {
         ipChecker[val] = 1;
       } else {
@@ -12,9 +12,15 @@ $(function() {
     });
     var list = list.map(function(val) {
       if(ipChecker[val] === 1) {
-        return val['ipsame'] = false;
+        return {
+          val['ipsame'] = false;
+          val['username'] = val.userame;
+        }
       } else {
-        return val['ipsame'] = true;
+        return {
+          val['ipsame'] = true;
+          val['username'] = val.userame;
+        }
       }      
     });
     console.log(list)
