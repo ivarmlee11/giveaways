@@ -25,7 +25,7 @@ $(function() {
           username: val.username
         });
       }
-    }      
+    });      
     console.log(list)
     return list;
   }
