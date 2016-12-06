@@ -1,5 +1,16 @@
 $(function() {
 
+  var checkIps = function(list) {
+    var ipChecker = {},
+        list = list;
+    list.forEach(function(val) {
+      if(!ipChecker[val]) {
+        val.sameIp = true; 
+      }
+    });
+    return list;
+  }
+
   var getPlayers = function(){
     var giveawayIds = $('.numberOfPlayer').map( function() {
       return $(this).attr('giveawayId');
@@ -15,9 +26,9 @@ $(function() {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
           }
           $('ul[playerListId=' + val + ']').html('<li></li>');
-          var playerList = countDuplicateIps(playerList);
+          var playerList = checkIps(playerList);
           playerList.forEach(function(player) {
-            if(player.sameip) {
+            if(player.sameIp) {
               $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
             }
             $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
