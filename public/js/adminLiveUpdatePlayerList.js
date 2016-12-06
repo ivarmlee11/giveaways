@@ -5,11 +5,14 @@ $(function() {
         list = list;
     list.forEach(function(val) {
       if(!ipChecker[val]) {
-        ipChecker[val] = false;
+        ipChecker[val] = 1;
+        val.ipsame = false;
       } else {
-        ipChecker[val] = true;
+        ipChecker[val]++;
+        val.ipsame = true;
       }
     });
+    console.log(list)
     return list;
   }
 
