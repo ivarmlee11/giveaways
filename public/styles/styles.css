@@ -28,8 +28,12 @@ a, a:hover, a:active {
   background-color: #F9FFE1;
 }
 
-#logo, #beamLogo {
+#logo {
   width: 20px;
+}
+
+#beamLogo {
+  width: 80px;
 }
 
 .playerList {

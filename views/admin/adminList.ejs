@@ -10,13 +10,18 @@
         <input type="text" class="form-control" id="adminNameGive" name="adminNameGive" required>
       </div>
       <div class="form-group">
-        <h6>Auth Provider</h6>
-        <input id="authTwitch" type="radio" name="auth" value="Twitch" checked/>Twitch
-        <input id="authBeam" type="radio" name="auth" value="Beam"/>Beam
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary active">
+            <input id="authTwitch" type="radio" name="auth" value="Twitch" checked/>Twitch
+          </label>
+          <label class="btn btn-primary">
+            <input id="authBeam" type="radio" name="auth" value="Beam"/>Beam
+          </label>
+        </div>
       </div>
       <button class="btn btn-success">Add</button>
     </form>
-      <button id="removeAdmin" class="btn btn-danger">Remove</button>
+    <button id="removeAdmin" class="btn btn-danger">Remove</button>
   </div>
 </div>
 
