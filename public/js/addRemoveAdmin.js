@@ -1,6 +1,7 @@
 $(function() {
 
 $('#removeAdmin').on('click', function(e) {
+  e.preventDefault();
   var dataObj = {};
   var adminName = $('#adminNameGive').val();
   var selected = $('input[name=auth]:checked').val();
