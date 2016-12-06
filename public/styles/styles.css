@@ -18,11 +18,7 @@ h5 {
   font-weight: bold;
 }
 
-a {
-  color: white;
-}
-
-a:hover, a:active {
+a, a:hover, a:active {
   color: #6F4BFF;
   text-decoration: none;
 }
