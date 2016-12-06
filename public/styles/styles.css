@@ -18,7 +18,11 @@ h5 {
   font-weight: bold;
 }
 
-a, a:hover, a:active {
+a {
+  color: white;
+}
+
+a:hover, a:active {
   color: #6F4BFF;
   text-decoration: none;
   font-size: 2.5em;
@@ -34,8 +38,7 @@ a, a:hover, a:active {
 
 #nav {
   background-color: black;
-  font-size: .25em;
-  border: 0;
+  font-size: .4em;
 }
 
 #footer {
