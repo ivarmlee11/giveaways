@@ -14,15 +14,17 @@ $(function() {
 
 
     playerList.forEach(function(val) {
-      if(ipChecker[val] === 1) {
+      if(ipChecker[val.username] === 1) {
         list.push({
           ipsame: false,
-          username: val.username
+          username: val.username,
+          auth: val.auth
         });
       } else {
         list.push({
           ipsame: true,
-          username: val.username
+          username: val.username,
+          auth: val.auth
         });
       }
     });      
