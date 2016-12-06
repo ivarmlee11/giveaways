@@ -5,6 +5,8 @@ $(function() {
         list = list;
     list.forEach(function(val) {
       if(!ipChecker[val]) {
+        val.sameIp = false; 
+      } else {
         val.sameIp = true; 
       }
     });
@@ -29,6 +31,7 @@ $(function() {
           var playerList = checkIps(playerList);
           playerList.forEach(function(player) {
             if(player.sameIp) {
+              console.log(player);
               $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
             } else {
               $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
