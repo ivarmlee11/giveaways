@@ -34,14 +34,10 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
         auth: auth
       }
     }).then(function(user) {
-      console.log('--removing admin privs----');
-      console.log(user.username);
-      console.log('------');
-
     });
-          req.flash('error', 'You removed admin status.');
-      res.redirect('/admin/adminList');
   }
+  req.flash('error', 'You removed admin status.');
+  res.redirect('/admin/adminList');
 });
 
 router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, function(req, res) {
