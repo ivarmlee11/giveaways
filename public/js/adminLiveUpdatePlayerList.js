@@ -18,13 +18,15 @@ $(function() {
         list.push({
           ipsame: false,
           username: val.username,
-          auth: val.auth
+          auth: val.auth,
+          ip: val.ip
         });
       } else {
         list.push({
           ipsame: true,
           username: val.username,
-          auth: val.auth
+          auth: val.auth,
+          ip: val.ip
         });
       }
     });      
