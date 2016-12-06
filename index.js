@@ -3,6 +3,7 @@ var express = require('express'),
     request = require('request'),
     morgan = require('morgan')('dev'),
     waterfall = require('async-waterfall'),
+    addLocals = require('./middleware/addLocalVariables.js'),
     ensureAuthenticated = require('./middleware/ensureAuth.js'),
     port = process.env.PORT || 3000,
     db = require('./models'),
@@ -41,15 +42,6 @@ app.use(passport.session());
 
 app.use(errorhandler());
 
-app.use(function(req, res, next) {
-  res.locals.alerts = req.flash();
-  res.locals.currentUser = req.user;
-  
-  console.log(res.locals);
-  console.log('currentUser middlleware')
-  next();
-});
-
 var adminCtrl = require('./controllers/admin');
 app.use('/admin', adminCtrl);
 
@@ -60,7 +52,7 @@ app.get('/', function(req, res) {
   res.render('login');
 });
 
-app.get('/giveawayList', ensureAuthenticated, function(req, res) {
+app.get('/giveawayList', ensureAuthenticated,cfunction(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
     res.render('users/giveaways', {giveaways: giveaway});
