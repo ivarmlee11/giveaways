@@ -1,6 +1,6 @@
 <% if(currentUser) { %>
 
-  <div class="container-fluid">
+  <nav class="container-fluid" id="nav">
     <ul class="nav nav-tabs">
       <% if(currentUser.admin) {%>
         <li role="presentation"><a href="/auth/loggedIn">Make A Giveaway</a></li>
@@ -10,6 +10,6 @@
       <li role="presentation"><a href="/giveawayList">Join A Giveaway</a></li>
       <li role="presentation"><a href="/profile/<%= currentUser.id %>"><%= currentUser.username %></a></li>
     </ul>
-  </div>
+  </nav>
 
 <% } %>

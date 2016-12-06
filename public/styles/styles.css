@@ -32,6 +32,11 @@ a, a:hover, a:active {
   width: 20px;
 }
 
+#nav {
+  background-color: black;
+  font-size: 1em;
+}
+
 #footer {
   position: absolute;
   bottom: 0;
