@@ -1,15 +1,11 @@
 <% if(currentUser) { %>
-  <div class="container-fluid">
-    <nav class="navbar navbar-inverse">
-      <ul class="nav navbar-nav">
-        <% if(currentUser.admin) {%>
-        <li><a class="nav-link" href="/auth/loggedIn"><h5>Make A Giveaway</h5></a></li>
-        <li><a class="nav-link" href="/admin/adminGiveawayList"><h5>Giveaway Admin List</h5></a></li>
-        <li><a class="nav-link" href="/giveawayList"><h5>Join A Giveaway</h5></a></li>
-        <li><a class="nav-link" href="/admin/adminList"><h5>Edit Admins</h5></a></li>
-        <% } %>
-        <li><a class="nav-link" href="/profile/<%= currentUser.id %>"><h5><%= currentUser.username %></h5></a></li>
-      </ul>
-    </nav>
-  </div>
+  <ul class="nav nav-tabs">
+    <% if(currentUser.admin) {%>
+      <li role="presentation" class="active"><a href="/auth/loggedIn">Make A Giveaway</a></li>
+      <li role="presentation"><a href="/admin/adminList">Edit Admins</a></li>
+      <li role="presentation"><a href="/admin/adminGiveawayList">Giveaway Admin List</a></li>
+    <% } %>
+    <li role="presentation"><a href="/giveawayList">Join A Giveaway</a></li>
+    <li role="presentation"><a href="/profile/<%= currentUser.id %>"><%= currentUser.username %></a></li>
+  </ul>
 <% } %>
