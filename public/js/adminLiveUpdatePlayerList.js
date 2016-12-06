@@ -12,7 +12,7 @@ $(function() {
       }
     });
 
-
+     console.log(ipChecker)
     playerList.forEach(function(val) {
       if(ipChecker[val.username] === 1) {
         list.push({
