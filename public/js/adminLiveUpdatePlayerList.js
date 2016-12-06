@@ -9,8 +9,9 @@ $(function() {
         ipChecker[val]++;
       }
     });
+    console.log(list)
 
-    var list = list.forEach(function(val) {
+    var playerList = list.forEach(function(val) {
       val['username'] = val.username;
       if(ipChecker[val] === 1) {
         val['ipsame'] = false;
@@ -18,8 +19,8 @@ $(function() {
         val['ipsame'] = true;
       }      
     });
-    console.log(list)
-    return list;
+    console.log(playerList)
+    return playerList;
   }
 
   var getPlayers = function(){
