@@ -10,7 +10,6 @@ $(function() {
         ipChecker[val]++;
       }
     });
-    console.log(list)
     list.forEach(function(val) {
       if(ipChecker[val] === 1) {
         val.ipsame = false;
@@ -18,6 +17,7 @@ $(function() {
         val.ipsame = true;
       }      
     });
+    console.log(list)
     return list;
   }
 
