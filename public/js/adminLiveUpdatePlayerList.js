@@ -12,9 +12,9 @@ $(function() {
     });
     var list = list.map(function(val) {
       if(ipChecker[val] === 1) {
-        val['ipsame'] = false;
+        return val['ipsame'] = false;
       } else {
-        val['ipsame'] = true;
+        return val['ipsame'] = true;
       }      
     });
     console.log(list)
