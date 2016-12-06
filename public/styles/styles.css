@@ -32,6 +32,10 @@ a, a:hover, a:active {
   width: 20px;
 }
 
+#beamLoginPic {
+  width: 50%;
+}
+
 .playerList {
   list-style-type: none;
 }
