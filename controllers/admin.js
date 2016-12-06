@@ -1,7 +1,6 @@
 var express = require('express'),
     router = express.Router(),
     passport = require('../config/ppConfig'),
-    addLocals = require('../middleware/addLocalVariables.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     flash = require('connect-flash');
@@ -38,10 +37,9 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
       console.log('--removing admin privs----');
       console.log(user.username);
       console.log('------');
-
+      req.flash('error', 'You removed admin status.');
+      res.redirect('/admin/adminList');
     });
-    req.flash('error', 'You removed admin status.');
-    res.redirect('/admin/adminList');
   }
 });
 
@@ -73,7 +71,7 @@ router.get('/adminList', ensureAuthenticated, function(req, res) {
   }
 });
 
-router.get('/adminGiveawayList', ensureAuthenticated, addLocals, function(req, res) {
+router.get('/adminGiveawayList', ensureAuthenticated, function(req, res) {
   if(req.user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
