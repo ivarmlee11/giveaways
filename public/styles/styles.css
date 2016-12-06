@@ -42,6 +42,11 @@ a, a:hover, a:active {
   width: 80px;
 }
 
+ul.nav-tabs > li {
+  width: 33%;
+  text-align: center;
+}
+
 .playerList {
   list-style-type: none;
 }

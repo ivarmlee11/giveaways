@@ -1,10 +1,10 @@
 <% if(currentUser) { %>
 
   <nav class="navbar navbar-default">
-    <div class="container">
+    <div class="container-fluid">
       <ul class="nav nav-tabs">
         <% if(currentUser.admin) {%>
-          <li role="presentation" class="active"><a href="/auth/loggedIn">Make A Giveaway</a></li>
+          <li role="presentation"><a href="/auth/loggedIn">Make A Giveaway</a></li>
           <li role="presentation"><a href="/admin/adminList">Edit Admins</a></li>
           <li role="presentation"><a href="/admin/adminGiveawayList">Giveaway Admin List</a></li>
         <% } %>
