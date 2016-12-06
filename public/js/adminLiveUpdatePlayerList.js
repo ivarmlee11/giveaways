@@ -10,13 +10,12 @@ $(function() {
         ipChecker[val]++;
       }
     });
-    var obj = {};
     var list = list.map(function(val) {
       var username = val.username
       if(ipChecker[val] === 1) {
-        return { obj['ipsame']: false, obj['username'] = username };
+        return { val['ipsame'] = false, val['username'] = username };
       } else {
-        return { obj['ipsame']: true, obj['username'] = username }
+        return { val['ipsame'] = true, val['username'] = username }
       }      
     });
     console.log(list)
