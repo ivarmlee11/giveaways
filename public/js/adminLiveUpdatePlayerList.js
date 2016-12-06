@@ -6,20 +6,17 @@ $(function() {
     list.forEach(function(val) {
       if(!ipChecker[val]) {
         ipChecker[val] = 1;
-        val.ipsame = 1;
       } else {
         ipChecker[val]++;
-        val.ipsame++;
       }
     });
+    console.log(list)
     list.forEach(function(val) {
-      if(!ipChecker[val]) {
-        ipChecker[val] = 1;
-        val.ipsame = 1;
+      if(ipChecker[val] === 1) {
+        val.ipsame = false;
       } else {
-        ipChecker[val]++;
-        val.ipsame++;
-      }
+        val.ipsame = true;
+      }      
     });
     return list;
   }
@@ -41,9 +38,7 @@ $(function() {
           $('ul[playerListId=' + val + ']').html('<li></li>');
           var playerList = checkIps(playerList);
           playerList.forEach(function(player) {
-            console.log(player)
             if(player.ipsame) {
-              console.log('ip is same');
               $('ul[playerListId=' + val + ']').append('<li><strong>' + player.username + '</strong><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
             } else {
               $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
