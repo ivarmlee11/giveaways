@@ -3,14 +3,14 @@ $(function() {
   var checkIps = function(list) {
     var ipChecker = {},
         list = list;
-    list.forEach(function(val) {
+    var list = list.forEach(function(val) {
       if(!ipChecker[val]) {
         ipChecker[val] = 1;
       } else {
         ipChecker[val]++;
       }
     });
-    list.forEach(function(val) {
+    var list = list.forEach(function(val) {
       if(ipChecker[val] === 1) {
         val.ipsame = false;
       } else {
