@@ -5,9 +5,9 @@ $(function() {
         list = list;
     list.forEach(function(val) {
       if(!ipChecker[val]) {
-        val.sameIp = false; 
+        ipChecker[val] = false;
       } else {
-        val.sameIp = true; 
+        ipChecker[val] = true;
       }
     });
     return list;
