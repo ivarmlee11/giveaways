@@ -86,7 +86,6 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       res.redirect('back');
     } else {
       if(giveaway.keyphrase === clientKeyPhraseAttempt) {
-        db.user.findById(reqUserId).then(function(user) {
           var userAdd = user,
               userIp = req.clientIp.toString();
 
@@ -110,7 +109,6 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
               res.redirect('back');
             });
           });
-        });
       } else {
         req.flash('error', 'Incorrect keyphrase.');
         res.redirect('back');
