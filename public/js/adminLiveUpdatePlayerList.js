@@ -5,16 +5,16 @@ $(function() {
     list = [];
 
      playerList.forEach(function(val) {
-      if(!ipChecker[val]) {
-        ipChecker[val] = 1;
+      if(!ipChecker[val.username]) {
+        ipChecker[val.username] = 1;
       } else {
-        ipChecker[val]++;
+        ipChecker[val.username]++;
       }
     });
 
      console.log(ipChecker)
     playerList.forEach(function(val) {
-      if(ipChecker[val.username] === 1) {
+      if(ipChecker[val] === 1) {
         list.push({
           ipsame: false,
           username: val.username,
