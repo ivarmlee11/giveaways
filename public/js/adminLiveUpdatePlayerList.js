@@ -34,8 +34,10 @@ $(function() {
           var playerList = checkIps(playerList);
           playerList.forEach(function(player) {
             if(player.sameip) {
+              console.log('hello')
               $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
             } else {
+              console.log('goodbye')
               $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
             }
           });
