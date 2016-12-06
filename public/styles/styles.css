@@ -25,7 +25,6 @@ a {
 a:hover, a:active {
   color: #6F4BFF;
   text-decoration: none;
-  font-size: 2.5em;
 }
 
 #loginBox, .well {
@@ -38,7 +37,7 @@ a:hover, a:active {
 
 #nav {
   background-color: black;
-  font-size: .4em;
+  font-size: .9em;
 }
 
 #footer {
