@@ -5,7 +5,7 @@
       <li><a href="/auth/loggedIn"><h5>Make A Giveaway</h5></a></li>
       <li><a class="nav-link" href="/giveawayList"><h5>Join A Giveaway</h5></a></li>
       <li><a href="/admin/adminGiveawayList"><h5>Giveaway List</h5></a></li>
-      <li><h5><%=JSON.stringify(currentUser.username) %></h5></li>
+      <li><h5><%=JSON.parse(currentUser.username) %></h5></li>
     </ul>
   </nav>
 </div>
