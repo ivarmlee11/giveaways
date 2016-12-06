@@ -2,15 +2,15 @@ $(function() {
 
   var checkIps = function(playerList) {
     var ipChecker = {},
-        list = playerList;
-    playerList.forEach(function(val) {
+    list = playerList.forEach(function(val) {
       if(!ipChecker[val]) {
         ipChecker[val] = 1;
       } else {
         ipChecker[val]++;
       }
     });
-    var list = playerList.forEach(function(val) {
+
+    var list = list.forEach(function(val) {
       val['username'] = val.username;
       if(ipChecker[val] === 1) {
         val['ipsame'] = false;
