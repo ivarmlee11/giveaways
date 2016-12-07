@@ -15,10 +15,10 @@ $(function() {
     })
     console.log(playerList);
     var ipNumber = [];
-    playerList.forEach(function(element) {
-      console.log(element)
+    var newList = playerList.forEach(function(element) {
       for(var i = 0; i <= ipNumber.length; i++) {
-        if(playerList[element].username !== ipNumber[i].username) {
+
+        if(element.username !== ipNumber[i].username) {
           ipNumber.push({
             username: element.username,
             ip: element.ip,
@@ -33,9 +33,11 @@ $(function() {
             numberofips: ipNumber[i].numberofips++
           })
         }
+
       }
+
     });
-    console.log(playerList);
+    console.log(newList);
 
 
     return list;
