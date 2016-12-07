@@ -52,7 +52,7 @@ $(function() {
     console.log(ipNumber);
 
 
-    return newList;
+    return ipNumber;
   }
 
   var getPlayers = function(){
