@@ -1,7 +1,7 @@
 $(function() {
 
   var checkIps = function(playerList) {
-    console.log(JSON.parse(playerList)) 
+    console.log(playerList) 
     var ipChecker = {},
     list = [];
 
