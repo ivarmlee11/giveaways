@@ -13,7 +13,7 @@ $(function() {
       }
       return 0
     })
-    // console.log(playerList);
+    console.log(playerList);
     var ipNumber = [];
     playerList.forEach(function(element) {
       if(ipNumber.length === 0) {
