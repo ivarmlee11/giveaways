@@ -7,29 +7,18 @@ $(function() {
 
     playerList.forEach(function(val) {
       if(!ipChecker[val.username]) {
-        ipChecker[val.username] = val.ip;
+        ipChecker[val.uservname] = {
+          ip: val.ip,
+          username: val.username,
+          numberOfIps: 1
+        }
+      } else {
+        ipChecker[val.username].numberOfIps++;
       }
     });
+    
+    console.log(ipChecker);
 
-     console.log(ipChecker)
-    playerList.forEach(function(val) {
-      if(ipChecker[val.username] === 1) {
-        list.push({
-          ipsame: false,
-          username: val.username,
-          auth: val.auth,
-          ip: val.ip
-        });
-      } else {
-        list.push({
-          ipsame: true,
-          username: val.username,
-          auth: val.auth,
-          ip: val.ip
-        });
-      }
-    });      
-    console.log(list)
     return list;
   }
 
