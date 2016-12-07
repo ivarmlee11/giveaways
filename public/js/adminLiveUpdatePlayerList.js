@@ -1,14 +1,13 @@
 $(function() {
 
   var checkIps = function(playerList) {
+    console.log(JSON.parse(playerList)) 
     var ipChecker = {},
     list = [];
 
-     playerList.forEach(function(val) {
+    playerList.forEach(function(val) {
       if(!ipChecker[val.username]) {
-        ipChecker[val.username] = 1;
-      } else {
-        ipChecker[val.username]++;
+        ipChecker[val.username] = val.ip;
       }
     });
 
