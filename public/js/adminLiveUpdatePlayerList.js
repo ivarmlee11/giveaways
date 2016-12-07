@@ -26,27 +26,25 @@ $(function() {
         console.log(ipNumber)
       } else {
         console.log('ipNumber is now greater than one')
-        // for(var i = 0; i <= ipNumber.length; i++) {
-        //   // if(ipNumber[i]) {
-        //     if(element.username !== ipNumber[i].username) {
-        //       ipNumber.push({
-        //         username: element.username,
-        //         ip: element.ip,
-        //         auth: element.auth,
-        //         numberofips: 1
-        //       })
-        //     } else {
-        //       ipNumber.push({
-        //         username: element.username,
-        //         ip: element.ip,
-        //         auth: element.auth,
-        //         numberofips: ipNumber[i].numberofips++
-        //       })
-        //       console.log(ipNumber)
-        //     }
-        //   // }
-        //   // console.log(i)
-        // }
+        for(var i = 0; i <= ipNumber.length; i++) {
+          // if(ipNumber[i]) {
+            if(element.username !== ipNumber[i].username) {
+              ipNumber.push({
+                username: element.username,
+                ip: element.ip,
+                auth: element.auth,
+                numberofips: 1
+              })
+            } else {
+              var number = ipNumber[i].numberofips++;
+              ipNumber.push({
+                username: element.username,
+                ip: element.ip,
+                auth: element.auth,
+                numberofips: number
+              })
+            }
+        }
       }
     });
     console.log(ipNumber);
