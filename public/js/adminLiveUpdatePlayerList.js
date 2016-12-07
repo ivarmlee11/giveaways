@@ -13,9 +13,9 @@ $(function() {
       }
       return 0
     })
-    console.log(playerList);
+    // console.log(playerList);
     var ipNumber = [];
-    var newList = playerList.forEach(function(element) {
+    playerList.forEach(function(element) {
       if(ipNumber.length === 0) {
         ipNumber.push({
           username: element.username,
@@ -25,26 +25,28 @@ $(function() {
         })
       }
       for(var i = 0; i <= ipNumber.length; i++) {
-        // if(element.username !== ipNumber[i].username) {
-        //   ipNumber.push({
-        //     username: element.username,
-        //     ip: element.ip,
-        //     auth: element.auth,
-        //     numberofips: 1
-        //   })
-        // } else {
-        //   ipNumber.push({
-        //     username: element.username,
-        //     ip: element.ip,
-        //     auth: element.auth,
-        //     numberofips: ipNumber[i].numberofips++
-        //   })
+        // if(ipNumber[i]) {
+          if(element.username !== ipNumber[i].username) {
+            ipNumber.push({
+              username: element.username,
+              ip: element.ip,
+              auth: element.auth,
+              numberofips: 1
+            })
+          } else {
+            ipNumber.push({
+              username: element.username,
+              ip: element.ip,
+              auth: element.auth,
+              numberofips: ipNumber[i].numberofips++
+            })
+          }
         // }
-        console.log(i)
+        // console.log(i)
       }
 
     });
-    console.log(newList);
+    console.log(playerList);
 
 
     return newList;
