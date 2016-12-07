@@ -3,18 +3,39 @@ $(function() {
   var checkIps = function(playerList) {
    
     playerList.sort(function(a, b){
-        var ipA=a.ip,
-            ipB=b.ip;
-        if (ipA < ipB) {
-            return -1 
-        }
-        if (ipA > ipB) {
-            return 1
-        }
-        return 0
+      var ipA=a.ip,
+          ipB=b.ip;
+      if (ipA < ipB) {
+          return -1 
+      }
+      if (ipA > ipB) {
+          return 1
+      }
+      return 0
     })
-
     console.log(playerList);
+    var ipNumber = [];
+    playerList.forEach(function(element) {
+      for(var i = 0; i <= ipNumber.length; i++) {
+        if(element.username !== ipNumber[i].username) {
+          ipNumber.push({
+            username: element.username,
+            ip: element.ip,
+            auth: element.auth,
+            numberofips: 1
+          })
+        } else {
+          ipNumber.push({
+            username: element.username,
+            ip: element.ip,
+            auth: element.auth,
+            numberofips: ipNumber[i].numberofips++
+          })
+        }
+      }
+    });
+    console.log(playerList);
+
 
     return list;
   }
