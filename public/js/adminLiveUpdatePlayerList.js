@@ -23,6 +23,7 @@ $(function() {
           auth: element.auth,
           numberofips: 1
         })
+        console.log(ipNumber)
       } else {
         for(var i = 0; i <= ipNumber.length; i++) {
           // if(ipNumber[i]) {
@@ -40,6 +41,7 @@ $(function() {
                 auth: element.auth,
                 numberofips: ipNumber[i].numberofips++
               })
+              console.log(ipNumber)
             }
           // }
           // console.log(i)
