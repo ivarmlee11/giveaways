@@ -16,6 +16,7 @@ $(function() {
     console.log(playerList);
     var ipNumber = [];
     playerList.forEach(function(element) {
+      console.log(element)
       for(var i = 0; i <= ipNumber.length; i++) {
         if(playerList[element].username !== ipNumber[i].username) {
           ipNumber.push({
