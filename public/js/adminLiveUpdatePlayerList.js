@@ -1,23 +1,20 @@
 $(function() {
 
   var checkIps = function(playerList) {
-    console.log(playerList) 
-    var ipChecker = {},
-    list = [];
-
-    playerList.forEach(function(val) {
-      if(!ipChecker[val.username]) {
-        ipChecker[val.uservname] = {
-          ip: val.ip,
-          username: val.username,
-          numberOfIps: 1
+   
+    playerList.sort(function(a, b){
+        var ipA=a.ip,
+            ipB=b.ip;
+        if (ipA < ipB) {
+            return -1 
         }
-      } else {
-        ipChecker[val.username].numberOfIps++;
-      }
-    });
-    
-    console.log(ipChecker);
+        if (ipA > ipB) {
+            return 1
+        }
+        return 0
+    })
+
+    console.log(playerList);
 
     return list;
   }
