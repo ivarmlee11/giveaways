@@ -1,7 +1,7 @@
 $(function() {
 
 var colorMap = {
-  1: null,
+  1: 'white',
   2: 'green',
   3: 'red',
   4: 'blue',
@@ -9,7 +9,7 @@ var colorMap = {
   6: 'silver'
 }
 
-function newArray(playerList) {
+var newArray  = function(playerList) {
   var ipData = {};
   playerList.sort(function(a, b){
     var ipA=a.ip,
@@ -38,11 +38,10 @@ function newArray(playerList) {
   
   var playerListWithIpInfo = [];
   for(var i = 0; i < playerList.length; i++) {
-    var color = null;
-    if(ipData[playerList[i].ip] > 1) {
+    var color = 'orange';
+    if(ipData[playerList[i].ip]) {
       color = colorMap[ipData[playerList[i].ip]];
     }
-    console.log(color)
     playerListWithIpInfo.push({
       ipCount: ipData[playerList[i].ip],
       userName: playerList[i].username,
@@ -74,7 +73,7 @@ var getPlayers = function(){
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {
           if(player.ipCount > 1) {
-            $('ul[playerListId=' + val + ']').append('<li><strong>' + player.userName + '</strong><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+            $('ul[playerListId=' + val + ']').append('<li style="background-color:' + player.color + '"><strong>' + player.userName + '</strong><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
           } else {
             $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
           }
