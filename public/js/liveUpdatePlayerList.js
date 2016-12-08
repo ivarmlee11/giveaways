@@ -73,11 +73,7 @@ var getPlayers = function(){
         $('ul[playerListId=' + val + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {
-          if(player.ipCount > 1) {
-            $('ul[playerListId=' + val + ']').append('<li><strong>' + player.userName + '</strong><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
-          } else {
-            $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
-          }
+          $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
         });
       }
     });
