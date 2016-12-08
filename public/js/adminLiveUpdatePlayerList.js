@@ -1,57 +1,5 @@
 $(function() {
 
-  var checkIps = function(playerList) {
-   
-    playerList.sort(function(a, b){
-      var ipA=a.ip,
-          ipB=b.ip;
-      if (ipA < ipB) {
-          return -1 
-      }
-      if (ipA > ipB) {
-          return 1
-      }
-      return 0
-    })
-    console.log(playerList);
-    var ipNumber = [];
-    playerList.forEach(function(element) {
-      if(ipNumber.length === 0) {
-        ipNumber.push({
-          username: element.username,
-          ip: element.ip,
-          auth: element.auth,
-          numberofips: 1
-        })
-        console.log(ipNumber)
-      } else {
-        console.log('ipNumber is now greater than one')
-        // for(var i = 0; i <= ipNumber.length; i++) {
-        //   // if(ipNumber[i]) {
-        //     if(element.username !== ipNumber[i].username) {
-        //       ipNumber.push({
-        //         username: element.username,
-        //         ip: element.ip,
-        //         auth: element.auth,
-        //         numberofips: 1
-        //       })
-        //     } else {
-        //       var number = ipNumber[i].numberofips++;
-        //       ipNumber.push({
-        //         username: element.username,
-        //         ip: element.ip,
-        //         auth: element.auth,
-        //         numberofips: number
-        //       })
-        //     }
-        // }
-      }
-    });
-    console.log(ipNumber);
-
-
-    return ipNumber;
-  }
 
   var getPlayers = function(){
     var giveawayIds = $('.numberOfPlayer').map( function() {
@@ -68,7 +16,7 @@ $(function() {
             $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
           }
           $('ul[playerListId=' + val + ']').html('<li></li>');
-          var playerList = checkIps(playerList);
+          // var playerList = checkIps(playerList);
           playerList.forEach(function(player) {
             if(player.numberofips > 1) {
               $('ul[playerListId=' + val + ']').append('<li><strong>' + player.username + '</strong><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
@@ -82,5 +30,5 @@ $(function() {
   };
 
   getPlayers();   
-  // setInterval(getPlayers, 10000);
+  setInterval(getPlayers, 10000);
 });
