@@ -23,9 +23,6 @@ a, a:hover, a:active {
   background-color: #F9FFE1;
 }
 
-#logo {
-  width: 20px;
-}
 
 #nav {
   background-color: #E6E7FF;
@@ -36,10 +33,19 @@ a, a:hover, a:active {
   position: absolute;
   bottom: 0;
   background-color: black;
+  height: 100px;
 }
   
+#logo {
+  width: 20px;
+}
+
 #beamLogo {
   width: 80px;
+}
+
+.playerList {
+  list-style-type: none;
 }
 
 ul.nav-tabs > li {
@@ -47,9 +53,6 @@ ul.nav-tabs > li {
   text-align: center;
 }
 
-.playerList {
-  list-style-type: none;
-}
 
 .btn {
   border-radius: 0px;
