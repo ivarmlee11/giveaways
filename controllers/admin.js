@@ -92,7 +92,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
         req.flash('error', 'A giveaway with this name already exists.');
         res.redirect('/admin/adminGiveawayList');
       };
-
+      console.log(giveaway)
       db.win.findOrCreate({
         where: {
           name: req.body.giveawayName
@@ -101,7 +101,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
         req.flash('success', 'You have created a giveaway.')
         res.redirect('/admin/adminGiveawayList');
       });
-      
+
     });
   } else {
     res.redirect('/');

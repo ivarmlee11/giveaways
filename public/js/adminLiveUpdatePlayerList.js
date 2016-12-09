@@ -65,11 +65,6 @@ var getPlayers = function(){
       url: url,
       type: 'GET',
       success: function(playerList) {
-        console.log('updated'); 
-        $('span[giveawayId=' + val + ']').text('There are ' + playerList.length + ' entries.');
-        if(playerList.length === 1) {
-          $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
-        }
         $('ul[playerListId=' + val + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {
