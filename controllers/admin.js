@@ -124,6 +124,7 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
       users.forEach(function(user) {
         playerList.push({
           username: user.username,
+          id: user.id,
           auth: user.auth,
           ip: user.ip
         });
@@ -142,7 +143,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
   var id = req.params.idx;
   console.log('posted to win history route');
   console.log('game id ' + id)
-  console.log(req.body.data +  ' added');
+  console.log(req.body +  ' added');
 
   console.log(req.user.id + ' my user id');
   db.giveaway.findById(id).then(function(giveaway) {

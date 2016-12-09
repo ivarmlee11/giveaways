@@ -56,20 +56,15 @@ var newArray  = function(playerList) {
 }
 
 var getPlayers = function(){
-          console.log('succssssssess')
-
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
   giveawayIds.forEach(function(val) {
-    console.log(val)
     var url = '/admin/playerListData/' + val;
     $.ajax({
       url: url,
       type: 'GET',
       success: function(playerList) {
-        console.log('success')
-        console.log(playerList)
         $('ul[playerListId=' + val + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {
