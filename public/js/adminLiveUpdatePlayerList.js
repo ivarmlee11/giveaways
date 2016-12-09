@@ -56,6 +56,8 @@ var newArray  = function(playerList) {
 }
 
 var getPlayers = function(){
+          console.log('succssssssess')
+
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
