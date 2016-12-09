@@ -17,10 +17,10 @@ var newArray  = function(playerList) {
     var ipA=a.ip,
         ipB=b.ip;
     if (ipA < ipB) {
-        return -1 
+      return -1 
     }
     if (ipA > ipB) {
-        return 1
+      return 1
     }
     return 0
   })
