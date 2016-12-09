@@ -40,7 +40,7 @@ $(function() {
         }
       });
     } else {
-      $('#winner').html('The winner has not been drawn yet or nobody has entered the competition yet!');
+      $('#winner').html('The winner has not been drawn or nobody has entered the competition yet!');
     }
   });
 });
