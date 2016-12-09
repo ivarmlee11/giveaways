@@ -147,13 +147,14 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
 
   console.log(req.user.id + ' my user id');
   db.giveaway.findById(id).then(function(giveaway) {
-      console.log('-------------')
+    console.log(giveaway.name); 
+    console.log('-------------');
 
-    // db.user.findById(req.body.id).then(function(user) {
-    //   console.log(user.username)
-    //   console.log('-------------')
+    db.user.findById(req.body.id).then(function(user) {
+      console.log(user.username);
+      console.log('-------------');
       res.redirect('back');
-    // });
+    });
   });
 });
 
