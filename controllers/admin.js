@@ -141,18 +141,17 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
   var id = req.params.idx;
   console.log('posted to win history route');
   console.log('game id ' + id)
-  console.log(req.body +  ' added');
+  console.log(req.body.data +  ' added');
 
   console.log(req.user.id + ' my user id');
   db.giveaway.findById(id).then(function(giveaway) {
-    console.log(giveaway)
       console.log('-------------')
 
-    db.user.findById(req.body.id).then(function(user) {
-      console.log(user.username)
-      console.log('-------------')
+    // db.user.findById(req.body.id).then(function(user) {
+    //   console.log(user.username)
+    //   console.log('-------------')
       res.redirect('back');
-    });
+    // });
   });
 });
 
