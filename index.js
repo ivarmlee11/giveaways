@@ -82,7 +82,7 @@ app.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
 app.post('/addToWinHistory/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
   console.log('posted to win history route');
-  console.log(req.data);
+  console.log(req.body);
   res.redirect('back');
 });
 
