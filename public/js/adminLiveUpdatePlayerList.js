@@ -62,6 +62,7 @@ var getPlayers = function(){
     return $(this).attr('giveawayId');
   }).get();
   giveawayIds.forEach(function(val) {
+    console.log(val)
     var url = '/admin/playerListData/' + val;
     $.ajax({
       url: url,
