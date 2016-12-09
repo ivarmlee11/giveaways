@@ -15,7 +15,7 @@ var express = require('express'),
     requestIp = require('request-ip'),
     flash = require('connect-flash');
  
-app.use(requestIp.mw())
+app.use(requestIp.mw());
 
 app.use(session({
   secret: sessionSecret,
@@ -72,6 +72,17 @@ app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
     var user = user;
     res.render('profile', {user: user});
   });
+});
+
+app.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+
+});
+
+app.post('/addToWinHistory/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+  console.log('posted to win history route');
+  console.log(req)
 });
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {

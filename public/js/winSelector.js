@@ -5,9 +5,11 @@ $(function() {
 
   var idx = url[url.length -1];
 
+  var winner,
+      winnerReset = false;
+
   $('#selectWinner').on('click', function() {
     var url = '/admin/playerListData/' + idx;
-    var winner;
     $.ajax({
       url: url,
       type: 'GET',
@@ -15,11 +17,34 @@ $(function() {
         var playerList = players;
         winner = playerList[Math.floor(Math.random()*playerList.length)];
         if(winner) {
+          winnerReset = true;
           $('#winner').html('The winner is ' + winner.username + '!');
         } else {
-          $('#winner').html('Nobody has joined the competition yet!');
+          $('#winner').html('Nobody has entered the competition yet!');
         } 
       }
     });
+  });
+
+  $('#addWinnerToDb').on('click', function() {
+    var url = '/admin/addToWinHistory/' + idx;
+    console.log(winner);
+    if(winnerReset) {
+      if(!winner) {
+        $('#winner').html('The winner has not been drawn yet or nobody has entered the competition yet!');
+      } else {
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: winner,
+          success: function(data) {
+            winnerReset = false
+            $('#winner').html('Winner added.');
+          }
+        });
+      }
+    } else {
+      $('#winner').html('Redraw to add another winner.');
+    }
   });
 });

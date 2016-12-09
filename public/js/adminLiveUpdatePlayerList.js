@@ -10,7 +10,9 @@ var colorMap = {
 }
 
 var newArray  = function(playerList) {
-  var ipData = {};
+  var ipData = {},
+      playerListWithIpInfo = [];
+  
   playerList.sort(function(a, b){
     var ipA=a.ip,
         ipB=b.ip;
@@ -36,7 +38,6 @@ var newArray  = function(playerList) {
     }
   }
   
-  var playerListWithIpInfo = [];
   for(var i = 0; i < playerList.length; i++) {
     var color = 'orange';
     if(ipData[playerList[i].ip]) {
