@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     passport = require('../config/ppConfig'),
+    modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     flash = require('connect-flash');
@@ -54,8 +55,8 @@ router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, function(req, res)
   });
 });
 
-router.get('/adminList', ensureAuthenticated, function(req, res) {
-  if(req.user.admin) {
+router.get('/adminList', ensureAuthenticated, modCheck, function(req, res) {
+  // if(req.user.admin) {
     db.user.findAll({
       where: {
         admin: true
@@ -64,24 +65,24 @@ router.get('/adminList', ensureAuthenticated, function(req, res) {
       var allAdmins = allAdmins;
       res.render('admin/adminList', {allAdmins: allAdmins});
     });
-  } else {
-    res.redirect('/');
-  }
+  // } else {
+    // res.redirect('/');
+  // }
 });
 
-router.get('/adminGiveawayList', ensureAuthenticated, function(req, res) {
-  if(req.user.admin) {
+router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
+  // if(req.user.admin) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveaway = giveaways;
       res.render('admin/adminGameList', {giveaways: giveaway});
     });
-  } else {
-    res.redirect('/');
-  }  
+  // } else {
+    // res.redirect('/');
+  // }  
 });
 
-router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
-  if(req.user.admin) {
+router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
+  // if(req.user.admin) {
     db.giveaway.findOrCreate({
       where: {
         name: req.body.giveawayName,
@@ -92,7 +93,6 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
         req.flash('error', 'A giveaway with this name already exists.');
         res.redirect('/admin/adminGiveawayList');
       };
-      console.log(giveaway)
       db.win.findOrCreate({
         where: {
           name: req.body.giveawayName
@@ -103,9 +103,9 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
       });
 
     });
-  } else {
-    res.redirect('/');
-  }
+  // } else {
+    // res.redirect('/');
+  // }
 });
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
@@ -163,7 +163,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, function(req, res) {
 });
 
 router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
-  if(req.user.admin) {
+  // if(req.user.admin) {
     var id = req.params.idx;
     db.giveaway.destroy({
       where: { id: id }
@@ -171,9 +171,9 @@ router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
       req.flash('success', 'You have deleted the giveaway.')
       res.redirect('/admin/adminGiveawayList');
     });
-  } else {
-    res.redirect('/');
-  }
+  // } else {
+    // res.redirect('/');
+  // }
 });
 
 module.exports = router;

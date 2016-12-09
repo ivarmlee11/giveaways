@@ -35,7 +35,7 @@ $(function() {
         type: 'POST',
         data: winner,
         success: function(data) {
-          winnerReset = false
+          winnerReset = false;
           $('#winner').html('Winner added.');
         }
       });
