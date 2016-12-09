@@ -30,21 +30,17 @@ $(function() {
     var url = '/addToWinHistory/' + idx;
     console.log(winner);
     if(winnerReset) {
-      if(!winner) {
-        $('#winner').html('The winner has not been drawn yet or nobody has entered the competition yet!');
-      } else {
-        $.ajax({
-          url: url,
-          type: 'POST',
-          data: winner,
-          success: function(data) {
-            winnerReset = false
-            $('#winner').html('Winner added.');
-          }
-        });
-      }
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: winner,
+        success: function(data) {
+          winnerReset = false
+          $('#winner').html('Winner added.');
+        }
+      });
     } else {
-      $('#winner').html('Redraw to add another winner.');
+      $('#winner').html('The winner has not been drawn yet or nobody has entered the competition yet!');
     }
   });
 });
