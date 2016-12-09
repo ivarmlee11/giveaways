@@ -128,6 +128,7 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           ip: user.ip
         });
       });
+      console.log(playerList);
       res.send(playerList);
     });
   });
