@@ -137,27 +137,27 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-});
+// router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
+//   var id = req.params.idx;
+// });
 
-router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
-  var id = req.params.idx;
-  console.log('posted to win history route');
-  console.log('game id' + id)
-  console.log(req.body.username + ' added');
-  console.log(req.user.id + ' user id');
-  db.giveaway.findById(id).then(function(giveaway) {
-    console.log(giveaway)
-      console.log('-------------')
+// router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
+//   var id = req.params.idx;
+//   console.log('posted to win history route');
+//   console.log('game id' + id)
+//   console.log(req.body.username + ' added');
+//   console.log(req.user.id + ' user id');
+//   db.giveaway.findById(id).then(function(giveaway) {
+//     console.log(giveaway)
+//       console.log('-------------')
 
-    db.user(findById(req.user.id).then(function(user) {
-      console.log(user)
-      console.log('-------------')
-    })
-  });
-  res.redirect('back');
-});
+//     db.user(findById(req.user.id).then(function(user) {
+//       console.log(user)
+//       console.log('-------------')
+//     })
+//   });
+//   res.redirect('back');
+// });
 
 router.get('/deleteGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx;
