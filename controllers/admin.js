@@ -84,8 +84,10 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
       req.flash('error', 'A giveaway with this name already exists.');
       res.redirect('/admin/adminGiveawayList');
     };
-    req.flash('success', 'You have created a giveaway.')
+
+    req.flash('success', 'You have created a giveaway.');
     res.redirect('/admin/adminGiveawayList');
+
   });
 });
 
@@ -145,12 +147,12 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     console.log(giveaway)
       console.log('-------------')
 
-    db.user(findById(req.user.id).then(function(user) {
+    db.user.findById(req.user.id).then(function(user) {
       console.log(user)
       console.log('-------------')
-    })
+      res.redirect('back');
+    });
   });
-  res.redirect('back');
 });
 
 router.get('/deleteGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
