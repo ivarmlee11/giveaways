@@ -65,6 +65,8 @@ var getPlayers = function(){
       url: url,
       type: 'GET',
       success: function(playerList) {
+        console.log('success')
+        console.log(playerList)
         $('ul[playerListId=' + val + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {
