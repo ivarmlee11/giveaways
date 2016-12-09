@@ -6,7 +6,7 @@ var express = require('express'),
     db = require('../models'),
     flash = require('connect-flash');
 
-router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
+router.post('/adminListAdd', ensureAuthenticated, modCheck, function(req, res) {
   db.user.update({
     admin: true
   }, {
@@ -20,7 +20,7 @@ router.post('/adminListAdd', ensureAuthenticated, function(req, res) {
   });
 });
 
-router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
+router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
   if(adminName === req.user.username) {
@@ -42,7 +42,7 @@ router.post('/adminListRemove', ensureAuthenticated, function(req, res) {
   }
 });
 
-router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, function(req, res) {
+router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var giveawayId = req.params.idx;
   db.giveaway.update({
     ended: true
@@ -56,56 +56,43 @@ router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, function(req, res)
 });
 
 router.get('/adminList', ensureAuthenticated, modCheck, function(req, res) {
-  // if(req.user.admin) {
-    db.user.findAll({
-      where: {
-        admin: true
-      }
-    }).then(function(allAdmins) {
-      var allAdmins = allAdmins;
-      res.render('admin/adminList', {allAdmins: allAdmins});
-    });
-  // } else {
-    // res.redirect('/');
-  // }
+  db.user.findAll({
+    where: {
+      admin: true
+    }
+  }).then(function(allAdmins) {
+    var allAdmins = allAdmins;
+    res.render('admin/adminList', {allAdmins: allAdmins});
+  });
 });
 
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
-  // if(req.user.admin) {
-    db.giveaway.findAll().then(function(giveaways) {
-      var giveaway = giveaways;
-      res.render('admin/adminGameList', {giveaways: giveaway});
-    });
-  // } else {
-    // res.redirect('/');
-  // }  
+  db.giveaway.findAll().then(function(giveaways) {
+    var giveaway = giveaways;
+    res.render('admin/adminGameList', {giveaways: giveaway});
+  });
 });
 
 router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
-  // if(req.user.admin) {
-    db.giveaway.findOrCreate({
+  db.giveaway.findOrCreate({
+    where: {
+      name: req.body.giveawayName,
+      keyphrase: req.body.giveawayKeyPhrase
+    }
+  }).spread(function(giveaway, created) {
+    if(!created) {
+      req.flash('error', 'A giveaway with this name already exists.');
+      res.redirect('/admin/adminGiveawayList');
+    };
+    db.win.findOrCreate({
       where: {
-        name: req.body.giveawayName,
-        keyphrase: req.body.giveawayKeyPhrase
+        name: req.body.giveawayName
       }
     }).spread(function(giveaway, created) {
-      if(!created) {
-        req.flash('error', 'A giveaway with this name already exists.');
-        res.redirect('/admin/adminGiveawayList');
-      };
-      db.win.findOrCreate({
-        where: {
-          name: req.body.giveawayName
-        }
-      }).spread(function(giveaway, created) {
-        req.flash('success', 'You have created a giveaway.')
-        res.redirect('/admin/adminGiveawayList');
-      });
-
+      req.flash('success', 'You have created a giveaway.')
+      res.redirect('/admin/adminGiveawayList');
     });
-  // } else {
-    // res.redirect('/');
-  // }
+  });
 });
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
@@ -152,28 +139,23 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
 
 router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
-
 });
 
-router.post('/addToWinHistory/:idx', ensureAuthenticated, function(req, res) {
+router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx;
   console.log('posted to win history route');
   console.log(req.body.username + ' added');
   res.redirect('back');
 });
 
-router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {
-  // if(req.user.admin) {
-    var id = req.params.idx;
-    db.giveaway.destroy({
-      where: { id: id }
-    }).then(function() {
-      req.flash('success', 'You have deleted the giveaway.')
-      res.redirect('/admin/adminGiveawayList');
-    });
-  // } else {
-    // res.redirect('/');
-  // }
+router.get('/deleteGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.destroy({
+    where: { id: id }
+  }).then(function() {
+    req.flash('success', 'You have deleted the giveaway.')
+    res.redirect('/admin/adminGiveawayList');
+  });
 });
 
 module.exports = router;
