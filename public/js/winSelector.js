@@ -27,7 +27,7 @@ $(function() {
   });
 
   $('#addWinnerToDb').on('click', function() {
-    var url = '/addToWinHistory/' + idx;
+    var url = '/admin/addToWinHistory/' + idx;
     console.log(winner);
     if(winnerReset) {
       $.ajax({

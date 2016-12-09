@@ -92,8 +92,16 @@ router.post('/adminGiveawayList', ensureAuthenticated, function(req, res) {
         req.flash('error', 'A giveaway with this name already exists.');
         res.redirect('/admin/adminGiveawayList');
       };
-      req.flash('success', 'You have created a giveaway.')
-      res.redirect('/admin/adminGiveawayList');
+
+      db.win.findOrCreate({
+        where: {
+          name: req.body.giveawayName
+        }
+      }).spread(function(giveaway, created) {
+        req.flash('success', 'You have created a giveaway.')
+        res.redirect('/admin/adminGiveawayList');
+      });
+      
     });
   } else {
     res.redirect('/');
@@ -140,6 +148,18 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
       res.send(playerList);
     });
   });
+});
+
+router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+
+});
+
+router.post('/addToWinHistory/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+  console.log('posted to win history route');
+  console.log(req.body.username + ' added');
+  res.redirect('back');
 });
 
 router.get('/deleteGiveaway/:idx', ensureAuthenticated, function(req, res) {

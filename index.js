@@ -74,18 +74,6 @@ app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-app.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-
-});
-
-app.post('/addToWinHistory/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-  console.log('posted to win history route');
-  console.log(req.body);
-  res.redirect('back');
-});
-
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx,
       clientKeyPhraseAttempt = req.body.keyphrase.toLowerCase(),
