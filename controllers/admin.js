@@ -144,6 +144,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
   console.log('posted to win history route');
   console.log('game id ' + id)
   console.log(req.body +  ' added');
+  console.log('test')
 
   console.log(req.user.id + ' my user id');
   db.giveaway.findById(id).then(function(giveaway) {
