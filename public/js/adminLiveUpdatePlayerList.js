@@ -3,7 +3,7 @@ $(function() {
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
-  
+  console.log(playerList)
   playerList.sort(function(a, b){
     var ipA=a.ip,
         ipB=b.ip;
