@@ -1,14 +1,5 @@
 $(function() {
 
-var colorMap = {
-  1: 'white',
-  2: 'green',
-  3: 'red',
-  4: 'blue',
-  5: 'yellow',
-  6: 'silver'
-}
-
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
@@ -26,29 +17,11 @@ var newArray  = function(playerList) {
   })
   
   for(var i = 0; i < playerList.length; i++) {
-    if(i === 0) {
-      ipData[playerList[i].ip] = 1;
-    } else {
-      if(ipData.hasOwnProperty(playerList[i].ip)) {
-        ipData[playerList[i].ip]++;
-        console.log(playerList[i].ip + ' was incremented')
-      } else {
-        ipData[playerList[i].ip] = 1;
-      }
-    }
-  }
-  
-  for(var i = 0; i < playerList.length; i++) {
-    var color = 'orange';
-    if(ipData[playerList[i].ip]) {
-      color = colorMap[ipData[playerList[i].ip]];
-    }
     playerListWithIpInfo.push({
       ipCount: ipData[playerList[i].ip],
       userName: playerList[i].username,
       auth: playerList[i].auth,
-      ip: playerList[i].ip,
-      color: color
+      ip: playerList[i].ip
     })
   }
   
@@ -65,7 +38,7 @@ var getPlayers = function(){
       url: url,
       type: 'GET',
       success: function(playerList) {
-        console.log('updated'); 
+        console.log('playerlist updated'); 
         $('span[giveawayId=' + val + ']').text('There are ' + playerList.length + ' entries.');
         if(playerList.length === 1) {
           $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
