@@ -1,14 +1,5 @@
 $(function() {
 
-var colorMap = {
-  1: 'white',
-  2: 'green',
-  3: 'red',
-  4: 'blue',
-  5: 'yellow',
-  6: 'silver'
-}
-
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
@@ -41,8 +32,11 @@ var newArray  = function(playerList) {
   for(var i = 0; i < playerList.length; i++) {
     var color = 'orange';
     if(ipData[playerList[i].ip]) {
-      console.log(playerList[i].ip.split('.'));
-      color = colorMap[ipData[playerList[i].ip]];
+      var rgb = playerList[i].ip.split('.'),
+          red = rgb[0],
+          green = rgb[1],
+          blue = rgb[2];
+      color = 'rgb(' + red + ',' + green + ',' + blue + ')';
     }
     playerListWithIpInfo.push({
       ipCount: ipData[playerList[i].ip],
