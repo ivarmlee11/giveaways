@@ -142,10 +142,27 @@ router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx;
 
-  db.giveaway.findById(id).then(function(giveaway) {
 
+  db.giveaway.findById(id).then(function(giveaway) {
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
     console.log(giveaway.name + ' was found')
+        console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+
     db.user.findById(req.body.id).then(function(user) {
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
     console.log(user.name + ' was found')
 
       res.redirect('back');
