@@ -35,7 +35,7 @@ var newArray  = function(playerList) {
           red = rgb[0],
           green = rgb[1],
           blue = rgb[2];
-      color = 'rgb(' + red + ',' + green + ',' + blue +   ')';
+      color = 'rgb(' + red + ',' + green + ',' + blue + ')';
     }
     playerListWithIpInfo.push({
       ipCount: ipData[playerList[i].ip],

@@ -35,7 +35,6 @@ router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res
         auth: auth
       }
     }).then(function(user) {
-      console.log('user updated');
       req.flash('error', 'You removed admin status.');
       res.redirect('/admin/adminList');
     });
@@ -129,7 +128,6 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           ip: user.ip
         });
       });
-      console.log(playerList);
       res.send(playerList);
     });
   });
@@ -141,20 +139,13 @@ router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx;
-  console.log('posted to win history route');
-  console.log('game id ' + id)
-  console.log(req.body +  ' added');
-  console.log('test')
 
-  console.log(req.user.id + ' my user id');
   db.giveaway.findById(id).then(function(giveaway) {
-    console.log(giveaway.name); 
-    console.log('-------------');
 
     db.user.findById(req.body.id).then(function(user) {
-      console.log(user.username);
-      console.log('-------------');
+
       res.redirect('back');
+      
     });
   });
 });

@@ -28,7 +28,7 @@ $(function() {
 
   $('#addWinnerToDb').on('click', function() {
     var url = '/admin/addToWinHistory/' + idx;
-    console.log(winner);
+    console.log(winner + ' is the winner');
     if(winnerReset) {
       $.ajax({
         url: url,
