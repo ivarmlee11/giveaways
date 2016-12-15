@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var usersGiveaways = sequelize.define('usersGiveaways', {
+  var contestsWinners = sequelize.define('contestsWinners', {
     userId: DataTypes.INTEGER,
     giveawayId: DataTypes.INTEGER
   }, {
@@ -10,5 +10,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return usersGiveaways;
+  return contestsWinners;
 };

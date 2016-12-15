@@ -131,17 +131,13 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-});
-
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
             giveaway;
   db.giveaway.findById(id).then(function(giveaway) {
     var giveaway = giveaway;
     db.user.findById(req.body.id).then(function(user) {
-    user.addGiveaway(giveaway);
+    giveaway.addWinner(user);
       req.flash('success', 'You have added a user to the win list.');
       res.redirect('back');
     });

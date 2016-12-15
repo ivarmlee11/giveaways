@@ -69,24 +69,23 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
 app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
   db.user.findById(id).then(function(user) {
-    user.getGiveaways().then(function(giveaways) {
-      res.render('profile', {giveaways: giveaways}) 
-    })
-  });
-});
-
-app.get('/getWinners/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
-  db.user.findById(id).then(function(user) {
-    user.getGiveaways().then(function(giveaways) {
-      if(!giveaways) {
+    user.getContests().then(function(contests) {
+      if(contests.length === 0) {
         res.render('profile');
       }
-      res.render('profile', {giveaways: giveaways});
+      res.render('profile', {contests: contests}) 
     })
   });
 });
 
+app.get('/getContestWinners/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.findById(id).then(function(giveaway) {
+    giveaway.getWinners().then(function(winners) {
+      res.send({winners: winners});
+    })
+  });
+});
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx,

@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         models.user.belongsToMany(models.giveaway, {through: 'giveawaysUsers'});
-        models.user.belongsToMany(models.giveaway, {through: 'usersGiveaways'});
+        models.user.belongsToMany(models.giveaway, {as: 'Contests', through: 'giveawaysWinners'});
       }
     }
   });
