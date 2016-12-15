@@ -72,24 +72,24 @@ var getPlayersandWinners = function(){
       }
     });
   });
-  giveawayIds.forEach(function(val) {
-    var url = '/getContestWinners/' + val;
-    $.ajax({
-      url: url,
-      type: 'GET',
-      success: function(winnerList) {
-        console.log(winnerList)
-        console.log('found winners')
-        $('ul[playerListId=' + val + ']').html('<li>winners are not being added</li>');
-        var updatedWinnerList = newArray(winnerList);
-        updatedWinnerList.forEach(function(player) {
-          console.log(player + ' winner found');
-          $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+  // giveawayIds.forEach(function(val) {
+  //   var url = '/getContestWinners/' + val;
+  //   $.ajax({
+  //     url: url,
+  //     type: 'GET',
+  //     success: function(winnerList) {
+  //       console.log(winnerList)
+  //       console.log('found winners')
+  //       $('ul[playerListId=' + val + ']').html('<li>winners are not being added</li>');
+  //       var updatedWinnerList = newArray(winnerList);
+  //       updatedWinnerList.forEach(function(player) {
+  //         console.log(player + ' winner found');
+  //         $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
 
-        });
-      }
-    });
-  });
+  //       });
+  //     }
+  //   });
+  // });
 };
 
 getPlayersandWinners();   
