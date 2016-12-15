@@ -68,10 +68,19 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
 
 app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
-  db.user.findById(id).then(function(user) {
-    var user = user;
-    res.render('profile', {user: user});
-  });
+    db.user.findById(id).then(function(user) {
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------')
+    console.log('----------------------------') 
+    user.getGiveaways().then(function(giveaways) {
+      res.render('profile', {giveaways: giveaways}) 
+    })
+      res.redirect('back');
+    });
+
+
 });
 
 app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {

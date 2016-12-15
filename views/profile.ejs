@@ -1,2 +1,11 @@
-<h1>Shows /winHistory/:idx</h1>
-<h2>Other profile settings</h2>
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <h1 class="text-center">Profile</h1>
+    <div class="well">
+      <% giveaways.forEach(function(giveaway) { %>
+        <h3><strong><%=giveaway.name%></strong></h3>  
+      <% }); %>  
+    </div>
+  </div>
+</div>
+
