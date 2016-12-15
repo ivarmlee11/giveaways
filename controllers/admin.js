@@ -142,7 +142,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     var giveaway = giveaway;
     db.user.findById(req.body.id).then(function(user) {
     user.addGiveaway(giveaway);
-    req.flash('success', 'You have added ' + user.username + ' to the ' + giveaway.name + ' giveaway list.');
+    req.flash('success', 'You have added a user to the win list.');
       res.redirect('back');
     });
   });
