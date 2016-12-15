@@ -41,6 +41,7 @@ var newArray  = function(playerList) {
   for(var i = 0; i < playerList.length; i++) {
     var color = 'orange';
     if(ipData[playerList[i].ip]) {
+      console.log(ipData[playerList[i].ip].split('.'));
       color = colorMap[ipData[playerList[i].ip]];
     }
     playerListWithIpInfo.push({
