@@ -114,6 +114,7 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
 });
 
 router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
+  console.log(req.user.username + ' is on the playerListData route. they are viewing an autoupdated page on the giveaway.')
   var id = req.params.idx;
   db.giveaway.find({
     where: {id: id}
@@ -142,10 +143,10 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
 
   db.giveaway.findById(id).then(function(giveaway) {
 
+
     db.user.findById(req.body.id).then(function(user) {
 
       res.redirect('back');
-      
     });
   });
 });
