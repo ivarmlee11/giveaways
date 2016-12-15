@@ -29,7 +29,6 @@ var newArray  = function(playerList) {
   }
   
   for(var i = 0; i < playerList.length; i++) {
-    var color = 'orange';
     if(ipData[playerList[i].ip]) {
       var rgb = playerList[i].ip.split('.'),
           red = rgb[0],
@@ -49,7 +48,7 @@ var newArray  = function(playerList) {
   return playerListWithIpInfo;
 }
 
-var getPlayers = function(){
+var getPlayersandWinners = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
@@ -71,8 +70,23 @@ var getPlayers = function(){
       }
     });
   });
+  giveawayIds.forEach(function(val) {
+    var url = '/getContestWinners/' + val;
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function(winnerList) {
+        $('ul[winnerListId=' + val + ']').html('<li></li>');
+        var updatedWinnerList = newArray(winnerList);
+        updatedPlayerList.forEach(function(player) {
+          $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+
+        });
+      }
+    });
+  });
 };
 
-getPlayers();   
-setInterval(getPlayers, 10000);
+getPlayersandWinners();   
+setInterval(getPlayersandWinners, 10000);
 });
