@@ -83,10 +83,8 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
       req.flash('error', 'A giveaway with this name already exists.');
       res.redirect('/admin/adminGiveawayList');
     };
-
     req.flash('success', 'You have created a giveaway.');
     res.redirect('/admin/adminGiveawayList');
-
   });
 });
 
@@ -114,7 +112,6 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
 });
 
 router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
-  console.log(req.user.username + ' is on the playerListData route. they are viewing an autoupdated page on the giveaway.')
   var id = req.params.idx;
   db.giveaway.find({
     where: {id: id}
@@ -129,7 +126,6 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           ip: user.ip
         });
       });
-      console.log('HEYYYYYYYYYYYY')
       res.send(playerList);
     });
   });
@@ -142,30 +138,11 @@ router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
             giveaway;
-
   db.giveaway.findById(id).then(function(giveaway) {
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log(giveaway.name + ' was found')
     var giveaway = giveaway;
-        console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-
     db.user.findById(req.body.id).then(function(user) {
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log('----------------------------')
-    console.log(user.username + ' was found') 
-    user.addGiveaway(giveaway)
+    user.addGiveaway(giveaway);
+    req.flash('success', 'You have added ' + user.username + ' to the ' + giveaway.name + ' giveaway list.');
       res.redirect('back');
     });
   });
@@ -176,7 +153,7 @@ router.get('/deleteGiveaway/:idx', ensureAuthenticated, modCheck, function(req, 
   db.giveaway.destroy({
     where: { id: id }
   }).then(function() {
-    req.flash('success', 'You have deleted the giveaway.')
+    req.flash('success', 'You have deleted the giveaway.');
     res.redirect('/admin/adminGiveawayList');
   });
 });
