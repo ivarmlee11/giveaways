@@ -144,8 +144,9 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
 
   db.giveaway.findById(id).then(function(giveaway) {
 
-
+    console.log(giveaway.name + ' was found')
     db.user.findById(req.body.id).then(function(user) {
+    console.log(user.name + ' was found')
 
       res.redirect('back');
     });

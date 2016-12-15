@@ -24,9 +24,8 @@ var newArray  = function(playerList) {
       ip: playerList[i].ip
     })
   }
-  
   return playerListWithIpInfo;
-}
+};
 
 var getPlayers = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
