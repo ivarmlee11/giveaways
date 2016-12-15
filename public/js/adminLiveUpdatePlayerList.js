@@ -58,6 +58,8 @@ var getPlayersandWinners = function(){
       url: url,
       type: 'GET',
       success: function(playerList) {
+        console.log(playerList)
+        console.log('found players')
         $('ul[playerListId=' + val + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {
@@ -76,6 +78,8 @@ var getPlayersandWinners = function(){
       url: url,
       type: 'GET',
       success: function(winnerList) {
+        console.log(winnerList)
+        console.log('found winners')
         $('ul[winnerListId=' + val + ']').html('<li></li>');
         var updatedWinnerList = newArray(winnerList);
         updatedWinnerList.forEach(function(player) {
