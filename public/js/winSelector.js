@@ -18,7 +18,7 @@ $(function() {
         winner = playerList[Math.floor(Math.random()*playerList.length)];
         if(winner) {
           winnerReset = true;
-          console.log(winner.dir())
+          console.log(JSON.stringify(winner))
           $('#winner').html('The winner is ' + winner.username + '!');
         } else {
           $('#winner').html('Nobody has entered the competition yet!');
