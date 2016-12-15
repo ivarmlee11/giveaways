@@ -77,7 +77,7 @@ app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
     user.getGiveaways().then(function(giveaways) {
       res.render('profile', {giveaways: giveaways}) 
     })
-      res.redirect('back');
+      // res.redirect('back');
     });
 
 
