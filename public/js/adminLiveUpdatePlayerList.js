@@ -78,7 +78,7 @@ var getPlayersandWinners = function(){
       success: function(winnerList) {
         $('ul[winnerListId=' + val + ']').html('<li></li>');
         var updatedWinnerList = newArray(winnerList);
-        updatedPlayerList.forEach(function(player) {
+        updatedWinnerList.forEach(function(player) {
           $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
 
         });
