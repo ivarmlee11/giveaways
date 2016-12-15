@@ -54,5 +54,5 @@ var getPlayers = function(){
 };
 
 getPlayers();   
-setInterval(getPlayers, 10000);
+// setInterval(getPlayers, 10000);
 });
