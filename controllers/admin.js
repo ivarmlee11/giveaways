@@ -140,8 +140,8 @@ router.get('/userWinHistory/:idx', ensureAuthenticated, function(req, res) {
 });
 
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
-  var id = req.params.idx;
-
+  var id = req.params.idx,
+            giveaway;
 
   db.giveaway.findById(id).then(function(giveaway) {
     console.log('----------------------------')
@@ -151,6 +151,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     console.log('----------------------------')
     console.log('----------------------------')
     console.log(giveaway.name + ' was found')
+    var giveaway = giveaway;
         console.log('----------------------------')
     console.log('----------------------------')
     console.log('----------------------------')
@@ -163,8 +164,8 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     console.log('----------------------------')
     console.log('----------------------------')
     console.log('----------------------------')
-    console.log(user.username + ' was found')
-
+    console.log(user.username + ' was found') 
+    user.addGiveaway(giveaway)
       res.redirect('back');
     });
   });
