@@ -163,7 +163,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     console.log('----------------------------')
     console.log('----------------------------')
     console.log('----------------------------')
-    console.log(user.name + ' was found')
+    console.log(user.username + ' was found')
 
       res.redirect('back');
     });
