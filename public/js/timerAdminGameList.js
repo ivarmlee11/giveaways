@@ -12,7 +12,8 @@ $(function() {
   });
   console.log(giveawayIdInts);
   giveawayIdInts.forEach(function(val) {
-    var time = $('h4[giveawayId="' + val + '"]').val();
+    var time = $('h4[giveawayId="' + val + '"]').text();
+    console.log($('h4[giveawayId="' + val + '"]'))
     console.log(time)
   });
 
