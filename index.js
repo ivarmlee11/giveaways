@@ -74,8 +74,9 @@ app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
       if(contests.length === 0) {
         contests = [];
         res.render('profile', {contests: contests});
-      }
-      res.render('profile', {contests: contests});
+      } else {
+        res.render('profile', {contests: contests});
+      } 
     })
   });
 });
