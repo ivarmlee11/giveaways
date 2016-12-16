@@ -80,9 +80,9 @@ var getPlayersandWinners = function(){
       }
     });
   });
-  var url = '/getContestWinners/' + idx;
+  var url2 = '/getContestWinners/' + idx;
   $.ajax({
-    url: url,
+    url: url2,
     type: 'GET',
     success: function(winnerList) {
       console.log(winnerList)
