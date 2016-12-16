@@ -96,5 +96,5 @@ var getPlayersandWinners = function(){
 };
 
 getPlayersandWinners();   
-// setInterval(getPlayersandWinners, 10000);
+setInterval(getPlayersandWinners, 10000);
 });
