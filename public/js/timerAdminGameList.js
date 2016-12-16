@@ -7,8 +7,9 @@ $(function() {
 
   var giveawayIdInts = [];
   giveawayIds.forEach(function(val) {
-    var int = val.parseInt();
+    var int = parseInt(val);
     console.log(int)
     giveawayIdInts.push(int);
   });
+  console.log(giveawayIdInts);
 });
