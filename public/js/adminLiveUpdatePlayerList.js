@@ -89,7 +89,7 @@ var getPlayersandWinners = function(){
       console.log('found winners')
       $('ul[playerListId=' + idx + ']').html('<li>winners are not being added</li>');
       // var updatedWinnerList = newArray(winnerList);
-      var winnerList = winnerList;
+      var winnerList = winnerList.winners;
 
       winnerList.forEach(function(player) {
         console.log(player + ' winner found');
