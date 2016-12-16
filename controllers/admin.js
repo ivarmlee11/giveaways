@@ -73,25 +73,18 @@ router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, re
 });
 
 router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
-  // if(req.body.options )
+  var timerOption;
+  if(req.body.options === 0) {
+    timerOption = null;
+  } else {
+    timerOption = req.body.options;
+  }
 
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log('----------------------')
-  console.log(req.body.options)
   db.giveaway.findOrCreate({
     where: {
       name: req.body.giveawayName,
       keyphrase: req.body.giveawayKeyPhrase,
-      timer: req.body.options
+      timer: timerOption
     }
   }).spread(function(giveaway, created) {
     if(!created) {
