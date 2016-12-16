@@ -76,7 +76,8 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
   db.giveaway.findOrCreate({
     where: {
       name: req.body.giveawayName,
-      keyphrase: req.body.giveawayKeyPhrase
+      keyphrase: req.body.giveawayKeyPhrase,
+      timer: req.body.options
     }
   }).spread(function(giveaway, created) {
     if(!created) {
