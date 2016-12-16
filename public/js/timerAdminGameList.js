@@ -13,7 +13,7 @@ $(function() {
   console.log(giveawayIdInts);
   giveawayIdInts.forEach(function(val) {
     var time = $('h4[giveawayId="' + val + '"]').text().split(' ');
-    console.log(time[4]) 
+    console.log(time) 
   });
 
 
