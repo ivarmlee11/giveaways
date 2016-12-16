@@ -12,7 +12,7 @@ $(function() {
   });
 
   giveawayIdInts.forEach(function(val) {
-    var time = $('h4[giveawayId=' + val ']').val();
+    var time = $('h4[giveawayId="' + val '"]').val();
     console.log(time)
   });
 
