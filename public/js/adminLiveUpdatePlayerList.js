@@ -88,7 +88,7 @@ var getPlayersandWinners = function(){
       console.log(winnerList)
       console.log('found winners')
       $('ul[playerListId=' + idx + ']').html('<li>winners are not being added</li>');
-      var updatedWinnerList = newArray(winnerList);
+      // var updatedWinnerList = newArray(winnerList);
       updatedWinnerList.forEach(function(player) {
         console.log(player + ' winner found');
         $('ul[winnerListId=' + idx + ']').append('<li><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
