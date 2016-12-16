@@ -3,8 +3,9 @@ module.exports = function(sequelize, DataTypes) {
   var giveaway = sequelize.define('giveaway', {
     name: DataTypes.STRING,
     keyphrase: DataTypes.STRING,
+    admin: DataTypes.BOOLEAN,
     ended: DataTypes.BOOLEAN,
-    hidden: DataTypes.BOOLEAN
+    timer: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
@@ -22,5 +23,3 @@ module.exports = function(sequelize, DataTypes) {
   });
   return giveaway;
 };
-
-
