@@ -1,5 +1,11 @@
 $(function() {
 
+var url = window.location.href;
+
+url = url.split('/');
+
+var idx = url[url.length -1];
+
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];

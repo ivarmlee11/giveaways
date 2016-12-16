@@ -1,9 +1,15 @@
 $(function() {
 
+var url = window.location.href;
+
+url = url.split('/');
+
+var idx = url[url.length -1];
+
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
-  console.log(JSON.Stringify(playerList))
+  // console.log(JSON.Stringify(playerList))
   console.log('player list')
   playerList.sort(function(a, b){
     var ipA=a.ip,
@@ -74,7 +80,7 @@ var getPlayersandWinners = function(){
       }
     });
   });
-  var url = '/getContestWinners/' + val;
+  var url = '/getContestWinners/' + idx;
   $.ajax({
     url: url,
     type: 'GET',
