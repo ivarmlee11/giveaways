@@ -14,9 +14,6 @@ module.exports = {
       keyphrase: {
         type: Sequelize.STRING
       },
-      admin: {
-        type: Sequelize.BOOLEAN
-      },
       ended: {
         type: Sequelize.BOOLEAN
       },

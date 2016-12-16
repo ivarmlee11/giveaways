@@ -3,7 +3,6 @@ module.exports = function(sequelize, DataTypes) {
   var giveaway = sequelize.define('giveaway', {
     name: DataTypes.STRING,
     keyphrase: DataTypes.STRING,
-    admin: DataTypes.BOOLEAN,
     ended: DataTypes.BOOLEAN,
     timer: DataTypes.INTEGER
   }, {
