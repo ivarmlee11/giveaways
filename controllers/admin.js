@@ -74,7 +74,7 @@ router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, re
 
 router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   var timerOption;
-  if(req.body.options === 0) {
+  if(req.body.options === '0') {
     timerOption = null;
   } else {
     timerOption = req.body.options;
