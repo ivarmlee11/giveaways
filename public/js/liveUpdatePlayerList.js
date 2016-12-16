@@ -33,26 +33,24 @@ var getPlayers = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
+
   var val = giveawayIds[0],
       url = '/admin/playerListData/' + val;
 
-  giveawayIds.forEach(function(val) {
-    $.ajax({
-      url: url,
-      type: 'GET',
-      success: function(playerList) {
-        console.log('playerlist updated'); 
-        $('span[giveawayId=' + val + ']').text('There are ' + playerList.length + ' entries.');
-        if(playerList.length === 1) {
-          $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
-        }
-        $('ul[playerListId=' + val + ']').html('<li></li>');
-        var updatedPlayerList = newArray(playerList);
-        updatedPlayerList.forEach(function(player) {
-          $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
-        });
+  $.ajax({
+    url: url,
+    type: 'GET',
+    success: function(playerList) {
+      $('span[giveawayId=' + val + ']').text('There are ' + playerList.length + ' entries.');
+      if(playerList.length === 1) {
+        $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
       }
-    });
+      $('ul[playerListId=' + val + ']').html('<li></li>');
+      var updatedPlayerList = newArray(playerList);
+      updatedPlayerList.forEach(function(player) {
+        $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
+      });
+    }
   });
 
   var url2 = '/getContestWinners/' + val;

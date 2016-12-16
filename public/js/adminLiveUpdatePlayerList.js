@@ -54,14 +54,14 @@ var getPlayersandWinners = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
-  var val = giveawayIds[0];
-  var url = '/admin/playerListData/' + val;
+
+  var val = giveawayIds[0],
+      url = '/admin/playerListData/' + val;
+
   $.ajax({
     url: url,
     type: 'GET',
     success: function(playerList) {
-      // console.log(playerList)
-      // console.log('found players')
       $('ul[playerListId=' + val + ']').html('<li></li>');
       var updatedPlayerList = newArray(playerList);
       updatedPlayerList.forEach(function(player) {
