@@ -12,9 +12,7 @@ $(function() {
   });
 
   giveawayIdInts.forEach(function(val) {
-    var dataAttr = '[giveawayId="' + val '"]';
-    console.log(dataAttr)
-    cosnole.log($(dataAttr).val())
+    console.log($('h4[giveawayId=' + val ']').val())
   });
 
 
