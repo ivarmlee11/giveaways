@@ -87,7 +87,7 @@ var getPlayersandWinners = function(){
     success: function(winnerList) {
       console.log(winnerList)
       console.log('found winners')
-      $('ul[winnerListId=' + val + ']').html('<li></li>');
+      $('ul[winnerListId=' + idx + ']').html('<li></li>');
 
       // var updatedWinnerList = newArray(winnerList);
       var winnerList = winnerList.winners;
