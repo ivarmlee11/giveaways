@@ -87,13 +87,14 @@ var getPlayersandWinners = function(){
     success: function(winnerList) {
       console.log(winnerList)
       console.log('found winners')
-      $('ul[playerListId=' + idx + ']').html('<li>winners are not being added</li>');
+      $('ul[winnerListId=' + val + ']').html('<li></li>');
+
       // var updatedWinnerList = newArray(winnerList);
       var winnerList = winnerList.winners;
 
       winnerList.forEach(function(player) {
-        console.log(player + ' winner found');
-        $('ul[winnerListId=' + idx + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+        console.log(player.username + ' winner found');
+        $('ul[winnerListId=' + idx + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
 
       });
     }
