@@ -73,6 +73,20 @@ router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, re
 });
 
 router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
+  // if(req.body.options )
+
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log('----------------------')
+  console.log(req.body.options)
   db.giveaway.findOrCreate({
     where: {
       name: req.body.giveawayName,
