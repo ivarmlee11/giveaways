@@ -3,7 +3,8 @@ $(function() {
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
-  console.log(playerList)
+  console.log(JSON.Stringify(playerList))
+  console.log('player list')
   playerList.sort(function(a, b){
     var ipA=a.ip,
         ipB=b.ip;
@@ -52,15 +53,15 @@ var getPlayersandWinners = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
-  console.log(giveawayIds)
+  // console.log(giveawayIds)
   giveawayIds.forEach(function(val) {
     var url = '/admin/playerListData/' + val;
     $.ajax({
       url: url,
       type: 'GET',
       success: function(playerList) {
-        console.log(playerList)
-        console.log('found players')
+        // console.log(playerList)
+        // console.log('found players')
         $('ul[playerListId=' + val + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {
