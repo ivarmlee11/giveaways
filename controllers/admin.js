@@ -90,6 +90,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
+
   db.giveaway.find({
     where: {id: id}
   }).then(function(giveaway) {
@@ -113,6 +114,7 @@ router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
 
 router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
+
   db.giveaway.find({
     where: {id: id}
   }).then(function(giveaway) {
@@ -134,6 +136,7 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
             giveaway;
+
   db.giveaway.findById(id).then(function(giveaway) {
     var giveaway = giveaway;
     db.user.findById(req.body.id).then(function(user) {
@@ -142,16 +145,23 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
       res.redirect('back');
     });
   });
+
 });
 
-router.get('/deleteGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
+router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx;
-  db.giveaway.destroy({
-    where: { id: id }
-  }).then(function() {
-    req.flash('success', 'You have deleted the giveaway.');
+
+  db.giveaway.update({
+    hidden: true
+  }, {
+    where: {
+      id: id
+    }
+  }).then(function(giveaway) {
+    req.flash('success', 'You have hidden the giveaway.');
     res.redirect('/admin/adminGiveawayList');
   });
+
 });
 
 module.exports = router;

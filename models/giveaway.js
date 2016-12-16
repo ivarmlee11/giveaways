@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   var giveaway = sequelize.define('giveaway', {
     name: DataTypes.STRING,
     keyphrase: DataTypes.STRING,
-    ended: DataTypes.BOOLEAN
+    ended: DataTypes.BOOLEAN,
+    hidden: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
@@ -11,13 +12,16 @@ module.exports = function(sequelize, DataTypes) {
         models.giveaway.belongsToMany(models.user, {as: 'Winners', through: 'contestsWinners'});
       }
     },
+    {
     hooks: {
       beforeCreate: function(giveaway, options, cb) {
-      giveaway.keyphrase = giveaway.keyphrase.toLowerCase();
-      //pass the updated giveaway object back
-      cb(null, giveaway);
-  }
-}
+        giveaway.keyphrase = giveaway.keyphrase.toLowerCase();
+        //pass the updated giveaway object back
+        cb(null, giveaway);
+      }
+    }
   });
   return giveaway;
 };
+
+

@@ -1,6 +1,5 @@
 <script src="/js/winSelector.js"></script>
-<script src="/js/deleteGiveaway.js"></script>
-<script src="/js/endGiveaway.js"></script>
+<script src="/js/hideGiveaway.js"></script>
 <script src="/js/adminLiveUpdatePlayerList.js"></script>
 
 <h1 class="text-center"><%= giveaway.name %></h1>
@@ -16,7 +15,7 @@
       <% if(giveaway.ended) { %>
         <h3>This giveaway has ended.</h3>
       <% } %>
-      <button id="deleteThis" class="btn btn-danger">Delete this Giveaway</button>
+      <button id="hideThis" class="btn btn-danger">Hide this Giveaway</button>
       <h3 class="text-center">Player Group</h3>
       <ul class="playerList" playerListId="<%=giveaway.id%>">
       </ul>

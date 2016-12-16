@@ -6,18 +6,20 @@
 
   <div class="col-md-6 col-md-offset-3">
     <% giveaways.forEach(function(giveaway) { %>
-      <div class="well text-center">
-        <h3><strong><%=giveaway.name%></strong></h3>
-        <a href="/admin/playerList/<%=giveaway.id%>"><h6>Select This Giveaway</h6></a>
-        <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
-        </span>
-        <h3 class="text-center">Player Group</h3>
-        <ul class="playerList" playerListId="<%=giveaway.id%>">
-        </ul>
-        <h3 class="text-center">Winner Group</h3>
-        <ul class="playerList" winnerListId="<%=giveaway.id%>">
-        </ul>
-      </div>
+      <% if(!giveaway.hidden) { %>
+        <div class="well text-center">
+          <h3><strong><%=giveaway.name%></strong></h3>
+          <a href="/admin/playerList/<%=giveaway.id%>"><h6>Select This Giveaway</h6></a>
+          <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
+          </span>
+          <h3 class="text-center">Player Group</h3>
+          <ul class="playerList" playerListId="<%=giveaway.id%>">
+          </ul>
+          <h3 class="text-center">Winner Group</h3>
+          <ul class="playerList" winnerListId="<%=giveaway.id%>">
+          </ul>
+        </div>
+      <% } %>
     <% }); %>
     <h1 id="winner" class="text-center"></h1>  
   </div>

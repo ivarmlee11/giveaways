@@ -5,8 +5,8 @@ $(function() {
 
   var idx = url[url.length -1];
 
-  $('#deleteThis').on('click', function() {
-    var url = '/admin/deleteGiveaway/' + idx;
+  $('#hideThis').on('click', function() {
+    var url = '/admin/hideGiveaway/' + idx;
     $.ajax({
       url: url,
       type: 'GET',
