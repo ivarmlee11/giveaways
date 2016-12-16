@@ -77,10 +77,8 @@ var getPlayersandWinners = function(){
       }
     });
   });
-  console.log('winner check')
-  console.log('giveaway ids')
-  console.log(giveawayIds[0])
-  var url2 = '/getContestWinners/' + val;
+
+  var url2 = '/getContestWinners/' + giveawayIds[0];
   $.ajax({
     url: url2,
     type: 'GET',
