@@ -12,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
         models.giveaway.belongsToMany(models.user, {as: 'Winners', through: 'contestsWinners'});
       }
     },
-    {
     hooks: {
       beforeCreate: function(giveaway, options, cb) {
         giveaway.keyphrase = giveaway.keyphrase.toLowerCase();
