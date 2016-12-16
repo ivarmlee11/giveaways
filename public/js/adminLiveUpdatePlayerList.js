@@ -5,8 +5,7 @@ var val;
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
-  // console.log(JSON.Stringify(playerList))
-  console.log('player list')
+
   playerList.sort(function(a, b){
     var ipA=a.ip,
         ipB=b.ip;
