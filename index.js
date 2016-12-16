@@ -70,10 +70,12 @@ app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
   db.user.findById(id).then(function(user) {
     user.getContests().then(function(contests) {
+      var contests = contests;
       if(contests.length === 0) {
-        res.render('profile');
+        contests = [];
+        res.render('profile', {contests: contests});
       }
-      res.render('profile', {contests: contests}) 
+      res.render('profile', {contests: contests});
     })
   });
 });
