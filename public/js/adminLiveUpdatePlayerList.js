@@ -2,7 +2,7 @@ $(function() {
 
 var val;
 
-var newAconsrray  = function(playerList) {
+var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
 
