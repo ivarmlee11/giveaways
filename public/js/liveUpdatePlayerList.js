@@ -36,7 +36,6 @@ var getPlayers = function(){
 
   var val = giveawayIds[0],
       url = '/admin/playerListData/' + val;
-      consle.log(val)
   $.ajax({
     url: url,
     type: 'GET',
