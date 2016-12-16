@@ -1,10 +1,6 @@
 $(function() {
 
-var url = window.location.href;
-
-url = url.split('/');
-
-var idx = url[url.length -1];
+var val;
 
 var newArray  = function(playerList) {
   var ipData = {},
@@ -61,6 +57,7 @@ var getPlayersandWinners = function(){
   }).get();
   // console.log(giveawayIds)
   giveawayIds.forEach(function(val) {
+    val = val;
     var url = '/admin/playerListData/' + val;
     $.ajax({
       url: url,
@@ -80,21 +77,21 @@ var getPlayersandWinners = function(){
       }
     });
   });
-  var url2 = '/getContestWinners/' + idx;
+  var url2 = '/getContestWinners/' + val;
   $.ajax({
     url: url2,
     type: 'GET',
     success: function(winnerList) {
       console.log(winnerList)
       console.log('found winners')
-      $('ul[winnerListId=' + idx + ']').html('<li></li>');
+      $('ul[winnerListId=' + val + ']').html('<li></li>');
 
-      // var updatedWinnerList = newArray(winnerList);
+      // var updatedWinnerList = newArray(windowinnerList);
       var winnerList = winnerList.winners;
 
       winnerList.forEach(function(player) {
         console.log(player.username + ' winner found');
-        $('ul[winnerListId=' + idx + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
+        $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
 
       });
     }
