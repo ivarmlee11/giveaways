@@ -55,30 +55,27 @@ var getPlayersandWinners = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
-  // console.log(giveawayIds)
-  giveawayIds.forEach(function(val) {
-    val = val;
-    var url = '/admin/playerListData/' + val;
-    $.ajax({
-      url: url,
-      type: 'GET',
-      success: function(playerList) {
-        // console.log(playerList)
-        // console.log('found players')
-        $('ul[playerListId=' + val + ']').html('<li></li>');
-        var updatedPlayerList = newArray(playerList);
-        updatedPlayerList.forEach(function(player) {
-          if(player.ipCount > 1) {
-            $('ul[playerListId=' + val + ']').append('<li><span style="background-color:' + player.color + '"><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
-          } else {
-            $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
-          }
-        });
-      }
-    });
+  var val = giveawayIds[0];
+  var url = '/admin/playerListData/' + val;
+  $.ajax({
+    url: url,
+    type: 'GET',
+    success: function(playerList) {
+      // console.log(playerList)
+      // console.log('found players')
+      $('ul[playerListId=' + val + ']').html('<li></li>');
+      var updatedPlayerList = newArray(playerList);
+      updatedPlayerList.forEach(function(player) {
+        if(player.ipCount > 1) {
+          $('ul[playerListId=' + val + ']').append('<li><span style="background-color:' + player.color + '"><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+        } else {
+          $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
+        }
+      });
+    }
   });
 
-  var url2 = '/getContestWinners/' + giveawayIds[0];
+  var url2 = '/getContestWinners/' + val;
   $.ajax({
     url: url2,
     type: 'GET',
@@ -88,7 +85,7 @@ var getPlayersandWinners = function(){
       $('ul[winnerListId=' + val + ']').html('<li></li>');
 
       // var updatedWinnerList = newArray(windowinnerList);
-      var winnerLxist = winnerList.winners;
+      var winnerList = winnerList.winners;
 
       winnerList.forEach(function(player) {
         console.log(player.username + ' winner found');
