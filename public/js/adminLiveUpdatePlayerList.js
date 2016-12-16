@@ -79,7 +79,7 @@ var getPlayersandWinners = function(){
   });
   console.log('winner check')
   console.log('giveaway ids')
-  console.log(giveawayIds)
+  console.log(giveawayIds[0])
   var url2 = '/getContestWinners/' + val;
   $.ajax({
     url: url2,
