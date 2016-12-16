@@ -5,7 +5,7 @@ var val;
 var newArray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
-  
+
   playerList.sort(function(a, b){
     var ipA=a.ip,
         ipB=b.ip;
@@ -19,35 +19,53 @@ var newArray  = function(playerList) {
   })
   
   for(var i = 0; i < playerList.length; i++) {
+    if(i === 0) {
+      ipData[playerList[i].ip] = 1;
+    } else {
+      if(ipData.hasOwnProperty(playerList[i].ip)) {
+        ipData[playerList[i].ip]++;
+      } else {
+        ipData[playerList[i].ip] = 1;
+      }
+    }
+  }
+  
+  for(var i = 0; i < playerList.length; i++) {
+    if(ipData[playerList[i].ip]) {
+      var rgb = playerList[i].ip.split('.'),
+          red = rgb[0],
+          green = rgb[1],
+          blue = rgb[2];
+      color = 'rgb(' + red + ',' + green + ',' + blue + ')';
+    }
     playerListWithIpInfo.push({
-      ipCount: ipData[playerList[i].ip],
+      ipcount: ipData[playerList[i].ip],
       username: playerList[i].username,
       auth: playerList[i].auth,
-      ip: playerList[i].ip
+      ip: playerList[i].ip,
+      color: color
     })
   }
+  
   return playerListWithIpInfo;
 }
 
-var getPlayers = function(){
+var getPlayersandWinners = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
 
   var val = giveawayIds[0],
       url = '/admin/playerListData/' + val;
+
   $.ajax({
     url: url,
     type: 'GET',
     success: function(playerList) {
-      $('span[giveawayId=' + val + ']').text('There are ' + playerList.length + ' entries.');
-      if(playerList.length === 1) {
-        $('span[giveawayId=' + val + ']').text('There is ' + playerList.length + ' entry.');
-      }
       $('ul[playerListId=' + val + ']').html('<li></li>');
       var updatedPlayerList = newArray(playerList);
-      updatedPlayerList.forEach(function(player) {
-        $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
+      updatedPlayerList.forEach(function(player) {     
+        $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>'); 
       });
     }
   });
@@ -57,16 +75,22 @@ var getPlayers = function(){
     url: url2,
     type: 'GET',
     success: function(winnerList) {
+      console.log(winnerList)
+      console.log('found winners')
       $('ul[winnerListId=' + val + ']').html('<li></li>');
+
+      // var updatedWinnerList = newArray(windowinnerList);
       var winnerList = winnerList.winners;
+
       winnerList.forEach(function(player) {
+        console.log(player.username + ' winner found');
         $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
+
       });
     }
   });
-
 };
 
-getPlayers();   
-setInterval(getPlayers, 10000);
+getPlayersandWinners();   
+setInterval(getPlayersandWinners, 10000);
 });
