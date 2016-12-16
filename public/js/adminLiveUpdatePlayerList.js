@@ -78,6 +78,8 @@ var getPlayersandWinners = function(){
     });
   });
   console.log('winner check')
+  console.log('giveaway ids')
+  console.log(giveawayIds)
   var url2 = '/getContestWinners/' + val;
   $.ajax({
     url: url2,
@@ -88,7 +90,7 @@ var getPlayersandWinners = function(){
       $('ul[winnerListId=' + val + ']').html('<li></li>');
 
       // var updatedWinnerList = newArray(windowinnerList);
-      var winnerList = winnerList.winners;
+      var winnerLxist = winnerList.winners;
 
       winnerList.forEach(function(player) {
         console.log(player.username + ' winner found');
