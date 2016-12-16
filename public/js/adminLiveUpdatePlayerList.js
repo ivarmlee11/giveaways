@@ -40,8 +40,8 @@ var newArray  = function(playerList) {
       color = 'rgb(' + red + ',' + green + ',' + blue + ')';
     }
     playerListWithIpInfo.push({
-      ipCount: ipData[playerList[i].ip],
-      userName: playerList[i].username,
+      ipcount: ipData[playerList[i].ip],
+      username: playerList[i].username,
       auth: playerList[i].auth,
       ip: playerList[i].ip,
       color: color
@@ -66,10 +66,10 @@ var getPlayersandWinners = function(){
       $('ul[playerListId=' + val + ']').html('<li></li>');
       var updatedPlayerList = newArray(playerList);
       updatedPlayerList.forEach(function(player) {
-        if(player.ipCount > 1) {
-          $('ul[playerListId=' + val + ']').append('<li><span style="background-color:' + player.color + '"><strong>' + player.userName + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+        if(player.ipcount > 1) {
+          $('ul[playerListId=' + val + ']').append('<li><span style="background-color:' + player.color + '"><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
         } else {
-          $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
+          $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
         }
       });
     }
