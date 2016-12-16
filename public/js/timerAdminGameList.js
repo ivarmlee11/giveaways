@@ -8,8 +8,14 @@ $(function() {
   var giveawayIdInts = [];
   giveawayIds.forEach(function(val) {
     var int = parseInt(val);
-    console.log(int)
     giveawayIdInts.push(int);
   });
-  console.log(giveawayIdInts);
+
+  giveawayIdInts.forEach(function(val) {
+    var dataAttr = '[giveawayId="' + val '"]';
+    console.log(dataAttr)
+    cosnole.log($(dataAttr).val())
+  });
+
+
 });
