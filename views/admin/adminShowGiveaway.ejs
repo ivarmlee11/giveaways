@@ -10,12 +10,12 @@
     <div class="well text-center">
       <% if(!giveaway.ended) { %>
         <button id="endGiveaway" class="btn btn-info">End the Giveaway</button>
+        <button id="selectWinner" class="btn btn-success">Pick A Winner</button>
+        <button id="addWinnerToDb" class="btn btn-success">Save Winner</button>
       <% } %>
       <% if(giveaway.ended) { %>
         <h3>This giveaway has ended.</h3>
       <% } %>
-      <button id="selectWinner" class="btn btn-success">Pick A Winner</button>
-      <button id="addWinnerToDb" class="btn btn-success">Save Winner</button>
       <button id="deleteThis" class="btn btn-danger">Delete this Giveaway</button>
       <h3 class="text-center">Player Group</h3>
       <ul class="playerList" playerListId="<%=giveaway.id%>">
