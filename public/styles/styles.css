@@ -46,6 +46,7 @@ a, a:hover, a:active {
 
 .playerList {
   list-style-type: none;
+  padding: 0;
 }
 
 ul.nav-tabs > li {
