@@ -2,7 +2,7 @@ $(function() {
 
 var val;
 
-var newArray  = function(playerList) {
+var newAconsrray  = function(playerList) {
   var ipData = {},
       playerListWithIpInfo = [];
 
@@ -79,17 +79,10 @@ var getPlayersandWinners = function(){
     url: url2,
     type: 'GET',
     success: function(winnerList) {
-      console.log(winnerList)
-      console.log('found winners')
       $('ul[winnerListId=' + val + ']').html('<li></li>');
-
-      // var updatedWinnerList = newArray(windowinnerList);
       var winnerList = winnerList.winners;
-
       winnerList.forEach(function(player) {
-        console.log(player.username + ' winner found');
         $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
-
       });
     }
   });
