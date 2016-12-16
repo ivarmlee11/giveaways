@@ -33,8 +33,10 @@ var getPlayers = function(){
   var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
   }).get();
+  var val = giveawayIds[0],
+      url = '/admin/playerListData/' + val;
+
   giveawayIds.forEach(function(val) {
-    var url = '/admin/playerListData/' + val;
     $.ajax({
       url: url,
       type: 'GET',
