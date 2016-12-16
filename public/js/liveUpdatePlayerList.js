@@ -21,7 +21,7 @@ var newArray  = function(playerList) {
   for(var i = 0; i < playerList.length; i++) {
     playerListWithIpInfo.push({
       ipCount: ipData[playerList[i].ip],
-      userName: playerList[i].username,
+      username: playerList[i].username,
       auth: playerList[i].auth,
       ip: playerList[i].ip
     })
@@ -36,7 +36,7 @@ var getPlayers = function(){
 
   var val = giveawayIds[0],
       url = '/admin/playerListData/' + val;
-
+      consle.log(val)
   $.ajax({
     url: url,
     type: 'GET',
@@ -48,7 +48,7 @@ var getPlayers = function(){
       $('ul[playerListId=' + val + ']').html('<li></li>');
       var updatedPlayerList = newArray(playerList);
       updatedPlayerList.forEach(function(player) {
-        $('ul[playerListId=' + val + ']').append('<li>' + player.userName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
+        $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
       });
     }
   });
@@ -58,17 +58,10 @@ var getPlayers = function(){
     url: url2,
     type: 'GET',
     success: function(winnerList) {
-      console.log(winnerList)
-      console.log('found winners')
       $('ul[winnerListId=' + val + ']').html('<li></li>');
-
-      // var updatedWinnerList = newArray(windowinnerList);
       var winnerList = winnerList.winners;
-
       winnerList.forEach(function(player) {
-        console.log(player.username + ' winner found');
         $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
-
       });
     }
   });
