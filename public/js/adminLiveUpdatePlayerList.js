@@ -77,6 +77,7 @@ var getPlayersandWinners = function(){
       }
     });
   });
+  console.log('winner check')
   var url2 = '/getContestWinners/' + val;
   $.ajax({
     url: url2,
