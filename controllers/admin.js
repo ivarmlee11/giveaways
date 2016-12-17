@@ -163,6 +163,7 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
   var id = req.params.idx;
 
   db.giveaway.update({
+    ended: true,
     hidden: true
   }, {
     where: {
