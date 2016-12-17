@@ -19,7 +19,7 @@ $(function() {
   });
 
   console.log('moment')
-  var localDate = moment.utc();
+  var localTime = moment.utc();
   console.log(localTime);
 
 });
