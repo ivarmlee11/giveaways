@@ -20,7 +20,5 @@ $(function() {
 
   console.log('moment')
   var localTime = moment.utc();
-  console.log(localTime);
-var localDate = new Date();
-console.log( 'localDate as UTC format = ' + moment.utc( localDate ).format() );
+  console.log(localTime._d);
 });

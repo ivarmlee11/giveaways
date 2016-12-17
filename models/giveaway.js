@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     keyphrase: DataTypes.STRING,
     ended: DataTypes.BOOLEAN,
+    hidden: DataTypes.BOOLEAN,
     timer: DataTypes.INTEGER
   }, {
     classMethods: {

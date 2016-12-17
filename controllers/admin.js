@@ -4,7 +4,8 @@ var express = require('express'),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
-    flash = require('connect-flash');
+    flash = require('connect-flash'),
+    moment = require('moment');
 
 router.post('/adminListAdd', ensureAuthenticated, modCheck, function(req, res) {
   db.user.update({
