@@ -18,12 +18,13 @@ $(function() {
   console.log(giveawayIds)
 
   giveawayIdInts.forEach(function(val) {
-    var time = $('h4[giveawayId="' + val + '"]').text();
-    console.log(time)
+    var time = $('h4[giveawayId="' + val + '"]').text().toISOString();
+    console.log(time + " time")
     contestStartTime = moment.utc(time).format();
-    
+    console.log(contestStartTime + " contest start time")
     var localTime = moment();
-    var realTime = moment.utc(localTime).format()
+    console.log(localTime + " local time moment()")
+    // var realTime = moment.utc(localTime).format()
   });
 
 });
