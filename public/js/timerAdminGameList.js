@@ -19,6 +19,7 @@ $(function() {
   });
 
   console.log('moment')
-  console.log(moment())
+  var localTime = moment();
+  console.log(localTime)
 
 });
