@@ -19,7 +19,8 @@ $(function() {
   });
 
   console.log('moment')
-  var localTime = moment().tz('America/Danmarkshavn');
-  // 
-  console.log(localTime);
+  var localTime = moment().utc()
+  console.log(localTime)
+  var realTime = moment.parseZone(localTime)
+  console.log(realTime);
 });
