@@ -19,7 +19,8 @@ $(function() {
 
   giveawayIdInts.forEach(function(val) {
     var time = $('h4[giveawayId="' + val + '"]').text();
-    console.log(time.toISOString())
+    console.log(time.format())
+    console.log()
     contestStartTime = moment.utc(time).format();
     console.log(contestStartTime + " contest start time")
     var localTime = moment();
