@@ -20,6 +20,6 @@ $(function() {
 
   console.log('moment')
   var localTime = moment();
-  console.log(localTime)
+  console.log(localTime._d);
 
 });
