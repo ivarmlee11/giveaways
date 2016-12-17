@@ -87,7 +87,7 @@ var getPlayersandWinners = function(){
         });
       }
     });
-  }
+  });
 };
 
 getPlayersandWinners();   
