@@ -40,7 +40,7 @@ $(function() {
         month = timeSplit[1],
         day = timeSplit[2],
         hourMinSec = timeSplit[4],
-        convertedMonth = month,
+        convertedMonth = months[month],
         isoDateString = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec;
 
     console.log(isoDateString);
