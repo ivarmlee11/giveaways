@@ -19,7 +19,7 @@ $(function() {
   });
 
   console.log('moment')
-  var localTime = moment().tz('Etc/UCT|UCT|0|0|');
+  var localTime = moment().tz('Etc/UCT');
   // 
   console.log(localTime);
 });
