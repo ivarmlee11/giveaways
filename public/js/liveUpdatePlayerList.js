@@ -57,7 +57,7 @@ var getPlayersandWinners = function(){
 
   var val = giveawayIds[0],
       url = '/admin/playerListData/' + val;
-
+  console.log(giveawayIds)
   $.ajax({
     url: url,
     type: 'GET',
