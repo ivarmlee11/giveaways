@@ -7,13 +7,11 @@ $(function() {
 
   $('#endGiveaway').on('click', function() {
     var url = '/admin/adminListEndGiveaway/' + idx;
-    console.log('url ' + url);
-    console.log('button clicked');
     $.ajax({
       url: url,
       type: 'GET',
       success: function(data) {  
-        $('#endGiveaway').text('Giveaway has ended')
+        $('#endGiveaway').text('Giveaway has ended');
       }
     });
   });
