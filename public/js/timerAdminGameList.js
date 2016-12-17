@@ -47,8 +47,9 @@ $(function() {
 
     var currentTime = moment.utc().format();
     console.log(currentTime);
-    var diff = giveawayStartTime.diff(currentTime);
-    console.log(diff  )
+  
+
+console.log('Difference is ', giveawayStartTime.diff(currentTime), 'seconds');
     
   });
 
