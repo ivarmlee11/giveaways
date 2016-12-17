@@ -55,33 +55,42 @@ var getPlayersandWinners = function(){
     return $(this).attr('giveawayId');
   }).get();
 
-  var val = giveawayIds[0],
-      url = '/admin/playerListData/' + val;
-  console.log(giveawayIds)
-  $.ajax({
-    url: url,
-    type: 'GET',
-    success: function(playerList) {
-      $('ul[playerListId=' + val + ']').html('<li></li>');
-      var updatedPlayerList = newArray(playerList);
-      updatedPlayerList.forEach(function(player) {     
-        $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>'); 
-      });
-    }
+
+  giveawayIds.forEach(function(element) {
+
+    var val = giveawayIds[element],
+        url = '/admin/playerListData/' + val;
+
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function(playerList) {
+        $('ul[playerListId=' + val + ']').html('<li></li>');
+        var updatedPlayerList = newArray(playerList);
+        updatedPlayerList.forEach(function(player) {     
+          $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>'); 
+        });
+      }
+    });
+
+    var url2 = '/getContestWinners/' + val;
+    $.ajax({
+      url: url2,
+      type: 'GET',
+      success: function(winnerList) {
+        $('ul[winnerListId=' + val + ']').html('<li></li>');
+        var winnerList = winnerList.winners;
+        winnerList.forEach(function(player) {
+          $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
+        });
+      }
+    });
+
+
+
   });
 
-  var url2 = '/getContestWinners/' + val;
-  $.ajax({
-    url: url2,
-    type: 'GET',
-    success: function(winnerList) {
-      $('ul[winnerListId=' + val + ']').html('<li></li>');
-      var winnerList = winnerList.winners;
-      winnerList.forEach(function(player) {
-        $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
-      });
-    }
-  });
+
 };
 
 getPlayersandWinners();   
