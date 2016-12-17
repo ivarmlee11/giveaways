@@ -45,7 +45,7 @@ $(function() {
 
     console.log(isoDateString);
 
-    var realTime = moment.utc(localTime).format()
+    var realTime = moment.utc()
     console.log(realTime);
   });
 
