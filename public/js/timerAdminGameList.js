@@ -15,6 +15,8 @@ $(function() {
 
   console.log('timer running')
 
+  console.log(giveawayIds)
+
   giveawayIdInts.forEach(function(val) {
     var time = $('h4[giveawayId="' + val + '"]').text();
     console.log(time + ' time')
