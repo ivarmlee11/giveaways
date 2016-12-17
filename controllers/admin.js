@@ -24,6 +24,8 @@ router.post('/adminListAdd', ensureAuthenticated, modCheck, function(req, res) {
 router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
+  console.log(adminName);
+  console.log(req.user.username);
   if(adminName === req.user.username) {
     req.flash('error', 'You cannot demod yourself.');
     res.redirect('/admin/adminList');
@@ -88,10 +90,10 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
       timer: timerOption
     }
   }).spread(function(giveaway, created) {
-    if(!created) {
-      req.flash('error', 'A giveaway with this name already exists.');
-      res.redirect('/admin/adminGiveawayList');
-    };
+    // if(!created) {
+    //   req.flash('error', 'A giveaway with this name already exists.');
+    //   res.redirect('/admin/adminGiveawayList');
+    // };
     req.flash('success', 'You have created a giveaway.');
     res.redirect('/admin/adminGiveawayList');
   });

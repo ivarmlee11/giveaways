@@ -20,6 +20,7 @@ $(function() {
     var localTime = moment();
     var realTime = moment.utc(localTime).format()
     console.log(realTime);
+    
   });
 
 });
