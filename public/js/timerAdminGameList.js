@@ -15,10 +15,12 @@ $(function() {
 
   giveawayIdInts.forEach(function(val) {
     var time = $('h4[giveawayId="' + val + '"]').text();
-    contestStartTime = moment(time).local();
-    console.log(contestStartTime)
-    console.log(moment.local())
+    contestStartTime = moment.utc(time).format();
+    console.log(contestStartTime);
 
+    var localTime = moment();
+    var realTime = moment.utc(localTime).format()
+    console.log(realTime);
   });
 
 });

@@ -10,7 +10,6 @@
       <% if(!giveaway.hidden) { %>
         <div class="well text-center">
           <h3><strong><%=giveaway.name%></strong></h3>
-          <h4 data="ids" giveawayId="<%=giveaway.id%>" class="text-center"><%= giveaway.createdAt %></h4>
 
           <a href="/admin/playerList/<%=giveaway.id%>"><h6>Select This Giveaway</h6></a>
           <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
