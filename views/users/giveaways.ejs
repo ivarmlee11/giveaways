@@ -7,7 +7,7 @@
       <% if(!giveaway.hidden) { %>
         <div class="well text-center">
           <h3><strong><%=giveaway.name%></strong></h3>
-          <h4 giveawayId="<%=giveaway.createdAt%>"><%=giveaway.createdAt%></h4>
+          <h4 giveawayId="<%=giveaway.id%>"><%=giveaway.createdAt%></h4>
 
           <form action="/keyPhrase/<%=giveaway.id%>" method="POST" accept-charset="utf-8">
             <div class="form-group">
