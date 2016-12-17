@@ -21,6 +21,6 @@ $(function() {
   console.log('moment')
   var localTime = moment().utc()
   console.log(localTime)
-  var realTime = moment.parseZone(localTime)
+  var realTime = moment.utc(localTime).format();
   console.log(realTime);
 });
