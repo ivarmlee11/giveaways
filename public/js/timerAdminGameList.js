@@ -35,6 +35,7 @@ $(function() {
   giveawayIdInts.forEach(function(val) {
     var time = $('h4[giveawayId="' + val + '"]').text(),
         timeSplit = time.split(' '),
+        year = timeSplit[4],
         month = timeSplit[1],
         day = timeSplit[2],
         hourMinSec = timeSplit[4],
