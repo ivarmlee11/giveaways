@@ -33,6 +33,7 @@ $(function() {
   console.log(giveawayIds)
 
   giveawayIdInts.forEach(function(val) {
+
     var time = $('h4[giveawayId="' + val + '"]').text(),
         timeSplit = time.split(' '),
         year = timeSplit[3],
@@ -43,6 +44,9 @@ $(function() {
         isoDateString = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec;
 
     console.log(isoDateString);
+
+    var realTime = moment.utc(localTime).format()
+    console.log(realTime);
   });
 
 });
