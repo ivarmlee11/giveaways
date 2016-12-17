@@ -41,14 +41,14 @@ $(function() {
         day = timeSplit[2],
         hourMinSec = timeSplit[4],
         convertedMonth = months[month],
-        giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec;
+        giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
 
     console.log(giveawayStartTime);
 
     var currentTime = moment.utc().format();
     console.log(currentTime);
     var diff = giveawayStartTime.diff(currentTime);
-    console.log(diff)
+    console.log(diff  )
     
   });
 
