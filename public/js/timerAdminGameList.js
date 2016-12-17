@@ -19,13 +19,10 @@ $(function() {
 
   giveawayIdInts.forEach(function(val) {
     var time = $('h4[giveawayId="' + val + '"]').text();
-    // console.log(time.format())
-    console.log()
+    var timeSplit = time.split(' ');
+    console.log(timeSplit)
     contestStartTime = moment.utc(time).format();
     console.log(contestStartTime + " contest start time")
-    var localTime = moment();
-    console.log(localTime + " local time moment()")
-    // var realTime = moment.utc(localTime).format()
   });
 
 });
