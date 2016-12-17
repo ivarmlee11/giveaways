@@ -19,6 +19,7 @@ $(function() {
   });
 
   console.log('moment')
-  var localTime = moment.utc();
-  console.log(localTime._d);
+  var localTime = moment().tz('Etc/UCT|UCT|0|0|');
+  // 
+  console.log(localTime);
 });
