@@ -55,37 +55,39 @@ var getPlayersandWinners = function(){
     return $(this).attr('giveawayId');
   }).get();
 
-  var val = giveawayIds[0],
-      url = '/admin/playerListData/' + val;
+  
+  giveawayIds.forEach(function(element) {
+    var url = '/admin/playerListData/' + element;
 
-  $.ajax({
-    url: url,
-    type: 'GET',
-    success: function(playerList) {
-      $('ul[playerListId=' + val + ']').html('<li></li>');
-      var updatedPlayerList = newArray(playerList);
-      updatedPlayerList.forEach(function(player) {
-        if(player.ipcount > 1) {
-          $('ul[playerListId=' + val + ']').append('<li><span style="background-color:' + player.color + '"><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
-        } else {
-          $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
-        }
-      });
-    }
-  });
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function(playerList) {
+        $('ul[playerListId=' + element + ']').html('<li></li>');
+        var updatedPlayerList = newArray(playerList);
+        updatedPlayerList.forEach(function(player) {
+          if(player.ipcount > 1) {
+            $('ul[playerListId=' + element + ']').append('<li><span style="background-color:' + player.color + '"><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/>!</li>');
+          } else {
+            $('ul[playerListId=' + element + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>');
+          }
+        });
+      }
+    });
 
-  var url2 = '/getContestWinners/' + val;
-  $.ajax({
-    url: url2,
-    type: 'GET',
-    success: function(winnerList) {
-      $('ul[winnerListId=' + val + ']').html('<li></li>');
-      var winnerList = winnerList.winners;
-      winnerList.forEach(function(player) {
-        $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
-      });
-    }
-  });
+    var url2 = '/getContestWinners/' + element;
+    $.ajax({
+      url: url2,
+      type: 'GET',
+      success: function(winnerList) {
+        $('ul[winnerListId=' + element + ']').html('<li></li>');
+        var winnerList = winnerList.winners;
+        winnerList.forEach(function(player) {
+          $('ul[winnerListId=' + element + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
+        });
+      }
+    });
+  }
 };
 
 getPlayersandWinners();   
