@@ -16,7 +16,6 @@ $(function() {
   giveawayIdInts.forEach(function(val) {
     var time = $('h4[giveawayId="' + val + '"]').text();
     console.log(time) 
-    console.log('giveaway time')
   });
 
   console.log('moment')

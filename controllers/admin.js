@@ -5,7 +5,7 @@ var express = require('express'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     flash = require('connect-flash'),
-    moment = require('moment');
+    moment = require('moment-timezone');
 
 router.post('/adminListAdd', ensureAuthenticated, modCheck, function(req, res) {
   db.user.update({
