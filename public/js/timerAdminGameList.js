@@ -19,7 +19,7 @@ $(function() {
   });
 
   console.log('moment')
-  var localTime = moment().tz('Etc/UCT');
+  var localTime = moment().tz('America/Danmarkshavn');
   // 
   console.log(localTime);
 });
