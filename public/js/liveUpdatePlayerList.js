@@ -55,33 +55,33 @@ var getPlayersandWinners = function(){
     return $(this).attr('giveawayId');
   }).get();
 
-
+  
   giveawayIds.forEach(function(element) {
 
-    var val = giveawayIds[element],
-        url = '/admin/playerListData/' + val;
+    console.log(element);
+    var url = '/admin/playerListData/' + element;
 
     $.ajax({
       url: url,
       type: 'GET',
       success: function(playerList) {
-        $('ul[playerListId=' + val + ']').html('<li></li>');
+        $('ul[playerListId=' + element + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
         updatedPlayerList.forEach(function(player) {     
-          $('ul[playerListId=' + val + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>'); 
+          $('ul[playerListId=' + element + ']').append('<li>' + player.username + '<img id="logo" src="/img/' + player.auth + '.png"/></li>'); 
         });
       }
     });
 
-    var url2 = '/getContestWinners/' + val;
+    var url2 = '/getContestWinners/' + element;
     $.ajax({
       url: url2,
       type: 'GET',
       success: function(winnerList) {
-        $('ul[winnerListId=' + val + ']').html('<li></li>');
+        $('ul[winnerListId=' + element + ']').html('<li></li>');
         var winnerList = winnerList.winners;
         winnerList.forEach(function(player) {
-          $('ul[winnerListId=' + val + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
+          $('ul[winnerListId=' + element + ']').append('<li><strong>' + player.username + '</strong></span><img id="logo" src="/img/' + player.auth + '.png"/></li>');
         });
       }
     });
