@@ -29,9 +29,6 @@ $(function() {
 
   var contestStartTime;
 
-
-  console.log(giveawayIds)
-
   giveawayIdInts.forEach(function(val) {
 
     var time = $('h4[giveawayId="' + val + '"]').text(),
@@ -44,12 +41,13 @@ $(function() {
         giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
 
     console.log(giveawayStartTime);
-
+    var endTime = giveawayStartTime.add(5, 'minutes');
+    console.log(endTime)
     var currentTime = moment.utc().format();
     console.log(currentTime);
   
 
-console.log('Difference is ', giveawayStartTime.diff(currentTime), 'seconds');
+// console.log('Difference is ', giveawayStartTime.diff(currentTime), 'seconds');
     
   });
 
