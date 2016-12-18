@@ -49,6 +49,7 @@ $(function() {
         } else if(giveawayData.timer === 10) {
           endTime = moment(startTime).add(10, 'minutes').format();          
         } else {
+          endTime = null;
           $('#timer').text('This giveaway is not timed.');
         }
         console.log('current time ' + currentTime);
