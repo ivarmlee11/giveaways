@@ -41,7 +41,7 @@ $(function() {
         giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
 
     console.log(giveawayStartTime);
-    var endTime = giveawayStartTime.add(5, 'minutes');
+    var endTime = moment(giveawayStartTime).add(5, 'minutes');
     console.log(endTime)
     var currentTime = moment.utc().format();
     console.log(currentTime);
