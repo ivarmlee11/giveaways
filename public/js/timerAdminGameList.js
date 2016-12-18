@@ -38,25 +38,23 @@ $(function() {
       type: 'GET',
       success: function(giveawayData) {
         console.log(giveawayData);
+        var startTime = givgiveawayData.createdAt,
+            endTime;
+        console.log('start time ' + startTime)
+        if(giveawayData.timer === 3) {
+          endTime = moment(startTime).add(3, 'minutes').format();
+        } else if(giveawayData.timer === 5) {
+          endTime = moment(startTime).add(5, 'minutes').format();          
+        } else if(giveawayData.timer === 10) {
+          endTime = moment(startTime).add(10, 'minutes').format();          
+        } else {
+          $('#timer').text('This giveaway is not timed.');
+        }
+        console.log('end time ' + endTime);
       }
     });
 
-    var time = $('h4[giveawayId="' + val + '"]').text();
-    console.log(time)
-        // timeSplit = time.split(' '),
-        // year = timeSplit[3],
-        // month = timeSplit[1],
-        // day = timeSplit[2],
-        // hourMinSec = timeSplit[4],
-        // convertedMonth = months[month],
-        // giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
 
-    // console.log(giveawayStartTime);
-    // var currentTime = moment().format();
-    // console.log(currentTime + ' currenttime')
-
-    // var thing = moment(giveawayStartTime).format();
-    // console.log(thing + ' start');
     // var endTime = moment(giveawayStartTime).add(5, 'minutes').format();
     // console.log(endTime + ' endtime')
       
