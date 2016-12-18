@@ -33,7 +33,7 @@ $(function() {
 
     var time = $('h4[giveawayId="' + val + '"]').text(),
         timeSplit = time.split(' '),
-        yar = timeSplit[3],
+        year = timeSplit[3],
         month = timeSplit[1],
         day = timeSplit[2],
         hourMinSec = timeSplit[4],
