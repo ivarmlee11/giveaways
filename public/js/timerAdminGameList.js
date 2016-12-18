@@ -40,15 +40,13 @@ $(function() {
         convertedMonth = months[month],
         giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
     console.log(giveawayStartTime);
-    var endTime = moment(giveawayStartTime).add(5, 'minutes');
-    console.log(endTime + ' endtime')
+    var currentTime = moment();
+    console.log(currentTime + ' currenttime')
+
     var thing = moment(giveawayStartTime);
-    console.log(thing + ' start');``
-    var currentTime = moment.utc().format();
-    console.log(currentTime);
-    var endTime = moment.utc(endTime).format();
-    console.log(endTime)
-// console.log('Difference is ', giveawayStartTime.diff(currentTime), 'seconds');
+    console.log(thing + ' start');
+        var endTime = moment(giveawayStartTime).add(5, 'minutes');
+    console.log(endTime + ' endtime')
     
   });
 
