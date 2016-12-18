@@ -40,12 +40,12 @@ $(function() {
         convertedMonth = months[month],
         giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
     console.log(giveawayStartTime);
-    var currentTime = moment().utc();
+    var currentTime = moment().format();
     console.log(currentTime + ' currenttime')
 
-    var thing = moment(giveawayStartTime).utc();
+    var thing = moment(giveawayStartTime).format();
     console.log(thing + ' start');
-        var endTime = moment(giveawayStartTime).add(5, 'minutes').utc();
+        var endTime = moment(giveawayStartTime).add(5, 'minutes').format();
     console.log(endTime + ' endtime')
       
   });
