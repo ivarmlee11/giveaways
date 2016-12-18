@@ -46,7 +46,7 @@ $(function() {
     console.log(thing + ' start');``
     var currentTime = moment.utc().format();
     console.log(currentTime);
-    var endTime = moment.utc().format();
+    var endTime = moment.utc(endTime).format();
     console.log(endTime)
 // console.log('Difference is ', giveawayStartTime.diff(currentTime), 'seconds');
     
