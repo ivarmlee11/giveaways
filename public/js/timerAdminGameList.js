@@ -33,7 +33,7 @@ $(function() {
 
     var time = $('h4[giveawayId="' + val + '"]').text(),
         timeSplit = time.split(' '),
-        year = timeSplit[3],
+        yar = timeSplit[3],
         month = timeSplit[1],
         day = timeSplit[2],
         hourMinSec = timeSplit[4],
@@ -43,11 +43,11 @@ $(function() {
     var endTime = moment(giveawayStartTime).add(5, 'minutes');
     console.log(endTime + ' endtime')
     var thing = moment(giveawayStartTime);
-    console.log(thing + ' thing')
+    console.log(thing + ' start');``
     var currentTime = moment.utc().format();
     console.log(currentTime);
-  
-
+    var endTime = moment.utc().format();
+    console.log(endTime)
 // console.log('Difference is ', giveawayStartTime.diff(currentTime), 'seconds');
     
   });
