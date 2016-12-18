@@ -40,14 +40,14 @@ $(function() {
         convertedMonth = months[month],
         giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
     console.log(giveawayStartTime);
-    var currentTime = moment();
+    var currentTime = moment().utc();
     console.log(currentTime + ' currenttime')
 
-    var thing = moment(giveawayStartTime);
+    var thing = moment(giveawayStartTime).utc();
     console.log(thing + ' start');
-        var endTime = moment(giveawayStartTime).add(5, 'minutes');
+        var endTime = moment(giveawayStartTime).add(5, 'minutes').utc();
     console.log(endTime + ' endtime')
-    
+      
   });
 
 });
