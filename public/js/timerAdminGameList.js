@@ -39,10 +39,11 @@ $(function() {
         hourMinSec = timeSplit[4],
         convertedMonth = months[month],
         giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
-
     console.log(giveawayStartTime);
     var endTime = moment(giveawayStartTime).add(5, 'minutes');
-    console.log(endTime)
+    console.log(endTime + ' endtime')
+    var thing = moment(giveawayStartTime);
+    console.log(thing + ' thing')
     var currentTime = moment.utc().format();
     console.log(currentTime);
   
