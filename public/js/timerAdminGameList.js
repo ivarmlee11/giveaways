@@ -38,7 +38,7 @@ $(function() {
       type: 'GET',
       success: function(giveawayData) {
         console.log(giveawayData);
-        var startTime = moment(giveawayData.createdAt).format();,
+        var startTime = moment(giveawayData.createdAt).format(),
             currentTime = moment.utc().format();
             endTime;
         console.log('start time ' + startTime)
