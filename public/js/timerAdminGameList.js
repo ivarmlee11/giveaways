@@ -39,7 +39,7 @@ $(function() {
       success: function(giveawayData) {
         console.log(giveawayData);
         var startTime = moment(giveawayData.createdAt).format(),
-            currentTime = moment.utc().format();
+            currentTime = moment.utc().format(),
             endTime;
         console.log('start time ' + startTime)
         if(giveawayData.timer === 3) {
