@@ -143,6 +143,16 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
+router.get('/giveawayData/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+
+  db.giveaway.find({
+    where: {id: id}
+  }).then(function(giveaway) {
+    res.send(giveaway);
+  });
+});
+
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
             giveaway;

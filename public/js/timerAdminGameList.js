@@ -31,22 +31,34 @@ $(function() {
 
   giveawayIdInts.forEach(function(val) {
 
-    var time = $('h4[giveawayId="' + val + '"]').text(),
-        timeSplit = time.split(' '),
-        year = timeSplit[3],
-        month = timeSplit[1],
-        day = timeSplit[2],
-        hourMinSec = timeSplit[4],
-        convertedMonth = months[month],
-        giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
-    console.log(giveawayStartTime);
-    var currentTime = moment().format();
-    console.log(currentTime + ' currenttime')
+    var url = '/admin/giveawayData/' + val;
 
-    var thing = moment(giveawayStartTime).format();
-    console.log(thing + ' start');
-        var endTime = moment(giveawayStartTime).add(5, 'minutes').format();
-    console.log(endTime + ' endtime')
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function(giveawayData) {
+        console.log(giveawayData);
+      }
+    });
+
+    var time = $('h4[giveawayId="' + val + '"]').text();
+    console.log(time)
+        // timeSplit = time.split(' '),
+        // year = timeSplit[3],
+        // month = timeSplit[1],
+        // day = timeSplit[2],
+        // hourMinSec = timeSplit[4],
+        // convertedMonth = months[month],
+        // giveawayStartTime = year + '-' + convertedMonth + '-' + day + 'T' + hourMinSec + 'Z';
+
+    // console.log(giveawayStartTime);
+    // var currentTime = moment().format();
+    // console.log(currentTime + ' currenttime')
+
+    // var thing = moment(giveawayStartTime).format();
+    // console.log(thing + ' start');
+    // var endTime = moment(giveawayStartTime).add(5, 'minutes').format();
+    // console.log(endTime + ' endtime')
       
   });
 
