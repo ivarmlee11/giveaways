@@ -117,10 +117,11 @@ window.onresize = function(event) {
 
   console.log(giveawayIds);
 
-
-
+  giveawayIds.forEach(function(val) {
     var timerId = '#clock' + val;
     $(timerId).TimeCircles().rebuild();   
+  })
+
   
 };
 
