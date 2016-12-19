@@ -81,6 +81,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
   } else {
     timerOption = req.body.options;
   }
+  console.log(req.body)
 
   db.giveaway.create({
     where: {
