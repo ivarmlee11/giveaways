@@ -25,6 +25,7 @@ $(function() {
   var giveawayIdInts = [];
 
   var diffInSeconds = function(string) {
+    console.log(string)
     var splitString = string.split(':'),
         mins = parseInt(splitString[0]),
         seconds = parseInt(splitString[1]);
