@@ -82,17 +82,13 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
     timerOption = req.body.options;
   }
 
-  db.giveaway.findOrCreate({
+  db.giveaway.create({
     where: {
       name: req.body.giveawayName,
       keyphrase: req.body.giveawayKeyPhrase,
       timer: timerOption
     }
-  }).spread(function(giveaway, created) {
-    // if(!created) {
-    //   req.flash('error', 'A giveaway with this name already exists.');
-    //   res.redirect('/admin/adminGiveawayList');
-    // };
+  }).then(function(giveaway) {
     req.flash('success', 'You have created a giveaway.');
     res.redirect('/admin/adminGiveawayList');
   });
