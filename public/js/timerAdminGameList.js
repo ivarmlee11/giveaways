@@ -59,6 +59,7 @@ $(function() {
         } else if(giveawayData.timer === 10) {
           endTime = moment(startTime).add(10, 'minutes').utc().format(); 
           var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
+          console.log(remainingTime)
           $(timerId).text('The giveaway is on a 10 min timer.');
           $(timerDisplayId).html(
 
