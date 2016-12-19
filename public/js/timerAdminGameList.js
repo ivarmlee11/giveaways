@@ -109,12 +109,19 @@ giveawayIdInts.forEach(function(val) {
 
 
 window.onresize = function(event) {
-  var displays = $("h6[data='display']");
-  console.log(displays);
-  displays.forEach(function(val) {
+
+
+  var giveawayIds = $('[data="display"]').map( function() {
+    return $(this);
+  }).get();
+
+  console.log(giveawayIds);
+
+
+
     var timerId = '#clock' + val;
-    $(timerId).TimeCircles().rebuild(); 
-  })
+    $(timerId).TimeCircles().rebuild();   
+  
 };
 
 
