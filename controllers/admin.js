@@ -101,7 +101,6 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
         }).then(function(user) {
         });
       }, time);
-
       req.flash('success', 'You have created a giveaway with a timer.');
       res.redirect('/admin/adminGiveawayList');
     } else {
@@ -168,14 +167,21 @@ router.get('/giveawayData/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
+      redirectUrl = '/admin/playerList/' + id,
             giveaway;
 
   db.giveaway.findById(id).then(function(giveaway) {
-    var giveaway = giveaway;
-    db.user.findById(req.body.id).then(function(user) {
-      giveaway.addWinner(user);
-      res.redirect('back');
-    });
+    giveaway = giveaway;
+    if(!giveaway.ended) {
+      db.user.findById(req.body.id).then(function(user) {
+        giveaway.addWinner(user);
+        req.flash('success', 'User added to winning pool.');
+        res.redirect(redirectUrl);
+      });
+    } else {
+      req.flash('error', 'Giveaway ended.');
+      res.redirect(redirectUrl);
+    }
   });
 
 });
