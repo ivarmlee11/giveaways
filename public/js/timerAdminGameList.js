@@ -25,12 +25,12 @@ $(function() {
   var giveawayIdInts = [];
 
   var diffInSeconds = function(string) {
-    console.log(string)
     var splitString = string.split(':'),
         mins = parseInt(splitString[0]),
-        seconds = parseInt(splitString[1]);
-
-        console.log(mins + ' ' + seconds)
+        seconds = parseInt(splitString[1]),
+        totalSeconds = (mins * 60) + seconds;
+    console.log(totalSeconds);
+    return totalSeconds;
   }
 
   giveawayIds.forEach(function(val) {
@@ -55,7 +55,7 @@ $(function() {
           if(giveawayData.timer === 3) {
             endTime = moment(startTime).add(3, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
-            diffInSeconds(remainingTime)
+            var timerSeconds = diffInSeconds(remainingTime);
             $(timerId).text('The giveaway is on a 3 min timer.');
             $(timerDisplayId).html(
 
@@ -63,6 +63,7 @@ $(function() {
           } else if(giveawayData.timer === 5) {
             endTime = moment(startTime).add(5, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
+            var timerSeconds = diffInSeconds(remainingTime);
             $(timerId).text('The giveaway is on a 5 min timer.');
             $(timerDisplayId).html(
 
@@ -70,6 +71,7 @@ $(function() {
           } else if(giveawayData.timer === 10) {
             endTime = moment(startTime).add(10, 'minutes').utc().format(); 
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
+            var timerSeconds = diffInSeconds(remainingTime);
             console.log(remainingTime)
             $(timerId).text('The giveaway is on a 10 min timer.');
             $(timerDisplayId).html(
