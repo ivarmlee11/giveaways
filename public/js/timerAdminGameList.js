@@ -67,6 +67,8 @@ $(function() {
         console.log('start time ' + startTime)
         console.log('current time ' + currentTime);
         console.log('end time ' + endTime);
+        var remainingTime = endTime.diff(currentTime);
+        console.log(remainingTime);
       }
     });
   });
