@@ -35,6 +35,7 @@ $('#addWinnerToDb').on('click', function() {
       type: 'POST',
       data: winner,
       success: function(data) {
+        console.log(data);
         winnerReset = false;
         $('#winner').html('Winner added.');
       }

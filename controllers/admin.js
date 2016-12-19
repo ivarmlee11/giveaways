@@ -175,12 +175,10 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     if(!giveaway.ended) {
       db.user.findById(req.body.id).then(function(user) {
         giveaway.addWinner(user);
-        req.flash('success', 'User added to winning pool.');
-        res.redirect(redirectUrl);
+        res.redirect('back');
       });
     } else {
-      req.flash('error', 'Giveaway ended.');
-      res.redirect(redirectUrl);
+      res.send({giveawayMessage: 'Giveaway ended.'});
     }
   });
 
