@@ -54,31 +54,31 @@ $(function() {
         if(!giveawayData.ended) {
           if(giveawayData.timer === 3) {
             endTime = moment(startTime).add(3, 'minutes').utc().format();
-            var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
-            var timerSeconds = diffInSeconds(remainingTime);
-            var timerString =  '<div id="timer" data-timer="' + timerSeconds + '"></div>';
-
+            var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
+                timerSeconds = diffInSeconds(remainingTime),
+                timerString =  '<div id="timer" data-timer="' + timerSeconds + '"></div>';
 
             $(timerId).text('The giveaway is on a 3 min timer.');
             $(timerDisplayId).html(timerString);
             $('#timer').TimeCircles();
           } else if(giveawayData.timer === 5) {
-            endTime = moment(startTime).add(5, 'minutes').utc().format();
-            var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
-            var timerSeconds = diffInSeconds(remainingTime);
-            $(timerId).text('The giveaway is on a 5 min timer.');
-            $(timerDisplayId).html(
+            endTime = moment(startTime).add(3, 'minutes').utc().format();
+            var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
+                timerSeconds = diffInSeconds(remainingTime),
+                timerString =  '<div id="timer" data-timer="' + timerSeconds + '"></div>';
 
-              );      
+            $(timerId).text('The giveaway is on a 3 min timer.');
+            $(timerDisplayId).html(timerString);
+            $('#timer').TimeCircles();   
           } else if(giveawayData.timer === 10) {
-            endTime = moment(startTime).add(10, 'minutes').utc().format(); 
-            var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
-            var timerSeconds = diffInSeconds(remainingTime);
-            console.log(remainingTime)
-            $(timerId).text('The giveaway is on a 10 min timer.');
-            $(timerDisplayId).html(
+            endTime = moment(startTime).add(3, 'minutes').utc().format();
+            var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
+                timerSeconds = diffInSeconds(remainingTime),
+                timerString =  '<div id="timer" data-timer="' + timerSeconds + '"></div>';
 
-              );   
+            $(timerId).text('The giveaway is on a 3 min timer.');
+            $(timerDisplayId).html(timerString);
+            $('#timer').TimeCircles();
           } else {
             endTime = null;
             $(timerId).text('This giveaway is not timed.');
