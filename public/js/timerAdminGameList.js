@@ -56,10 +56,12 @@ $(function() {
             endTime = moment(startTime).add(3, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
             var timerSeconds = diffInSeconds(remainingTime);
-            $(timerId).text('The giveaway is on a 3 min timer.');
-            $(timerDisplayId).html(
+            var timerString =  '<div id="timer" data-timer="' + timerSeconds + '"></div>';
 
-              );
+
+            $(timerId).text('The giveaway is on a 3 min timer.');
+            $(timerDisplayId).html(timerSeconds);
+            $('#timer').TimeCircles();
           } else if(giveawayData.timer === 5) {
             endTime = moment(startTime).add(5, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
