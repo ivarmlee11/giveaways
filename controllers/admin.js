@@ -158,11 +158,16 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
 
   db.giveaway.findById(id).then(function(giveaway) {
     var giveaway = giveaway;
-    db.user.findById(req.body.id).then(function(user) {
-    giveaway.addWinner(user);
-      req.flash('success', 'You have added a user to the win list.');
-      res.redirect('back');
-    });
+    if(giveaway.ended) {
+      req.flash('error', 'Giveaway ended.');
+      res.redirect('back');      
+    } else {
+      db.user.findById(req.body.id).then(function(user) {
+      giveaway.addWinner(user);
+        req.flash('success', 'You have added a user to the win list.');
+        res.redirect('back');
+      });
+    }
   });
 
 });
