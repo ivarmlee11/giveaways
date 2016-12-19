@@ -44,18 +44,21 @@ $(function() {
             endTime;
         if(giveawayData.timer === 3) {
           endTime = moment(startTime).add(3, 'minutes').utc().format();
+          var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
           $(timerId).text('The giveaway is on a 3 min timer.');
           $(timerDisplayId).html(
 
             );
         } else if(giveawayData.timer === 5) {
           endTime = moment(startTime).add(5, 'minutes').utc().format();
+          var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
           $(timerId).text('The giveaway is on a 5 min timer.');
           $(timerDisplayId).html(
 
             );      
         } else if(giveawayData.timer === 10) {
           endTime = moment(startTime).add(10, 'minutes').utc().format(); 
+          var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
           $(timerId).text('The giveaway is on a 10 min timer.');
           $(timerDisplayId).html(
 
@@ -67,10 +70,6 @@ $(function() {
         console.log('start time ' + startTime)
         console.log('current time ' + currentTime);
         console.log('end time ' + endTime);
-
-
-
-        console.log(moment.utc(moment(endTime).diff(moment(currentTime))).format("HH:mm:ss"));
       }
     });
   });
