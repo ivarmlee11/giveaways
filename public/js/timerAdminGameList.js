@@ -37,19 +37,29 @@ $(function() {
       url: url,
       type: 'GET',
       success: function(giveawayData) {
-        var timerId = '#timer' + val;
-        var startTime = moment(giveawayData.createdAt).format(),
+        var timerId = '#timer' + val,
+            timerDisplayId = '#timerDisplay' + val,
+            startTime = moment(giveawayData.createdAt).format(),
             currentTime = moment.utc().format(),
             endTime;
         if(giveawayData.timer === 3) {
-          endTime = moment(startTime).add(3, 'minutes').format();
+          endTime = moment(startTime).add(3, 'minutes').utc().format();
           $(timerId).text('The giveaway is on a 3 min timer.');
+          $(timerDisplayId).html(
+
+            );
         } else if(giveawayData.timer === 5) {
-          endTime = moment(startTime).add(5, 'minutes').format();
-          $(timerId).text('The giveaway is on a 5 min timer.');         
+          endTime = moment(startTime).add(5, 'minutes').utc().format();
+          $(timerId).text('The giveaway is on a 5 min timer.');
+          $(timerDisplayId).html(
+
+            );      
         } else if(giveawayData.timer === 10) {
-          endTime = moment(startTime).add(10, 'minutes').format(); 
-          $(timerId).text('The giveaway is on a 10 min timer.');     
+          endTime = moment(startTime).add(10, 'minutes').utc().format(); 
+          $(timerId).text('The giveaway is on a 10 min timer.');
+          $(timerDisplayId).html(
+
+            );   
         } else {
           endTime = null;
           $(timerId).text('This giveaway is not timed.');
@@ -59,11 +69,6 @@ $(function() {
         console.log('end time ' + endTime);
       }
     });
-
-
-    // var endTime = moment(giveawayStartTime).add(5, 'minutes').format();
-    // console.log(endTime + ' endtime')
-      
   });
 
 });
