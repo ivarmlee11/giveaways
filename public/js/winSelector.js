@@ -35,6 +35,7 @@ $(function() {
         data: winner,
         success: function(data) {
           winnerReset = false;
+          console.log(data);
           $('#winner').html('Winner added.');
         }
       });
