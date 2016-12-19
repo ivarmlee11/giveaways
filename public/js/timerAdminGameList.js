@@ -70,7 +70,7 @@ $(function() {
 
 
 
-        console.log(moment.utc(moment(currentTime).diff(moment(endTime))).format("HH:mm:ss"));
+        console.log(moment.utc(moment(endTime).diff(moment(currentTime))).format("HH:mm:ss"));
       }
     });
   });
