@@ -154,21 +154,14 @@ router.get('/giveawayData/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
-      url = '/admin/playerList/' + id,
-      giveaway;
+            giveaway;
 
   db.giveaway.findById(id).then(function(giveaway) {
     var giveaway = giveaway;
-    if(giveaway.ended) {
-      req.flash('error', 'Giveaway ended.');
-      res.redirect(url);      
-    } else {
-      db.user.findById(req.body.id).then(function(user) {
-        giveaway.addWinner(user);
-        req.flash('success', 'You have added a user to the win list.');
-        res.redirect(url);
-      });
-    }
+    db.user.findById(req.body.id).then(function(user) {
+      giveaway.addWinner(user);
+      res.redirect('back');
+    });
   });
 
 });
