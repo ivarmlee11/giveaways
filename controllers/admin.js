@@ -81,22 +81,27 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
   } else {
     timerOption = req.body.options;
   }
-  console.log(req.body)
-
   db.giveaway.create({
     name: req.body.giveawayName,
     keyphrase: req.body.giveawayKeyPhrase,
     timer: timerOption
   }).then(function(giveaway) {
+    var id = giveaway.id;
     if(giveaway.timer) {
-      console.log('---------------------------------')
-      console.log('---------------------------------')
-      console.log('---------------------------------')
-      console.log('---------------------------------')
       console.log(giveaway.timer)
-      console.log('---------------------------------')
-      console.log('---------------------------------')
-      console.log('---------------------------------')
+      var time = giveaway.timer * 60;
+      time = time * 1000;
+      setTimeout(function() {
+        db.giveaway.update({
+          ended: true
+        }, {
+          where: {
+            id: id
+          }
+        }).then(function(user) {
+        });
+      }, time);
+
       req.flash('success', 'You have created a giveaway with a timer.');
       res.redirect('/admin/adminGiveawayList');
     } else {
