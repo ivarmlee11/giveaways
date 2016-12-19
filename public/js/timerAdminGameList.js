@@ -37,21 +37,24 @@ $(function() {
       url: url,
       type: 'GET',
       success: function(giveawayData) {
-        console.log(giveawayData);
+        var timerId = '#timer' + val;
         var startTime = moment(giveawayData.createdAt).format(),
             currentTime = moment.utc().format(),
             endTime;
-        console.log('start time ' + startTime)
         if(giveawayData.timer === 3) {
           endTime = moment(startTime).add(3, 'minutes').format();
+          $(timerId).text('The giveaway is on a 3 min timer.');
         } else if(giveawayData.timer === 5) {
-          endTime = moment(startTime).add(5, 'minutes').format();          
+          endTime = moment(startTime).add(5, 'minutes').format();
+          $(timerId).text('The giveaway is on a 5 min timer.');         
         } else if(giveawayData.timer === 10) {
-          endTime = moment(startTime).add(10, 'minutes').format();          
+          endTime = moment(startTime).add(10, 'minutes').format(); 
+          $(timerId).text('The giveaway is on a 10 min timer.');     
         } else {
           endTime = null;
-          $('#timer').text('This giveaway is not timed.');
+          $(timerId).text('This giveaway is not timed.');
         }
+        console.log('start time ' + startTime)
         console.log('current time ' + currentTime);
         console.log('end time ' + endTime);
       }
