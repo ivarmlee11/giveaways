@@ -43,7 +43,7 @@ $(function() {
             currentTime = moment.utc().format(),
             endTime;
         if(!giveawayData.ended) {
-          if(giveawayData.timer === 3 &&) {
+          if(giveawayData.timer === 3) {
             endTime = moment(startTime).add(3, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
             $(timerId).text('The giveaway is on a 3 min timer.');
