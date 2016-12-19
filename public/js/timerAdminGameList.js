@@ -96,6 +96,10 @@ giveawayIdInts.forEach(function(val) {
           } else {
             $(timerIdTag).text('Giveaway is over.');
           }
+        } else {
+          endTime = null;
+          $(timerId).text('This giveaway is not timed.');
+        }
       } else {
         $(timerId).text('This giveaway has ended.');
       }
