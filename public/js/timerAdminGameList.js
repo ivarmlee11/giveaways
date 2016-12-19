@@ -72,9 +72,6 @@ $(function() {
         } else {
           $(timerId).text('This giveaway has ended.');
         }
-        console.log('start time ' + startTime)
-        console.log('current time ' + currentTime);
-        console.log('end time ' + endTime);
       }
     });
   });
