@@ -37,7 +37,7 @@ $('#addWinnerToDb').on('click', function() {
       success: function(data) {
         console.log(data);
         winnerReset = false;
-        $('#winner').html('Winner added.');
+        $('#winner').html(data);
       }
     });
   } else {
