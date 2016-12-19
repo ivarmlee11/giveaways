@@ -20,14 +20,22 @@ $(function() {
     return $(this).attr('giveawayId');
   }).get();
 
+  var contestStartTime;
+
   var giveawayIdInts = [];
+
+  var diffInSeconds = function(string) {
+    var splitString = string.split(':'),
+        mins = parseInt(splitString[0]),
+        seconds = parseInt(splitString[1]);
+
+        console.log(mins + ' ' + seconds)
+  }
 
   giveawayIds.forEach(function(val) {
     var int = parseInt(val);
     giveawayIdInts.push(int);
   });
-
-  var contestStartTime;
 
   giveawayIdInts.forEach(function(val) {
 
@@ -46,6 +54,7 @@ $(function() {
           if(giveawayData.timer === 3) {
             endTime = moment(startTime).add(3, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss");
+            diffInSeconds(remainingTime)
             $(timerId).text('The giveaway is on a 3 min timer.');
             $(timerDisplayId).html(
 
