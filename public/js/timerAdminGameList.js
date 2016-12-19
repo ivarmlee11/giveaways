@@ -56,7 +56,7 @@ $(function() {
             endTime = moment(startTime).add(3, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
                 timerSeconds = diffInSeconds(remainingTime),
-                timerId = 'timer' + val,
+                timerId = 'clock' + val,
                 timerIdTag = '#' + timerId,
                 timerString =  '<div id="' + timerId + '" data-timer="' + timerSeconds + '"></div>';
 
@@ -67,7 +67,7 @@ $(function() {
             endTime = moment(startTime).add(5, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
                 timerSeconds = diffInSeconds(remainingTime),
-                timerId = 'timer' + val,
+                timerId = 'clock' + val,
                 timerIdTag = '#' + timerId,
                 timerString =  '<div id="' + timerId + '" data-timer="' + timerSeconds + '"></div>';
 
@@ -78,7 +78,7 @@ $(function() {
             endTime = moment(startTime).add(10, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
                 timerSeconds = diffInSeconds(remainingTime),
-                timerId = 'timer' + val,
+                timerId = 'clock' + val,
                 timerIdTag = '#' + timerId,
                 timerString =  '<div id="' + timerId + '" data-timer="' + timerSeconds + '"></div>';
 
