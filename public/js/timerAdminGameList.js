@@ -67,7 +67,11 @@ $(function() {
         console.log('start time ' + startTime)
         console.log('current time ' + currentTime);
         console.log('end time ' + endTime);
-        var remainingTime = endTime.diff(currentTime);
+        var a = moment([2008, 6]);
+        var b = moment([2007, 0]);
+        console.log(a.diff(b, 'years'))     // 1
+        console.log(a.diff(b, 'years', true)) // 1.5
+        var remainingTime = endTime.diff(currentTime, 'minutes');
         console.log(remainingTime);
       }
     });
