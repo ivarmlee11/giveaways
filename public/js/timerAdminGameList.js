@@ -60,7 +60,7 @@ $(function() {
 
 
             $(timerId).text('The giveaway is on a 3 min timer.');
-            $(timerDisplayId).html(timerSeconds);
+            $(timerDisplayId).html(timerString);
             $('#timer').TimeCircles();
           } else if(giveawayData.timer === 5) {
             endTime = moment(startTime).add(5, 'minutes').utc().format();
