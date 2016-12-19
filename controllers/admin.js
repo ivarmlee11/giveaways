@@ -76,6 +76,7 @@ router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, re
 
 router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   var timerOption;
+  console.log(req.body);
   if(req.body.options === '0') {
     timerOption = null;
   } else {
@@ -91,6 +92,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
       console.log(giveaway.timer)
       var time = giveaway.timer * 60;
       time = time * 1000;
+      console.log('timer ' + time);
       setTimeout(function() {
         db.giveaway.update({
           ended: true
@@ -178,7 +180,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
         res.send('User added.');
       });
     } else {
-      res.send('Giveaway ended.');
+      res.send('Giveaway already ended.');
     }
   });
 
