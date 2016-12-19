@@ -39,7 +39,7 @@ $(function() {
       success: function(giveawayData) {
         var timerId = '#timer' + val,
             timerDisplayId = '#timerDisplay' + val,
-            startTime = moment(giveawayData.createdAt).format(),
+            startTime = moment(giveawayData.createdAt).utc().format(),
             currentTime = moment.utc().format(),
             endTime;
         if(giveawayData.timer === 3) {
