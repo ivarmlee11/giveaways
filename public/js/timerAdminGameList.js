@@ -62,7 +62,7 @@ $(function() {
 
             $(timerId).text('The giveaway is on a 3 min timer.');
             $(timerDisplayId).html(timerString);
-            $(timerIdTag).TimeCircles();
+            $(timerIdTag).TimeCircles({count_past_zero: false});
           } else if(giveawayData.timer === 5) {
             endTime = moment(startTime).add(5, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
@@ -73,7 +73,7 @@ $(function() {
 
             $(timerId).text('The giveaway is on a 5 min timer.');
             $(timerDisplayId).html(timerString);
-            $(timerIdTag).TimeCircles();
+            $(timerIdTag).TimeCircles({count_past_zero: false});
           } else if(giveawayData.timer === 10) {
             endTime = moment(startTime).add(10, 'minutes').utc().format();
             var remainingTime = moment.utc(moment(endTime).diff(moment(currentTime))).format("mm:ss"),
@@ -84,7 +84,7 @@ $(function() {
 
             $(timerId).text('The giveaway is on a 10 min timer.');
             $(timerDisplayId).html(timerString);
-            $(timerIdTag).TimeCircles();
+            $(timerIdTag).TimeCircles({count_past_zero: false});
           } else {
             endTime = null;
             $(timerId).text('This giveaway is not timed.');
