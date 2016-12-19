@@ -107,4 +107,15 @@ giveawayIdInts.forEach(function(val) {
   });
 });
 
+
+window.onresize = function(event) {
+  var displays = $("h6[data='display']");
+  console.log(displays);
+  displays.forEach(function(val) {
+    var timerId = '#clock' + val;
+    $(timerId).TimeCircles().rebuild(); 
+  })
+};
+
+
 });
