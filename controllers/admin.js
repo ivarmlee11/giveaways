@@ -88,7 +88,7 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
       keyphrase: req.body.giveawayKeyPhrase,
       timer: timerOption
     }
-  }).spread(function(giveaway, created) {
+  }).then(function(giveaway) {
     // if(!created) {
     //   req.flash('error', 'A giveaway with this name already exists.');
     //   res.redirect('/admin/adminGiveawayList');
