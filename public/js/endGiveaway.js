@@ -12,7 +12,7 @@ $('#endGiveaway').on('click', function() {
     url: url,
     type: 'GET',
     success: function(data) {
-      $('#endGiveaway').text('Winner added.');
+      $('#endGiveaway').text('Giveaway ended.');
     }
   });
 });
