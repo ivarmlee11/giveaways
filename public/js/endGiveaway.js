@@ -11,8 +11,8 @@ $('#endGiveaway').on('click', function() {
   $.ajax({
     url: url,
     type: 'GET',
-    success: function(data) {  
-      $('#endGiveaway').text('Giveaway has ended');
+    success: function(data) {
+      $('#endGiveaway').text('Winner added.');
     }
   });
 });
