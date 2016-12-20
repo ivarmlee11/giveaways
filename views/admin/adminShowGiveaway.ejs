@@ -10,7 +10,12 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3"> 
     <div class="well text-center">
-      <button id="endGiveaway" class="btn btn-info">End the Giveaway</button>
+      <% if(giveaway.ended) { %>
+        <button class="btn btn-info">Giveaway ended.</button>
+      <% } %>
+      <% if(!giveaway.ended) { %>
+        <button id="endGiveaway" class="btn btn-info">End the Giveaway</button>
+      <% } %>
       <button id="selectWinner" class="btn btn-success">Pick A Winner</button>
       <button id="addWinnerToDb" class="btn btn-success">Save Winner</button>
       <% if(giveaway.ended) { %>
