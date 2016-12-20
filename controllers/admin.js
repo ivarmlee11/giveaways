@@ -174,14 +174,14 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
 
   db.giveaway.findById(id).then(function(giveaway) {
     giveaway = giveaway;
-    if(!giveaway.ended) {
+    // if(!giveaway.ended) {
       db.user.findById(req.body.id).then(function(user) {
         giveaway.addWinner(user);
         res.send('User added.');
       });
-    } else {
+    // } else {
       res.send('Giveaway already ended.');
-    }
+    // }
   });
 
 });
