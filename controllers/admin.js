@@ -177,7 +177,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     // if(!giveaway.ended) {
     db.user.findById(req.body.id).then(function(user) {
       giveaway.addWinner(user);
-      res.send('User added.');
+      res.send('Added to winner group!');
     });
   });
 
