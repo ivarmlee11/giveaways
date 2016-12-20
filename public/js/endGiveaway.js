@@ -13,8 +13,6 @@ $('#endGiveaway').on('click', function() {
     type: 'GET',
     success: function(data) {  
       $('#endGiveaway').text('Giveaway has ended');
-      $('#selectWinner').hide();
-      $('#addWinnerToDb').hide();
     }
   });
 });
