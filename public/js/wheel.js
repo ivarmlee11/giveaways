@@ -56,8 +56,8 @@ $(function() {
 
     frames : 0,
 
-    centerX : 300,
-    centerY : 300,
+    centerX : 150,
+    centerY : 150,
 
     spin : function() {
       // Start the wheel only if it's not already spinning
