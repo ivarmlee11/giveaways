@@ -399,8 +399,8 @@ giveawayIds.forEach(function(element) {
       
       playerList.forEach(function(val) {
         venues.push({
-          username: val.username,
-          auth: val.auth,
+          name: val.username,
+          type: val.auth,
           id: val.id,
           ip: val.ip
         })
