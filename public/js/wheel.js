@@ -52,7 +52,6 @@ giveawayIds.forEach(function(element) {
           type: val.auth
         })
       });
-      wheel.init();
 
     }
   });
@@ -359,6 +358,8 @@ var wheel = {
     ctx.stroke();
   }
 };
+
+      wheel.init();
 
 
 });
