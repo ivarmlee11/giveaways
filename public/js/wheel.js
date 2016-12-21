@@ -17,8 +17,8 @@ giveawayIds.forEach(function(element) {
       console.log(playerList);
       playerList.forEach(function(val) {
         players.push({
-          name: val.username,
-          type: val.auth
+          'name': val.username,
+          'type': val.auth
         })
       });
       console.log(players)
