@@ -4,27 +4,27 @@ $(function() {
     var venues2 = [];
 
 
-    var giveawayIds = $('.numberOfPlayer').map( function() {
-      return $(this).attr('giveawayId');
-    }).get();
+    // var giveawayIds = $('.numberOfPlayer').map( function() {
+    //   return $(this).attr('giveawayId');
+    // }).get();
 
-    giveawayIds.forEach(function(element) {
-      var url = '/admin/playerListData/' + element;
+    // giveawayIds.forEach(function(element) {
+    //   var url = '/admin/playerListData/' + element;
 
-      $.ajax({
-        url: url,
-        type: 'GET',
-        success: function(playerList) {
-          playerList.forEach(function(val) {
-            venues2.push({
-              name: val.username,
-              type: 'Player'
-            });
-          });
-          console.log(venues2);
-        }
-      });
-    });
+    //   $.ajax({
+    //     url: url,
+    //     type: 'GET',
+    //     success: function(playerList) {
+    //       playerList.forEach(function(val) {
+    //         venues2.push({
+    //           name: val.username,
+    //           type: 'Player'
+    //         });
+    //       });
+    //       console.log(venues2);
+    //     }
+    //   });
+    // });
     
     
     // Helpers
