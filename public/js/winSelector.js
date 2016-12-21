@@ -296,7 +296,7 @@ var wheel = {
     if(wheel.segments[i]) {
       winnerReset = true;  
     }
-    $('#winner').html('The winner is ' + winner.username + '!');
+    $('#winner').html('The winner is ' + winner + '!');
     ctx.fillText(winner, centerSize + 20, centerY);
   },
 
