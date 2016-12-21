@@ -440,7 +440,7 @@ var venueTypes =
         // Uses the tinysort plugin, but our array is sorted for now.
     //$list.find('>li').tsort("input", {attr: "value"});
         
-        // wheel.init();
+        wheel.init();
 
     $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );
