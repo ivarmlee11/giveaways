@@ -1,9 +1,13 @@
 *, h1 {
   font-family: 'Dosis', sans-serif;
+  font-weight: 700; 
+  line-height:2; 
 }
 
 html, body {
   background-color: #9A9DA2;
+  color:#fff; 
+  letter-spacing: .25px;
 }
 
 input {
@@ -22,7 +26,6 @@ a, a:hover, a:active {
 #loginBox, .well {
   background-color: #F9FFE1;
 }
-
 
 #nav {
   background-color: #E6E7FF;
@@ -58,16 +61,92 @@ ul.nav-tabs > li {
   border-radius: 0px;
 }
 
+/*wheel*/
 
-/*wheel of fortune*/
+a,
+a:visited {
+  color: #d14c45;
+}
 
-h1, h2 { font-weight: 700; line-height:2; }
-input[type='checkbox'] + label { padding-left:.5em; }
+input[type='checkbox'] + label { 
+  padding-left:.5em; 
+}
+
+.page-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3em;
+  margin: 0;
+  background-color: #222;
+}
+
+.page-title span {
+  color: #d14c45;
+}
+
+.toggle-container {
+  display: block;
+  text-align: center;
+}
+
+.button {
+  text-transform: uppercase;
+  background-color: #222;
+  display: block;
+  padding: 5px;
+}
+
 label,
-#filterToggle { display:inline-block; }
-#venues,
-#filterToggle { background: #fefefe; box-shadow: 0 1px 2px #efefef; }
-#venues { padding: .5em; overflow:hidden; }
-#venues ul, #venues h2 {clear:both;}
-#venues li { float:left; width:25%; line-height: 1.5; vertical-align:middle; }
-#filterToggle { border-radius: 0 0 3px 3px; cursor: pointer; margin-left: .5em; margin-top:-1px; padding:.5em; }
+#filterToggle { 
+  display:inline-block; 
+}
+
+#venues { 
+  padding: 30px; 
+  overflow:hidden; 
+  background: #222;
+}
+
+#venues .venue-title {
+  border-bottom: 2px solid #333;
+  margin: 0 30px 20px;
+  display: block;
+  clear: both;
+}
+
+#venues ul {
+  clear:both;
+  list-style: none;
+  padding: 0 30px;
+  margin: 0;
+}
+
+#venues li { 
+  float:left; 
+  width:25%; 
+  line-height: 1.5; 
+  vertical-align:middle; 
+}
+
+#filterToggle { 
+  border-radius: 0 0 3px 3px; 
+  cursor: pointer; 
+  margin-left: .5em; 
+  margin-top:-1px; 
+  padding:.5em; 
+}
+
+#filterToggle:before {
+  content: "+";
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+
+#filterToggle.open:before {
+  content: "-";
+}
+
+#wheel {
+  margin: 50px auto;
+  width: 600px;
+}

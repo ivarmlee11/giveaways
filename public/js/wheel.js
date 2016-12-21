@@ -1,35 +1,33 @@
 $(function() {
+    var venues =  
+    [{"name":"Guasaca", "type":"Venezuelan"},
+    {"name":"Relish", "type":"Cafe"},
+    {"name":"Panera", "type":"Cafe"},
+    {"name":"Gino's Pizza", "type":"Pizza"},
+    {"name":"Indian Buffet", "type":"Buffet"},
+    {"name":"Haru", "type":"Japanese"},
+    {"name":"Chipotle", "type":"Burritos"},
+    {"name":"Tarbouch", "type":"Mediterrenean"},
+    {"name":"Mod Pizza", "type":"Pizza"},
+    {"name":"Chubbys", "type":"Mexican"},
+    {"name":"Chick-fil-a", "type":"Fast Food"},
+    {"name":"Firehouse", "type":"Sandwiches"},
+    {"name":"All you can eat sushi", "type":"Japanese"},
+    {"name":"Char-Grill", "type":"Fast Food"},
+    {"name":"La Ranch", "type":"Mexican"},
+    {"name":"Harris Teeter", "type":"Grocery Store"},
+    {"name":"Qdoba", "type":"Burritos"},
+    {"name":"Dos Taquitos", "type":"Mexican"},
+    {"name":"El Dorado", "type":"Mexican"},
+    {"name":"Taco Bell", "type":"Mexican"},
+    {"name":"Salsa Fresh", "type":"Mexican"},
+    {"name":"El Rodeo", "type":"Mexican"}
+    ];
 
-    // var venues =  [{"name":"1900 Mexican Grill", "type":"Mexican"}, {"name":"Zack's Hamburgers", "type":"American/Fast"}];
-    var venues = [];
-
-
-    var giveawayIds = $('.numberOfPlayer').map( function() {
-      return $(this).attr('giveawayId');
-    }).get();
-
-    giveawayIds.forEach(function(element) {
-      var url = '/admin/playerListData/' + element;
-
-      $.ajax({
-        url: url,
-        type: 'GET',
-        success: function(playerList) {
-          playerList.forEach(function(val) {
-            venues.push({
-              name: val.username,
-              type: 'Player'
-            });
-          });
-          console.log(venues2);
-          wheel.init();
-        }
-      });
-    });
     
     
     // Helpers
-    var blackHex = '#333',
+    var blackHex = '#d2e2e1',
         whiteHex = '#fff',
         shuffle = function(o) {
             for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
@@ -63,11 +61,26 @@ $(function() {
     angleCurrent : 0,
     angleDelta : 0,
 
-    size : 150,
+    size : 290,
 
     canvasContext : null,
 
-    colors : [ '#003366','#FF6600','#CCCC00','#006600','#3333CC','#CC0066','#FF3300','#009900','#6600CC','#33CC33','#0066CC','#FF0066','#3300FF','#00CC00','#FFCC00' ],
+    colors :
+    ['#d14c45',
+    '#d25346',
+    '#d35f47',
+    '#d46849',
+    '#d56e49',
+    '#d77b4b',
+    '#d8874d',
+    '#d98c4d',
+    '#d9914e',
+    '#da9a4f',
+    '#dba150',
+    '#dca951',
+    '#d14c45',
+    '#d58a49',
+    '#c43b33'],
 
     segments : [],
 
@@ -75,15 +88,15 @@ $(function() {
     
     maxSpeed : Math.PI / 16,
 
-    upTime : 1000, // How long to spin up for (in ms)
-    downTime : 5000, // How long to slow down for (in ms)
+    upTime : 3000, // How long to spin up for (in ms)
+    downTime : 10000, // How long to slow down for (in ms)
 
     spinStart : 0,
 
     frames : 0,
 
-    centerX : 150,
-    centerY : 150,
+    centerX : 300,
+    centerY : 300,
 
     spin : function() {
       // Start the wheel only if it's not already spinning
@@ -174,11 +187,11 @@ $(function() {
       // Ensure we start mid way on a item
       //var r = Math.floor(Math.random() * wheel.segments.length);
       var r = 0,
-                segments = wheel.segments,
-          len      = segments.length,
-                colors   = wheel.colors,
+          segments = wheel.segments,
+          len = segments.length,
+          colors = wheel.colors,
           colorLen = colors.length,
-                seg_color = [], // Generate a color cache (so we have consistant coloring)
+          seg_color = [], // Generate a color cache (so we have consistant coloring)
                 i
             wheel.angleCurrent = ((r + 0.5) / wheel.segments.length) * doublePI;
             
@@ -231,7 +244,7 @@ $(function() {
       ctx.textAlign = "left";
       ctx.textBaseline = "middle";
       ctx.fillStyle = blackHex;
-      ctx.font = "1em Arial";
+      ctx.font = "2em Lato";
             winner = wheel.segments[i] || 'Choose at least 1 Venue';
       ctx.fillText(winner, centerSize + 20, centerY);
     },
@@ -285,7 +298,7 @@ $(function() {
       ctx.strokeStyle  = blackHex;
       ctx.textBaseline = "middle";
       ctx.textAlign    = "right";
-      ctx.font         = "1em Arial";
+      ctx.font         = "1em Lato";
 
       for (i = 1; i <= len; i++) {
         angle = doublePI * (i / len) + angleCurrent;
@@ -308,8 +321,8 @@ $(function() {
       ctx.arc(centerX, centerY, size, 0, doublePI, false);
       ctx.closePath();
 
-      ctx.lineWidth   = 10;
-      //ctx.strokeStyle = blackHex;
+      ctx.lineWidth   = 2;
+      // ctx.strokeStyle = blackHex;
       ctx.stroke();
     }
   };
@@ -397,7 +410,7 @@ $(function() {
         // Uses the tinysort plugin, but our array is sorted for now.
     //$list.find('>li').tsort("input", {attr: "value"});
         
-        
+        wheel.init();
 
     $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );
@@ -408,8 +421,10 @@ $(function() {
         $filterToggler.on("click", function (){
             if($venues.data("open")){
                 $venues.slideUp().data("open",false);
+                $filterToggler.removeClass("open");
             }else{
                 $venues.slideDown().data("open",true);
+                $filterToggler.addClass("open");
             }
         });
         
@@ -417,6 +432,4 @@ $(function() {
             $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
         });
   });
-
-
 });
