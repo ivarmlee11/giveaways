@@ -197,7 +197,7 @@ $(function() {
     },
 
     clear : function() {
-      wheel.canvasContext.clearRect(0, 0, 1000, 800);
+      // wheel.canvasContext.clearRect(0, 0, 1000, 800);
     },
 
     drawNeedle : function() {
