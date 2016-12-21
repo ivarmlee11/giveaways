@@ -292,7 +292,9 @@ var wheel = {
     ctx.fillStyle = blackHex;
     ctx.font = "2em Lato";
     winner = wheel.segments[i] || '... Nobody has entered.';
-    winnerReset = true;
+    if(wheel.segments[i]) {
+      winnerReset = true;  
+    }
     $('#winner').html('The winner is ' + winner + '!');
     ctx.fillText(winner, centerSize + 20, centerY);
   },
