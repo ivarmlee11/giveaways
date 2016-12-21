@@ -107,7 +107,7 @@ var wheel = {
   angleCurrent : 0,
   angleDelta : 0,
 
-  size : 250,
+  size : 200,
 
   canvasContext : null,
 
@@ -141,8 +141,8 @@ var wheel = {
 
   frames : 0,
 
-  centerX : 300,
-  centerY : 300,
+  centerX : 250,
+  centerY : 250,
 
   spin : function() {
     // Start the wheel only if it's not already spinning
