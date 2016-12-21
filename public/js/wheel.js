@@ -431,5 +431,6 @@ $('.checkAll').on("click", function (){
     $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
 });
 
+wheel.init();
 });
 
