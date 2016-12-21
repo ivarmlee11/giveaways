@@ -5,31 +5,31 @@ $(function() {
   
 
 
-//  var giveawayIds = $('.numberOfPlayer').map( function() {
-//     return $(this).attr('giveawayId');
-//   }).get();
+ var giveawayIds = $('.numberOfPlayer').map( function() {
+    return $(this).attr('giveawayId');
+  }).get();
 
   
-// giveawayIds.forEach(function(element) {
-//   var url = '/admin/playerListData/' + element;
+giveawayIds.forEach(function(element) {
+  var url = '/admin/playerListData/' + element;
 
-//   $.ajax({
-//     url: url,
-//     method: 'GET',
-//     success: function(playerList) {
-//       console.log(playerList);
-//       playerList.forEach(function(val) {
-//         venues.push({
-//           name: val.username,
-//           type: val.auth
-//         })
-//       });
-//       wheel.init();
+  $.ajax({
+    url: url,
+    method: 'GET',
+    success: function(playerList) {
+      console.log(playerList);
+      playerList.forEach(function(val) {
+        venues.push({
+          name: val.username,
+          type: val.auth
+        })
+      });
+      wheel.init();
 
-//     }
-//   });
+    }
+  });
 
-// });
+});
     var venues =  
     [{"name":"Guasaca", "type":"Venezuelan"},
     {"name":"Relish", "type":"Cafe"},
@@ -439,7 +439,7 @@ $(function() {
         // Uses the tinysort plugin, but our array is sorted for now.
     //$list.find('>li').tsort("input", {attr: "value"});
         
-        wheel.init();
+        // wheel.init();
 
     $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );
