@@ -293,9 +293,7 @@ var wheel = {
     ctx.fillStyle = blackHex;
     ctx.font = "2em Lato";
     winner = wheel.segments[i] || '... Nobody yet';
-    console.log(wheel)
     console.log(winner)
-    console.log(wheel.segments)
     if(wheel.segments[i]) {
       winnerReset = true;  
     }
