@@ -179,8 +179,7 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
       giveaway.addWinner(user);
       res.send('Added to winner group!');
     });
-  });
-
+  })
 });
 
 router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {

@@ -3,6 +3,7 @@
 <script src="/js/endGiveaway.js"></script>
 <script src="/js/adminLiveUpdatePlayerList.js"></script>
 <script src="/js/timerAdminGameList.js"></script>
+<script src="/js/wheel.js"></script>
 
 <h1 class="text-center"><%= giveaway.name %></h1>
 <h4 data="ids" class="text-center" giveawayId="<%=giveaway.id%>"><%=giveaway.createdAt%></h4>
@@ -36,6 +37,19 @@
       </h1>
       <h6 id="timer<%=giveaway.id%>"></h6>
       <h6 id="timerDisplay<%=giveaway.id%>" data="display"></h6> 
+    </div>
+    <div class="well text-center">
+      <div id="venues">
+        <h1>Venues <input type="checkbox" class="checkAll" checked /></h1>
+        <div id="name"></div>
+        <h2>Types <input type="checkbox" class="checkAll" checked /></h2>
+        <div id="types"></div>
+      </div>
+      <div id="filterToggle">. . .</div>
+      <div id="wheel">
+        <canvas id="canvas" width="1000" height="600"></canvas>
+      </div>
+      <div id="counter"></div>
     </div>
   </div>
 </div>
