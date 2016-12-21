@@ -102,7 +102,7 @@ giveawayIds.forEach(function(element) {
         wheel.spinStart = new Date().getTime();
         wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
         wheel.frames = 0;
-        wheel.sound.play();
+        // wheel.sound.play();
 
         wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
       }
@@ -152,7 +152,7 @@ giveawayIds.forEach(function(element) {
     init : function(optionList) {
       try {
         wheel.initWheel();
-        wheel.initAudio();
+        // wheel.initAudio();
         wheel.initCanvas();
         wheel.draw();
 
@@ -164,11 +164,11 @@ giveawayIds.forEach(function(element) {
 
     },
 
-    initAudio : function() {
-      var sound = document.createElement('audio');
-      sound.setAttribute('src', 'wheel.mp3');
-      wheel.sound = sound;
-    },
+    // initAudio : function() {
+    //   var sound = document.createElement('audio');
+    //   sound.setAttribute('src', 'wheel.mp3');
+    //   wheel.sound = sound;
+    // },
 
     initCanvas : function() {
       var canvas = $('#canvas')[0];
