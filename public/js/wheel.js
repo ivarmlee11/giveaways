@@ -1,6 +1,6 @@
 $(function() {
 
-var players = [];
+var venues = [];
 
  var giveawayIds = $('.numberOfPlayer').map( function() {
     return $(this).attr('giveawayId');
@@ -16,7 +16,7 @@ giveawayIds.forEach(function(element) {
     success: function(playerList) {
       console.log(playerList);
       playerList.forEach(function(val) {
-        players.push({
+        venues.push({
           name: val.username,
           type: val.auth
         })
