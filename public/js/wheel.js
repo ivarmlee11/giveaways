@@ -1,17 +1,33 @@
 $(function() {
 
-    var venues =  [{"name":"1900 Mexican Grill", "type":"Mexican"},{"name":"300 East", "type":"American/Upscale"},{"name":"Angry Ale's", "type":"American/Pub "},{"name":"Azteca", "type":"Mexican"},{"name":"Bedder Bedder and Moore", "type":"Sandwiches, Salads, Soups"},{"name":"Boading", "type":"Chinese"},{"name":"Brazwell's Premium Pub", "type":"American/Pub "},{"name":"Brio Tuscan Grille", "type":"Italian"},{"name":"Brixx", "type":"Pizza/Salads"},{"name":"Café at 6100", "type":"Home Cooking"},{"name":"California Pizza Kitchen", "type":"Pizza/Salads"},{"name":"Chick-Fil-A", "type":"Fast Food"},{"name":"City Tavern", "type":"American/Upscale"},{"name":"Copper", "type":"Indian"},{"name":"Cowfish", "type":"Sushi"},{"name":"Duckworth's", "type":"American/Pub "},{"name":"Eddie's Place", "type":"American/Pub "},{"name":"El Camino", "type":"Mexican"},{"name":"Fairview Plaza Restaurant", "type":"Home Cooking"},{"name":"Firebird's Wood Fired Grill", "type":"American/Upscale"},{"name":"Firehouse Subs", "type":"Sandwiches, Salads, Soups"},{"name":"Flying Biscuit", "type":"American/Fast"},{"name":"Fuel", "type":"Pizza"},{"name":"Good Food on Montford", "type":"American/Upscale"},{"name":"Harper's Restaurant", "type":"American/Upscale"},{"name":"Hawthorne's Pizza", "type":"Pizza/Italian"},{"name":"Luisa's Brick Oven Pizza", "type":"Pizza/Italian"},{"name":"Maverick Rock Taco", "type":"Mexican"},{"name":"McAllister's", "type":"Sandwiches, Salads, Soups"},{"name":"Mellow Mushroom", "type":"Pizza/Salads"},{"name":"Moe's", "type":"Mexican"},{"name":"Moosehead Grill", "type":"American/Pub "},{"name":"Paco's Tacos and Tequila", "type":"Mexican"},{"name":"Panera ", "type":"Sandwiches, Salads, Soups"},{"name":"PF Chang's", "type":"Chinese"},{"name":"Portofinos", "type":"Pizza/Italian"},{"name":"Qdoba", "type":"Mexican"},{"name":"Rooster's Wood Fire Kitchen", "type":"American/Upscale"},{"name":"Rusty's Deli", "type":"Sandwiches, Salads, Soups"},{"name":"Taco Bell", "type":"Fast Food"},{"name":"Taco Mac", "type":"American/Pub "},{"name":"Terrace Café", "type":"American/Upscale"},{"name":"The Roasting Company", "type":"American/Fast"},{"name":"Village Tavern", "type":"American/Upscale"},{"name":"Which Wich?", "type":"Sandwiches, Salads, Soups"},{"name":"Zack's Hamburgers", "type":"American/Fast"}];
+var venues = [];
+
+var giveawayIds = $('.numberOfPlayer').map( function() {
+  return $(this).attr('giveawayId');
+}).get();
+
+giveawayIds.forEach(function(element) {
+  var url = '/admin/playerListData/' + element;
+
+  $.ajax({
+    url: url,
+    type: 'GET',
+    success: function(playerList) {
+      console.log(playerList);
+    }
+  });
+};
     
-    // Helpers
-    var blackHex = '#333',
-        whiteHex = '#fff',
-        shuffle = function(o) {
-            for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-                ;
-            return o;
-        },
-        halfPI = Math.PI / 2,
-        doublePI = Math.PI * 2;
+// Helpers
+var blackHex = '#333',
+    whiteHex = '#fff',
+    shuffle = function(o) {
+        for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
+            ;
+        return o;
+    },
+    halfPI = Math.PI / 2,
+    doublePI = Math.PI * 2;
 
   String.prototype.hashCode = function(){
     // See http://www.cse.yorku.ca/~oz/hash.html    
@@ -205,7 +221,7 @@ $(function() {
       ctx.textAlign = "left";
       ctx.textBaseline = "middle";
       ctx.fillStyle = blackHex;
-      ctx.font = "2em Arial";
+      ctx.font = "1em Arial";
             winner = wheel.segments[i] || 'Choose at least 1 Venue';
       ctx.fillText(winner, centerSize + 20, centerY);
     },
@@ -371,7 +387,7 @@ $(function() {
         // Uses the tinysort plugin, but our array is sorted for now.
     //$list.find('>li').tsort("input", {attr: "value"});
         
-        wheel.init();
+        
 
     $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );

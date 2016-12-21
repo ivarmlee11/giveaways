@@ -61,7 +61,7 @@ var getPlayersandWinners = function(){
 
     $.ajax({
       url: url,
-      type: 'GET',
+      method: 'GET',
       success: function(playerList) {
         $('ul[playerListId=' + element + ']').html('<li></li>');
         var updatedPlayerList = newArray(playerList);
