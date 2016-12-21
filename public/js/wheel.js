@@ -21,8 +21,8 @@ giveawayIds.forEach(function(element) {
           type: val.auth
         })
       });
-      console.log(players)
-      wheel.init();
+      // console.log(players)
+      // wheel.init();
 
     }
   });
