@@ -25,7 +25,7 @@ giveawayIds.forEach(function(element) {
           'type': val.auth
         })
       });
-      wheel.init();
+      console.log(venueTypes);
 
     }
   });
