@@ -1,13 +1,9 @@
 *, h1 {
   font-family: 'Dosis', sans-serif;
-  font-weight: 700; 
-  line-height:2; 
 }
 
 html, body {
   background-color: #9A9DA2;
-  color:#fff; 
-  letter-spacing: .25px;
 }
 
 input {
@@ -26,6 +22,7 @@ a, a:hover, a:active {
 #loginBox, .well {
   background-color: #F9FFE1;
 }
+
 
 #nav {
   background-color: #E6E7FF;
@@ -61,17 +58,6 @@ ul.nav-tabs > li {
   border-radius: 0px;
 }
 
-/*wheel*/
-
-a,
-a:visited {
-  color: #d14c45;
-}
-
-input[type='checkbox'] + label { 
-  padding-left:.5em; 
-}
-
 .page-title {
   text-align: center;
   text-transform: uppercase;
@@ -96,6 +82,21 @@ input[type='checkbox'] + label {
   padding: 5px;
 }
 
+
+h1, h2 { 
+  font-weight: 700; 
+  line-height:2; 
+}
+
+a,
+a:visited {
+  color: #d14c45;
+}
+
+input[type='checkbox'] + label { 
+  padding-left:.5em; 
+}
+
 label,
 #filterToggle { 
   display:inline-block; 
@@ -113,6 +114,7 @@ label,
   display: block;
   clear: both;
 }
+
 
 #venues ul {
   clear:both;
@@ -149,4 +151,5 @@ label,
 #wheel {
   margin: 50px auto;
   width: 600px;
+  
 }
