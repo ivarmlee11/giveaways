@@ -296,7 +296,7 @@ var wheel = {
     if(wheel.segments[i]) {
       winnerReset = true;  
     }
-    $('#winner').html('The winner is ' + winner + '!');
+    $('#winner').html('The winner is ' + winner.username + '!');
     ctx.fillText(winner, centerSize + 20, centerY);
   },
 
@@ -399,9 +399,10 @@ giveawayIds.forEach(function(element) {
       
       playerList.forEach(function(val) {
         venues.push({
-          name: val.username,
-          type: val.auth,
-          id: val.id
+          username: val.username,
+          auth: val.auth,
+          id: val.id,
+          ip: val.ip
         })
       });
 
