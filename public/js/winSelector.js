@@ -267,8 +267,7 @@ var wheel = {
               size = wheel.size,
               i,
               centerSize = centerX + size,
-              len = wheel.segments.length,
-              winner;
+              len = wheel.segments.length;
 
     ctx.lineWidth = 2;
     ctx.strokeStyle = blackHex;
@@ -292,10 +291,15 @@ var wheel = {
     ctx.textBaseline = "middle";
     ctx.fillStyle = blackHex;
     ctx.font = "2em Lato";
-    winner = wheel.segments[i] || '... Nobody yet';
-    console.log(winner)
     if(wheel.segments[i]) {
+      winner = {
+        username: wheel.segments[i]
+      };
       winnerReset = true;  
+    } else {
+      winner = {
+        username: null
+      };
     }
     $('#winner').html('The winner is ' + winner + '!');
     ctx.fillText(winner, centerSize + 20, centerY);
