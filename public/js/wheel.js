@@ -1,12 +1,15 @@
 $(function() {
 
-var giveawayIds = $('.numberOfPlayer').map( function() {
-  return $(this).attr('giveawayId');
-}).get();
+
 
   
 
 
+ var giveawayIds = $('.numberOfPlayer').map( function() {
+    return $(this).attr('giveawayId');
+  }).get();
+
+  
 giveawayIds.forEach(function(element) {
   var url = '/admin/playerListData/' + element;
 
@@ -14,16 +17,44 @@ giveawayIds.forEach(function(element) {
     url: url,
     method: 'GET',
     success: function(playerList) {
-     var venueTypes = [];
+      console.log(playerList);
       playerList.forEach(function(val) {
-        venueTypes.push({
+        venues.push({
           name: val.username,
           type: val.auth
         })
       });
+      wheel.init();
+
+    }
+  });
+
+});
+    var venueTypes =  
+    [{"name":"Guasaca", "type":"Venezuelan"},
+    {"name":"Relish", "type":"Cafe"},
+    {"name":"Panera", "type":"Cafe"},
+    {"name":"Gino's Pizza", "type":"Pizza"},
+    {"name":"Indian Buffet", "type":"Buffet"},
+    {"name":"Haru", "type":"Japanese"},
+    {"name":"Chipotle", "type":"Burritos"},
+    {"name":"Tarbouch", "type":"Mediterrenean"},
+    {"name":"Mod Pizza", "type":"Pizza"},
+    {"name":"Chubbys", "type":"Mexican"},
+    {"name":"Chick-fil-a", "type":"Fast Food"},
+    {"name":"Firehouse", "type":"Sandwiches"},
+    {"name":"All you can eat sushi", "type":"Japanese"},
+    {"name":"Char-Grill", "type":"Fast Food"},
+    {"name":"La Ranch", "type":"Mexican"},
+    {"name":"Harris Teeter", "type":"Grocery Store"},
+    {"name":"Qdoba", "type":"Burritos"},
+    {"name":"Dos Taquitos", "type":"Mexican"},
+    {"name":"El Dorado", "type":"Mexican"},
+    {"name":"Taco Bell", "type":"Mexican"},
+    {"name":"Salsa Fresh", "type":"Mexican"},
+    {"name":"El Rodeo", "type":"Mexican"}
+    ];
     
-
-
     // Helpers
     var blackHex = '#d2e2e1',
         whiteHex = '#fff',
@@ -102,7 +133,7 @@ giveawayIds.forEach(function(element) {
         wheel.spinStart = new Date().getTime();
         wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
         wheel.frames = 0;
-        // wheel.sound.play();
+        wheel.sound.play();
 
         wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
       }
@@ -152,7 +183,7 @@ giveawayIds.forEach(function(element) {
     init : function(optionList) {
       try {
         wheel.initWheel();
-        // wheel.initAudio();
+        wheel.initAudio();
         wheel.initCanvas();
         wheel.draw();
 
@@ -164,11 +195,11 @@ giveawayIds.forEach(function(element) {
 
     },
 
-    // initAudio : function() {
-    //   var sound = document.createElement('audio');
-    //   sound.setAttribute('src', 'wheel.mp3');
-    //   wheel.sound = sound;
-    // },
+    initAudio : function() {
+      var sound = document.createElement('audio');
+      sound.setAttribute('src', 'wheel.mp3');
+      wheel.sound = sound;
+    },
 
     initCanvas : function() {
       var canvas = $('#canvas')[0];
@@ -408,7 +439,7 @@ giveawayIds.forEach(function(element) {
         // Uses the tinysort plugin, but our array is sorted for now.
     //$list.find('>li').tsort("input", {attr: "value"});
         
-        wheel.init();
+        // wheel.init();
 
     $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );
@@ -430,17 +461,6 @@ giveawayIds.forEach(function(element) {
             $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
         });
   });
-
-
-
-    
-
-    }
-  });
-
-});
-
-    
 });
 
 
