@@ -5,7 +5,7 @@ var giveawayIds = $('.numberOfPlayer').map( function() {
 }).get();
 
   
-var venueTypes = [];
+
 
 giveawayIds.forEach(function(element) {
   var url = '/admin/playerListData/' + element;
@@ -14,21 +14,16 @@ giveawayIds.forEach(function(element) {
     url: url,
     method: 'GET',
     success: function(playerList) {
-      console.log(playerList);
+     var venueTypes = [];
       playerList.forEach(function(val) {
         venueTypes.push({
           name: val.username,
           type: val.auth
         })
       });
-      wheel.init();
-
-    }
-  });
-
-});
-
     
+
+
     // Helpers
     var blackHex = '#d2e2e1',
         whiteHex = '#fff',
@@ -413,7 +408,7 @@ giveawayIds.forEach(function(element) {
         // Uses the tinysort plugin, but our array is sorted for now.
     //$list.find('>li').tsort("input", {attr: "value"});
         
-        // wheel.init();
+        wheel.init();
 
     $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );
@@ -435,6 +430,17 @@ giveawayIds.forEach(function(element) {
             $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
         });
   });
+
+
+
+    
+
+    }
+  });
+
+});
+
+    
 });
 
 
