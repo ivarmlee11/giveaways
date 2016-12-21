@@ -291,7 +291,7 @@ var wheel = {
     ctx.textBaseline = "middle";
     ctx.fillStyle = blackHex;
     ctx.font = "2em Lato";
-    winner = wheel.segments[i] || '... Nobody has entered.';
+    winner = wheel.segments[i] || '... Nobody yet';
     if(wheel.segments[i]) {
       winnerReset = true;  
     }
@@ -403,7 +403,6 @@ giveawayIds.forEach(function(element) {
           id: val.id
         })
       });
-      console.log(venueTypes);
 
       var $venues = $('#venues'),
             $venueName = $('#name'),

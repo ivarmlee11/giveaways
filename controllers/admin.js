@@ -170,6 +170,27 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
   var id = req.params.idx,
     redirectUrl = '/admin/playerList/' + id,
     giveaway;
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+
+    console.log(req.body)
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
+    console.log('----------------------')
 
   db.giveaway.findById(id).then(function(giveaway) {
     giveaway = giveaway;
