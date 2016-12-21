@@ -1,33 +1,36 @@
 $(function() {
 
-var venues = [];
+    var venues =  [{"name":"1900 Mexican Grill", {"name":"Zack's Hamburgers", "type":"American/Fast"}];
 
-var giveawayIds = $('.numberOfPlayer').map( function() {
-  return $(this).attr('giveawayId');
-}).get();
 
-giveawayIds.forEach(function(element) {
-  var url = '/admin/playerListData/' + element;
 
-  $.ajax({
-    url: url,
-    type: 'GET',
-    success: function(playerList) {
-      console.log(playerList);
-    }
-  });
-});
+    var giveawayIds = $('.numberOfPlayer').map( function() {
+      return $(this).attr('giveawayId');
+    }).get();
+
+    giveawayIds.forEach(function(element) {
+      var url = '/admin/playerListData/' + element;
+
+      $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(playerList) {
+          console.log(playerList);
+        }
+      });
+    });
     
-// Helpers
-var blackHex = '#333',
-    whiteHex = '#fff',
-    shuffle = function(o) {
-        for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-            ;
-        return o;
-    },
-    halfPI = Math.PI / 2,
-    doublePI = Math.PI * 2;
+    
+    // Helpers
+    var blackHex = '#333',
+        whiteHex = '#fff',
+        shuffle = function(o) {
+            for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
+                ;
+            return o;
+        },
+        halfPI = Math.PI / 2,
+        doublePI = Math.PI * 2;
 
   String.prototype.hashCode = function(){
     // See http://www.cse.yorku.ca/~oz/hash.html    
@@ -81,7 +84,7 @@ var blackHex = '#333',
         wheel.spinStart = new Date().getTime();
         wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
         wheel.frames = 0;
-        // wheel.sound.play();  
+        wheel.sound.play();
 
         wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
       }
