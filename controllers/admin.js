@@ -23,8 +23,7 @@ router.post('/adminListAdd', ensureAuthenticated, modCheck, function(req, res) {
 router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res) {
   var adminName = req.body.adminName,
       auth = req.body.auth;
-  console.log(adminName);
-  console.log(req.user.username);
+
   if(adminName === req.user.username) {
     req.flash('error', 'You cannot demod yourself.');
     res.redirect('/admin/adminList');

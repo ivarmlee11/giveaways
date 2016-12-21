@@ -398,8 +398,9 @@ giveawayIds.forEach(function(element) {
       
       playerList.forEach(function(val) {
         venues.push({
-          'name': val.username,
-          'type': val.auth
+          name: val.username,
+          type: val.auth,
+          id: val.id
         })
       });
       console.log(venueTypes);
@@ -453,41 +454,41 @@ giveawayIds.forEach(function(element) {
         );
             venueTypes.push(venue.type);
       });
-        $.each(arrayUnique(venueTypes), function (index, venue){
-            $types.append(
-            $("<li/>")
-            .append(
-                  $("<input />").attr({
-                         id:    'venue-type-' + index
-                        ,name:  venue
-                        ,value: venue
-                        ,type:  'checkbox'
-                        ,checked:true
-                  })
-                  .change( function() {
-                        var $this = $(this), i;
-                        for(i=0; i<venues.length;i++){
-                            if (venues[i].type === $this.val()){
-                                $('[name="'+venues[i].name+'"]').prop("checked",$this.prop('checked')).trigger('change');
-                            }
-                        }
-                  })
+      $.each(arrayUnique(venueTypes), function (index, venue){
+          $types.append(
+          $("<li/>")
+          .append(
+                $("<input />").attr({
+                       id:    'venue-type-' + index
+                      ,name:  venue
+                      ,value: venue
+                      ,type:  'checkbox'
+                      ,checked:true
+                })
+                .change( function() {
+                      var $this = $(this), i;
+                      for(i=0; i<venues.length;i++){
+                          if (venues[i].type === $this.val()){
+                              $('[name="'+venues[i].name+'"]').prop("checked",$this.prop('checked')).trigger('change');
+                          }
+                      }
+                })
 
-            ).append(
-                  $('<label />').attr({
-                      'for':  'venue-' + index
-                  })
-                  .text( venue )
-            )
-        )
-        });
+          ).append(
+                $('<label />').attr({
+                    'for':  'venue-' + index
+                })
+                .text( venue )
+          )
+      )
+      });
         
-        $venueName.append($list);
-        $venueType.append($types);
-        // Uses the tinysort plugin, but our array is sorted for now.
-      //$list.find('>li').tsort("input", {attr: "value"});
-        
-        wheel.init(); 
+      $venueName.append($list);
+      $venueType.append($types);
+      // Uses the tinysort plugin, but our array is sorted for now.
+    //$list.find('>li').tsort("input", {attr: "value"});
+      
+      wheel.init(); 
 
       $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );
