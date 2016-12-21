@@ -96,8 +96,8 @@ var venues =
 
     frames : 0,
 
-    centerX : 180,
-    centerY : 180,
+    centerX : 600,
+    centerY : 600,
 
     spin : function() {
       // Start the wheel only if it's not already spinning
