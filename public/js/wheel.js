@@ -37,7 +37,7 @@ $(function() {
     angleCurrent : 0,
     angleDelta : 0,
 
-    size : 290,
+    size : 150,
 
     canvasContext : null,
 
