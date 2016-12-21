@@ -97,8 +97,8 @@ var wheel = {
 
   frames : 0,
 
-  centerX : 100,
-  centerY : 100,
+  centerX : 300,
+  centerY : 300,
 
   spin : function() {
     // Start the wheel only if it's not already spinning
