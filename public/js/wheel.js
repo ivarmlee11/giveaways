@@ -96,8 +96,8 @@ var venues =
 
     frames : 0,
 
-    centerX : 250,
-    centerY : 250,
+    centerX : 180,
+    centerY : 180,
 
     spin : function() {
       // Start the wheel only if it's not already spinning
@@ -489,9 +489,7 @@ giveawayIds.forEach(function(element) {
 
 });
 
-  //   $(function() {
 
-  // });
 });
 
 
