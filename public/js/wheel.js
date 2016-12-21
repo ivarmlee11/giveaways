@@ -1,6 +1,29 @@
 $(function() {
 
-
+var venueTypes =  
+    [{"name":"Guasaca", "type":"Venezuelan"},
+    {"name":"Relish", "type":"Cafe"},
+    {"name":"Panera", "type":"Cafe"},
+    {"name":"Gino's Pizza", "type":"Pizza"},
+    {"name":"Indian Buffet", "type":"Buffet"},
+    {"name":"Haru", "type":"Japanese"},
+    {"name":"Chipotle", "type":"Burritos"},
+    {"name":"Tarbouch", "type":"Mediterrenean"},
+    {"name":"Mod Pizza", "type":"Pizza"},
+    {"name":"Chubbys", "type":"Mexican"},
+    {"name":"Chick-fil-a", "type":"Fast Food"},
+    {"name":"Firehouse", "type":"Sandwiches"},
+    {"name":"All you can eat sushi", "type":"Japanese"},
+    {"name":"Char-Grill", "type":"Fast Food"},
+    {"name":"La Ranch", "type":"Mexican"},
+    {"name":"Harris Teeter", "type":"Grocery Store"},
+    {"name":"Qdoba", "type":"Burritos"},
+    {"name":"Dos Taquitos", "type":"Mexican"},
+    {"name":"El Dorado", "type":"Mexican"},
+    {"name":"Taco Bell", "type":"Mexican"},
+    {"name":"Salsa Fresh", "type":"Mexican"},
+    {"name":"El Rodeo", "type":"Mexican"}
+    ];
 
 
 
@@ -31,30 +54,7 @@ giveawayIds.forEach(function(element) {
   });
 
 });
-    var venueTypes =  
-    [{"name":"Guasaca", "type":"Venezuelan"},
-    {"name":"Relish", "type":"Cafe"},
-    {"name":"Panera", "type":"Cafe"},
-    {"name":"Gino's Pizza", "type":"Pizza"},
-    {"name":"Indian Buffet", "type":"Buffet"},
-    {"name":"Haru", "type":"Japanese"},
-    {"name":"Chipotle", "type":"Burritos"},
-    {"name":"Tarbouch", "type":"Mediterrenean"},
-    {"name":"Mod Pizza", "type":"Pizza"},
-    {"name":"Chubbys", "type":"Mexican"},
-    {"name":"Chick-fil-a", "type":"Fast Food"},
-    {"name":"Firehouse", "type":"Sandwiches"},
-    {"name":"All you can eat sushi", "type":"Japanese"},
-    {"name":"Char-Grill", "type":"Fast Food"},
-    {"name":"La Ranch", "type":"Mexican"},
-    {"name":"Harris Teeter", "type":"Grocery Store"},
-    {"name":"Qdoba", "type":"Burritos"},
-    {"name":"Dos Taquitos", "type":"Mexican"},
-    {"name":"El Dorado", "type":"Mexican"},
-    {"name":"Taco Bell", "type":"Mexican"},
-    {"name":"Salsa Fresh", "type":"Mexican"},
-    {"name":"El Rodeo", "type":"Mexican"}
-    ];
+
     
     // Helpers
     var blackHex = '#d2e2e1',
