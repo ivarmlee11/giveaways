@@ -1,7 +1,7 @@
 $(function() {
 
-    var venues =  [{"name":"1900 Mexican Grill", {"name":"Zack's Hamburgers", "type":"American/Fast"}];
-
+    var venues =  [{"name":"1900 Mexican Grill", "type":"Mexican"}, {"name":"Zack's Hamburgers", "type":"American/Fast"}];
+    var venues2 = [];
 
 
     var giveawayIds = $('.numberOfPlayer').map( function() {
@@ -15,7 +15,13 @@ $(function() {
         url: url,
         type: 'GET',
         success: function(playerList) {
-          console.log(playerList);
+          playerList.forEach(function(val) {
+            venues2.push({
+              name: val.username,
+              type: 'Player'
+            });
+          });
+          console.log(venues2);
         }
       });
     });
