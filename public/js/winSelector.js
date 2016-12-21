@@ -398,7 +398,13 @@ giveawayIds.forEach(function(element) {
     method: 'GET',
     success: function(playerList) {
       console.log(playerList);
+      var playerList = playerList;
+      if(playerList.length === 0) {
+        $('#wheel').hide();
+      }
+
       venues = [];
+      
       playerList.forEach(function(val) {
         venues.push({
           'name': val.username,
