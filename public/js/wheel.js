@@ -2,7 +2,7 @@ $(function() {
 
 
 
-  
+
 
 
  var giveawayIds = $('.numberOfPlayer').map( function() {
@@ -18,10 +18,11 @@ giveawayIds.forEach(function(element) {
     method: 'GET',
     success: function(playerList) {
       console.log(playerList);
+      venueTypes = [];
       playerList.forEach(function(val) {
-        venues.push({
-          name: val.username,
-          type: val.auth
+        venueTypes.push({
+          'name': val.username,
+          'type': val.auth
         })
       });
       wheel.init();
