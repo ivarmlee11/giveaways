@@ -26,35 +26,6 @@ var venues =
   ];
 
 
-
-
-//  var giveawayIds = $('.numberOfPlayer').map( function() {
-//     return $(this).attr('giveawayId');
-//   }).get();
-
-  
-// giveawayIds.forEach(function(element) {
-//   var url = '/admin/playerListData/' + element;
-
-//   $.ajax({
-//     url: url,
-//     method: 'GET',
-//     success: function(playerList) {
-//       console.log(playerList);
-//       venueTypes = [];
-//       playerList.forEach(function(val) {
-//         venueTypes.push({
-//           'name': val.username,
-//           'type': val.auth
-//         })
-//       });
-//       console.log(venueTypes);
-
-//     }
-//   });
-
-// });
-
     
     // Helpers
     var blackHex = '#d2e2e1',
@@ -356,112 +327,144 @@ var venues =
       ctx.stroke();
     }
   };
-    $(function() {
-        var $venues = $('#venues'),
-            $venueName = $('#name'),
-            $venueType = $('#types'),
-            venueTypes = [],
-            $list = $('<ul/>'),
-            $types = $('<ul/>'),
-            $filterToggler = $('#filterToggle'),
-            arrayUnique = function(a) {
-                return a.reduce(function(p, c) {
-                    if (p.indexOf(c) < 0) { p.push(c); }
-                    return p;
-                }, []);
-            };
 
-    $.each(venues, function(index, venue) {
-      $list.append(
-            $("<li/>")
-            .append(
-                  $("<input />").attr({
-                         id:    'venue-' + index
-                        ,name:  venue.name
-                        ,value: venue.name
-                        ,type:  'checkbox'
-                        ,checked:true
-                  })
-                  .change( function() {
-                    var cbox = this,
-                            segments = wheel.segments,
-                            i = segments.indexOf(cbox.value);
 
-                    if (cbox.checked && i === -1) {
-                      segments.push(cbox.value);
-                    } else if ( !cbox.checked && i !== -1 ) {
-                      segments.splice(i, 1);
-                    }
+  
 
-                    segments.sort();
-                    wheel.update();
-                  })
 
-            ).append(
-                  $('<label />').attr({
-                      'for':  'venue-' + index
-                  })
-                  .text( venue.name )
-            )
-        );
-            venueTypes.push(venue.type);
-    });
-        $.each(arrayUnique(venueTypes), function (index, venue){
-            $types.append(
-            $("<li/>")
-            .append(
-                  $("<input />").attr({
-                         id:    'venue-type-' + index
-                        ,name:  venue
-                        ,value: venue
-                        ,type:  'checkbox'
-                        ,checked:true
-                  })
-                  .change( function() {
-                        var $this = $(this), i;
-                        for(i=0; i<venues.length;i++){
-                            if (venues[i].type === $this.val()){
-                                $('[name="'+venues[i].name+'"]').prop("checked",$this.prop('checked')).trigger('change');
-                            }
-                        }
-                  })
+//  var giveawayIds = $('.numberOfPlayer').map( function() {
+//     return $(this).attr('giveawayId');
+//   }).get();
 
-            ).append(
-                  $('<label />').attr({
-                      'for':  'venue-' + index
-                  })
-                  .text( venue )
-            )
-        )
-        });
+  
+// giveawayIds.forEach(function(element) {
+//   var url = '/admin/playerListData/' + element;
+
+//   $.ajax({
+//     url: url,
+//     method: 'GET',
+//     success: function(playerList) {
+//       console.log(playerList);
+//       venueTypes = [];
+//       playerList.forEach(function(val) {
+//         venueTypes.push({
+//           'name': val.username,
+//           'type': val.auth
+//         })
+//       });
+//       console.log(venueTypes);
+
+//     }
+//   });
+
+// });
+
+  //   $(function() {
+  //       var $venues = $('#venues'),
+  //           $venueName = $('#name'),
+  //           $venueType = $('#types'),
+  //           venueTypes = [],
+  //           $list = $('<ul/>'),
+  //           $types = $('<ul/>'),
+  //           $filterToggler = $('#filterToggle'),
+  //           arrayUnique = function(a) {
+  //               return a.reduce(function(p, c) {
+  //                   if (p.indexOf(c) < 0) { p.push(c); }
+  //                   return p;
+  //               }, []);
+  //           };
+
+  //   $.each(venues, function(index, venue) {
+  //     $list.append(
+  //           $("<li/>")
+  //           .append(
+  //                 $("<input />").attr({
+  //                        id:    'venue-' + index
+  //                       ,name:  venue.name
+  //                       ,value: venue.name
+  //                       ,type:  'checkbox'
+  //                       ,checked:true
+  //                 })
+  //                 .change( function() {
+  //                   var cbox = this,
+  //                           segments = wheel.segments,
+  //                           i = segments.indexOf(cbox.value);
+
+  //                   if (cbox.checked && i === -1) {
+  //                     segments.push(cbox.value);
+  //                   } else if ( !cbox.checked && i !== -1 ) {
+  //                     segments.splice(i, 1);
+  //                   }
+
+  //                   segments.sort();
+  //                   wheel.update();
+  //                 })
+
+  //           ).append(
+  //                 $('<label />').attr({
+  //                     'for':  'venue-' + index
+  //                 })
+  //                 .text( venue.name )
+  //           )
+  //       );
+  //           venueTypes.push(venue.type);
+  //   });
+  //       $.each(arrayUnique(venueTypes), function (index, venue){
+  //           $types.append(
+  //           $("<li/>")
+  //           .append(
+  //                 $("<input />").attr({
+  //                        id:    'venue-type-' + index
+  //                       ,name:  venue
+  //                       ,value: venue
+  //                       ,type:  'checkbox'
+  //                       ,checked:true
+  //                 })
+  //                 .change( function() {
+  //                       var $this = $(this), i;
+  //                       for(i=0; i<venues.length;i++){
+  //                           if (venues[i].type === $this.val()){
+  //                               $('[name="'+venues[i].name+'"]').prop("checked",$this.prop('checked')).trigger('change');
+  //                           }
+  //                       }
+  //                 })
+
+  //           ).append(
+  //                 $('<label />').attr({
+  //                     'for':  'venue-' + index
+  //                 })
+  //                 .text( venue )
+  //           )
+  //       )
+  //       });
         
-        $venueName.append($list);
-        $venueType.append($types);
-        // Uses the tinysort plugin, but our array is sorted for now.
-    //$list.find('>li').tsort("input", {attr: "value"});
+  //       $venueName.append($list);
+  //       $venueType.append($types);
+  //       // Uses the tinysort plugin, but our array is sorted for now.
+  //   //$list.find('>li').tsort("input", {attr: "value"});
         
-        wheel.init(); 
+  //       wheel.init(); 
 
-    $.each($venueName.find('ul input:checked'), function(key, cbox) {
-      wheel.segments.push( cbox.value );
-    });
+  //   $.each($venueName.find('ul input:checked'), function(key, cbox) {
+  //     wheel.segments.push( cbox.value );
+  //   });
 
-    wheel.update();
-        $venues.slideUp().data("open",false);
-        $filterToggler.on("click", function (){
-            if($venues.data("open")){
-                $venues.slideUp().data("open",false);
-                $filterToggler.removeClass("open");
-            }else{
-                $venues.slideDown().data("open",true);
-                $filterToggler.addClass("open");
-            }
-        });
+  //   wheel.update();
+  //       $venues.slideUp().data("open",false);
+  //       $filterToggler.on("click", function (){
+  //           if($venues.data("open")){
+  //               $venues.slideUp().data("open",false);
+  //               $filterToggler.removeClass("open");
+  //           }else{
+  //               $venues.slideDown().data("open",true);
+  //               $filterToggler.addClass("open");
+  //           }
+  //       });
         
-        $('.checkAll').on("click", function (){
-            $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
-        });
-  });
+  //       $('.checkAll').on("click", function (){
+  //           $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
+  //       });
+  // });
 });
 
 
