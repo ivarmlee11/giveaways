@@ -108,7 +108,7 @@ var wheel = {
   angleCurrent : 0,
   angleDelta : 0,
 
-  size : 200,
+  size : 150,
 
   canvasContext : null,
 
@@ -142,8 +142,8 @@ var wheel = {
 
   frames : 0,
 
-  centerX : 250,
-  centerY : 250,
+  centerX : 190,
+  centerY : 190,
 
   spin : function() {
     // Start the wheel only if it's not already spinning
@@ -293,6 +293,9 @@ var wheel = {
     ctx.fillStyle = blackHex;
     ctx.font = "2em Lato";
     winner = wheel.segments[i] || '... Nobody yet';
+    console.log(wheel)
+    console.log(winner)
+    console.log(wheel.segments)
     if(wheel.segments[i]) {
       winnerReset = true;  
     }
