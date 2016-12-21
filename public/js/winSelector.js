@@ -46,11 +46,7 @@ $('#addWinnerToDb').on('click', function() {
 });
 
 
-
-
-
-
-
+// wheel config
 var venues =  
   [{"name":"Guasaca", "type":"Venezuelan"},
   {"name":"Relish", "type":"Cafe"},
@@ -76,30 +72,28 @@ var venues =
   {"name":"El Rodeo", "type":"Mexican"}
   ];
 
+// helpers
+var blackHex = 'black',
+    whiteHex = 'white',
+    shuffle = function(o) {
+        for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
+            ;
+        return o;
+    },
+    halfPI = Math.PI / 2,
+    doublePI = Math.PI * 2;
 
-    
-    // Helpers
-    var blackHex = 'black',
-        whiteHex = 'white',
-        shuffle = function(o) {
-            for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-                ;
-            return o;
-        },
-        halfPI = Math.PI / 2,
-        doublePI = Math.PI * 2;
-
-  String.prototype.hashCode = function(){
-    // See http://www.cse.yorku.ca/~oz/hash.html    
-    var hash = 5381,
-            i;
-    for (i = 0; i < this.length; i++) {
-      char = this.charCodeAt(i);
-      hash = ((hash<<5)+hash) + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-    return hash;
-  };
+String.prototype.hashCode = function(){
+// See http://www.cse.yorku.ca/~oz/hash.html    
+var hash = 5381,
+        i;
+for (i = 0; i < this.length; i++) {
+  char = this.charCodeAt(i);
+  hash = ((hash<<5)+hash) + char;
+  hash = hash & hash; // Convert to 32bit integer
+}
+return hash;
+};
 
 Number.prototype.mod = function(n) {
   return ((this%n)+n)%n;
@@ -381,14 +375,9 @@ var wheel = {
   }
 };
 
-
-
-
-
- var giveawayIds = $('.numberOfPlayer').map( function() {
-    return $(this).attr('giveawayId');
-  }).get();
-
+var giveawayIds = $('.numberOfPlayer').map( function() {
+  return $(this).attr('giveawayId');
+}).get();
   
 giveawayIds.forEach(function(element) {
   var url = '/admin/playerListData/' + element;
@@ -397,10 +386,10 @@ giveawayIds.forEach(function(element) {
     url: url,
     method: 'GET',
     success: function(playerList) {
-      console.log(playerList);
       var playerList = playerList;
       if(playerList.length === 0) {
         $('#wheel').hide();
+        $('#filterToggle').hide();
       }
 
       venues = [];
@@ -413,17 +402,7 @@ giveawayIds.forEach(function(element) {
       });
       console.log(venueTypes);
 
-
-
-// =-----------------------
-
-
-
-
-
-
-
-        var $venues = $('#venues'),
+      var $venues = $('#venues'),
             $venueName = $('#name'),
             $venueType = $('#types'),
             venueTypes = [],
@@ -437,7 +416,7 @@ giveawayIds.forEach(function(element) {
                 }, []);
             };
 
-    $.each(venues, function(index, venue) {
+      $.each(venues, function(index, venue) {
       $list.append(
             $("<li/>")
             .append(
@@ -471,7 +450,7 @@ giveawayIds.forEach(function(element) {
             )
         );
             venueTypes.push(venue.type);
-    });
+      });
         $.each(arrayUnique(venueTypes), function (index, venue){
             $types.append(
             $("<li/>")
@@ -504,66 +483,33 @@ giveawayIds.forEach(function(element) {
         $venueName.append($list);
         $venueType.append($types);
         // Uses the tinysort plugin, but our array is sorted for now.
-    //$list.find('>li').tsort("input", {attr: "value"});
+      //$list.find('>li').tsort("input", {attr: "value"});
         
         wheel.init(); 
 
-    $.each($venueName.find('ul input:checked'), function(key, cbox) {
+      $.each($venueName.find('ul input:checked'), function(key, cbox) {
       wheel.segments.push( cbox.value );
-    });
+      });
 
-    wheel.update();
-        $venues.slideUp().data("open",false);
-        $filterToggler.on("click", function (){
-            if($venues.data("open")){
-                $venues.slideUp().data("open",false);
-                $filterToggler.removeClass("open");
-            }else{
-                $venues.slideDown().data("open",true);
-                $filterToggler.addClass("open");
-            }
-        });
-        
-        $('.checkAll').on("click", function (){
-            $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
-        });
-
-
-
-
-
-
-
-
-
-
-
-// -------------------------------
-
-
-
-
+      wheel.update();
+      $venues.slideUp().data("open",false);
+      $filterToggler.on("click", function (){
+          if($venues.data("open")){
+              $venues.slideUp().data("open",false);
+              $filterToggler.removeClass("open");
+          }else{
+              $venues.slideDown().data("open",true);
+              $filterToggler.addClass("open");
+          }
+      });
+      
+      $('.checkAll').on("click", function (){
+          $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
+      });
     }
   });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
