@@ -294,14 +294,15 @@ var wheel = {
     if(wheel.segments[i]) {
       winner = {
         username: wheel.segments[i]
+        $('#winner').html('The winner is ' + winner.username + '!');
       };
       winnerReset = true;  
     } else {
       winner = {
         username: null
       };
+      $('#winner').html('');
     }
-    $('#winner').html('The winner is ' + winner + '!');
     ctx.fillText(winner, centerSize + 20, centerY);
   },
 
