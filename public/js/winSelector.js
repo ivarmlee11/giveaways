@@ -412,14 +412,15 @@ giveawayIds.forEach(function(element) {
         $('#filterToggle').hide();
       }
       venues = [];
-      
+
       playerList.forEach(function(val) {
         venues.push({
           name: val.username,
           type: val.auth,
-          id: val.id,
+          id: val.id,eg
           ip: val.ip
         })
+        wheel.segments.push(val.username);
       });
 
       var $venues = $('#venues'),
@@ -453,7 +454,7 @@ giveawayIds.forEach(function(element) {
                             i = segments.indexOf(cbox.value);
 
                     if (cbox.checked && i === -1) {
-                      segments.push(cbox.value);
+                      // segments.push(cbox.value);
                     } else if ( !cbox.checked && i !== -1 ) {
                       segments.splice(i, 1);
                     }
