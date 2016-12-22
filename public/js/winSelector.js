@@ -121,6 +121,8 @@ var wheel = {
 
   spin : function() {
     // Start the wheel only if it's not already spinning
+    console.log(wheel.timerHandle)
+    console.log('wheel clicked ')
     if (wheel.timerHandle == 0) {
       wheel.spinStart = new Date().getTime();
       wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
