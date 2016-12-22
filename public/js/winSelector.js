@@ -209,7 +209,7 @@ var wheel = {
       $.extend(wheel, optionList);
 
     } catch (exceptionData) {
-      alert('Wheel is not loaded ' + exceptionData);
+      // alert('Wheel is not loaded ' + exceptionData);
     }
 
   },
