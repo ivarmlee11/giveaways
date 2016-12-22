@@ -232,6 +232,7 @@ var wheel = {
 
   // Called when segments have changed
   update : function() {
+    console.log(segments)
     // Ensure we start mid way on a item
     //var r = Math.floor(Math.random() * wheel.segments.length);
     var r = 0,
