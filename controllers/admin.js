@@ -191,23 +191,24 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
     console.log('----------------------')
     console.log('----------------------')
     console.log('----------------------')
-  if(req.body.id) {
     db.giveaway.findById(id).then(function(giveaway) {
       giveaway = giveaway;
       // if(!giveaway.ended) {
-      db.user.findById(req.body.id).then(function(user) {
-        giveaway.addWinner(user);
-        res.send('Added to winner group!');
-      });
-    })
-  } else {
-    db.user.find({
-      where: {username: req.body.username}
-    }).then(function(user) {
-      giveaway.addWinner(user);
-      res.send('Added to winner group!');
+      if(req.body.id) {
+        db.user.findById(req.body.id).then(function(user) {
+          giveaway.addWinner(user);
+          res.send('Added to winner group!');
+        });
+      } else {
+        db.user.find({
+          where: {username: req.body.username}
+        }).then(function(user) {
+          giveaway.addWinner(user);
+          res.send('Added to winner group!');
+        });
+      }
     });
-  }
+    
 });
 
 router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
