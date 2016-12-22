@@ -384,6 +384,7 @@ var wheel = {
   }
 };
 
+function createWheel() {
 var giveawayIds = $('.numberOfPlayer').map( function() {
   return $(this).attr('giveawayId');
 }).get();
@@ -521,6 +522,11 @@ giveawayIds.forEach(function(element) {
 
 });
 
+};
+
+createWheel();
+
+setInterval(createWheel, 10000);
 
 
 });
