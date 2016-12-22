@@ -412,7 +412,7 @@ giveawayIds.forEach(function(element) {
         $('#filterToggle').hide();
       }
       venues = [];
-
+      wheel.segments = [];
       playerList.forEach(function(val) {
         venues.push({
           name: val.username,
