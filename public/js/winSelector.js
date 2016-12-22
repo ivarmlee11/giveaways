@@ -398,7 +398,10 @@ function createWheel() {
 };
 
 createWheel();
-
+$('#redrawWheel').on('click', function() {
+  afterFirstSpin = false;
+  createWheel();
+})
 // setInterval(createWheel, 10000);
 
 
