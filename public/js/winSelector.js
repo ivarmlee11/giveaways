@@ -532,7 +532,7 @@ giveawayIds.forEach(function(element) {
 
 createWheel();
 
-setInterval(createWheel, 10000);
+// setInterval(createWheel, 10000);
 
 
 });
