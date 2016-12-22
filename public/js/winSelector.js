@@ -7,6 +7,7 @@ url = url.split('/');
 var idx = url[url.length -1],
     winner,
     winnerReset = false,
+    finished = false,
     afterFirstSpin = false;
 
 $('#selectWinner').on('click', function() {
@@ -106,10 +107,10 @@ var wheel = {
 
   seg_colors : [], // Cache of segments to colors
   
-  maxSpeed : Math.PI / 8,
+  maxSpeed : Math.PI / 20,
 
   upTime : 6000, // How long to spin up for (in ms)
-  downTime : 15000, // How long to slow down for (in ms)
+  downTime : 12000, // How long to slow down for (in ms)
 
   spinStart : 0,
 
@@ -133,8 +134,7 @@ var wheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - wheel.spinStart),
-        progress = 0,
-        finished = false;
+        progress = 0;
 
     wheel.frames++;
     wheel.draw();
@@ -268,7 +268,7 @@ var wheel = {
       winner = {
         username: wheel.segments[i]
       };
-      if(afterFirstSpin) {
+      if(afterFirstSpin && finished) {
         $('#winner').html('The winner is ' + winner.username + '!');
       } else {
         $('#winner').html('');
@@ -400,6 +400,7 @@ function createWheel() {
 createWheel();
 $('#redrawWheel').on('click', function() {
   afterFirstSpin = false;
+  finished = false;
   createWheel();
 })
 // setInterval(createWheel, 10000);
