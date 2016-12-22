@@ -501,8 +501,8 @@ giveawayIds.forEach(function(element) {
       // )
       // });
         
-      $venueName.append($list);
-      $venueType.append($types);
+      // $venueName.append($list);
+      // $venueType.append($types);
       // Uses the tinysort plugin, but our array is sorted for now.
     //$list.find('>li').tsort("input", {attr: "value"});
       
