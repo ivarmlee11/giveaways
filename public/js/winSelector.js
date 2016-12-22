@@ -508,9 +508,9 @@ giveawayIds.forEach(function(element) {
       
       wheel.init(); 
 
-      $.each($venueName.find('ul input:checked'), function(key, cbox) {
-        wheel.segments.push( cbox.value );
-      });
+      // $.each($venueName.find('ul input:checked'), function(key, cbox) {
+      //   // wheel.segments.push( cbox.value );
+      // });
 
       wheel.update();
       console.log(wheel.segments)
