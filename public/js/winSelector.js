@@ -134,6 +134,7 @@ var wheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - wheel.spinStart),
+        finished,
         progress = 0;
 
     wheel.frames++;
