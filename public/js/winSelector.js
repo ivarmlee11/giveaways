@@ -399,7 +399,7 @@ function createWheel() {
 
 createWheel();
 
-setInterval(createWheel, 10000);
+// setInterval(createWheel, 10000);
 
 
 });
