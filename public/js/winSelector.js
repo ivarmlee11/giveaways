@@ -7,7 +7,8 @@ url = url.split('/');
 var idx = url[url.length -1];
 
 var winner,
-    winnerReset = false;
+    winnerReset = false,
+    afterFirstSpin = false;
 
 $('#selectWinner').on('click', function() {
   var url = '/admin/playerListData/' + idx;
@@ -48,30 +49,30 @@ $('#addWinnerToDb').on('click', function() {
 
 
 // wheel config
-var venues =  
-  [{"name":"Guasaca", "type":"Venezuelan"},
-  {"name":"Relish", "type":"Cafe"},
-  {"name":"Panera", "type":"Cafe"},
-  {"name":"Gino's Pizza", "type":"Pizza"},
-  {"name":"Indian Buffet", "type":"Buffet"},
-  {"name":"Haru", "type":"Japanese"},
-  {"name":"Chipotle", "type":"Burritos"},
-  {"name":"Tarbouch", "type":"Mediterrenean"},
-  {"name":"Mod Pizza", "type":"Pizza"},
-  {"name":"Chubbys", "type":"Mexican"},
-  {"name":"Chick-fil-a", "type":"Fast Food"},
-  {"name":"Firehouse", "type":"Sandwiches"},
-  {"name":"All you can eat sushi", "type":"Japanese"},
-  {"name":"Char-Grill", "type":"Fast Food"},
-  {"name":"La Ranch", "type":"Mexican"},
-  {"name":"Harris Teeter", "type":"Grocery Store"},
-  {"name":"Qdoba", "type":"Burritos"},
-  {"name":"Dos Taquitos", "type":"Mexican"},
-  {"name":"El Dorado", "type":"Mexican"},
-  {"name":"Taco Bell", "type":"Mexican"},
-  {"name":"Salsa Fresh", "type":"Mexican"},
-  {"name":"El Rodeo", "type":"Mexican"}
-  ];
+// var venues =  
+//   [{"name":"Guasaca", "type":"Venezuelan"},
+//   {"name":"Relish", "type":"Cafe"},
+//   {"name":"Panera", "type":"Cafe"},
+//   {"name":"Gino's Pizza", "type":"Pizza"},
+//   {"name":"Indian Buffet", "type":"Buffet"},
+//   {"name":"Haru", "type":"Japanese"},
+//   {"name":"Chipotle", "type":"Burritos"},
+//   {"name":"Tarbouch", "type":"Mediterrenean"},
+//   {"name":"Mod Pizza", "type":"Pizza"},
+//   {"name":"Chubbys", "type":"Mexican"},
+//   {"name":"Chick-fil-a", "type":"Fast Food"},
+//   {"name":"Firehouse", "type":"Sandwiches"},
+//   {"name":"All you can eat sushi", "type":"Japanese"},
+//   {"name":"Char-Grill", "type":"Fast Food"},
+//   {"name":"La Ranch", "type":"Mexican"},
+//   {"name":"Harris Teeter", "type":"Grocery Store"},
+//   {"name":"Qdoba", "type":"Burritos"},
+//   {"name":"Dos Taquitos", "type":"Mexican"},
+//   {"name":"El Dorado", "type":"Mexican"},
+//   {"name":"Taco Bell", "type":"Mexican"},
+//   {"name":"Salsa Fresh", "type":"Mexican"},
+//   {"name":"El Rodeo", "type":"Mexican"}
+//   ];
 
 // helpers
 var blackHex = 'black',
@@ -158,9 +159,9 @@ var wheel = {
   },
 
   onTimerTick : function() {
-          var duration = (new Date().getTime() - wheel.spinStart),
-              progress = 0,
-              finished = false;
+    var duration = (new Date().getTime() - wheel.spinStart),
+        progress = 0,
+        finished = false;
 
     wheel.frames++;
     wheel.draw();
@@ -295,7 +296,12 @@ var wheel = {
       winner = {
         username: wheel.segments[i]
       };
-      $('#winner').html('The winner is ' + winner.username + '!');
+      if(afterFirstSpin) {
+        $('#winner').html('The winner is ' + winner.username + '!');
+      } else {
+        $('#winner').html('');
+      }
+      afterFirstSpin = true;
       winnerReset = true;  
     } else {
       winner = {
