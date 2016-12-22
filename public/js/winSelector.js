@@ -407,7 +407,7 @@ giveawayIds.forEach(function(element) {
         $('#wheel').hide();
         $('#filterToggle').hide();
       }
-      $('#venues').html('');
+
       venues = [];
       
       playerList.forEach(function(val) {
@@ -532,7 +532,7 @@ giveawayIds.forEach(function(element) {
 
 createWheel();
 
-// setInterval(createWheel, 10000);
+setInterval(createWheel, 10000);
 
 
 });
