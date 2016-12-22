@@ -232,7 +232,6 @@ var wheel = {
 
   // Called when segments have changed
   update : function() {
-    console.log(segments)
     // Ensure we start mid way on a item
     //var r = Math.floor(Math.random() * wheel.segments.length);
     var r = 0,
@@ -513,6 +512,7 @@ giveawayIds.forEach(function(element) {
       });
 
       wheel.update();
+      console.log(wheel.segments)
       $venues.slideUp().data("open",false);
       $filterToggler.on("click", function (){
           if($venues.data("open")){
