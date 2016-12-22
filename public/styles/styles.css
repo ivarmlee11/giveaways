@@ -5,7 +5,7 @@
 }
 
 html, body {
-  background-color: #9A9DA2;
+  background-color: gray;
 }
 
 input {
@@ -18,11 +18,11 @@ a, a:hover, a:active {
 }
 
 #loginBox, .well {
-  background-color: #F9FFE1;
+  background-color: white;
 }
 
 #nav {
-  background-color: #E6E7FF;
+  background-color: white;
   font-size: .9em;
 }
 
