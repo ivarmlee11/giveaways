@@ -130,7 +130,7 @@ var wheel = {
       wheel.frames = 0;
       // wheel.sound.play();
       afterFirstSpin = true;
-
+      window.clearInterval(wheel.timerHandle)
       wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
     }
   },
