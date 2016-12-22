@@ -106,10 +106,10 @@ var wheel = {
 
   seg_colors : [], // Cache of segments to colors
   
-  maxSpeed : Math.PI / 16,
+  maxSpeed : Math.PI / 8,
 
-  upTime : 1000, // How long to spin up for (in ms)
-  downTime : 3000, // How long to slow down for (in ms)
+  upTime : 6000, // How long to spin up for (in ms)
+  downTime : 15000, // How long to slow down for (in ms)
 
   spinStart : 0,
 
