@@ -513,17 +513,17 @@ giveawayIds.forEach(function(element) {
       // });
 
       wheel.update();
-      console.log(wheel.segments)
-      $venues.slideUp().data("open",false);
-      $filterToggler.on("click", function (){
-          if($venues.data("open")){
-              $venues.slideUp().data("open",false);
-              $filterToggler.removeClass("open");
-          }else{
-              $venues.slideDown().data("open",true);
-              $filterToggler.addClass("open");
-          }
-      });
+      // console.log(wheel.segments)
+      // $venues.slideUp().data("open",false);
+      // $filterToggler.on("click", function (){
+      //     if($venues.data("open")){
+      //         $venues.slideUp().data("open",false);
+      //         $filterToggler.removeClass("open");
+      //     }else{
+      //         $venues.slideDown().data("open",true);
+      //         $filterToggler.addClass("open");
+      //     }
+      // });
       
       $('.checkAll').on("click", function (){
           $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
