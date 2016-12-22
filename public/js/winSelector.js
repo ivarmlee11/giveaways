@@ -281,7 +281,8 @@ var wheel = {
       };
       $('#winner').html('');
     }
-    ctx.fillText(winner, centerSize + 20, centerY);
+    var winnerString = winner.usera
+    ctx.fillText(winnerString, centerSize + 20, centerY);
   },
 
   drawSegment : function(key, lastAngle, angle) {
