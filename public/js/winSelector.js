@@ -281,7 +281,7 @@ var wheel = {
       };
       $('#winner').html('');
     }
-    var winnerString = winner.usera
+    var winnerString = winner.username;
     ctx.fillText(winnerString, centerSize + 20, centerY);
   },
 
