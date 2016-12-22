@@ -7,7 +7,6 @@ url = url.split('/');
 var idx = url[url.length -1],
     winner,
     winnerReset = false,
-    finished = false,
     afterFirstSpin = false;
 
 $('#selectWinner').on('click', function() {
@@ -403,8 +402,6 @@ function createWheel() {
 
 createWheel();
 $('#redrawWheel').on('click', function() {
-  afterFirstSpin = false;
-  finished = false;
   createWheel();
 })
 // setInterval(createWheel, 10000);
