@@ -391,7 +391,6 @@ var wheel = {
 };
 
 function createWheel() {
-$('#venues').html('');
 
 var giveawayIds = $('.numberOfPlayer').map( function() {
   return $(this).attr('giveawayId');
@@ -506,7 +505,7 @@ giveawayIds.forEach(function(element) {
       wheel.init(); 
 
       $.each($venueName.find('ul input:checked'), function(key, cbox) {
-      wheel.segments.push( cbox.value );
+        wheel.segments.push( cbox.value );
       });
 
       wheel.update();
