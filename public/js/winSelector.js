@@ -391,6 +391,8 @@ var wheel = {
 };
 
 function createWheel() {
+$('#venues').html('');
+1
 var giveawayIds = $('.numberOfPlayer').map( function() {
   return $(this).attr('giveawayId');
 }).get();
@@ -407,7 +409,6 @@ giveawayIds.forEach(function(element) {
         $('#wheel').hide();
         $('#filterToggle').hide();
       }
-
       venues = [];
       
       playerList.forEach(function(val) {
