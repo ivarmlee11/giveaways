@@ -281,7 +281,7 @@ var wheel = {
       };
       $('#winner').html('');
     }
-    // ctx.fillText(winner, centerSize + 20, centerY);
+    ctx.fillText(winner, centerSize + 20, centerY);
   },
 
   drawSegment : function(key, lastAngle, angle) {
