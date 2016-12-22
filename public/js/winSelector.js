@@ -269,9 +269,9 @@ var wheel = {
         username: wheel.segments[i]
       };
       if(afterFirstSpin) {
-        if(finished) {
+        // if(finished) {
           $('#winner').html('The winner is ' + winner.username + '!');
-        }
+        // }
       } else {
         $('#winner').html('');
       }
