@@ -4,9 +4,8 @@ var url = window.location.href;
 
 url = url.split('/');
 
-var idx = url[url.length -1];
-
-var winner,
+var idx = url[url.length -1],
+    winner,
     winnerReset = false,
     afterFirstSpin = false;
 
@@ -47,33 +46,6 @@ $('#addWinnerToDb').on('click', function() {
   }
 });
 
-
-// wheel config
-// var venues =  
-//   [{"name":"Guasaca", "type":"Venezuelan"},
-//   {"name":"Relish", "type":"Cafe"},
-//   {"name":"Panera", "type":"Cafe"},
-//   {"name":"Gino's Pizza", "type":"Pizza"},
-//   {"name":"Indian Buffet", "type":"Buffet"},
-//   {"name":"Haru", "type":"Japanese"},
-//   {"name":"Chipotle", "type":"Burritos"},
-//   {"name":"Tarbouch", "type":"Mediterrenean"},
-//   {"name":"Mod Pizza", "type":"Pizza"},
-//   {"name":"Chubbys", "type":"Mexican"},
-//   {"name":"Chick-fil-a", "type":"Fast Food"},
-//   {"name":"Firehouse", "type":"Sandwiches"},
-//   {"name":"All you can eat sushi", "type":"Japanese"},
-//   {"name":"Char-Grill", "type":"Fast Food"},
-//   {"name":"La Ranch", "type":"Mexican"},
-//   {"name":"Harris Teeter", "type":"Grocery Store"},
-//   {"name":"Qdoba", "type":"Burritos"},
-//   {"name":"Dos Taquitos", "type":"Mexican"},
-//   {"name":"El Dorado", "type":"Mexican"},
-//   {"name":"Taco Bell", "type":"Mexican"},
-//   {"name":"Salsa Fresh", "type":"Mexican"},
-//   {"name":"El Rodeo", "type":"Mexican"}
-//   ];
-
 // helpers
 var blackHex = 'black',
     whiteHex = 'white',
@@ -86,7 +58,7 @@ var blackHex = 'black',
     doublePI = Math.PI * 2;
 
 String.prototype.hashCode = function(){
-// See http://www.cse.yorku.ca/~oz/hash.html    
+// See http://www.cse.yorku.ca/~oz/hash.html 
 var hash = 5381,
         i;
 for (i = 0; i < this.length; i++) {
@@ -101,7 +73,7 @@ Number.prototype.mod = function(n) {
   return ((this%n)+n)%n;
 };
     
-// wheel object
+// wheel
 var wheel = {
   timerHandle : 0,
   timerDelay : 33,
@@ -136,8 +108,8 @@ var wheel = {
   
   maxSpeed : Math.PI / 16,
 
-  upTime : 3000, // How long to spin up for (in ms)
-  downTime : 10000, // How long to slow down for (in ms)
+  upTime : 1000, // How long to spin up for (in ms)
+  downTime : 3000, // How long to slow down for (in ms)
 
   spinStart : 0,
 
@@ -153,6 +125,7 @@ var wheel = {
       wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
       wheel.frames = 0;
       // wheel.sound.play();
+      afterFirstSpin = true;
 
       wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
     }
@@ -180,16 +153,15 @@ var wheel = {
     }
 
     wheel.angleCurrent += wheel.angleDelta;
-          while (wheel.angleCurrent >= doublePI){
+    while (wheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
       wheel.angleCurrent -= doublePI;
-          }
+      }
     if (finished) {
       clearInterval(wheel.timerHandle);
       wheel.timerHandle = 0;
       wheel.angleDelta = 0;
-
-              if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
+      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
 
     /*
@@ -301,7 +273,6 @@ var wheel = {
       } else {
         $('#winner').html('');
       }
-      afterFirstSpin = true;
       winnerReset = true;  
     } else {
       winner = {
@@ -391,147 +362,38 @@ var wheel = {
 };
 
 function createWheel() {
-$('#name').empty();
-$('#types').empty();
 
-
-var giveawayIds = $('.numberOfPlayer').map( function() {
-  return $(this).attr('giveawayId');
-}).get();
-  
-giveawayIds.forEach(function(element) {
-  var url = '/admin/playerListData/' + element;
-
-  $.ajax({
-    url: url,
-    method: 'GET',
-    success: function(playerList) {
-      var playerList = playerList;
-      if(playerList.length === 0) {
-        $('#wheel').hide();
-        $('#filterToggle').hide();
+  var giveawayIds = $('.numberOfPlayer').map( function() {
+    return $(this).attr('giveawayId');
+  }).get();
+    
+  giveawayIds.forEach(function(element) {
+    var url = '/admin/playerListData/' + element;
+    $.ajax({
+      url: url,
+      method: 'GET',
+      success: function(playerList) {
+        var playerList = playerList;
+        if(playerList.length === 0) {
+          $('#wheel').hide();
+        }
+        venues = [];
+        wheel.segments = [];
+        playerList.forEach(function(val) {
+          venues.push({
+            name: val.username,
+            type: val.auth,
+            id: val.id,
+            ip: val.ip
+          })
+          wheel.segments.push(val.username);
+        });
+        console.log(wheel.segments)
+        wheel.init(); 
+        wheel.update();
       }
-      venues = [];
-      wheel.segments = [];
-      playerList.forEach(function(val) {
-        venues.push({
-          name: val.username,
-          type: val.auth,
-          id: val.id,
-          ip: val.ip
-        })
-        wheel.segments.push(val.username);
-      });
-
-      // var $venues = $('#venues'),
-      //       $venueName = $('#name'),
-      //       $venueType = $('#types'),
-      //       venueTypes = [],
-      //       $list = $('<ul/>'),
-      //       $types = $('<ul/>'),
-      //       $filterToggler = $('#filterToggle'),
-      //       arrayUnique = function(a) {
-      //           return a.reduce(function(p, c) {
-      //               if (p.indexOf(c) < 0) { p.push(c); }
-      //               return p;
-      //           }, []);
-      //       };
-
-      // $.each(venues, function(index, venue) {
-      // $list.append(
-      //       $("<li/>")
-      //       .append(
-      //             $("<input />").attr({
-      //                    id:    'venue-' + index
-      //                   ,name:  venue.name
-      //                   ,value: venue.name
-      //                   ,type:  'checkbox'
-      //                   ,checked:true
-      //             })
-      //             .change( function() {
-      //               var cbox = this,
-      //                       segments = wheel.segments,
-      //                       i = segments.indexOf(cbox.value);
-
-      //               if (cbox.checked && i === -1) {
-      //                 // segments.push(cbox.value);
-      //               } else if ( !cbox.checked && i !== -1 ) {
-      //                 segments.splice(i, 1);
-      //               }
-
-      //               segments.sort();
-      //               wheel.update();
-      //             })
-
-      //       ).append(
-      //             $('<label />').attr({
-      //                 'for':  'venue-' + index
-      //             })
-      //             .text( venue.name )
-      //       )
-      //   );
-      //       venueTypes.push(venue.type);
-      // });
-      // $.each(arrayUnique(venueTypes), function (index, venue){
-      //     $types.append(
-      //     $("<li/>")
-      //     .append(
-      //           $("<input />").attr({
-      //                  id:    'venue-type-' + index
-      //                 ,name:  venue
-      //                 ,value: venue
-      //                 ,type:  'checkbox'
-      //                 ,checked:true
-      //           })
-      //           .change( function() {
-      //                 var $this = $(this), i;
-      //                 for(i=0; i<venues.length;i++){
-      //                     if (venues[i].type === $this.val()){
-      //                         $('[name="'+venues[i].name+'"]').prop("checked",$this.prop('checked')).trigger('change');
-      //                     }
-      //                 }
-      //           })
-
-      //     ).append(
-      //           $('<label />').attr({
-      //               'for':  'venue-' + index
-      //           })
-      //           .text( venue )
-      //     )
-      // )
-      // });
-        
-      // $venueName.append($list);
-      // $venueType.append($types);
-      // Uses the tinysort plugin, but our array is sorted for now.
-    //$list.find('>li').tsort("input", {attr: "value"});
-      
-      wheel.init(); 
-
-      // $.each($venueName.find('ul input:checked'), function(key, cbox) {
-      //   // wheel.segments.push( cbox.value );
-      // });
-
-      wheel.update();
-      // console.log(wheel.segments)
-      // $venues.slideUp().data("open",false);
-      // $filterToggler.on("click", function (){
-      //     if($venues.data("open")){
-      //         $venues.slideUp().data("open",false);
-      //         $filterToggler.removeClass("open");
-      //     }else{
-      //         $venues.slideDown().data("open",true);
-      //         $filterToggler.addClass("open");
-      //     }
-      // });
-      
-      // $('.checkAll').on("click", function (){
-      //     $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
-      // });
-    }
+    });
   });
-
-});
 
 };
 
