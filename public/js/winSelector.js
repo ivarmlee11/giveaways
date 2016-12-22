@@ -7,7 +7,6 @@ url = url.split('/');
 var idx = url[url.length -1],
     winner,
     winnerReset = false,
-    finished = false,
     afterFirstSpin = false;
 
 $('#selectWinner').on('click', function() {
@@ -107,10 +106,10 @@ var wheel = {
 
   seg_colors : [], // Cache of segments to colors
   
-  maxSpeed : Math.PI / 20,
+  maxSpeed : Math.PI / 16,
 
-  upTime : 6000, // How long to spin up for (in ms)
-  downTime : 12000, // How long to slow down for (in ms)
+  upTime : 3000, // How long to spin up for (in ms)
+  downTime : 10000, // How long to slow down for (in ms)
 
   spinStart : 0,
 
@@ -121,16 +120,14 @@ var wheel = {
 
   spin : function() {
     // Start the wheel only if it's not already spinning
-    console.log(wheel.timerHandle)
     console.log('wheel clicked ')
-    console.log('after First Spin ' + afterFirstSpin)
     if (wheel.timerHandle == 0) {
+      console.log('weehl should start')
       wheel.spinStart = new Date().getTime();
       wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
       wheel.frames = 0;
       // wheel.sound.play();
       afterFirstSpin = true;
-      window.clearInterval(wheel.timerHandle)
       wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
     }
   },
