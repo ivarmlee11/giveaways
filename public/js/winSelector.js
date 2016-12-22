@@ -391,7 +391,9 @@ var wheel = {
 };
 
 function createWheel() {
-$('#venues').empty();
+$('#name').empty();
+$('#types').empty();
+
 
 var giveawayIds = $('.numberOfPlayer').map( function() {
   return $(this).attr('giveawayId');
