@@ -108,8 +108,8 @@ var wheel = {
   
   maxSpeed : Math.PI / 16,
 
-  upTime : 3000, // How long to spin up for (in ms)
-  downTime : Math.floor((Math.random() * 1000) + 4000), // How long to slow down for (in ms)
+  upTime : 3500, // How long to spin up for (in ms)
+  downTime : Math.floor((Math.random() * 1000) + 7000), // How long to slow down for (in ms)
 
   spinStart : 0,
 
