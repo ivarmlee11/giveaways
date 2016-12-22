@@ -417,7 +417,7 @@ giveawayIds.forEach(function(element) {
         venues.push({
           name: val.username,
           type: val.auth,
-          id: val.id,eg
+          id: val.id,
           ip: val.ip
         })
         wheel.segments.push(val.username);
