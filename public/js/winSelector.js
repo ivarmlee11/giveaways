@@ -109,7 +109,7 @@ var wheel = {
   maxSpeed : Math.PI / 16,
 
   upTime : 3000, // How long to spin up for (in ms)
-  downTime : 10000, // How long to slow down for (in ms)
+  downTime : Math.floor((Math.random() * 1000) + 4000), // How long to slow down for (in ms)
 
   spinStart : 0,
 
@@ -120,9 +120,7 @@ var wheel = {
 
   spin : function() {
     // Start the wheel only if it's not already spinning
-    console.log('wheel clicked ')
     if (wheel.timerHandle == 0) {
-      console.log('weehl should start')
       wheel.spinStart = new Date().getTime();
       wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
       wheel.frames = 0;
