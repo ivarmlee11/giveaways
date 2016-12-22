@@ -268,8 +268,10 @@ var wheel = {
       winner = {
         username: wheel.segments[i]
       };
-      if(afterFirstSpin && finished) {
-        $('#winner').html('The winner is ' + winner.username + '!');
+      if(afterFirstSpin) {
+        if(finished) {
+          $('#winner').html('The winner is ' + winner.username + '!');
+        }
       } else {
         $('#winner').html('');
       }
@@ -400,7 +402,7 @@ function createWheel() {
 createWheel();
 $('#redrawWheel').on('click', function() {
   afterFirstSpin = false;
-  // finished = false;
+  finished = false;
   createWheel();
 })
 // setInterval(createWheel, 10000);
