@@ -173,6 +173,7 @@ var wheel = {
   init : function(optionList) {
     try {
       wheel.initWheel();
+      console.log('init function called')
       // wheel.initAudio();
       wheel.initCanvas();
       wheel.draw();
@@ -376,9 +377,9 @@ function createWheel() {
       method: 'GET',
       success: function(playerList) {
         var playerList = playerList;
-        if(playerList.length === 0) {
-          $('#wheel').hide();
-        }
+        // if(playerList.length === 0) {
+        //   $('#wheel').hide();
+        // }
         venues = [];
         wheel.segments = [];
         playerList.forEach(function(val) {
