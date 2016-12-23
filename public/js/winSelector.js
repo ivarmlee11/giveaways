@@ -377,9 +377,10 @@ function createWheel() {
       method: 'GET',
       success: function(playerList) {
         var playerList = playerList;
-        // if(playerList.length === 0) {
-        //   $('#wheel').hide();
-        // }
+        console.log(playerList)
+        if(playerList.length === 0) {
+          $('#wheel').hide();
+        }
         venues = [];
         wheel.segments = [];
         playerList.forEach(function(val) {
