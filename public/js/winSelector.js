@@ -378,8 +378,11 @@ function createWheel() {
       success: function(playerList) {
         var playerList = playerList;
         console.log(playerList)
+
         if(playerList.length === 0) {
           $('#wheel').hide();
+        } else {
+          $('#wheel').show();
         }
         venues = [];
         wheel.segments = [];
@@ -392,7 +395,6 @@ function createWheel() {
           })
           wheel.segments.push(val.username);
         });
-        console.log(wheel.segments)
         wheel.init(); 
         wheel.update();
       }
