@@ -71,28 +71,24 @@ var options = {
 var client = new tmi.client(options);
 client.connect();
 
-client.on('chat', function(channel, user, message, self) {
+client.on('connected', function(address, port) {
+  console.log('Address ' + address + ' port ' + port);
+  client.action('bigbonesjones69', 'Hello world!');
+});
+
+client.on('chat', function(channel, userstate, message, self) {
   if(message === '!testbot') {
     client.action('bigbonesjones69', 'What up? What up?');
   }
 });
 
-client.on('connected', function(address, port) {
-  console.log('Address ' + address + ' port ' + port);
-  console.log('-------------------------------------')
-  
-  console.log('-------------------------------------')
+client.on("chat", function (channel, userstate, message, self) {
+    // Don't listen to my own messages..
+    if (self) return;
 
-  console.log('-------------------------------------')
+    // Do your stuff.
+});
 
-  console.log('-------------------------------------')
-
-  console.log('-------------------------------------')
-
-  console.log('-------------------------------------')
-  client.action('bigbonesjones69', 'Hello world!')
-
-})
 
 app.use('/admin', adminCtrl);
 
