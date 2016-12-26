@@ -77,18 +77,14 @@ client.on('connected', function(address, port) {
 });
 
 client.on('chat', function(channel, userstate, message, self) {
+  console.log(message)
+  console.log(channel)
+  console.log(userstate)
+  console.log(self)
   if(message === '!testbot') {
     client.action('bigbonesjones69', 'What up? What up?');
   }
 });
-
-client.on("chat", function (channel, userstate, message, self) {
-    // Don't listen to my own messages..
-    if (self) return;
-
-    // Do your stuff.
-});
-
 
 app.use('/admin', adminCtrl);
 
