@@ -62,7 +62,7 @@ var options = {
     reconnect: true
   },
   identity: {
-    username: 'bigbonesjone666',
+    username: 'bigbonesjones69',
     password: botKey
   },
   channels: ['Tweakgames']
@@ -70,6 +70,23 @@ var options = {
 
 var client = new tmi.client(options);
 client.connect();
+
+client.on('connected', function(address, part) {
+  console.log('Address ' + address + ' port ' + port);
+  console.log('-------------------------------------')
+  
+  console.log('-------------------------------------')
+
+  console.log('-------------------------------------')
+
+  console.log('-------------------------------------')
+
+  console.log('-------------------------------------')
+
+  console.log('-------------------------------------')
+  client.action('bigbonesjones69', 'Hello world!')
+
+})
 
 app.use('/admin', adminCtrl);
 
