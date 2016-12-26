@@ -14,7 +14,7 @@ var express = require('express'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
-    botKey = process.env.BOTAPIKEY
+    botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash');
  
 app.use(requestIp.mw());
@@ -65,7 +65,7 @@ var options = {
     username: 'bigbonesjones69',
     password: botKey
   },
-  channels: ['#Tweakgames']
+  channels: ['#tweakgames']
 };
 
 var client = new tmi.client(options);
