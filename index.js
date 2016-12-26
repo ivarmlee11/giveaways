@@ -71,7 +71,13 @@ var options = {
 var client = new tmi.client(options);
 client.connect();
 
-client.on('connected', function(address, part) {
+client.on('chat', function(channel, user, message, self) {
+  if(message === '!testbot') {
+    client.action('bigbonesjones69', 'What up? What up?');
+  }
+});
+
+client.on('connected', function(address, port) {
   console.log('Address ' + address + ' port ' + port);
   console.log('-------------------------------------')
   
