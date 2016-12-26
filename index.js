@@ -65,7 +65,7 @@ var options = {
     username: 'bigbonesjones69',
     password: botKey
   },
-  channels: ['Tweakgames']
+  channels: ['#Tweakgames']
 };
 
 var client = new tmi.client(options);
