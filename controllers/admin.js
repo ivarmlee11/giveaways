@@ -4,6 +4,7 @@ var express = require('express'),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
+    moment = require('moment-timezone'),
     flash = require('connect-flash');
 
 router.post('/adminListAdd', ensureAuthenticated, modCheck, function(req, res) {
@@ -69,7 +70,11 @@ router.get('/adminList', ensureAuthenticated, modCheck, function(req, res) {
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
-    res.render('admin/adminGameList', {giveaways: giveaway});
+    res.render('admin/adminGameList', 
+      {
+        giveaways: giveaway,
+        moment: momentaja
+    });
   });
 });
 

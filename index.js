@@ -13,6 +13,8 @@ var express = require('express'),
     passport = require('./config/ppConfig'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
+    tmi = require('tmi.js'),
+    botKey = process.env.BOTAPIKEY
     flash = require('connect-flash');
  
 app.use(requestIp.mw());
@@ -49,6 +51,25 @@ app.use(function(req, res, next) {
 
 var adminCtrl = require('./controllers/admin'),
     authCtrl = require('./controllers/auth');
+
+// twitch bot config
+var options = {
+  options: {
+    debug: true
+  },
+  connection: {
+    cluster: 'aws',
+    reconnect: true
+  },
+  identity: {
+    username: 'bigbonesjone666',
+    password: botKey
+  },
+  channels: ['Tweakgames']
+};
+
+var client = new tmi.client(options);
+client.connect();
 
 app.use('/admin', adminCtrl);
 
