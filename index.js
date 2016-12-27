@@ -80,9 +80,8 @@ client.on('chat', function(channel, userstate, message, self) {
   console.log(message)
   console.log(channel)
   console.log(userstate)
-  console.log(self)
   if(message === '!testbot') {
-    client.action('bigbonesjones69', 'What up? What up?');
+    client.action('#tweakgames', 'What up? What up?');
   }
 });
 
