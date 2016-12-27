@@ -87,7 +87,7 @@ client.on('chat', function(channel, userstate, message, self) {
           giveaways = giveaways;
       console.log(giveaways)
       for(var i = 0; i <= giveaways.length; i++) {
-        giveawayList.concat(giveaways.data.name);
+        console.log(giveaways[i])
       }
       console.log(giveawayList)
       console.log('List of players ' + giveawayList)
