@@ -77,12 +77,18 @@ client.on('connected', function(address, port) {
 });
 
 client.on('chat', function(channel, userstate, message, self) {
-  console.log(message)
-  console.log(channel)
-  console.log(userstate)
-  if(message === '!testbot') {
-    client.action('#tweakgames', 'What up? What up?');
+  switch(message) {
+    case '!testbot':
+         client.action('#tweakgames', 'This bot is ready to rock. I am not that usefule yet.');
+        break;
+    case '!clear':
+        client.clear("tweakgames");
+        client.action('#tweakgames', 'Chat cleared.');
+        break;
+    default: console.log(message);
+        
   }
+
 });
 
 app.use('/admin', adminCtrl);
