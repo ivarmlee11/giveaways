@@ -79,7 +79,7 @@ client.on('connected', function(address, port) {
 client.on('chat', function(channel, userstate, message, self) {
   switch(message) {
     case '!testbot':
-         client.action('#tweakgames', 'This bot is ready to rock. I am not that usefule yet.');
+         client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
         break;
     case '!clear':
         client.clear("tweakgames");
