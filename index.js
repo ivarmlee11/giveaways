@@ -77,17 +77,30 @@ client.on('connected', function(address, port) {
 });
 
 client.on('chat', function(channel, userstate, message, self) {
+  var messageUser = message.split(' '),
+      messageTo,
+      messageContent;
+  console.log(messageUser);
+  if(messageUser[0] === '!whisper') {
+    messageTo = messageUser[1];
+    messageContent = messageUser[2];
+    client.whisper(messageTo, messageContent);
+  }
+
   switch(message) {
     case '!testbot':
-         client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
-        break;
+      console.log(message);
+       client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
+      break;
     case '!clear':
-        client.clear("tweakgames");
-        client.action('#tweakgames', 'Chat cleared.');
-        break;
-    default: console.log(message);
-        
+      client.clear("tweakgames");
+      console.log(message);
+      client.action('#tweakgames', 'Chat cleared.');
+      break;
+    default: console.log(message);     
   }
+
+
 
 });
 
