@@ -85,12 +85,12 @@ client.on('chat', function(channel, userstate, message, self) {
     db.giveaway.findAll().then(function(giveaways) {
       var giveawayList = '',
           giveaways = giveaways;
-      console.log(giveaways)
-      for(var i = 0; i <= giveaways.length; i++) {
+      // console.log(giveaways)
+      for(var i = 0; i < giveaways.length; i++) {
         console.log(giveaways[i])
       }
-      console.log(giveawayList)
-      console.log('List of players ' + giveawayList)
+      // console.log(giveawayList)
+      // console.log('List of players ' + giveawayList)
       client.action('#tweakgames', giveawayList);
     });
 
