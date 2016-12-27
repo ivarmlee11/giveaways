@@ -83,11 +83,11 @@ client.on('chat', function(channel, userstate, message, self) {
 
   if(messageUser[0] === '!giveaways') {
     db.giveaway.findAll().then(function(giveaways) {
-      console.log(giveaways)
       var giveawayList = '',
           giveaways = giveaways;
+      console.log(giveaways)
       for(var i = 0; i <= giveaways.length; i++) {
-        giveawayList.concat(giveaways.name);
+        giveawayList.concat(giveaways.data.name);
       }
       console.log(giveawayList)
       console.log('List of players ' + giveawayList)
