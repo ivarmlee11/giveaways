@@ -80,11 +80,18 @@ client.on('chat', function(channel, userstate, message, self) {
   var messageUser = message.split(' '),
       messageTo,
       messageContent;
-  console.log(messageUser);
-  if(messageUser[0] === '!whisper') {
-    messageTo = messageUser[1];
-    messageContent = messageUser[2];
-    client.whisper(messageTo, messageContent);
+
+  if(messageUser[0] === '!giveaways') {
+    db.giveaway.findAll().then(function(giveaways) {
+      var giveawayList = '',
+          giveaways = giveaways;
+      for(var i = 0; i <= giveaways.length; i++) {
+        giveawayList.concat(giveaways.name);
+      }
+      console.log('List of players ' + giveawayList)
+      client.action('#tweakgames', giveawayList);
+    });
+
   }
 
   switch(message) {
