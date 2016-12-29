@@ -73,7 +73,6 @@ client.connect();
 
 client.on('connected', function(address, port) {
   console.log('Address ' + address + ' port ' + port);
-  client.action('bigbonesjones69', 'Hello world!');
 });
 
 client.on('chat', function(channel, userstate, message, self) {
@@ -81,36 +80,21 @@ client.on('chat', function(channel, userstate, message, self) {
       messageTo,
       messageContent;
 
-  if(messageUser[0] === '!giveaways') {
-    db.giveaway.findAll().then(function(giveaways) {
-      var giveawayList = '',
-          giveaways = giveaways;
-      // console.log(giveaways)
-      for(var i = 0; i < giveaways.length; i++) {
-        console.log(giveaways[i])
-      }
-      // console.log(giveawayList)
-      // console.log('List of players ' + giveawayList)
-      client.action('#tweakgames', giveawayList);
-    });
-
-  }
 
   switch(message) {
     case '!testbot':
-      console.log(message);
        client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
       break;
     case '!clear':
       client.clear("tweakgames");
-      console.log(message);
       client.action('#tweakgames', 'Chat cleared.');
       break;
     default: console.log(message);     
   }
+});
 
-
-
+client.on("join", function (channel, username, self) {
+    // Do your stuff.
 });
 
 app.use('/admin', adminCtrl);
