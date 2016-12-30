@@ -219,6 +219,9 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   console.log(req.body);
+  var file = req.body.uploadGameData,
+    parsed = Baby.parseFiles(file);
+  console.log(parsed);
 });
 
 module.exports = router;
