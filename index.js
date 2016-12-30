@@ -80,7 +80,6 @@ client.on('chat', function(channel, userstate, message, self) {
       messageTo,
       messageContent;
 
-
   switch(message) {
     case '!testbot':
        client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
