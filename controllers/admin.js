@@ -222,6 +222,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   var file = req.body.uploadGameData,
     parsed = Baby.parseFiles(file);
   console.log(parsed);
+  res.send(parsed);
 });
 
 module.exports = router;
