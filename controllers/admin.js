@@ -223,10 +223,8 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     parsed = Baby.parseFiles(file),
     dataList = parsed.data,
     gameList = [];
-
-dataList.forEach(function(game) {
-
-});
+    console.log(dataList)
+  res.send(dataList);
 
 });
 
