@@ -63,11 +63,18 @@ router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
-    res.render('admin/adminGameList', 
-      {
-        giveaways: giveaway,
-        moment: moment
-    });
+    db.games.findAll().then(function(games) {
+      var game = games;
+      res.render('admin/adminGameList', 
+        {
+          giveaways: giveaway,
+          games: game,
+          moment: moment
+      });
+    
+
+  })
+
   });
 });
 
@@ -245,6 +252,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     }
   });
 
+res.redirect('/admin/adminGiveawayList');
 
 
 });
