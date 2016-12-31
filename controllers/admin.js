@@ -6,8 +6,7 @@ var express = require('express'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash'),
-    Baby = require('babyparse'),
-    Sequelize = require('sequelize');
+    Baby = require('babyparse');
 
 
 // admin controls
@@ -233,36 +232,16 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     });
   });
 
-  var chainer = new Sequelize.Utils.QueryChainer;
-  var Task = sequelize.define('updateGame', function(game) {
-
-    var stringToBoolean = eval(game.coderevealed);
-    console.log(stringToBoolean)
-
+  gameList.forEach(function(game) {
     db.games.create({
       name: game.name,
       price: game.price,
       code: game.code
     }).then(function(data) {
     });
-
   });
- 
-chainer
-  .add(updateGame.drop())
-  .add(updateGame.sync())
- 
-for(var i = 0; i < gameList.length; i++)
-  chainer.add(updateGame.create({}))
- 
-chainer
-  .run()
-  .success(function(){
-    res.send('save worked. check your games table in heroku.')
-  })
-  .error(function(errors){
-    res.send(errors);
-  })
+
+
 
 });
 
