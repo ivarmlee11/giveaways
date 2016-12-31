@@ -232,6 +232,8 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     dataList = parsed.data,
     gameList = [];
 
+    console.log(dataList)
+
   dataList.forEach(function(game) {
     gameList.push({
       name: game[0],
