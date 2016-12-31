@@ -218,7 +218,6 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
 // upload game information to game table
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
-  console.log('file being uploaded ' + req.body);
   var file = req.body.uploadGameData,
     parsed = Baby.parseFiles(file),
     dataList = parsed.data,
@@ -233,10 +232,36 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     });
   });
 
-  gameList = gameList.pop();
+  var chainer = new Sequelize.Utils.QueryChainer;
+  var Task = sequelize.define('updateGame', function(game) {
 
-  console.log(gameList);
-  res.send(gameList);
+    var stringToBoolean = eval(game.coderevealed);
+
+    db.games.create({
+      name: game.name,
+      price: game.price,
+      code: game.code,
+      coderevealed: stringToBoolean
+    }).then(function(data) {
+    });
+
+  });
+ 
+chainer
+  .add(updateGame.drop())
+  .add(updateGame.sync())
+ 
+for(var i = 0; i < gameList.length; i++)
+  chainer.add(updateGame.create({}))
+ 
+chainer
+  .run()
+  .success(function(){
+    res.send('save worked. check your games table in heroku.')
+  })
+  .error(function(errors){
+    res.send(errors);
+  })
 
 });
 
