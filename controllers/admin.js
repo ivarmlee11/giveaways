@@ -225,17 +225,18 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     gameList = [];
 
   dataList.forEach(function(game) {
-    if(game !== "") {
-      gameList.push({
-        name: game[0],
-        price: game[1],
-        code: game[2],
-        coderevealed: game[3]
-      })
-    }
+    // if(game !== "") {
+    //   gameList.push({
+    //     name: game[0],
+    //     price: game[1],
+    //     code: game[2],
+    //     coderevealed: game[3]
+    //   })
+    // }
+    console.log(game);
   });
 
-  console.log(dataList);
+  // console.log(dataList);
 
 });
 
