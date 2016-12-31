@@ -234,14 +234,15 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
 
   gameList.forEach(function(game) {
     if(game.coderevealed === undefined) {
-      break;
-    }
+      return;
+    } else {
     db.games.create({
       name: game.name,
       price: game.price,
       code: game.code
     }).then(function(data) {
     });
+    }
   });
 
 
