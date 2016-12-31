@@ -63,19 +63,11 @@ router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
-    db.games.findAll().then(function(games) {
-      console.log(games)
-      var game = games;
-      res.render('admin/adminGameList', 
-        {
-          giveaways: giveaway,
-          games: game,
-          moment: moment
-      });
-    
-
-  })
-
+    res.render('admin/adminGameList', 
+      {
+        giveaways: giveaway,
+        moment: moment
+    });
   });
 });
 
@@ -225,6 +217,15 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
 
 // upload game information to game table
 
+router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
+
+  db.games.findAll().then(function(games) {
+    var games = games;
+    res.render('admin/gameData', {games: games});
+  });
+
+});
+
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   var file = req.body.uploadGameData,
     parsed = Baby.parseFiles(file),
@@ -253,7 +254,9 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     }
   });
 
-res.redirect('/admin/adminGiveawayList');
+
+
+res.redirect('/admin/gameData');
 
 
 });
