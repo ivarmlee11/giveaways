@@ -240,8 +240,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     db.games.create({
       name: game.name,
       price: game.price,
-      code: game.code,
-      coderevealed: stringToBoolean
+      code: game.code
     }).then(function(data) {
     });
 
