@@ -233,6 +233,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   });
 
   gameList.forEach(function(game) {
+    console.log(game);
     db.games.create({
       name: game.name,
       price: game.price,
