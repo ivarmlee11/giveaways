@@ -6,7 +6,8 @@ var express = require('express'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash'),
-    Baby = require('babyparse');
+    Baby = require('babyparse'),
+    Sequelize = require('sequelize');
 
 
 // admin controls
@@ -236,6 +237,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   var Task = sequelize.define('updateGame', function(game) {
 
     var stringToBoolean = eval(game.coderevealed);
+    console.log(stringToBoolean)
 
     db.games.create({
       name: game.name,
