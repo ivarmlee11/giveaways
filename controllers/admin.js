@@ -218,25 +218,25 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
 // upload game information to game table
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
-  console.log(req.body);
+  console.log('file being uploaded ' + req.body);
   var file = req.body.uploadGameData,
     parsed = Baby.parseFiles(file),
     dataList = parsed.data,
     gameList = [];
 
   dataList.forEach(function(game) {
-    if(game !== '') {
-      gameList.push({
-        name: game[0],
-        price: game[1],
-        code: game[2],
-        coderevealed: game[3]
-      })
-    }
-    // console.log(game);
+    gameList.push({
+      name: game[0],
+      price: game[1],
+      code: game[2],
+      coderevealed: game[3]
+    });
   });
 
+  gameList = gameList.pop();
+
   console.log(gameList);
+  res.send(gameList);
 
 });
 
