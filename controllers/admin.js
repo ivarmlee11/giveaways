@@ -64,6 +64,7 @@ router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, re
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
     db.games.findAll().then(function(games) {
+      console.log(games)
       var game = games;
       res.render('admin/adminGameList', 
         {
