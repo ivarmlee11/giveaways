@@ -242,7 +242,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   });
 
   gameList.forEach(function(game) {
-    if(game.coderevealed === undefined || true) {
+    if(game.coderevealed === undefined) {
       return;
     } else {
     console.log('--------------')
