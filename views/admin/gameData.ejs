@@ -3,13 +3,14 @@
     <h1 class="text-center">Current Game List</h1>
     <h4 class="text-center">There are <%= games.length %> in the games database</h1>
     <% games.forEach(function(game) { %>
-      <div class='well'>
-        <% if(game.coderevealed !== true){ %>
+        <div class='well'>
           <p>Title: <%=  game.name %></p>
           <p>Code: <%=  game.code %></p>
           <p>Price: <%=  game.price %></p>
-        <% } %>
-      </div>
+          <% if(game.coderevealed === true){ %>
+            <p> This game code has been revealed. </p>
+          <% } %>
+        </div>
     <% }); %>  
   </div>
 </div>

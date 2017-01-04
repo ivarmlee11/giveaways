@@ -1,10 +1,11 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var games = sequelize.define('games', {
+  var game = sequelize.define('game', {
     name: DataTypes.STRING,
-    price: DataTypes.STRING,
     code: DataTypes.STRING,
-    coderevealed: DataTypes.BOOLEAN
+    price: DataTypes.STRING,
+    coderevealed: DataTypes.BOOLEAN,
+    owned: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
@@ -12,5 +13,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return games;
+  return game;
 };
