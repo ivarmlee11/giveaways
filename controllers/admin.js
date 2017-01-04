@@ -245,6 +245,9 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     if(game.coderevealed === undefined || true) {
       return;
     } else {
+    console.log('--------------')
+    console.log(game)
+    console.log('--------------')
     db.games.create({
       name: game.name,
       price: game.price,
