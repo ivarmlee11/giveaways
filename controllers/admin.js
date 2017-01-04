@@ -232,8 +232,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     dataList = parsed.data,
     gameList = [];
 
-    console.log(dataList)
-
   dataList.forEach(function(game) {
     gameList.push({
       name: game[0],
@@ -244,7 +242,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   });
 
   gameList.forEach(function(game) {
-    if(game.coderevealed === undefined) {
+    if(game.coderevealed === true) {
       return;
     } else {
     db.games.create({
@@ -255,12 +253,8 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     });
     }
   });
-
-
-
-res.redirect('/admin/gameData');
-
-
+  req.flash('success', 'Games added.');
+  res.redirect('/admin/gameData');
 });
 
 module.exports = router;
