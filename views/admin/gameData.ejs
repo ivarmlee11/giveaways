@@ -4,7 +4,7 @@
     <h4 class="text-center">There are <%= games.length %> in the games database</h1>
     <% games.forEach(function(game) { %>
       <div class='well'>
-        <% if !game.coderevealed %>
+        <% if(!game.coderevealed) %>
           <p>Title: <%=  game.name %></p>
           <p>Code: <%=  game.code %></p>
           <p>Price: <%=  game.price %></p>
