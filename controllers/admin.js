@@ -242,13 +242,14 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   });
 
   gameList.forEach(function(game) {
-    if(game.coderevealed === true) {
+    if(game.coderevealed === undefined || true) {
       return;
     } else {
     db.games.create({
       name: game.name,
       price: game.price,
-      code: game.code
+      code: game.code,
+      coderevealed: game.coderevealed
     }).then(function(data) {
     });
     }
