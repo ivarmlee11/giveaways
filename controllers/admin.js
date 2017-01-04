@@ -219,7 +219,7 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
 
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
 
-  db.games.findAll().then(function(games) {
+  db.game.findAll().then(function(games) {
     var games = games;
     res.render('admin/gameData', {games: games});
   });
