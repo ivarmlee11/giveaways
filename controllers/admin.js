@@ -248,7 +248,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     console.log('--------------')
     console.log(game)
     console.log('--------------')
-    db.games.create({
+    db.game.create({
       name: game.name,
       price: game.price,
       code: game.code,
