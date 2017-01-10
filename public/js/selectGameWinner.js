@@ -370,7 +370,7 @@ function createWheel() {
   // }).get();
     
   // giveawayIds.forEach(function(element) {
-    var url = '/admin/gameData/';
+    var url = '/admin/gameDataOnly';
     $.ajax({
       url: url,
       method: 'GET',

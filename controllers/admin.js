@@ -229,6 +229,15 @@ router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
 
 });
 
+router.get('/gameDataOnly', ensureAuthenticated, modCheck, function(req, res) {
+
+  db.game.findAll().then(function(games) {
+    var games = games;
+    res.send({games: games});
+  });
+
+});
+
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   var file = req.body.uploadGameData,
     parsed = Baby.parseFiles(file),
