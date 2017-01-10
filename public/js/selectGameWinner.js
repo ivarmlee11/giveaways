@@ -263,26 +263,26 @@ var wheel = {
     ctx.textBaseline = "middle";
     ctx.fillStyle = blackHex;
     ctx.font = "2em Lato";
-    // if(wheel.segments[i]) {
-    //   winner = {
-    //     username: wheel.segments[i]
-    //   };
-    //   if(afterFirstSpin) {
-    //     // if(finished) {
-    //       $('#winner').html('The winner is ' + winner.username + '!');
-    //     // }
-    //   } else {
-    //     $('#winner').html('');
-    //   }
-    //   winnerReset = true;  
-    // } else {
-    //   winner = {
-    //     username: null
-    //   };
-    //   $('#winner').html('');
-    // }
-    // var winnerString = winner.username;
-    // ctx.fillText(winnerString, centerSize + 20, centerY);
+    if(wheel.segments[i]) {
+      game = {
+        name: wheel.segments[i]
+      };
+      if(afterFirstSpin) {
+        // if(finished) {
+          $('#game').html('The game is ' + game.name + '!');
+        // }
+      } else {
+        $('#game').html('');
+      }
+      winnerReset = true;  
+    } else {
+      game = {
+        name: null
+      };
+      $('#game').html('');
+    }
+    var winnerString = game.name;
+    ctx.fillText(winnerString, centerSize + 20, centerY);
   },
 
   drawSegment : function(key, lastAngle, angle) {
