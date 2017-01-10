@@ -281,7 +281,7 @@ var wheel = {
       $('#game').html('');
     }
     var winnerString = game.name;
-    ctx.fillText(winnerString, centerSize + 20, centerY);
+    ctx.fillText(winnerString, centerSize + 10, centerY);
   },
 
   drawSegment : function(key, lastAngle, angle) {
