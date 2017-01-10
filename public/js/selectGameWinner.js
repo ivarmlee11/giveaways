@@ -1,13 +1,13 @@
 $(function() {
 
-// var url = window.location.href;
+var url = window.location.href;
 
-// url = url.split('/');
+url = url.split('/');
 
-// var idx = url[url.length -1],
-//     winner,
-//     winnerReset = false,
-//     afterFirstSpin = false;
+var idx = url[url.length -1],
+    winner,
+    winnerReset = false,
+    afterFirstSpin = false;
 
 // $('#selectWinner').on('click', function() {
 //   var url = '/admin/playerListData/' + idx;
