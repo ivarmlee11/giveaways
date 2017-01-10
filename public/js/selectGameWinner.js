@@ -376,6 +376,7 @@ function createWheel() {
       method: 'GET',
       success: function(gameList) {
         var gameList = gameList;
+        console.log(gameList);
 
         if(gameList.length === 0) {
           $('#gameDBWheel').hide();
