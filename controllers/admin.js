@@ -40,6 +40,9 @@ router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res
   var adminName = req.body.adminName,
       auth = req.body.auth;
 
+  console.log(adminName + ' admin name');
+  console.log(req.user.username + ' req.user.username');
+
   if(adminName === req.user.username) {
     req.flash('error', 'You cannot demod yourself.');
     res.redirect('/admin/adminList');
@@ -245,9 +248,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     if(game.coderevealed === undefined) {
       return;
     } else {
-    console.log('--------------')
-    console.log(game)
-    console.log('--------------')
     db.game.create({
       name: game.name,
       price: game.price,
