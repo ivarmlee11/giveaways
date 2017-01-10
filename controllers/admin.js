@@ -233,7 +233,7 @@ router.get('/gameDataOnly', ensureAuthenticated, modCheck, function(req, res) {
 
   db.game.findAll().then(function(games) {
     var games = games;
-    res.send({games: games});
+    res.send(games);
   });
 
 });
