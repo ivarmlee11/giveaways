@@ -172,7 +172,6 @@ var wheel = {
   init : function(optionList) {
     try {
       wheel.initWheel();
-      console.log('init function called')
       // wheel.initAudio();
       wheel.initCanvas();
       wheel.draw();
@@ -376,7 +375,6 @@ function createWheel() {
       method: 'GET',
       success: function(gameList) {
         var gameList = gameList;
-        console.log(gameList);
 
         if(gameList.length === 0) {
           $('#gameDBWheel').hide();

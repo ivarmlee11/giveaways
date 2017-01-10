@@ -29,14 +29,12 @@ $('#selectWinner').on('click', function() {
 
 $('#addWinnerToDb').on('click', function() {
   var url = '/admin/addToWinHistory/' + idx;
-  console.log(winner);
   if(winnerReset) {
     $.ajax({
       url: url,
       type: 'POST',
       data: winner,
       success: function(data) {
-        console.log(data);
         winnerReset = false;
         $('#winner').html(data);
       }
@@ -172,7 +170,6 @@ var wheel = {
   init : function(optionList) {
     try {
       wheel.initWheel();
-      console.log('init function called')
       // wheel.initAudio();
       wheel.initCanvas();
       wheel.draw();
