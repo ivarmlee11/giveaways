@@ -29,11 +29,12 @@ $('#selectWinner').on('click', function() {
 
 $('#addWinnerToDb').on('click', function() {
 
-  if($('#hideThis').is(":checked")) {
+  if($('#saveGameToggle').is(":checked")) {
     console.log('was checked')
   }
 
   var url = '/admin/addToWinHistory/' + idx;
+  
   if(winnerReset) {
     $.ajax({
       url: url,
