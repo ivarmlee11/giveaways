@@ -30,7 +30,7 @@ $('#selectWinner').on('click', function() {
 $('#addWinnerToDb').on('click', function() {
 
 
-  console.log($('#gameToggleButton').val);
+  console.log($('#gameToggleButton').val());
 
   var url = '/admin/addToWinHistory/' + idx;
   if(winnerReset) {
