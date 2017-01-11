@@ -1,5 +1,7 @@
 $(function() {
 
+$('#gameToggleButton').hide();
+
 var url = window.location.href;
 
 url = url.split('/');
@@ -81,6 +83,7 @@ var wheel = {
   centerY : 190,
 
   spin : function() {
+
     // Start the wheel only if it's not already spinning
     if (wheel.timerHandle == 0) {
       wheel.spinStart = new Date().getTime();
@@ -122,6 +125,7 @@ var wheel = {
       clearInterval(wheel.timerHandle);
       wheel.timerHandle = 0;
       wheel.angleDelta = 0;
+      gameToggleButton.show();
       // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
 

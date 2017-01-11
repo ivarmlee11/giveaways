@@ -19,6 +19,9 @@
     <% } %>
     <button id="selectWinner" class="btn btn-success">Pick A Winner</button>
     <button id="addWinnerToDb" class="btn btn-success">Save Winner</button>
+    <label id="gameToggleButton" class="btn btn-primary">
+      <input id="saveGameToggle" type="checkbox" autocomplete="off">Save Game With This Winner
+    </label>
     <% if(giveaway.ended) { %>
       <h3>This giveaway has ended.</h3>
     <% } %>
