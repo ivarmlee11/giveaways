@@ -45,7 +45,7 @@ $('#addWinnerToDb').on('click', function() {
         data: winner,
         success: function(data) {
           winnerReset = false;
-          $('#winner').html(data);
+          $('#winner').html('Game will be associated with this winner in soon');
         }
       });
     } else {
