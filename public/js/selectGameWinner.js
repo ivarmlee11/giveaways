@@ -125,7 +125,7 @@ var wheel = {
       clearInterval(wheel.timerHandle);
       wheel.timerHandle = 0;
       wheel.angleDelta = 0;
-      gameToggleButton.show();
+      $('#gameToggleButton').show();
       // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
 
