@@ -98,9 +98,9 @@ $('#addWinnerToDb').on('click', function() {
           winnerReset = false;
           gameWheelReset = false;
           $('#winner').html('Game will be associated with this winner in soon');
-          $('#game').html('');
           $('#saveGameToggle').prop('checked', false);
           createGameWheel();
+          $('#game').html('');
         }
       });
     } else {
