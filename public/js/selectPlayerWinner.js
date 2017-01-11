@@ -99,11 +99,11 @@ $('#addWinnerToDb').on('click', function() {
         type: 'POST',
         data: winner,
         success: function(data) {
-          afterFirstSpinWheel = false;
           $('#winner').html('Game will be associated with this winner in comingi update.');  
           $('#saveGameToggle').prop('checked', false);
           $('#game').html('');
-
+          afterFirstSpinWheel = false;
+          createGameWheel();
         }
       });
     } else {
