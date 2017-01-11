@@ -28,6 +28,12 @@ $('#selectWinner').on('click', function() {
 });
 
 $('#addWinnerToDb').on('click', function() {
+
+
+  if($('#gameToggleButton').checked) {
+    console.log('thing was checked')
+  }
+   
   var url = '/admin/addToWinHistory/' + idx;
   if(winnerReset) {
     $.ajax({
