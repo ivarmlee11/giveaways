@@ -2,6 +2,9 @@ $(function() {
 
 $('#gameToggleButton').hide();
 
+createWheel();
+createGameWheel();
+
 var url = window.location.href;
 
 url = url.split('/');
@@ -9,66 +12,14 @@ url = url.split('/');
 var idx = url[url.length -1],
     winner,
     winnerReset = false,
-    afterFirstSpin = false;
+    afterFirstSpin = false,
+    game,
+    gameWheelReset = false,
+    afterFirstSpinWheel = false;
 
-$('#selectWinner').on('click', function() {
-  var url = '/admin/playerListData/' + idx;
-  $.ajax({
-    url: url,
-    type: 'GET',
-    success: function(players) {
-      var playerList = players;
-      winner = playerList[Math.floor(Math.random()*playerList.length)];
-      if(winner) {
-        winnerReset = true;
-        $('#winner').html('The winner is ' + winner.username + '!');
-      } else {
-        $('#winner').html('Nobody has entered the competition yet!');
-      } 
-    }
-  });
-});
-
-$('#addWinnerToDb').on('click', function() {
-
-  
-
-
-
-  if(winnerReset) {
-
-    if($('#saveGameToggle').is(":checked")) {
-      var url = '/admin/addToWinHistory/' + idx;
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: winner,
-        success: function(data) {
-          winnerReset = false;
-          $('#winner').html('Game will be associated with this winner in soon');
-          createGameWheel();
-        }
-      });
-    } else {
-      var url = '/admin/addToWinHistory/' + idx;
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: winner,
-        success: function(data) {
-          winnerReset = false;
-          $('#winner').html(data);
-          createGameWheel();
-        }
-      });
-    }
-
-  } else {
-    $('#winner').html('Select a winner!');
-  }
-});
 
 // helpers
+
 var blackHex = 'black',
     whiteHex = 'white',
     shuffle = function(o) {
@@ -93,6 +44,72 @@ String.prototype.hashCode = function(){
 Number.prototype.mod = function(n) {
   return ((this%n)+n)%n;
 };
+
+
+$('#redrawGameWheel').on('click', function() {
+  afterFirstSpinWheel = false;
+  finished = false;
+  createGameWheel();
+})
+
+$('#redrawWheel').on('click', function() {
+  afterFirstSpin = false;
+  finished = false;
+  createWheel();
+})
+
+$('#selectWinner').on('click', function() {
+  var url = '/admin/playerListData/' + idx;
+  $.ajax({
+    url: url,
+    type: 'GET',
+    success: function(players) {
+      var playerList = players;
+      winner = playerList[Math.floor(Math.random()*playerList.length)];
+      if(winner) {
+        winnerReset = true;
+        $('#winner').html('The winner is ' + winner.username + '!');
+      } else {
+        $('#winner').html('Nobody has entered the competition yet!');
+      } 
+    }
+  });
+});
+
+$('#addWinnerToDb').on('click', function() {
+
+  if(winnerReset) {
+
+    if($('#saveGameToggle').is(":checked")) {
+      var url = '/admin/addToWinHistory/' + idx;
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: winner,
+        success: function(data) {
+          winnerReset = false;
+          $('#winner').html('Game will be associated with this winner in soon');
+          createGameWheel();
+        }
+      });
+    } else {
+      var url = '/admin/addToWinHistory/' + idx;
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: winner,
+        success: function(data) {
+          winnerReset = false;
+          $('#winner').html(data);
+          createWheel();
+        }
+      });
+    }
+
+  } else {
+    $('#winner').html('Select a winner!');
+  }
+});
     
 // wheel
 var wheel = {
@@ -424,24 +441,7 @@ function createWheel() {
 
 };
 
-createWheel();
 
-$('#redrawWheel').on('click', function() {
-  afterFirstSpin = false;
-  finished = false;
-  createWheel();
-})
-// setInterval(createWheel, 10000);
-
-
-
-var idx = url[url.length -1],
-    game,
-    gameWheelReset = false,
-    afterFirstSpinWheel = false;
-
-
-    
 // wheel
 var gameWheel = {
   timerHandle : 0,
@@ -774,12 +774,5 @@ function createGameWheel() {
   // });
 
 };
-
-createGameWheel();
-$('#redrawGameWheel').on('click', function() {
-  afterFirstSpin = false;
-  finished = false;
-  createGameWheel();
-})
 
 });
