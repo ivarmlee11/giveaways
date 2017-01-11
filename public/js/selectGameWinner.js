@@ -38,7 +38,7 @@ Number.prototype.mod = function(n) {
 };
     
 // wheel
-var wheel = {
+var gameWheel = {
   timerHandle : 0,
   timerDelay : 33,
 
@@ -85,46 +85,46 @@ var wheel = {
   spin : function() {
 
     // Start the wheel only if it's not already spinning
-    if (wheel.timerHandle == 0) {
-      wheel.spinStart = new Date().getTime();
-      wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
-      wheel.frames = 0;
-      // wheel.sound.play();
+    if (gameWheel.timerHandle == 0) {
+      gameWheel.spinStart = new Date().getTime();
+      gameWheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
+      gameWheel.frames = 0;
+      // gameWheel.sound.play();
       afterFirstSpin = true;
-      wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
+      gameWheel.timerHandle = setInterval(gameWheel.onTimerTick, gameWheel.timerDelay);
     }
   },
 
   onTimerTick : function() {
-    var duration = (new Date().getTime() - wheel.spinStart),
+    var duration = (new Date().getTime() - gameWheel.spinStart),
         finished,
         progress = 0;
 
-    wheel.frames++;
-    wheel.draw();
+    gameWheel.frames++;
+    gameWheel.draw();
 
-    if (duration < wheel.upTime) {
-      progress = duration / wheel.upTime;
-      wheel.angleDelta = wheel.maxSpeed
+    if (duration < gameWheel.upTime) {
+      progress = duration / gameWheel.upTime;
+      gameWheel.angleDelta = gameWheel.maxSpeed
           * Math.sin(progress * halfPI);
     } else {
-      progress = duration / wheel.downTime;
-      wheel.angleDelta = wheel.maxSpeed
+      progress = duration / gameWheel.downTime;
+      gameWheel.angleDelta = gameWheel.maxSpeed
           * Math.sin(progress * halfPI + halfPI);
               if (progress >= 1){
                   finished = true;
               }
     }
 
-    wheel.angleCurrent += wheel.angleDelta;
-    while (wheel.angleCurrent >= doublePI){
+    gameWheel.angleCurrent += gameWheel.angleDelta;
+    while (gameWheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
-      wheel.angleCurrent -= doublePI;
+      gameWheel.angleCurrent -= doublePI;
       }
     if (finished) {
-      clearInterval(wheel.timerHandle);
-      wheel.timerHandle = 0;
-      wheel.angleDelta = 0;
+      clearInterval(gameWheel.timerHandle);
+      gameWheel.timerHandle = 0;
+      gameWheel.angleDelta = 0;
       $('#gameToggleButton').show();
       // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
@@ -138,15 +138,15 @@ var wheel = {
 
   init : function(optionList) {
     try {
-      wheel.initWheel();
+      gameWheel.initWheel();
       // wheel.initAudio();
-      wheel.initCanvas();
-      wheel.draw();
+      gameWheel.initCanvas();
+      gameWheel.draw();
 
-      $.extend(wheel, optionList);
+      $.extend(gameWheel, optionList);
 
     } catch (exceptionData) {
-      // alert('Wheel is not loaded ' + exceptionData);
+      // alert('gameWheel is not loaded ' + exceptionData);
     }
 
   },
@@ -329,7 +329,7 @@ var wheel = {
   }
 };
 
-function createWheel() {
+function createGameWheel() {
 
   // var giveawayIds = $('.numberOfPlayer').map( function() {
   //   return $(this).attr('giveawayId');
@@ -370,11 +370,11 @@ function createWheel() {
 
 };
 
-createWheel();
+createGameWheel();
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpin = false;
   finished = false;
-  createWheel();
+  createGameWheel();
 })
 // setInterval(createWheel, 10000);
 
