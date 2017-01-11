@@ -290,11 +290,12 @@ var wheel = {
       if(afterFirstSpin) {
         // if(finished) {
           $('#winner').html('The winner is ' + winner.username + '!');
+          winnerReset = true;
         // }
       } else {
         $('#winner').html('');
       }
-      winnerReset = true;  
+        
     } else {
       winner = {
         username: null
