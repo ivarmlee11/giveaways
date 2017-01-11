@@ -87,7 +87,6 @@ $('#selectWinner').on('click', function() {
 $('#addWinnerToDb').on('click', function() {
 
   if(winnerReset) {
-    afterFirstSpinWheel = false;
     afterFirstSpin = false;
     winnerReset = false;
     gameWheelReset = false;
@@ -100,7 +99,8 @@ $('#addWinnerToDb').on('click', function() {
         type: 'POST',
         data: winner,
         success: function(data) {
-          $('#winner').html('Game will be associated with this winner in soon');  
+          afterFirstSpinWheel = false;
+          $('#winner').html('Game will be associated with this winner in comingi update.');  
           $('#saveGameToggle').prop('checked', false);
           $('#game').html('');
 
