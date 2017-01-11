@@ -46,6 +46,7 @@ $('#addWinnerToDb').on('click', function() {
         success: function(data) {
           winnerReset = false;
           $('#winner').html('Game will be associated with this winner in soon');
+          createGameWheel();
         }
       });
     } else {
@@ -57,6 +58,7 @@ $('#addWinnerToDb').on('click', function() {
         success: function(data) {
           winnerReset = false;
           $('#winner').html(data);
+          createGameWheel();
         }
       });
     }
