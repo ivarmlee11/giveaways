@@ -562,7 +562,7 @@ var gameWheel = {
   initCanvas : function() {
     var gameCanvis = $('#gameWheel')[0];
     gameCanvis.addEventListener("click", gameWheel.spin, false);
-    gameWheel.canvasContext = canvas.getContext("2d");
+    gameWheel.canvasContext = gameCanvis.getContext("2d");
   },
 
   initWheel : function() {
