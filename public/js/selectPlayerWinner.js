@@ -96,6 +96,7 @@ $('#addWinnerToDb').on('click', function() {
         data: winner,
         success: function(data) {
           winnerReset = false;
+          gameWheelReset = false;
           $('#winner').html('Game will be associated with this winner in soon');
           createGameWheel();
           $('#saveGameToggle').prop('checked', false);
@@ -109,6 +110,7 @@ $('#addWinnerToDb').on('click', function() {
         data: winner,
         success: function(data) {
           winnerReset = false;
+          gameWheelReset = false;
           $('#winner').html(data);
           // createWheel();
         }
