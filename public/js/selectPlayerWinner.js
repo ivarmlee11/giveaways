@@ -638,7 +638,7 @@ var gameWheel = {
       game = {
         name: gameWheel.segments[i]
       };
-      if(afterFirstSpin) {
+      if(afterFirstSpinWheel) {
         // if(finished) {
           $('#game').html('The game is ' + game.name + '!');
         // }
