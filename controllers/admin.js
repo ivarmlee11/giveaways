@@ -134,7 +134,7 @@ router.get('/giveawayData/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-// get player information
+// player interaction
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
@@ -218,7 +218,7 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
   });
 });
 
-// upload game information to game table
+// game interaction
 
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
 
