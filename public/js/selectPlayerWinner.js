@@ -591,14 +591,14 @@ var gameWheel = {
   },
 
   draw : function() {
-    gameWheel.clear();
+    // gameWheel.clear();
     gameWheel.drawWheel();
     gameWheel.drawNeedle();
   },
 
-  clear : function() {
-    gameWheel.canvasContext.clearRect(0, 0, 1000, 800);
-  },
+  // clear : function() {
+  //   gameWheel.canvasContext.clearRect(0, 0, 1000, 800);
+  // },
 
   drawNeedle : function() {
     var ctx = gameWheel.canvasContext,
