@@ -62,7 +62,7 @@ $('#redrawWheel').on('click', function() {
 $('#clearGame').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
-  $('#saveGameToggle').prop('checked', false);
+  $('#gameToggleButton').prop('checked', false);
   createGameWheel();
 })
 
@@ -98,6 +98,7 @@ $('#addWinnerToDb').on('click', function() {
           winnerReset = false;
           $('#winner').html('Game will be associated with this winner in soon');
           createGameWheel();
+          $('#saveGameToggle').prop('checked', false);
         }
       });
     } else {
