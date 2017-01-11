@@ -1,6 +1,6 @@
 $(function() {
 
-$('#gameToggleButton').hide();
+// $('#gameToggleButton').hide();
 
 createWheel();
 createGameWheel();
@@ -49,7 +49,7 @@ Number.prototype.mod = function(n) {
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
-  $('#gameToggleButton').hide();
+  $('#gameToggleButton').prop('checked', false);
   createGameWheel();
 })
 
@@ -57,6 +57,13 @@ $('#redrawWheel').on('click', function() {
   afterFirstSpin = false;
   finished = false;
   createWheel();
+})
+
+$('#clearGame').on('click', function() {
+  afterFirstSpinWheel = false;
+  finished = false;
+  $('#gameToggleButton').prop('checked', false);
+  createGameWheel();
 })
 
 $('#selectWinner').on('click', function() {
@@ -531,7 +538,7 @@ var gameWheel = {
       clearInterval(gameWheel.timerHandle);
       gameWheel.timerHandle = 0;
       gameWheel.angleDelta = 0;
-      $('#gameToggleButton').show();
+      // $('#gameToggleButton').show();
       // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
 
