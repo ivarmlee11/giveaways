@@ -560,9 +560,9 @@ var gameWheel = {
   // },
 
   initCanvas : function() {
-    var canvas = $('#gameWheel')[0];
-    canvas.addEventListener("click", gameWheel.spin, false);
-    wheel.canvasContext = canvas.getContext("2d");
+    var gameCanvis = $('#gameWheel')[0];
+    gameCanvis.addEventListener("click", gameWheel.spin, false);
+    gameWheel.canvasContext = canvas.getContext("2d");
   },
 
   initWheel : function() {
@@ -591,14 +591,14 @@ var gameWheel = {
   },
 
   draw : function() {
-    // gameWheel.clear();
+    gameWheel.clear();
     gameWheel.drawWheel();
     gameWheel.drawNeedle();
   },
 
-  // clear : function() {
-  //   gameWheel.canvasContext.clearRect(0, 0, 1000, 800);
-  // },
+  clear : function() {
+    gameWheel.canvasContext.clearRect(0, 0, 1000, 800);
+  },
 
   drawNeedle : function() {
     var ctx = gameWheel.canvasContext,
