@@ -28,8 +28,7 @@ $('#selectWinner').on('click', function() {
 });
 
 $('#addWinnerToDb').on('click', function() {
-  console.log($('#gameToggleButton').is(":checked"))
-  if($('#gameToggleButton').is(":checked")) {
+  if($('#hideThis').is(":checked")) {
     console.log('was checked')
   }
 
