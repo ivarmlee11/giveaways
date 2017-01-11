@@ -98,8 +98,9 @@ $('#addWinnerToDb').on('click', function() {
           winnerReset = false;
           gameWheelReset = false;
           $('#winner').html('Game will be associated with this winner in soon');
-          createGameWheel();
+          $('#game').html('');
           $('#saveGameToggle').prop('checked', false);
+          createGameWheel();
         }
       });
     } else {
@@ -112,6 +113,7 @@ $('#addWinnerToDb').on('click', function() {
           winnerReset = false;
           gameWheelReset = false;
           $('#winner').html(data);
+           $('#game').html('');
           // createWheel();
         }
       });
