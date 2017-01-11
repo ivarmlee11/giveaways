@@ -41,6 +41,10 @@ a, a:hover, a:active {
   width: 80px;
 }
 
+.nameSpace {
+  height: 60px;
+}
+
 .playerList {
   list-style-type: none;
   padding: 0;
