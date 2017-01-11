@@ -109,7 +109,7 @@ $('#addWinnerToDb').on('click', function() {
         success: function(data) {
           winnerReset = false;
           $('#winner').html(data);
-          createWheel();
+          // createWheel();
         }
       });
     }
