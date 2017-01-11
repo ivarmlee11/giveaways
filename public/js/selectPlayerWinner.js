@@ -87,12 +87,14 @@ $('#selectWinner').on('click', function() {
 $('#addWinnerToDb').on('click', function() {
 
   if(winnerReset) {
+    afterFirstSpinWheel = false;
+    afterFirstSpin = false;
+    winnerReset = false;
+    gameWheelReset = false;
+    finished = false;
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
       var url = '/admin/addToWinHistory/' + idx;
-      afterFirstSpinWheel = false;
-      winnerReset = false;
-      gameWheelReset = false;
       $.ajax({
         url: url,
         type: 'POST',
@@ -101,6 +103,7 @@ $('#addWinnerToDb').on('click', function() {
           $('#winner').html('Game will be associated with this winner in soon');  
           $('#saveGameToggle').prop('checked', false);
           $('#game').html('');
+
         }
       });
     } else {
@@ -110,11 +113,9 @@ $('#addWinnerToDb').on('click', function() {
         type: 'POST',
         data: winner,
         success: function(data) {
-          winnerReset = false;
-          gameWheelReset = false;
           $('#winner').html(data);
-          // createWheel();
-           $('#game').html('');
+          $('#saveGameToggle').prop('checked', false);
+          $('#game').html('');
         }
       });
     }
