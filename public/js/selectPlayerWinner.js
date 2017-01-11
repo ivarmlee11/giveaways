@@ -49,6 +49,7 @@ Number.prototype.mod = function(n) {
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
+  $('#gameToggleButton').hide();
   createGameWheel();
 })
 
