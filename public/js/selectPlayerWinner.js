@@ -88,7 +88,7 @@ $('#addWinnerToDb').on('click', function() {
 
   if(winnerReset) {
 
-    if($('#saveGameToggle').is(":checked")) {
+    if($('#saveGameToggle').is(":checked") && (game.name !== null)) {
       var url = '/admin/addToWinHistory/' + idx;
       $.ajax({
         url: url,
