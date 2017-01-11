@@ -49,7 +49,7 @@ Number.prototype.mod = function(n) {
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
-  $('#gameToggleButton').prop('checked', false);
+  $('#saveGameToggle').prop('checked', false);
   createGameWheel();
 })
 
@@ -62,7 +62,7 @@ $('#redrawWheel').on('click', function() {
 $('#clearGame').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
-  $('#gameToggleButton').prop('checked', false);
+  $('#saveGameToggle').prop('checked', false);
   createGameWheel();
 })
 
