@@ -29,22 +29,36 @@ $('#selectWinner').on('click', function() {
 
 $('#addWinnerToDb').on('click', function() {
 
-  if($('#saveGameToggle').is(":checked")) {
-    console.log('was checked')
-  }
-
-  var url = '/admin/addToWinHistory/' + idx;
   
+
+
+
   if(winnerReset) {
-    $.ajax({
-      url: url,
-      type: 'POST',
-      data: winner,
-      success: function(data) {
-        winnerReset = false;
-        $('#winner').html(data);
-      }
-    });
+
+    if($('#saveGameToggle').is(":checked")) {
+      var url = '/admin/addToWinHistory/' + idx;
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: winner,
+        success: function(data) {
+          winnerReset = false;
+          $('#winner').html(data);
+        }
+      });
+    } else {
+      var url = '/admin/addToWinHistory/' + idx;
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: winner,
+        success: function(data) {
+          winnerReset = false;
+          $('#winner').html(data);
+        }
+      });
+    }
+
   } else {
     $('#winner').html('The winner has not been drawn or nobody has entered the competition yet!');
   }
