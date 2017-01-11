@@ -29,8 +29,9 @@ $('#selectWinner').on('click', function() {
 
 $('#addWinnerToDb').on('click', function() {
 
-
-  console.log($('#gameToggleButton').val());
+  if($('#gameToggleButton').is(":checked")) {
+    console.log('was checked')
+  }
 
   var url = '/admin/addToWinHistory/' + idx;
   if(winnerReset) {
