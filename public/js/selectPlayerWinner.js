@@ -751,7 +751,7 @@ function createGameWheel() {
           $('#gameDBWheel').show();
         }
         venues = [];
-        wheel.segments = [];
+        gameWheel.segments = [];
         gameList.forEach(function(val) {
           venues.push({
             name: val.name,
