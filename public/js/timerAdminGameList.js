@@ -118,7 +118,7 @@ window.onresize = function(event) {
   giveawayIds.forEach(function(val) {
     giveValues.push(val); 
   })
-
+  console.log(giveValues);
   giveValues.forEach(function(val) {
     var timerId = '#clock' + val;
     $(timerId).TimeCircles().rebuild();   
