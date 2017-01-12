@@ -80,8 +80,9 @@ router.get('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
       var games = games;
       if(games.length === 0) {
         games = [];
-      }
-      res.send(games);
+        res.send(games);
+      } else {
+        res.send(games);
       }
     })
   });   
