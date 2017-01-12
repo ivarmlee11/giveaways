@@ -755,7 +755,7 @@ function createGameWheel() {
       var games = [];
       gameWheel.segments = [];
       gameList.forEach(function(val) {
-        if((val.coderevealed !== true) || (val.owned !== true)) {
+        if((val.coderevealed !== true) && (val.owned !== true)) {
           gameWheel.segments.push(val.name);
           games.push({
             id: val.id,
@@ -773,7 +773,7 @@ function createGameWheel() {
 function gameDropDownList(list) {
   var $dropDownArea = $('#gameDropDown');
   list.forEach(function(val) {
-    $dropDownArea.append('<option>' + val.name + '</option>');
+    $dropDownArea.append('<option>' + val.name + '</option>');  
   });
 };
 
