@@ -799,7 +799,7 @@ function gameDropDownList(list) {
   var $dropDownArea = $('#gameDropDown');
   $dropDownArea.html('');
   list.forEach(function(val) {
-    $dropDownArea.append('<option userId="' + val.id + '">' + val.name + '</option>');  
+    $dropDownArea.append('<option userId="' + val.gameId + '">' + val.name + '</option>');  
   });
 };
 
