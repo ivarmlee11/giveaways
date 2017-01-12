@@ -12,7 +12,7 @@
         <% if(!giveaway.hidden) { %>
           <div class="well text-center">
             <h3><strong><%=giveaway.name%></strong></h3>
-            <h4 data="ids" giveawayId="<%=giveaway.id%>"><%=moment(giveaway.createdAt).format('LLL')%></h4>
+            <h4 data="ids" giveawayId="<%=giveaway.id%>"><%=moment(giveaway.createdAt).format('LLL').local()%></h4>
             <a href="/player/playerList/<%=giveaway.id%>"><h4>Select This Giveaway</h4></a>
             <a target="_blank" href="/player/playerList/<%=giveaway.id%>"><h4>Create Overlay for this Giveaway</h4></a>
             <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
