@@ -70,7 +70,7 @@ $('#dropDown').change(function() {
   game = {
     name: $(this).val(),
     userId: $('#winnerId').val(),
-    gameId: userId 
+    gameId: parseInt(userId) 
   };
   afterFirstSpinWheel = true;
 });
