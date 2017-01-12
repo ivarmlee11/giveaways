@@ -629,12 +629,13 @@ var gameWheel = {
     if(gameWheel.segments[i]) {
       game = {
         name: gameWheel.segments[i].name,
-        userId: null
+        userId: gameWheel.segments[i].userId
       };
       if(afterFirstSpinWheel) {
         // if(finished) {
           $('#game').html('Prize: ' + game.name + '!');
           $('#winnerId').html(game.userId);
+          console.log(game.userId)
         // }
       } else {
         $('#game').html('');
