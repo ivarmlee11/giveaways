@@ -98,7 +98,7 @@ $('#addWinnerToDb').on('click', function() {
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
       var url = '/game/winnerCard';
-      game.userId = $('#winnerId').html();
+      // game.userId = $('#winnerId').html();
       console.log(game)
       $.ajax({
         url: url,
