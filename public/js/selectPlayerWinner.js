@@ -66,12 +66,12 @@ $('#clearGame').on('click', function() {
 
 $('#dropDown').change(function() {
   $('#game').html('Prize: ' + $(this).val());
-  console.log($(this))
-  game = {
-    name: $(this).val(),
-    userId: $('#winnerId').val(),
-    gameId: $(this).attr('userId') 
-  };
+  console.log($(this).val())
+  // game = {
+  //   name: $(this).val(),
+  //   userId: $('#winnerId').val(),
+  //   gameId: $(this).attr('userId') 
+  // };
   afterFirstSpinWheel = true;
 });
 
@@ -801,7 +801,7 @@ function gameDropDownList(list) {
   var $dropDownArea = $('#gameDropDown');
   $dropDownArea.html('');
   list.forEach(function(val) {
-    $dropDownArea.append('<option userId="' + val.gameId + '">' + val.name + '</option>');  
+    $dropDownArea.append('<option>' + val.name + '<span class="hide">' + val.id + '</span></option>');  
   });
 };
 
