@@ -108,23 +108,24 @@ giveawayIdInts.forEach(function(val) {
 });
 
 
-// window.onresize = function(event) {
-//   var giveawayIds = $('[data="display"]').map( function() {
-//     return $(this);
-//   }).get();
-//   var giveValues = [];
+window.onresize = function(event) {
+  console.log('resizin')
+  var giveawayIds = $('[data="display"]').map( function() {
+    return $(this);
+  }).get();
+  var giveValues = [];
 
-//   giveawayIds.forEach(function(val) {
-//     giveValues.push(val); 
-//   })
+  giveawayIds.forEach(function(val) {
+    giveValues.push(val); 
+  })
 
-//   giveValues.forEach(function(val) {
-//     var timerId = '#clock' + val;
-//     $(timerId).TimeCircles().rebuild();   
-//   })
+  giveValues.forEach(function(val) {
+    var timerId = '#clock' + val;
+    $(timerId).TimeCircles().rebuild();   
+  })
 
   
-// };
+};
 
 
 });
