@@ -65,7 +65,7 @@ router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
     // redirectUrl = '/player/playerList/' + id,
     giveaway;
 
-  db.game.findById(gameId).then(function(game) {
+  db.game.findById(req.body.gameId).then(function(game) {
     game = game;
 
     db.user.findById(req.body.userId).then(function(user) {
