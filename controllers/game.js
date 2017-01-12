@@ -61,9 +61,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
 });
 
 router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
-  var id = req.params.idx,
-    // redirectUrl = '/player/playerList/' + id,
-    giveaway;
 
   db.game.findById(req.body.gameId).then(function(game) {
     game = game;
@@ -74,6 +71,20 @@ router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
     });
 
   });    
+});
+
+router.get('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
+  var id = req.user.id;
+  db.user.findById(id).then(function(user) {
+    user.getGames().then(function(games) {
+      var games = games;
+      if(games.length === 0) {
+        games = [];
+      }
+      res.send(games);
+      }
+    })
+  });   
 });
 
 module.exports = router;
