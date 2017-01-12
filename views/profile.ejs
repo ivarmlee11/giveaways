@@ -6,8 +6,8 @@
     <h2 class="text-center">Giveaways Won</h2>
       <% contests.forEach(function(contest) { %>
         <h3><strong><%=contest.name%></strong></h3>
-        <h5><strong>Started <%=moment(contest.createdAt).tz("America/Los_Angeles").format('LLL')%></strong></h5>  
-        <h5><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%></strong></h5>  
+        <h5><strong>Started <%=moment(contest.createdAt).tz("America/Los_Angeles").format('LLL')%>PST</strong></h5>  
+        <h5><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%>PST</strong></h5>  
       <% }); %>  
     </div>
   </div>
