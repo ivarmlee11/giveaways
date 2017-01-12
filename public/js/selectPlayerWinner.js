@@ -106,7 +106,7 @@ $('#addWinnerToDb').on('click', function() {
         type: 'POST',
         data: game,
         success: function(data) {
-          $('#winner').html('Game will be associated with this winner in coming update.');  
+          $('#winner').html(data);  
           $('#saveGameToggle').prop('checked', false);
           $('#game').html('');
           afterFirstSpinWheel = false;
