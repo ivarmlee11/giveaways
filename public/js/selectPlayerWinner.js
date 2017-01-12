@@ -783,7 +783,7 @@ function createWheel() {
         });
         wheel.init(); 
         wheel.update();
-        console.log(wheel)
+        console.log(wheel.segments)
       }
     });
   });
