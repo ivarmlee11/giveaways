@@ -85,6 +85,7 @@ $('#selectWinner').on('click', function() {
       if(winner) {
         winnerReset = true;
         $('#winner').html('The winner is ' + winner.username + '!');
+        $('#winnerId').html(winner.id);
       } else {
         $('#winner').html('Nobody has entered the competition yet!');
       } 
@@ -98,6 +99,7 @@ $('#addWinnerToDb').on('click', function() {
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
       var url = '/game/winnerCard';
+      console.log(game)
       $.ajax({
         url: url,
         type: 'POST',
@@ -111,6 +113,7 @@ $('#addWinnerToDb').on('click', function() {
         }
       });
     } else {
+      console.log(winner)
       var url = '/player/addToWinHistory/' + idx;
       $.ajax({
         url: url,
@@ -334,6 +337,7 @@ var wheel = {
       if(afterFirstSpin) {
         // if(finished) {
           $('#winner').html('The winner is ' + winner.username + '!');
+          $('#winnerId').html(winner.id);
           winnerReset = true;
         // }
       } else {
