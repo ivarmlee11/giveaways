@@ -99,7 +99,6 @@ $('#addWinnerToDb').on('click', function() {
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
       var url = '/game/winnerCard';
       // game.userId = $('#winnerId').html();
-      console.log(game)
       $.ajax({
         url: url,
         type: 'POST',
@@ -115,7 +114,6 @@ $('#addWinnerToDb').on('click', function() {
         }
       });
     } else {
-      console.log(winner)
       var url = '/player/addToWinHistory/' + idx;
       $.ajax({
         url: url,
@@ -751,16 +749,11 @@ function createGameWheel() {
             id: val.id,
             name: val.name
           });
-          games.push({
-            id: val.id,
-            name: val.name
-          });
         }
       });
-      gameDropDownList(games);
+      gameDropDownList(gameWheel.segments);
       gameWheel.init(); 
       gameWheel.update();
-      console.log(games)
     }
   });
 };
@@ -793,7 +786,6 @@ function createWheel() {
         });
         wheel.init(); 
         wheel.update();
-        console.log(wheel.segments)
       }
     });
   });
