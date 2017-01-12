@@ -60,7 +60,7 @@ $('#redrawWheel').on('click', function() {
 $('#clearGame').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
-  $('#gameToggleButton').prop('checked', false);
+  $('#saveGameToggle').prop('checked', false);
   createGameWheel();
 });
 
@@ -100,7 +100,7 @@ $('#addWinnerToDb').on('click', function() {
       var url = '/game/winnerCard';
       // game.userId = $('#winnerId').html();
       game.userId = winner.id;
-      console.log(game);
+      console.log(game);  
       $.ajax({
         url: url,
         type: 'POST',
