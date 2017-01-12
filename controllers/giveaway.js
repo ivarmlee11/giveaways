@@ -12,7 +12,7 @@ var express = require('express'),
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
-    res.render('giveaway/adminGameList', 
+    res.render('admin/adminGameList', 
       {
         giveaways: giveaway,
         moment: moment
