@@ -67,7 +67,8 @@ $('#clearGame').on('click', function() {
 $('#dropDown').change(function() {
   $('#game').html('Prize: ' + $(this).val());
   game = {
-    name: $(this).val()
+    name: $(this).val(),
+    userId: $('#winnerId').val()
   };
   afterFirstSpinWheel = true;
   console.log(game);
@@ -94,19 +95,15 @@ $('#selectWinner').on('click', function() {
 $('#addWinnerToDb').on('click', function() {
 
   if(winnerReset) {
-    afterFirstSpin = false;
-    winnerReset = false;
-    gameWheelReset = false;
-    finished = false;
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
-      var url = '/player/addToWinHistory/' + idx;
+      var url = '/game/winnerCard';
       $.ajax({
         url: url,
         type: 'POST',
-        data: winner,
+        data: game,
         success: function(data) {
-          $('#winner').html('Game will be associated with this winner in comingi update.');  
+          $('#winner').html('Game will be associated with this winner in coming update.');  
           $('#saveGameToggle').prop('checked', false);
           $('#game').html('');
           afterFirstSpinWheel = false;
@@ -129,7 +126,13 @@ $('#addWinnerToDb').on('click', function() {
 
   } else {
     $('#winner').html('Select a winner!');
-  }
+  };
+
+  afterFirstSpin = false;
+  winnerReset = false;
+  gameWheelReset = false;
+  finished = false;
+
 });
     
 // wheel
@@ -325,7 +328,8 @@ var wheel = {
 
     if(wheel.segments[i]) {
       winner = {
-        username: wheel.segments[i]
+        username: wheel.segments[i].username,
+        id: wheel.segments[i].id
       };
       if(afterFirstSpin) {
         // if(finished) {
@@ -338,7 +342,8 @@ var wheel = {
         
     } else {
       winner = {
-        username: null
+        username: null,
+        id: null
       };
       $('#winner').html('');
     }
@@ -424,36 +429,7 @@ var wheel = {
   }
 };
 
-function createWheel() {
 
-  var giveawayIds = $('.numberOfPlayer').map( function() {
-    return $(this).attr('giveawayId');
-  }).get();
-    
-  giveawayIds.forEach(function(element) {
-    var url = '/player/playerListData/' + element;
-    $.ajax({
-      url: url,
-      method: 'GET',
-      success: function(playerList) {
-        var playerList = playerList;
-
-        if(playerList.length === 0) {
-          $('#wheel').hide();
-        } else {
-          $('#wheel').show();
-        }
-        wheel.segments = [];
-        playerList.forEach(function(val) {
-          wheel.segments.push(val.username);
-        });
-        wheel.init(); 
-        wheel.update();
-      }
-    });
-  });
-
-};
 
 
 // wheel
@@ -650,11 +626,13 @@ var gameWheel = {
     ctx.font = "2em Lato";
     if(gameWheel.segments[i]) {
       game = {
-        name: gameWheel.segments[i]
+        name: gameWheel.segments[i],
+        userId: $('#winnerId').val()
       };
       if(afterFirstSpinWheel) {
         // if(finished) {
           $('#game').html('Prize: ' + game.name + '!');
+          $('#winnerId').html(game.userId);
         // }
       } else {
         $('#game').html('');
@@ -662,7 +640,8 @@ var gameWheel = {
       gameWheelReset = true;  
     } else {
       game = {
-        name: null
+        name: null,
+        userId: null
       };
       $('#game').html('');
     }
@@ -775,8 +754,44 @@ function createGameWheel() {
       gameDropDownList(games);
       gameWheel.init(); 
       gameWheel.update();
+      console.log(games)
     }
   });
+};
+
+function createWheel() {
+
+  var giveawayIds = $('.numberOfPlayer').map( function() {
+    return $(this).attr('giveawayId');
+  }).get();
+    
+  giveawayIds.forEach(function(element) {
+    var url = '/player/playerListData/' + element;
+    $.ajax({
+      url: url,
+      method: 'GET',
+      success: function(playerList) {
+        var playerList = playerList;
+
+        if(playerList.length === 0) {
+          $('#wheel').hide();
+        } else {
+          $('#wheel').show();
+        }
+        wheel.segments = [];
+        playerList.forEach(function(val) {
+          wheel.segments.push({
+            username: val.username,
+            id: val.id
+          });
+        });
+        wheel.init(); 
+        wheel.update();
+        console.log(wheel)
+      }
+    });
+  });
+
 };
 
 function gameDropDownList(list) {
