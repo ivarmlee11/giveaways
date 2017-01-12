@@ -65,7 +65,11 @@ $('#clearGame').on('click', function() {
 });
 
 $('#dropDown').change(function() {
-  console.log($(this).val());
+  $('#game').html('Prize: ' + $(this).val());
+  game = {
+    name: $(this).val();
+  };
+  console.log(game);
 });
 
 $('#selectWinner').on('click', function() {
