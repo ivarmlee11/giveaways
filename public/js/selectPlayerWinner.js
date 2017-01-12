@@ -67,12 +67,11 @@ $('#clearGame').on('click', function() {
 $('#dropDown').change(function() {
   $('#game').html('Prize: ' + $(this).val());
   var userId = $('option:selected', this).attr('userid');
-  console.log(userId);
-  // game = {
-  //   name: $(this).val(),
-  //   userId: $('#winnerId').val(),
-  //   gameId: $(this).attr('userId') 
-  // };
+  game = {
+    name: $(this).val(),
+    userId: $('#winnerId').val(),
+    gameId: userId 
+  };
   afterFirstSpinWheel = true;
 });
 
