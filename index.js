@@ -22,11 +22,6 @@ var express = require('express'),
 app.use(requestIp.mw());
 
 app.locals.moment = require('moment');
-// app.use(session({
-//   secret: sessionSecret,
-//   resave: false,
-//   saveUninitialized: true
-// }));
 
 app.use(cookieParser());
 app.use(cookieSession({ secret: sessionSecret, cookie: { maxAge: 60 * 60 * 1000 }}));
