@@ -654,7 +654,7 @@ var gameWheel = {
               centerY = gameWheel.centerY,
               size = gameWheel.size,
               colors = gameWheel.seg_color,
-              value = gameWheel.segments[key];
+              value = gameWheel.segments[key].name;
     
     //ctx.save();
     ctx.beginPath();
