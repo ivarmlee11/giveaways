@@ -277,7 +277,7 @@ var wheel = {
           wheel.angleCurrent = ((r + 0.5) / wheel.segments.length) * doublePI;
           
           for (i = 0; i < len; i++){
-      seg_color.push( colors [ segments[i].username.hashCode().mod(colorLen) ] );
+      seg_color.push(colors[i]);
           }
     wheel.seg_color = seg_color;
 
@@ -572,7 +572,7 @@ var gameWheel = {
           gameWheel.angleCurrent = ((r + 0.5) / gameWheel.segments.length) * doublePI;
           
           for (i = 0; i < len; i++){
-      seg_color.push( colors [ segments[i].name.hashCode().mod(colorLen) ] );
+      seg_color.push(colors[i]);
           }
     gameWheel.seg_color = seg_color;
 
