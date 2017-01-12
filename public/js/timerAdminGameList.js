@@ -4,9 +4,8 @@ var giveawayIds = $('[data="ids"]').map( function() {
   return $(this).attr('giveawayId');
 }).get();
 
-var contestStartTime;
-
-var giveawayIdInts = [];
+var contestStartTime,
+  giveawayIdInts = [];
 
 function diffInSeconds(string) {
   var splitString = string.split(':'),
@@ -14,7 +13,7 @@ function diffInSeconds(string) {
       seconds = parseInt(splitString[1]),
       totalSeconds = (mins * 60) + seconds;
   return totalSeconds;
-}
+};
 
 giveawayIds.forEach(function(val) {
   var int = parseInt(val);

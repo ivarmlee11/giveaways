@@ -64,12 +64,21 @@ router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, r
 
   db.game.findById(req.body.gameId).then(function(game) {
 
-    db.user.findById(req.body.userId).then(function(user) {
-      game.addUser(user);
-      res.send('Added to winner group with a game');
+    db.game.update({
+      owned: true
+    }, {
+      where: {
+        name: game.name
+      }
+    }).then(function(user) {
+      db.user.findById(req.body.userId).then(function(user) {
+        game.addUser(user);
+        res.send('Added to winner group with a game');
+      });
     });
+    
+  });  
 
-  });    
 });
 
 router.get('/winnerCard/', ensureAuthenticated, function(req, res) {
