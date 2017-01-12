@@ -5,10 +5,9 @@
     <% games.forEach(function(game) { %>
         <div class='well'>
           <p>Title: <%=  game.name %></p>
-          <p>Code: <%=  game.code %></p>
           <p>Price: <%=  game.price %></p>
-          <% if(game.coderevealed === true){ %>
-            <p> This game code has been revealed. </p>
+          <% if(game.owned === true){ %>
+            <p> This game is owned.</p>
           <% } %>
         </div>
     <% }); %>  
