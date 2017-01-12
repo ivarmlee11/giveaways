@@ -747,6 +747,7 @@ function createGameWheel() {
       gameWheel.segments = [];
       gameList.forEach(function(val) {
         if((val.coderevealed !== true) && (val.owned !== true)) {
+          console.log(val)
           gameWheel.segments.push({
             userId: null,
             gameId: val.id,
