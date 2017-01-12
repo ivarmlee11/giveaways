@@ -801,7 +801,7 @@ function gameDropDownList(list) {
   var $dropDownArea = $('#gameDropDown');
   $dropDownArea.html('');
   list.forEach(function(val) {
-    $dropDownArea.append('<option>' + val.name + '<span class="hide">' + val.gameId + '</span></option>');  
+    $dropDownArea.append('<option userid="' + val.gameId + '">' + val.name + '</option>');  
   });
 };
 
