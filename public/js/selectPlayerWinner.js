@@ -109,6 +109,8 @@ $('#addWinnerToDb').on('click', function() {
           $('#saveGameToggle').prop('checked', false);
           $('#game').html('');
           afterFirstSpinWheel = false;
+          // game.userId = '';
+          // game.name = '';
           createGameWheel();
         }
       });
