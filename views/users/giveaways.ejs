@@ -8,7 +8,7 @@
       <% if(!giveaway.hidden) { %>
         <div class="well text-center">
           <h3><strong><%=giveaway.name%></strong></h3>
-          <h4 data="ids"  giveawayId="<%=giveaway.id%>"><%=moment(giveaway.createdAt).tz.guess()%></h4>
+          <h4 data="ids"  giveawayId="<%=giveaway.id%>"><%=moment(giveaway.createdAt).tz(moment.tz.guess()).format('LLL')%></h4>
 
           <form action="/keyPhrase/<%=giveaway.id%>" method="POST" accept-charset="utf-8">
             <div class="form-group">
