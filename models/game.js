@@ -19,7 +19,8 @@ module.exports = function(sequelize, DataTypes) {
         game.generateHash(team.teamPassword, function(err, encrypted){
           if (err) return next(err);
           game.code = encrypted;
-        cb(null, game);
+          cb(null, game);
+        });
       }
     }
   });
