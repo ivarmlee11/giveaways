@@ -71,7 +71,6 @@ $('#dropDown').change(function() {
     userId: $('#winnerId').val()
   };
   afterFirstSpinWheel = true;
-  console.log(game);
 });
 
 $('#selectWinner').on('click', function() {
@@ -337,7 +336,7 @@ var wheel = {
       if(afterFirstSpin) {
         // if(finished) {
           $('#winner').html('The winner is ' + winner.username + '!');
-          $('#winnerId').html(winner.id);
+          $('#winnerId').val(winner.id);
           winnerReset = true;
         // }
       } else {
@@ -626,7 +625,7 @@ var gameWheel = {
     ctx.font = "2em Lato";
     if(gameWheel.segments[i]) {
       game = {
-        name: gameWheel.segments[i],
+        name: gameWheel.segments[i].name,
         userId: $('#winnerId').val()
       };
       if(afterFirstSpinWheel) {
