@@ -792,7 +792,7 @@ function createWheel() {
 
 function gameDropDownList(list) {
   var $dropDownArea = $('#gameDropDown');
-  $dropDownArea.clear();
+  $dropDownArea.html('');
   list.forEach(function(val) {
     $dropDownArea.append('<option>' + val.name + '</option>');  
   });
