@@ -59,4 +59,23 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   res.redirect('/game/gameData');
 });
 
+router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
+  var id = req.params.idx,
+    // redirectUrl = '/player/playerList/' + id,
+    giveaway;
+
+  db.giveaway.findById(id).then(function(giveaway) {
+    giveaway = giveaway;
+    // if(!giveaway.ended) {
+    console.log(req.body)
+
+    // db.user.findById(req.body.userId).then(function(user) {
+    //   giveaway.addWinner(user);
+    //   res.send('Added to winner group!');
+    // });
+
+  });    
+});
+
+
 module.exports = router;
