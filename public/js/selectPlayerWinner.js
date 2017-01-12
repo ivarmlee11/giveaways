@@ -95,12 +95,12 @@ $('#selectWinner').on('click', function() {
 $('#addWinnerToDb').on('click', function() {
 
   if(winnerReset) {
-    console.log('afterSpingWheel is ' + afterFirstSpinWheel)
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
       var url = '/game/winnerCard';
       // game.userId = $('#winnerId').html();
       game.userId = winner.id;
+      console.log(game);
       $.ajax({
         url: url,
         type: 'POST',
@@ -629,7 +629,8 @@ var gameWheel = {
     if(gameWheel.segments[i]) {
       game = {
         name: gameWheel.segments[i].name,
-        userId: gameWheel.segments[i].userId
+        userId: gameWheel.segments[i].userId,
+        gameId: gameWheel.segments[i].gameId
       };
       if(afterFirstSpinWheel) {
         // if(finished) {
@@ -642,7 +643,8 @@ var gameWheel = {
     } else {
       game = {
         name: null,
-        userId: null
+        userId: null,
+        gameId: null
       };
       $('#game').html('');
     }
@@ -747,6 +749,7 @@ function createGameWheel() {
         if((val.coderevealed !== true) && (val.owned !== true)) {
           gameWheel.segments.push({
             userId: null,
+            gameId: val.id,
             name: val.name
           });
         }
