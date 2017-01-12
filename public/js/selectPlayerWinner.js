@@ -95,6 +95,7 @@ $('#selectWinner').on('click', function() {
 $('#addWinnerToDb').on('click', function() {
 
   if(winnerReset) {
+    console.log('afterSpingWheel is ' + afterFirstSpinWheel)
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
       var url = '/game/winnerCard';
