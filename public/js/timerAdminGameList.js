@@ -109,7 +109,8 @@ giveawayIdInts.forEach(function(val) {
 
 
 window.onresize = function(event) {
-   $('[data=display]').TimeCircles().rebuild();   
+  $('[data=display]').html('');
+  $('[data=display]').TimeCircles().rebuild();   
 };
 
 
