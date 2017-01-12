@@ -20,11 +20,14 @@ var express = require('express'),
  
 app.use(requestIp.mw());
 
-app.use(session({
-  secret: sessionSecret,
-  resave: false,
-  saveUninitialized: true
-}));
+// app.use(session({
+//   secret: sessionSecret,
+//   resave: false,
+//   saveUninitialized: true
+// }));
+
+app.use(express.cookieParser());
+app.use(express.cookieSession({ secret: sessionSecret, cookie: { maxAge: 60 * 60 * 1000 }}));
 
 app.use(flash());
 
