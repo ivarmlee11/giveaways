@@ -46,6 +46,12 @@ a, a:hover, a:active {
   height: 90px;
 }
 
+.cards {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+}
+
 .playerList {
   list-style-type: none;
   padding: 0;

@@ -77,7 +77,6 @@ router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, r
     });
   });  
 
-
 });
 
 router.get('/winnerCard/', ensureAuthenticated, function(req, res) {
