@@ -67,7 +67,7 @@ $('#clearGame').on('click', function() {
 $('#dropDown').change(function() {
   $('#game').html('Prize: ' + $(this).val());
   game = {
-    name: $(this).val();
+    name: $(this).val()
   };
   console.log(game);
 });
