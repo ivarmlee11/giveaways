@@ -60,7 +60,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   res.redirect('/game/gameData');
 });
 
-router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
+router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, res) {
 
   db.game.findById(req.body.gameId).then(function(game) {
     game = game;
@@ -73,7 +73,7 @@ router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
   });    
 });
 
-router.get('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
+router.get('/winnerCard/', ensureAuthenticated, function(req, res) {
   var id = req.user.id;
   db.user.findById(id).then(function(user) {
     user.getGames().then(function(games) {

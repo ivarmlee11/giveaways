@@ -97,9 +97,20 @@ $('#selectWinner').on('click', function() {
 $('#addWinnerToDb').on('click', function() {
 
   if(winnerReset) {
-
+    var url = '/player/addToWinHistory/' + idx;
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: winner,
+      success: function(data) {
+        $('#winner').html(data);
+        $('#saveGameToggle').prop('checked', false);
+        $('#game').html('');
+        afterFirstSpin = false;
+      }
+    });
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
-      var url = '/game/winnerCard';
+      var url = '/game/assignWinnerCard';
       game.userId = winner.id;
       $.ajax({
         url: url,
@@ -113,20 +124,7 @@ $('#addWinnerToDb').on('click', function() {
           createGameWheel();
         }
       });
-    } else {
-      var url = '/player/addToWinHistory/' + idx;
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: winner,
-        success: function(data) {
-          $('#winner').html(data);
-          $('#saveGameToggle').prop('checked', false);
-          $('#game').html('');
-          afterFirstSpin = false;
-        }
-      });
-    }
+    }    
 
   } else {
     $('#winner').html('Select a winner!');
