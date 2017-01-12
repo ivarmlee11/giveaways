@@ -76,19 +76,4 @@ router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req
   });    
 });
 
-router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
-  var id = req.params.idx;
-  db.giveaway.update({
-    ended: true,
-    hidden: true
-  }, {
-    where: {
-      id: id
-    }
-  }).then(function(giveaway) {
-    req.flash('success', 'You have hidden the giveaway.');
-    res.redirect('/giveaway/adminGiveawayList');
-  });
-});
-
 module.exports = router;
