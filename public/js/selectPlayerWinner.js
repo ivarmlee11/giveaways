@@ -98,6 +98,7 @@ $('#addWinnerToDb').on('click', function() {
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
       var url = '/game/winnerCard';
+      game.userId = $('#winnerId').val();
       console.log(game)
       $.ajax({
         url: url,
@@ -626,7 +627,7 @@ var gameWheel = {
     if(gameWheel.segments[i]) {
       game = {
         name: gameWheel.segments[i].name,
-        userId: $('#winnerId').val()
+        userId: null
       };
       if(afterFirstSpinWheel) {
         // if(finished) {
