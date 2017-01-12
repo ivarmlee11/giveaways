@@ -26,8 +26,8 @@ app.use(requestIp.mw());
 //   saveUninitialized: true
 // }));
 
-app.use(express.cookieParser());
-app.use(express.cookieSession({ secret: sessionSecret, cookie: { maxAge: 60 * 60 * 1000 }}));
+app.use(cookieParser());
+app.use(cookieSession({ secret: sessionSecret, cookie: { maxAge: 60 * 60 * 1000 }}));
 
 app.use(flash());
 
