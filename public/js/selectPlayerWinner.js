@@ -13,9 +13,7 @@ var idx = url[url.length -1],
     afterFirstSpin = false,
     game,
     gameWheelReset = false,
-    afterFirstSpinWheel = false,
-    playerPickerFinished = false,
-    gamePickerFinished = false;
+    afterFirstSpinWheel = false;
 
 
 // helpers
@@ -48,7 +46,6 @@ Number.prototype.mod = function(n) {
 
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
-  gamePickerFinished = false;
   $('#saveGameToggle').prop('checked', false);
   createGameWheel();
 });
@@ -61,8 +58,6 @@ $('#redrawWheel').on('click', function() {
 
 $('#clearGame').on('click', function() {
   afterFirstSpinWheel = false;
-  playerPickerFinished = false;
-  gamePickerFinished = false;
   $('#gameToggleButton').prop('checked', false);
   createGameWheel();
 });
@@ -137,8 +132,6 @@ $('#addWinnerToDb').on('click', function() {
   afterFirstSpin = false;
   winnerReset = false;
   gameWheelReset = false;
-  gamePickerFinished = false; 
-  playerPickerFinished = false;
 });
     
 // wheel
@@ -200,7 +193,6 @@ var wheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - wheel.spinStart),
-        playerPickerFinished,
         progress = 0;
 
     wheel.frames++;
@@ -212,24 +204,18 @@ var wheel = {
           * Math.sin(progress * halfPI);
     } else {
       progress = duration / wheel.downTime;
-      wheel.angleDelta = wheel.maxSpeed
-          * Math.sin(progress * halfPI + halfPI);
-              if (progress >= 1){
-                  playerPickerFinished = true;
-              }
+      wheel.angleDelta = wheel.maxSpeed * Math.sin(progress * halfPI + halfPI);
     }
 
     wheel.angleCurrent += wheel.angleDelta;
     while (wheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
       wheel.angleCurrent -= doublePI;
-      }
-    if (playerPickerFinished) {
-      clearInterval(wheel.timerHandle);
-      wheel.timerHandle = 0;
-      wheel.angleDelta = 0;
-      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
+    clearInterval(wheel.timerHandle);
+    wheel.timerHandle = 0;
+    wheel.angleDelta = 0;
+    // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
 
     /*
     // Display RPM
@@ -338,11 +324,9 @@ var wheel = {
         id: wheel.segments[i].id
       };
       if(afterFirstSpin) {
-        if(playerPickerFinished) {
-          $('#winner').html('The winner is ' + winner.username + '!');
-          $('#winnerId').val(winner.id);
+        $('#winner').html('The winner is ' + winner.username + '!');
+        $('#winnerId').val(winner.id);
           winnerReset = true;
-        }
       } else {
         $('#winner').html('');
       }
@@ -495,7 +479,6 @@ var gameWheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - gameWheel.spinStart),
-        gamePickerFinished,
         progress = 0;
 
     gameWheel.frames++;
@@ -507,25 +490,19 @@ var gameWheel = {
           * Math.sin(progress * halfPI);
     } else {
       progress = duration / gameWheel.downTime;
-      gameWheel.angleDelta = gameWheel.maxSpeed
-          * Math.sin(progress * halfPI + halfPI);
-              if (progress >= 1){
-                  gamePickerFinished = true;
-              }
+      gameWheel.angleDelta = gameWheel.maxSpeed * Math.sin(progress * halfPI + halfPI);
     }
 
     gameWheel.angleCurrent += gameWheel.angleDelta;
     while (gameWheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
       gameWheel.angleCurrent -= doublePI;
-      }
-    if (gamePickerFinished) {
-      clearInterval(gameWheel.timerHandle);
-      gameWheel.timerHandle = 0;
-      gameWheel.angleDelta = 0;
-      // $('#gameToggleButton').show();
-      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
+    clearInterval(gameWheel.timerHandle);
+    gameWheel.timerHandle = 0;
+    gameWheel.angleDelta = 0;
+    // $('#gameToggleButton').show();
+    // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
 
     /*
     // Display RPM
@@ -633,10 +610,8 @@ var gameWheel = {
         userId: gameWheel.segments[i].userId
       };
       if(afterFirstSpinWheel) {
-        if(gamePickerFinished) {
-          $('#game').html('Prize: ' + game.name + '!');
-          console.log(game);
-        }
+        $('#game').html('Prize: ' + game.name + '!');
+        console.log(game);     
       } else {
         $('#game').html('');
       }
