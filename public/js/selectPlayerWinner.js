@@ -66,7 +66,7 @@ $('#clearGame').on('click', function() {
 
 $('#dropDown').change(function() {
   $('#game').html('Prize: ' + $(this).val());
-  console.log($(this).attr('userId'))
+  console.log($(this).attr('userid'))
   game = {
     name: $(this).val(),
     userId: $('#winnerId').val(),
