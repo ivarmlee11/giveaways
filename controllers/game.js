@@ -68,6 +68,7 @@ router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
     giveaway = giveaway;
     // if(!giveaway.ended) {
     console.log(req.body)
+    console.log('-------------------------------')
 
     // db.user.findById(req.body.userId).then(function(user) {
     //   giveaway.addWinner(user);
