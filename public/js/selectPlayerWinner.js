@@ -69,7 +69,7 @@ $('#dropDown').change(function() {
   game = {
     name: $(this).val(),
     userId: $('#winnerId').val(),
-    gameId: $(this).attr('userid') 
+    gameId: $(this).attr('userId') 
   };
   afterFirstSpinWheel = true;
 });
