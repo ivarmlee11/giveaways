@@ -1,4 +1,6 @@
 'use strict';
+var bcrypt = require('bcrypt');
+
 module.exports = function(sequelize, DataTypes) {
   var game = sequelize.define('game', {
     name: DataTypes.STRING,
@@ -11,7 +13,16 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
       }
+    },
+    hooks: {
+      beforeCreate: function(game, options, cb) {
+        game.generateHash(team.teamPassword, function(err, encrypted){
+          if (err) return next(err);
+          game.code = encrypted;
+        cb(null, game);
+      }
     }
   });
   return game;
 };
+
