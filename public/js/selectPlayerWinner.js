@@ -629,7 +629,7 @@ var gameWheel = {
     if(gameWheel.segments[i]) {
       game = {
         name: gameWheel.segments[i].name,
-        userId: gameWheel.segments[i].userId
+        userId: gameWheel.segments[i].id
       };
       if(afterFirstSpinWheel) {
         // if(finished) {
