@@ -49,20 +49,24 @@ $('#redrawGameWheel').on('click', function() {
   finished = false;
   $('#saveGameToggle').prop('checked', false);
   createGameWheel();
-})
+});
 
 $('#redrawWheel').on('click', function() {
   afterFirstSpin = false;
   finished = false;
   createWheel();
-})
+});
 
 $('#clearGame').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
   $('#gameToggleButton').prop('checked', false);
   createGameWheel();
-})
+});
+
+$('#dropDown').change(function() {
+  console.log($(this).val());
+});
 
 $('#selectWinner').on('click', function() {
   var url = '/player/playerListData/' + idx;
