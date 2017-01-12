@@ -381,7 +381,7 @@ var wheel = {
     ctx.rotate((lastAngle + angle) / 2);
 
     ctx.fillStyle = whiteHex;
-    ctx.fillText(value.substr(0, 20), size-15, 0);
+    // ctx.fillText(value.substr(0, 20), size-15, 0);
     ctx.restore();
   },
 
