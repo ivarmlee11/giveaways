@@ -14,8 +14,7 @@ router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, re
     var giveaway = giveaways;
     res.render('admin/adminGameList', 
       {
-        giveaways: giveaway,
-        moment: moment
+        giveaways: giveaway
     });
   });
 });

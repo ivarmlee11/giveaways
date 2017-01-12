@@ -21,6 +21,7 @@ var express = require('express'),
  
 app.use(requestIp.mw());
 
+app.locals.moment = require('moment');
 // app.use(session({
 //   secret: sessionSecret,
 //   resave: false,
