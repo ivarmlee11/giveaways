@@ -51,6 +51,10 @@ a, a:hover, a:active {
   padding: 0;
 }
 
+.hide {
+  display: hidden;
+}
+
 ul.nav-tabs > li {
   width: 20%;
   text-align: center;

@@ -755,18 +755,25 @@ function createGameWheel() {
       var games = [];
       gameWheel.segments = [];
       gameList.forEach(function(val) {
-        games.push({
-          id: val.id,
-          name: val.name
-        })
-        if(val.coderevealed !== true) {
+        if((val.coderevealed !== true) || (val.owned !== true)) {
           gameWheel.segments.push(val.name);
+          games.push({
+            id: val.id,
+            name: val.name
+          });
         }
       });
-      console.log(games);
+      gameDropDownList(games);
       gameWheel.init(); 
       gameWheel.update();
     }
+  });
+};
+
+function gameDropDownList(list) {
+  var $dropDownArea = ('#gameDropDown');
+  list.forEach(function(val) {
+    $dropDownArea.append(val.name);
   });
 };
 
