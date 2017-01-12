@@ -69,6 +69,7 @@ $('#dropDown').change(function() {
   game = {
     name: $(this).val()
   };
+  afterFirstSpinWheel = true;
   console.log(game);
 });
 
