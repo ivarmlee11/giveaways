@@ -5,7 +5,8 @@ var express = require('express'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     moment = require('moment-timezone'),
-    flash = require('connect-flash');
+    flash = require('connect-flash'),
+    Baby = require('babyparse');
 
 // game interaction
 
