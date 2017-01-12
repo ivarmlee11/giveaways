@@ -107,10 +107,10 @@ function remakeTimer(){
     });
   });
 }
-
+remakeTimer();
 
 window.onresize = function(event) {
-   remakeTimer();  
+  remakeTimer();  
 };
 
 
