@@ -101,6 +101,7 @@ $('#addWinnerToDb').on('click', function() {
       var url = '/game/winnerCard';
       // game.userId = $('#winnerId').html();
       console.log('hasgdjadgasjdgasjgds')
+      console.log(winner.id)
       console.log(game)
       $.ajax({
         url: url,
