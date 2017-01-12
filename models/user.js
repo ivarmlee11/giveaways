@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         models.user.belongsToMany(models.giveaway, {through: 'giveawaysUsers'});
         models.user.belongsToMany(models.giveaway, {as: 'Contests', through: 'contestsWinners'});
+        models.user.belongsToMany(models.game, {as: 'Games', through: 'gamesUsers'});
       }
     }
   });
