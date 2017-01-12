@@ -627,13 +627,14 @@ var gameWheel = {
     if(gameWheel.segments[i]) {
       game = {
         name: gameWheel.segments[i].name,
-        userId: gameWheel.segments[i].id
+        userId: gameWheel.segments[i].userId
       };
       if(afterFirstSpinWheel) {
         // if(finished) {
-          $('#game').html('Prize: ' + game.name + '!');
-          $('#winnerId').html(game.userId);
-          console.log(game.userId)
+        $('#game').html('Prize: ' + game.name + '!');
+        console.log(gameWheel.segments)
+        console.log(game)
+        $('#winnerId').html(game.userId);
         // }
       } else {
         $('#game').html('');
@@ -746,7 +747,7 @@ function createGameWheel() {
       gameList.forEach(function(val) {
         if((val.coderevealed !== true) && (val.owned !== true)) {
           gameWheel.segments.push({
-            id: val.id,
+            userId: null
             name: val.name
           });
         }
