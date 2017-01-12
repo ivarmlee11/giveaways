@@ -125,6 +125,7 @@ $('#addWinnerToDb').on('click', function() {
           $('#winner').html(data);
           $('#saveGameToggle').prop('checked', false);
           $('#game').html('');
+          afterFirstSpin = false;
         }
       });
     }
@@ -133,7 +134,6 @@ $('#addWinnerToDb').on('click', function() {
     $('#winner').html('Select a winner!');
   };
 
-  afterFirstSpin = false;
   winnerReset = false;
   gameWheelReset = false;
   finished = false;
