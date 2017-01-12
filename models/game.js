@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     hooks: {
       beforeCreate: function(game, options, cb) {
-        game.generateHash(team.teamPassword, function(err, encrypted){
+        game.generateHash(game.code, function(err, encrypted){
           if (err) return next(err);
           game.code = encrypted;
           cb(null, game);
