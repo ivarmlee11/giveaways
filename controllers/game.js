@@ -65,17 +65,13 @@ router.post('/winnerCard/', ensureAuthenticated, modCheck, function(req, res) {
     // redirectUrl = '/player/playerList/' + id,
     giveaway;
 
-  db.giveaway.findById(id).then(function(giveaway) {
-    giveaway = giveaway;
-    // if(!giveaway.ended) {
-    console.log(req.body)
-    console.log('-------------------------------')
-    res.send('YA Boy')
+  db.game.findById(gameId).then(function(game) {
+    game = game;
 
-    // db.user.findById(req.body.userId).then(function(user) {
-    //   giveaway.addWinner(user);
-    //   res.send('Added to winner group!');
-    // });
+    db.user.findById(req.body.userId).then(function(user) {
+      game.addUser(user);
+      res.send('Added to winner group with a game');
+    });
 
   });    
 });
