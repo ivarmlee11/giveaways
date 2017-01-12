@@ -752,20 +752,18 @@ function createGameWheel() {
       } else {
         $('#gameDBWheel').show();
       }
-      venues = [];
+      var games = [];
       gameWheel.segments = [];
       gameList.forEach(function(val) {
-        venues.push({
-          name: val.name,
-          code: val.code,
-          price: val.price,
-          coderevealed: val.coderevealed,
-          owned: val.owned
+        games.push({
+          id: val.id
+          name: val.name
         })
         if(val.coderevealed !== true) {
           gameWheel.segments.push(val.name);
         }
       });
+      console.log(games);
       gameWheel.init(); 
       gameWheel.update();
     }
