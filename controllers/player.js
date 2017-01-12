@@ -90,3 +90,5 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
     res.redirect('/giveaway/adminGiveawayList');
   });
 });
+
+module.exports = router;
