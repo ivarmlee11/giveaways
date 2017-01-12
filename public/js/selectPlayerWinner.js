@@ -771,7 +771,7 @@ function createGameWheel() {
 };
 
 function gameDropDownList(list) {
-  var $dropDownArea = ('#gameDropDown');
+  var $dropDownArea = $('#gameDropDown');
   list.forEach(function(val) {
     $dropDownArea.append(val.name);
   });
