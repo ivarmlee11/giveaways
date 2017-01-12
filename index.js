@@ -128,8 +128,10 @@ app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
       var contests = contests;
       if(contests.length === 0) {
         contests = [];
+        res.render('profile', {contests: contests});
+      } else {
+        res.render('profile', {contests: contests});
       } 
-      res.render('profile', {contests: contests});
     })
   });
 });
