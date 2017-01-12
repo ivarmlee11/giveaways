@@ -46,18 +46,20 @@ Number.prototype.mod = function(n) {
 
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
+  finished = false;
   $('#saveGameToggle').prop('checked', false);
   createGameWheel();
 });
 
 $('#redrawWheel').on('click', function() {
   afterFirstSpin = false;
-  playerPickerFinished = false;
+  finished = false;
   createWheel();
 });
 
 $('#clearGame').on('click', function() {
   afterFirstSpinWheel = false;
+  finished = false;
   $('#gameToggleButton').prop('checked', false);
   createGameWheel();
 });
@@ -132,6 +134,8 @@ $('#addWinnerToDb').on('click', function() {
   afterFirstSpin = false;
   winnerReset = false;
   gameWheelReset = false;
+  finished = false;
+
 });
     
 // wheel
@@ -193,6 +197,7 @@ var wheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - wheel.spinStart),
+        finished,
         progress = 0;
 
     wheel.frames++;
@@ -204,18 +209,24 @@ var wheel = {
           * Math.sin(progress * halfPI);
     } else {
       progress = duration / wheel.downTime;
-      wheel.angleDelta = wheel.maxSpeed * Math.sin(progress * halfPI + halfPI);
+      wheel.angleDelta = wheel.maxSpeed
+          * Math.sin(progress * halfPI + halfPI);
+              if (progress >= 1){
+                  finished = true;
+              }
     }
 
     wheel.angleCurrent += wheel.angleDelta;
     while (wheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
       wheel.angleCurrent -= doublePI;
+      }
+    if (finished) {
+      clearInterval(wheel.timerHandle);
+      wheel.timerHandle = 0;
+      wheel.angleDelta = 0;
+      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
-    clearInterval(wheel.timerHandle);
-    wheel.timerHandle = 0;
-    wheel.angleDelta = 0;
-    // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
 
     /*
     // Display RPM
@@ -324,9 +335,11 @@ var wheel = {
         id: wheel.segments[i].id
       };
       if(afterFirstSpin) {
-        $('#winner').html('The winner is ' + winner.username + '!');
-        $('#winnerId').val(winner.id);
+        // if(finished) {
+          $('#winner').html('The winner is ' + winner.username + '!');
+          $('#winnerId').val(winner.id);
           winnerReset = true;
+        // }
       } else {
         $('#winner').html('');
       }
@@ -479,6 +492,7 @@ var gameWheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - gameWheel.spinStart),
+        finished,
         progress = 0;
 
     gameWheel.frames++;
@@ -490,19 +504,25 @@ var gameWheel = {
           * Math.sin(progress * halfPI);
     } else {
       progress = duration / gameWheel.downTime;
-      gameWheel.angleDelta = gameWheel.maxSpeed * Math.sin(progress * halfPI + halfPI);
+      gameWheel.angleDelta = gameWheel.maxSpeed
+          * Math.sin(progress * halfPI + halfPI);
+              if (progress >= 1){
+                  finished = true;
+              }
     }
 
     gameWheel.angleCurrent += gameWheel.angleDelta;
     while (gameWheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
       gameWheel.angleCurrent -= doublePI;
+      }
+    if (finished) {
+      clearInterval(gameWheel.timerHandle);
+      gameWheel.timerHandle = 0;
+      gameWheel.angleDelta = 0;
+      // $('#gameToggleButton').show();
+      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
     }
-    clearInterval(gameWheel.timerHandle);
-    gameWheel.timerHandle = 0;
-    gameWheel.angleDelta = 0;
-    // $('#gameToggleButton').show();
-    // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
 
     /*
     // Display RPM
@@ -610,8 +630,10 @@ var gameWheel = {
         userId: gameWheel.segments[i].userId
       };
       if(afterFirstSpinWheel) {
+        // if(finished) {
         $('#game').html('Prize: ' + game.name + '!');
-        console.log(game);     
+        console.log(game)
+        // }
       } else {
         $('#game').html('');
       }
