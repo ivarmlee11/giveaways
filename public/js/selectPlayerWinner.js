@@ -1,7 +1,5 @@
 $(function() {
 
-// $('#gameToggleButton').hide();
-
 createWheel();
 createGameWheel();
 
@@ -67,7 +65,7 @@ $('#clearGame').on('click', function() {
 })
 
 $('#selectWinner').on('click', function() {
-  var url = '/admin/playerListData/' + idx;
+  var url = '/player/playerListData/' + idx;
   $.ajax({
     url: url,
     type: 'GET',
@@ -93,7 +91,7 @@ $('#addWinnerToDb').on('click', function() {
     finished = false;
 
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
-      var url = '/admin/addToWinHistory/' + idx;
+      var url = '/player/addToWinHistory/' + idx;
       $.ajax({
         url: url,
         type: 'POST',
@@ -107,7 +105,7 @@ $('#addWinnerToDb').on('click', function() {
         }
       });
     } else {
-      var url = '/admin/addToWinHistory/' + idx;
+      var url = '/player/addToWinHistory/' + idx;
       $.ajax({
         url: url,
         type: 'POST',
@@ -424,7 +422,7 @@ function createWheel() {
   }).get();
     
   giveawayIds.forEach(function(element) {
-    var url = '/admin/playerListData/' + element;
+    var url = '/player/playerListData/' + element;
     $.ajax({
       url: url,
       method: 'GET',
@@ -436,15 +434,8 @@ function createWheel() {
         } else {
           $('#wheel').show();
         }
-        venues = [];
         wheel.segments = [];
         playerList.forEach(function(val) {
-          venues.push({
-            name: val.username,
-            type: val.auth,
-            id: val.id,
-            ip: val.ip
-          })
           wheel.segments.push(val.username);
         });
         wheel.init(); 
@@ -654,7 +645,7 @@ var gameWheel = {
       };
       if(afterFirstSpinWheel) {
         // if(finished) {
-          $('#game').html('The game is ' + game.name + '!');
+          $('#game').html('Prize: ' + game.name + '!');
         // }
       } else {
         $('#game').html('');
@@ -749,44 +740,36 @@ var gameWheel = {
 };
 
 function createGameWheel() {
+  var url = '/game/gameDataOnly';
+  $.ajax({
+    url: url,
+    method: 'GET',
+    success: function(gameList) {
+      var gameList = gameList;
 
-  // var giveawayIds = $('.numberOfPlayer').map( function() {
-  //   return $(this).attr('giveawayId');
-  // }).get();
-    
-  // giveawayIds.forEach(function(element) {
-    var url = '/admin/gameDataOnly';
-    $.ajax({
-      url: url,
-      method: 'GET',
-      success: function(gameList) {
-        var gameList = gameList;
-
-        if(gameList.length === 0) {
-          $('#gameDBWheel').hide();
-        } else {
-          $('#gameDBWheel').show();
-        }
-        venues = [];
-        gameWheel.segments = [];
-        gameList.forEach(function(val) {
-          venues.push({
-            name: val.name,
-            code: val.code,
-            price: val.price,
-            coderevealed: val.coderevealed,
-            owned: val.owned
-          })
-          if(val.coderevealed !== true) {
-            gameWheel.segments.push(val.name);
-          }
-        });
-        gameWheel.init(); 
-        gameWheel.update();
+      if(gameList.length === 0) {
+        $('#gameDBWheel').hide();
+      } else {
+        $('#gameDBWheel').show();
       }
-    });
-  // });
-
+      venues = [];
+      gameWheel.segments = [];
+      gameList.forEach(function(val) {
+        venues.push({
+          name: val.name,
+          code: val.code,
+          price: val.price,
+          coderevealed: val.coderevealed,
+          owned: val.owned
+        })
+        if(val.coderevealed !== true) {
+          gameWheel.segments.push(val.name);
+        }
+      });
+      gameWheel.init(); 
+      gameWheel.update();
+    }
+  });
 };
 
 });

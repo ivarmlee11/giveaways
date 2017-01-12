@@ -1,0 +1,92 @@
+var express = require('express'),
+    router = express.Router(),
+    passport = require('../config/ppConfig'),
+    modCheck = require('../middleware/modCheck.js'),
+    ensureAuthenticated = require('../middleware/ensureAuth.js'),
+    db = require('../models'),
+    moment = require('moment-timezone'),
+    flash = require('connect-flash');
+
+// player interaction
+
+router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.find({
+    where: {id: id}
+  }).then(function(giveaway) {
+    var giveaway = giveaway;
+    giveaway.getUsers().then(function(users) {
+      var playerList = [];
+      users.forEach(function(user) {
+        playerList.push({
+          username: user.username,
+          auth: user.auth
+        });
+      });
+      res.render('admin/adminShowGiveaway', 
+        {
+        playerList: playerList,
+        giveaway: giveaway
+      });
+    });
+  });
+});
+
+router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.find({
+    where: {id: id}
+  }).then(function(giveaway) {
+    giveaway.getUsers().then(function(users) {
+      var playerList = [];
+      users.forEach(function(user) {
+        playerList.push({
+          username: user.username,
+          id: user.id,
+          auth: user.auth,
+          ip: user.ip
+        });
+      });
+      res.send(playerList);
+    });
+  });
+});
+
+router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
+  var id = req.params.idx,
+    redirectUrl = '/player/playerList/' + id,
+    giveaway;
+
+  db.giveaway.findById(id).then(function(giveaway) {
+    giveaway = giveaway;
+    // if(!giveaway.ended) {
+    if(req.body.id) {
+      db.user.findById(req.body.id).then(function(user) {
+        giveaway.addWinner(user);
+        res.send('Added to winner group!');
+      });
+    } else {
+      db.user.find({
+        where: {username: req.body.username}
+      }).then(function(user) {
+        giveaway.addWinner(user);
+        res.send('Added to winner group!');
+      });
+    }
+  });    
+});
+
+router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
+  var id = req.params.idx;
+  db.giveaway.update({
+    ended: true,
+    hidden: true
+  }, {
+    where: {
+      id: id
+    }
+  }).then(function(giveaway) {
+    req.flash('success', 'You have hidden the giveaway.');
+    res.redirect('/giveaway/adminGiveawayList');
+  });
+});

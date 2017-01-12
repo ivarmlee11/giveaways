@@ -50,8 +50,10 @@ app.use(function(req, res, next) {
 });
 
 var adminCtrl = require('./controllers/admin'),
-    authCtrl = require('./controllers/auth');
-
+    authCtrl = require('./controllers/auth'),
+    giveawayCtrl = require('./controllers/giveaway'),
+    playerCtrl = require('./controllers/player'),
+    gameCtrl = require('./controllers/game');
 // twitch bot config
 var options = {
   options: {
@@ -97,6 +99,12 @@ client.on("join", function (channel, username, self) {
 });
 
 app.use('/admin', adminCtrl);
+
+app.use('/player', playerCtrl);
+
+app.use('/game', gameCtrl);
+
+app.use('/giveaway', giveawayCtrl);
 
 app.use('/auth', authCtrl);
 

@@ -39,7 +39,7 @@ giveawayIds.forEach(function(val) {
 
 giveawayIdInts.forEach(function(val) {
 
-  var url = '/admin/giveawayData/' + val;
+  var url = '/giveaway/giveawayData/' + val;
 
   $.ajax({
     url: url,

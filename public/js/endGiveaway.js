@@ -7,7 +7,7 @@ url = url.split('/');
 var idx = url[url.length -1];
 
 $('#endGiveaway').on('click', function() {
-  var url = '/admin/adminListEndGiveaway/' + idx;
+  var url = '/giveaway/adminListEndGiveaway/' + idx;
   $.ajax({
     url: url,
     type: 'GET',
