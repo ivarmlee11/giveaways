@@ -13,7 +13,9 @@ var idx = url[url.length -1],
     afterFirstSpin = false,
     game,
     gameWheelReset = false,
-    afterFirstSpinWheel = false;
+    afterFirstSpinWheel = false,
+    playerPickerFinished = false,
+    gamePickerFinished = false;
 
 
 // helpers
@@ -46,20 +48,21 @@ Number.prototype.mod = function(n) {
 
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
-  finished = false;
+  gamePickerFinished = false;
   $('#saveGameToggle').prop('checked', false);
   createGameWheel();
 });
 
 $('#redrawWheel').on('click', function() {
   afterFirstSpin = false;
-  finished = false;
+  playerPickerFinished = false;
   createWheel();
 });
 
 $('#clearGame').on('click', function() {
   afterFirstSpinWheel = false;
-  finished = false;
+  playerPickerFinished = false;
+  gamePickerFinished = false;
   $('#gameToggleButton').prop('checked', false);
   createGameWheel();
 });
@@ -134,8 +137,8 @@ $('#addWinnerToDb').on('click', function() {
   afterFirstSpin = false;
   winnerReset = false;
   gameWheelReset = false;
-  finished = false;
-
+  gamePickerFinished = false; 
+  playerPickerFinished = false;
 });
     
 // wheel
@@ -197,7 +200,7 @@ var wheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - wheel.spinStart),
-        finished,
+        playerPickerFinished,
         progress = 0;
 
     wheel.frames++;
@@ -212,7 +215,7 @@ var wheel = {
       wheel.angleDelta = wheel.maxSpeed
           * Math.sin(progress * halfPI + halfPI);
               if (progress >= 1){
-                  finished = true;
+                  playerPickerFinished = true;
               }
     }
 
@@ -221,7 +224,7 @@ var wheel = {
       // Keep the angle in a reasonable range
       wheel.angleCurrent -= doublePI;
       }
-    if (finished) {
+    if (playerPickerFinished) {
       clearInterval(wheel.timerHandle);
       wheel.timerHandle = 0;
       wheel.angleDelta = 0;
@@ -335,11 +338,11 @@ var wheel = {
         id: wheel.segments[i].id
       };
       if(afterFirstSpin) {
-        // if(finished) {
+        if(playerPickerFinished) {
           $('#winner').html('The winner is ' + winner.username + '!');
           $('#winnerId').val(winner.id);
           winnerReset = true;
-        // }
+        }
       } else {
         $('#winner').html('');
       }
@@ -492,7 +495,7 @@ var gameWheel = {
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - gameWheel.spinStart),
-        finished,
+        gamePickerFinished,
         progress = 0;
 
     gameWheel.frames++;
@@ -507,7 +510,7 @@ var gameWheel = {
       gameWheel.angleDelta = gameWheel.maxSpeed
           * Math.sin(progress * halfPI + halfPI);
               if (progress >= 1){
-                  finished = true;
+                  gamePickerFinished = true;
               }
     }
 
@@ -516,7 +519,7 @@ var gameWheel = {
       // Keep the angle in a reasonable range
       gameWheel.angleCurrent -= doublePI;
       }
-    if (finished) {
+    if (gamePickerFinished) {
       clearInterval(gameWheel.timerHandle);
       gameWheel.timerHandle = 0;
       gameWheel.angleDelta = 0;
@@ -630,12 +633,10 @@ var gameWheel = {
         userId: gameWheel.segments[i].userId
       };
       if(afterFirstSpinWheel) {
-        // if(finished) {
-        $('#game').html('Prize: ' + game.name + '!');
-        console.log(gameWheel.segments)
-        console.log(game)
-        $('#winnerId').html(game.userId);
-        // }
+        if(gamePickerFinished) {
+          $('#game').html('Prize: ' + game.name + '!');
+          console.log(game);
+        }
       } else {
         $('#game').html('');
       }
