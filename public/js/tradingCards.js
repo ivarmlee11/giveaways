@@ -4,6 +4,7 @@ $(function() {
     updateCards();
   });
   function updateCards() {
+    var url = '/game/winnerCard'
    $.ajax({
     url: url,
     type: 'GET',
