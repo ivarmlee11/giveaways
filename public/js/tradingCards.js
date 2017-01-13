@@ -33,7 +33,7 @@ function updatePlayerList() {
           users = [];
 
       playerList.forEach(function(val) {
-        users.segments.push({
+        users.push({
           username: val.username,
           id: val.id
         });
