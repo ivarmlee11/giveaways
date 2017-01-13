@@ -788,7 +788,6 @@ function createWheel() {
       }
     });
   });
-
 };
 
 function gameDropDownList(list) {
