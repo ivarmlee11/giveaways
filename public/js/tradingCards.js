@@ -5,7 +5,7 @@ $(function() {
   var $tradingArea = $('#tradingArea');
 
   function updateCards() {
-    var url = '/game/winnerCard'
+    var url = '/game/winnerCard/'
    $.ajax({
     url: url,
     type: 'GET',
