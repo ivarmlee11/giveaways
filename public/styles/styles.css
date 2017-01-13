@@ -42,7 +42,7 @@ a, a:hover, a:active {
 }
 
 #tradingWindow {
-  min-height: 100px;
+  min-height: 300px;
 }
 
 .nameSpace {
