@@ -3,14 +3,6 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
     <h1 class="text-center">Profile</h1>
-    <div class="well">
-    <h2 class="text-center">Giveaways Won</h2>
-      <% contests.forEach(function(contest) { %>
-        <h3><strong><%=contest.name%></strong></h3>
-        <h5><strong>Started <%=moment(contest.createdAt).tz("America/Los_Angeles").format('LLL')%> PST</strong></h5>  
-        <h5><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%> PST</strong></h5>  
-      <% }); %>  
-    </div>
   </div>
 </div>
 <h1 class="text-center">Tradable Games</h1>
@@ -33,4 +25,11 @@
 </div>
 <h1 class="text-center">Owned Games</h1>
 <div id="ownedGames" = class="container">
+</div>
+<div class="well">
+  <h2 class="text-center">Giveaways Won</h2>
+  <% contests.forEach(function(contest) { %>
+    <h3><strong><%=contest.name%></strong></h3>
+    <h5><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%> PST</strong></h5>  
+  <% }); %>  
 </div>
