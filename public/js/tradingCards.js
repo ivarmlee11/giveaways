@@ -19,7 +19,9 @@ $(function() {
 
           )
         })
-        $('.cards').draggable();
+        $('.cards').draggable({
+          stack: '.cards'
+        });
       }
     });
   };
