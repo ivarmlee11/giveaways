@@ -1,8 +1,18 @@
 $(function() {
-// $('#updateCards').on('click', function(){
-//   updateCards();
-// });
-var $tradingArea = $('#tradingArea');
+
+var $tradingArea = $('#tradingArea'),
+    playerInfo;
+
+$('#playerDropDown').change(function() {
+  $('#player').html($(this).val());
+  var userId = $('option:selected', this).attr('userid');
+  playerInfo = {
+    name: $(this).val(),
+    gameId: null,
+    userId: parseInt(userId) 
+  };
+  console.log(playerInfo)
+});
 
 function updateCards() {
   var url = '/game/winnerCard/'
@@ -30,7 +40,8 @@ function updatePlayerList() {
     method: 'GET',
     success: function(playerList) {
       var playerList = playerList,
-          users = [];
+          users = [],
+          $playerTradeList = $('#playerTradeList');
 
       playerList.forEach(function(val) {
         users.push({
@@ -39,18 +50,15 @@ function updatePlayerList() {
         });
       });
 
-      gameDropDownList(users);
+   
+      $playerTradeList.html('');
+      users.forEach(function(val) {
+        $playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
+      });
     }
   });
 };
 
-function gameDropDownList(list) {
-  var $playerTradeList = $('#playerTradeList');
-  $playerTradeList.html('');
-  list.forEach(function(val) {
-    $playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
-  });
-};
 
 updateCards();
 updatePlayerList();
