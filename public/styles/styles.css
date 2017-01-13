@@ -45,14 +45,24 @@ a, a:hover, a:active {
   min-height: 300px;
 }
 
-#tradingWindow {
-  background-color: green;
+#tradeWindowIn {
+  border: 3px solid green;
   height: 300px
 }
 
-#tradePlayerSelectWindow {
-  background-color: blue;
+#tradeWindowInfo {
+  border: 3px solid green;
+  height: 200px
+}
+
+#tradeWindowOut {
+  border: 3px solid blue;
   height: 300px
+}
+
+#tradeWindowOutInfo {
+  border: 3px solid blue;
+  height: 200px
 }
 
 .nameSpace {

@@ -11,14 +11,11 @@ $(function() {
       type: 'GET',
       success: function(cardList) {
         cardList.forEach(function(val) {
-          console.log(val);
           $tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
             '<h3>' + val.name + '</h3>' + 
             '</div>'
-
-
           )
-        })
+        });
         $('.cards').draggable({
           stack: '.cards'
         });
