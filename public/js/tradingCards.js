@@ -1,8 +1,9 @@
 $(function() {
-  console.log('trading cards');
-  $('#updateCards').on('click', function(){
-    updateCards();
-  });
+  // $('#updateCards').on('click', function(){
+  //   updateCards();
+  // });
+  var $tradingArea = $('#tradingArea');
+
   function updateCards() {
     var url = '/game/winnerCard'
    $.ajax({
@@ -11,8 +12,13 @@ $(function() {
     success: function(cardList) {
       cardList.forEach(function(val) {
         console.log(val);
+        $tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
+          '<h3>' + val.name + '</h3>' + 
+          '</div>'
+        )
       })
     }
   });
+  updateCards();
   };
 });

@@ -8,24 +8,18 @@ var express = require('express'),
     flash = require('connect-flash'),
     Baby = require('babyparse');
 
-// game interaction
-
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
-
   db.game.findAll().then(function(games) {
     var games = games;
     res.render('admin/gameData', {games: games});
   });
-
 });
 
 router.get('/gameDataOnly', ensureAuthenticated, modCheck, function(req, res) {
-
   db.game.findAll().then(function(games) {
     var games = games;
     res.send(games);
   });
-
 });
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
@@ -61,7 +55,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
 });
 
 router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, res) {
-
   db.game.findById(req.body.gameId).then(function(game) {
     db.user.findById(req.body.userId).then(function(user) {
       game.addUser(user);
