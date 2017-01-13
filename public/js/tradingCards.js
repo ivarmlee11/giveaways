@@ -15,8 +15,11 @@ $(function() {
           $tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
             '<h3>' + val.name + '</h3>' + 
             '</div>'
+
+
           )
         })
+        $('.cards').draggable();
       }
     });
   };
