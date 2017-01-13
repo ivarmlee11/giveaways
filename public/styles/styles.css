@@ -41,8 +41,12 @@ a, a:hover, a:active {
   width: 80px;
 }
 
-#tradingWindow {
+#tradingDiv {
   min-height: 300px;
+}
+
+#tradingWindow {
+  background-color: green;
 }
 
 .nameSpace {
@@ -53,6 +57,7 @@ a, a:hover, a:active {
   display: inline-block;
   height: 140px;
   width: 140px;
+  background-color: gray;
 }
 
 .playerList {
