@@ -49,6 +49,10 @@ a, a:hover, a:active {
   background-color: green;
 }
 
+#tradePlayerSelectWindow {
+  background-color: blue;
+}
+
 .nameSpace {
   height: 90px;
 }
