@@ -47,10 +47,12 @@ a, a:hover, a:active {
 
 #tradingWindow {
   background-color: green;
+  height: 100%;
 }
 
 #tradePlayerSelectWindow {
   background-color: blue;
+  height: 100%;
 }
 
 .nameSpace {
