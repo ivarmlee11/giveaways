@@ -41,6 +41,10 @@ a, a:hover, a:active {
   width: 80px;
 }
 
+#tradingArea {
+  min-height: 100px;
+}
+
 .nameSpace {
   height: 90px;
 }
