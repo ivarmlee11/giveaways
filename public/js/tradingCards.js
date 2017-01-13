@@ -24,7 +24,7 @@ function updateCards() {
 };
 
 function updatePlayerList() {
-  var url = '/player/playerListData/' + element;
+  var url = '/player/allplayers/';
   $.ajax({
     url: url,
     method: 'GET',
@@ -52,6 +52,6 @@ function gameDropDownList(list) {
   });
 };
 
-  updateCards();
-  updatePlayerList();
+updateCards();
+updatePlayerList();
 });

@@ -8,6 +8,13 @@ var express = require('express'),
     flash = require('connect-flash');
 
 // player interaction
+router.get('/allplayers/', ensureAuthenticated, function(req, res) {
+
+  db.user.findAll().then(function(users) {
+    res.send(users);
+  });
+
+});
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
