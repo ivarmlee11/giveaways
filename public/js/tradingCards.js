@@ -33,13 +33,19 @@ $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
     var draggable = ui.draggable,
       id = draggable.attr('gameid');
-    tradeInfoOut.gameId.push(parseInt(id));
+    if (tradeInfoOut.gameId.indexOf(id) === -1) {
+      tradeInfoOut.gameId.push(parseInt(id));
+    }  
     $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
     console.log(tradeInfoOut);
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
 });
+
+function removeDuplictes() {
+
+}
 
 function updateCards() {
   var url = '/game/winnerCard/'
