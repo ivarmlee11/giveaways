@@ -12,7 +12,7 @@ $('#hideThis').on('click', function() {
     url: url,
     type: 'GET',
     success: function(data) {       
-      window.location.href = 'https://tweak-game-temp.herokuapp.com' + url;       
+      // window.location.href = 'https://tweak-game-temp.herokuapp.com' + url;       
     }
   });
 });
