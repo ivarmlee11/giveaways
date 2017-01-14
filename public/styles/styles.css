@@ -65,6 +65,10 @@ a, a:hover, a:active {
   height: 200px
 }
 
+#messageBox {
+  min-height: 90px;
+}
+
 .nameSpace {
   height: 90px;
 }

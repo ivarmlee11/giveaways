@@ -47,7 +47,7 @@ $('#clearIncTrade').on('click', function() {
 $('#proposeTrade').on('click', function() {
   if(tradeInfoOut.name && tradeInfoOut.gameId.length && tradeInfoOut.userId) {
     console.log(tradeInfoOut);
-    console.log('package ready to be sent')
+    $('#messageBox').html('Proposal sent.');
   } else {
     console.log(tradeInfoOut);
     $('#messageBox').html('To propose a trade you need a recipient and an item to send.');
