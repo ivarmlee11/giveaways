@@ -22,6 +22,8 @@ $('#clearOutTrade').on('click', function() {
 
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
+    console.log(event)
+    console.log(ui)
     console.log(tradeInfoOut);
     var draggable = ui.draggable;
     var id = draggable.attr('gameid');
