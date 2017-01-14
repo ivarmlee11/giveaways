@@ -44,11 +44,10 @@ $('#clearIncTrade').on('click', function() {
   console.log(tradeInfoIn);
 })
 
-$('#tradeWindowIn').droppable( {
+$('#tradeWindowOut').droppable( {
   drop: function(event, ui){
     var draggable = ui.draggable,
-      id = draggable.attr('gameid'),
-      arr = tradeInfoOut.gameId;
+      id = draggable.attr('gameid');
 
       tradeInfoOut.gameId.push(parseInt(id));
 
@@ -63,10 +62,6 @@ $('#tradeWindowIn').droppable( {
   activeClass: 'highlight',
   hoverClass: 'foundhome'
 });
-
-function removeDuplictes() {
-
-}
 
 function updateCards() {
   var url = '/game/winnerCard/'
