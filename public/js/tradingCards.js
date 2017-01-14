@@ -23,7 +23,10 @@ $('#clearOutTrade').on('click', function() {
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
     console.log(tradeInfoOut);
-    $('#gameListOut').html(tradeWindowOut.gameId)
+    var draggable = ui.draggable;
+    var id = draggable.attr('gameid');
+    console.log(id + ' gameid');
+    // $('#gameListOut').html(tradeInfoOut.gameId)
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
