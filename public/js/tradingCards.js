@@ -18,7 +18,8 @@ $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
     console.log(playerInfo);
   },
-  activeClass: "highlight"
+  activeClass: 'highlight',
+  hoverClass: 'foundhome'
 });
 
 function updateCards() {

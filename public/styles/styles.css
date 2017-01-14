@@ -70,7 +70,11 @@ a, a:hover, a:active {
 }
 
 .highlight {
-  background-color: red;
+  background-color: green;
+}
+
+.foundhome {
+  background-color: gray;
 }
 
 .cards {
