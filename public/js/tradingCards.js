@@ -32,10 +32,16 @@ $('#clearOutTrade').on('click', function() {
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
     var draggable = ui.draggable,
-      id = draggable.attr('gameid');
-    if (tradeInfoOut.gameId.indexOf(id) === -1) {
+      id = draggable.attr('gameid'),
+      arr = tradeInfoOut.gameId;
+
       tradeInfoOut.gameId.push(parseInt(id));
-    }  
+
+      tradeInfoOut.gameId =  tradeInfoOut.gameId.filter( function( item, index, inputArray ) {
+        return inputArray.indexOf(item) == index;
+      });
+
+    
     $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
     console.log(tradeInfoOut);
   },
