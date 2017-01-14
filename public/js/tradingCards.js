@@ -1,22 +1,28 @@
 $(function() {
 
 var $tradingArea = $('#tradingArea'),
-    playerInfo = {};
+    tradeInfoOut = {},
+    tradeInfoIn = {};
 
 $('#playerDropDown').on('click', function() {
   $('#player').html($(this).val());
   var userId = $('option:selected', this).attr('userid');
-  playerInfo = {
+  tradeInfoOut = {
     name: $(this).val(),
     gameId: [],
     userId: parseInt(userId) 
   };
-  console.log(playerInfo)
+  console.log(tradeInfoOut)
 });
+
+$('#clearOutTrade').on('click', function() {
+  tradeInfoOut = {};
+  console.log(tradeInfoOut);
+})
 
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
-    console.log(playerInfo);
+    console.log(tradeInfoOut);
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
