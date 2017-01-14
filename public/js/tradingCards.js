@@ -22,13 +22,11 @@ $('#clearOutTrade').on('click', function() {
 
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
-    console.log(event)
-    console.log(ui)
-    console.log(tradeInfoOut);
-    var draggable = ui.draggable;
-    var id = draggable.attr('gameid');
+    var draggable = ui.draggable,
+      id = draggable.attr('gameid');
     console.log(id + ' gameid');
-    // $('#gameListOut').html(tradeInfoOut.gameId)
+    tradeInfoOut.gameId.push(id);
+    console.log(tradeInfoOut);
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
