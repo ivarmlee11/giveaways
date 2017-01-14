@@ -26,7 +26,22 @@ $('#clearOutTrade').on('click', function() {
     gameId: [],
     userId: null 
   };
+  $('#playerOut').html('');
+  $('#gameListOut').html('');
+  console.log('trade info out');
   console.log(tradeInfoOut);
+});
+
+$('#clearIncTrade').on('click', function() {
+  tradeInfoIn = {
+    name: null,
+    gameId: [],
+    userId: null 
+  };
+  $('#playerIn').html('');
+  $('#gameListIn').html('');
+  console.log('trade info in');
+  console.log(tradeInfoIn);
 })
 
 $('#tradeWindowIn').droppable( {
