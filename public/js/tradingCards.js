@@ -50,7 +50,6 @@ function updatePlayerList() {
         });
       });
 
-   
       $playerTradeList.html('');
       users.forEach(function(val) {
         $playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
