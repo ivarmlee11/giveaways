@@ -1,7 +1,11 @@
 $(function() {
 
 var $tradingArea = $('#tradingArea'),
-    tradeInfoOut = {},
+    tradeInfoOut = {
+        name: null,
+        gameId: [],
+        userId: null 
+      },
     tradeInfoIn = {};
 
 $('#playerDropDown').on('click', function() {
@@ -25,7 +29,7 @@ $('#tradeWindowIn').droppable( {
     var draggable = ui.draggable,
       id = draggable.attr('gameid');
     console.log(id + ' gameid');
-    tradeInfoOut.gameId.push(id);
+    tradeInfoOut.gameId.push(parseInt(id));
     console.log(tradeInfoOut);
   },
   activeClass: 'highlight',
