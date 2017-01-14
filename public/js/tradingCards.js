@@ -16,7 +16,7 @@ $('#playerDropDown').on('click', function() {
 
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
-  console.log(playarInfo)
+  console.log(playerInfo)
 }
 });
 
