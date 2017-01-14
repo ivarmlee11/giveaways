@@ -16,9 +16,7 @@ $('#playerDropDown').on('click', function() {
 
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
-    // playerInfo.gameId = 
-    console.log(event.target)
-    console.log(playerInfo)
+  console.log(playerInfo)
 }
 });
 
