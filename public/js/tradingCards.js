@@ -6,21 +6,26 @@ var $tradingArea = $('#tradingArea'),
         gameId: [],
         userId: null 
       },
-    tradeInfoIn = {};
+    tradeInfoIn = {
+        name: null,
+        gameId: [],
+        userId: null 
+      };
 
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
   var userId = $('option:selected', this).attr('userid');
-  tradeInfoOut = {
-    name: $(this).val(),
-    gameId: [],
-    userId: parseInt(userId) 
-  };
+  tradeInfoOut.name = $(this).val();
+  tradeInfoOut.userId = parseInt(userId);
   console.log(tradeInfoOut)
 });
 
 $('#clearOutTrade').on('click', function() {
-  tradeInfoOut = {};
+  tradeInfoOut = {
+    name: null,
+    gameId: [],
+    userId: null 
+  };
   console.log(tradeInfoOut);
 })
 
