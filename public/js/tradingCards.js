@@ -5,7 +5,7 @@ var $tradingArea = $('#tradingArea'),
     tradeInfoIn = {};
 
 $('#playerDropDown').on('click', function() {
-  $('#player').html($(this).val());
+  $('#playerOut').html($(this).val());
   var userId = $('option:selected', this).attr('userid');
   tradeInfoOut = {
     name: $(this).val(),
@@ -23,6 +23,7 @@ $('#clearOutTrade').on('click', function() {
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
     console.log(tradeInfoOut);
+    $('#gameListOut').html(tradeWindowInOut.gameId)
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
