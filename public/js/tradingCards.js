@@ -23,7 +23,7 @@ $('#playerDropDown').on('click', function() {
 $('#clearOutTrade').on('click', function() {
   tradeInfoOut = {
     name: null,
-    gameId: [],
+    gameId: null,
     userId: null 
   };
   $('#playerOut').html('');
@@ -35,7 +35,7 @@ $('#clearOutTrade').on('click', function() {
 $('#clearIncTrade').on('click', function() {
   tradeInfoIn = {
     name: null,
-    gameId: [],
+    gameId: null,
     userId: null 
   };
   $('#playerIn').html('');
@@ -43,6 +43,17 @@ $('#clearIncTrade').on('click', function() {
   console.log('trade info in');
   console.log(tradeInfoIn);
 })
+
+$('#proposeTrade').on('click', function() {
+  if(tradeInfoOut.name && tradeInfoOut.gameId.length && tradeInfoOut.userId) {
+    console.log(tradeInfoOut);
+    console.log('package ready to be sent')
+  } else {
+    console.log(tradeInfoOut);
+    $('#messageBox').html('To propose a trade you need a recipient and an item to send.');
+  }
+
+});
 
 $('#tradeWindowOut').droppable( {
   drop: function(event, ui){

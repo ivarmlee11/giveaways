@@ -8,12 +8,11 @@ var express = require('express'),
     flash = require('connect-flash');
 
 // player interaction
-router.get('/allplayers/', ensureAuthenticated, function(req, res) {
 
+router.get('/allplayers/', ensureAuthenticated, function(req, res) {
   db.user.findAll().then(function(users) {
     res.send(users);
   });
-
 });
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
@@ -61,18 +60,14 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
-    // redirectUrl = '/player/playerList/' + id,
     giveaway;
 
   db.giveaway.findById(id).then(function(giveaway) {
     giveaway = giveaway;
-    // if(!giveaway.ended) {
-
     db.user.findById(req.body.id).then(function(user) {
       giveaway.addWinner(user);
       res.send('Added to winner group!');
     });
-
   });    
 });
 

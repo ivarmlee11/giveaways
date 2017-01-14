@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-waterfall": "^0.1.5",
     "babyparse": "^0.4.6",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
@@ -21,7 +20,6 @@
     "errorhandler": "^1.5.0",
     "express": "^4.14.0",
     "express-ejs-layouts": "^2.2.0",
-    "express-session": "^1.14.2",
     "moment-timezone": "^0.5.11",
     "morgan": "^1.7.0",
     "mysql": "^2.12.0",

@@ -15,7 +15,6 @@ var idx = url[url.length -1],
     gameWheelReset = false,
     afterFirstSpinWheel = false;
 
-
 // helpers
 
 var blackHex = 'black',
@@ -64,7 +63,7 @@ $('#clearGame').on('click', function() {
   createGameWheel();
 });
 
-$('#dropDown').change(function() {
+$('#dropDown').on('click', function() {
   $('#game').html('Prize: ' + $(this).val());
   var userId = $('option:selected', this).attr('userid');
   game = {
