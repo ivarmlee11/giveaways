@@ -3,7 +3,7 @@ $(function() {
 var $tradingArea = $('#tradingArea'),
     playerInfo;
 
-$('#playerDropDown').change(function() {
+$('#playerDropDown').on('click', function() {
   $('#player').html($(this).val());
   var userId = $('option:selected', this).attr('userid');
   playerInfo = {
@@ -12,6 +12,12 @@ $('#playerDropDown').change(function() {
     userId: parseInt(userId) 
   };
   console.log(playerInfo)
+});
+
+$('#tradeWindowIn').droppable( {
+  drop: function(event, ui){
+  console.log(playarInfo)
+}
 });
 
 function updateCards() {
