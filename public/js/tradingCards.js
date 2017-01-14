@@ -1,14 +1,14 @@
 $(function() {
 
 var $tradingArea = $('#tradingArea'),
-    playerInfo;
+    playerInfo = {};
 
 $('#playerDropDown').on('click', function() {
   $('#player').html($(this).val());
   var userId = $('option:selected', this).attr('userid');
   playerInfo = {
     name: $(this).val(),
-    gameId: null,
+    gameId: [],
     userId: parseInt(userId) 
   };
   console.log(playerInfo)
@@ -16,8 +16,8 @@ $('#playerDropDown').on('click', function() {
 
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
-  console.log(playerInfo)
-}
+    console.log(playerInfo);
+  }
 });
 
 function updateCards() {
@@ -33,7 +33,8 @@ function updateCards() {
         )
       });
       $('.cards').draggable({
-        stack: '.cards'
+        stack: '.cards',
+        activeClass: 'highlight'
       });
     }
   });
