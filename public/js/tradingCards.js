@@ -17,7 +17,8 @@ $('#playerDropDown').on('click', function() {
 $('#tradeWindowIn').droppable( {
   drop: function(event, ui){
     console.log(playerInfo);
-  }
+  },
+  activeClass: "highlight"
 });
 
 function updateCards() {

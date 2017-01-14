@@ -70,8 +70,9 @@ a, a:hover, a:active {
 }
 
 .highlight {
-  background-color: yellow;
+  background-color: red;
 }
+
 .cards {
   display: inline-block;
   height: 140px;
