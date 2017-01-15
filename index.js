@@ -17,7 +17,8 @@ var express = require('express'),
     botKey = process.env.BOTAPIKEY,
     server  = require("http").createServer(app),
     io = require("socket.io")(server),
-    flash = require('connect-flash');
+    flash = require('connect-flash'),
+    sharedsession = require("express-socket.io-session");
 
 app.use(requestIp.mw());
 
@@ -39,6 +40,20 @@ app.use(session({
   saveUninitialized: false,
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
 }));
+
+io.use(sharedsession(session));
+
+io.on("connection", function(socket) {
+    // Accept a login event with user's data
+    socket.on("login", function(userdata) {
+        socket.handshake.session.userdata = userdata;
+    });
+    socket.on("logout", function(userdata) {
+        if (socket.handshake.session.userdata) {
+            delete socket.handshake.session.userdata;
+        }
+    });        
+});
 
 app.use(flash());
 
