@@ -15,8 +15,8 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    server = require('http').Server(app),
-    io = require('socket.io')(server),
+    // server = require('http').Server(app),
+    io = require('socket.io')(),
     sharedsession = require('express-socket.io-session'),
     flash = require('connect-flash');
  
