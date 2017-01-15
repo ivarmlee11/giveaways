@@ -20,7 +20,7 @@ var express = require('express'),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
 
-server.listen(port);
+// server.listen(port);
 
 app.use(requestIp.mw());
 
@@ -189,7 +189,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       reqUserId = req.user.id,
       reqUserName = req.user.username;
 
-  db.giveaway.findById(id).then(function(giveaway) {
+  Error: listen EADDRINUSE :::54337db.giveaway.findById(id).then(function(giveaway) {
     if(giveaway.ended) {
       req.flash('error', 'Giveaway ended.');
       res.redirect('back');
@@ -228,4 +228,4 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-app.listen(port);
+server.listen(port);
