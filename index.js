@@ -228,4 +228,4 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-server.listen(port);
+app.listen(port);
