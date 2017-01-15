@@ -19,7 +19,9 @@ var express = require('express'),
     server = require('http').Server(app), 
     io = require('socket.io')(server),
     flash = require('connect-flash');
- 
+
+server.listen(80);
+
 app.use(requestIp.mw());
 
 app.locals.moment = require('moment');
