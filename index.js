@@ -30,7 +30,7 @@ var session = {
   cookie: { maxAge: 60 * 60 * 1000 }
 };
 
-app.use(cookieSession(sesion));
+app.use(cookieSession(session));
 
 var sharedSession = require("express-socket.io-session");
 
