@@ -15,7 +15,7 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    server  = app.listen(port),
+    server  = require("http").createServer(app),
     io = require("socket.io")(server),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
@@ -41,22 +41,22 @@ app.use(session({
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
 }));
 
-io.use(sharedsession(session, {
-    autoSave:true
-})); 
+// io.use(sharedsession(session, {
+//     autoSave:true
+// })); 
 
-io.on("connection", function(socket) {
-    // Accept a login event with user's data
-    console.log('what up')
-    socket.on("login", function(userdata) {
-        socket.handshake.session.userdata = userdata;
-    });
-    socket.on("logout", function(userdata) {
-        if (socket.handshake.session.userdata) {
-            delete socket.handshake.session.userdata;
-        }
-    });        
-});
+// io.on("connection", function(socket) {
+//     // Accept a login event with user's data
+//     console.log('what up')
+//     socket.on("login", function(userdata) {
+//         socket.handshake.session.userdata = userdata;
+//     });
+//     socket.on("logout", function(userdata) {
+//         if (socket.handshake.session.userdata) {
+//             delete socket.handshake.session.userdata;
+//         }
+//     });        
+// });
 
 app.use(flash());
 
@@ -81,6 +81,7 @@ app.locals.moment = require('moment');
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
+  res.io = io;
   next();
 });
 
