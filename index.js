@@ -15,12 +15,11 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    server  = require("http").createServer(app),
-    io = require("socket.io")(server),
+    // server  = require("http").createServer(app),
+    io = require("socket.io")(app),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
 
-server.listen(8080);
 app.use(requestIp.mw());
 
 app.use(cookieParser());
@@ -59,6 +58,8 @@ io.on("connection", function(socket) {
         }
     });        
 });
+
+
 
 app.use(flash());
 
