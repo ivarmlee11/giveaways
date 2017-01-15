@@ -1,5 +1,5 @@
 var express = require('express'),
-    app = express().createServer();,
+    app = express().createServer(),
     request = require('request'),
     morgan = require('morgan')('dev'),
     ensureAuthenticated = require('./middleware/ensureAuth.js'),
