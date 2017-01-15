@@ -226,4 +226,4 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
 });
 
 app.listen(port);
-
+server.listen(3000);
