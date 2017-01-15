@@ -30,10 +30,10 @@ app.use(requestIp.mw());
 app.use(cookieParser());
 
 app.use(expressSession({
-    secret: sessionSecret,
-    store: sequelizeSessionStore,
-    resave: false,
-    saveUninitialized: false
+  secret: sessionSecret,
+  // store: sequelizeSessionStore,
+  resave: false,
+  saveUninitialized: false
 }));
 
 app.use(flash());
@@ -57,7 +57,7 @@ app.use(errorhandler());
 var sharedSession = require('express-socket.io-session');
 
 io.use(sharedSession(session, {
-  autoSave:true
+  autoSave: true
 }));
 
 app.locals.moment = require('moment');
