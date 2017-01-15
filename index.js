@@ -35,9 +35,9 @@ app.use(cookieSession(session));
 
 var sharedSession = require('express-socket.io-session');
 
-// io.use(sharedSession(session, {
-//     autoSave:true
-// }));
+io.use(sharedSession(session, {
+    autoSave:true
+}));
 
 app.use(flash());
 
@@ -64,29 +64,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-io.on("connection", function(socket) {
-    // Accept a login event with user's data
-    console.log('we connected ')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    console.log('---------------------')
-    // socket.on("login", function(userdata) {
-    //     socket.handshake.session.userdata = userdata;
-    // });
-    // socket.on("logout", function(userdata) {
-    //     if (socket.handshake.session.userdata) {
-    //         delete socket.handshake.session.userdata;
-    //     }
-    // });        
+io.on('connection', function(socket){
+  console.log('a user connected');
 });
-
 
 
 var adminCtrl = require('./controllers/admin'),
