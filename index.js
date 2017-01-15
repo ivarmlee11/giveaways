@@ -207,7 +207,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-app.listen(port);
+app.server.listen(port);
 
 
 
