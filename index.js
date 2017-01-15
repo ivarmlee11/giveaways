@@ -21,9 +21,9 @@ var express = require('express'),
     io = require('socket.io')(server),
     flash = require('connect-flash');
 
-var sequelizeSessionStore = new SessionStore({
-  db: db
-});
+// var sequelizeSessionStore = new SessionStore({
+//   db: db
+// });
 
 app.use(requestIp.mw());
 
