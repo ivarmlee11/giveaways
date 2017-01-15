@@ -1,9 +1,9 @@
 $(function() {
 
 function TradeWindow(tradeName, tradeGame, tradeUser) {
-  name: this.tradeName,
-  gameId: this.tradeGame,
-  userId: this.tradeUser
+  this.name = tradeName,
+  this.gameId = tradeGame,
+  this.userId = tradeUser
 };
 
 var $tradingArea = $('#tradingArea'),
