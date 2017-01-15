@@ -28,8 +28,8 @@ router.get('/loggedIn', ensureAuthenticated, function(req, res) {
     res.render('admin/adminControl', {user: user});
     req.flash('success', 'Admin logged in.');
   } else {
-    res.redirect('/giveawayList');
     req.flash('success', 'Welcome back.');
+    res.redirect('/giveawayList');
   }
 });
 

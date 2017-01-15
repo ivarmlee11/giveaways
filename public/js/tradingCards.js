@@ -62,6 +62,9 @@ $('#acceptTrade').on('click', function() {
     // socket io message to other trader saying you like the conditions of the trade
     if(otherTraderAcceptedOffer) {
       console.log('other player accepted offer')
+
+      //ajax call to switch ownership of games
+      
     } else {
       console.log('other payer needs to accept offfer')
     }
