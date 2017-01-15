@@ -64,6 +64,7 @@ app.use(function(req, res, next) {
 
 io.on("connection", function(socket) {
     // Accept a login event with user's data
+    console.log('we connected ')
     console.log(socket)
     socket.on("login", function(userdata) {
         socket.handshake.session.userdata = userdata;
