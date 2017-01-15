@@ -15,7 +15,7 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    server  = require("http").createServer(app),
+    server  = app.listen(port),
     io = require("socket.io")(server),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
@@ -57,7 +57,7 @@ io.on("connection", function(socket) {
         }
     });        
 });
-server.listen(port)
+
 app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
@@ -223,8 +223,6 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     };
   });
 });
-
-// app.listen(port);
 
 
 
