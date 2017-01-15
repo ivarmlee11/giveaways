@@ -19,7 +19,8 @@ var express = require('express'),
     io = require("socket.io")(server),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
-server.listen(80);
+
+server.listen(port);
 
 app.use(requestIp.mw());
 
