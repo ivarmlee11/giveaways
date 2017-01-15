@@ -47,7 +47,7 @@ io.use(sharedsession(session, {
 
 io.on("connection", function(socket) {
     // Accept a login event with user's data
-    console.log(socket)
+    console.log('what up')
     socket.on("login", function(userdata) {
         socket.handshake.session.userdata = userdata;
     });
