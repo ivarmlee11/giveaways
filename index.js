@@ -20,7 +20,7 @@ var express = require('express'),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
 
-server.listen(port);
+server.listen(8080);
 app.use(requestIp.mw());
 
 app.use(cookieParser());
@@ -227,4 +227,4 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-// app.listen(port);
+app.listen(port);
