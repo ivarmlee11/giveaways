@@ -62,6 +62,20 @@ app.use(function(req, res, next) {
   next();
 });
 
+io.on("connection", function(socket) {
+    // Accept a login event with user's data
+    console.log(socket)
+    socket.on("login", function(userdata) {
+        socket.handshake.session.userdata = userdata;
+    });
+    socket.on("logout", function(userdata) {
+        if (socket.handshake.session.userdata) {
+            delete socket.handshake.session.userdata;
+        }
+    });        
+});
+
+
 
 var adminCtrl = require('./controllers/admin'),
     authCtrl = require('./controllers/auth'),
