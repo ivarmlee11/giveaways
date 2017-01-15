@@ -15,9 +15,6 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    // server = require('http').Server(app), 
-    server = app.listen(port), 
-    io = require('socket.io')(server),
     flash = require('connect-flash');
 
 app.use(requestIp.mw());
@@ -56,23 +53,12 @@ app.use(passport.session());
 
 app.use(errorhandler());
 
-var sharedSession = require('express-socket.io-session');
-
-io.use(sharedSession(session, {
-  autoSave: true
-}));
-
 app.locals.moment = require('moment');
 
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
-  res.io = io;
   next();
-});
-
-io.on('connection', function(socket){
-  console.log('a user connected');
 });
 
 var adminCtrl = require('./controllers/admin'),
@@ -215,7 +201,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-// app.listen(port);
+app.listen(port);
 
 
 
