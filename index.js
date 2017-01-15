@@ -15,51 +15,18 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    // server  = require("http").Server(app),
-    // io = require("socket.io")(server),
     flash = require('connect-flash');
-    // sharedsession = require("express-socket.io-session");
-
-// server.listen(port);
 
 app.use(requestIp.mw());
 
 app.use(cookieParser());
 
-// 8 lines (7 sloc)  253 Bytes
-// CREATE TABLE "session" (
-//   "sid" varchar NOT NULL COLLATE "default",
-//   "sess" json NOT NULL,
-//   "expire" timestamp(6) NOT NULL
-// )
-// WITH (OIDS=FALSE);
-// ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
-var newSesh = {
+app.use(session({
   secret: sessionSecret,
   store: new (require('connect-pg-simple')(session))(),
   resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 day
-};
-
-app.use(session(newSesh));
-
-// io.use(sharedsession(newSesh, {
-//     autoSave:true
-// })); 
-
-// io.on("connection", function(socket) {
-//     // Accept a login event with user's data
-//     console.log('what up')
-//     socket.on("login", function(userdata) {
-//         socket.handshake.session.userdata = userdata;
-//     });
-//     socket.on("logout", function(userdata) {
-//         if (socket.handshake.session.userdata) {
-//             delete socket.handshake.session.userdata;
-//         }
-//     });        
-// });
+  saveUninitialized: false
+}));
 
 app.use(flash());
 
@@ -84,7 +51,6 @@ app.locals.moment = require('moment');
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
-  // res.io = io;
   next();
 });
 
@@ -189,7 +155,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
       reqUserId = req.user.id,
       reqUserName = req.user.username;
 
-  Error: listen EADDRINUSE :::54337db.giveaway.findById(id).then(function(giveaway) {
+  db.giveaway.findById(id).then(function(giveaway) {
     if(giveaway.ended) {
       req.flash('error', 'Giveaway ended.');
       res.redirect('back');
@@ -229,3 +195,8 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
 });
 
 app.listen(port);
+
+
+
+
+
