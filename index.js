@@ -44,22 +44,22 @@ var newSesh = {
 
 app.use(session(newSesh));
 
-io.use(sharedsession(newSesh, {
-    autoSave:true
-})); 
+// io.use(sharedsession(newSesh, {
+//     autoSave:true
+// })); 
 
-io.on("connection", function(socket) {
-    // Accept a login event with user's data
-    console.log('what up')
-    socket.on("login", function(userdata) {
-        socket.handshake.session.userdata = userdata;
-    });
-    socket.on("logout", function(userdata) {
-        if (socket.handshake.session.userdata) {
-            delete socket.handshake.session.userdata;
-        }
-    });        
-});
+// io.on("connection", function(socket) {
+//     // Accept a login event with user's data
+//     console.log('what up')
+//     socket.on("login", function(userdata) {
+//         socket.handshake.session.userdata = userdata;
+//     });
+//     socket.on("logout", function(userdata) {
+//         if (socket.handshake.session.userdata) {
+//             delete socket.handshake.session.userdata;
+//         }
+//     });        
+// });
 
 app.use(flash());
 
