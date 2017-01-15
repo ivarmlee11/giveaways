@@ -15,6 +15,8 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
+    io = require('socket.io'),
+    sharedsession = require('express-socket.io-sessio'),
     flash = require('connect-flash');
  
 app.use(requestIp.mw());
@@ -22,7 +24,19 @@ app.use(requestIp.mw());
 app.locals.moment = require('moment');
 
 app.use(cookieParser());
-app.use(cookieSession({ secret: sessionSecret, cookie: { maxAge: 60 * 60 * 1000 }}));
+
+var session = { 
+  secret: sessionSecret,
+  cookie: { maxAge: 60 * 60 * 1000 }
+};
+
+app.use(cookieSession(sesion));
+
+var sharedSession = require("express-socket.io-session");
+
+io.use(sharedSession(session, {
+    autoSave:true
+}));
 
 app.use(flash());
 
@@ -47,6 +61,7 @@ app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
+
 
 var adminCtrl = require('./controllers/admin'),
     authCtrl = require('./controllers/auth'),
