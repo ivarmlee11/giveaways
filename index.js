@@ -1,5 +1,5 @@
 var express = require('express'),
-    app = express(),
+    app = express().createServer();,
     request = require('request'),
     morgan = require('morgan')('dev'),
     ensureAuthenticated = require('./middleware/ensureAuth.js'),
@@ -15,8 +15,8 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    server  = require("http").createServer(app),
-    io = require("socket.io")(server),
+    // server  = require("http").createServer(app),
+    io = require("socket.io")(app),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
 // server.listen(app);
@@ -46,18 +46,25 @@ io.use(sharedsession(newSesh, {
     autoSave:true
 })); 
 
-io.on("connection", function(socket) {
-    // Accept a login event with user's data
-    console.log('what up')
-    console.log(socket)
-    socket.on("login", function(userdata) {
-        socket.handshake.session.userdata = userdata;
-    });
-    socket.on("logout", function(userdata) {
-        if (socket.handshake.session.userdata) {
-            delete socket.handshake.session.userdata;
-        }
-    });        
+// io.on("connection", function(socket) {
+//     // Accept a login event with user's data
+//     console.log('what up')
+//     console.log(socket)
+//     socket.on("login", function(userdata) {
+//         socket.handshake.session.userdata = userdata;
+//     });
+//     socket.on("logout", function(userdata) {
+//         if (socket.handshake.session.userdata) {
+//             delete socket.handshake.session.userdata;
+//         }
+//     });        
+// });
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
 });
 
 app.use(flash());
