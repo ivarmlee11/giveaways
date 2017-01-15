@@ -9,15 +9,15 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     cookieSession = require('cookie-session'),
     sessionSecret = process.env.SESSION,
+    sharedsession = require('express-socket.io-session'),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    server = app.listen(port), 
+    server = require('http').createServer(app), 
     io = require('socket.io')(server),
-    sharedsession = require('express-socket.io-session'),
     flash = require('connect-flash');
  
 app.use(requestIp.mw());
@@ -60,10 +60,11 @@ app.use(errorhandler());
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
+  res.io = io;
   next();
 });
 
-io.sockets.on("connection", function(socket) {
+io.on("connection", function(socket) {
     // Accept a login event with user's data
     console.log('we connected ')
     console.log('---------------------')
@@ -228,7 +229,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-
+app.listen(port);
 
 
 
