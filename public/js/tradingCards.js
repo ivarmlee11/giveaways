@@ -63,14 +63,13 @@ $('#acceptTrade').on('click', function() {
     if(otherTraderAcceptedOffer) {
       console.log('other player accepted offer')
     } else {
-      console.log('otgehr payer needs to accept offfer')
+      console.log('other payer needs to accept offfer')
     }
 
   } else {
-    $('#messageBox').html('Trades require that both parties propose a trade, even if they offer nother');
+    $('#messageBox').html('Trades require that both parties propose a trade, even if they offer nothing');
   };
-  console.log(tradeInfoOut);
-  console.log(tradeInfoIn);
+
 });
 
 $('#tradeWindowOut').droppable( {
