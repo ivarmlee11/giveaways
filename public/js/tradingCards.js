@@ -7,8 +7,8 @@ function TradeWindow(tradeName, tradeGame, tradeUser) {
 };
 
 var $tradingArea = $('#tradingArea'),
-    tradeInfoOut = new TradeWindow(null, null, null),
-    tradeInfoIn = new TradeWindow(null, null, null),
+    tradeInfoOut = new TradeWindow(null, [], null),
+    tradeInfoIn = new TradeWindow(null, [], null),
     otherTraderAcceptedOffer = false;
 
 $('#playerDropDown').on('click', function() {
@@ -22,7 +22,7 @@ $('#playerDropDown').on('click', function() {
 $('#clearOutTrade').on('click', function() {
   tradeInfoOut = {
     name: null,
-    gameId: null,
+    gameId: [],
     userId: null
   };
   $('#playerOut').html('');
@@ -31,17 +31,17 @@ $('#clearOutTrade').on('click', function() {
   console.log(tradeInfoOut);
 });
 
-$('#clearIncTrade').on('click', function() {
-  tradeInfoIn = {
-    name: null,
-    gameId: null,
-    userId: null
-  };
-  $('#playerIn').html('');
-  $('#gameListIn').html('');
-  console.log('trade info in');
-  console.log(tradeInfoIn);
-});
+// $('#clearIncTrade').on('click', function() {
+//   tradeInfoIn = {
+//     name: null,
+//     gameId: [],
+//     userId: null
+//   };
+//   $('#playerIn').html('');
+//   $('#gameListIn').html('');
+//   console.log('trade info in');
+//   console.log(tradeInfoIn);
+// });
 
 $('#proposeTrade').on('click', function() {
   if(tradeInfoOut.name && tradeInfoOut.userId) {
