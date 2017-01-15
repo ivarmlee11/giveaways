@@ -33,7 +33,7 @@ app.use(expressSession({
     secret: sessionSecret,
     store: sequelizeSessionStore,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
 }));
 
 app.use(flash());
