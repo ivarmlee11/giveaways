@@ -64,7 +64,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-io.sockets.on("connection", function(socket) {
+io.on("connection", function(socket) {
     // Accept a login event with user's data
     console.log('we connected ')
     console.log('---------------------')
