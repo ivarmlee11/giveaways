@@ -22,7 +22,7 @@ var express = require('express'),
     flash = require('connect-flash');
 
 var sequelizeSessionStore = new SessionStore({
-  db: db,
+  db: db
 });
 
 app.use(requestIp.mw());
