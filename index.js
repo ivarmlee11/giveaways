@@ -19,6 +19,17 @@ var express = require('express'),
     botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash');
 
+server.listen(80);
+
+
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+
 app.use(requestIp.mw());
 
 app.use(cookieParser());
