@@ -19,7 +19,7 @@ var express = require('express'),
     io = require("socket.io")(server),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
-server.listen(port);
+server.listen(80);
 app.use(requestIp.mw());
 
 app.use(cookieParser());
@@ -49,7 +49,7 @@ io.use(sharedsession(newSesh, {
 io.on("connection", function(socket) {
     // Accept a login event with user's data
     console.log('what up')
-    console.log(data)
+    console.log(socket)
     socket.on("login", function(userdata) {
         socket.handshake.session.userdata = userdata;
     });
@@ -227,4 +227,4 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-// app.listen(port);
+app.listen(port);
