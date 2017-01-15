@@ -33,16 +33,17 @@ app.use(cookieParser());
 // )
 // WITH (OIDS=FALSE);
 // ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
-
-app.use(session({
+var newSesh = {
   secret: sessionSecret,
   store: new (require('connect-pg-simple')(session))(),
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
-}));
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 day
+};
 
-io.use(sharedsession(session, {
+app.use(session(newSesh));
+
+io.use(sharedsession(newSesh, {
     autoSave:true
 })); 
 
