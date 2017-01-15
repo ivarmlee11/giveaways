@@ -8,26 +8,33 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     sessionSecret = process.env.SESSION,
+    expressSession = require('express-session'),
+    SessionStore = require('express-session-sequelize')(expressSession.Store),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    // server = require('http').Server(app),
-    session = require('express-session'),
+    // server = require('http').Server(app), 
     server = app.listen(port), 
     io = require('socket.io')(server),
     flash = require('connect-flash');
 
+var sequelizeSessionStore = new SessionStore({
+  db: db,
+});
 
 app.use(requestIp.mw());
 
-app.locals.moment = require('moment');
-
 app.use(cookieParser());
 
-app.use(session);
+app.use(expressSession({
+    secret: sessionSecret,
+    store: sequelizeSessionStore,
+    resave: false,
+    saveUninitialized: false,
+}));
 
 app.use(flash());
 
@@ -52,6 +59,8 @@ var sharedSession = require('express-socket.io-session');
 io.use(sharedSession(session, {
   autoSave:true
 }));
+
+app.locals.moment = require('moment');
 
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
