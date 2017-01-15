@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use(session({
   secret: sessionSecret,
-  store: db.session,
+  store: new (require('connect-pg-simple')(session))(),
   resave: false,
   saveUninitialized: false
 }));
