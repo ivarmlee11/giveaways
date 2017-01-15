@@ -17,8 +17,8 @@ var express = require('express'),
     botKey = process.env.BOTAPIKEY,
     server  = require("http").Server(app),
     io = require("socket.io")(server),
-    flash = require('connect-flash'),
-    sharedsession = require("express-socket.io-session");
+    flash = require('connect-flash');
+    // sharedsession = require("express-socket.io-session");
 
 // server.listen(port);
 
@@ -84,7 +84,7 @@ app.locals.moment = require('moment');
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
-  // res.io = io;
+  res.io = io;
   next();
 });
 
