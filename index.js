@@ -22,7 +22,7 @@ app.use(requestIp.mw());
 app.use(cookieParser());
 
 app.use(session({
-  store: new (require('connect-pg-simple')(session))(),
+  store: db.sesion,
   secret: sessionSecret,
   resave: false,
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
