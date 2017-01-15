@@ -1,6 +1,10 @@
+$(function() {
+var url = 'window.location.href',
+    socket = io.connect(url);
 
-var socket = io.connect(window.location.href);
+console.log(url)
 // socket.on('news', function (data) {
 //   console.log(data);
 //   socket.emit('my other event', { my: 'data' });
 // });
+});
