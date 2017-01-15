@@ -15,8 +15,8 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    // server  = require("http").createServer(app),
-    io = require("socket.io")(app),
+    server  = require("http").createServer(app),
+    io = require("socket.io")(server),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
 
@@ -49,6 +49,7 @@ io.use(sharedsession(newSesh, {
 io.on("connection", function(socket) {
     // Accept a login event with user's data
     console.log('what up')
+    console.log(data)
     socket.on("login", function(userdata) {
         socket.handshake.session.userdata = userdata;
     });
@@ -58,8 +59,6 @@ io.on("connection", function(socket) {
         }
     });        
 });
-
-
 
 app.use(flash());
 
