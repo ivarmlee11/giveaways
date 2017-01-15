@@ -15,7 +15,7 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    server = require('http').Server(app),
+    server = require('http').Server(app), 
     io = require('socket.io')(server),
     sharedsession = require('express-socket.io-session'),
     flash = require('connect-flash');
@@ -63,7 +63,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-io.on("connection", function(socket) {
+io.sockets.on("connection", function(socket) {
     // Accept a login event with user's data
     console.log('we connected ')
     console.log(socket)
