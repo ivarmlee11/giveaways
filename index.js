@@ -56,7 +56,7 @@ app.use(errorhandler());
 
 var sharedSession = require('express-socket.io-session');
 
-io.use(sharedSession(session, {
+io.use(sharedSession(expressSession, {
   autoSave: true
 }));
 
