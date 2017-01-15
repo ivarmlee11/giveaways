@@ -20,7 +20,6 @@ var express = require('express'),
     io = require('socket.io')(server),
     flash = require('connect-flash');
 
-server.listen(80);
 
 app.use(requestIp.mw());
 
@@ -53,11 +52,11 @@ app.use(passport.session());
 
 app.use(errorhandler());
 
-var sharedSession = require('express-socket.io-session');
+// var sharedSession = require('express-socket.io-session');
 
-io.use(sharedSession(session, {
-  autoSave:true
-}));
+// io.use(sharedSession(session, {
+//   autoSave:true
+// }));
 
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
