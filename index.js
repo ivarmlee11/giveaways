@@ -33,12 +33,6 @@ var session = {
 
 app.use(cookieSession(session));
 
-var sharedSession = require('express-socket.io-session');
-
-io.use(sharedSession(session, {
-    autoSave:true
-}));
-
 app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
@@ -56,6 +50,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(errorhandler());
+
+var sharedSession = require('express-socket.io-session');
+
+io.use(sharedSession(session, {
+  autoSave:true
+}));
 
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
