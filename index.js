@@ -20,7 +20,7 @@ var express = require('express'),
     flash = require('connect-flash'),
     sharedsession = require("express-socket.io-session");
 
-server.listen(3000);
+server.listen(port);
 app.use(requestIp.mw());
 
 app.use(cookieParser());
