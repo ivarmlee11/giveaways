@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use(session({
   secret: sessionSecret,
-  store: db.sessions,
+  store: db.session,
   resave: false,
   saveUninitialized: false
 }));
