@@ -7,16 +7,15 @@ var express = require('express'),
     db = require('./models'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    cookieSession = require('cookie-session'),
     sessionSecret = process.env.SESSION,
-    sharedsession = require('express-socket.io-session'),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    // server = require('http').Server(app), 
+    // server = require('http').Server(app),
+    session = require('express-session'),
     server = app.listen(port), 
     io = require('socket.io')(server),
     flash = require('connect-flash');
@@ -28,12 +27,7 @@ app.locals.moment = require('moment');
 
 app.use(cookieParser());
 
-var session = { 
-  secret: sessionSecret,
-  cookie: { maxAge: 60 * 60 * 1000 }
-};
-
-app.use(cookieSession(session));
+app.use(session);
 
 app.use(flash());
 
@@ -69,7 +63,6 @@ app.use(function(req, res, next) {
 io.on('connection', function(socket){
   console.log('a user connected');
 });
-
 
 var adminCtrl = require('./controllers/admin'),
     authCtrl = require('./controllers/auth'),
