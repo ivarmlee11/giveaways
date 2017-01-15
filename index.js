@@ -66,15 +66,24 @@ app.use(function(req, res, next) {
 io.sockets.on("connection", function(socket) {
     // Accept a login event with user's data
     console.log('we connected ')
-    console.log(socket)
-    socket.on("login", function(userdata) {
-        socket.handshake.session.userdata = userdata;
-    });
-    socket.on("logout", function(userdata) {
-        if (socket.handshake.session.userdata) {
-            delete socket.handshake.session.userdata;
-        }
-    });        
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    console.log('---------------------')
+    // socket.on("login", function(userdata) {
+    //     socket.handshake.session.userdata = userdata;
+    // });
+    // socket.on("logout", function(userdata) {
+    //     if (socket.handshake.session.userdata) {
+    //         delete socket.handshake.session.userdata;
+    //     }
+    // });        
 });
 
 
