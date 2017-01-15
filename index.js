@@ -35,9 +35,9 @@ app.use(cookieSession(session));
 
 var sharedSession = require('express-socket.io-session');
 
-io.use(sharedSession(session, {
-    autoSave:true
-}));
+// io.use(sharedSession(session, {
+//     autoSave:true
+// }));
 
 app.use(flash());
 
