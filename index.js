@@ -8,32 +8,29 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     sessionSecret = process.env.SESSION,
-    session = require('express-session'),
+    server  = require('http').createServer(app)
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    flash = require('connect-flash');
+    flash = require('connect-flash'),
+    io = require('socket.io')(server),
+    session = require('express-session')({
+      secret: sessionSecret,
+      store: new (require('connect-pg-simple')(session))(),
+      resave: true,
+      saveUninitialized: true
+    }),
+    sharedsession = require('express-socket.io-session');
+
 
 app.use(requestIp.mw());
 
 app.use(cookieParser());
 
-// app.use(session({
-//   store: db.sessions,
-//   secret: sessionSecret,
-//   resave: false,
-//   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
-// }));
-
-app.use(session({
-  secret: sessionSecret,
-  store: new (require('connect-pg-simple')(session))(),
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(session);
 
 app.use(flash());
 
@@ -99,7 +96,7 @@ client.on('chat', function(channel, userstate, message, self) {
        client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
       break;
     case '!clear':
-      client.clear("tweakgames");
+      client.clear('tweakgames');
       client.action('#tweakgames', 'Chat cleared.');
       break;
     default: console.log(message);     
@@ -201,7 +198,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-app.listen(port);
+// app.listen(port);
 
 
 
