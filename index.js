@@ -8,8 +8,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     sessionSecret = process.env.SESSION,
-    expressSession = require('express-session'),
-    SessionStore = require('express-session-sequelize')(expressSession.Store),
+    session = require('express-session'),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
     errorhandler = require('errorhandler'),
@@ -21,20 +20,23 @@ var express = require('express'),
     io = require('socket.io')(server),
     flash = require('connect-flash');
 
-var sequelizeSessionStore = new SessionStore({
-  db: db.game
-});
-
 app.use(requestIp.mw());
 
 app.use(cookieParser());
 
-app.use(expressSession({
+app.use(session({
+  store: new (require('connect-pg-simple')(session))(),
   secret: sessionSecret,
-  store: sequelizeSessionStore,
   resave: false,
-  saveUninitialized: false
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
 }));
+
+// app.use(session({
+//   secret: sessionSecret,
+//   store: sequelizeSessionStore,
+//   resave: false,
+//   saveUninitialized: false
+// }));
 
 app.use(flash());
 
@@ -56,7 +58,7 @@ app.use(errorhandler());
 
 var sharedSession = require('express-socket.io-session');
 
-io.use(sharedSession(expressSession, {
+io.use(sharedSession(session, {
   autoSave: true
 }));
 
