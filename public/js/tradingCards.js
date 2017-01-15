@@ -77,7 +77,7 @@ $('#tradeWindowOut').droppable( {
   drop: function(event, ui){
     var draggable = ui.draggable,
       id = draggable.attr('gameid');
-
+      console.log(tradeInfoOut)
     tradeInfoOut.gameId.push(parseInt(id));
 
     tradeInfoOut.gameId =  tradeInfoOut.gameId.filter( function( item, index, inputArray ) {
