@@ -15,17 +15,22 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
+    server  = require("http").createServer(app),
+    io = require("socket.io")(server),
     flash = require('connect-flash');
 
 app.use(requestIp.mw());
 
 app.use(cookieParser());
 
-// app.use(session({
-//   store: db.sessions,
-//   secret: sessionSecret,
-//   resave: false,
-// }));
+// 8 lines (7 sloc)  253 Bytes
+// CREATE TABLE "session" (
+//   "sid" varchar NOT NULL COLLATE "default",
+//   "sess" json NOT NULL,
+//   "expire" timestamp(6) NOT NULL
+// )
+// WITH (OIDS=FALSE);
+// ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 app.use(session({
   secret: sessionSecret,
