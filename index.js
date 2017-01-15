@@ -21,9 +21,9 @@ var express = require('express'),
     io = require('socket.io')(server),
     flash = require('connect-flash');
 
-// var sequelizeSessionStore = new SessionStore({
-//   db: db
-// });
+var sequelizeSessionStore = new SessionStore({
+  db: db.game
+});
 
 app.use(requestIp.mw());
 
@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 app.use(expressSession({
   secret: sessionSecret,
-  // store: sequelizeSessionStore,
+  store: sequelizeSessionStore,
   resave: false,
   saveUninitialized: false
 }));
