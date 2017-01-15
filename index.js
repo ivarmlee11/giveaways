@@ -41,7 +41,9 @@ app.use(session({
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
 }));
 
-io.use(sharedsession(session));
+io.use(sharedsession(session, {
+    autoSave:true
+})); 
 
 io.on("connection", function(socket) {
     // Accept a login event with user's data
