@@ -19,7 +19,7 @@ var express = require('express'),
     botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash');
 
-server.listen(80);
+// server.listen(80);
 
 
 
