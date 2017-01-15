@@ -81,7 +81,7 @@ app.locals.moment = require('moment');
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
-  res.io = io;
+  // res.io = io;
   next();
 });
 
