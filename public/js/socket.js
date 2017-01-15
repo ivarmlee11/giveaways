@@ -1,5 +1,5 @@
 $(function() {
-var url = 'window.location.href',
+var url = window.location.href,
     socket = io.connect(url);
 
 console.log(url)
