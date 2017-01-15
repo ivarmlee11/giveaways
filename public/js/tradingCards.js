@@ -1,16 +1,15 @@
 $(function() {
 
+function TradeWindow(tradeName, tradeGame, tradeUser) {
+  name: this.tradeName,
+  gameId: this.tradeGame,
+  userId: this.tradeUser
+};
+
 var $tradingArea = $('#tradingArea'),
-    tradeInfoOut = {
-        name: null,
-        gameId: [],
-        userId: null 
-      },
-    tradeInfoIn = {
-        name: null,
-        gameId: [],
-        userId: null 
-      };
+    tradeInfoOut = new TradeWindow(null, null, null),
+    tradeInfoIn = new TradeWindow(null, null, null),
+    otherTraderAcceptedOffer = false;
 
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
@@ -24,7 +23,7 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut = {
     name: null,
     gameId: null,
-    userId: null 
+    userId: null
   };
   $('#playerOut').html('');
   $('#gameListOut').html('');
@@ -36,23 +35,42 @@ $('#clearIncTrade').on('click', function() {
   tradeInfoIn = {
     name: null,
     gameId: null,
-    userId: null 
+    userId: null
   };
   $('#playerIn').html('');
   $('#gameListIn').html('');
   console.log('trade info in');
   console.log(tradeInfoIn);
-})
+});
 
 $('#proposeTrade').on('click', function() {
-  if(tradeInfoOut.name && tradeInfoOut.gameId.length && tradeInfoOut.userId) {
+  if(tradeInfoOut.name && tradeInfoOut.userId) {
     console.log(tradeInfoOut);
+
+    // call function to send object
+
     $('#messageBox').html('Proposal sent.');
   } else {
     console.log(tradeInfoOut);
-    $('#messageBox').html('To propose a trade you need a recipient and an item to send.');
+    $('#messageBox').html('To propose a trade you need a recipient');
   }
+});
 
+$('#acceptTrade').on('click', function() {
+  if(tradeInfoIn.name && tradeInfoIn.userId && tradeInfoOut.name && tradeInfoOut.userId) {
+    
+    // socket io message to other trader saying you like the conditions of the trade
+    if(otherTraderAcceptedOffer) {
+      console.log('other player accepted offer')
+    } else {
+      console.log('otgehr payer needs to accept offfer')
+    }
+
+  } else {
+    $('#messageBox').html('Trades require that both parties propose a trade, even if they offer nother');
+  };
+  console.log(tradeInfoOut);
+  console.log(tradeInfoIn);
 });
 
 $('#tradeWindowOut').droppable( {
@@ -60,13 +78,12 @@ $('#tradeWindowOut').droppable( {
     var draggable = ui.draggable,
       id = draggable.attr('gameid');
 
-      tradeInfoOut.gameId.push(parseInt(id));
+    tradeInfoOut.gameId.push(parseInt(id));
 
-      tradeInfoOut.gameId =  tradeInfoOut.gameId.filter( function( item, index, inputArray ) {
-        return inputArray.indexOf(item) == index;
-      });
+    tradeInfoOut.gameId =  tradeInfoOut.gameId.filter( function( item, index, inputArray ) {
+      return inputArray.indexOf(item) == index;
+    });
 
-    
     $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
     console.log(tradeInfoOut);
   },
@@ -119,6 +136,9 @@ function updatePlayerList() {
   });
 };
 
+function incomingTrade() {
+
+};
 
 updateCards();
 updatePlayerList();
