@@ -33,7 +33,7 @@ var session = {
 
 app.use(cookieSession(session));
 
-var sharedSession = require("express-socket.io-session");
+var sharedSession = require('express-socket.io-session');
 
 io.use(sharedSession(session, {
     autoSave:true
