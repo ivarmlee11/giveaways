@@ -125,11 +125,11 @@ client.on('chat', function(channel, userstate, message, self) {
   }
 });
 
-client.on("join", function (channel, username, self) {
+client.on('join', function (channel, username, self) {
     // Do your stuff.
 });
   
-io.on("connection", function(socket) {
+io.on('connection', function(socket) {
   // Accept a login event with user's data
   console.log(socket.id + ' user connected');
        
