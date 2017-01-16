@@ -143,7 +143,19 @@ io.on('connection', function(socket) {
   console.log(allConnectedClients);
   // console.log(io.sockets.connected)
   console.log(clients)
+  socket.on('disconnect', function() {
+    // console.log('Got disconnect!');
+    console.log(socket.id + ' dc');
+
+    var temp = clients.filter(function(obj) {
+      return obj.id !== clientId;
+    });
+
+    clients = temp
+    console.log(clients);
+  });
 });
+
 
 app.use('/admin', adminCtrl);
 
