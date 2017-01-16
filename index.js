@@ -36,7 +36,7 @@ io.use(sharedSession(session({
   store: new (require('connect-pg-simple')(session))(),
   resave: false,
   saveUninitialized: false
-}));
+})));
 
 app.use(flash());
 
