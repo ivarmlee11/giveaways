@@ -116,16 +116,22 @@ client.on("join", function (channel, username, self) {
 //
 
 io.on("connection", function(socket) {
-    // Accept a login event with user's data
-    console.log(socket.id + ' user connected');
-    socket.on("login", function(userdata) {
-        socket.handshake.session.userdata = userdata;
-    });
-    socket.on("logout", function(userdata) {
-        if (socket.handshake.session.userdata) {
-            delete socket.handshake.session.userdata;
-        }
-    });        
+  // Accept a login event with user's data
+  console.log(socket.id + ' user connected');
+  socket.on("login", function(userdata) {
+      socket.handshake.session.userdata = userdata;
+  });       
+});
+
+io.on("disconnect", function(socket) {
+  // Accept a login event with user's data
+  console.log(socket.id + ' user dc\'d');
+
+  socket.on("logout", function(userdata) {
+      if (socket.handshake.session.userdata) {
+          delete socket.handshake.session.userdata;
+      }
+  });        
 });
 
 app.use('/admin', adminCtrl);
