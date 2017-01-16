@@ -23,10 +23,9 @@ router.get('/beam/callback',
 });
 
 router.get('/loggedIn', ensureAuthenticated, function(req, res) {
-  var user = req.user;
   if (req.user.admin) {
-    res.render('admin/adminControl', {user: user});
     req.flash('success', 'Admin logged in.');
+    res.redirect('/giveawayList');
   } else {
     req.flash('success', 'Welcome back.');
     res.redirect('/giveawayList');

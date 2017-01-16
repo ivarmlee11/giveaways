@@ -150,10 +150,12 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   var user = req.user;
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
-    res.render('users/giveaways', {
-      giveaways: giveaway,
-      user: user
-    });
+    res.render('users/giveaways',
+      {
+        giveaways: giveaway,
+        user: user
+      }
+    );
   });
 });
 
