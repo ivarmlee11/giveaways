@@ -124,13 +124,21 @@ client.on('chat', function(channel, userstate, message, self) {
 });
 
 client.on('join', function (channel, username, self) {
-    // Do your stuff.
+  // Do your stuff.
 });
-  
+
+var clients = [];
+
 io.on('connection', function(socket) {
   // Accept a login event with user's data
-  console.log(socket.request.user.dataValues.id);
-  console.log(io.engine.clientsCount);
+  var clientId = socket.request.user.dataValues.id;
+  console.log(clientId + ' client Id');
+  console.log(socket.id + ' socket id')
+  console.log(io.engine.clientsCount + ' current number of clients');
+  clients.push({
+    id: clientId,
+
+  })
   var allConnectedClients = Object.keys(io.sockets.connected);
   console.log(allConnectedClients);
   // console.log(io.sockets.connected)
