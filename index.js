@@ -129,23 +129,11 @@ client.on("join", function (channel, username, self) {
     // Do your stuff.
 });
   
-// io.on("connection", function(socket) {
-//   // Accept a login event with user's data
-//   console.log(socket.id + ' user connected');
-
- 
-//   socket.on("login", function(userdata) {
-//     socket.handshake.session.userdata = userdata;
-//     socket.handshake.session.save();
-//     console.log(socket.handshake.session.userdata);
-//   });
-//   socket.on("logout", function(userdata) {
-//     if (socket.handshake.session.userdata) {
-//       delete socket.handshake.session.userdata;
-//       socket.handshake.session.save();
-//     }
-//   });        
-// });
+io.on("connection", function(socket) {
+  // Accept a login event with user's data
+  console.log(socket.id + ' user connected');
+       
+});
 
 app.use('/admin', adminCtrl);
 
