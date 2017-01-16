@@ -1,4 +1,4 @@
-var express = require('express'),
+var express = require('express')(),
     app = express(),
     request = require('request'),
     morgan = require('morgan')('dev'),
@@ -9,7 +9,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     sessionSecret = process.env.SESSION,
     session = require('express-session'),
-    server  = require("http").createServer(app),
+    server  = require("http").Server(app),
     io = require("socket.io")(server),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
@@ -19,7 +19,7 @@ var express = require('express'),
     botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash');
 
-// server.listen(80);
+server.listen(port);
 
 
 
@@ -207,7 +207,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-app.listen(port);
+// app.listen(port);
 
 
 
