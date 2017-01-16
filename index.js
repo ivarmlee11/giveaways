@@ -19,7 +19,6 @@ var express = require('express')  ,
     botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash');
 
-server.listen(80);
 
 
 
@@ -207,8 +206,9 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-app.listen(port);
+// app.listen(port);
 
+server.listen(port);
 
 
 
