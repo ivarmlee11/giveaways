@@ -129,7 +129,7 @@ client.on('join', function (channel, username, self) {
   
 io.on('connection', function(socket) {
   // Accept a login event with user's data
-  console.log(socket.request.user + ' joined');
+  console.log(socket.request.user.username + ' joined');
   console.log(io.engine.clientsCount);
   var allConnectedClients = Object.keys(io.sockets.connected);
   console.log(allConnectedClients);
@@ -137,7 +137,7 @@ io.on('connection', function(socket) {
 });
 io.on('disconnect', function(socket) {
   // Accept a login event with user's data
-  console.log(socket.request.user + ' left');
+  console.log(socket.request.user.username + ' left');
   console.log(io.engine.clientsCount);
   var allConnectedClients = Object.keys(io.sockets.connected);
   console.log(allConnectedClients);
