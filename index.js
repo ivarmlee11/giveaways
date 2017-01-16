@@ -24,14 +24,16 @@ app.use(requestIp.mw());
 
 app.use(cookieParser());
 
-app.use(session({
+var sessionPg = {
   secret: sessionSecret,
   store: new (require('connect-pg-simple')(session))(),
   resave: false,
   saveUninitialized: false
-}));
+};
 
-io.use(sharedSession(session));
+app.use(session(sessionPg));
+
+io.use(sharedSession(sessionPg));
 
 io.on("connection", function(socket) {
   console.log(socket)
