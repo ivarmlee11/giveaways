@@ -132,6 +132,7 @@ client.on('join', function (channel, username, self) {
 io.on('connection', function(socket) {
   // Accept a login event with user's data
   console.log(socket.id + ' user connected');
+  console.log(io.sockets.connected)
        
 });
 
