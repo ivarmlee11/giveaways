@@ -61,11 +61,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-var adminCtrl = require('./controllers/admin'),
-    authCtrl = require('./controllers/auth'),
-    giveawayCtrl = require('./controllers/giveaway'),
-    playerCtrl = require('./controllers/player'),
-    gameCtrl = require('./controllers/game');
+var adminCtrl = require('./controllers/admin')(io),
+    authCtrl = require('./controllers/auth')(io),
+    giveawayCtrl = require('./controllers/giveaway')(io),
+    playerCtrl = require('./controllers/player')(io),
+    gameCtrl = require('./controllers/game')(io);
 
 // twitch bot config
 
@@ -116,22 +116,24 @@ client.on("join", function (channel, username, self) {
 //
 
 io.on("connection", function(socket) {
-  // Accept a login event with user's data
-  console.log(socket.id + ' user connected');
-  socket.on("login", function(userdata) {
-      socket.handshake.session.userdata = userdata;
-  });       
+    // Accept a login event with user's data
+    console.log(socket.id + ' user connected');
+    socket.on("login", function(userdata) {
+        socket.handshake.session.userdata = userdata;
+    });
+        socket.on("logout", function(userdata) {
+        if (socket.handshake.session.userdata) {
+          console.log(socket.id + ' user dc\'d');
+            delete socket.handshake.session.userdata;
+        }
+    });     
 });
 
 io.on("disconnect", function(socket) {
-  // Accept a login event with user's data
-  console.log(socket.id + ' user dc\'d');
+    // Accept a login event with user's data
+    console.log(socket.id + ' user dc\'d');
 
-  socket.on("logout", function(userdata) {
-      if (socket.handshake.session.userdata) {
-          delete socket.handshake.session.userdata;
-      }
-  });        
+       
 });
 
 app.use('/admin', adminCtrl);
