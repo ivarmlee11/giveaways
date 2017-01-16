@@ -10,7 +10,7 @@ var express = require('express')  ,
     sessionSecret = process.env.SESSION,
     session = require('express-session'),
     server  = require("http").Server(app),
-    sharedSession = require('xpress-socket.io-session'),
+    sharedSession = require('express-socket.io-session'),
     io = require("socket.io")(server),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
@@ -117,7 +117,7 @@ io.on('connection', function (socket) {
   socket.on('my other event', function (data) {
     console.log(data);
   });
-});
+}); 
 
 app.use('/admin', adminCtrl);
 
