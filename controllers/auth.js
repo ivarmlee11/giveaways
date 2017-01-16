@@ -26,7 +26,7 @@ router.get('/loggedIn', ensureAuthenticated, function(req, res) {
   socket.emit('login', req.user);
   if (req.user.admin) {
     req.flash('success', 'Admin logged in.');
-    res.render('admin/adminGameList');
+    res.render('admin/adminControl');
   } else {
     req.flash('success', 'Welcome back.');
     res.redirect('/giveawayList');
