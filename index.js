@@ -131,6 +131,7 @@ var clients = [];
 
 io.on('connection', function(socket) {
   // Accept a login event with user's data
+  console.log(socket.request.user)
   var clientId = socket.request.user.dataValues.id;
   console.log(clientId + ' client Id');
   console.log(socket.id + ' socket id')
