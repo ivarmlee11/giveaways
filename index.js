@@ -10,7 +10,7 @@ var express = require('express')  ,
     sessionSecret = process.env.SESSION,
     session = require('express-session'),
     server  = require("http").Server(app),
-    sharedSession = require('express-socket.io-session'),
+    // sharedSession = require('express-socket.io-session'),
     io = require("socket.io")(server),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
@@ -31,12 +31,12 @@ app.use(session({
   saveUninitialized: false
 }));
 
-io.use(sharedSession(session({
-  secret: sessionSecret,
-  store: new (require('connect-pg-simple')(session))(),
-  resave: false,
-  saveUninitialized: false
-})));
+// io.use(sharedSession(session({
+//   secret: sessionSecret,
+//   store: new (require('connect-pg-simple')(session))(),
+//   resave: false,
+//   saveUninitialized: false
+// })));
 
 app.use(flash());
 
@@ -115,23 +115,23 @@ client.on("join", function (channel, username, self) {
     // Do your stuff.
 });
   
-io.on("connection", function(socket) {
-  // Accept a login event with user's data
-  console.log(socket.id + ' user connected');
+// io.on("connection", function(socket) {
+//   // Accept a login event with user's data
+//   console.log(socket.id + ' user connected');
   
  
-  socket.on("login", function(userdata) {
-    socket.handshake.session.userdata = userdata;
-    socket.handshake.session.save();
-    console.log(socket.handshake.session.userdata);
-  });
-  socket.on("logout", function(userdata) {
-    if (socket.handshake.session.userdata) {
-      delete socket.handshake.session.userdata;
-      socket.handshake.session.save();
-    }
-  });        
-});
+//   socket.on("login", function(userdata) {
+//     socket.handshake.session.userdata = userdata;
+//     socket.handshake.session.save();
+//     console.log(socket.handshake.session.userdata);
+//   });
+//   socket.on("logout", function(userdata) {
+//     if (socket.handshake.session.userdata) {
+//       delete socket.handshake.session.userdata;
+//       socket.handshake.session.save();
+//     }
+//   });        
+// });
 
 app.use('/admin', adminCtrl);
 

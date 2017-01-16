@@ -23,7 +23,6 @@ router.get('/beam/callback',
 });
 
 router.get('/loggedIn', ensureAuthenticated, function(req, res) {
-  socket.emit('login', req.user);
   if (req.user.admin) {
     req.flash('success', 'Admin logged in.');
     res.render('admin/adminControl');
