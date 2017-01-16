@@ -137,11 +137,12 @@ io.on('connection', function(socket) {
   console.log(io.engine.clientsCount + ' current number of clients');
   clients.push({
     id: clientId,
-
+    socketId: socket.id
   })
   var allConnectedClients = Object.keys(io.sockets.connected);
   console.log(allConnectedClients);
   // console.log(io.sockets.connected)
+  console.log(clients)
 });
 
 app.use('/admin', adminCtrl);
