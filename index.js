@@ -121,9 +121,10 @@ io.on("connection", function(socket) {
     socket.on("login", function(userdata) {
         socket.handshake.session.userdata = userdata;
     });
+    console.log(socket.handshake.session.userdata);
     socket.on("logout", function(userdata) {
         if (socket.handshake.session.userdata) {
-            delete socket.handshake.session.userdata;
+          delete socket.handshake.session.userdata;
         }
     });        
 });
