@@ -31,9 +31,12 @@ app.use(session({
   saveUninitialized: false
 }));
 
-io.use(sharedSession(session, {
-  autoSave:true
-})); 
+io.use(sharedSession(session({
+  secret: sessionSecret,
+  store: new (require('connect-pg-simple')(session))(),
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(flash());
 
