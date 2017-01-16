@@ -32,6 +32,7 @@ app.use(session({
 }));
 
 io.use(sharedSession(session, {
+  store: new (require('connect-pg-simple')(iosession))(),
   autoSave:true
 })); 
 
