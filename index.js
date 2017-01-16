@@ -113,7 +113,7 @@ client.on('chat', function(channel, userstate, message, self) {
 
   switch(message) {
     case '!testbot':
-       client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
+      client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.');
       break;
     case '!clear':
       client.clear("tweakgames");
@@ -131,7 +131,7 @@ var clients = [];
 
 io.on('connection', function(socket) {
   // Accept a login event with user's data
-  console.log(socket.request.user)
+  console.log(Object.keys(socket.request.user))
   // var clientId = socket.request.user.dataValues.id;
   // console.log(clientId + ' client Id');
   // console.log(socket.id + ' socket id')
