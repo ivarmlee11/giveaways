@@ -1,4 +1,4 @@
-var express = require('express')(),
+var express = require('express'),
     app = express(),
     request = require('request'),
     morgan = require('morgan')('dev'),
@@ -19,7 +19,7 @@ var express = require('express')(),
     botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash');
 
-server.listen(5050);
+// server.listen(80);
 
 
 
@@ -207,7 +207,7 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
   });
 });
 
-// app.listen(port);
+app.listen(port);
 
 
 
