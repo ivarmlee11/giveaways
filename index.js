@@ -61,11 +61,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-var adminCtrl = require('./controllers/admin')(io),
-    authCtrl = require('./controllers/auth')(io),
-    giveawayCtrl = require('./controllers/giveaway')(io),
-    playerCtrl = require('./controllers/player')(io),
-    gameCtrl = require('./controllers/game')(io);
+var adminCtrl = require('./controllers/admin'),
+    authCtrl = require('./controllers/auth'),
+    giveawayCtrl = require('./controllers/giveaway'),
+    playerCtrl = require('./controllers/player'),
+    gameCtrl = require('./controllers/game');
 
 // twitch bot config
 
