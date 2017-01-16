@@ -31,7 +31,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-io.use(shareSsession(session, {
+io.use(sharedSsession(session, {
   autoSave:true
 })); 
 
