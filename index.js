@@ -33,7 +33,7 @@ app.use(session({
 
 io.use(sharedSession({
   secret: sessionSecret,
-  store: new (require('connect-pg-simple')(iosession))(),
+  store: new (require('connect-pg-simple')(session))(),
   resave: false,
   saveUninitialized: false
 }));
