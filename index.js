@@ -33,7 +33,7 @@ var sessionData = {
 
 app.use(session(sessionData));
 
-io.use(sharedSession(sessionData));
+io.use(sharedSession(session(sessionData)));
 
 app.use(flash());
 
@@ -117,7 +117,7 @@ client.on("join", function (channel, username, self) {
 
 io.on("connection", function(socket) {
     // Accept a login event with user's data
-    console.log(socket.id + ' user connected');
+    console.log(socket.id + ' user connected';
     socket.on("login", function(userdata) {
         socket.handshake.session.userdata = userdata;
     });
