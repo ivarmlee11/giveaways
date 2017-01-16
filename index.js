@@ -9,9 +9,10 @@ var express = require('express')  ,
     cookieParser = require('cookie-parser'),
     sessionSecret = process.env.SESSION,
     session = require('express-session'),
-    server  = require("http").Server(app),
+    server  = require('http').Server(app),
+    passportSocketIo = require('passport.socketio'),
     // sharedSession = require('express-socket.io-session'),
-    io = require("socket.io")(server),
+    io = require('socket.io')(server),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
     errorhandler = require('errorhandler'),
@@ -31,12 +32,29 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// io.use(sharedSession(session({
-//   secret: sessionSecret,
-//   store: new (require('connect-pg-simple')(session))(),
-//   resave: false,
-//   saveUninitialized: false
-// })));
+io.use(passportSocketIo.authorize({
+  cookieParser: cookieParser,       // the same middleware you registrer in express 
+  key: 'connect.sid',       // the name of the cookie where express/connect stores its session_id 
+  secret: sessionSecret,    // the session_secret to parse the cookie 
+  store: new (require('connect-pg-simple')(session))(),        // we NEED to use a sessionstore. no memorystore please 
+  success:      onAuthorizeSuccess,  // *optional* callback on success - read more below 
+  fail:         onAuthorizeFail     // *optional* callback on fail/error - read more below 
+}));
+
+function onAuthorizeSuccess(data, accept){
+  console.log('successful connection to socket.io');
+ 
+  accept();
+}
+ 
+function onAuthorizeFail(data, message, error, accept){ 
+  // If you use socket.io@1.X the callback looks different 
+  // If you don't want to accept the connection 
+  if(error)
+    accept(new Error(message));
+  // this error will be sent to the user as a special error-package 
+  // see: http://socket.io/docs/client-api/#socket > error-object 
+}
 
 app.use(flash());
 
@@ -118,7 +136,7 @@ client.on("join", function (channel, username, self) {
 // io.on("connection", function(socket) {
 //   // Accept a login event with user's data
 //   console.log(socket.id + ' user connected');
-  
+
  
 //   socket.on("login", function(userdata) {
 //     socket.handshake.session.userdata = userdata;
