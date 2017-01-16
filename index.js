@@ -24,19 +24,16 @@ app.use(requestIp.mw());
 
 app.use(cookieParser());
 
-app.use(session({
+var sessionData = {
   secret: sessionSecret,
   store: new (require('connect-pg-simple')(session))(),
   resave: false,
   saveUninitialized: false
-}));
+}
 
-io.use(sharedSession(session({
-  secret: sessionSecret,
-  store: new (require('connect-pg-simple')(session))(),
-  resave: false,
-  saveUninitialized: false
-})));
+app.use(session(sessionData));
+
+io.use(sharedSession(sessionData));
 
 app.use(flash());
 
@@ -115,13 +112,21 @@ client.on("join", function (channel, username, self) {
     // Do your stuff.
 });
 
-io.on('connection', function (socket) {
-  console.log(socket)
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-}); 
+
+//
+
+io.on("connection", function(socket) {
+    // Accept a login event with user's data
+    console.log(socket.id + ' user connected';
+    socket.on("login", function(userdata) {
+        socket.handshake.session.userdata = userdata;
+    });
+    socket.on("logout", function(userdata) {
+        if (socket.handshake.session.userdata) {
+            delete socket.handshake.session.userdata;
+        }
+    });        
+});
 
 app.use('/admin', adminCtrl);
 
