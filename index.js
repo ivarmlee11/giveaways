@@ -130,10 +130,6 @@ client.on('join', function (channel, username, self) {
 io.on('connection', function(socket) {
   // Accept a login event with user's data
   console.log(socket.id + ' user connected');
-  console.log(io.sockets.connected)
-  console.log(io.sockets.connected.length + ' number of connected sockets')
-  console.log(io.sockets.manager.rooms)
-       
 });
 
 app.use('/admin', adminCtrl);
