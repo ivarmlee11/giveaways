@@ -116,19 +116,19 @@ client.on("join", function (channel, username, self) {
 });
   
 io.on("connection", function(socket) {
-    // Accept a login event with user's data
-    console.log(socket.id + ' user connected');
-    socket.on("login", function(userdata) {
-        socket.handshake.session.userdata = userdata;
-        socket.handshake.session.save();
-    });
+  // Accept a login event with user's data
+  console.log(socket.id + ' user connected');
+  socket.on("login", function(userdata) {
+    socket.handshake.session.userdata = userdata;
+    socket.handshake.session.save();
     console.log(socket.handshake.session.userdata);
-    socket.on("logout", function(userdata) {
-        if (socket.handshake.session.userdata) {
-          delete socket.handshake.session.userdata;
-          socket.handshake.session.save();
-        }
-    });        
+  });
+  socket.on("logout", function(userdata) {
+    if (socket.handshake.session.userdata) {
+      delete socket.handshake.session.userdata;
+      socket.handshake.session.save();
+    }
+  });        
 });
 
 app.use('/admin', adminCtrl);
@@ -147,9 +147,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {
+  var user = req.user;
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
-    res.render('users/giveaways', {giveaways: giveaway});
+    res.render('users/giveaways', {
+      giveaways: giveaway,
+      user: user
+    });
   });
 });
 
