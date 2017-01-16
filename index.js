@@ -11,7 +11,6 @@ var express = require('express')  ,
     session = require('express-session'),
     server  = require('http').Server(app),
     passportSocketIo = require('passport.socketio'),
-    // sharedSession = require('express-socket.io-session'),
     io = require('socket.io')(server),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
@@ -24,7 +23,7 @@ var express = require('express')  ,
 app.use(requestIp.mw());
 
 app.use(cookieParser());
-
+  
 app.use(session({
   secret: sessionSecret,
   store: new (require('connect-pg-simple')(session))(),
@@ -43,18 +42,15 @@ io.use(passportSocketIo.authorize({
 
 function onAuthorizeSuccess(data, accept){
   console.log('successful connection to socket.io');
- 
+  console.log(data)
+  console.log(accept)
   accept();
-}
+};
  
-function onAuthorizeFail(data, message, error, accept){ 
-  // If you use socket.io@1.X the callback looks different 
-  // If you don't want to accept the connection 
-  if(error)
-    accept(new Error(message));
-  // this error will be sent to the user as a special error-package 
-  // see: http://socket.io/docs/client-api/#socket > error-object 
-}
+function onAuthorizeFail(data, message, error, accept){
+  if(error)  throw new Error(message);
+  return accept();
+};
 
 app.use(flash());
 
