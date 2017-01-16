@@ -41,8 +41,8 @@ io.use(passportSocketIo.authorize({
 }));
 
 function onAuthorizeSuccess(data, accept){
-  console.log('successful connection to socket.io');
-  console.log(accept)
+  console.log('successful connection to socket.io');  
+  console.log(data.user)
   accept();
 };
  
