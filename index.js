@@ -10,6 +10,7 @@ var express = require('express')  ,
     sessionSecret = process.env.SESSION,
     session = require('express-session'),
     server  = require("http").Server(app),
+    sharedSession = require('xpress-socket.io-session'),
     io = require("socket.io")(server),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
@@ -18,16 +19,6 @@ var express = require('express')  ,
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash');
-
-
-
-
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
 
 app.use(requestIp.mw());
 
@@ -39,6 +30,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+io.use(shareSsession(session, {
+  autoSave:true
+})); 
 
 app.use(flash());
 
@@ -71,7 +66,9 @@ var adminCtrl = require('./controllers/admin'),
     giveawayCtrl = require('./controllers/giveaway'),
     playerCtrl = require('./controllers/player'),
     gameCtrl = require('./controllers/game');
+
 // twitch bot config
+
 var options = {
   options: {
     debug: true
@@ -113,6 +110,13 @@ client.on('chat', function(channel, userstate, message, self) {
 
 client.on("join", function (channel, username, self) {
     // Do your stuff.
+});
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
 });
 
 app.use('/admin', adminCtrl);
