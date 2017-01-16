@@ -31,26 +31,9 @@ app.use(session({
   saveUninitialized: false
 }));
 
-io.use(sharedSession({
-  secret: sessionSecret,
-  store: new (require('connect-pg-simple')(session))(),
-  resave: false,
-  saveUninitialized: false
-}));
-
-io.on("connection", function(socket) {
-  console.log(socket)
-  // Accept a login event with user's data
-  socket.on("login", function(userdata) {
-    console.log(userdata)
-    socket.handshake.session.userdata = userdata;
-  });
-  socket.on("logout", function(userdata) {
-    if (socket.handshake.session.userdata) {
-      delete socket.handshake.session.userdata;
-    }
-  });        
-});
+io.use(sharedSession(session, {
+  autoSave:true
+})); 
 
 app.use(flash());
 
@@ -128,6 +111,13 @@ client.on('chat', function(channel, userstate, message, self) {
 client.on("join", function (channel, username, self) {
     // Do your stuff.
 });
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+}); 
 
 app.use('/admin', adminCtrl);
 
