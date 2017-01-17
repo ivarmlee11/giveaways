@@ -130,25 +130,30 @@ client.on('join', function (channel, username, self) {
 var clients = [];
 
 io.on('connection', function(socket) {
-  // Accept a login event with user's data
   var clientId = socket.request.user.dataValues.id;
   
   console.log(clientId + ' client Id');
   console.log(socket.id + ' socket id')
   console.log(io.engine.clientsCount + ' current number of clients');
-  
+
+  var temp = clients.filter(function(obj) {
+    return obj.id !== clientId;
+  });
+
+  clients = temp;
+    
   clients.push({
     id: clientId,
     socketId: socket.id
   });
 
-  socket.emit('updateList', clients);
+  socket.emit('updateList', 'hello');
   // console.log(io.sockets.connected)
   console.log(clients);
 
   socket.on('disconnect', function() {
     // console.log('Got disconnect!');
-    console.log(socket.id + ' dc');
+    console.log(socket.id + ' disconnected');
 
     var temp = clients.filter(function(obj) {
       return obj.id !== clientId;
