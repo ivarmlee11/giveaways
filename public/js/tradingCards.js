@@ -28,8 +28,11 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.userId = parseInt(userId);
 
   socket.emit('clientSenderA', tradeInfoOut);
-
-  $('#messageBox').html('No games sent yet.');
+  if(!tradeInfoOut.gameId) {
+    $('#messageBox').html('No games sent yet.');
+  } else {
+    $('#messageBox').html('Proposal sent.')
+  }
 
 });
 
