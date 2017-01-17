@@ -139,7 +139,7 @@ io.on('connection', function(socket) {
     id: clientId,
     socketId: socket.id
   })
-  socket.broadcast.emit('socketid and userid list', clients);
+  socket.emit('socketid and userid list', clients);
   // console.log(io.sockets.connected)
   console.log(clients);
 

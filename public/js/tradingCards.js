@@ -97,8 +97,9 @@ $('#tradeWindowOut').droppable( {
   hoverClass: 'foundhome'
 });
 
-socket.on('socketid and userid list',function(msg){
+socket.on('socketid and userid list', function(msg){
   console.log(message);
+  console.log(message started)
 });
 
 function updateCards() {
