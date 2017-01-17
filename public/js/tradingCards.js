@@ -45,7 +45,7 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut.sentFromName = null;
   tradeInfoOut.sendTo = null;
   console.log(tradeInfoOut)
-  socket.emit('get trade a', tradeInfoOut);
+  socket.emit('clientSenderA', tradeInfoOut);
   tradeInfoOut.userId = null;
 });
 
