@@ -26,11 +26,12 @@ $('#playerDropDown').on('click', function() {
   var userId = $('option:selected', this).attr('userid');
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-  console.log(tradeInfoOut)
   socket.emit('clientSenderA', tradeInfoOut);
+  $('#messageBox').html('Proposal sent.');
 });
 
 $('#clearOutTrade').on('click', function() {
+  console.log(tradeInfoOut)
   tradeInfoOut = {
     sendTo: null,
     gameId: [],
@@ -40,31 +41,6 @@ $('#clearOutTrade').on('click', function() {
   };
   $('#playerOut').html('');
   $('#gameListOut').html('');
-  console.log('trade info out');
-  console.log(tradeInfoOut);
-});
-
-// $('#clearIncTrade').on('click', function() {
-//   tradeInfoIn = {
-//     name: null,
-//     gameId: [],
-//     userId: null
-//   };
-//   $('#playerIn').html('');
-//   $('#gameListIn').html('');
-//   console.log('trade info in');
-//   console.log(tradeInfoIn);
-// });
-
-$('#proposeTrade').on('click', function() {
-  if(tradeInfoOut.sendTo && tradeInfoOut.userId) {
-    console.log(tradeInfoOut);
-
-    // call function to send object
-    socket.emit('clientSenderA', tradeInfoOut);
-
-    $('#messageBox').html('Proposal sent.');
-  } 
 });
 
 $('#acceptTrade').on('click', function() {
