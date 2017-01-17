@@ -157,8 +157,8 @@ io.on('connection', function(socket) {
           return obj.id == id;
         });
     console.log('trade inc')
-    console.log(result)
-    var sendToId = result.socketId;
+    console.log(result[0].socketId)
+    var sendToId = result[0].socketId;
     socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
   });
 
