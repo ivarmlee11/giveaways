@@ -151,9 +151,17 @@ io.on('connection', function(socket) {
 
   socket.on('clientSenderA', function(tradeObject){
     console.log('getting trade')
-    console.log(tradeObject)
-    // socket.broadcast.to(clientId).emit('getTradeA', tradeObject);
+    // console.log(tradeObject)
+    var id = tradeObject.userId;
+    var result = clients.filter(function( obj ) {
+      return obj.id == id;
+    });
+    console.log('trade inc')
+    console.log(result)
+    socket.broadcast.to(id).emit('getTradeA', tradeObject);
   });
+
+
 
   socket.on('disconnect', function() {
     // console.log('Got disconnect!');
