@@ -157,8 +157,9 @@ io.on('connection', function(socket) {
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-    console.log('trade inc')
-    console.log(result)
+    console.log('trade inc');
+    console.log('result')
+    console.log(result);
 
     console.log(result[0].socketId)
     sendToId = result[0].socketId;
