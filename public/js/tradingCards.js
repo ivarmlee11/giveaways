@@ -12,7 +12,8 @@ function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName) {
 };
 
 var tradingArea = $('#tradingArea'),
-    tradeWindowOut =$('#tradeWindowOut'),
+    tradeWindowOut = $('#tradeWindowOut'),
+    messageBox = $('#messageBox'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null),
     otherTraderAcceptedOffer = false,
@@ -21,6 +22,17 @@ var tradingArea = $('#tradingArea'),
 
 tradeInfoOut.sentFromId = parseInt(sentFromId);
 tradeInfoOut.sentFromName = sentFromName;
+
+socket.on('updateList', function(connectedPlayers){
+  console.log('connected players')
+  console.log(connectedPlayers);
+});
+
+socket.on('get trade', function(trade) {
+  $('#playerIn').html(trade.sentFromName);
+  $('#gameListIn').html(trade.gameId.length + ' items');
+});
+
 
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
@@ -31,9 +43,9 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.sentFromName = sentFromName;
   socket.emit('clientSenderA', tradeInfoOut);
   if(!tradeInfoOut.gameId.length) {
-    $('#messageBox').html('No games sent yet.');
+    messageBox.html('No games sent yet.');
   } else {
-    $('#messageBox').html('Proposal sent.')
+    messageBox.html('Proposal sent.')
   }
   $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
 
@@ -41,20 +53,23 @@ $('#playerDropDown').on('click', function() {
 
 $('#clearOutTrade').on('click', function() {
   var sendIt = tradeInfoOut.userId;
-  console.log(sendIt +  ' send it to id')
+
   tradeInfoOut.gameId = [];
   tradeInfoOut.sentFromId = null;
   tradeInfoOut.sentFromName = null;
   tradeInfoOut.sendTo = null;
-  console.log(tradeInfoOut)
+
   if(tradeInfoOut.userId){
     socket.emit('clientSenderA', tradeInfoOut);
     tradeInfoOut.userId = null;
   }
+
   $('#gameListOut').html('0 items');
   $('#playerOut').html('Recipient cleared.');
+  
   tradingArea.html('');
   tradeWindowOut.html('');
+  messageBox.html('Trade cleared');
   updateCards();
 });
 
@@ -71,12 +86,12 @@ $('#acceptTrade').on('click', function() {
     }
 
   } else {
-    $('#messageBox').html('Trades require that both parties propose a trade, even if they offer nothing');
+    messageBox.html('Trades require that both parties propose a trade, even if they offer nothing');
   };
 
 });
 
-$('#tradeWindowOut').droppable({
+tradeWindowOut.droppable({
   drop: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid');
@@ -93,30 +108,14 @@ $('#tradeWindowOut').droppable({
 
       socket.emit('clientSenderA', tradeInfoOut);
 
-      $('#messageBox').html('Proposal sent.');
+      messageBox.html('Proposal sent.');
     } else {
 
-      $('#messageBox').html('To propose a trade you need a recipient');
+      messageBox.html('To propose a trade you need a recipient');
     } 
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
-});
-
-socket.on('updateList', function(connectedPlayers){
-  console.log('connected players')
-  console.log(connectedPlayers);
-});
-
-socket.on('get trade a', function(trade) {
-  console.log('trade');
-  console.log(trade)
-  $('#playerIn').html(trade.sentFromName);
-  $('#gameListIn').html(trade.gameId.length + ' items');
-
-  // var displayInfo = findGameInfo(trade.gameId);
-  // displayIncomingGames(displayInfo);
-  console.log(trade.gameId);
 });
 
 function findGameInfo(array) {

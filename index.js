@@ -133,10 +133,6 @@ io.on('connection', function(socket) {
   var clientId = socket.request.user.dataValues.id,
       sendToId,
       tradeObject = {};
-  
-  console.log(clientId + ' client Id');
-  console.log(socket.id + ' socket id')
-  console.log(io.engine.clientsCount + ' current number of clients');
 
   clients = clients.filter(function(obj) {
     return obj.id !== clientId;
@@ -149,45 +145,33 @@ io.on('connection', function(socket) {
 
   io.emit('updateList', clients);
 
-  socket.on('clientSenderA', function(tradeObject){
-    console.log('getting trade')
-    console.log(tradeObject)
+  socket.on('clientSenderA', function(tradeObject) {
+
     tradeObject = tradeObject;
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-    console.log('trade inc');
-    console.log('result')
-    console.log(result);
 
-    console.log(result[0].socketId)
     sendToId = result[0].socketId;
-    socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
-  
+    socket.broadcast.to(sendToId).emit('get trade', tradeObject);
   });
 
-
-
   socket.on('disconnect', function() {
-    // console.log('Got disconnect!');
-    console.log(socket.id + ' disconnected');
-    console.log('clearing object');
+
     tradeObject.gameId = [];
     tradeObject.userId = null;
     tradeObject.sentFromId = null;
     tradeObject.sentFromName = null;
-    console.log(tradeObject)
 
-    socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
-    var temp = clients.filter(function(obj) {
+    socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    clients = clients.filter(function(obj) {
       return obj.id !== clientId;
     });
 
-    clients = temp;
     io.emit('updateList', clients);
-    console.log(clients);
   });
+
 });
 
 app.use('/admin', adminCtrl);
