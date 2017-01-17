@@ -141,9 +141,8 @@ io.on('connection', function(socket) {
     id: clientId,
     socketId: socket.id
   });
-  socket.on('updateList', function() {
-    socket.emit('updateList', clients);
-  })
+
+  socket.emit('updateList', clients);
   // console.log(io.sockets.connected)
   console.log(clients);
 
