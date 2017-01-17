@@ -27,6 +27,7 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
   console.log(tradeInfoOut)
+  socket.emit('clientSenderA', tradeInfoOut);
 });
 
 $('#clearOutTrade').on('click', function() {
