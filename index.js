@@ -131,7 +131,8 @@ var clients = [];
 
 io.on('connection', function(socket) {
   var clientId = socket.request.user.dataValues.id,
-      sendToId;
+      sendToId,
+      tradeObject;
   
   console.log(clientId + ' client Id');
   console.log(socket.id + ' socket id')
@@ -151,6 +152,7 @@ io.on('connection', function(socket) {
   socket.on('clientSenderA', function(tradeObject){
     console.log('getting trade')
     console.log(tradeObject)
+    tradeObject = tradeObject;
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
