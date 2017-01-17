@@ -132,7 +132,7 @@ var clients = [];
 io.on('connection', function(socket) {
   var clientId = socket.request.user.dataValues.id,
       sendToId,
-      tradeObject;
+      tradeObject = {};
   
   console.log(clientId + ' client Id');
   console.log(socket.id + ' socket id')
