@@ -11,7 +11,8 @@ function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName) {
   this.sentFromName = sentFromName
 };
 
-var $tradingArea = $('#tradingArea'),
+var tradingArea = $('#tradingArea'),
+    tradeWindowOut =$('#tradeWindowOut'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null),
     otherTraderAcceptedOffer = false,
@@ -52,6 +53,8 @@ $('#clearOutTrade').on('click', function() {
   }
   $('#gameListOut').html('0 items');
   $('#playerOut').html('Recipient cleared.');
+  tradingArea.html('');
+  tradeWindowOut.html('');
   updateCards();
 });
 
@@ -147,7 +150,7 @@ function updateCards() {
     type: 'GET',
     success: function(cardList) {
       cardList.forEach(function(val) {
-        $tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
+        tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
           '<h3>' + val.name + '</h3>' + 
           '</div>'
         )
