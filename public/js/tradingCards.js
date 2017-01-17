@@ -119,6 +119,21 @@ socket.on('get trade a', function(trade) {
   console.log(trade)
 });
 
+function displayIncomingGames(array) {
+  $('#tradeWindowIn').html('');
+  if(!array.length) {
+    return;
+  } else {
+    array.forEach(function(val) {
+      $('#tradeWindowIn').append(
+        '<div gameId="' + val.id + '" class="cards">' + 
+        '<h3>' + val.name + '</h3>' + 
+        '</div>'
+      )
+    });
+  }
+};
+
 function updateCards() {
   var url = '/game/winnerCard/'
    $.ajax({
