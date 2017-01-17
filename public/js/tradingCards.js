@@ -116,6 +116,7 @@ socket.on('get trade a', function(trade) {
   console.log('trade')
   $('#playerIn').html(trade.sentFromName);
   $('#gameListIn').html(trade.gameId.length + ' items');
+  displayIncomingGames(trade.gameId);
   console.log(trade)
 });
 
