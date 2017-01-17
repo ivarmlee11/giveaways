@@ -99,7 +99,7 @@ $('#tradeWindowOut').droppable( {
 
 socket.on('socketid and userid list', function(msg){
   console.log(message);
-  console.log(message started)
+  console.log('sdsd')
 });
 
 function updateCards() {

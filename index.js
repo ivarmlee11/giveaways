@@ -119,7 +119,7 @@ client.on('chat', function(channel, userstate, message, self) {
       client.clear("tweakgames");
       client.action('#tweakgames', 'Chat cleared.');
       break;
-    default: console.log(message);     
+    default: null     
   }
 });
 
