@@ -149,7 +149,7 @@ io.on('connection', function(socket) {
 
   io.emit('updateList', clients);
 
-  socket.on('clientSenderA', function(id, tradeObject){
+  socket.on('clientSenderA', function(tradeObject){
     console.log('getting trade')
     console.log(tradeObject)
     // socket.broadcast.to(clientId).emit('getTradeA', tradeObject);
