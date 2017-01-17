@@ -18,10 +18,9 @@ var tradingArea = $('#tradingArea'),
     tradeInfoIn = new TradeWindow(null, [], null, null, null),
     otherTraderAcceptedOffer = false,
     sentFromId = $('#sentFromId').text(),
-    sentFromName = $('#sentFromName').text();
-
-tradeInfoOut.sentFromId = parseInt(sentFromId);
-tradeInfoOut.sentFromName = sentFromName;
+    sentFromName = $('#sentFromName').text(),
+    tradeInfoOut.sentFromId = parseInt(sentFromId),
+    tradeInfoOut.sentFromName = sentFromName;
 
 socket.on('updateList', function(connectedPlayers){
   console.log('connected players')
@@ -29,10 +28,13 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
-  $('#playerIn').html(trade.sentFromName);
-  $('#gameListIn').html(trade.gameId.length + ' items');
+  var isPlayerIn = $('#playerIn').html(),
+      isGameIn = $('#gameListIn').html();
+  if((!isPlayerIn.length) && (!isGameIn.length)) {
+    $('#playerIn').html(trade.sentFromName);
+    $('#gameListIn').html(trade.gameId.length + ' items');    
+  };
 });
-
 
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
@@ -64,9 +66,9 @@ $('#clearOutTrade').on('click', function() {
     tradeInfoOut.userId = null;
   }
 
-  $('#gameListOut').html('0 items');
-  $('#playerOut').html('Recipient cleared.');
-  
+  $('#gameListOut').html('');
+  $('#playerOut').html('');
+
   tradingArea.html('');
   tradeWindowOut.html('');
   messageBox.html('Trade cleared');
