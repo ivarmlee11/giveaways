@@ -68,8 +68,7 @@ $('#proposeTrade').on('click', function() {
 
 $('#acceptTrade').on('click', function() {
   if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
-    
-    // socket io message to other trader saying you like the conditions of the trade
+     
     if(otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
@@ -90,29 +89,22 @@ $('#tradeWindowOut').droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid');
 
-      console.log(tradeInfoOut);
     tradeInfoOut.gameId.push(parseInt(id));
-      console.log(tradeInfoOut);
-
     tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
       return inputArray.indexOf(item) == index;
     });
-      console.log(tradeInfoOut);
 
     $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
 
     if(tradeInfoOut.sendTo && tradeInfoOut.userId) {
 
-      // call function to send object
       socket.emit('clientSenderA', tradeInfoOut);
 
       $('#messageBox').html('Proposal sent.');
     } else {
+
       $('#messageBox').html('To propose a trade you need a recipient');
     } 
-
-    console.log(tradeInfoOut);
-    
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
@@ -143,7 +135,7 @@ function findGameInfo(array) {
       return cardList;
     }
   });
-}
+};
 
 function displayIncomingGames(array) {
   $('#tradeWindowIn').html('');
@@ -156,7 +148,6 @@ function displayIncomingGames(array) {
     )
   });
 };
-
 
 function updateCards() {
   var url = '/game/winnerCard/'

@@ -10,7 +10,7 @@ var express = require('express'),
 // admin controls
 
 router.get('/makeAGiveaway', ensureAuthenticated, modCheck, function(req, res) {
-  res.render('admin/adminControl')
+  res.render('admin/adminControl');
 });
 
 router.get('/adminList', ensureAuthenticated, modCheck, function(req, res) {

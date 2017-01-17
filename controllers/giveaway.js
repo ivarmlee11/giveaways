@@ -9,6 +9,12 @@ var express = require('express'),
 
 // manage giveaways
 
+
+router.get('/makeAGiveaway', ensureAuthenticated, modCheck, function(req, res) {
+  res.render('admin/adminControl');
+});
+
+
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
     var giveaway = giveaways;
