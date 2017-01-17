@@ -152,13 +152,14 @@ io.on('connection', function(socket) {
   socket.on('clientSenderA', function(tradeObject){
     console.log('getting trade')
     // console.log(tradeObject)
-    var id = tradeObject.userId;
-    var result = clients.filter(function( obj ) {
-      return obj.id == id;
-    });
+    var id = tradeObject.userId,
+        result = clients.filter(function( obj ) {
+          return obj.id == id;
+        });
     console.log('trade inc')
-    console.log(result)
-    socket.broadcast.to(id).emit('getTradeA', tradeObject);
+    console.log(result.socketId)
+    var sendToId = result.socketId;
+    socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
   });
 
 

@@ -99,10 +99,14 @@ $('#tradeWindowOut').droppable( {
 });
 
 socket.on('updateList', function(connectedPlayers){
+  console.log('connected players')
   console.log(connectedPlayers);
-  console.log('--------')
 });
 
+socket.on('get trade a', function(trade) {
+  console.log('trade')
+  console.log(trade)
+});
 
 function updateCards() {
   var url = '/game/winnerCard/'
