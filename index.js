@@ -159,11 +159,11 @@ io.on('connection', function(socket) {
         });
     console.log('trade inc')
     console.log(result)
-    if(result[0].socketid) {
+
       console.log(result[0].socketId)
       sendToId = result[0].socketId;
       socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
-    };
+    
   });
 
 
