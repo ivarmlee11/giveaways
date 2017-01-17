@@ -81,7 +81,7 @@ a, a:hover, a:active {
   background-color: gray;
 }
 
-.cards {
+.cards, .cardsStatic {
   display: inline-block;
   height: 140px;
   width: 140px;

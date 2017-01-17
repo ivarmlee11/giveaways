@@ -117,22 +117,20 @@ socket.on('get trade a', function(trade) {
   $('#playerIn').html(trade.sentFromName);
   $('#gameListIn').html(trade.gameId.length + ' items');
   displayIncomingGames(trade.gameId);
-  console.log(trade)
+  console.log(trade.gameId)
 });
 
 function displayIncomingGames(array) {
   $('#tradeWindowIn').html('');
-  if(!array.length) {
-    return;
-  } else {
-    array.forEach(function(val) {
-      $('#tradeWindowIn').append(
-        '<div gameId="' + val.id + '" class="cards">' + 
-        '<h3>' + val.name + '</h3>' + 
-        '</div>'
-      )
-    });
-  }
+  array.forEach(function(val) {
+    console.log(val)
+    $('#tradeWindowIn').append(
+      '<div gameId="' + val.id + '" class="cardsStatic">' + 
+      '<h3>' + val.name + '</h3>' + 
+      '</div>'
+    )
+  });
+
 };
 
 function updateCards() {
