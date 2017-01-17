@@ -147,7 +147,7 @@ io.on('connection', function(socket) {
     socketId: socket.id
   });
 
-  socket.emit('updateList', 'hello');
+  io.emit('updateList', clients);
   // console.log(io.sockets.connected)
   console.log(clients);
 
@@ -160,7 +160,7 @@ io.on('connection', function(socket) {
     });
 
     clients = temp;
-    socket.emit('updateList', 'goodbye');
+    io.emit('updateList', clients);
     console.log(clients);
   });
 });
