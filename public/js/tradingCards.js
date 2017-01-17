@@ -19,8 +19,8 @@ var tradingArea = $('#tradingArea'),
     otherTraderAcceptedOffer = false,
     sentFromId = $('#sentFromId').text(),
     sentFromName = $('#sentFromName').text();
-    
-tradeInfoOut.sentFromId = parseInt(sentFromId),
+
+tradeInfoOut.sentFromId = parseInt(sentFromId);
 tradeInfoOut.sentFromName = sentFromName;
 
 socket.on('updateList', function(connectedPlayers){
