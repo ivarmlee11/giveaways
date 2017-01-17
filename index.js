@@ -152,7 +152,7 @@ io.on('connection', function(socket) {
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-    if(result[0.socketId]) {
+    if(result[0].socketId]) {
       sendToId = result[0].socketId;
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
     };
@@ -164,8 +164,9 @@ io.on('connection', function(socket) {
     tradeObject.userId = null;
     tradeObject.sentFromId = null;
     tradeObject.sentFromName = null;
-
-    socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    if(sendToId) {
+      socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    }
     clients = clients.filter(function(obj) {
       return obj.id !== clientId;
     });
