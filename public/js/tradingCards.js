@@ -14,7 +14,7 @@ var $tradingArea = $('#tradingArea'),
     tradeInfoOut = new TradeWindow(null, [], null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null),
     otherTraderAcceptedOffer = false;
-var sentFromId = $('#sentFromId').val();
+var sentFromId = $('#sentFromId').text();
 console.log(sentFromId)
 
 tradeInfoOut.sentFrom = sentFromId;
