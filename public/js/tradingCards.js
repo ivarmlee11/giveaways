@@ -120,8 +120,8 @@ socket.on('get trade a', function(trade) {
   $('#playerIn').html(trade.sentFromName);
   $('#gameListIn').html(trade.gameId.length + ' items');
 
-  var displayInfo = findGameInfo(trade.gameId);
-  displayIncomingGames(displayInfo);
+  // var displayInfo = findGameInfo(trade.gameId);
+  // displayIncomingGames(displayInfo);
   console.log(trade.gameId);
 });
 
