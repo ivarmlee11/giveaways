@@ -97,8 +97,8 @@ $('#tradeWindowOut').droppable( {
   hoverClass: 'foundhome'
 });
 
-socket.on('socketid and userid list', function(msg){
-  console.log(msg);
+socket.on('socketid and userid list', function(connectedPlayers){
+  console.log(connectedPlayers);
   console.log('sdsd')
 });
 

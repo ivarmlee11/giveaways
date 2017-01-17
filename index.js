@@ -132,21 +132,27 @@ var clients = [];
 io.on('connection', function(socket) {
   // Accept a login event with user's data
   var clientId = socket.request.user.dataValues.id;
+  
   console.log(clientId + ' client Id');
   console.log(socket.id + ' socket id')
   console.log(io.engine.clientsCount + ' current number of clients');
+  
   clients.push({
     id: clientId,
     socketId: socket.id
-  })
-  socket.emit('socketid and userid list', clients);
+  });
+
+  socket.on('connect', function() {
+    socket.emit('socketid and userid list', clients);
+  });
+
   // console.log(io.sockets.connected)
   console.log(clients);
 
   socket.on('tradeA', function(id, msg){
     // socket.broadcast.to(id).emit('my message', msg);
-    console.log(id)
-    console.log(msg)
+    console.log(id);
+    console.log(msg);
   });
 
   socket.on('disconnect', function() {
