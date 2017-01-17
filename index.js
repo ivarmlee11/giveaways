@@ -130,7 +130,8 @@ client.on('join', function (channel, username, self) {
 var clients = [];
 
 io.on('connection', function(socket) {
-  var clientId = socket.request.user.dataValues.id;
+  var clientId = socket.request.user.dataValues.id,
+      sendToId;
   
   console.log(clientId + ' client Id');
   console.log(socket.id + ' socket id')
@@ -157,7 +158,7 @@ io.on('connection', function(socket) {
     console.log('trade inc')
     console.log(result)
     console.log(result[0].socketId)
-    var sendToId = result[0].socketId;
+    sendToId = result[0].socketId;
     socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
   });
 
@@ -166,7 +167,14 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     // console.log('Got disconnect!');
     console.log(socket.id + ' disconnected');
+    console.log('clearing object');
+    tradeObject.gameId = [];
+    tradeObject.userId = null;
+    tradeObject.sentFromId = null;
+    tradeObject.sentFromName = null;
+    console.log(tradeObject)
 
+    socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
     var temp = clients.filter(function(obj) {
       return obj.id !== clientId;
     });
