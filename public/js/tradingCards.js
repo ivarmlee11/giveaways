@@ -26,7 +26,8 @@ $('#playerDropDown').on('click', function() {
   var userId = $('option:selected', this).attr('userid');
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-
+  tradeInfoOut.sentFromId = parseInt(sentFromId);
+  tradeInfoOut.sentFromName = sentFromName;
   socket.emit('clientSenderA', tradeInfoOut);
   if(!tradeInfoOut.gameId.length) {
     $('#messageBox').html('No games sent yet.');
