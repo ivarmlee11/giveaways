@@ -148,8 +148,12 @@ io.on('connection', function(socket) {
   });
 
   io.emit('updateList', clients);
-  // console.log(io.sockets.connected)
-  console.log(clients);
+
+  socket.on('clientSenderA', function(id, tradeObject){
+    console.log('getting trade')
+    console.log(tradeObject)
+    // socket.broadcast.to(clientId).emit('getTradeA', tradeObject);
+  });
 
   socket.on('disconnect', function() {
     // console.log('Got disconnect!');

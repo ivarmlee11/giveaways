@@ -51,6 +51,7 @@ $('#proposeTrade').on('click', function() {
     console.log(tradeInfoOut);
 
     // call function to send object
+    socket.emit('clientSenderA', tradeInfoOut);
 
     $('#messageBox').html('Proposal sent.');
   } else {
@@ -101,6 +102,7 @@ socket.on('updateList', function(connectedPlayers){
   console.log(connectedPlayers);
   console.log('--------')
 });
+
 
 function updateCards() {
   var url = '/game/winnerCard/'
