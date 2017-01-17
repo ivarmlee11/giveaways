@@ -48,6 +48,8 @@ $('#clearOutTrade').on('click', function() {
   console.log(tradeInfoOut)
   socket.emit('clientSenderA', tradeInfoOut);
   tradeInfoOut.userId = null;
+  $('#gameListOut').html('0 items');
+  $('#playerOut').html('Recipient cleared.');
 });
 
 $('#acceptTrade').on('click', function() {
