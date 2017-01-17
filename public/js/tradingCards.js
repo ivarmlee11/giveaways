@@ -97,15 +97,10 @@ $('#tradeWindowOut').droppable( {
   hoverClass: 'foundhome'
 });
 
-var intervalID = window.setInterval(myCallback, 500);
-
-function myCallback() {
-  socket.on('updateList', function(connectedPlayers){
-    console.log(connectedPlayers);
-    console.log('sdsd')
-  })
-}
-
+socket.on('updateList', function(connectedPlayers){
+  console.log(connectedPlayers);
+  console.log('--------')
+});
 
 function updateCards() {
   var url = '/game/winnerCard/'

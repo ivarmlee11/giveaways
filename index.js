@@ -141,19 +141,10 @@ io.on('connection', function(socket) {
     id: clientId,
     socketId: socket.id
   });
-
   
   socket.emit('updateList', clients);
-
-
   // console.log(io.sockets.connected)
   console.log(clients);
-
-  socket.on('tradeA', function(id, msg){
-    // socket.broadcast.to(id).emit('my message', msg);
-    console.log(id);
-    console.log(msg);
-  });
 
   socket.on('disconnect', function() {
     // console.log('Got disconnect!');
@@ -164,7 +155,7 @@ io.on('connection', function(socket) {
     });
 
     clients = temp;
-    socket.emit('socketid and userid list', clients);
+    socket.emit('updateList', clients);
     console.log(clients);
   });
 });
