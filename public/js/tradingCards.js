@@ -50,6 +50,7 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut.userId = null;
   $('#gameListOut').html('0 items');
   $('#playerOut').html('Recipient cleared.');
+  updateCards();
 });
 
 $('#acceptTrade').on('click', function() {
