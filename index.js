@@ -131,30 +131,29 @@ var clients = [];
 
 io.on('connection', function(socket) {
   // Accept a login event with user's data
-  console.log(socket.request.user.dataValues)
-  // var clientId = socket.request.user.dataValues.id;
-  // console.log(clientId + ' client Id');
-  // console.log(socket.id + ' socket id')
-  // console.log(io.engine.clientsCount + ' current number of clients');
-  // clients.push({
-  //   id: clientId,
-  //   socketId: socket.id
-  // })
-  // var allConnectedClients = Object.keys(io.sockets.connected);
-  // console.log(allConnectedClients);
-  // // console.log(io.sockets.connected)
-  // console.log(clients)
-  // socket.on('disconnect', function() {
-  //   // console.log('Got disconnect!');
-  //   console.log(socket.id + ' dc');
+  var clientId = socket.request.user.dataValues.id;
+  console.log(clientId + ' client Id');
+  console.log(socket.id + ' socket id')
+  console.log(io.engine.clientsCount + ' current number of clients');
+  clients.push({
+    id: clientId,
+    socketId: socket.id
+  })
+  var allConnectedClients = Object.keys(io.sockets.connected);
+  console.log(allConnectedClients);
+  // console.log(io.sockets.connected)
+  console.log(clients)
+  socket.on('disconnect', function() {
+    // console.log('Got disconnect!');
+    console.log(socket.id + ' dc');
 
-  //   var temp = clients.filter(function(obj) {
-  //     return obj.id !== clientId;
-  //   });
+    var temp = clients.filter(function(obj) {
+      return obj.id !== clientId;
+    });
 
-  //   clients = temp
-  //   console.log(clients);
-  // });
+    clients = temp
+    console.log(clients);
+  });
 });
 
 
