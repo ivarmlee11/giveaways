@@ -46,8 +46,10 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut.sentFromName = null;
   tradeInfoOut.sendTo = null;
   console.log(tradeInfoOut)
-  socket.emit('clientSenderA', tradeInfoOut);
-  tradeInfoOut.userId = null;
+  if(tradeInfoOut.userId){
+    socket.emit('clientSenderA', tradeInfoOut);
+    tradeInfoOut.userId = null;
+  }
   $('#gameListOut').html('0 items');
   $('#playerOut').html('Recipient cleared.');
   updateCards();
