@@ -14,14 +14,15 @@ var $tradingArea = $('#tradingArea'),
     tradeInfoOut = new TradeWindow(null, [], null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null),
     otherTraderAcceptedOffer = false;
+console.log($('#sentFromId').val())
+var sentFromId = $('#sentFromId').val();
+tradeInfoOut.sentFrom = sentFromId;
 
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
-  var userId = $('option:selected', this).attr('userid'),
-      sentFromId = $('#sentFromId').val();
+  var userId = $('option:selected', this).attr('userid');
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-  tradeInfoOut.sentFrom = sentFromId;
   console.log(tradeInfoOut)
 });
 
