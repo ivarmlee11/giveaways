@@ -1,6 +1,7 @@
 $(function() {
 
-var socket = io.connect('https://tweak-game-temp.herokuapp.com');
+
+var socket = io.connect();
 
 function TradeWindow(tradeName, tradeGame, tradeUser) {
   this.name = tradeName,
