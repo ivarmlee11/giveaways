@@ -43,11 +43,10 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut.gameId = [];
   tradeInfoOut.sentFromId = null;
   tradeInfoOut.sentFromName = null;
+  tradeInfoOut.sendTo = null;
   console.log(tradeInfoOut)
   socket.emit('get trade a', tradeInfoOut);
   tradeInfoOut.userId = null;
-  $('#playerOut').html('');
-  $('#gameListOut').html('');
 });
 
 $('#acceptTrade').on('click', function() {
@@ -102,6 +101,7 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade a', function(trade) {
   console.log('trade');
+  console.log(trade)
   $('#playerIn').html(trade.sentFromName);
   $('#gameListIn').html(trade.gameId.length + ' items');
 
