@@ -149,12 +149,13 @@ io.on('connection', function(socket) {
 
   socket.on('clientSenderA', function(tradeObject){
     console.log('getting trade')
-    // console.log(tradeObject)
+    console.log(tradeObject)
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
     console.log('trade inc')
+    console.log(result)
     console.log(result[0].socketId)
     var sendToId = result[0].socketId;
     socket.broadcast.to(sendToId).emit('get trade a', tradeObject);
