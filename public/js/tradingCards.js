@@ -98,7 +98,7 @@ $('#tradeWindowOut').droppable( {
 });
 
 socket.on('socketid and userid list', function(msg){
-  console.log(message);
+  console.log(msg);
   console.log('sdsd')
 });
 
