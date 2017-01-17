@@ -20,7 +20,7 @@ $('#playerDropDown').on('click', function() {
   var userId = $('option:selected', this).attr('userid');
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-  tradeInfoOut.sentFrom = $('#userId').val();
+  tradeInfoOut.sentFrom = $('#sentFromId').val();
   console.log(tradeInfoOut)
 });
 
