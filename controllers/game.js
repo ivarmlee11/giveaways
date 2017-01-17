@@ -41,13 +41,13 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     if(game.coderevealed === undefined) {
       return;
     } else {
-    db.game.create({
-      name: game.name,
-      price: game.price,
-      code: game.code,
-      coderevealed: game.coderevealed
-    }).then(function(data) {
-    });
+      db.game.create({
+        name: game.name,
+        price: game.price,
+        code: game.code,
+        coderevealed: game.coderevealed
+      }).then(function(data) {
+      });
     }
   });
   req.flash('success', 'Games added.');

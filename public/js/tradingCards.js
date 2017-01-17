@@ -94,7 +94,7 @@ $('#tradeWindowOut').droppable({
     tradeInfoOut.gameId.push(parseInt(id));
       console.log(tradeInfoOut);
 
-    tradeInfoOut.gameId =  tradeInfoOut.gameId.filter(function(item, index, inputArray) {
+    tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
       return inputArray.indexOf(item) == index;
     });
       console.log(tradeInfoOut);
@@ -139,9 +139,7 @@ function findGameInfo(array) {
     url: url,
     type: 'GET',
     success: function(cardList) {
-      var temp = cardList.filter(function(val) {
-
-      });
+      console.log(cardList)
       return cardList;
     }
   });

@@ -136,11 +136,9 @@ io.on('connection', function(socket) {
   console.log(socket.id + ' socket id')
   console.log(io.engine.clientsCount + ' current number of clients');
 
-  var temp = clients.filter(function(obj) {
+  clients = clients.filter(function(obj) {
     return obj.id !== clientId;
   });
-
-  clients = temp;
 
   clients.push({
     id: clientId,
