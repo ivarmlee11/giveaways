@@ -158,6 +158,7 @@ io.on('connection', function(socket) {
     });
 
     clients = temp;
+    socket.emit('socketid and userid list', clients);
     console.log(clients);
   });
 });
