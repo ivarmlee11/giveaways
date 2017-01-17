@@ -152,9 +152,10 @@ io.on('connection', function(socket) {
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-
-    sendToId = result[0].socketId;
-    socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    if(result[0.socketId]) {
+      sendToId = result[0].socketId;
+      socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    };
   });
 
   socket.on('disconnect', function() {
