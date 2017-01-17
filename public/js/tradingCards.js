@@ -18,16 +18,18 @@ var $tradingArea = $('#tradingArea'),
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
   var userId = $('option:selected', this).attr('userid');
-  tradeInfoOut.name = $(this).val();
+  tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
+  tradeInfoOut.sentFrom = parseInt($('#userId').val());
   console.log(tradeInfoOut)
 });
 
 $('#clearOutTrade').on('click', function() {
   tradeInfoOut = {
-    name: null,
+    sendTo: null,
     gameId: [],
-    userId: null
+    userId: null,
+    sentFrom: null
   };
   $('#playerOut').html('');
   $('#gameListOut').html('');
@@ -48,7 +50,7 @@ $('#clearOutTrade').on('click', function() {
 // });
 
 $('#proposeTrade').on('click', function() {
-  if(tradeInfoOut.name && tradeInfoOut.userId) {
+  if(tradeInfoOut.sendTo && tradeInfoOut.userId) {
     console.log(tradeInfoOut);
 
     // call function to send object
@@ -62,7 +64,7 @@ $('#proposeTrade').on('click', function() {
 });
 
 $('#acceptTrade').on('click', function() {
-  if(tradeInfoIn.name && tradeInfoIn.userId && tradeInfoOut.name && tradeInfoOut.userId) {
+  if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
     
     // socket io message to other trader saying you like the conditions of the trade
     if(otherTraderAcceptedOffer) {
@@ -106,6 +108,7 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade a', function(trade) {
   console.log('trade')
+  $('#playerIn').html(trade.sentFrom);
   $('#gameListIn').html(trade.gameId.length + ' items');
   console.log(trade)
 });
