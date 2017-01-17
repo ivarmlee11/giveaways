@@ -73,6 +73,7 @@ $('#tradeWindowOut').droppable({
         id = draggable.attr('gameid');
 
     tradeInfoOut.gameId.push(parseInt(id));
+    tradeInfoOut.sentFromName = $('#playerOut').text();
     tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
       return inputArray.indexOf(item) == index;
     });
