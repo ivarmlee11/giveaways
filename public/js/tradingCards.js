@@ -26,8 +26,11 @@ $('#playerDropDown').on('click', function() {
   var userId = $('option:selected', this).attr('userid');
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
+
   socket.emit('clientSenderA', tradeInfoOut);
-  $('#messageBox').html('Proposal sent.');
+
+  $('#messageBox').html('No games sent yet.');
+
 });
 
 $('#clearOutTrade').on('click', function() {
