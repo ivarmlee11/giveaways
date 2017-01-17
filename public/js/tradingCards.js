@@ -17,7 +17,7 @@ var $tradingArea = $('#tradingArea'),
 var sentFromId = $('#sentFromId').text();
 console.log(sentFromId)
 
-tradeInfoOut.sentFrom = sentFromId;
+tradeInfoOut.sentFrom = parseInt(sentFromId);
 
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
