@@ -97,7 +97,7 @@ $('#tradeWindowOut').droppable( {
   hoverClass: 'foundhome'
 });
 
-socket.on('socketid and userid list', function(connectedPlayers){
+socket.on('updateList', function(connectedPlayers){
   console.log(connectedPlayers);
   console.log('sdsd')
 });

@@ -142,9 +142,9 @@ io.on('connection', function(socket) {
     socketId: socket.id
   });
 
-  socket.on('connect', function() {
-    socket.emit('socketid and userid list', clients);
-  });
+  
+  socket.emit('updateList', clients);
+
 
   // console.log(io.sockets.connected)
   console.log(clients);
