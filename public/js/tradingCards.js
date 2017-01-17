@@ -39,13 +39,13 @@ $('#playerDropDown').on('click', function() {
 
 $('#clearOutTrade').on('click', function() {
   console.log(tradeInfoOut)
-  tradeInfoOut = {
-    sendTo: null,
-    gameId: [],
-    userId: null,
-    sentFromId: null,
-    sentFromName: null
-  };
+  var sendIt = tradeInfoOut.sendToId;
+  tradeInfoOut.gameId = [];
+  tradeInfoOut.userId = null;
+  tradeInfoOut.sentFromId = null;
+  tradeInfoOut.sentFromName = null;
+  tradeInfoOut.sendToId = null;
+  socket.broadcast.to(sendIt).emit('get trade a', tradeObject);
   $('#playerOut').html('');
   $('#gameListOut').html('');
 });
