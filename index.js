@@ -205,13 +205,24 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
 app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx;
   db.user.findById(id).then(function(user) {
+    var user = user;
     user.getContests().then(function(contests) {
       var contests = contests;
       if(contests.length === 0) {
         contests = [];
-        res.render('profile', {contests: contests});
+        res.render('profile', 
+          {
+            contests: contests,
+            user: user
+          }
+        );
       } else {
-        res.render('profile', {contests: contests});
+        res.render('profile', 
+          {
+            contests: contests,
+            user: user
+          }
+        );
       } 
     })
   });

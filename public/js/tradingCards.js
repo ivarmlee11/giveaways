@@ -3,15 +3,16 @@ $(function() {
 
 var socket = io.connect();
 
-function TradeWindow(tradeName, tradeGame, tradeUser) {
-  this.name = tradeName,
+function TradeWindow(sendTo, tradeGame, tradeUser, sentFrom) {
+  this.sendTo = sendTo,
   this.gameId = tradeGame,
-  this.userId = tradeUser
+  this.userId = tradeUser,
+  this.sentFrom = sentFrom
 };
 
 var $tradingArea = $('#tradingArea'),
-    tradeInfoOut = new TradeWindow(null, [], null),
-    tradeInfoIn = new TradeWindow(null, [], null),
+    tradeInfoOut = new TradeWindow(null, [], null, null),
+    tradeInfoIn = new TradeWindow(null, [], null, null),
     otherTraderAcceptedOffer = false;
 
 $('#playerDropDown').on('click', function() {
@@ -105,6 +106,7 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade a', function(trade) {
   console.log('trade')
+  $('#gameListIn').html(trade.gameId.length + ' items');
   console.log(trade)
 });
 
