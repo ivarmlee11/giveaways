@@ -17,10 +17,11 @@ var $tradingArea = $('#tradingArea'),
 
 $('#playerDropDown').on('click', function() {
   $('#playerOut').html($(this).val());
-  var userId = $('option:selected', this).attr('userid');
+  var userId = $('option:selected', this).attr('userid'),
+      sentFromId = $('#sentFromId').val();
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-  tradeInfoOut.sentFrom = $('#sentFromId').val();
+  tradeInfoOut.sentFrom = sentFromId;
   console.log(tradeInfoOut)
 });
 
