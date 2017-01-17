@@ -63,10 +63,7 @@ $('#proposeTrade').on('click', function() {
     socket.emit('clientSenderA', tradeInfoOut);
 
     $('#messageBox').html('Proposal sent.');
-  } else {
-    console.log(tradeInfoOut);
-    $('#messageBox').html('To propose a trade you need a recipient');
-  }
+  } 
 });
 
 $('#acceptTrade').on('click', function() {
@@ -74,7 +71,7 @@ $('#acceptTrade').on('click', function() {
     
     // socket io message to other trader saying you like the conditions of the trade
     if(otherTraderAcceptedOffer) {
-      console.log('other player accepted offer')
+      console.log('other player accepted offer');
 
       //ajax call to switch ownership of games
       
@@ -88,18 +85,32 @@ $('#acceptTrade').on('click', function() {
 
 });
 
-$('#tradeWindowOut').droppable( {
-  drop: function(event, ui){
+$('#tradeWindowOut').droppable({
+  drop: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid');
 
+      console.log(tradeInfoOut);
     tradeInfoOut.gameId.push(parseInt(id));
+      console.log(tradeInfoOut);
 
-    tradeInfoOut.gameId =  tradeInfoOut.gameId.filter( function( item, index, inputArray ) {
+    tradeInfoOut.gameId =  tradeInfoOut.gameId.filter(function(item, index, inputArray) {
       return inputArray.indexOf(item) == index;
     });
+      console.log(tradeInfoOut);
 
     $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
+
+    if(tradeInfoOut.sendTo && tradeInfoOut.userId) {
+
+      // call function to send object
+      socket.emit('clientSenderA', tradeInfoOut);
+
+      $('#messageBox').html('Proposal sent.');
+    } else {
+      $('#messageBox').html('To propose a trade you need a recipient');
+    } 
+
     console.log(tradeInfoOut);
     
   },
@@ -113,25 +124,41 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade a', function(trade) {
-  console.log('trade')
+  console.log('trade');
   $('#playerIn').html(trade.sentFromName);
   $('#gameListIn').html(trade.gameId.length + ' items');
-  displayIncomingGames(trade.gameId);
-  console.log(trade.gameId)
+
+  var displayInfo = findGameInfo(trade.gameId);
+  displayIncomingGames(displayInfo);
+  console.log(trade.gameId);
 });
+
+function findGameInfo(array) {
+  var url = '/game/gameData/'
+   $.ajax({
+    url: url,
+    type: 'GET',
+    success: function(cardList) {
+      var temp = cardList.filter(function(val) {
+
+      });
+      return cardList;
+    }
+  });
+}
 
 function displayIncomingGames(array) {
   $('#tradeWindowIn').html('');
   array.forEach(function(val) {
-    console.log(val)
+    console.log(val);
     $('#tradeWindowIn').append(
       '<div gameId="' + val.id + '" class="cardsStatic">' + 
       '<h3>' + val.name + '</h3>' + 
       '</div>'
     )
   });
-
 };
+
 
 function updateCards() {
   var url = '/game/winnerCard/'
@@ -177,8 +204,6 @@ function updatePlayerList() {
     }
   });
 };
-
-
 
 updateCards();
 updatePlayerList();
