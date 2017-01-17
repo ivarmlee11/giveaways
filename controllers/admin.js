@@ -47,7 +47,7 @@ router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res
 
   if(adminName === req.user.username) {
     console.log('your names are the same, you cannot demod yaself')
-    req.flash('success', 'You cannot demod yourself.');
+    req.flash('info', 'You cannot demod yourself.');
     res.redirect('/admin/adminList');
   } else {
     db.user.update({
@@ -58,7 +58,7 @@ router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res
         auth: auth
       }
     }).then(function(user) {
-      req.flash('success', 'You removed adminList status.');
+      req.flash('success', 'You removed admin status.');
       res.redirect('/admin/adminList');
     });
   }
