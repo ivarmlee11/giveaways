@@ -1,13 +1,10 @@
 var express = require('express'),
     router = express.Router(),
-    passport = require('../config/ppConfig'),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash');
-
-// manage giveaways
 
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   db.giveaway.findAll().then(function(giveaways) {
@@ -92,6 +89,5 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
     res.redirect('/giveaway/adminGiveawayList');
   });
 });
-
 
 module.exports = router;

@@ -1,13 +1,10 @@
 var express = require('express'),
     router = express.Router(),
-    passport = require('../config/ppConfig'),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash');
-
-// admin controls
 
 router.get('/makeAGiveaway', ensureAuthenticated, modCheck, function(req, res) {
   res.render('admin/adminControl');

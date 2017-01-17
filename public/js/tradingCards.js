@@ -29,6 +29,10 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
+  var playerIn = $('#playerIn').html().length
+  console.log(playerIn + ' player in')
+  var gameListIn = $('#gameListIn').html().length
+  console.log(gameListIn + ' gameListIn in')
   $('#playerIn').html(trade.sentFromName);
   $('#gameListIn').html(trade.gameId.length + ' items');  
 });

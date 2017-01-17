@@ -1,13 +1,10 @@
 var express = require('express'),
     router = express.Router(),
-    passport = require('../config/ppConfig'),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash');
-
-// player interaction
 
 router.get('/allplayers/', ensureAuthenticated, function(req, res) {
   db.user.findAll().then(function(users) {
