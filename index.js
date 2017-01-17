@@ -139,10 +139,16 @@ io.on('connection', function(socket) {
     id: clientId,
     socketId: socket.id
   })
-  var allConnectedClients = Object.keys(io.sockets.connected);
-  console.log(allConnectedClients);
+  socket.broadcast.emit('socketid and userid list', clients);
   // console.log(io.sockets.connected)
-  console.log(clients)
+  console.log(clients);
+
+  socket.on('tradeA', function(id, msg){
+    // socket.broadcast.to(id).emit('my message', msg);
+    console.log(id)
+    console.log(msg)
+  });
+
   socket.on('disconnect', function() {
     // console.log('Got disconnect!');
     console.log(socket.id + ' dc');
@@ -151,20 +157,15 @@ io.on('connection', function(socket) {
       return obj.id !== clientId;
     });
 
-    clients = temp
+    clients = temp;
     console.log(clients);
   });
 });
 
-
 app.use('/admin', adminCtrl);
-
 app.use('/player', playerCtrl);
-
 app.use('/game', gameCtrl);
-
 app.use('/giveaway', giveawayCtrl);
-
 app.use('/auth', authCtrl);
 
 app.get('/', function(req, res) {
@@ -253,8 +254,6 @@ app.post('/keyPhrase/:idx', ensureAuthenticated, function(req, res) {
     };
   });
 });
-
-// app.listen(port);
 
 server.listen(port);
 

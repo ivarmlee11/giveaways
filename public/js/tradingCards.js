@@ -78,8 +78,8 @@ $('#acceptTrade').on('click', function() {
 $('#tradeWindowOut').droppable( {
   drop: function(event, ui){
     var draggable = ui.draggable,
-      id = draggable.attr('gameid');
-      console.log(tradeInfoOut)
+        id = draggable.attr('gameid');
+
     tradeInfoOut.gameId.push(parseInt(id));
 
     tradeInfoOut.gameId =  tradeInfoOut.gameId.filter( function( item, index, inputArray ) {
@@ -88,9 +88,14 @@ $('#tradeWindowOut').droppable( {
 
     $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
     console.log(tradeInfoOut);
+    
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
+});
+
+socket.on('socketid and userid list',function(msg){
+  console.log(message);
 });
 
 function updateCards() {
@@ -138,9 +143,7 @@ function updatePlayerList() {
   });
 };
 
-function incomingTrade() {
 
-};
 
 updateCards();
 updatePlayerList();
