@@ -29,13 +29,8 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
-  var isPlayerIn = $('#playerIn').html(),
-      isGameIn = $('#gameListIn').html();
-  console.log(trade)
-  if((!isPlayerIn.length) && (!isGameIn.length)) {
-    $('#playerIn').html(trade.sentFromName);
-    $('#gameListIn').html(trade.gameId.length + ' items');    
-  };
+  $('#playerIn').html(trade.sentFromName);
+  $('#gameListIn').html(trade.gameId.length + ' items');  
 });
 
 $('#playerDropDown').on('click', function() {
