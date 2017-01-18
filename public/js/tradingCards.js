@@ -1,6 +1,5 @@
 $(function() {
 
-
 var socket = io.connect();
 
 function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName) {
@@ -14,6 +13,12 @@ function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName) {
 var tradingArea = $('#tradingArea'),
     tradeWindowOut = $('#tradeWindowOut'),
     messageBox = $('#messageBox'),
+    playerIn = $('#playerIn'),
+    playerOut = $('#playerOut'),
+    gameListIn = $('#gameListIn'),
+    gameListOut = $('#gameListOut'),
+    tradeWindowIn = $('#tradeWindowIn'),
+    playerTradeList = $('playerTradeList'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null),
     otherTraderAcceptedOffer = false,
@@ -28,17 +33,20 @@ socket.on('updateList', function(connectedPlayers){
   console.log(connectedPlayers);
 });
 
+var lastId = null;
+
 socket.on('get trade', function(trade) {
-  var playerIn = $('#playerIn').html().length
-  console.log(playerIn + ' player in')
-  var gameListIn = $('#gameListIn').html().length
-  console.log(gameListIn + ' gameListIn in')
-  $('#playerIn').html(trade.sentFromName);
-  $('#gameListIn').html(trade.gameId.length + ' items');  
+  if ((!lastId) || (lastId = trade.sentFromId)) {
+    lastId = trade.sentFromId;
+    console.log(lastId)
+    playerIn.html(trade.sentFromName);
+    gameListIn.html(trade.gameId.length + ' items'); 
+  }
+  
 });
 
 $('#playerDropDown').on('click', function() {
-  $('#playerOut').html($(this).val());
+  playerOut.html($(this).val());
   var userId = $('option:selected', this).attr('userid');
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
@@ -50,7 +58,7 @@ $('#playerDropDown').on('click', function() {
   } else {
     messageBox.html('Proposal sent.')
   }
-  $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
+  gameListOut.html(tradeInfoOut.gameId.length + ' items');
 
 });
 
@@ -67,8 +75,8 @@ $('#clearOutTrade').on('click', function() {
     tradeInfoOut.userId = null;
   }
 
-  $('#gameListOut').html('');
-  $('#playerOut').html('');
+  gameListOut.html('');
+  playerOut.html('');
 
   tradingArea.html('');
   tradeWindowOut.html('');
@@ -105,7 +113,7 @@ tradeWindowOut.droppable({
       return inputArray.indexOf(item) == index;
     });
 
-    $('#gameListOut').html(tradeInfoOut.gameId.length + ' items');
+    .html(tradeInfoOut.gameId.length + ' items');
 
     if(tradeInfoOut.sendTo && tradeInfoOut.userId) {
 
@@ -134,10 +142,10 @@ function findGameInfo(array) {
 };
 
 function displayIncomingGames(array) {
-  $('#tradeWindowIn').html('');
+  tradeWindowIn.html('');
   array.forEach(function(val) {
     console.log(val);
-    $('#tradeWindowIn').append(
+    tradeWindowIn.append(
       '<div gameId="' + val.id + '" class="cardsStatic">' + 
       '<h3>' + val.name + '</h3>' + 
       '</div>'
@@ -172,8 +180,7 @@ function updatePlayerList() {
     method: 'GET',
     success: function(playerList) {
       var playerList = playerList,
-          users = [],
-          $playerTradeList = $('#playerTradeList');
+          users = [];
 
       playerList.forEach(function(val) {
         users.push({
@@ -182,9 +189,9 @@ function updatePlayerList() {
         });
       });
 
-      $playerTradeList.html('');
+      playerTradeList.html('');
       users.forEach(function(val) {
-        $playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
+        playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
       });
     }
   });
