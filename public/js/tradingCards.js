@@ -190,6 +190,7 @@ function updatePlayerList() {
       });
 
       playerTradeList.html('');
+      console.log(users)
       users.forEach(function(val) {
         playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
       });
