@@ -29,13 +29,15 @@ tradeInfoOut.sentFromId = parseInt(sentFromId);
 tradeInfoOut.sentFromName = sentFromName;
 
 socket.on('updateList', function(connectedPlayers){
-  console.log('connected players')
+  console.log('connected players');
   console.log(connectedPlayers);
 });
 
 var lastId = null;
 
 socket.on('get trade', function(trade) {
+  console.log('getting trade');
+  console.log(trade);
   if ((!lastId) || (lastId = trade.sentFromId)) {
     lastId = trade.sentFromId;
     console.log(lastId)
@@ -47,18 +49,22 @@ socket.on('get trade', function(trade) {
 
 $('#playerDropDown').on('click', function() {
   playerOut.html($(this).val());
+  gameListOut.html(tradeInfoOut.gameId.length + ' items');
+  
   var userId = $('option:selected', this).attr('userid');
+  
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
+  
   socket.emit('clientSenderA', tradeInfoOut);
+  
   if(!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent yet.');
   } else {
     messageBox.html('Proposal sent.')
   }
-  gameListOut.html(tradeInfoOut.gameId.length + ' items');
 
 });
 
@@ -87,6 +93,7 @@ $('#clearOutTrade').on('click', function() {
 });
 
 $('#clearIncTrade').on('click', function() {
+  tradeInProgrsess = false;
   console.log(tradeInfoIn)
   if (tradeInfoIn.userId) {
     socket.emit('clientSenderA', tradeInfoIn);
@@ -103,7 +110,7 @@ $('#clearIncTrade').on('click', function() {
 
 $('#acceptTrade').on('click', function() {
   if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
-     
+    tradeInProgrsess = false;
     if(otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
@@ -122,7 +129,8 @@ $('#acceptTrade').on('click', function() {
 tradeWindowOut.droppable({
   drop: function(event, ui) {
     var draggable = ui.draggable,
-        id = draggable.attr('gameid');
+        id = draggable.attr('gameid'),
+        tradeInProgrsess = true;
 
     tradeInfoOut.gameId.push(parseInt(id));
 
