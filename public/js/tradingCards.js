@@ -74,7 +74,7 @@ $('#playerDropDown').on('click', function() {
   
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-  tradeInfoOut.sentFromId = sentFromId;
+  tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
   
   socket.emit('clientSenderA', tradeInfoOut);
@@ -121,6 +121,9 @@ $('#clearIncTrade').on('click', function() {
   console.log('clearing trade')
   if (tradeInfoIn.userId) {
     tradeInfoIn.clearThis = true;
+    var temp = tradeInfoIn.userId;
+    tradeInfoIn.sentFromId = tradeInfoIn.userId;
+    tradeInfoIn.sentFromId = temp;
     console.log(tradeInfoIn)
     socket.emit('clientSenderA', tradeInfoIn);
   }
