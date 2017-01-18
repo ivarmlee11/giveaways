@@ -71,6 +71,7 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut.sendTo = null;
 
   if(tradeInfoOut.userId){
+    console.log(tradeInfoOut)
     socket.emit('clientSenderA', tradeInfoOut);
     tradeInfoOut.userId = null;
   }
