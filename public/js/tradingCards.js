@@ -52,6 +52,8 @@ socket.on('get trade', function(trade) {
 });
 
 socket.on('trade busy', function(message) {
+      console.log('trade in progress')
+console.log(message)
   messageBox.html(message);
 });
 
