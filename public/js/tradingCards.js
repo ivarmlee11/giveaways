@@ -92,7 +92,7 @@ $('#clearIncTrade').on('click', function() {
   tradeInfoIn.gameId = [];
   // tradeInfoIn.sentFromId = null;
   tradeInfoIn.sentFromName = null;
-
+  console.log(tradeInfoIn)
   if (tradeInfoIn.userId) {
     console.log('trade info in')
     console.log(tradeInfoIn)
