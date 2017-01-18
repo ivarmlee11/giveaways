@@ -39,7 +39,7 @@ socket.on('get trade', function(trade) {
   console.log(tradeInProgress + ' trade in progress')
   console.log(trade.clearThis + ' if true this trade will be cleared')
 
-  if (!tradeInProgress) {
+  if (!tradeInProgress && !trade.clearThis) {
     console.log('fresh trade proposal')
     tradeInProgress = true;   
     tradeInfoIn = trade;
@@ -112,6 +112,7 @@ $('#clearOutTrade').on('click', function() {
 });
 
 $('#clearIncTrade').on('click', function() {
+  tradeInProgrsess = false;
   tradeInfoIn.sendTo = null;
   // tradeInfoIn.sentFromId = null;
   tradeInfoIn.sentFromName = null;
