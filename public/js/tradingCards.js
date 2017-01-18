@@ -123,7 +123,7 @@ $('#clearIncTrade').on('click', function() {
     tradeInfoIn.clearThis = true;
     var temp = tradeInfoIn.userId;
     tradeInfoIn.sentFromId = tradeInfoIn.userId;
-    tradeInfoIn.sentFromId = temp;
+    tradeInfoIn.userId = temp;
     console.log(tradeInfoIn)
     socket.emit('clientSenderA', tradeInfoIn);
   }
