@@ -68,12 +68,12 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut.gameId = [];
   tradeInfoOut.sentFromId = null;
   tradeInfoOut.sentFromName = null;
-  tradeInfoOut.sendTo = null;
 
   if(tradeInfoOut.userId){
     console.log(tradeInfoOut)
     socket.emit('clientSenderA', tradeInfoOut);
     tradeInfoOut.userId = null;
+    tradeInfoOut.sendTo = null;
   }
 
   gameListOut.html('');
