@@ -18,7 +18,7 @@ var tradingArea = $('#tradingArea'),
     gameListIn = $('#gameListIn'),
     gameListOut = $('#gameListOut'),
     tradeWindowIn = $('#tradeWindowIn'),
-    playerTradeList = $('playerTradeList'),
+    // playerTradeList = $('playerTradeList'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null),
     otherTraderAcceptedOffer = false,
@@ -174,13 +174,11 @@ function updateCards() {
 };
 
 function updatePlayerList() {
-  console.log('wat')
   var url = '/player/allplayers/';
   $.ajax({
     url: url,
     method: 'GET',
     success: function(playerList) {
-      console.log(playerList)
       var playerList = playerList,
           users = [];
 
@@ -191,10 +189,9 @@ function updatePlayerList() {
         });
       });
 
-      playerTradeList.html('');
-      console.log(users)
+      $('#playerTradeList').html('');
       users.forEach(function(val) {
-        playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
+        $('#playerTradeList').append('<option userid="' + val.id + '">' + val.username + '</option>');  
       });
     }
   });
