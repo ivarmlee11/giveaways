@@ -146,7 +146,6 @@ io.on('connection', function(socket) {
   io.emit('updateList', clients);
 
   socket.on('clientSenderA', function(tradeObject) {
-    console.log('sdasdasdasdasdasd')
     tradeObject = tradeObject;
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
@@ -160,10 +159,14 @@ io.on('connection', function(socket) {
         console.log(clients)
     if(result.length) {
       sendToId = result[0].socketId;
-      console.log('a0sda0sd-asd-asd-as-0d-as')
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
     };
     // else send message that player isnt online TODO
+  });
+
+  socket.on('Trade in progress', function(message) {
+    console.log(message)
+    console.log('-----------')
   });
 
   socket.on('disconnect', function() {

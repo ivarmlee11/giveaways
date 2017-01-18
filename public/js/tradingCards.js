@@ -33,17 +33,25 @@ socket.on('updateList', function(connectedPlayers){
   console.log(connectedPlayers);
 });
 
-var lastId = null;
+
 
 socket.on('get trade', function(trade) {
   console.log('getting trade');
   console.log(trade);
   console.log(tradeInfoIn)
-  if ((!lastId) || (lastId = trade.sentFromId)) {
-    lastId = trade.sentFromId;
-    console.log(lastId)
+  console.log(trade.sentFromId)
+  console.log(tradeInfoIn.sentFromId)
+  if (!tradeInProgrsess) {
+    tradeInProgrsess = true;   
+    tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items'); 
+  } else {
+    var message = {
+      message: 'The trader has a trade in progress.',
+      sentToId: trade.sentFromId
+    }
+    socket.emit('Trade in progress', message)
   }
   
 });
@@ -70,8 +78,6 @@ $('#playerDropDown').on('click', function() {
 });
 
 $('#clearOutTrade').on('click', function() {
-  var sendIt = tradeInfoOut.userId;
-
   tradeInfoOut.gameId = [];
   // tradeInfoOut.sentFromId = null;
   tradeInfoOut.sentFromName = null;
@@ -95,6 +101,7 @@ $('#clearOutTrade').on('click', function() {
 
 $('#clearIncTrade').on('click', function() {
   tradeInProgrsess = false;
+
   console.log(tradeInfoIn)
   if (tradeInfoIn.userId) {
     socket.emit('clientSenderA', tradeInfoIn);
