@@ -36,10 +36,11 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   console.log('getting trade');
-  console.log(tradeInProgress)
+  console.log(tradeInProgress + ' trade in progress')
+  console.log(trade.clearThis + ' if true this trade will be cleared')
   console.log(trade)
   if (!tradeInProgress) {
-    tradeInProgress = false;   
+    tradeInProgress = true;   
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items'); 
@@ -51,8 +52,9 @@ socket.on('get trade', function(trade) {
     socket.emit('Trade in progress', message)
   } else if (trade.clearThis) {
     console.log('the other trader cleared your incoming trade')
-    
 
+    tradeInfoIn = trade;
+    tradeInfoIn.clearThis = false;
   }
 });
 
