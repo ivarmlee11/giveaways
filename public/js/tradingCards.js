@@ -101,13 +101,12 @@ $('#clearIncTrade').on('click', function() {
     tradeInfoIn.sendTo = null;
   }
 
-  gameListOut.html('');
-  playerOut.html('');
+  gameListIn.html('');
+  playerIn.html('');
 
-  tradingArea.html('');
-  tradeWindowOut.html('');
+
   messageBox.html('Incoming trade cleared');
-  updateCards();
+  tradeWindowIn.html('');
 });
 
 
@@ -180,7 +179,7 @@ function displayIncomingGames(array) {
   });
 };
 
-function updateCards() {
+function updateTradeableCards() {
   var url = '/game/winnerCard/'
    $.ajax({
     url: url,
@@ -224,6 +223,6 @@ function updatePlayerList() {
   });
 };
 
-updateCards();
+updateTradeableCards();
 updatePlayerList();
 });
