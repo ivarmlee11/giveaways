@@ -188,6 +188,7 @@ io.on('connection', function(socket) {
     tradeObject.userId = null;
     tradeObject.sentFromId = null;
     tradeObject.sentFromName = null;
+    tradeObject.clearThis = true;
     if(sendToId) {
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
     }
