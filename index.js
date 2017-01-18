@@ -152,11 +152,17 @@ io.on('connection', function(socket) {
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-    
-    sendToId = result[0].socketId || 'foo';
-    console.log('a0sda0sd-asd-asd-as-0d-as')
-    socket.broadcast.to(sendToId).emit('get trade', tradeObject);
-    
+        console.log('traded object')
+        console.log(tradeObject)
+        console.log('ruesult')
+        console.log(result)
+        console.log('clients')
+        console.log(clients)
+    if(result.length) {
+      sendToId = result[0].socketId;
+      console.log('a0sda0sd-asd-asd-as-0d-as')
+      socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    };
   });
 
   socket.on('disconnect', function() {
