@@ -18,10 +18,10 @@ var tradingArea = $('#tradingArea'),
     gameListIn = $('#gameListIn'),
     gameListOut = $('#gameListOut'),
     tradeWindowIn = $('#tradeWindowIn'),
-    // playerTradeList = $('playerTradeList'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null),
     otherTraderAcceptedOffer = false,
+    tradeInProgrsess = false,
     sentFromId = $('#sentFromId').text(),
     sentFromName = $('#sentFromName').text();
 
@@ -69,7 +69,8 @@ $('#clearOutTrade').on('click', function() {
   // tradeInfoOut.sentFromId = null;
   tradeInfoOut.sentFromName = null;
 
-  if(tradeInfoOut.userId){
+  if (tradeInfoOut.userId) {
+    console.log('trade info out')
     console.log(tradeInfoOut)
     socket.emit('clientSenderA', tradeInfoOut);
     tradeInfoOut.userId = null;
@@ -81,9 +82,34 @@ $('#clearOutTrade').on('click', function() {
 
   tradingArea.html('');
   tradeWindowOut.html('');
-  messageBox.html('Trade cleared');
+  messageBox.html('Outgoing trade cleared');
   updateCards();
 });
+
+$('#clearIncTrade').on('click', function() {
+  var sendIt = tradeInfoIn.userId;
+
+  tradeInfoIn.gameId = [];
+  // tradeInfoIn.sentFromId = null;
+  tradeInfoIn.sentFromName = null;
+
+  if (tradeInfoIn.userId) {
+    console.log('trade info in')
+    console.log(tradeInfoIn)
+    socket.emit('clientSenderA', tradeInfoIn);
+    tradeInfoIn.userId = null;
+    tradeInfoIn.sendTo = null;
+  }
+
+  gameListOut.html('');
+  playerOut.html('');
+
+  tradingArea.html('');
+  tradeWindowOut.html('');
+  messageBox.html('Incoming trade cleared');
+  updateCards();
+});
+
 
 $('#acceptTrade').on('click', function() {
   if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
