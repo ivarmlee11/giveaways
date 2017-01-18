@@ -165,8 +165,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('Trade in progress', function(message) {
-    console.log(message)
-    console.log('-----------')
+    socket.broadcast.to(message.sentToId).emit('trade busy', message.message);
   });
 
   socket.on('disconnect', function() {

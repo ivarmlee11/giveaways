@@ -53,7 +53,10 @@ socket.on('get trade', function(trade) {
     }
     socket.emit('Trade in progress', message)
   }
-  
+});
+
+socket.on('trade busy', function(message) {
+  messageBox.html(message);
 });
 
 $('#playerDropDown').on('click', function() {
