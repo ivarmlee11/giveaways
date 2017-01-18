@@ -89,6 +89,7 @@ $('#playerDropDown').on('click', function() {
 $('#clearOutTrade').on('click', function() {
   tradeInfoOut.gameId = [];
   // tradeInfoOut.sentFromId = null;
+  tradeInfoOut.clearThis = true;
   tradeInfoOut.sentFromName = null;
 
   if (tradeInfoOut.userId) {
@@ -112,7 +113,7 @@ $('#clearOutTrade').on('click', function() {
 $('#clearIncTrade').on('click', function() {
   tradeInProgrsess = false;
   tradeInfoIn.sendTo = null;
-  tradeInfoIn.sentFromId = null;
+  // tradeInfoIn.sentFromId = null;
   tradeInfoIn.sentFromName = null;
   tradeInfoIn.gameId = [];
 
