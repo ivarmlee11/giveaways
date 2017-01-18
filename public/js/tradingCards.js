@@ -38,8 +38,9 @@ socket.on('get trade', function(trade) {
   console.log('getting trade');
   console.log(tradeInProgress + ' trade in progress')
   console.log(trade.clearThis + ' if true this trade will be cleared')
-  console.log(trade)
+
   if (!tradeInProgress) {
+    console.log('fresh trade proposal')
     tradeInProgress = true;   
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
@@ -52,7 +53,7 @@ socket.on('get trade', function(trade) {
     socket.emit('Trade in progress', message)
   } else if (trade.clearThis) {
     console.log('the other trader cleared your incoming trade')
-
+    tradeInProgress = true;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
   }
