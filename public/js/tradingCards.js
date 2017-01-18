@@ -121,7 +121,7 @@ $('#clearIncTrade').on('click', function() {
   console.log('clearing trade')
   if (tradeInfoIn.userId) {
     tradeInfoIn.clearThis = true;
-    var temp = tradeInfoIn.userId;
+    var temp = tradeInfoIn.sentFromId;
     tradeInfoIn.sentFromId = tradeInfoIn.userId;
     tradeInfoIn.userId = temp;
     console.log(tradeInfoIn)
