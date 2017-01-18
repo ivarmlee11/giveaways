@@ -101,10 +101,8 @@ $('#clearIncTrade').on('click', function() {
 
   gameListIn.html('');
   playerIn.html('');
-
-
-  messageBox.html('Incoming trade cleared');
   tradeWindowIn.html('');
+  messageBox.html('Incoming trade cleared');
 });
 
 
