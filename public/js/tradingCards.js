@@ -35,13 +35,14 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   console.log('getting trade');
-  
+
   if (!tradeInProgrsess) {
     tradeInProgrsess = true;   
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items'); 
   } else {
+
     var message = {
       message: 'The trader has a trade in progress.',
       sentToId: trade.sentFromId
