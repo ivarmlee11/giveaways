@@ -113,7 +113,7 @@ tradeWindowOut.droppable({
       return inputArray.indexOf(item) == index;
     });
 
-    .html(tradeInfoOut.gameId.length + ' items');
+    gameListOut.html(tradeInfoOut.gameId.length + ' items');
 
     if(tradeInfoOut.sendTo && tradeInfoOut.userId) {
 
