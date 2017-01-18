@@ -146,7 +146,7 @@ io.on('connection', function(socket) {
   io.emit('updateList', clients);
 
   socket.on('clientSenderA', function(tradeObject) {
-
+    console.log('sdasdasdasdasdasd')
     tradeObject = tradeObject;
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
@@ -154,6 +154,7 @@ io.on('connection', function(socket) {
         });
     if(result.length) {
       sendToId = result[0].socketId;
+      console.log('a0sda0sd-asd-asd-as-0d-as')
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
     };
   });
