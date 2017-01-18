@@ -2,12 +2,13 @@ $(function() {
 
 var socket = io.connect();
 
-function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName) {
+function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName, clearThis) {
   this.sendTo = sendTo,
   this.gameId = tradeGame,
   this.userId = tradeUser,
   this.sentFromId = sentFromId,
-  this.sentFromName = sentFromName
+  this.sentFromName = sentFromName,
+  this.clearThis = clearThis
 };
 
 var tradingArea = $('#tradingArea'),
@@ -18,8 +19,8 @@ var tradingArea = $('#tradingArea'),
     gameListIn = $('#gameListIn'),
     gameListOut = $('#gameListOut'),
     tradeWindowIn = $('#tradeWindowIn'),
-    tradeInfoOut = new TradeWindow(null, [], null, null, null),
-    tradeInfoIn = new TradeWindow(null, [], null, null, null),
+    tradeInfoOut = new TradeWindow(null, [], null, null, null, false),
+    tradeInfoIn = new TradeWindow(null, [], null, null, null, false),
     otherTraderAcceptedOffer = false,
     tradeInProgress = false,
     sentFromId = $('#sentFromId').text(),
@@ -37,17 +38,21 @@ socket.on('get trade', function(trade) {
   console.log('getting trade');
   console.log(tradeInProgress)
   console.log(trade)
-  if (!trade.sentFromName) {
+  if (!tradeInProgress) {
     tradeInProgress = false;   
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items'); 
-  } else {
+  } else if (tradeInProgress) {
     var message = {
       message: 'The trader has a trade in progress.',
       sentToId: trade.sentFromId
     }
     socket.emit('Trade in progress', message)
+  } else if (trade.clearThis) {
+    console.log('the other trader cleared your incoming trade')
+    
+
   }
 });
 
@@ -86,6 +91,7 @@ $('#clearOutTrade').on('click', function() {
   if (tradeInfoOut.userId) {
     console.log('trade info out')
     console.log(tradeInfoOut)
+    tradeInfoOut.clearThis = true;
     socket.emit('clientSenderA', tradeInfoOut);
     tradeInfoOut.userId = null;
     tradeInfoOut.sendTo = null;
