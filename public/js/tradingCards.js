@@ -83,22 +83,13 @@ $('#clearOutTrade').on('click', function() {
   tradingArea.html('');
   tradeWindowOut.html('');
   messageBox.html('Outgoing trade cleared');
-  updateCards();
+  updateTradeableCards();
 });
 
 $('#clearIncTrade').on('click', function() {
-  var sendIt = tradeInfoIn.userId;
-
-  tradeInfoIn.gameId = [];
-  // tradeInfoIn.sentFromId = null;
-  tradeInfoIn.sentFromName = null;
   console.log(tradeInfoIn)
   if (tradeInfoIn.userId) {
-    console.log('trade info in')
-    console.log(tradeInfoIn)
     socket.emit('clientSenderA', tradeInfoIn);
-    tradeInfoIn.userId = null;
-    tradeInfoIn.sendTo = null;
   }
 
   gameListIn.html('');
