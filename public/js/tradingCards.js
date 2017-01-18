@@ -38,6 +38,7 @@ var lastId = null;
 socket.on('get trade', function(trade) {
   console.log('getting trade');
   console.log(trade);
+  console.log(tradeInfoIn)
   if ((!lastId) || (lastId = trade.sentFromId)) {
     lastId = trade.sentFromId;
     console.log(lastId)
