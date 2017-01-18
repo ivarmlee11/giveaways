@@ -21,7 +21,7 @@ var tradingArea = $('#tradingArea'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null),
     otherTraderAcceptedOffer = false,
-    tradeInProgrsess = false,
+    tradeInProgress = false,
     sentFromId = $('#sentFromId').text(),
     sentFromName = $('#sentFromName').text();
 
@@ -37,8 +37,8 @@ socket.on('get trade', function(trade) {
   console.log('getting trade');
   console.log(tradeInProgress)
   console.log(trade)
-  if (!tradeInProgrsess) {
-    tradeInProgrsess = true;   
+  if (!tradeInProgress) {
+    tradeInProgress = true;   
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items'); 
