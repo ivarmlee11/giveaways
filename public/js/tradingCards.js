@@ -180,6 +180,7 @@ function updatePlayerList() {
     url: url,
     method: 'GET',
     success: function(playerList) {
+      console.log(playerList)
       var playerList = playerList,
           users = [];
 
