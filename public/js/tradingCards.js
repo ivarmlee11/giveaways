@@ -33,14 +33,9 @@ socket.on('updateList', function(connectedPlayers){
   console.log(connectedPlayers);
 });
 
-
-
 socket.on('get trade', function(trade) {
   console.log('getting trade');
-  console.log(trade);
-  console.log(tradeInfoIn)
-  console.log(trade.sentFromId)
-  console.log(tradeInfoIn.sentFromId)
+  
   if (!tradeInProgrsess) {
     tradeInProgrsess = true;   
     tradeInfoIn = trade;
@@ -109,7 +104,7 @@ $('#clearIncTrade').on('click', function() {
   tradeInfoIn.sentFromName = null;
   tradeInfoIn.gameId = [];
 
-  console.log(tradeInfoIn)
+  console.log('clearing trade')
   if (tradeInfoIn.userId) {
     socket.emit('clientSenderA', tradeInfoIn);
   }
