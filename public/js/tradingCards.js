@@ -52,10 +52,11 @@ socket.on('get trade', function(trade) {
     }
     socket.emit('Trade in progress', message)
   } else if (trade.clearThis) {
-    console.log('the other trader cleared your incoming trade')
     tradeInProgress = true;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
+    playerIn.html('')
+    messageBox.html('The other trader cleared your incoming trade.')
   }
 });
 
