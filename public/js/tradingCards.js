@@ -174,6 +174,7 @@ function updateCards() {
 };
 
 function updatePlayerList() {
+  console.log('wat')
   var url = '/player/allplayers/';
   $.ajax({
     url: url,
