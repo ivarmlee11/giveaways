@@ -166,6 +166,7 @@ io.on('connection', function(socket) {
 
   socket.on('Trade in progress', function(message) {
     console.log('trade in progress')
+    console.log(message)
     socket.broadcast.to(message.sentToId).emit('trade busy', message.message);
   });
 

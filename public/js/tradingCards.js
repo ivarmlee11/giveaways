@@ -37,13 +37,12 @@ socket.on('get trade', function(trade) {
   console.log('getting trade');
   console.log(tradeInProgress)
   console.log(trade)
-  if (!tradeInProgress) {
-    tradeInProgress = true;   
+  if (!trade.sentFromName) {
+    tradeInProgress = false;   
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items'); 
   } else {
-
     var message = {
       message: 'The trader has a trade in progress.',
       sentToId: trade.sentFromId
@@ -53,8 +52,8 @@ socket.on('get trade', function(trade) {
 });
 
 socket.on('trade busy', function(message) {
-      console.log('trade in progress')
-console.log(message)
+  console.log('trade in progress')
+  console.log(message)
   messageBox.html(message);
 });
 
@@ -66,7 +65,7 @@ $('#playerDropDown').on('click', function() {
   
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-  tradeInfoOut.sentFromId = parseInt(sentFromId);
+  tradeInfoOut.sentFromId = sentFromId;
   tradeInfoOut.sentFromName = sentFromName;
   
   socket.emit('clientSenderA', tradeInfoOut);
