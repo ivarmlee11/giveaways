@@ -35,7 +35,8 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   console.log('getting trade');
-
+  console.log(tradeInProgress)
+  console.log(trade)
   if (!tradeInProgrsess) {
     tradeInProgrsess = true;   
     tradeInfoIn = trade;
@@ -109,6 +110,7 @@ $('#clearIncTrade').on('click', function() {
 
   console.log('clearing trade')
   if (tradeInfoIn.userId) {
+    console.log(tradeInfoIn)
     socket.emit('clientSenderA', tradeInfoIn);
   }
 
