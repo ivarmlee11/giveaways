@@ -120,6 +120,7 @@ $('#clearIncTrade').on('click', function() {
 
   console.log('clearing trade')
   if (tradeInfoIn.userId) {
+    tradeInfoIn.clearThis = true;
     console.log(tradeInfoIn)
     socket.emit('clientSenderA', tradeInfoIn);
   }
