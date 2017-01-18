@@ -112,7 +112,6 @@ $('#clearOutTrade').on('click', function() {
 });
 
 $('#clearIncTrade').on('click', function() {
-  tradeInProgrsess = false;
   tradeInfoIn.sendTo = null;
   // tradeInfoIn.sentFromId = null;
   tradeInfoIn.sentFromName = null;
