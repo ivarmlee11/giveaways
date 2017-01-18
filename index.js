@@ -160,8 +160,10 @@ io.on('connection', function(socket) {
         console.log(clients)
     if(result.length) {
       sendToId = result[0].socketId;
+      console.log('a0sda0sd-asd-asd-as-0d-as')
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
     };
+    // else send message that player isnt online TODO
   });
 
   socket.on('disconnect', function() {

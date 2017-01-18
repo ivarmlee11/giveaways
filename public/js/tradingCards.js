@@ -66,7 +66,7 @@ $('#clearOutTrade').on('click', function() {
   var sendIt = tradeInfoOut.userId;
 
   tradeInfoOut.gameId = [];
-  tradeInfoOut.sentFromId = null;
+  // tradeInfoOut.sentFromId = null;
   tradeInfoOut.sentFromName = null;
 
   if(tradeInfoOut.userId){
