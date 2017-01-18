@@ -165,7 +165,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('Trade in progress', function(message) {
-        var id = tradeObject.userId,
+        var id = message.sentToId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
@@ -177,7 +177,7 @@ io.on('connection', function(socket) {
         // console.log(clients)
     // if(result.length) {
       sendToId = result[0].socketId;
-      socket.broadcast.to(sendToId).emit('get trade', message.message);
+      socket.broadcast.to(sendToId).emit('trade busy', message.message);
     // };
     // else send message that player isnt online TODO
   });
