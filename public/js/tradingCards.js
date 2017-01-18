@@ -104,7 +104,11 @@ $('#clearOutTrade').on('click', function() {
 
 $('#clearIncTrade').on('click', function() {
   tradeInProgrsess = false;
-
+  tradeInfoIn.userId = null;
+  tradeInfoIn.sentFromId = null;
+  tradeInfoIn.sentFromName = null;
+  tradeInfoIn.gameId = [];
+  console.log(tradeInfoIn)
   console.log(tradeInfoIn)
   if (tradeInfoIn.userId) {
     socket.emit('clientSenderA', tradeInfoIn);
