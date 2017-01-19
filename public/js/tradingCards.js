@@ -34,7 +34,7 @@ tradeInfoOut.sentFromId = sentFromId;
 tradeInfoOut.sentFromName = sentFromName;
 tradeInProgressIndicator.html(tradeInProgress)
 
-socket.on('updateList', function(connectedPlay1ers){
+socket.on('updateList', function(connectedPlayers){
   console.log('connected players');
   console.log(connectedPlayers);
 });
@@ -94,13 +94,13 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.clearThis = false;
 
   
-  if(!tradeInfoOut.gameId.length) {
+  if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent yet.');
   } else {
     messageBox.html('Proposal sent.');
   }
 
-  if(tradeInfoOut.userId !== sentFromId) {
+  if (tradeInfoOut.userId !== sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
     messageBox.html('You cannot trade with yourself.');
@@ -158,9 +158,9 @@ $('#clearIncTrade').on('click', function() {
 
 
 $('#acceptTrade').on('click', function() {
-  if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
+  if (tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
     tradeInProgress = false;
-    if(otherTraderAcceptedOffer) {
+    if (otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
       //ajax call to switch ownership of games
@@ -191,7 +191,7 @@ tradeWindowOut.droppable({
 
     gameListOut.html(tradeInfoOut.gameId.length + ' items');
 
-    if(tradeInfoOut.sendTo && tradeInfoOut.userId) {
+    if (tradeInfoOut.sendTo && tradeInfoOut.userId) {
 
       socket.emit('clientSenderA', tradeInfoOut);
 
