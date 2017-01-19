@@ -37,13 +37,10 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   console.log('getting trade');
-  console.log(tradeInProgress + ' trade in progress')
-  console.log(trade.clearThis + ' if true this trade will be cleared')
-  console.log('incoming trade')
-
-  console.log(trade)
-
-
+  console.log(tradeInProgress + ' trade in progress');
+  console.log(trade.clearThis + ' if true this trade will be cleared');
+  console.log('incoming trade');
+  console.log(trade);
 
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true;   
@@ -55,8 +52,8 @@ socket.on('get trade', function(trade) {
     var message = {
       message: 'The trader has a trade in progress.',
       sentToId: trade.sentFromId
-    }
-    socket.emit('Trade in progress', message)
+    };
+    socket.emit('Trade in progress', message);
   } else if (tradeInProgress && !trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
@@ -72,15 +69,13 @@ socket.on('get trade', function(trade) {
 });
 
 socket.on('trade busy', function(message) {
-  console.log('Trade in progress')
-  console.log(message)
+  console.log('Trade in progress');
+  console.log(message);
   messageBox.html(message);
 });
 
 $('#playerDropDown').on('click', function() {
 
-  socket.emit('clientSenderA', tradeInfoOut);
-  
   playerOut.html($(this).val());
   gameListOut.html(tradeInfoOut.gameId.length + ' items');
   
@@ -96,10 +91,14 @@ $('#playerDropDown').on('click', function() {
   if(!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent yet.');
   } else {
-    messageBox.html('Proposal sent.')
+    messageBox.html('Proposal sent.');
   }
 
-
+  if(tradeInfoOut.userId !== sentFromId) {
+    socket.emit('clientSenderA', tradeInfoOut);
+  } else {
+    messageBox.html('You cannot trade with yourself.');
+  }
 });
 
 $('#clearOutTrade').on('click', function() {
@@ -110,13 +109,13 @@ $('#clearOutTrade').on('click', function() {
 
 
   if (tradeInfoOut.userId) {
-    console.log('trade info out')
-    console.log(tradeInfoOut)
+    console.log('trade info out');
+    console.log(tradeInfoOut);
     tradeInfoOut.clearThis = true;
     socket.emit('clientSenderA', tradeInfoOut);
     tradeInfoOut.userId = null;
     tradeInfoOut.sendTo = null;
-  }
+  };
 
   gameListOut.html('');
   playerOut.html('');
@@ -134,13 +133,14 @@ $('#clearIncTrade').on('click', function() {
   tradeInfoIn.sentFromName = null;
   tradeInfoIn.gameId = [];
 
-  console.log('clearing trade')
+  console.log('clearing trade');
+
   if (tradeInfoIn.userId) {
     tradeInfoIn.clearThis = true;
     var temp = tradeInfoIn.sentFromId;
     tradeInfoIn.sentFromId = tradeInfoIn.userId;
     tradeInfoIn.userId = temp;
-    console.log(tradeInfoIn)
+    console.log(tradeInfoIn);
     socket.emit('clientSenderA', tradeInfoIn);
   }
 
@@ -160,7 +160,7 @@ $('#acceptTrade').on('click', function() {
       //ajax call to switch ownership of games
       
     } else {
-      console.log('other payer needs to accept offfer')
+      console.log('other payer needs to accept offfer');
     }
 
   } else {
@@ -205,7 +205,7 @@ function findGameInfo(array) {
     url: url,
     type: 'GET',
     success: function(cardList) {
-      console.log(cardList)
+      console.log(cardList);
       return cardList;
     }
   });
