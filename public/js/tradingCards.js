@@ -55,8 +55,8 @@ socket.on('get trade', function(trade) {
     tradeInProgress = false;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
-    playerIn.html('');
-    gameListIn.html('');
+    playerOut.html('');
+    gameLisOut.html('');
     messageBox.html('The other trader cleared their incoming trade to you');
   }
 });
@@ -77,7 +77,7 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.userId = parseInt(userId);
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
-  tradeInfoOut.clearThis = false;
+  tradeInfoOut  .clearThis = false;
   if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
