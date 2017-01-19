@@ -81,7 +81,7 @@ $('#playerDropDown').on('click', function() {
   if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
-    messageBox('You cannot trade with yourself')
+    messageBox.html('You cannot trade with yourself')
   }
   
   if(!tradeInfoOut.gameId.length) {
