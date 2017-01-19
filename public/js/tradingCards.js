@@ -105,9 +105,11 @@ $('#playerDropDown').on('click', function() {
   } else {
     messageBox.html('You cannot trade with yourself.');
   }
+  $(this).hide();
 });
 
 $('#clearOutTrade').on('click', function() {
+  $('#playerDropDown').show()
   tradeInfoOut.gameId = [];
   // tradeInfoOut.sentFromId = null;
   tradeInfoOut.clearThis = true;
