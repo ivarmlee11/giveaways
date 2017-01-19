@@ -77,7 +77,7 @@ socket.on('trade busy', function(message) {
   messageBox.html(message);
 });
 
-$('#playerDropDown').on('click', function() {
+$('#playerDropDown').on('change', function() {
   console.log(tradeInfoOut.userId)
   console.log(sentFromId)
   if (sentFromId !== tradeInfoOut.userId) {
