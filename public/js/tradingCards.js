@@ -13,20 +13,21 @@ function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName, cle
 
 var tradingArea = $('#tradingArea'),
     tradeWindowOut = $('#tradeWindowOut'),
+    tradeWindowIn = $('#tradeWindowIn'),
     messageBox = $('#messageBox'),
     playerIn = $('#playerIn'),
     playerOut = $('#playerOut'),
     gameListIn = $('#gameListIn'),
     gameListOut = $('#gameListOut'),
-    tradeWindowIn = $('#tradeWindowIn'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null, false),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, false),
     otherTraderAcceptedOffer = false,
     tradeInProgress = false,
-    sentFromId = $('#sentFromId').text(),
+    sentFromId = $('#sentFromId').text()
+    sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text();
 
-tradeInfoOut.sentFromId = parseInt(sentFromId);
+tradeInfoOut.sentFromId = sentFromId;
 tradeInfoOut.sentFromName = sentFromName;
 
 socket.on('updateList', function(connectedPlayers){
@@ -78,8 +79,8 @@ socket.on('trade busy', function(message) {
 
 $('#playerDropDown').on('click', function() {
   console.log(tradeInfoOut.userId)
-  console.log(tradeInfoOut.sentFromId)
-  if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
+  console.log(sentFromId)
+  if (sentFromId !== tradeInfoOut.userId) {
     socket.emit('clientSenderA', tradeInfoOut);
     
     playerOut.html($(this).val());
