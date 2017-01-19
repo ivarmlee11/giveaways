@@ -42,9 +42,7 @@ socket.on('get trade', function(trade) {
 
   console.log(trade)
 
-  console.log('current incoming trade info')
 
-  console.log(tradeInfoIn)
 
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true;   
@@ -61,44 +59,47 @@ socket.on('get trade', function(trade) {
   } else if (tradeInProgress && !trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
-    messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade!');
+    messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal.');
   } else if (trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     tradeInProgress = false;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
     playerIn.html('');
     gameListIn.html('');
-    messageBox.html('The other trader cleared their incoming trade to you');
+    messageBox.html('The other trader cleared their incoming trade to you.');
   }
 });
 
 socket.on('trade busy', function(message) {
-  console.log('trade in progress')
+  console.log('Trade in progress')
   console.log(message)
   messageBox.html(message);
 });
 
 $('#playerDropDown').on('click', function() {
-  playerOut.html($(this).val());
-  gameListOut.html(tradeInfoOut.gameId.length + ' items');
-  
-  var userId = $('option:selected', this).attr('userid');
-  
-  tradeInfoOut.sendTo = $(this).val();
-  tradeInfoOut.userId = parseInt(userId);
-  tradeInfoOut.sentFromId = parseInt(sentFromId);
-  tradeInfoOut.sentFromName = sentFromName;
-  tradeInfoOut  .clearThis = false;
   if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
-  } else {
-    messageBox.html('You cannot trade with yourself')
-  }
-  
-  if(!tradeInfoOut.gameId.length) {
-    messageBox.html('No games sent yet');
-  } else {
-    messageBox.html('Proposal sent')
+    
+    playerOut.html($(this).val());
+    gameListOut.html(tradeInfoOut.gameId.length + ' items');
+    
+    var userId = $('option:selected', this).attr('userid');
+    
+    tradeInfoOut.sendTo = $(this).val();
+    tradeInfoOut.userId = parseInt(userId);
+    tradeInfoOut.sentFromId = parseInt(sentFromId);
+    tradeInfoOut.sentFromName = sentFromName;
+    tradeInfoOut  .clearThis = false;
+
+    
+    if(!tradeInfoOut.gameId.length) {
+      messageBox.html('No games sent yet.');
+    } else {
+      messageBox.html('Proposal sent.')
+    }
+    
+    } else {
+    messageBox.html('You cannot trade with yourself.')
   }
 
 });
