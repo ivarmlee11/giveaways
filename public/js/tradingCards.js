@@ -145,9 +145,9 @@ $('#clearIncTrade').on('click', function() {
   tradeInfoIn.sentFromId = tradeInfoIn.userId;
   tradeInfoIn.userId = temp;
   console.log(tradeInfoIn);
-  
+
   socket.emit('clientSenderA', tradeInfoIn);
-  }
+  
 
   gameListIn.html('');
   playerIn.html('');
