@@ -165,19 +165,19 @@ io.on('connection', function(socket) {
   });
 
   socket.on('Trade in progress', function(message) {
-        var id = message.sentToId,
+    var id = message.sentToId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-        // console.log('traded object')
-        // console.log(tradeObject)
-        // console.log('ruesult')
-        // console.log(result)
-        // console.log('clients')
-        // console.log(clients)
+    // console.log('traded object')
+    // console.log(tradeObject)
+    // console.log('ruesult')
+    // console.log(result)
+    // console.log('clients')
+    // console.log(clients)
     // if(result.length) {
-      sendToId = result[0].socketId;
-      socket.broadcast.to(sendToId).emit('trade busy', message.message);
+    sendToId = result[0].socketId;
+    socket.broadcast.to(sendToId).emit('trade busy', message.message);
     // };
     // else send message that player isnt online TODO
   });
