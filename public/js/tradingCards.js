@@ -44,7 +44,8 @@ socket.on('get trade', function(trade) {
     tradeInProgress = true;   
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
-    gameListIn.html(trade.gameId.length + ' items'); 
+    gameListIn.html(trade.gameId.length + ' items');
+    messageBox.html('Incoming trade!');
   } else if (tradeInProgress && !trade.clearThis) {
     var message = {
       message: 'The trader has a trade in progress.',
@@ -55,8 +56,8 @@ socket.on('get trade', function(trade) {
     tradeInProgress = false;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
-    playerOut.html('');
-    gameListOut.html('');
+    playerIn.html('');
+    gameListIn.html('');
     messageBox.html('The other trader cleared their incoming trade to you');
   }
 });
@@ -97,6 +98,7 @@ $('#clearOutTrade').on('click', function() {
   // tradeInfoOut.sentFromId = null;
   tradeInfoOut.clearThis = true;
   tradeInfoOut.sentFromName = null;
+
 
   if (tradeInfoOut.userId) {
     console.log('trade info out')
