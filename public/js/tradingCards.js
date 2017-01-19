@@ -67,10 +67,10 @@ socket.on('get trade', function(trade) {
     tradeInProgress = false;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
-    // playerOut.html('');
-    // gameListOut.html('');
-    playerIn.html('');
-    gameListIn.html('');
+    playerOut.html('');
+    gameListOut.html('');
+    // playerIn.html('');
+    // gameListIn.html('');
     messageBox.html('The other trader cleared their outgoing trade to you.');
   }
 });
@@ -134,18 +134,20 @@ $('#clearOutTrade').on('click', function() {
 });
 
 $('#clearIncTrade').on('click', function() {
+  var temp = tradeInfoIn.sentFromId;
+  
   tradeInProgress = false;
+  tradeInfoIn.sentfromName = tradeInfoIn.sendTo;
+  tradeInfoIn.clearThis = true;
+
+  tradeInfoIn.sentFromId = tradeInfoIn.userId;
+  tradeInfoIn.userId = temp;
   tradeInfoIn.gameId = [];
 
   console.log('clearing trade');
-
-  tradeInfoIn.clearThis = true;
-
-  var temp = tradeInfoIn.sentFromId
-  tradeInfoIn.sentFromId = tradeInfoIn.userId;
-  tradeInfoIn.userId = temp;
   console.log(tradeInfoIn);
-
+  console.log('--------');
+  
   socket.emit('clientSenderA', tradeInfoIn);
   
 
