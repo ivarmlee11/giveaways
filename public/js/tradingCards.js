@@ -164,7 +164,7 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid');
 
     tradeInProgrsess = true;
-    tradeWindowOut.clearThis = false;
+    tradeInfoOut.clearThis = false;
 
     tradeInfoOut.gameId.push(parseInt(id));
 
