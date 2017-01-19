@@ -32,7 +32,7 @@ var tradingArea = $('#tradingArea'),
 
 tradeInfoOut.sentFromId = sentFromId;
 tradeInfoOut.sentFromName = sentFromName;
-tradeInProgressIndicator.html(tradeInProgress)
+tradeInProgressIndicator.html('Trade not in progress')
 
 socket.on('updateList', function(connectedPlayers){
   console.log('connected players');
@@ -64,7 +64,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal.');
-  } else if (tradeInProgress && trade.clearThis && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) { 
+  } else if (trade.clearThis && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) { 
     tradeInProgress = false;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
