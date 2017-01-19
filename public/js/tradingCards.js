@@ -81,6 +81,7 @@ $('#playerDropDown').on('change', function() {
   console.log(tradeInfoOut.userId)
   console.log(sentFromId)
   if (sentFromId !== tradeInfoOut.userId) {
+    console.log('ello')
     socket.emit('clientSenderA', tradeInfoOut);
     
     playerOut.html($(this).val());
