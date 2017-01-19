@@ -43,7 +43,7 @@ socket.on('get trade', function(trade) {
   console.log(trade.clearThis + ' if true this trade will be cleared');
   console.log('incoming trade');
   console.log(trade);
-  console.log('trade info in');
+  console.log('trade info in current');
   console.log(tradeInfoIn);
 
   if (!tradeInProgress && !trade.clearThis) {
@@ -51,7 +51,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn = trade;
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items');
-    messageBox.html('Incoming trade!');
+    messageBox.html('Incoming trade arrived');
   } else if (tradeInProgress && !trade.clearThis &&  (trade.sentFromId !== tradeInfoIn.sentFromId)) {
     var message = {
       message: 'The trader has a trade in progress.',
@@ -116,7 +116,7 @@ $('#clearOutTrade').on('click', function() {
 
   if (tradeInfoOut.userId) {
     console.log('trade info out');
-    console.log(tradeInfoOut);
+    console.log(tradeInfoOut);  
     tradeInfoOut.clearThis = true;
     socket.emit('clientSenderA', tradeInfoOut);
     tradeInfoOut.userId = null;

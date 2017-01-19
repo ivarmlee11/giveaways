@@ -182,7 +182,7 @@ io.on('connection', function(socket) {
     // else send message that player isnt online TODO
   });
 
-  socket.on('disconnect', function() {
+  socket.on('disconnect', function(   ) {
 
     tradeObject.gameId = [];
     tradeObject.userId = null;
