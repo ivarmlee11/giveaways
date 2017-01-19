@@ -77,7 +77,7 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.userId = parseInt(userId);
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
-  
+  tradeWindowOut.clearThis = false;
   if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
@@ -161,8 +161,10 @@ $('#acceptTrade').on('click', function() {
 tradeWindowOut.droppable({
   drop: function(event, ui) {
     var draggable = ui.draggable,
-        id = draggable.attr('gameid'),
-        tradeInProgrsess = true;
+        id = draggable.attr('gameid');
+
+    tradeInProgrsess = true;
+    tradeWindowOut.clearThis = false;
 
     tradeInfoOut.gameId.push(parseInt(id));
 
