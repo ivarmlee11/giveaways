@@ -25,14 +25,16 @@ var tradingArea = $('#tradingArea'),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, false),
     otherTraderAcceptedOffer = false,
     tradeInProgress = false,
+    tradeInProgressIndicator = $('#tradeInProgress'),
     sentFromId = $('#sentFromId').text()
     sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text();
 
 tradeInfoOut.sentFromId = sentFromId;
 tradeInfoOut.sentFromName = sentFromName;
+tradeInProgressIndicator.html(tradeInProgress)
 
-socket.on('updateList', function(connectedPlayers){
+socket.on('updateList', function(connectedPlay1ers){
   console.log('connected players');
   console.log(connectedPlayers);
 });
@@ -157,7 +159,7 @@ $('#clearIncTrade').on('click', function() {
 
 $('#acceptTrade').on('click', function() {
   if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
-    tradeInProgrsess = false;
+    tradeInProgress = false;
     if(otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
