@@ -92,7 +92,7 @@ $('#playerDropDown').on('click', function() {
     tradeInfoOut.userId = parseInt(userId);
     tradeInfoOut.sentFromId = parseInt(sentFromId);
     tradeInfoOut.sentFromName = sentFromName;
-    tradeInfoOut  .clearThis = false;
+    tradeInfoOut.clearThis = false;
 
     
     if(!tradeInfoOut.gameId.length) {
@@ -109,10 +109,9 @@ $('#playerDropDown').on('click', function() {
 
 $('#clearOutTrade').on('click', function() {
   tradeInfoOut.gameId = [];
-  // tradeInfoOut.sentFromId = null;
   tradeInfoOut.clearThis = true;
-  tradeInfoOut.sentFromName = null;
-
+  // tradeInfoOut.sentFromName = null;
+  // tradeInfoOut.sentFromId = null;
 
   if (tradeInfoOut.userId) {
     console.log('trade info out')
@@ -135,14 +134,15 @@ $('#clearOutTrade').on('click', function() {
 $('#clearIncTrade').on('click', function() {
   tradeInProgress = false;
   tradeInfoIn.sendTo = null;
-  // tradeInfoIn.sentFromId = null;
   tradeInfoIn.sentFromName = null;
   tradeInfoIn.gameId = [];
+  // tradeInfoIn.sentFromId = null;
 
-  console.log('clearing trade')
+  console.log('clearing trade');
+
   if (tradeInfoIn.userId) {
-    tradeInfoIn.clearThis = true;
     var temp = tradeInfoIn.sentFromId;
+    tradeInfoIn.clearThis = true;
     tradeInfoIn.sentFromId = tradeInfoIn.userId;
     tradeInfoIn.userId = temp;
     console.log(tradeInfoIn)
