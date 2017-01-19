@@ -46,7 +46,7 @@ socket.on('get trade', function(trade) {
     playerIn.html(trade.sentFromName);
     gameListIn.html(trade.gameId.length + ' items');
     messageBox.html('Incoming trade!');
-  } else if (tradeInProgress && !trade.clearThis) {
+  } else if (tradeInProgress && !trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     var message = {
       message: 'The trader has a trade in progress.',
       sentToId: trade.sentFromId
