@@ -78,12 +78,16 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
   
-  socket.emit('clientSenderA', tradeInfoOut);
+  if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
+    socket.emit('clientSenderA', tradeInfoOut);
+  } else {
+    messageBox('You cannot trade with yourself')
+  }
   
   if(!tradeInfoOut.gameId.length) {
-    messageBox.html('No games sent yet.');
+    messageBox.html('No games sent yet');
   } else {
-    messageBox.html('Proposal sent.')
+    messageBox.html('Proposal sent')
   }
 
 });
@@ -138,7 +142,7 @@ $('#clearIncTrade').on('click', function() {
 
 $('#acceptTrade').on('click', function() {
   if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
-    tradeInProgress = false;
+    tradeInProgrsess = false;
     if(otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
