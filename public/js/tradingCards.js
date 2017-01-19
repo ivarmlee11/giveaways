@@ -77,42 +77,37 @@ socket.on('trade busy', function(message) {
   messageBox.html(message);
 });
 
-$('#playerDropDown').on('change', function() {
-  console.log(tradeInfoOut.userId)
-  console.log(sentFromId)
-  if (sentFromId !== tradeInfoOut.userId) {
-    console.log('ello')
-    socket.emit('clientSenderA', tradeInfoOut);
-    
-    playerOut.html($(this).val());
-    gameListOut.html(tradeInfoOut.gameId.length + ' items');
-    
-    var userId = $('option:selected', this).attr('userid');
-    
-    tradeInfoOut.sendTo = $(this).val();
-    tradeInfoOut.userId = parseInt(userId);
-    tradeInfoOut.sentFromId = parseInt(sentFromId);
-    tradeInfoOut.sentFromName = sentFromName;
-    tradeInfoOut.clearThis = false;
+$('#playerDropDown').on('click', function() {
 
-    
-    if(!tradeInfoOut.gameId.length) {
-      messageBox.html('No games sent yet.');
-    } else {
-      messageBox.html('Proposal sent.')
-    }
+  socket.emit('clientSenderA', tradeInfoOut);
+  
+  playerOut.html($(this).val());
+  gameListOut.html(tradeInfoOut.gameId.length + ' items');
+  
+  var userId = $('option:selected', this).attr('userid');
+  
+  tradeInfoOut.sendTo = $(this).val();
+  tradeInfoOut.userId = parseInt(userId);
+  tradeInfoOut.sentFromId = parseInt(sentFromId);
+  tradeInfoOut.sentFromName = sentFromName;
+  tradeInfoOut  .clearThis = false;
 
-    } else {
-    messageBox.html('You cannot trade with yourself.')
+  
+  if(!tradeInfoOut.gameId.length) {
+    messageBox.html('No games sent yet.');
+  } else {
+    messageBox.html('Proposal sent.')
   }
+
 
 });
 
 $('#clearOutTrade').on('click', function() {
   tradeInfoOut.gameId = [];
-  tradeInfoOut.clearThis = true;
-  // tradeInfoOut.sentFromName = null;
   // tradeInfoOut.sentFromId = null;
+  tradeInfoOut.clearThis = true;
+  tradeInfoOut.sentFromName = null;
+
 
   if (tradeInfoOut.userId) {
     console.log('trade info out')
@@ -135,15 +130,14 @@ $('#clearOutTrade').on('click', function() {
 $('#clearIncTrade').on('click', function() {
   tradeInProgress = false;
   tradeInfoIn.sendTo = null;
+  // tradeInfoIn.sentFromId = null;
   tradeInfoIn.sentFromName = null;
   tradeInfoIn.gameId = [];
-  // tradeInfoIn.sentFromId = null;
 
-  console.log('clearing trade');
-
+  console.log('clearing trade')
   if (tradeInfoIn.userId) {
-    var temp = tradeInfoIn.sentFromId;
     tradeInfoIn.clearThis = true;
+    var temp = tradeInfoIn.sentFromId;
     tradeInfoIn.sentFromId = tradeInfoIn.userId;
     tradeInfoIn.userId = temp;
     console.log(tradeInfoIn)
