@@ -70,7 +70,7 @@ socket.on('get trade', function(trade) {
     // playerOut.html('');
     // gameListOut.html('');
     playerIn.html('');
-    playerOut.html('');
+    gameListIn.html('');
     messageBox.html('The other trader cleared their outgoing trade to you.');
   }
 });
