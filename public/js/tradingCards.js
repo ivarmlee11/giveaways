@@ -77,7 +77,7 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.userId = parseInt(userId);
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
-  tradeWindowOut.clearThis = false;
+  tradeInfoOut.clearThis = false;
   if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
