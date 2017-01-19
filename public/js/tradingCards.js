@@ -41,6 +41,8 @@ socket.on('get trade', function(trade) {
   console.log(trade.clearThis + ' if true this trade will be cleared');
   console.log('incoming trade');
   console.log(trade);
+  console.log('trade info in');
+  console.log(tradeInfoIn);
 
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true;   
@@ -62,8 +64,8 @@ socket.on('get trade', function(trade) {
     tradeInProgress = false;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
-    playerIn.html('');
-    gameListIn.html('');
+    playerOut.html('');
+    gameListOut.html('');
     messageBox.html('The other trader cleared their incoming trade to you.');
   }
 });
