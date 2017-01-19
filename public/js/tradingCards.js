@@ -77,6 +77,8 @@ socket.on('trade busy', function(message) {
 });
 
 $('#playerDropDown').on('click', function() {
+  console.log(tradeInfoOut.userId)
+  console.log(tradeInfoOut.sentFromId)
   if (tradeInfoOut.userId !== tradeInfoOut.sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
     
@@ -97,7 +99,7 @@ $('#playerDropDown').on('click', function() {
     } else {
       messageBox.html('Proposal sent.')
     }
-    
+
     } else {
     messageBox.html('You cannot trade with yourself.')
   }
