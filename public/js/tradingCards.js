@@ -52,7 +52,7 @@ socket.on('get trade', function(trade) {
       sentToId: trade.sentFromId
     }
     socket.emit('Trade in progress', message)
-  } else if (trade.clearThis) {
+  } else if (trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     tradeInProgress = false;
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
