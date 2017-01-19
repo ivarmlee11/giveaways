@@ -1,5 +1,7 @@
 $(function() {
 
+console.log('')
+
 var socket = io.connect();
 
 function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName, clearThis) {
