@@ -113,7 +113,7 @@ $('#clearOutTrade').on('click', function() {
 });
 
 $('#clearIncTrade').on('click', function() {
-  tradeInProgrsess = false;
+  tradeInProgress = false;
   tradeInfoIn.sendTo = null;
   // tradeInfoIn.sentFromId = null;
   tradeInfoIn.sentFromName = null;
@@ -138,7 +138,7 @@ $('#clearIncTrade').on('click', function() {
 
 $('#acceptTrade').on('click', function() {
   if(tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
-    tradeInProgrsess = false;
+    tradeInProgress = false;
     if(otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
