@@ -57,7 +57,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn.clearThis = false;
     playerOut.html('');
     gameListOut.html('');
-    messageBox.html('The other trader cleared your incoming trade.')
+    messageBox.html('The other trader cleared their incoming trade to you');
   }
 });
 
