@@ -1,7 +1,5 @@
 $(function() {
 
-console.log('')
-
 var socket = io.connect();
 
 function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName, clearThis) {
@@ -35,16 +33,15 @@ tradeInfoOut.sentFromName = sentFromName;
 tradeInProgressIndicator.html('Trade not in progress');
 
 socket.on('updateList', function(connectedPlayers){
-  console.log('connected players');
-  console.log(connectedPlayers);
+  // console.log(connectedPlayers);
 });
 
 socket.on('get trade', function(trade) {
-  console.log('incoming trade')
-  console.log(trade.clearThis);
-  console.log(trade);
-  console.log('trade info in object')
-  console.log(tradeInfoIn)
+  // console.log('incoming trade')
+  // console.log(trade.clearThis);
+  // console.log(trade);
+  // console.log('trade info in object')
+  // console.log(tradeInfoIn)
 
   if (!tradeInProgress && (trade.clearThis === null)) {
     tradeInProgress = true;   
