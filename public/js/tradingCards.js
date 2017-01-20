@@ -118,12 +118,15 @@ $('#clearOutTrade').on('click', function() {
   $('#playerDropDown').show()
   tradeInfoOut.gameId = [];
   tradeInfoOut.clearThis = 'out';
-  // tradeInfoOut.sentFromId = null;
   // tradeInfoOut.sentFromName = null;
 
   if (tradeInfoOut.userId) {
     socket.emit('clientSenderA', tradeInfoOut);
-  };
+    console.log('sent to user')
+  } else {
+    console.log('no user Id')
+  }
+  tradeInfoOut.userId = null;
 
   gameListOut.html('');
   playerOut.html('');
@@ -144,8 +147,14 @@ $('#clearIncTrade').on('click', function() {
 
   tradeInProgress = false;
 
-  socket.emit('clientSenderA', tradeInfoIn);
-  
+  if (tradeInfoIn.userId) {
+    socket.emit('clientSenderA', tradeInfoIn);
+    console.log('sent to user')
+  } else {
+    console.log('no user Id')
+  }
+  tradeInfoIn.userId = null;
+
   gameListIn.html('');
   playerIn.html('');
   tradeWindowIn.html('');
