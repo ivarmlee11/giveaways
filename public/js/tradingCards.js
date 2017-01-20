@@ -67,8 +67,8 @@ socket.on('get trade', function(trade) {
     console.log('what was in your info in object');
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
-    tradeInfoIn.clearThis = false;
-    tradeInProgress = false;
+    // tradeInfoIn.clearThis = false;
+    // tradeInProgress = false;
     gameListOut.html('');
     playerOut.html('');
     messageBox.html('The other trader backed out');
