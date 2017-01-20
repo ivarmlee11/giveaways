@@ -157,6 +157,8 @@ io.on('connection', function(socket) {
     if(result.length) {
       sendToId = result[0].socketId;
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    } else {
+      console.log('that user isnt logged on');
     };
     // else send message that player isnt online TODO
   });
@@ -170,6 +172,8 @@ io.on('connection', function(socket) {
     if(result.length) {
       sendToId = result[0].socketId;
       socket.broadcast.to(sendToId).emit('trade busy', message.message);
+    } else {
+      console.log('that user isnt logged on');
     };
     // else send message that player isnt online TODO
   });
