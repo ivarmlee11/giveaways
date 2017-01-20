@@ -40,16 +40,16 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
-console.log('incoming trade')
-console.log(trade)
+  console.log('incoming trade')
+  console.log(trade)
 
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true;   
-    tradeInProgressIndicator.html('Trade in progress');
     tradeInfoIn = trade;
-    playerIn.html(trade.sentFromName);
-    gameListIn.html(trade.gameId.length + ' items');
+    playerIn.html(tradeInfoIn.sentFromName);
+    gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html('Incoming trade arrived');
+    tradeInProgressIndicator.html('Trade in progress');
   } else if (tradeInProgress && !trade.clearThis &&  (trade.sentFromId !== tradeInfoIn.sentFromId)) {
     var message = {
       message: 'That trader has a trade in progress',
@@ -66,11 +66,12 @@ console.log(trade)
     console.log('what was in your info in object');
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
-    tradeInProgress = false;
     tradeInfoIn.clearThis = false;
-
-    tradeInProgressIndicator.html('Trade not in progress');
+    tradeInProgress = false;
+    gameListOut.html('');
+    playerOut.html('');
     messageBox.html('The other trader cleared their outgoing trade to you');
+    tradeInProgressIndicator.html('Trade not in progress');
   }
 });
 
@@ -112,23 +113,18 @@ $('#playerDropDown').on('click', function() {
 $('#clearOutTrade').on('click', function() {
   $('#playerDropDown').show()
   tradeInfoOut.gameId = [];
-  // tradeInfoOut.sentFromId = null;
   tradeInfoOut.clearThis = true;
+  // tradeInfoOut.sentFromId = null;
   // tradeInfoOut.sentFromName = null;
 
-
   if (tradeInfoOut.userId) {
-    console.log('trade info out');
+    console.log('trade info out cleared. here is what you are sending.');
     console.log(tradeInfoOut);  
-    tradeInfoOut.clearThis = true;
     socket.emit('clientSenderA', tradeInfoOut);
-    tradeInfoOut.userId = null;
-    tradeInfoOut.sendTo = null;
   };
 
   gameListOut.html('');
   playerOut.html('');
-
   tradingArea.html('');
   tradeWindowOut.html('');
   messageBox.html('Outgoing trade cleared');
