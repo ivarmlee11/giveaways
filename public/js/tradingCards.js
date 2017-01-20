@@ -126,7 +126,7 @@ $('#clearOutTrade').on('click', function() {
   } else {
     console.log('no user Id')
   }
-  tradeInfoOut.userId = null;
+  // tradeInfoOut.userId = null;
 
   gameListOut.html('');
   playerOut.html('');
@@ -153,7 +153,7 @@ $('#clearIncTrade').on('click', function() {
   } else {
     console.log('no user Id')
   }
-  tradeInfoIn.userId = null;
+  // tradeInfoIn.userId = null;
 
   gameListIn.html('');
   playerIn.html('');
