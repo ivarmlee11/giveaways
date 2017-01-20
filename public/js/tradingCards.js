@@ -66,8 +66,6 @@ socket.on('get trade', function(trade) {
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
     tradeInProgressIndicator.html('Trade in progress');
   } else if ((trade.clearThis !== null) && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) {
-    console.log('what was in your info in object');
-    console.log(tradeInfoIn);
     tradeInfoIn = trade;
     tradeInProgress = false;
     if (trade.clearThis === 'in') {
@@ -83,11 +81,10 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade not in progress');
   }
   tradeInfoIn.clearThis = null;
+  console.log(tradeInfoIn);
 });
 
 socket.on('trade busy', function(message) {
-  console.log('Trade in progress');
-  console.log(message);
   messageBox.html(message);
 });
 
@@ -128,8 +125,6 @@ $('#clearOutTrade').on('click', function() {
   // tradeInfoOut.sentFromName = null;
 
   if (tradeInfoOut.userId) {
-    console.log('trade info out cleared. here is what you are sending.');
-    console.log(tradeInfoOut);  
     socket.emit('clientSenderA', tradeInfoOut);
   };
 
@@ -151,10 +146,6 @@ $('#clearIncTrade').on('click', function() {
   tradeInfoIn.clearThis = 'in';
 
   tradeInProgress = false;
-
-  console.log('clearing trade');
-  console.log(tradeInfoIn);
-  console.log('--------');
 
   socket.emit('clientSenderA', tradeInfoIn);
   
