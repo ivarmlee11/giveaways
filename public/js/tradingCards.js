@@ -67,7 +67,7 @@ socket.on('get trade', function(trade) {
     console.log('what was in your info in object');
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
-    tradeInfoIn.clearThis = null;
+    // tradeInfoIn.clearThis = null;
     // tradeInProgress = false;
     gameListOut.html('');
     playerOut.html('');
@@ -104,7 +104,7 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.userId = parseInt(userId);
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
-  tradeInfoOut.clearThis = false;
+  tradeInfoOut.clearThis = null;
 
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent');
