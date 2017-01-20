@@ -69,12 +69,12 @@ socket.on('get trade', function(trade) {
     console.log('what was in your info in object');
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
-    // tradeInfoIn.clearThis = false;
     tradeInProgress = false;
     if (trade.clearThis === 'in') {
       gameListOut.html('');
       playerOut.html('');
       messageBox.html('The other trader cleared their incoming trade');
+      updateTradeableCards();
     } else {
       gameListIn.html('');
       playerIn.html('');
@@ -82,6 +82,7 @@ socket.on('get trade', function(trade) {
     }
     tradeInProgressIndicator.html('Trade not in progress');
   }
+  tradeInfoIn.clearThis = null;
 });
 
 socket.on('trade busy', function(message) {
