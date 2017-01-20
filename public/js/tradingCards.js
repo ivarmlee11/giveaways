@@ -21,8 +21,8 @@ var tradingArea = $('#tradingArea'),
     playerOut = $('#playerOut'),
     gameListIn = $('#gameListIn'),
     gameListOut = $('#gameListOut'),
-    tradeInfoOut = new TradeWindow(null, [], null, null, null, false),
-    tradeInfoIn = new TradeWindow(null, [], null, null, null, false),
+    tradeInfoOut = new TradeWindow(null, [], null, null, null, null),
+    tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
     otherTraderAcceptedOffer = false,
     tradeInProgress = false,
     tradeInProgressIndicator = $('#tradeInProgress'),
@@ -71,7 +71,7 @@ socket.on('get trade', function(trade) {
     // tradeInProgress = false;
     gameListOut.html('');
     playerOut.html('');
-    messageBox.html('The other trader backed out');
+    messageBox.html('The other trader cleared their incoming trade');
     tradeInProgressIndicator.html('Trade not in progress');
   } else if ((trade.clearThis === 'out') && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) {
     console.log('what was in your info in object');
@@ -81,7 +81,7 @@ socket.on('get trade', function(trade) {
     // tradeInProgress = false;
     gameListIn.html('');
     playerIn.html('');
-    messageBox.html('The other trader backed out');
+    messageBox.html('The other trade removed their offer');
     tradeInProgressIndicator.html('Trade not in progress');
   }
 });
@@ -189,7 +189,7 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid');
 
     tradeInProgress = true;
-    tradeInfoOut.clearThis = false;
+    tradeInfoOut.clearThis = null;
 
     tradeInfoOut.gameId.push(parseInt(id));
 

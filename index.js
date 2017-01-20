@@ -184,7 +184,7 @@ io.on('connection', function(socket) {
     // tradeObject.userId = null;
     // tradeObject.sentFromId = null;
     tradeObject.sentFromName = 'Came from clearing';
-    tradeObject.clearThis = true;
+    tradeObject.clearThis = 'out';
 
 
     socket.broadcast.to(sendToId).emit('get trade', tradeObject);
