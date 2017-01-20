@@ -37,11 +37,11 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
-  // console.log('incoming trade')
+  console.log('incoming trade')
   // console.log(trade.clearThis);
-  // console.log(trade);
-  // console.log('trade info in object')
-  // console.log(tradeInfoIn)
+  console.log(JSON.stringify(trade));
+  console.log('trade info in object')
+  console.log(JSON.stringify(tradeInfoIn))
 
   if (!tradeInProgress && (trade.clearThis === null)) {
     tradeInProgress = true;   
@@ -77,9 +77,8 @@ socket.on('get trade', function(trade) {
     }
     tradeInProgressIndicator.html('Trade not in progress');
   }
-  console.log(tradeInfoIn);
-  tradeInfoIn.clearThis = null;
-  console.log('clear this changed to null')
+
+  console.log('trade info in after being altered')
   console.log(tradeInfoIn)
 });
 
