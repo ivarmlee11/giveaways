@@ -60,7 +60,7 @@ socket.on('get trade', function(trade) {
   } else if (tradeInProgress && !trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
-    messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal.');
+    messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
     tradeInProgressIndicator.html('Trade in progress');
   } else if (trade.clearThis && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) {
     console.log('what was in your info in object');
@@ -70,7 +70,7 @@ socket.on('get trade', function(trade) {
     tradeInProgress = false;
     gameListOut.html('');
     playerOut.html('');
-    messageBox.html('The other trader cleared their outgoing trade to you');
+    messageBox.html('The other trader backed out');
     tradeInProgressIndicator.html('Trade not in progress');
   }
 });
@@ -95,17 +95,16 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.sentFromName = sentFromName;
   tradeInfoOut.clearThis = false;
 
-  
   if (!tradeInfoOut.gameId.length) {
-    messageBox.html('No games sent yet.');
+    messageBox.html('No games sent');
   } else {
-    messageBox.html('Proposal sent.');
+    messageBox.html('Proposal sent with games');
   }
 
   if (tradeInfoOut.userId !== sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
-    messageBox.html('You cannot trade with yourself.');
+    messageBox.html('You cannot trade with yourself');
   }
   $(this).hide();
 });
