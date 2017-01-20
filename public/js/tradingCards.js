@@ -104,7 +104,7 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.userId = parseInt(userId);
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
-  tradeInfoOut.clearThis = false;
+  tradeInfoOut.clearThis = null;
 
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent');
