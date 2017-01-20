@@ -145,10 +145,10 @@ io.on('connection', function(socket) {
 
   io.emit('updateList', clients);
 
-  socket.on('clientSenderA', function(tradeObject) {
-    console.log(tradeObject);
+  socket.on('clientSenderA', function(tradeObj) {
 
-    tradeObject = tradeObject;
+    tradeObject = tradeObj;
+    console.log(tradeObject);
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
