@@ -68,7 +68,7 @@ socket.on('get trade', function(trade) {
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
-    // tradeInProgress = false;
+    tradeInProgress = false;
     gameListOut.html('');
     playerOut.html('');
     messageBox.html('The other trader cleared their incoming trade');
@@ -78,7 +78,7 @@ socket.on('get trade', function(trade) {
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
-    // tradeInProgress = false;
+    tradeInProgress = false;
     gameListIn.html('');
     playerIn.html('');
     messageBox.html('The other trade removed their offer');
