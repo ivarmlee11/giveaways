@@ -63,25 +63,21 @@ socket.on('get trade', function(trade) {
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
     tradeInProgressIndicator.html('Trade in progress');
-  } else if ((trade.clearThis === 'in') && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) {
+  } else if ((trade.clearThis !== null) && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) {
     console.log('what was in your info in object');
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
     tradeInfoIn.clearThis = false;
     tradeInProgress = false;
-    gameListOut.html('');
-    playerOut.html('');
-    messageBox.html('The other trader cleared their incoming trade');
-    tradeInProgressIndicator.html('Trade not in progress');
-  } else if ((trade.clearThis === 'out') && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) {
-    console.log('what was in your info in object');
-    console.log(tradeInfoIn);
-    tradeInfoIn = trade;
-    tradeInfoIn.clearThis = false;
-    tradeInProgress = false;
-    gameListIn.html('');
-    playerIn.html('');
-    messageBox.html('The other trade removed their offer');
+    if (trade.clearThis === 'in') {
+      gameListOut.html('');
+      playerOut.html('');
+      messageBox.html('The other trader cleared their incoming trade');
+    } else {
+      gameListIn.html('');
+      playerIn.html('');
+      messageBox.html('The other trade removed their offer');      
+    }
     tradeInProgressIndicator.html('Trade not in progress');
   }
 });
@@ -138,6 +134,8 @@ $('#clearOutTrade').on('click', function() {
   playerOut.html('');
   tradingArea.html('');
   tradeWindowOut.html('');
+  tradeInProgress = false;
+  tradeInProgressIndicator.html('Trade not in progress');
   messageBox.html('Outgoing trade cleared');
   updateTradeableCards();
 });
