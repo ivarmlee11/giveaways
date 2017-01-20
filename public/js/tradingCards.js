@@ -49,10 +49,10 @@ socket.on('get trade', function(trade) {
     tradeInfoIn = trade;
     playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
-    messageBox.html('Incoming trade arrived');
+    messageBox.html('Incoming trade arrived from ' + tradeInfoIn.sentFromName);
     tradeInProgressIndicator.html('Trade in progress');
   } else if (tradeInProgress && !trade.clearThis &&  (trade.sentFromId !== tradeInfoIn.sentFromId)) {
-    var message = {
+    var message = { 
       message: 'That trader has a trade in progress',
       sentToId: trade.sentFromId
     };
@@ -67,7 +67,7 @@ socket.on('get trade', function(trade) {
     console.log('what was in your info in object');
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
-    tradeInfoIn.clearThis = null;
+    tradeInfoIn.clearThis = false;
     // tradeInProgress = false;
     gameListOut.html('');
     playerOut.html('');
@@ -77,7 +77,7 @@ socket.on('get trade', function(trade) {
     console.log('what was in your info in object');
     console.log(tradeInfoIn);
     tradeInfoIn = trade;
-    tradeInfoIn.clearThis = null;
+    tradeInfoIn.clearThis = false;
     // tradeInProgress = false;
     gameListIn.html('');
     playerIn.html('');
@@ -104,7 +104,7 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.userId = parseInt(userId);
   tradeInfoOut.sentFromId = parseInt(sentFromId);
   tradeInfoOut.sentFromName = sentFromName;
-  tradeInfoOut.clearThis = null;
+  tradeInfoOut.clearThis = false;
 
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent');
