@@ -183,22 +183,16 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    var id = message.sentToId,
-        result = clients.filter(function( obj ) {
-          return obj.id == id;
-        });
 
     tradeObject.gameId = [];
     // tradeObject.userId = null;
     // tradeObject.sentFromId = null;
-    // tradeObject.sentFromName = null;
+    tradeObject.sentFromName = 'Came from clearing';
     tradeObject.clearThis = true;
-    
-    if(result.length) {
-      sendToId = result[0].socketId;
-      socket.broadcast.to(sendToId).emit('get trade', tradeObject);
-    }
 
+
+    socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    
     clients = clients.filter(function(obj) {
       return obj.id !== clientId;
     });
