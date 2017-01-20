@@ -146,6 +146,8 @@ io.on('connection', function(socket) {
   io.emit('updateList', clients);
 
   socket.on('clientSenderA', function(tradeObject) {
+    console.log(tradeObject);
+    
     tradeObject = tradeObject;
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
