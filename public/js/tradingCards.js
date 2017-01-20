@@ -63,16 +63,14 @@ console.log(trade)
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal.');
     tradeInProgressIndicator.html('Trade in progress');
   } else if (trade.clearThis && ((trade.sentFromId === tradeInfoIn.sentFromId) || (tradeInfoIn.sentFromId === null))) {
-    console.log('what was in your info in object')
-    console.log(tradeInfoIn)
+    console.log('what was in your info in object');
+    console.log(tradeInfoIn);
     tradeInfoIn = trade;
     tradeInProgress = false;
     tradeInfoIn.clearThis = false;
-    
-    playerIn.html('');
-    gameListIn.html('');
+
     tradeInProgressIndicator.html('Trade not in progress');
-    messageBox.html('The other trader cleared their outgoing trade to you.');
+    messageBox.html('The other trader cleared their outgoing trade to you');
   }
 });
 
@@ -139,14 +137,12 @@ $('#clearOutTrade').on('click', function() {
 
 $('#clearIncTrade').on('click', function() {
   var temp = tradeInfoIn.sentFromId;
-  
-  tradeInProgress = false;
-  tradeInfoIn.sentfromName = tradeInfoIn.sendTo;
-  tradeInfoIn.clearThis = true;
-
   tradeInfoIn.sentFromId = tradeInfoIn.userId;
   tradeInfoIn.userId = temp;
   tradeInfoIn.gameId = [];
+  tradeInfoIn.clearThis = true;
+
+  tradeInProgress = false;
 
   console.log('clearing trade');
   console.log(tradeInfoIn);
@@ -154,11 +150,11 @@ $('#clearIncTrade').on('click', function() {
 
   socket.emit('clientSenderA', tradeInfoIn);
   
-
   gameListIn.html('');
   playerIn.html('');
   tradeWindowIn.html('');
   messageBox.html('Incoming trade cleared');
+  tradeInProgressIndicator.html('Trade not in progress');
 });
 
 

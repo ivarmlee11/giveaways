@@ -175,23 +175,30 @@ io.on('connection', function(socket) {
     // console.log(result)
     // console.log('clients')
     // console.log(clients)
-    // if(result.length) {
-    sendToId = result[0].socketId;
-    socket.broadcast.to(sendToId).emit('trade busy', message.message);
-    // };
+    if(result.length) {
+      sendToId = result[0].socketId;
+      socket.broadcast.to(sendToId).emit('trade busy', message.message);
+    };
     // else send message that player isnt online TODO
   });
 
-  socket.on('disconnect', function(   ) {
+  socket.on('disconnect', function() {
+    var id = message.sentToId,
+        result = clients.filter(function( obj ) {
+          return obj.id == id;
+        });
 
     tradeObject.gameId = [];
-    tradeObject.userId = null;
+    // tradeObject.userId = null;
     // tradeObject.sentFromId = null;
     // tradeObject.sentFromName = null;
     tradeObject.clearThis = true;
-    if(sendToId) {
+    
+    if(result.length) {
+      sendToId = result[0].socketId;
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
     }
+
     clients = clients.filter(function(obj) {
       return obj.id !== clientId;
     });
