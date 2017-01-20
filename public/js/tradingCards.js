@@ -79,7 +79,7 @@ socket.on('get trade', function(trade) {
   }
   console.log(tradeInfoIn);
   tradeInfoIn.clearThis = null;
-  console.log('clear this')
+  console.log('clear this changed to null')
   console.log(tradeInfoIn)
 });
 
