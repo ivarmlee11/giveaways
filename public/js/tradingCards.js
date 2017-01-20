@@ -41,8 +41,9 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   console.log('incoming trade')
-  console.log(trade)
-
+  console.log(trade.clearThis);
+  console.log(trade);
+  
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true;   
     tradeInfoIn = trade;
@@ -105,7 +106,6 @@ $('#playerDropDown').on('click', function() {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
     messageBox.html('You cannot trade with yourself');
-    tradeInProgressIndicator.html('Trade not in progress');
   }
   $(this).hide();
 });

@@ -147,18 +147,13 @@ io.on('connection', function(socket) {
 
   socket.on('clientSenderA', function(tradeObject) {
     console.log(tradeObject);
-    
+
     tradeObject = tradeObject;
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-        // console.log('traded object')
-        // console.log(tradeObject)
-        // console.log('ruesult')
-        // console.log(result)
-        // console.log('clients')
-        // console.log(clients)
+
     if(result.length) {
       sendToId = result[0].socketId;
       socket.broadcast.to(sendToId).emit('get trade', tradeObject);
@@ -171,12 +166,7 @@ io.on('connection', function(socket) {
         result = clients.filter(function( obj ) {
           return obj.id == id;
         });
-    // console.log('traded object')
-    // console.log(tradeObject)
-    // console.log('ruesult')
-    // console.log(result)
-    // console.log('clients')
-    // console.log(clients)
+
     if(result.length) {
       sendToId = result[0].socketId;
       socket.broadcast.to(sendToId).emit('trade busy', message.message);
