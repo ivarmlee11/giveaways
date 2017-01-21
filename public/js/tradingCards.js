@@ -38,7 +38,7 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
 
-  if(tradeInfoOut.userId === (tradeInfoIn.sentFromId && !null)) {
+  if(tradeInfoOut.userId === trade.sentFromId) {
     tradeInProgress = true;
     console.log(trade + ' trade in progress')
     tradeInProgressIndicator.html('Trade in progress');
