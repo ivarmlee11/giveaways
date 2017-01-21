@@ -46,14 +46,14 @@ socket.on('get trade', function(trade) {
   console.log(trade.clearThis === null);
   console.log('!trade.clearThis')
   console.log(!trade.clearThis)
-  if(tradeInfoOut.userId === (tradeInfoIn.sentFromId && !null)) {
-    tradeInProgress = true;
-    tradeInProgressIndicator.html('Trade in progress');
-  } else {
-    tradeInProgress = false;
-    tradeInProgressIndicator.html('Trade in progress');    
-  }
-  console.log(tradeInProgress + ' -is trade in progress')
+  // if(tradeInfoOut.userId === (tradeInfoIn.sentFromId && !null)) {
+  //   tradeInProgress = true;
+  //   tradeInProgressIndicator.html('Trade in progress');
+  // } else {
+  //   tradeInProgress = false;
+  //   tradeInProgressIndicator.html('Trade not in progress');    
+  // }
+  // console.log(tradeInProgress + ' -is trade in progress')
   if (!tradeInProgress && !trade.clearThis) {
     // tradeInProgress = true;   
     tradeInfoIn = trade;
