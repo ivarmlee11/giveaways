@@ -41,8 +41,8 @@ socket.on('get trade', function(trade) {
   console.log(JSON.stringify(trade));
   console.log('trade info in object')
   console.log(JSON.stringify(tradeInfoIn))
-  console.log(tradeInProgress)
-  // console.log(trade.clearThis);
+  console.log(tradeInProgress + ' trade in progress')
+  console.log(trade.clearThis + ' clear this');
 
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true;   
@@ -83,6 +83,9 @@ socket.on('get trade', function(trade) {
 
   console.log('trade info in after being altered')
   console.log(JSON.stringify(tradeInfoIn))
+  console.log(tradeInProgress + ' trade in progress')
+  console.log(trade.clearThis + ' clear this');
+
 });
 
 socket.on('trade busy', function(message) {
@@ -108,7 +111,7 @@ $('#playerDropDown').on('click', function() {
   } else {
     messageBox.html('Proposal sent with games');
   }
-  console.log(tradeInfoOut)
+  console.log('trade Info Out')
   console.log(JSON.stringify(tradeInfoOut))
 
   if (tradeInfoOut.userId !== sentFromId) {
