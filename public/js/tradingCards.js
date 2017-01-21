@@ -41,7 +41,7 @@ socket.on('get trade', function(trade) {
   // console.log(trade.clearThis);
   console.log(JSON.stringify(trade));
   console.log('trade info in object')
-  console.log(JSON.stringify(tradeInfoIn))
+  console.log(JSON.stringify(tradetraInfoIn))
 
   if (!tradeInProgress && (trade.clearThis === null)) {
     tradeInProgress = true;   
@@ -70,6 +70,7 @@ socket.on('get trade', function(trade) {
       playerOut.html('');
       messageBox.html('The other trader cleared their incoming trade');
       tradeInfoOut.userId = null;
+      tradeInfoOut.clearThis = null;
       updateTradeableCards();
     } else {
       gameListIn.html('');
