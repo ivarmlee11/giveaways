@@ -83,9 +83,9 @@ socket.on('get trade', function(trade) {
       playerIn.html('');
       messageBox.html('The other trade removed their offer');      
     }
-    tradeInfoOut.userId = null;
     tradeInfoOut.clearThis = null;
     tradeInfoIn.clearThis = null;
+    tradeInfoOut.userId = null;
     tradeInfoIn.sentFromId = null;
     tradeInProgressIndicator.html('Trade not in progress');
   }
@@ -140,7 +140,7 @@ $('#clearOutTrade').on('click', function() {
   $('#playerDropDown').show()
   tradeInfoOut.gameId = [];
   tradeInfoOut.clearThis = 'out';
-  // tradeInfoOut.sentFromName = null;
+
 
   if (tradeInfoOut.userId) {
     socket.emit('clientSenderA', tradeInfoOut);
@@ -148,7 +148,8 @@ $('#clearOutTrade').on('click', function() {
   } else {
     console.log('no user Id')
   }
-  // tradeInfoOut.userId = null;
+  tradeInfoOut.sentFromName = null;
+  tradeInfoOut.userId = null;
 
   gameListOut.html('');
   playerOut.html('');
