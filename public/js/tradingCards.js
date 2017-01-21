@@ -59,6 +59,7 @@ socket.on('get trade', function(trade) {
   console.log('-------------')
    console.log('-------------') 
   console.log('incoming trade')
+  console.log(tradeInfoOut.userId + ' ' + trade.userId)
 
 
   console.log(JSON.stringify(trade));
