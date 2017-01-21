@@ -41,7 +41,7 @@ socket.on('get trade', function(trade) {
   // console.log(trade.clearThis);
   console.log(JSON.stringify(trade));
   console.log('trade info in object')
-  console.log(JSON.stringify(tradetraInfoIn))
+  console.log(JSON.stringify(tradeInfoIn))
 
   if (!tradeInProgress && (trade.clearThis === null)) {
     tradeInProgress = true;   
