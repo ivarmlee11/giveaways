@@ -78,6 +78,7 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trader cleared their incoming trade');
       tradeInfoOut.userId = null;
       tradeInfoOut.clearThis = null;
+      tradeInfoIn.sentFromId = null;
       updateTradeableCards();
     } else {
       gameListIn.html('');
@@ -206,7 +207,7 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid');
 
-    tradeInProgress = true;
+    // tradeInProgress = true;
     tradeInfoOut.clearThis = null;
 
     tradeInfoOut.gameId.push(parseInt(id));
