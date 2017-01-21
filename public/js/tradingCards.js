@@ -37,15 +37,7 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
-  console.log('incoming trade')
-  console.log(JSON.stringify(trade));
-  console.log('trade info in object')
-  console.log(JSON.stringify(tradeInfoIn))
-  console.log(tradeInProgress + ' trade in progress')
-  console.log('trade.clearthis === null')
-  console.log(trade.clearThis === null);
-  console.log('!trade.clearThis')
-  console.log(!trade.clearThis)
+
   // if(tradeInfoOut.userId === (tradeInfoIn.sentFromId && !null)) {
   //   tradeInProgress = true;
   //   tradeInProgressIndicator.html('Trade in progress');
@@ -87,16 +79,33 @@ socket.on('get trade', function(trade) {
     tradeInfoIn.clearThis = null;
     tradeInfoOut.userId = null;
     tradeInfoIn.sentFromId = null;
-  }
+    }
+  console.log('-------------')
+ 
+  console.log('-------------')
+   console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
+  console.log('-------------')
+   console.log('-------------') 
+  console.log('incoming trade')
 
-  console.log('trade info in after being altered')
+
+  console.log(JSON.stringify(trade));
+  console.log('                        ')
+  console.log('                        ')
+  console.log('trade info in object')
   console.log(JSON.stringify(tradeInfoIn))
-  console.log(tradeInProgress + ' trade in progress')
-  console.log('trade.clearthis === null')
-  console.log(trade.clearThis === null);
-  console.log('!trade.clearThis')
-  console.log(!trade.clearThis)
-  console.log(tradeInProgress + ' trade in progress')
+    console.log('                        ')
+  console.log('                        ')
+  console.log(' trade in progress:' + tradeInProgress)
+      console.log('                        ')
+  console.log('                        ')
+  console.log('trade.clearthis === null ' + (trade.clearThis === null))
+      console.log('                        ')
+  console.log('                        ')
+  console.log('!trade.clearThis ' + !trade.clearThis)
+
 
 });
 
