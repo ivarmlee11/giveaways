@@ -46,7 +46,7 @@ socket.on('get trade', function(trade) {
   console.log(trade.clearThis === null);
   console.log('!trade.clearThis')
   console.log(!trade.clearThis)
-
+  
   if (!tradeInProgress && !trade.clearThis) {
     // tradeInProgress = true;   
     tradeInfoIn = trade;
@@ -100,7 +100,7 @@ socket.on('trade busy', function(message) {
 });
 
 $('#playerDropDown').on('click', function() {
-  tradeInProgress = true;
+  // tradeInProgress = true;
   tradeInProgressIndicator.html('Trade in progress');
   playerOut.html($(this).val());
   gameListOut.html(tradeInfoOut.gameId.length + ' items');
