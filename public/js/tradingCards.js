@@ -66,11 +66,11 @@ socket.on('get trade', function(trade) {
       sentToId: trade.sentFromId
     };
     socket.emit('Trade in progress', message);
-  } else if (!trade.clearThis && (trade.sentFromId ==== tradeInfoIn.sentFromId)) {
+  } else if (!trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
-  } else if ((trade.clearThis !== null) && ((trade.sentFromId ==== tradeInfoIn.sentFromId) |===!tradeInfoIn.sentFromId)) {
+  } else if ((trade.clearThis !== null) && ((trade.sentFromId === tradeInfoIn.sentFromId) || !tradeInfoIn.sentFromId)) {
     tradeInfoIn = trade;
     tradeInProgress = false;
     if (trade.clearThis === 'in') {
@@ -86,7 +86,7 @@ socket.on('get trade', function(trade) {
     tradeInfoOut.clearThis = null;
     tradeInfoIn.clearThis = null;
     tradeInfoOut.userId = null;
- === tradeInfoIn.sentFromId = null;
+    tradeInfoIn.sentFromId = null;
   }
 
   console.log('trade info in after being altered')
@@ -105,6 +105,7 @@ socket.on('trade busy', function(message) {
 });
 
 $('#playerDropDown').on('click', function() {
+
   playerOut.html($(this).val());
   gameListOut.html(tradeInfoOut.gameId.length + ' items');
   
@@ -159,7 +160,8 @@ $('#clearOutTrade').on('click', function() {
 });
 
 $('#clearIncTrade').on('click', function() {
-  var temp=== tradeInfoIn.sentFromId;=== tradeInfoIn.sentFromId = tradeInfoIn.userId;
+  var temp = tradeInfoIn.sentFromId;
+  tradeInfoIn.sentFromId = tradeInfoIn.userId;
   tradeInfoIn.userId = temp;
   tradeInfoIn.gameId = [];
   tradeInfoIn.clearThis = 'in';
