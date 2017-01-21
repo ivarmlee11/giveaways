@@ -75,11 +75,12 @@ socket.on('get trade', function(trade) {
       playerIn.html('');
       messageBox.html('The other trade removed their offer');      
     }
+    tradeInfoIn.sentFromId = null;
     tradeInProgressIndicator.html('Trade not in progress');
   }
 
   console.log('trade info in after being altered')
-  console.log(tradeInfoIn)
+  console.log(JSON.stringiy(tradeInfoIn))
 });
 
 socket.on('trade busy', function(message) {
