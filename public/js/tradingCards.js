@@ -51,6 +51,7 @@ socket.on('get trade', function(trade) {
   } else {
     tradeInProgress = false;    
   }
+  console.log(tradeInProgress + ' -is trade in progress')
   if (!tradeInProgress && !trade.clearThis) {
     // tradeInProgress = true;   
     tradeInfoIn = trade;
@@ -83,7 +84,6 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trade removed their offer');      
     }
     tradeInfoOut.userId = null;
-    
     tradeInfoOut.clearThis = null;
     tradeInfoIn.clearThis = null;
     tradeInfoIn.sentFromId = null;
