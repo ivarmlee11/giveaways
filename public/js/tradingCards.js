@@ -69,7 +69,7 @@ socket.on('get trade', function(trade) {
       gameListOut.html('');
       playerOut.html('');
       messageBox.html('The other trader cleared their incoming trade');
-      tradeInfoIn.userId = null;
+      tradeInfoOut.userId = null;
       updateTradeableCards();
     } else {
       gameListIn.html('');
