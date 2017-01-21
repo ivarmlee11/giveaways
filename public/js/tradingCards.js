@@ -72,7 +72,7 @@ socket.on('get trade', function(trade) {
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
   } else if ((trade.clearThis !== null) && ((trade.sentFromId === tradeInfoIn.sentFromId) || !tradeInfoIn.sentFromId)) {
     tradeInfoIn = trade;
-    tradeInProgress = false;
+    // tradeInProgress = false;
     if (trade.clearThis === 'in') {
       gameListOut.html('');
       playerOut.html('');
@@ -153,7 +153,7 @@ $('#clearOutTrade').on('click', function() {
   playerOut.html('');
   tradingArea.html('');
   tradeWindowOut.html('');
-  tradeInProgress = false;
+  // tradeInProgress = false;
   tradeInProgressIndicator.html('Trade not in progress');
   messageBox.html('Outgoing trade cleared');
   updateTradeableCards();
@@ -166,7 +166,7 @@ $('#clearIncTrade').on('click', function() {
   tradeInfoIn.gameId = [];
   tradeInfoIn.clearThis = 'in';
 
-  tradeInProgress = false;
+  // tradeInProgress = false;
 
   if (tradeInfoIn.userId) {
     socket.emit('clientSenderA', tradeInfoIn);
@@ -186,7 +186,7 @@ $('#clearIncTrade').on('click', function() {
 
 $('#acceptTrade').on('click', function() {
   if (tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
-    tradeInProgress = false;
+    // tradeInProgress = false;
     if (otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
