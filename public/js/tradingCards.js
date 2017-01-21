@@ -38,14 +38,17 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
 
-  // if(tradeInfoOut.userId === (tradeInfoIn.sentFromId && !null)) {
-  //   tradeInProgress = true;
-  //   tradeInProgressIndicator.html('Trade in progress');
-  // } else {
-  //   tradeInProgress = false;
-  //   tradeInProgressIndicator.html('Trade not in progress');    
-  // }
-  // console.log(tradeInProgress + ' -is trade in progress')
+  if(tradeInfoOut.userId === (tradeInfoIn.sentFromId && !null)) {
+    tradeInProgress = true;
+    console.log(trade + ' trade in progress')
+    tradeInProgressIndicator.html('Trade in progress');
+  } else {
+    tradeInProgress = false;
+    console.log(trade + ' trade in progress')
+
+    tradeInProgressIndicator.html('Trade not in progress');    
+  }
+  console.log(tradeInProgress + ' -is trade in progress')
 
     console.log('-------------')
  
@@ -102,7 +105,12 @@ socket.on('get trade', function(trade) {
     tradeInfoOut.userId = null;
     tradeInfoIn.sentFromId = null;
     }
-
+   console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
+      console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
   console.log('                        ')
   console.log('                        ')
   console.log('trade info in object')
