@@ -80,7 +80,7 @@ socket.on('get trade', function(trade) {
   }
 
   console.log('trade info in after being altered')
-  console.log(JSON.stringiy(tradeInfoIn))
+  console.log(JSON.stringify(tradeInfoIn))
 });
 
 socket.on('trade busy', function(message) {
