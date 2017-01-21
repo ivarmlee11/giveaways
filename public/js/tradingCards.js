@@ -42,7 +42,9 @@ socket.on('get trade', function(trade) {
   console.log('trade info in object')
   console.log(JSON.stringify(tradeInfoIn))
   console.log(tradeInProgress + ' trade in progress')
-  console.log(trade.clearThis);
+  console.log('trade.clearthis === null')
+  console.log(trade.clearThis === null);
+  console.log('!trade.clearThis')
   console.log(!trade.clearThis)
 
   if (!tradeInProgress && !trade.clearThis) {
@@ -58,12 +60,12 @@ socket.on('get trade', function(trade) {
       sentToId: trade.sentFromId
     };
     socket.emit('Trade in progress', message);
-  } else if (!trade.clearThis && (trade.sentFromId === (tradeInfoIn.sentFromId || null))) {
+  } else if (!trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromI)) {
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
     tradeInProgressIndicator.html('Trade in progress');
-  } else if ((trade.clearThis) && ((trade.sentFromId === tradeInfoIn.sentFromId) || !tradeInfoIn.sentFromId)) {
+  } else if ((trade.clearThis !== null) && ((trade.sentFromId === tradeInfoIn.sentFromId) || !tradeInfoIn.sentFromId)) {
     tradeInfoIn = trade;
     tradeInProgress = false;
     if (trade.clearThis === 'in') {
@@ -85,7 +87,11 @@ socket.on('get trade', function(trade) {
   console.log('trade info in after being altered')
   console.log(JSON.stringify(tradeInfoIn))
   console.log(tradeInProgress + ' trade in progress')
-  console.log(trade.clearThis + ' clear this');
+  console.log('trade.clearthis === null')
+  console.log(trade.clearThis === null);
+  console.log('!trade.clearThis')
+  console.log(!trade.clearThis)
+  console.log(tradeInProgress + ' trade in progress')
 
 });
 
