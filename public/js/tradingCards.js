@@ -46,23 +46,45 @@ socket.on('get trade', function(trade) {
   //   tradeInProgressIndicator.html('Trade not in progress');    
   // }
   // console.log(tradeInProgress + ' -is trade in progress')
+
+    console.log('-------------')
+ 
+  console.log('-------------')
+   console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
+  console.log('-------------')
+   console.log('-------------') 
+  console.log('incoming trade')
+
+
+  console.log(JSON.stringify(trade));
+    console.log('-------------')
+   console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
+  console.log('-------------')
   if (!tradeInProgress && !trade.clearThis) {
-    // tradeInProgress = true;   
+    // tradeInProgress = true; 
+    console.log('trade made')  
     tradeInfoIn = trade;
     playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html('Incoming trade arrived from ' + tradeInfoIn.sentFromName);
   } else if (tradeInProgress && !trade.clearThis &&  (trade.sentFromId !== tradeInfoOut.userId)) {
+    console.log('tradde busy')
     var message = { 
       message: 'That trader has a trade in progress',
       sentToId: trade.sentFromId
     };
     socket.emit('Trade in progress', message);
   } else if (!trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
+    console.log('trade updated')
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
   } else if ((trade.clearThis !== null) && ((trade.sentFromId === tradeInfoIn.sentFromId) || !tradeInfoIn.sentFromId)) {
+    console.log('trade cleared')
     tradeInfoIn = trade;
     // tradeInProgress = false;
     if (trade.clearThis === 'in') {
@@ -80,18 +102,7 @@ socket.on('get trade', function(trade) {
     tradeInfoOut.userId = null;
     tradeInfoIn.sentFromId = null;
     }
-  console.log('-------------')
- 
-  console.log('-------------')
-   console.log('-------------')
-  console.log('-------------')
-   console.log('-------------')
-  console.log('-------------')
-   console.log('-------------') 
-  console.log('incoming trade')
 
-
-  console.log(JSON.stringify(trade));
   console.log('                        ')
   console.log('                        ')
   console.log('trade info in object')
