@@ -67,7 +67,7 @@ socket.on('get trade', function(trade) {
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     tradeInProgressIndicator.html('Trade in progress');
     messageBox.html('Incoming trade arrived from ' + tradeInfoIn.sentFromName);
-  } else if (tradeInProgress && !trade.clearThis &&  (trade.sentFromId !== tradeInfoOut.userid)) {
+  } else if (tradeInProgress && !trade.clearThis &&  (trade.sentFromId !== tradeInfoOut.userId)) {
     console.log('trade busy')
     var message = { 
       message: 'That trader has a trade in progress',
@@ -98,7 +98,7 @@ socket.on('get trade', function(trade) {
       tradeWindowIn.html('');
       messageBox.html('The other trade removed their offer');      
     }
-    tradeInfoOut.clearThis = null;
+    // tradeInfoOut.clearThis = null;
     tradeInfoIn.clearThis = null;
     // tradeInfoOut.userId = null;
     tradeInfoIn.sentFromId = null;
