@@ -77,6 +77,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn = trade;
     playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
+    tradeInProgressIndicator.html('Trade in progress');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
   } else if (trade.clearThis && ((trade.sentFromId === tradeInfoIn.sentFromId) || !tradeInfoIn.sentFromId)) {
     console.log('trade cleared')
