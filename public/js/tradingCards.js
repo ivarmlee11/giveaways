@@ -112,6 +112,8 @@ socket.on('get trade', function(trade) {
   console.log(JSON.stringify(tradeInfoIn))
   console.log('-------------')
   console.log('-------------')
+    console.log('trade info out object')
+  console.log(JSON.stringify(tradeInfoOut))
    console.log('-------------')
   console.log(' trade in progress:' + tradeInProgress)
   console.log('-------------')
