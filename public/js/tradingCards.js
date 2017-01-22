@@ -121,6 +121,7 @@ socket.on('get trade', function(trade) {
 });
 
 socket.on('trade busy', function(message) {
+  tradeInfoOut.userId = null;
   messageBox.html(message);
 });
 
