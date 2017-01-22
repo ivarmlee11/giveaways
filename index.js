@@ -181,7 +181,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
 
     tradeObject.gameId = [];
-    tradeObject.userId = sentToId;
+    tradeObject.userId = sendToId;
     tradeObject.sentFromId = clientId;
     tradeObject.sentFromName = 'Came from clearing';
     tradeObject.clearThis = 'out';
