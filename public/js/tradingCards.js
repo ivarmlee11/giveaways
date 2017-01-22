@@ -93,6 +93,7 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trade removed their offer');      
     }
     tradeInProgress = false;
+    tradeInProgressIndicator.html('Trade not in progress');
     tradeInfoOut.clearThis = null;
     tradeInfoIn.clearThis = null;
     tradeInfoOut.userId = null;
