@@ -173,25 +173,23 @@ $('#clearOutTrade').on('click', function() {
   tradeInfoOut.gameId = [];
   tradeInfoOut.clearThis = 'out';
 
-
-  if (tradeInfoOut.userId) {
-    socket.emit('clientSenderA', tradeInfoOut);
-    console.log('sent to user')
-  } else {
-    console.log('no user Id')
-  }
-  tradeInfoOut.sentFromName = null;
-  tradeInfoOut.userId = null;
-
   gameListOut.html('');
   playerOut.html('');
   tradingArea.html('');
   tradeWindowOut.html('');
-  if (tradeInfoIn.userId) {
+
+  if (tradeInfoOut.userId) {
+    socket.emit('clientSenderA', tradeInfoOut);
+    console.log('sent to user')
     tradeInProgress = false;
     tradeInProgressIndicator.html('Trade not in progress');
     messageBox.html('Outgoing trade cleared');
+  } else {
+    console.log('no user Id');
   }
+
+  tradeInfoOut.sentFromName = null;
+  tradeInfoOut.userId = null;
   updateTradeableCards();
 });
 
