@@ -148,7 +148,8 @@ $('#playerDropDown').on('click', function() {
 
 
   tradeInProgress = true;
-
+  tradeInProgressIndicator.html('Trade not in progress');
+  
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent');
   } else {
@@ -160,6 +161,7 @@ $('#playerDropDown').on('click', function() {
   if (tradeInfoOut.userId !== sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
+    tradeInProgress = false;
     messageBox.html('You cannot trade with yourself');
     tradeInProgressIndicator.html('Trade not in progress');
   }
