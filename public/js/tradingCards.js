@@ -187,7 +187,7 @@ $('#clearOutTrade').on('click', function() {
   playerOut.html('');
   tradingArea.html('');
   tradeWindowOut.html('');
-  if (!tradeInfoIn.userId) {
+  if (tradeInfoIn.userId) {
     tradeInProgress = false;
     tradeInProgressIndicator.html('Trade not in progress');
     messageBox.html('Outgoing trade cleared');
