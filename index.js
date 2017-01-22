@@ -185,8 +185,8 @@ io.on('connection', function(socket) {
     // tradeObject.sentFromId = null;
     tradeObject.sentFromName = 'Came from clearing';
     tradeObject.clearThis = 'out';
-
-
+    console.log('----------')
+    console.log(tradeObject)
     socket.broadcast.to(sendToId).emit('get trade', tradeObject);
     
     clients = clients.filter(function(obj) {
