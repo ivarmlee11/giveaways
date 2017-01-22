@@ -61,6 +61,8 @@ socket.on('get trade', function(trade) {
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true; 
     tradeInfoIn = trade;
+    tradeWindowIn.html('');
+    displayIncomingGames(tradeInfoIn.gameId);
     playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     tradeInProgressIndicator.html('Trade in progress');
@@ -181,8 +183,10 @@ $('#clearOutTrade').on('click', function() {
   playerOut.html('');
   tradingArea.html('');
   tradeWindowOut.html('');
+  if (!tradeInfoIn.userId) {
   tradeInProgress = false;
   tradeInProgressIndicator.html('Trade not in progress');
+  }
   messageBox.html('Outgoing trade cleared');
   updateTradeableCards();
 });
@@ -202,8 +206,7 @@ $('#clearIncTrade').on('click', function() {
   } else {
     console.log('no user Id')
   }
-  // tradeInfoIn.userId = null;
-
+  tradeInfoIn.userId = null;
   gameListIn.html('');
   playerIn.html('');
   tradeWindowIn.html('');
@@ -276,8 +279,8 @@ function displayIncomingGames(array) {
   array.forEach(function(val) {
     console.log(val);
     tradeWindowIn.append(
-      '<div gameId="' + val.id + '" class="cardsStatic">' + 
-      '<h3>' + val.name + '</h3>' + 
+      '<div class="cardsStatic">' + 
+      '<h3>' + val + '</h3>' + 
       '</div>'
     )
   });
