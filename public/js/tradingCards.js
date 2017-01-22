@@ -49,7 +49,7 @@ socket.on('get trade', function(trade) {
   console.log('-------------')
    console.log('-------------') 
   console.log('incoming trade')
-  console.log(tradeInfoOut.userId + ' ' + trade.sentFromId)
+  console.log('tradeinfoout.userid ' + tradeInfoOut.userId + ' trade.sentfromtId ' + trade.sentFromId)
 
 
   console.log(JSON.stringify(trade));
@@ -85,12 +85,13 @@ socket.on('get trade', function(trade) {
     if (trade.clearThis === 'in') {
       gameListOut.html('');
       playerOut.html('');
-      messageBox.html('The other trader cleared their incoming trade');
+      messageBox.html('The other trader cleared your trade offer');
       tradingArea.html('');
       updateTradeableCards();
     } else {
       gameListIn.html('');
       playerIn.html('');
+      tradeWindowIn.html('');
       messageBox.html('The other trade removed their offer');      
     }
     tradeInProgress = false;
@@ -103,21 +104,19 @@ socket.on('get trade', function(trade) {
    console.log('-------------')
   console.log('-------------')
    console.log('-------------')
-      console.log('-------------')
-  console.log('-------------')
-   console.log('-------------')
-  console.log('                        ')
-  console.log('                        ')
   console.log('trade info in object')
   console.log(JSON.stringify(tradeInfoIn))
-    console.log('                        ')
-  console.log('                        ')
+  console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
   console.log(' trade in progress:' + tradeInProgress)
-      console.log('                        ')
-  console.log('                        ')
+  console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
   console.log('trade.clearthis === null ' + (trade.clearThis === null))
-      console.log('                        ')
-  console.log('                        ')
+  console.log('-------------')
+  console.log('-------------')
+   console.log('-------------')
   console.log('!trade.clearThis ' + !trade.clearThis)
 
 
@@ -261,7 +260,7 @@ tradeWindowOut.droppable({
   hoverClass: 'foundhome'
 });
 
-function findGameInfo(array) {
+function findGameInfo() {
   var url = '/game/gameData/'
    $.ajax({
     url: url,
@@ -274,7 +273,6 @@ function findGameInfo(array) {
 };
 
 function displayIncomingGames(array) {
-  tradeWindowIn.html('');
   array.forEach(function(val) {
     console.log(val);
     tradeWindowIn.append(
