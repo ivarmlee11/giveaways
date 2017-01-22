@@ -154,7 +154,8 @@ $('#playerDropDown').on('click', function() {
   }
   console.log('trade Info Out')
   console.log(JSON.stringify(tradeInfoOut))
-
+  console.log('trade Info in')
+  console.log(JSON.stringify(tradeInfoIn))
   if (tradeInfoOut.userId !== sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
