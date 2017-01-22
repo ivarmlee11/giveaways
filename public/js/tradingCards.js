@@ -148,7 +148,7 @@ $('#playerDropDown').on('click', function() {
 
 
   tradeInProgress = true;
-  tradeInProgressIndicator.html('Trade not in progress');
+  tradeInProgressIndicator.html('Trade in progress');
   
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent');
@@ -188,10 +188,10 @@ $('#clearOutTrade').on('click', function() {
   tradingArea.html('');
   tradeWindowOut.html('');
   if (!tradeInfoIn.userId) {
-  tradeInProgress = false;
-  tradeInProgressIndicator.html('Trade not in progress');
+    tradeInProgress = false;
+    tradeInProgressIndicator.html('Trade not in progress');
+    messageBox.html('Outgoing trade cleared');
   }
-  messageBox.html('Outgoing trade cleared');
   updateTradeableCards();
 });
 
