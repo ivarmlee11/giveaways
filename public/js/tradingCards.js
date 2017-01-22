@@ -60,7 +60,7 @@ socket.on('get trade', function(trade) {
   console.log('-------------')
   if (!tradeInProgress && !trade.clearThis) {
     tradeInProgress = true; 
-    console.log('trade made')  
+    messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
     tradeInfoIn = trade;
     playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
