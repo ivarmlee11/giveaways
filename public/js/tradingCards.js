@@ -59,7 +59,7 @@ socket.on('get trade', function(trade) {
   console.log('-------------')
    console.log('-------------') 
   console.log('incoming trade')
-  console.log(tradeInfoIn.sentFromId + ' ' + trade.sentFromId)
+  console.log(tradeInfoOut.userId + ' ' + trade.sentFromId)
 
 
   console.log(JSON.stringify(trade));
@@ -82,7 +82,7 @@ socket.on('get trade', function(trade) {
       sentToId: trade.sentFromId
     };
     socket.emit('Trade in progress', message);
-  } else if (!trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
+  } else if (!trade.clearThis && (trade.sentFromId === tradeInfoOut.userId)) {
     console.log('trade updated')
     tradeInfoIn = trade;
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
