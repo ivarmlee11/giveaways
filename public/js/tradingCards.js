@@ -144,7 +144,7 @@ $('#playerDropDown').on('click', function() {
 
   if (tradeInfoIn.sentFromId === tradeInfoOut.userId) {
     tradeInProgress = true;
-    tradeInProgressIndicator.html('Trade not in progress');
+    tradeInProgressIndicator.html('Trade in progress');
   }
 
   if (!tradeInfoOut.gameId.length) {
