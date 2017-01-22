@@ -85,6 +85,7 @@ socket.on('get trade', function(trade) {
   } else if (!trade.clearThis && (trade.sentFromId === tradeInfoOut.userId)) {
     console.log('trade updated')
     tradeInfoIn = trade;
+    playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
   } else if (trade.clearThis && ((trade.sentFromId === tradeInfoIn.sentFromId) || !tradeInfoIn.sentFromId)) {
