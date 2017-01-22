@@ -138,9 +138,14 @@ $('#playerDropDown').on('click', function() {
   
   tradeInfoOut.sendTo = $(this).val();
   tradeInfoOut.userId = parseInt(userId);
-  tradeInfoOut.sentFromId = parseInt(sentFromId);
+  tradeInfoOut.sentFromId = sentFromId;
   tradeInfoOut.sentFromName = sentFromName;
   tradeInfoOut.clearThis = null;
+
+  if (tradeInfoIn.sentFromId === tradeInfoOut.userId) {
+    tradeInProgress = true;
+    tradeInProgressIndicator.html('Trade not in progress');
+  }
 
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent');
