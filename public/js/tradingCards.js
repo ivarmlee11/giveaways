@@ -142,10 +142,8 @@ $('#playerDropDown').on('click', function() {
   tradeInfoOut.sentFromName = sentFromName;
   tradeInfoOut.clearThis = null;
 
-  if (tradeInfoIn.sentFromId === tradeInfoOut.userId) {
-    tradeInProgress = true;
-    tradeInProgressIndicator.html('Trade in progress');
-  }
+
+  tradeInProgress = true;
 
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent');
@@ -154,13 +152,12 @@ $('#playerDropDown').on('click', function() {
   }
   console.log('trade Info Out')
   console.log(JSON.stringify(tradeInfoOut))
-  console.log('trade Info in')
-  console.log(JSON.stringify(tradeInfoIn))
+
   if (tradeInfoOut.userId !== sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
     messageBox.html('You cannot trade with yourself');
-    tradeInProgressIndicator.html('Cannot trade with yourself');
+    tradeInProgressIndicator.html('Trade not in progress');
   }
   $(this).hide();
 });
