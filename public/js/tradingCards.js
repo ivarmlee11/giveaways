@@ -159,7 +159,7 @@ $('#playerDropDown').on('click', function() {
     socket.emit('clientSenderA', tradeInfoOut);
   } else {
     messageBox.html('You cannot trade with yourself');
-    tradeInProgressIndicator.html('Trade not in progress');
+    tradeInProgressIndicator.html('Cannot trade with yourself');
   }
   $(this).hide();
 });
