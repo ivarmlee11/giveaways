@@ -198,6 +198,8 @@ clearOutTrade.on('click', function() {
 
   tradeInfoOut.sentFromName = null;
   tradeInfoOut.userId = null;
+    console.log(JSON.stringify(tradeInfoOut))
+
   updateTradeableCards();
 });
 
@@ -227,6 +229,7 @@ clearIncTrade.on('click', function() {
   } else {
     tradeInProgressIndicator.html('There were no incoming trades to clear');
   }
+  console.log(JSON.stringify(tradeInfoIn))
 });
 
 
