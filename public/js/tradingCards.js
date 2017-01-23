@@ -204,27 +204,31 @@ clearOutTrade.on('click', function() {
 });
 
 clearIncTrade.on('click', function() {
-  var temp = tradeInfoIn.sentFromId;
-  tradeInfoIn.sentFromId = tradeInfoIn.userId;
-  tradeInfoIn.userId = temp;
-  tradeInfoIn.gameId = [];
-  tradeInfoIn.clearThis = 'in';
+  if(tradeInfoIn.sentFromId) {
+    var temp = tradeInfoIn.sentFromId;
+    tradeInfoIn.sentFromId = tradeInfoIn.userId;
+    tradeInfoIn.userId = temp;
+    tradeInfoIn.gameId = [];
+    tradeInfoIn.clearThis = 'in';
 
-  tradeInProgress = false;
+    tradeInProgress = false;
 
-  if (tradeInfoIn.userId) {
-    socket.emit('clientSenderA', tradeInfoIn);
-    console.log('sent to user')
+    if (tradeInfoIn.userId) {
+      socket.emit('clientSenderA', tradeInfoIn);
+      console.log('sent to user')
+    } else {
+      console.log('no user Id')
+    }
+    tradeInfoIn.userId = null;
+    // tradeInfoIn.sentFromId = temp;
+    gameListIn.html('');
+    playerIn.html('');
+    tradeWindowIn.html('');
+    messageBox.html('Incoming trade cleared');
+    tradeInProgressIndicator.html('Trade not in progress');
   } else {
-    console.log('no user Id')
+    tradeInProgressIndicator.html('There were no incoming trades to clear');
   }
-  tradeInfoIn.userId = null;
-  // tradeInfoIn.sentFromId = temp;
-  gameListIn.html('');
-  playerIn.html('');
-  tradeWindowIn.html('');
-  messageBox.html('Incoming trade cleared');
-  tradeInProgressIndicator.html('Trade not in progress');
 });
 
 
