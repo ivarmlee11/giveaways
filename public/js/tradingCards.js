@@ -38,10 +38,11 @@ tradeInfoOut.sentFromName = sentFromName;
 tradeInProgressIndicator.html('Trade not in progress');
 
 socket.on('updateList', function(connectedPlayers){
-  console.log(connectedPlayers)
-  // currentPlayers.html(
-
-  // )
+  currentPlayers.html('');
+  var playerList = connectedPlayers;
+  playerList.forEach(function(val) {
+    currentPlayers.append('<h4 clientId="' + val.id + '">' + val.clientName + '</h4>');  
+  });
 });
 
 socket.on('get trade', function(trade) {

@@ -131,9 +131,10 @@ var clients = [];
 
 io.on('connection', function(socket) {
   // console.log(socket)
-  console.log(socket.request.user.dataValues)
+  console.log(socket.request.user.dataValues.username)
   var clientId = socket.request.user.dataValues.id,
       sendToId,
+      clientName = socket.request.user.dataValues.username;
       tradeObject = {};
 
   clients = clients.filter(function(obj) {
@@ -142,7 +143,8 @@ io.on('connection', function(socket) {
 
   clients.push({
     id: clientId,
-    socketId: socket.id
+    socketId: socket.id,
+    clientName: clientName
   });
 
   io.emit('updateList', clients);
