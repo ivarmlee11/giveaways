@@ -106,17 +106,15 @@ socket.on('get trade', function(trade) {
     tradeInfoIn = trade;
     if (trade.clearThis === 'in') {
       console.log('trade cleared in')
+      tradeInfoOut.userId = null;
       gameListOut.html('');
       playerOut.html('');
-      tradeInfoOut.userId = null;
-      // tradeInfoOut.clearThis = null;
       tradingArea.html('');
       messageBox.html('The other trader cleared your trade offer');
       updateTradeableCards();
     } else {
      console.log('trade cleared out')
       tradeInfoIn.clearThis = null;
-      // tradeInfoIn.sentFromId = null;
 
       gameListIn.html('');
       playerIn.html('');
