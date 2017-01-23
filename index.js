@@ -130,7 +130,6 @@ client.on('join', function (channel, username, self) {
 var clients = [];
 
 io.on('connection', function(socket) {
-  console.log(socket.request.user.dataValues.id + ' logged on')
   var clientId = socket.request.user.dataValues.id,
       sendToId,
       tradeObject = {};
@@ -179,10 +178,11 @@ io.on('connection', function(socket) {
     // else send message that player isnt online TODO
   });
 
-  socket.on('disconnect', function() {
-
+  socket.on('disconnect', function(socket) {
+    console.log(tradeObject)
     tradeObject.gameId = [];
     tradeObject.sentFromId = clientId;
+    tradeObject.sendTo = null;
     tradeObject.sentFromName = 'Came from clearing';
     tradeObject.clearThis = 'out';
     console.log('-----cleared-----')
