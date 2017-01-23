@@ -340,5 +340,5 @@ function updatePlayerList() {
 };
 
 updateTradeableCards();
-// updatePlayerList();
+updatePlayerList();
 });
