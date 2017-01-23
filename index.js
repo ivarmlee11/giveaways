@@ -150,6 +150,7 @@ io.on('connection', function(socket) {
 
     tradeObject = tradeObj;
     console.log(tradeObject);
+    lastTrade = tradeObject.sentFromId;
     var id = tradeObject.userId,
         result = clients.filter(function( obj ) {
           return obj.id == id;
@@ -183,14 +184,14 @@ io.on('connection', function(socket) {
     console.log(tradeObject)
     tradeObject.gameId = [];
     tradeObject.sentFromId = clientId;
-    tradeObject.sendTo = null;
+    tradeObject.sendTo = lastTrade;
     tradeObject.sentFromName = 'Came from clearing';
     tradeObject.clearThis = 'out';
     console.log('-----cleared-----')
     console.log(tradeObject)
     console.log(clients)
     var sendToSocket = clients.filter(function(obj) {
-      return obj.id === clientId
+      return obj.id === lastTrade
     });
     var sendToSocket = sendToSocket[0].socketId;
     console.log(sendToSocket)
