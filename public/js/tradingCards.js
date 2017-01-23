@@ -84,6 +84,7 @@ socket.on('get trade', function(trade) {
     messageBox.html('Incoming trade arrived from ' + tradeInfoIn.sentFromName);
   } else if (tradeInProgress && !trade.clearThis &&  (trade.userId !== tradeInfoOut.sentFromId)) {
     console.log('trade busy')
+    
     var message = { 
       message: 'That trader has a trade in progress',
       sentToId: trade.sentFromId
