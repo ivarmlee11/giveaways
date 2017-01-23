@@ -184,13 +184,16 @@ io.on('connection', function(socket) {
     tradeObject.gameId = [];
     tradeObject.sentFromId = clientId;
     tradeObject.sentFromName = 'Came from clearing';
-    tradeObject.sentFromName = null;
     tradeObject.clearThis = 'out';
     console.log('-----cleared-----')
     console.log(tradeObject)
     console.log(clients)
-    console.log(sendToId)
-    socket.broadcast.to(sendToId).emit('get trade', tradeObject);
+    var sendToSocket = clients.filter(function(obj) {
+      return obj.id === clientId
+    });
+    var sendToSocket = sendToSocket[0].socketId;
+    console.log(sendToSocket)
+    socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);
     
     clients = clients.filter(function(obj) {
       return obj.id !== clientId;
