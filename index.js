@@ -130,8 +130,7 @@ client.on('join', function (channel, username, self) {
 var clients = [];
 
 io.on('connection', function(socket) {
-  console.log(socket)
-  console.log(socket.request.user.dataValues.id)
+  console.log(socket.request.user.dataValues.id + ' logged on')
   var clientId = socket.request.user.dataValues.id,
       sendToId,
       tradeObject = {};
