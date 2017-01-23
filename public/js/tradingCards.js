@@ -69,6 +69,8 @@ socket.on('get trade', function(trade) {
     console.log('-------------')
    console.log(tradeInProgress)
   console.log('-------------')
+  console.log(trade.userId === tradeInfoOut.sentFromId)
+  console.log(!trade.clearThis)
    console.log('-------------')
   if (!tradeInProgress && !trade.clearThis) {
     console.log('trade made')
