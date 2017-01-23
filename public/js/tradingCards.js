@@ -91,7 +91,7 @@ socket.on('get trade', function(trade) {
     tradeInProgress = true; 
     tradeInfoIn = trade;
     tradeWindowIn.html('');
-    displayIncomingGames();
+    displayIncomingGames(tradeInfoIn.gameId);
     playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html('Incoming trade arrived from ' + tradeInfoIn.sentFromName);
@@ -107,7 +107,7 @@ socket.on('get trade', function(trade) {
     console.log('trade updated')
     tradeInfoIn = trade;
     tradeWindowIn.html('');
-    displayIncomingGames();
+    displayIncomingGames(tradeInfoIn.gameId);
     playerIn.html(tradeInfoIn.sentFromName);
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
@@ -278,23 +278,26 @@ tradeWindowOut.droppable({
   hoverClass: 'foundhome'
 });
 
-function displayIncomingGames() {
-  var url = '/game/gameData/'
-   $.ajax({
-    url: url,
-    type: 'GET',
-    success: function(cardList) {
-      console.log(cardList);
-      
-      array.forEach(function(val) {
-      tradeWindowIn.append(
-        '<div class="cardsStatic">' + 
-        '<h3>' + val + '</h3>' + 
-        '</div>'
-        )
-      });
-    }
-  });
+function displayIncomingGames(gameIdArray) {
+  var gameIdArray = gameIdArray;
+  tradeWindowIn.html('');
+
+  gameIdArray.forEach(function(val) {
+    var url = '/game/gameData/' + val;
+
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function(gameInfo) {
+        tradeWindowIn.append(
+          '<div class="cardsStatic">' + 
+          '<h3>' + gameInfo.name + '</h3>' + 
+          '</div>'
+          )
+        });
+      }
+    });
+  });  
 };
 
 function updateTradeableCards() {

@@ -21,6 +21,14 @@ router.get('/gameDataOnly', ensureAuthenticated, modCheck, function(req, res) {
   });
 });
 
+router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx;
+  db.game.findById(id).then(function(game) {
+    res.send(game);
+  });    
+});
+
+
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   var file = req.body.uploadGameData,
     parsed = Baby.parseFiles(file),
