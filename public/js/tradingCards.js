@@ -229,9 +229,7 @@ tradeWindowOut.droppable({
 
     tradeInfoOut.gameId.push(parseInt(id));
 
-    tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
-      return inputArray.indexOf(item) == index;
-    });
+
 
     gameListOut.html(tradeInfoOut.gameId.length + ' items');
 
@@ -239,7 +237,7 @@ tradeWindowOut.droppable({
 
       socket.emit('clientSenderA', tradeInfoOut);
 
-      messageBox.html('Proposal sent.');
+      messageBox.html('Proposal sent');
     } else {
 
       messageBox.html('To propose a trade you need a recipient');
@@ -248,7 +246,15 @@ tradeWindowOut.droppable({
   out: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid');
-      console.log('game with id of ' + id + ' has left the trade area.')
+      console.log('game with id of ' + id + ' has left the trade area.');
+
+    tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
+      return item !== id;
+    });
+
+    socket.emit('clientSenderA', tradeInfoOut);
+
+    messageBox.html('Game removed');
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
