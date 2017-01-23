@@ -116,7 +116,7 @@ socket.on('get trade', function(trade) {
     } else {
      console.log('trade cleared out')
       tradeInfoIn.clearThis = null;
-      tradeInfoIn.sentFromId = null;
+      // tradeInfoIn.sentFromId = null;
 
 
 
