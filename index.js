@@ -203,7 +203,7 @@ io.on('connection', function(socket) {
   });
 
 });
-
+ 
 app.use('/admin', adminCtrl);
 app.use('/player', playerCtrl);
 app.use('/game', gameCtrl);
