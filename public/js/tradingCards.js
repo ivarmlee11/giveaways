@@ -53,8 +53,20 @@ socket.on('get trade', function(trade) {
 
 
   console.log(JSON.stringify(trade));
+
+  console.log('-------------')
+  console.log(JSON.stringify(tradeInfoIn))
+   console.log('-------------')
+  console.log('trade info in object')
+  console.log('-------------')
+  console.log('-------------')
+    console.log('trade info out object')
+  console.log(JSON.stringify(tradeInfoOut))
+   console.log('-------------')
+  
     console.log('-------------')
    console.log('-------------')
+   console.log(tradeInProgress)
   console.log('-------------')
    console.log('-------------')
   console.log('-------------')
@@ -110,27 +122,6 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade not in progress');
     
     }
-   console.log('-------------')
-  console.log('-------------')
-   console.log('-------------')
-  console.log('trade info in object')
-  console.log(JSON.stringify(tradeInfoIn))
-  console.log('-------------')
-  console.log('-------------')
-    console.log('trade info out object')
-  console.log(JSON.stringify(tradeInfoOut))
-   console.log('-------------')
-  console.log(' trade in progress:' + tradeInProgress)
-  console.log('-------------')
-  console.log('-------------')
-   console.log('-------------')
-  console.log('trade.clearthis === null ' + (trade.clearThis === null))
-  console.log('-------------')
-  console.log('-------------')
-   console.log('-------------')
-  console.log('!trade.clearThis ' + !trade.clearThis)
-
-
 });
 
 socket.on('trade busy', function(message) {
