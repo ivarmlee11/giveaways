@@ -247,18 +247,14 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id);
-      console.log('game with id of ' + id + ' has left the trade area.');
 
     tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
-      console.log(item, id)
-      console.log(item === id)
-      return item !== id;
+      return item !== isRequired;
     });
-    console.log(tradeInfoOut.gameId)
-    console.log(id)
 
-    // socket.emit('clientSenderA', tradeInfoOut);
-
+    socket.emit('clientSenderA', tradeInfoOut);
+    
+    gameListOut.html(tradeInfoOut.gameId.length + ' items');
     messageBox.html('Game removed');
   },
   activeClass: 'highlight',
