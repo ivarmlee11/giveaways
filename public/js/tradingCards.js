@@ -212,6 +212,7 @@ $('#clearIncTrade').on('click', function() {
     console.log('no user Id')
   }
   tradeInfoIn.userId = null;
+  tradeInfoIn.sentFromId = temp;
   gameListIn.html('');
   playerIn.html('');
   tradeWindowIn.html('');
