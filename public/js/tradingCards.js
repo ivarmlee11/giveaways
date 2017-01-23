@@ -49,43 +49,6 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
-
-
-
-    console.log('-------------')
- 
-  console.log('-------------')
-   console.log('-------------')
-  console.log('-------------')
-   console.log('-------------') 
-  console.log('incoming trade')
-
-
-
-  console.log(JSON.stringify(trade));
-   console.log('-------------')
-  console.log('-------------')
-
-  console.log('trade info in object')
-  console.log('-------------')
-   console.log('-------------')
-  console.log(JSON.stringify(tradeInfoIn))
-  console.log('-------------')
-  console.log('-------------')
-    console.log('trade info out object')
-  console.log('-------------')
-   console.log('-------------')
-  console.log(JSON.stringify(tradeInfoOut))
-   console.log('-------------')
-  
-    console.log('-------------')
-   console.log(tradeInProgress)
-  console.log('-------------')
-  console.log(trade.userId === tradeInfoOut.sentFromId)
-  console.log(!trade.clearThis)
-  console.log(trade.sentFromId === (tradeInfoIn.sentFromId || tradeInfoOut.userId))
-  console.log(trade.sentFromId, tradeInfoIn.sentFromId, tradeInfoOut.userId)
-   console.log('-------------')
   if (!tradeInProgress && !trade.clearThis) {
     console.log('trade made')
     tradeInProgress = true; 
@@ -164,8 +127,7 @@ playerDropDown.on('click', function() {
   } else {
     messageBox.html('Proposal sent with games');
   }
-  console.log('trade Info Out')
-  console.log(JSON.stringify(tradeInfoOut))
+
 
   if (tradeInfoOut.userId !== sentFromId) {
     socket.emit('clientSenderA', tradeInfoOut);
@@ -175,6 +137,9 @@ playerDropDown.on('click', function() {
     tradeInProgressIndicator.html('Trade not in progress');
   }
   $(this).hide();
+    console.log('trade Info Out')
+  console.log(JSON.stringify(tradeInfoOut))
+
 });
 
 clearOutTrade.on('click', function() {
@@ -201,6 +166,8 @@ clearOutTrade.on('click', function() {
     console.log(JSON.stringify(tradeInfoOut))
 
   updateTradeableCards();
+    console.log('trade Info Out')
+  console.log(JSON.stringify(tradeInfoOut))
 });
 
 clearIncTrade.on('click', function() {
@@ -229,6 +196,7 @@ clearIncTrade.on('click', function() {
   } else {
     tradeInProgressIndicator.html('There were no incoming trades to clear');
   }
+    console.log('trade Info in')
   console.log(JSON.stringify(tradeInfoIn))
 });
 
@@ -276,6 +244,11 @@ tradeWindowOut.droppable({
 
       messageBox.html('To propose a trade you need a recipient');
     } 
+  },
+  out: function(event, ui) {
+    var draggable = ui.draggable,
+        id = draggable.attr('gameid');
+      console.log('game with id of ' + id + ' has left the trade area.')
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
