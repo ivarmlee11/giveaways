@@ -251,6 +251,8 @@ tradeWindowOut.droppable({
     tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
       return item !== id;
     });
+    console.log(tradeInfoOut.gameId)
+    console.log(id)
 
     socket.emit('clientSenderA', tradeInfoOut);
 
