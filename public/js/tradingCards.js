@@ -88,12 +88,15 @@ socket.on('get trade', function(trade) {
     console.log('trade cleared')
     tradeInfoIn = trade;
     if (trade.clearThis === 'in') {
+      console.log('trade cleared in')
       gameListOut.html('');
       playerOut.html('');
       tradingArea.html('');
       messageBox.html('The other trader cleared your trade offer');
       updateTradeableCards();
     } else {
+     console.log('trade cleared out')
+
       gameListIn.html('');
       playerIn.html('');
       tradeWindowIn.html('');
@@ -105,6 +108,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn.sentFromId = null;
     tradeInProgress = false;
     tradeInProgressIndicator.html('Trade not in progress');
+    
     }
    console.log('-------------')
   console.log('-------------')
