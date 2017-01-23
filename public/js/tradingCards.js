@@ -24,6 +24,7 @@ var tradingArea = $('#tradingArea'),
     clearOutTrade = $('#clearOutTrade'),
     clearIncTrade = $('#clearIncTrade'),
     playerTradeList = $('#playerTradeList'),
+    acceptTrade = $('#acceptTrade'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
     otherTraderAcceptedOffer = false,
@@ -42,7 +43,7 @@ socket.on('updateList', function(connectedPlayers){
   playerTradeList.html('');
   var playerList = connectedPlayers;
   playerList.forEach(function(val) {
-    currentPlayers.append('<h4 clientId="' + val.id + '">' + val.clientName + '</h4>');
+    currentPlayers.append('<h5 clientId="' + val.id + '">' + val.clientName + '</h5>');
     playerTradeList.append('<option userid="' + val.id + '">' + val.clientName + '</option>');
   });
 });
@@ -227,7 +228,7 @@ clearIncTrade.on('click', function() {
 });
 
 
-$('#acceptTrade').on('click', function() {
+acceptTrade.on('click', function() {
   if (tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
     // tradeInProgress = false;
     if (otherTraderAcceptedOffer) {
@@ -318,30 +319,5 @@ function updateTradeableCards() {
   });
 };
 
-function updatePlayerList() {
-  var url = '/player/allplayers/';
-  $.ajax({
-    url: url,
-    method: 'GET',
-    success: function(playerList) {
-      var playerList = playerList,
-          users = [];
-
-      playerList.forEach(function(val) {
-        users.push({
-          username: val.username,
-          id: val.id
-        });
-      });
-
-      playerTradeList.html('');
-      users.forEach(function(val) {
-        playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
-      });
-    }
-  });
-};
-
 updateTradeableCards();
-// updatePlayerList();
 });

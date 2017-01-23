@@ -16,6 +16,27 @@
     </div>
     <div id="tradeWindowIn" class="col-md-4">
     </div>
+    <div class="col-md-4 text-center">
+      <h3>Current players</h3>
+      <div id="currentPlayers" class="text-center"> 
+      </div>
+    </div>
+  <div class="row">
+    <div id="tradeWindowOutInfo" class="col-md-4 text-center">
+      <div class='text-center'>
+        <button id="clearOutTrade" class="btn btn-danger">Clear Outgoing Trade</button>
+      </div>
+      <div class="text-center">
+        <select id="playerDropDown" class="selectpicker" data-size="5">
+          <optgroup id="playerTradeList" label="Players">
+          </optgroup>f
+        </select>
+      </div>
+      <div class='text-center'>
+        <h4>Sending to: <span id="playerOut"></span></h4>
+        <h4>Sending: <span id="gameListOut"></span></h4>
+      </div>
+    </div>
     <div id="tradeWindowInfo" class="col-md-4 text-center">
       <div class='text-center'>
         <button id="acceptTrade" class="btn btn-info">Accept Trade Request</button>
@@ -25,25 +46,6 @@
         <h4>Receiving from: <span id="playerIn"></span></h4>
         <h4>Receiving: <span id="gameListIn"></span></h4>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div id="tradeWindowOutInfo" class="col-md-4 text-center">
-      <div class='text-center'>
-        <button id="clearOutTrade" class="btn btn-danger">Clear Outgoing Trade</button>
-      </div>
-      <div class="text-center">
-        <select id="playerDropDown" class="selectpicker" data-size="5">
-          <optgroup id="playerTradeList" label="Players">
-          </optgroup>
-        </select>
-      </div>
-      <div class='text-center'>
-        <h4>Sending to: <span id="playerOut"></span></h4>
-        <h4>Sending: <span id="gameListOut"></span></h4>
-      </div>
-    </div>
-    <div id="currentPlayers" class="col-md-4 text-center"> 
     </div>
   </div>
 </div>
