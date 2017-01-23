@@ -130,6 +130,7 @@ client.on('join', function (channel, username, self) {
 var clients = [];
 
 io.on('connection', function(socket) {
+  console.log(socket)
   var clientId = socket.request.user.dataValues.id,
       sendToId,
       tradeObject = {};
@@ -160,7 +161,7 @@ io.on('connection', function(socket) {
     } else {
       console.log('that user isnt logged on');
     };
-    // else send message that player isnt online TODO
+    // else send message thclat player isnt online TODO
   });
 
   socket.on('Trade in progress', function(message) {
