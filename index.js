@@ -197,7 +197,7 @@ io.on('connection', function(socket) {
     var sendToSocket = clients.filter(function(obj) {
       return obj.id === temp
     }),
-    sendToSocket = sendToSocket[0].socketId;
+    // sendToSocket = sendToSocket[0].socketId;
     console.log(sendToSocket)
     socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);
     
