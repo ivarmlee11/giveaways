@@ -99,7 +99,7 @@ socket.on('get trade', function(trade) {
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     tradeInProgressIndicator.html('Trade in progress'); 
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
-  } else if (trade.clearThis && ((trade.sentFromId === (tradeInfoIn.sentFromId) || tradeInfoOut.userId)) {
+  } else if (trade.clearThis && ((trade.sentFromId === (tradeInfoIn.sentFromId || tradeInfoOut.userId)) {
     console.log('trade cleared')
     tradeInfoIn = trade;
     if (trade.clearThis === 'in') {
