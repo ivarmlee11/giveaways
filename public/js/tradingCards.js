@@ -252,6 +252,7 @@ tradeWindowOut.droppable({
       return item !== id;
     });
 
+
     socket.emit('clientSenderA', tradeInfoOut);
     
     gameListOut.html(tradeInfoOut.gameId.length + ' items');
