@@ -49,27 +49,27 @@ socket.on('get trade', function(trade) {
   console.log('-------------')
    console.log('-------------') 
   console.log('incoming trade')
-  console.log('tradeinfoout.userid ' + tradeInfoOut.userId + ' trade.sentfromtId ' + trade.sentFromId)
+
 
 
   console.log(JSON.stringify(trade));
 
-  console.log('-------------')
-  console.log(JSON.stringify(tradeInfoIn))
-   console.log('-------------')
   console.log('trade info in object')
+  console.log('-------------')
+   console.log('-------------')
+  console.log(JSON.stringify(tradeInfoIn))
   console.log('-------------')
   console.log('-------------')
     console.log('trade info out object')
+  console.log('-------------')
+   console.log('-------------')
   console.log(JSON.stringify(tradeInfoOut))
    console.log('-------------')
   
     console.log('-------------')
-   console.log('-------------')
    console.log(tradeInProgress)
   console.log('-------------')
    console.log('-------------')
-  console.log('-------------')
   if (!tradeInProgress && !trade.clearThis) {
     console.log('trade made')
     tradeInProgress = true; 
