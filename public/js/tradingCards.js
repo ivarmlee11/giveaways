@@ -117,6 +117,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn.sentFromId = null;
 
 
+
       gameListIn.html('');
       playerIn.html('');
       tradeWindowIn.html('');
