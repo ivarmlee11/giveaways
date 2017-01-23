@@ -19,6 +19,11 @@ var tradingArea = $('#tradingArea'),
     playerOut = $('#playerOut'),
     gameListIn = $('#gameListIn'),
     gameListOut = $('#gameListOut'),
+    currentPlayers =  $('#currentPlayers'),
+    playerDropDown = $('#playerDropDown'),
+    clearOutTrade = $('#clearOutTrade'),
+    clearIncTrade = $('#clearIncTrade'),
+    playerTradeList = $('#playerTradeList'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
     otherTraderAcceptedOffer = false,
@@ -33,7 +38,10 @@ tradeInfoOut.sentFromName = sentFromName;
 tradeInProgressIndicator.html('Trade not in progress');
 
 socket.on('updateList', function(connectedPlayers){
-  // console.log(connectedPlayers);
+  console.log(connectedPlayers)
+  // currentPlayers.html(
+
+  // )
 });
 
 socket.on('get trade', function(trade) {
@@ -131,7 +139,7 @@ socket.on('trade busy', function(message) {
   tradeInProgressIndicator.html('Trade not in progress');
 });
 
-$('#playerDropDown').on('click', function() {
+playerDropDown.on('click', function() {
 
   playerOut.html($(this).val());
   gameListOut.html(tradeInfoOut.gameId.length + ' items');
@@ -166,8 +174,8 @@ $('#playerDropDown').on('click', function() {
   $(this).hide();
 });
 
-$('#clearOutTrade').on('click', function() {
-  $('#playerDropDown').show()
+clearOutTrade.on('click', function() {
+  playerDropDown.show()
   tradeInfoOut.gameId = [];
   tradeInfoOut.clearThis = 'out';
 
@@ -191,7 +199,7 @@ $('#clearOutTrade').on('click', function() {
   updateTradeableCards();
 });
 
-$('#clearIncTrade').on('click', function() {
+clearIncTrade.on('click', function() {
   var temp = tradeInfoIn.sentFromId;
   tradeInfoIn.sentFromId = tradeInfoIn.userId;
   tradeInfoIn.userId = temp;
@@ -323,14 +331,14 @@ function updatePlayerList() {
         });
       });
 
-      $('#playerTradeList').html('');
+      playerTradeList.html('');
       users.forEach(function(val) {
-        $('#playerTradeList').append('<option userid="' + val.id + '">' + val.username + '</option>');  
+        playerTradeList.append('<option userid="' + val.id + '">' + val.username + '</option>');  
       });
     }
   });
 };
 
 updateTradeableCards();
-updatePlayerList();
+// updatePlayerList();
 });
