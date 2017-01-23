@@ -294,7 +294,6 @@ function displayIncomingGames(gameIdArray) {
           '<h3>' + gameInfo.name + '</h3>' + 
           '</div>'
           )
-        });
       }
     });
   });  
