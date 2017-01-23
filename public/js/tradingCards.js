@@ -99,9 +99,9 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trade removed their offer');      
     }
     // tradeInfoOut.clearThis = null;
-    // tradeInfoIn.clearThis = null;
+    tradeInfoIn.clearThis = null;
     // tradeInfoOut.userId = null;
-    // tradeInfoIn.sentFromId = null;
+    tradeInfoIn.sentFromId = null;
     tradeInProgress = false;
     tradeInProgressIndicator.html('Trade not in progress');
     }
