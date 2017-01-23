@@ -45,14 +45,14 @@ socket.on('get trade', function(trade) {
   console.log('-------------')
    console.log('-------------')
   console.log('-------------')
-   console.log('-------------')
-  console.log('-------------')
    console.log('-------------') 
   console.log('incoming trade')
 
 
 
   console.log(JSON.stringify(trade));
+   console.log('-------------')
+  console.log('-------------')
 
   console.log('trade info in object')
   console.log('-------------')
