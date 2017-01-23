@@ -249,7 +249,7 @@ tradeWindowOut.droppable({
         id = parseInt(id);
 
     tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
-      return item !== isRequired;
+      return item !== id;
     });
 
     socket.emit('clientSenderA', tradeInfoOut);
