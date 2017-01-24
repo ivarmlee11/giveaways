@@ -86,13 +86,19 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trader cleared your trade offer');
       updateTradeableCards();
     } else if (trade.clearThis === 'in') {
+      tradeInfoOut.userId = null;
+      gameListOut.html('');
+      playerOut.html('');
+      tradingArea.html('');
+      gameListIn.html('');
+      playerIn.html('');
+      tradeWindowIn.html('');
+    } else {
      console.log('trade cleared out')
       gameListIn.html('');
       playerIn.html('');
       tradeWindowIn.html('');
       messageBox.html('The other trade removed their offer');      
-    } else if (trade.clearThis === 'both') {
-      
     }
     tradeInfoIn.clearThis = null;
     tradeInProgress = false;
