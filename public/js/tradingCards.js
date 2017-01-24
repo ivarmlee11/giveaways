@@ -85,15 +85,6 @@ socket.on('get trade', function(trade) {
       tradingArea.html('');
       messageBox.html('The other trader cleared your trade offer');
       updateTradeableCards();
-    } else if (trade.clearThis === 'both') {
-      console.log('dc event')
-      tradeInfoOut.userId = null;
-      gameListOut.html('');
-      playerOut.html('');
-      tradingArea.html('');
-      gameListIn.html('');
-      playerIn.html('');
-      tradeWindowIn.html('');
     } else {
      console.log('trade cleared out')
       gameListIn.html('');
@@ -105,6 +96,11 @@ socket.on('get trade', function(trade) {
     tradeInProgress = false;
     tradeInProgressIndicator.html('Trade not in progress');
     }
+});
+
+socket.on('disconnect clear', function(trade) {
+  console.log('other trader had dc d')
+  console.log(trade)
 });
 
 socket.on('trade busy', function(message) {
