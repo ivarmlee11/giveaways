@@ -86,6 +86,7 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trader cleared your trade offer');
       updateTradeableCards();
     } else if (trade.clearThis === 'both') {
+      console.log('dc event')
       tradeInfoOut.userId = null;
       gameListOut.html('');
       playerOut.html('');

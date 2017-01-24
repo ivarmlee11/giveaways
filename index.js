@@ -183,7 +183,6 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    console.log(tradeObject)
     console.log('d/c event')
     var temp = tradeObject.sentFromId;
 
@@ -193,12 +192,14 @@ io.on('connection', function(socket) {
     tradeObject.sentFromName = 'Came from clearing';
     tradeObject.clearThis = 'both';
 
+    console.log(tradeObject)
     if (temp) {
       var sendToSocket = clients.filter(function(obj) {
         return obj.id === temp;
       }),
 
       sendToSocket = sendToSocket[0].socketId;  
+  
       socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);  
       // tradeObject.clearThis = 'out';
       // socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);  
