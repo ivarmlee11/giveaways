@@ -198,7 +198,9 @@ io.on('connection', function(socket) {
         return obj.id === temp;
       }),
 
-      sendToSocket = sendToSocket[0].socketId;  
+      sendToSocket = sendToSocket[0].socketId; 
+      console.log(clients)
+      console.log(sendToSocket) 
       socket.broadcast.to(sendToSocket).emit('disconnect clear', tradeObject);
     }
 
