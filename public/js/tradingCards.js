@@ -227,10 +227,15 @@ acceptTrade.on('click', function() {
 tradeWindowOut.droppable({
   drop: function(event, ui) {
     var draggable = ui.draggable,
-        id = draggable.attr('gameid');
+        id = draggable.attr('gameid'),
+        id = parseInt(id);
 
-    // tradeInProgress = true;
+  
     tradeInfoOut.clearThis = null;
+
+    tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
+      return item !== id;
+    });
 
     tradeInfoOut.gameId.push(parseInt(id));
 
