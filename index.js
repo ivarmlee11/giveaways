@@ -199,7 +199,9 @@ io.on('connection', function(socket) {
       }),
 
       sendToSocket = sendToSocket[0].socketId;  
-      socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);   
+      socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);  
+      tradeObject.clearThis = 'out';
+      socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);  
     }
 
 
