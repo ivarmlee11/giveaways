@@ -80,6 +80,7 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade in progress'); 
   } else if (tradeInProgress &&  !trade.clearThis && (tradeInfoIn.userId === tradeInfoOut.sentFromId)) {
     acceptTrade.show();
+    
   }
    else if (trade.clearThis && (trade.sentFromId === (tradeInfoOut.userId || null))) {
     tradeInfoIn = trade;
