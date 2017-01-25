@@ -148,12 +148,15 @@ playerDropDown.on('click', function() {
   }
   $(this).hide();
     console.log('trade Info Out')
-  console.log(JSON.stringify(tradeInfoOut))
+  console.log(tradeInfoOut)
+  console.log('trade info in')
+  console.log(tradeInfoIn)
 
 });
 
 clearOutTrade.on('click', function() {
-  playerDropDown.show()
+  acceptTrade.hide();
+  playerDropDown.show();
   tradeInfoOut.gameId = [];
   tradeInfoOut.clearThis = 'out';
 
@@ -181,6 +184,7 @@ clearOutTrade.on('click', function() {
 });
 
 clearIncTrade.on('click', function() {
+  acceptTrade.hide();
   if(tradeInfoIn.sentFromId) {
     var temp = tradeInfoIn.sentFromId;
     tradeInfoIn.sentFromId = tradeInfoIn.userId;
@@ -227,7 +231,7 @@ acceptTrade.on('click', function() {
     }
 
   } else {
-    messageBox.html('Trades require that both parties propose a trade, even if they offer nothing');
+    messageBox.html('Trades require trthat both parties propose a trade, even if they offer nothing');
   };
 
 });
@@ -238,7 +242,6 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid'),
         id = parseInt(id);
 
-  
     tradeInfoOut.clearThis = null;
 
     tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
@@ -247,17 +250,12 @@ tradeWindowOut.droppable({
 
     tradeInfoOut.gameId.push(parseInt(id));
 
-
-
     gameListOut.html(tradeInfoOut.gameId.length + ' items');
 
     if (tradeInfoOut.sendTo && tradeInfoOut.userId) {
-
       socket.emit('clientSenderA', tradeInfoOut);
-
       messageBox.html('Proposal sent');
     } else {
-
       messageBox.html('To propose a trade you need a recipient');
     } 
   },
