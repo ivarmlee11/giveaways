@@ -37,6 +37,7 @@ var tradingArea = $('#tradingArea'),
 tradeInfoOut.sentFromId = sentFromId;
 tradeInfoOut.sentFromName = sentFromName;
 tradeInProgressIndicator.html('Trade not in progress');
+acceptTrade.hide();
 
 socket.on('updateList', function(connectedPlayers){
   currentPlayers.html('');
@@ -49,6 +50,7 @@ socket.on('updateList', function(connectedPlayers){
 });
 
 socket.on('get trade', function(trade) {
+  acceptTrade.hide();
   if (!tradeInProgress && !trade.clearThis) {
     console.log('trade made')
     tradeInProgress = true; 
@@ -68,6 +70,7 @@ socket.on('get trade', function(trade) {
     socket.emit('Trade in progress', message);
   } else if (tradeInProgress &&  !trade.clearThis && (trade.userId === tradeInfoOut.sentFromId)) {
     console.log('trade updated')
+    acceptTrade.show();
     tradeInfoIn = trade;
     tradeWindowIn.html('');
     displayIncomingGames(tradeInfoIn.gameId);
@@ -77,6 +80,7 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade in progress'); 
   } else if (trade.clearThis && (trade.sentFromId === (tradeInfoOut.userId || null))) {
     tradeInfoIn = trade;
+   
     if (trade.clearThis === 'in') {
       console.log('trade cleared in')
       tradeInfoOut.userId = null;
@@ -96,7 +100,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn.clearThis = null;
     tradeInProgress = false;
     tradeInProgressIndicator.html('Trade not in progress');
-    }
+  }
 });
 
 socket.on('disconnect clear', function(trade) {
@@ -209,7 +213,10 @@ clearIncTrade.on('click', function() {
 
 acceptTrade.on('click', function() {
   if (tradeInfoIn.sendTo && tradeInfoIn.userId && tradeInfoOut.sendTo && tradeInfoOut.userId) {
-    // tradeInProgress = false;
+    console.log('trade info in')
+    console.log(tradeInfoIn)
+    console.log('trade info out')
+    console.log(tradeInfoOut)
     if (otherTraderAcceptedOffer) {
       console.log('other player accepted offer');
 
