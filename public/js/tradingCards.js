@@ -80,6 +80,7 @@ socket.on('get trade', function(trade) {
     if (trade.clearThis === 'in') {
       console.log('trade cleared in')
       tradeInfoOut.userId = null;
+      playerDropDown.show();
       gameListOut.html('');
       playerOut.html('');
       tradingArea.html('');

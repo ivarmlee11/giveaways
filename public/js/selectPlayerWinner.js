@@ -151,18 +151,17 @@ var wheel = {
   ['#336FD1',
   '#D277C6',
   '#C4CCD3',
-  '#D4C70C',
   '#d56e49',
   '#3BD78E',
-  '#d8874d',
-  '#ECFF11',
+  '#FF0000',
+  '#550000',
   '#2F3BD9',
   '#550000',
-  '#BEFF45',
+  '#55AAFF',
   '#005500',
   '#d14c45',
   '#d58a49',
-  '#c43b33'],
+  '#AA007F'],
 
   segments : [],
 
@@ -733,11 +732,6 @@ function createGameWheel() {
     success: function(gameList) {
       var gameList = gameList;
 
-      if(gameList.length === 0) {
-        $('#gameDBWheel').hide();
-      } else {
-        $('#gameDBWheel').show();
-      }
       var games = [];
       gameWheel.segments = [];
       gameList.forEach(function(val) {
@@ -752,6 +746,11 @@ function createGameWheel() {
       gameDropDownList(gameWheel.segments);
       gameWheel.init(); 
       gameWheel.update();
+      if(gameList.length === 0) {
+        $('#gameDBWheel').hide();
+      } else {
+        $('#gameDBWheel').show();
+      }
     }
   });
 };

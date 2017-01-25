@@ -31,7 +31,15 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   var file = req.body.uploadGameData,
-    parsed = Baby.parseFiles(file),
+    config = {
+      complete: function(error) {
+        if(error){
+          res.send(error);
+          // req.flash('success', 'You added the game info incorrectly')
+        }
+      }
+    },
+    parsed = Baby.parseFiles(file[, config]),
     dataList = parsed.data,
     gameList = [];
 
