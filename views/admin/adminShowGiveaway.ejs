@@ -28,10 +28,10 @@
     </div>
 
     <div class="well text-center">
-      <button id="redrawWheel" class="btn btn-info">Refresh The Player Wheel</button>
-      <button id="redrawGameWheel" class="btn btn-info">Refresh The Game Wheel</button>
-      <button id="clearGame" class="btn btn-danger">Remove Game</button>
-      <div>
+      <div class="gameUi">
+        <button id="redrawWheel" class="btn btn-info">Refresh The Player Wheel</button>
+        <button id="redrawGameWheel" class="btn btn-info">Refresh The Game Wheel</button>
+        <button id="clearGame" class="btn btn-danger">Remove Game</button>
         <h4 class="text-center">Choose a game</h4>
         <select id="dropDown" class="selectpicker" data-size="5">
           <optgroup id="gameDropDown" label="Prize">
@@ -45,11 +45,11 @@
       <div class="nameSpace">
         <h1 id="game"></h1>
       </div>
-      <h1 call="text-center">Players</h1>
+      <h1 class="text-center">Players</h1>
       <div id="wheel">
         <canvas id="playerWheel" width="600" height="400"></canvas>
       </div>
-      <h1 call="text-center">Games</h1>
+      <h1 class="text-center gameUi">Games</h1>
       <div>
         <canvas id="gameWheel" width="800" height="400"></canvas>
       </div>

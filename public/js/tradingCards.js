@@ -147,7 +147,6 @@ playerDropDown.on('click', function() {
     tradeInProgressIndicator.html('Trade not in progress');
   }
   $(this).hide();
-  
   console.log('trade Info Out')
   console.log(tradeInfoOut)
   console.log('trade info in')

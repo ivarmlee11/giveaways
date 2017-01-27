@@ -749,8 +749,10 @@ function createGameWheel() {
         console.log(gameList)
         console.log(gameWheel.segments)
         $('#gameWheel').hide();
+        $('#gameUi').hide();
       } else {
         $('#gameWheel').show();
+        $('#gameUi').show();
       }
     }
   });
