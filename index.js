@@ -197,13 +197,12 @@ io.on('connection', function(socket) {
       var sendToSocket = clients.filter(function(obj) {
         return obj.id === temp;
       }),
-
-      if(sendToSocket.length) {
-        sendToSocket = sendToSocket[0].socketId; 
-        console.log(clients)
-        console.log(sendToSocket) 
-        socket.broadcast.to(sendToSocket).emit('disconnect clear', tradeObject);
-      }
+    }
+    if (sendToSocket.length) {
+      sendToSocket = sendToSocket[0].socketId; 
+      console.log(clients)
+      console.log(sendToSocket) 
+      socket.broadcast.to(sendToSocket).emit('disconnect clear', tradeObject);
     }
 
     clients = clients.filter(function(obj) {

@@ -93,7 +93,7 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trader cleared your trade offer');
       updateTradeableCards();
     } else {
-     console.log('trade cleared out')
+      console.log('trade cleared out')
       gameListIn.html('');
       playerIn.html('');
       tradeWindowIn.html('');
