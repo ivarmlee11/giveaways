@@ -208,7 +208,7 @@ io.on('connection', function(socket) {
       sendToSocket = sendToSocket[0].socketId; 
       console.log(clients)
       console.log(sendToSocket) 
-      socket.broadcast.to(sendToSocket).emit('disconnect clear', tradeObject);
+      socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);
     }
 
     clients = clients.filter(function(obj) {
