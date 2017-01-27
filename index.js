@@ -1,4 +1,4 @@
-var express = require('express')  ,
+var express = require('express'),
     app = express(),
     request = require('request'),
     morgan = require('morgan')('dev'),
