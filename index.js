@@ -58,7 +58,7 @@ app.set('view engine', 'ejs');
 
 app.use(ejsLayouts);
 
-app.use(morgan);
+app.use(morgan('combined'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
