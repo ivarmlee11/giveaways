@@ -186,6 +186,7 @@ io.on('connection', function(socket) {
     console.log('d/c event')
     var temp = tradeObject.sentFromId,
               sendToSocket;
+    console.log('sent from ' + temp)
 
     tradeObject.gameId = [];
     tradeObject.sentFromId = clientId;
