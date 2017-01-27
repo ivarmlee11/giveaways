@@ -61,5 +61,4 @@ router.post('/adminListRemove', ensureAuthenticated, modCheck, function(req, res
   }
 });
 
-
 module.exports = router;
