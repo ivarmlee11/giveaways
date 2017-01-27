@@ -210,6 +210,7 @@ io.on('connection', function(socket) {
       console.log(sendToSocket) 
       socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);
       tradeObject.clearThis = 'out';
+      console.log(tradeObject)
       socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);
     }
 
