@@ -42,7 +42,6 @@ Number.prototype.mod = function(n) {
   return ((this%n)+n)%n;
 };
 
-
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
   finished = false;
@@ -749,9 +748,9 @@ function createGameWheel() {
       if(gameList.length === 0) {
         console.log(gameList)
         console.log(gameWheel.segments)
-        $('#gameDBWheel').hide();
+        $('#gameWheel').hide();
       } else {
-        $('#gameDBWheel').show();
+        $('#gameWheel').show();
       }
     }
   });
