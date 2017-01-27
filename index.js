@@ -184,9 +184,13 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('d/c event')
-    var temp = tradeObject.sentFromId,
-              sendToSocket;
-    console.log('sent from ' + temp)
+    var sentFromId = tradeObject.sentFromId,
+        sendToId = tradeObject.userId,
+        sendToSocket;
+
+    console.log('sent from ' + sentFromId)
+    console.log('sent to ' + userId)
+    console.log('client id ' + clientId)
 
     tradeObject.gameId = [];
     tradeObject.sentFromId = clientId;
@@ -195,9 +199,9 @@ io.on('connection', function(socket) {
     tradeObject.clearThis = 'in';
 
     console.log(tradeObject)
-    if (temp) {
+    if (sentFromId) {
       sendToSocket = clients.filter(function(obj) {
-        return obj.id === temp;
+        return obj.id === userId;
       })
     }
     if (sendToSocket.length) {
