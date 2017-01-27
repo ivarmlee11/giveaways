@@ -41,7 +41,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
                 console.log(results)
               }
     },
-    parsed = Baby.parseFiles(file[config]),
+    parsed = Baby.parseFiles(file),
     dataList = parsed.data,
     gameList = [];
 
