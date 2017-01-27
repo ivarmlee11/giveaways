@@ -201,7 +201,7 @@ io.on('connection', function(socket) {
     console.log(tradeObject)
     if (sentFromId) {
       sendToSocket = clients.filter(function(obj) {
-        return obj.id === userId;
+        return obj.id === sentToId;
       })
     }
     if (sendToSocket.length) {
