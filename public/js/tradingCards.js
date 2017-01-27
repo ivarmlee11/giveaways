@@ -52,7 +52,7 @@ socket.on('updateList', function(connectedPlayers){
 socket.on('get trade', function(trade) {
   acceptTrade.hide();
   if (!tradeInProgress && !trade.clearThis) {
-    if (tradeInfoIn.userId === tradeInfoOut.sentFromId) {
+    if ((tradeInfoIn.userId === tradeInfoOut.sentFromId) || (tradeInfoOut.userId === tradeInfoIn.sentFromId)) {
       console.log('trade updated')
       acceptTrade.show();
     };
