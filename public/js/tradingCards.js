@@ -112,7 +112,6 @@ socket.on('get trade', function(trade) {
   }
 });
 
-
 // socket.on('disconnect clear', function(trade) {
 //   console.log('other trader had dc d')
 //   console.log(trade)
