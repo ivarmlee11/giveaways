@@ -30,9 +30,13 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   var file = req.body.uploadGameData,
-    config = {
+  config = {
       error: function(error, file) {
                 console.log(error)
+                console.log(file)
+              },
+      complete: function(file) {
+                console.log('done')
                 console.log(file)
               }
     },
