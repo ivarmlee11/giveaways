@@ -747,6 +747,8 @@ function createGameWheel() {
       gameWheel.init(); 
       gameWheel.update();
       if(gameList.length === 0) {
+        console.log(gameList)
+        console.log(gameWheel.segments)
         $('#gameDBWheel').hide();
       } else {
         $('#gameDBWheel').show();
