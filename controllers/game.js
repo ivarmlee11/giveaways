@@ -6,6 +6,7 @@ var express = require('express'),
     moment = require('moment-timezone'),
     flash = require('connect-flash'),
     Baby = require('babyparse');
+    
 
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
   db.game.findAll().then(function(games) {
