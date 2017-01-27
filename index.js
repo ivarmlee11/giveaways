@@ -184,7 +184,8 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('d/c event')
-    var temp = tradeObject.sentFromId;
+    var temp = tradeObject.sentFromId,
+              sendToSocket;
 
     tradeObject.gameId = [];
     tradeObject.sentFromId = clientId;
@@ -194,9 +195,9 @@ io.on('connection', function(socket) {
 
     console.log(tradeObject)
     if (temp) {
-      var sendToSocket = clients.filter(function(obj) {
+      sendToSocket = clients.filter(function(obj) {
         return obj.id === temp;
-      }),
+      })
     }
     if (sendToSocket.length) {
       sendToSocket = sendToSocket[0].socketId; 
