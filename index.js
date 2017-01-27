@@ -185,11 +185,11 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('d/c event')
     var sentFromId = tradeObject.sentFromId,
-        sendToId = tradeObject.userId,
+        sentToId = tradeObject.userId,
         sendToSocket;
 
     console.log('sent from ' + sentFromId)
-    console.log('sent to ' + sendToId)
+    console.log('sent to ' + sentToId)
     console.log('client id ' + clientId)
 
     tradeObject.gameId = [];
