@@ -189,7 +189,7 @@ io.on('connection', function(socket) {
         sendToSocket;
 
     console.log('sent from ' + sentFromId)
-    console.log('sent to ' + userId)
+    console.log('sent to ' + sendToId)
     console.log('client id ' + clientId)
 
     tradeObject.gameId = [];
