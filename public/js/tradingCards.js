@@ -118,6 +118,10 @@ socket.on('trade busy', function(message) {
 });
 
 playerDropDown.on('click', function() {
+  if (tradeInfoIn.userId === tradeInfoOut.sentFromId) {
+      console.log('trade updated')
+      acceptTrade.show();
+  };
 
   playerOut.html($(this).val());
   gameListOut.html(tradeInfoOut.gameId.length + ' items');

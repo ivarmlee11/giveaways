@@ -10,6 +10,7 @@
 <div class="container">
   <div class="col-md-12 text-center"> 
     <div class="well text-center">
+      <button id="redrawWheel" class="btn btn-info">Refresh The Player Wheel</button>
       <% if(giveaway.ended) { %>
         <button class="btn btn-info">Giveaway ended.</button>
       <% } %>
@@ -29,7 +30,6 @@
 
     <div class="well text-center">
       <div class="gameUi">
-        <button id="redrawWheel" class="btn btn-info">Refresh The Player Wheel</button>
         <button id="redrawGameWheel" class="btn btn-info">Refresh The Game Wheel</button>
         <button id="clearGame" class="btn btn-danger">Remove Game</button>
         <h4 class="text-center">Choose a game</h4>
