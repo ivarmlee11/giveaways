@@ -678,7 +678,6 @@ var gameWheel = {
     ctx.fillText(value.substr(0, 20), size-15, 0);
     ctx.restore();
   },
-  
 
   drawWheel : function() {
     var ctx = gameWheel.canvasContext,
