@@ -209,6 +209,8 @@ io.on('connection', function(socket) {
       console.log(clients)
       console.log(sendToSocket) 
       socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);
+      tradeObject.clearThis = 'out';
+      socket.broadcast.to(sendToSocket).emit('get trade', tradeObject);
     }
 
     clients = clients.filter(function(obj) {
