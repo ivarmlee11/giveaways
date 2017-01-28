@@ -40,6 +40,7 @@ tradeInProgressIndicator.html('Trade not in progress');
 acceptTrade.hide();
 
 socket.on('updateList', function(connectedPlayers){
+  console.log(connectedPlayers)
   currentPlayers.html('');
   playerTradeList.html('');
   var playerList = connectedPlayers;
@@ -105,7 +106,6 @@ socket.on('get trade', function(trade) {
       messageBox.html('The other trade removed their offer');    
     } else if (trade.clearThis === 'both') {
       playerDropDown.show();
-      updateTradeableCards();
       
       tradeInfoOut.userId = null;
       
@@ -115,6 +115,7 @@ socket.on('get trade', function(trade) {
       gameListOut.html('');
       playerOut.html('');
       tradingArea.html('');
+      updateTradeableCards();
     }
     tradeInfoIn.clearThis = null;
     tradeInProgress = false;
