@@ -142,9 +142,9 @@ playerDropDown.on('click', function() {
   tradeInProgress = true
   tradeInProgressIndicator.html('Trade in progress')
   
- if (tradeInfoIn.sentFromId === tradeInfoOut.userId) {
-  acceptTrade.show()
- }
+  if (tradeInfoIn.sentFromId === tradeInfoOut.userId) {
+    acceptTrade.show()
+  }
 
   if (!tradeInfoOut.gameId.length) {
     messageBox.html('No games sent')

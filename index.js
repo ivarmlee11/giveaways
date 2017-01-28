@@ -173,7 +173,7 @@ io.on('connection', function(socket) {
           return obj.id === id
         })
 
-    if(result.length) {
+    if(clientObj.length) {
       sendToSocket = clientObj[0].socketId
       socket.broadcast.to(sendToSocket).emit('trade busy', message.message)
     } else {
