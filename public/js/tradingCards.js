@@ -182,8 +182,11 @@ clearOutTrade.on('click', function() {
 
   gameListOut.html('')
   playerOut.html('')
+  gameListIn.html('')
+  playerIn.html('')
   tradingArea.html('')
   tradeWindowOut.html('')
+  tradeWindowIn.html('')
 
   updateTradeableCards()
 })
