@@ -114,7 +114,7 @@ socket.on('get trade', function(trade) {
 
 
 socket.on('accept offer', function(acceptObj) {
-  offerAccepted = acceptObj
+  
   console.log(offerAccepted)
 })
 
@@ -192,7 +192,6 @@ acceptTrade.on('click', function() {
   }
   if (tradeInfoOut.userId === tradeInfoIn.sentFromId) {
     socket.emit('accept offer', acceptObject)
-    messageBox.html('Trades mades')
   } else {
     messageBox.html('Trades require that both parties propose a trade, even if they offer nothing')
   }
