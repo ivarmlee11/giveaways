@@ -169,7 +169,7 @@ clearOutTrade.on('click', function() {
 
 
   if (tradeInfoOut.userId) {
-    socket.emit('trade', tradeInfoOut)
+    socket.emit('trade option', tradeInfoOut)
     tradeInProgress = false
     messageBox.html('Outgoing trade cleared')
     tradeInProgressIndicator.html('Trade not in progress')
