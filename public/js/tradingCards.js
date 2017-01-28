@@ -52,7 +52,7 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   acceptTrade.hide();
-  
+
   console.log('--------income traed------')
   console.log(tradeInfoIn)
   console.log('------outgoing trade----')
@@ -85,7 +85,7 @@ socket.on('get trade', function(trade) {
     gameListIn.html(tradeInfoIn.gameId.length + ' items');
     messageBox.html(tradeInfoIn.sentFromName + ' has updated the trade proposal');
     tradeInProgressIndicator.html('Trade in progress'); 
-  } else if (trade.clearThis && (trade.sentFromId === (tradeInfoOut.userId || null))) {
+  } else if (trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
     // tradeInfoIn = trade;
     console.log('trade cleared')
     playerDropDown.show();
@@ -181,10 +181,9 @@ clearOutTrade.on('click', function() {
 
   tradeInfoOut.sentFromName = null;
   tradeInfoOut.userId = null;
-    console.log(JSON.stringify(tradeInfoOut))
 
   updateTradeableCards();
-    console.log('trade Info Out')
+  console.log('trade Info Out')
   console.log(JSON.stringify(tradeInfoOut))
 });
 
