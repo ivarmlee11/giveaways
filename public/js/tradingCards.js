@@ -250,7 +250,7 @@ tradeWindowOut.droppable({
     }
   },
   activeClass: 'highlight',
-  hoverClass: 'highlight'
+  hoverClass: 'foundhome'
 })
 
 function displayIncomingGames(gameIdArray) {
