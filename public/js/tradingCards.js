@@ -104,7 +104,17 @@ socket.on('get trade', function(trade) {
 
       messageBox.html('The other trade removed their offer');    
     } else if (trade.clearThis === 'both') {
-
+      playerDropDown.show();
+      updateTradeableCards();
+      
+      tradeInfoOut.userId = null;
+      
+      gameListIn.html('');
+      playerIn.html('');
+      tradeWindowIn.html('');
+      gameListOut.html('');
+      playerOut.html('');
+      tradingArea.html('');
     }
     tradeInfoIn.clearThis = null;
     tradeInProgress = false;
