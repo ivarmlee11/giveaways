@@ -185,10 +185,10 @@ io.on('connection', function(socket) {
   socket.on('accept offer', function(acceptObj) {
     var acceptObJ = acceptObj,
          clientObj = clients.filter(function(obj) {
-          return obj.id === id
+          return obj.id === acceptObj.sentTo
         })
 
-    if(result.length) {
+    if(clientObj.length) {
       sendToSocket = clientObj[0].socketId
       socket.broadcast.to(sendToSocket).emit('accept offer', acceptObj)
     }
