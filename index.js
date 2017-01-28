@@ -192,7 +192,7 @@ io.on('connection', function(socket) {
          console.log(clientObj)
     if(clientObj.length) {
       sendToSocket = clientObj[0].socketId
-      socket.broadcast.to(sendToSocket).emit('accept offer', acceptObj)
+      socket.broadcast.to(sendToSocket).emit('accept offer confirmed', acceptObj)
     }
   
   })

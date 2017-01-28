@@ -113,7 +113,7 @@ socket.on('get trade', function(trade) {
 })
 
 
-socket.on('accept offer', function(acceptObj) {
+socket.on('accept offer confirmed', function(acceptObj) {
   offerAccepted = acceptObj
   console.log('offif eccedpted')
   messageBox.html('other play accepted offer')
