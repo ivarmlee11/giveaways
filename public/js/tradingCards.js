@@ -200,7 +200,7 @@ acceptTrade.on('click', function() {
     sendTo: tradeInfoOut.userId
   }
   if (tradeInfoOut.userId === tradeInfoIn.sentFromId) {
-    console.log('we good')
+    messageBox.html('Trade made!')
     socket.emit('accept offer', acceptObject)
   } else {
     messageBox.html('Trades require that both parties propose a trade, even if they offer nothing')
