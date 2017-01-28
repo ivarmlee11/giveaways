@@ -243,7 +243,9 @@ tradeWindowOut.droppable({
     } else {
       messageBox.html('Put your game in the trading area')
     }
-  }
+  },
+  activeClass: 'highlight',
+  hoverClass: 'highlight'
 })
 
 function displayIncomingGames(gameIdArray) {
