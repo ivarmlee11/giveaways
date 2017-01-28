@@ -103,6 +103,9 @@ socket.on('get trade', function(trade) {
     tradeInfoIn.userId = null;
     tradeInfoOut.userId = null;
     tradeInfoIn.clearThis = null;
+    tradeInfoOut.clearThis = null;
+    tradeInfoIn.sentFromId = null;
+    tradeInfoOut.sentFromId = null;
     tradeInProgress = false;
     tradeInProgressIndicator.html('Trade not in progress');
     messageBox.html('The other trade reset the trade');
