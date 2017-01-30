@@ -212,7 +212,7 @@ io.on('connection', function(socket) {
     console.log('sent from id ' + sentFromId)
 
     tradeObject.gameId = []
-    tradeObject.sentFromId = sentFromId
+    tradeObject.sentFromId = clientId
     tradeObject.sendTo = null
     tradeObject.sentFromName = 'Came from clearing'
     tradeObject.clearThis = 'in'
