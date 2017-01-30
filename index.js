@@ -125,6 +125,7 @@ client.on('chat', function(channel, userstate, message, self) {
 
 client.on('join', function (channel, username, self) {
   // Do your stuff.
+  
 })
 
 var clients = []
