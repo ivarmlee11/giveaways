@@ -39,7 +39,7 @@ tradeInProgressIndicator.html('Trade not in progress')
 acceptTrade.hide()
 
 socket.on('updateList', function(connectedPlayers){
-  console.log(connectedPlayers)
+  // console.log(connectedPlayers)
   currentPlayers.html('')
   playerTradeList.html('')
   var playerList = connectedPlayers

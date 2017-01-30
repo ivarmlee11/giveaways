@@ -185,10 +185,10 @@ io.on('connection', function(socket) {
          clientObj = clients.filter(function(obj) {
           return obj.id === acceptObj.sendTo
         })
-     console.log('accept offer')
-     console.log(acceptObj)
-     console.log(clientObj)
-     console.log(clients)
+     // console.log('accept offer')
+     // console.log(acceptObj)
+     // console.log(clientObj)
+     // console.log(clients)
     if(clientObj.length) {
       sendToSocket = clientObj[0].socketId
       socket.broadcast.to(sendToSocket).emit('accept offer confirmed', acceptObj)
@@ -198,7 +198,7 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('d/c event')
-    console.log(tradeObject)
+    // console.log(tradeObject)
 
     var sentToId = tradeObject.userId,
         sentFromId = tradeObject.sentFromId,
@@ -214,7 +214,7 @@ io.on('connection', function(socket) {
     tradeObject.sentFromName = 'Came from clearing'
     tradeObject.clearThis = 'in'
 
-    console.log(tradeObject)
+    // console.log(tradeObject)
 
     if (sentFromId) {
       sendToSocket = clients.filter(function(obj) {
@@ -223,9 +223,9 @@ io.on('connection', function(socket) {
     }
     if (sendToSocket.length) {
       sendToSocket = sendToSocket[0].socketId 
-      console.log(clients)
+      // console.log(clients)
 
-      console.log(sendToSocket) 
+      // console.log(sendToSocket) 
       socket.broadcast.to(sendToSocket).emit('get trade', tradeObject)
     }
 

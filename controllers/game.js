@@ -104,6 +104,7 @@ router.get('/winnerCard/', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/trade/', ensureAuthenticated, function(req, res) {
+  console.log('req.body')
   console.log(req.body)
 })
 
