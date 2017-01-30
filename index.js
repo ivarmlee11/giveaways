@@ -206,7 +206,6 @@ io.on('connection', function(socket) {
         sentFromId = tradeObject.sentFromId,
         sendToSocket
 
-
     console.log('sent to ' + sentToId)
     console.log('client id ' + clientId)
     console.log('sent from id ' + sentFromId)
@@ -226,7 +225,7 @@ io.on('connection', function(socket) {
     if (sendToSocket.length) {
       sendToSocket = sendToSocket[0].socketId 
       console.log(clients)
-      
+
       console.log(sendToSocket) 
       socket.broadcast.to(sendToSocket).emit('get trade', tradeObject)
     }
