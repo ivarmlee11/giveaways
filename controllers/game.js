@@ -110,7 +110,7 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
   var trade = req.body,
   gamesA = [],
   gamesB = [],
-  tradeA = trade.traderA,
+  traderA = trade.traderA,
   traderB = trade.traderB
 
   if(trade.gamesA) {
