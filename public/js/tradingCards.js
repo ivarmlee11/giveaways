@@ -132,7 +132,7 @@ socket.on('accept offer confirmed', function(acceptObj) {
     gamesA: tradeInfoIn.gameId,
     gamesB: tradeInfoOut.gameId
   },
-  url = '/game/trade'
+  url = '/game/trade/'
   $.ajax({
     url: url,
     type: 'POST',
