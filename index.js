@@ -183,11 +183,12 @@ io.on('connection', function(socket) {
   socket.on('accept offer', function(acceptObj) {
     var acceptObJ = acceptObj,
          clientObj = clients.filter(function(obj) {
-          return obj.id === acceptObj.sentTo
+          return obj.id === acceptObj.sendTo
         })
          console.log('hellos governasd')
          console.log(acceptObj)
          console.log(clientObj)
+         console.log(clients)
     if(clientObj.length) {
       sendToSocket = clientObj[0].socketId
       socket.broadcast.to(sendToSocket).emit('accept offer confirmed', acceptObj)
