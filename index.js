@@ -201,7 +201,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('d/c event')
     console.log(tradeObject)
-    var sentFromId = clientId,
+    var sentFromId = tradeObject.userId,
         sentToId = tradeObject.sentFromId,
         sendToSocket
 
@@ -210,7 +210,7 @@ io.on('connection', function(socket) {
     console.log('client id ' + clientId)
 
     tradeObject.gameId = []
-    tradeObject.sentFromId = clientId
+    tradeObject.sentFromId = sentFromId
     tradeObject.sendTo = null
     tradeObject.sentFromName = 'Came from clearing'
     tradeObject.clearThis = 'in'
