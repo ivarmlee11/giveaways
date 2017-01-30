@@ -177,10 +177,7 @@ io.on('connection', function(socket) {
     if(clientObj.length) {
       sendToSocket = clientObj[0].socketId
       socket.broadcast.to(sendToSocket).emit('trade busy', message.message)
-    } else {
-      console.log('that user isnt logged on')
     }
-    // else send message that player isnt online TODO
   })
 
   socket.on('accept offer', function(acceptObj) {
@@ -217,7 +214,7 @@ io.on('connection', function(socket) {
     tradeObject.clearThis = 'in'
 
     console.log(tradeObject)
-    
+
     if (sentFromId) {
       sendToSocket = clients.filter(function(obj) {
         return obj.id === sentToId
