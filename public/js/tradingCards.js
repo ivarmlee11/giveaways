@@ -71,7 +71,7 @@ socket.on('get trade', function(trade) {
       sentToId: trade.sentFromId
     }
     socket.emit('Trade in progress', message)
-  } else if (tradeInProgress &&  !trade.clearThis && (trade.sentFromId === tradeInfoIn.sentFromId)) {
+  } else if (tradeInProgress &&  !trade.clearThis && (trade.sentFromId === tradeInfoOut.userId)) {
     console.log('trade updated')
     acceptTrade.show()
     tradeInfoIn = trade
