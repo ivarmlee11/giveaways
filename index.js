@@ -168,7 +168,7 @@ io.on('connection', function(socket) {
     // else send message that player isnt online TODO
   })
 
-  socket.on('Trade in progress', function(message) {
+  socket.on('trade in progress', function(message) {
     var id = message.sentToId,
         clientObj = clients.filter(function(obj) {
           return obj.id === id
@@ -185,10 +185,10 @@ io.on('connection', function(socket) {
          clientObj = clients.filter(function(obj) {
           return obj.id === acceptObj.sendTo
         })
-         console.log('hellos governasd')
-         console.log(acceptObj)
-         console.log(clientObj)
-         console.log(clients)
+     console.log('accept offer')
+     console.log(acceptObj)
+     console.log(clientObj)
+     console.log(clients)
     if(clientObj.length) {
       sendToSocket = clientObj[0].socketId
       socket.broadcast.to(sendToSocket).emit('accept offer confirmed', acceptObj)

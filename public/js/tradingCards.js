@@ -71,7 +71,7 @@ socket.on('get trade', function(trade) {
       message: 'That trader has a trade in progress',
       sentToId: trade.sentFromId
     }
-    socket.emit('Trade in progress', message)
+    socket.emit('trade in progress', message)
   } else if (tradeInProgress &&  !trade.clearThis && (trade.sentFromId === tradeInfoOut.userId)) {
     console.log('trade updated')
     acceptTrade.show()
@@ -110,24 +110,36 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade not in progress')
     messageBox.html('The other trade reset the trade')
   }
-
   console.log('--------tradeInfo In------')
   console.log(tradeInfoIn)
   console.log('------ tradeinfo out----')
   console.log(tradeInfoOut)
-
-
 })
 
 
 socket.on('accept offer confirmed', function(acceptObj) {
-   = acceptObj
+  var offerAccepted = acceptObj
   messageBox.html('Other play accepted offer')
   console.log(offerAccepted)
   console.log(tradeInfoOut.gameId)
   console.log(offerAccepted.sentFromId)
   console.log(tradeInfoIn.gameId)
   console.log(offerAccepted.userId)
+  var dataObj = {
+    traderA: tradeInfoIn.sentFromId,
+    tradeB: tradeInfoIn.userId,
+    gamesA: tradeInfoIn.gameId,
+    gamesB: tradeInfoOut.gameId
+  },
+  url = '/game/trade'
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: dataObj,
+    success: function() {
+      location.reload()
+    }
+  })
 })
 
 socket.on('trade busy', function(message) {
@@ -139,11 +151,10 @@ socket.on('trade busy', function(message) {
 })
 
 playerDropDown.on('click', function() {
-
+  var userId = $('option:selected', this).attr('userid')
+  
   playerOut.html($(this).val())
   gameListOut.html(tradeInfoOut.gameId.length + ' items')
-  
-  var userId = $('option:selected', this).attr('userid')
   
   tradeInfoOut.sendTo = $(this).val()
   tradeInfoOut.userId = parseInt(userId)

@@ -5,28 +5,28 @@ var express = require('express'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash'),
-    Baby = require('babyparse');
+    Baby = require('babyparse')
 
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
   db.game.findAll().then(function(games) {
-    var games = games;
-    res.render('admin/gameData', {games: games});
-  });
-});
+    var games = games
+    res.render('admin/gameData', {games: games})
+  })
+})
 
 router.get('/gameDataOnly', ensureAuthenticated, modCheck, function(req, res) {
   db.game.findAll().then(function(games) {
-    var games = games;
-    res.send(games);
-  });
-});
+    var games = games
+    res.send(games)
+  })
+})
 
 router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
+  var id = req.params.idx
   db.game.findById(id).then(function(game) {
-    res.send(game);
-  });    
-});
+    res.send(game)
+  })    
+})
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   var file = req.body.uploadGameData,
@@ -43,7 +43,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     },
     parsed = Baby.parseFiles(file),
     dataList = parsed.data,
-    gameList = [];
+    gameList = []
 
   dataList.forEach(function(game) {
     gameList.push({
@@ -51,12 +51,12 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
       price: game[1],
       code: game[2],
       coderevealed: game[3]
-    });
-  });
+    })
+  })
 
   gameList.forEach(function(game) {
     if(game.coderevealed === undefined) {
-      return;
+      return
     } else {
       db.game.create({
         name: game.name,
@@ -64,17 +64,17 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
         code: game.code,
         coderevealed: game.coderevealed
       }).then(function(data) {
-      });
+      })
     }
-  });
-  req.flash('success', 'Games added.');
-  res.redirect('/game/gameData');
-});
+  })
+  req.flash('success', 'Games added.')
+  res.redirect('/game/gameData')
+})
 
 router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, res) {
   db.game.findById(req.body.gameId).then(function(game) {
     db.user.findById(req.body.userId).then(function(user) {
-      user.addGame(game);
+      user.addGame(game)
       db.game.update({
         owned: true
       }, {
@@ -82,25 +82,30 @@ router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, r
           id: req.body.gameId
         }
       }).then(function(game) {
-        res.send('Added to winner group with a game');
-      });
-    });
-  });  
-});
+        res.send('Added to winner group with a game')
+      })
+    })
+  })  
+})
 
 router.get('/winnerCard/', ensureAuthenticated, function(req, res) {
-  var id = req.user.id;
+  var id = req.user.id
   db.user.findById(id).then(function(user) {
     user.getGames().then(function(games) {
-      var games = games;
+      var games = games
       if(games.length === 0) {
-        games = [];
-        res.send(games);
+        games = []
+        res.send(games)
       } else {
-        res.send(games);
+        res.send(games)
       }
     })
-  });   
-});
+  })   
+})
 
-module.exports = router;
+router.post('/trade', ensureAuthenticated, function(req, res) {
+  console.log(req.dataObj)
+  console.log(req.data)
+})
+
+module.exports = router
