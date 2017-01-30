@@ -125,6 +125,7 @@ socket.on('accept offer confirmed', function(acceptObj) {
 
 socket.on('trade busy', function(message) {
   tradeInfoOut.userId = null
+  tradeInfo.sentFromId = null
   tradeInProgress = false
   messageBox.html(message)
   tradeInProgressIndicator.html('Trade not in progress')
