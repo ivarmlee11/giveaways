@@ -117,7 +117,6 @@ socket.on('get trade', function(trade) {
   console.log(tradeInfoOut)
 
 
-  
 })
 
 
