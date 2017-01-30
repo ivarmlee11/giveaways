@@ -51,10 +51,8 @@ socket.on('updateList', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   acceptTrade.hide()
-  console.log('--------tradeInfo In------')
-  console.log(tradeInfoIn)
-  console.log('------ tradeinfo out----')
-  console.log(tradeInfoOut)
+
+  console.log(trade)
 
   if (!tradeInProgress && !trade.clearThis) {
     console.log('trade made')
@@ -110,6 +108,11 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade not in progress')
     messageBox.html('The other trade reset the trade')
   }
+
+    console.log('--------tradeInfo In------')
+  console.log(tradeInfoIn)
+  console.log('------ tradeinfo out----')
+  console.log(tradeInfoOut)
 })
 
 
