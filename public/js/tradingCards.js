@@ -117,6 +117,7 @@ socket.on('get trade', function(trade) {
 })
 
 
+
 socket.on('accept offer confirmed', function(acceptObj) {
   var offerAccepted = acceptObj
   messageBox.html('Other play accepted offer')
