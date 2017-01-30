@@ -201,6 +201,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('d/c event')
     console.log(tradeObject)
+    
     var sentToId = tradeObject.userId,
         sentFromId = tradeObject.sentFromId,
         sendToSocket
