@@ -107,7 +107,45 @@ router.get('/winnerCard/', ensureAuthenticated, function(req, res) {
 router.post('/trade/', ensureAuthenticated, function(req, res) {
   console.log('req.body')
   console.log(req.body)
-  res.send('back')
+  var trade = req.body,
+  gamesA = [],
+  gamesB = [],
+  tradeA = trade.traderA,
+  traderB = trade.traderB
+
+  if(trade.gamesA) {
+    gamesA = trade.gamesA
+  }
+
+  if(trade.gamesB) {
+    gamesB = trade.gamesB
+  }
+
+  gamesA.forEach(function(gameTrade) {
+    db.game.update({
+      userId: traderA
+    }, {
+      where: {
+        id: gameTrade
+      }
+    }).then(function(game) {
+
+    })
+  })
+
+  gamesB.forEach(function(gameTrade) {
+    db.game.update({
+      userId: traderB
+    }, {
+      where: {
+        id: gameTrade
+      }
+    }).then(function(game) {
+
+    })
+  })
+
+  res.send('ok')
 })
 
 module.exports = router

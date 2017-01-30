@@ -119,21 +119,18 @@ socket.on('get trade', function(trade) {
 
 
 socket.on('accept offer confirmed', function(acceptObj) {
-  var offerAccepted = acceptObj
-  messageBox.html('Other play accepted offer')
-  // console.log(offerAccepted)
-  // console.log(tradeInfoOut.gameId)
-  // console.log(offerAccepted.sentFromId)
-  // console.log(tradeInfoIn.gameId)
-  // console.log(offerAccepted.userId)
-  var dataObj = {
+  var offerAccepted = acceptObj,
+  dataObj = {
     traderA: tradeInfoIn.sentFromId,
     tradeB: tradeInfoIn.userId,
     gamesA: tradeInfoIn.gameId,
     gamesB: tradeInfoOut.gameId
   },
   url = '/game/trade/'
+
+  
   console.log(dataObj)
+  
   $.ajax({
     url: url,
     type: 'POST',
@@ -142,6 +139,7 @@ socket.on('accept offer confirmed', function(acceptObj) {
       console.log('test')
     }
   })
+  messageBox.html('Other play accepted offer')
 })
 
 socket.on('trade busy', function(message) {
