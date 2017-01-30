@@ -217,6 +217,7 @@ io.on('connection', function(socket) {
     tradeObject.clearThis = 'in'
 
     console.log(tradeObject)
+    
     if (sentFromId) {
       sendToSocket = clients.filter(function(obj) {
         return obj.id === sentToId
