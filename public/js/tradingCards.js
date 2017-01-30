@@ -66,6 +66,7 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade in progress')
   } else if (tradeInProgress &&  (trade.sentFromId !== tradeInfoOut.userId)) {
     console.log('trade busy')
+    acceptTrade.show();
     var message = { 
       message: 'That trader has a trade in progress',
       sentToId: trade.sentFromId

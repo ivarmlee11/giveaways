@@ -125,7 +125,7 @@ client.on('chat', function(channel, userstate, message, self) {
 
 client.on('join', function (channel, username, self) {
   // Do your stuff.
-  
+
 })
 
 var clients = []
@@ -201,7 +201,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('d/c event')
     var sentFromId = clientId,
-        sentToId = tradeObject.userId,
+        sentToId = tradeObject.sentFromId,
         sendToSocket
 
     console.log('sent from ' + sentFromId)
