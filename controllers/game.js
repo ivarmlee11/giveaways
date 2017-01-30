@@ -106,6 +106,7 @@ router.get('/winnerCard/', ensureAuthenticated, function(req, res) {
 router.post('/trade', ensureAuthenticated, function(req, res) {
   console.log(req.dataObj)
   console.log(req.data)
+  console.log(req)
 })
 
 module.exports = router
