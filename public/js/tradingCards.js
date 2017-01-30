@@ -106,6 +106,7 @@ socket.on('get trade', function(trade) {
     tradeInfoIn.gameId = []
     tradeInfoOut.gameId = []
     tradeInProgress = false
+    
     tradeInProgressIndicator.html('Trade not in progress')
     messageBox.html('The other trade reset the trade')
   }
