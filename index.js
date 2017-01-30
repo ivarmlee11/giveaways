@@ -205,6 +205,7 @@ io.on('connection', function(socket) {
         sentFromId = tradeObject.sentFromId,
         sendToSocket
 
+
     console.log('sent to ' + sentToId)
     console.log('client id ' + clientId)
     console.log('sent from id ' + sentFromId)
