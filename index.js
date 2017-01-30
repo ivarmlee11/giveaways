@@ -221,7 +221,7 @@ io.on('connection', function(socket) {
         return obj.id === sentToId
       })
     }
-    if (sendToSocket.length) {
+    if (sendToSocket) {
       sendToSocket = sendToSocket[0].socketId 
       // console.log(clients)
 
