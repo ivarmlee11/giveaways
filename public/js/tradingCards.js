@@ -121,11 +121,13 @@ socket.on('get trade', function(trade) {
 
 
 socket.on('accept offer confirmed', function(acceptObj) {
-  offerAccepted = acceptObj
+   = acceptObj
   messageBox.html('Other play accepted offer')
   console.log(offerAccepted)
   console.log(tradeInfoOut.gameId)
+  console.log(offerAccepted.sentFromId)
   console.log(tradeInfoIn.gameId)
+  console.log(offerAccepted.userId)
 })
 
 socket.on('trade busy', function(message) {
