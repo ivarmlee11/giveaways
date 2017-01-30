@@ -202,7 +202,7 @@ io.on('connection', function(socket) {
     console.log('d/c event')
     console.log(tradeObject)
     var sentFromId = clientId,
-        sentToId = tradeObject.userId,
+        sentToId = tradeObject.sentFromId,
         sendToSocket
 
     console.log('sent from ' + sentFromId)
