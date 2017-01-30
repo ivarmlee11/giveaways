@@ -52,10 +52,10 @@ socket.on('updateList', function(connectedPlayers){
 socket.on('get trade', function(trade) {
   acceptTrade.hide()
   console.log('trade')
-  console.log(trade)
+  // console.log(trade)
 
   if (!tradeInProgress && !trade.clearThis) {
-    console.log('trade made')
+    // console.log('trade made')
     tradeInProgress = true 
     tradeInfoIn = trade
     tradeWindowIn.html('')
@@ -110,10 +110,10 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade not in progress')
     messageBox.html('The other trade reset the trade')
   }
-  console.log('--------tradeInfo In------')
-  console.log(tradeInfoIn)
-  console.log('------ tradeinfo out----')
-  console.log(tradeInfoOut)
+  // console.log('--------tradeInfo In------')
+  // console.log(tradeInfoIn)
+  // console.log('------ tradeinfo out----')
+  // console.log(tradeInfoOut)
 })
 
 
@@ -121,11 +121,11 @@ socket.on('get trade', function(trade) {
 socket.on('accept offer confirmed', function(acceptObj) {
   var offerAccepted = acceptObj
   messageBox.html('Other play accepted offer')
-  console.log(offerAccepted)
-  console.log(tradeInfoOut.gameId)
-  console.log(offerAccepted.sentFromId)
-  console.log(tradeInfoIn.gameId)
-  console.log(offerAccepted.userId)
+  // console.log(offerAccepted)
+  // console.log(tradeInfoOut.gameId)
+  // console.log(offerAccepted.sentFromId)
+  // console.log(tradeInfoIn.gameId)
+  // console.log(offerAccepted.userId)
   var dataObj = {
     traderA: tradeInfoIn.sentFromId,
     tradeB: tradeInfoIn.userId,
