@@ -133,7 +133,7 @@ socket.on('accept offer confirmed', function(acceptObj) {
     gamesB: tradeInfoOut.gameId
   },
   url = '/game/trade/'
-  conssole.log(dataObj)
+  console.log(dataObj)
   $.ajax({
     url: url,
     type: 'POST',
