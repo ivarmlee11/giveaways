@@ -128,15 +128,16 @@ socket.on('accept offer confirmed', function(acceptObj) {
   },
   url = '/game/trade/'
 
-  
+
   console.log(dataObj)
-  
+
   $.ajax({
     url: url,
     type: 'POST',
     data: dataObj,
     success: function() {
       console.log('test')
+      location.reload();
     }
   })
   messageBox.html('Other play accepted offer')

@@ -123,7 +123,7 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
 
   gamesA.forEach(function(gameTrade) {
     db.game.update({
-      userId: traderA
+      userId: traderB
     }, {
       where: {
         id: gameTrade
@@ -135,7 +135,7 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
 
   gamesB.forEach(function(gameTrade) {
     db.game.update({
-      userId: traderB
+      userId: traderA
     }, {
       where: {
         id: gameTrade
