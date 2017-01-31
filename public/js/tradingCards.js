@@ -328,11 +328,13 @@ function updateOwnedCards() {
     type: 'GET',
     success: function(cardList) {
       cardList.forEach(function(val) {
-        ownedGames.append('<div class="cardsStatic">' + 
-          '<h3>' + val.name + '</h3>' + 
-          '<h5>' + val.code + '</h5>' +
-          '</div>'
-        )
+        if(val.coderevealed) {
+          ownedGames.append('<div class="cardsStatic">' + 
+            '<h3>' + val.name + '</h3>' + 
+            '<h5>' + val.code + '</h5>' +
+            '</div>'
+          )
+        }
       })
     }
   })
