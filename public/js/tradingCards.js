@@ -122,7 +122,7 @@ socket.on('accept offer confirmed', function(acceptObj) {
   var offerAccepted = acceptObj,
   dataObj = {
     traderA: tradeInfoIn.sentFromId,
-    tradeB: tradeInfoIn.userId,
+    traderB: tradeInfoIn.userId,
     gamesA: tradeInfoIn.gameId,
     gamesB: tradeInfoOut.gameId
   },
@@ -261,7 +261,6 @@ tradeWindowOut.droppable({
       return item !== id
     })
 
-
     socket.emit('trade', tradeInfoOut)
     
     gameListOut.html(tradeInfoOut.gameId.length + ' items')
@@ -278,6 +277,7 @@ tradeWindowOut.droppable({
 
 function displayIncomingGames(gameIdArray) {
   var gameIdArray = gameIdArray
+
   tradeWindowIn.html('')
 
   gameIdArray.forEach(function(val) {
@@ -306,6 +306,7 @@ function updateTradeableCards() {
       cardList.forEach(function(val) {
         tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
           '<h3>' + val.name + '</h3>' + 
+          '<h5><a href="/game/claimed/"' + val.id + '">Claim this</a></h5>' +
           '</div>'
         )
       })

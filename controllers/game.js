@@ -128,8 +128,7 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
       where: {
         id: gameTrade
       }
-    }).then(function(game) {
-
+    }).then(function() {
     })
   })
 
@@ -140,12 +139,26 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
       where: {
         id: gameTrade
       }
-    }).then(function(game) {
-
+    }).then(function() {
     })
   })
 
   res.send('ok')
+})
+
+router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
+  var gameId = req.params.idx
+
+  db.game.update({
+    coderevealed: true
+  }, {
+    where: {
+      id: gameId
+    }
+  }).then(function(game) {
+    res.send('ok')
+  })
+ 
 })
 
 module.exports = router
