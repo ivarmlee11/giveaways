@@ -307,7 +307,7 @@ function updateTradeableCards() {
       cardList.forEach(function(val) {
         tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
           '<h3>' + val.name + '</h3>' + 
-          '<h5><a href="/game/claimed/"' + val.id + '">Claim this</a></h5>' +
+          '<h5><a href="/game/claimed/' + val.id + '">Claim this</a></h5>' +
           '</div>'
         )
       })
