@@ -143,7 +143,7 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
     })
   })
 
-  res.send('ok')
+  res.send('okback')
 })
 
 router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
@@ -156,9 +156,9 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
       id: gameId
     }
   }).then(function(game) {
-    res.send('ok')
   })
  
+  res.send('back')
 })
 
 module.exports = router
