@@ -23,6 +23,7 @@ var tradingArea = $('#tradingArea'),
     playerDropDown = $('#playerDropDown'),
     clearOutTrade = $('#clearOutTrade'),
     playerTradeList = $('#playerTradeList'),
+    ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
@@ -318,5 +319,23 @@ function updateTradeableCards() {
   })
 }
 
+function updateOwnedCards() {
+  var url = '/game/winnerCard/'
+   $.ajax({
+    url: url,
+    type: 'GET',
+    success: function(cardList) {
+      cardList.forEach(function(val) {
+        ownedGames.append('<div class="cardsStatic">' + 
+          '<h3>' + val.name + '</h3>' + 
+          '<h5>' + val.code + '</h5>' +
+          '</div>'
+        )
+      })
+    }
+  })
+}
+
 updateTradeableCards()
+updateOwnedCards()
 })
