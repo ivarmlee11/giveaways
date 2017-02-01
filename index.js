@@ -148,7 +148,7 @@ io.on('connection', function(socket) {
     clientName: clientName
   })
 
-  io.emit('updateList', clients)
+  io.emit('update players', clients)
 
   socket.on('trade', function(tradeObj) {
 

@@ -39,7 +39,7 @@ tradeInfoOut.sentFromName = sentFromName
 tradeInProgressIndicator.html('Trade not in progress')
 acceptTrade.hide()
 
-socket.on('updateList', function(connectedPlayers){
+socket.on('update players', function(connectedPlayers){
   // console.log(connectedPlayers)
   currentPlayers.html('')
   playerTradeList.html('')
@@ -308,7 +308,7 @@ function updateTradeableCards() {
         if(!val.coderevealed) {
           tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
           '<h3>' + val.name + '</h3>' + 
-          '<h5><a href="/game/claimed/' + val.id + '">Claim this</a></h5>' +
+          '<h5><a href="/game/claimed/' + val.id + '">Reveal Code</a></h5>' +
           '</div>'
         )
         }
