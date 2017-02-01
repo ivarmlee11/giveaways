@@ -68,7 +68,8 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
       })
     }
   })
-  req.flash('success', 'Games added.')
+  req.flash('success', '  req.flash('success', 'Games added.')
+Games added.')
   res.redirect('/game/gameData')
 })
 
@@ -143,7 +144,8 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
     })
   })
 
-  res.send('okback')
+  req.flash('success', 'Games traded.')
+  res.redirect('back')
 })
 
 router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
@@ -157,7 +159,8 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
     }
   }).then(function(game) {
   })
- 
+
+  req.flash('success', 'Code revealed. You now own this game.') 
   res.send('back')
 })
 
