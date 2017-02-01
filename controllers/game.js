@@ -159,7 +159,7 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
   }).then(function(game) {
   })
 
-  req.flash('success', 'Code revealed. You now own this game) 
+  req.flash('success', 'Code revealed. You now own this game') 
   res.send('back')
 })
 
