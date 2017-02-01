@@ -68,8 +68,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
       })
     }
   })
-  req.flash('success', '  req.flash('success', 'Games added.')
-Games added.')
+  req.flash('success', 'Games added.')
   res.redirect('/game/gameData')
 })
 
@@ -160,7 +159,7 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
   }).then(function(game) {
   })
 
-  req.flash('success', 'Code revealed. You now own this game.') 
+  req.flash('success', 'Code revealed. You now own this game) 
   res.send('back')
 })
 
