@@ -53,6 +53,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   gameList = []
 
   console.log(file)
+  console.log(dataList)
 
   dataList.forEach(function(game) {
     gameList.push({
