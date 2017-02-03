@@ -31,17 +31,17 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
   var file = req.body.uploadGameData,
-  config = {
-      error: function(error, file) {
-                console.log(error)
-                console.log(file)
-              },
-      complete: function(results, file) {
-                console.log('done')
-                console.log(file)
-                console.log(results)
-              }
-    },
+  // config = {
+  //     error: function(error, file) {
+  //               console.log(error)
+  //               console.log(file)
+  //             },
+  //     complete: function(results, file) {
+  //               console.log('done')
+  //               console.log(file)
+  //               console.log(results)
+  //             }
+  //   },
     parsed = Baby.parseFiles(file),
     dataList = parsed.data,
     gameList = []
@@ -61,9 +61,11 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     } else {
       db.game.create({
         name: game.name,
-        price: game.price,
         code: game.code,
-        coderevealed: game.coderevealed
+        price: game.price,
+        coderevealed: game.coderevealed,
+        owned: null,
+        userId: null
       }).then(function(data) {
       })
     }
@@ -160,7 +162,7 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
   })
 
   req.flash('success', 'Code revealed. You now own this game') 
-  res.send('back')
+  res.redirect('back')
 })
 
 module.exports = router
