@@ -28,5 +28,5 @@ $(this).parse({
     console.log(file)
   }
 });
-
+});
 })
