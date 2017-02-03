@@ -18,6 +18,6 @@ form.on('submit', function(e) {
     success: function() {
     }
   })
-
+})
 
 })
