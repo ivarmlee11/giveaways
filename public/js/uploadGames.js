@@ -6,9 +6,10 @@ var form = $('#uploadForm'),
 
 form.on('submit', function(e) {
   e.preventDefault();
-  var file = uploadGameData.files[0],
+  var file = uploadGameData.files,
       formData = new FormData()
 
+      console.log(file)
   formData.append(uploadGameData, file, file.name)
 
   $.ajax({
