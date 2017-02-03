@@ -30,11 +30,12 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
+  console.log(typeof(req.body.uploadGameData))
+  console.log(req.body.uploadGameData)
   console.log(req.body)
   console.log('req.body')
   var file = req.body.uploadGameData,
   parsed = Baby.parseFiles(file, {
-    download: true,
     error: function(error, file) {
               if(error) {
                 console.log(error)
