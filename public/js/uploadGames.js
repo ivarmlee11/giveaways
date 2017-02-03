@@ -4,21 +4,22 @@ var form = $('#uploadForm'),
     uploadGameData = $('#uploadGameData'),
     uploadButton = $('#uploadButton')
 
-form.on('submit', function(e) {
-  e.preventDefault();
-  var file = uploadGameData.files,
-      formData = new FormData()
+form.submit(function(){
 
-      console.log(file)
-  formData.append(uploadGameData, file, file.name)
+var formData = new FormData($(this)[0]);
 
-  $.ajax({
+$.ajax({
     url: '/game/uploadGameData',
     type: 'POST',
     data: formData,
-    success: function() {
-    }
-  })
-})
+    async: false,
+    success: function (data) {
+    },
+    cache: false,
+    contentType: false,
+    processData: false
+});
+
+});
 
 })
