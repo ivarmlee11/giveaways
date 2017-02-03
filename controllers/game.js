@@ -76,7 +76,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   res.redirect('/game/gameData')
 })
 
-
 router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, res) {
   db.game.findById(req.body.gameId).then(function(game) {
     db.user.findById(req.body.userId).then(function(user) {
