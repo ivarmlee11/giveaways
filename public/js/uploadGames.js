@@ -8,7 +8,7 @@ form.submit(function(e){
 
 e.preventDefault();
 
-var formData = new FormData($(this)[0]);
+var formData = new FormData(form[0]);
 console.log(formData)
 // $.ajax({
 //     url: '/game/uploadGameData',
