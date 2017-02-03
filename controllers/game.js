@@ -6,7 +6,8 @@ var express = require('express'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash'),
-    Baby = require('babyparse')
+    Baby = require('babyparse'),
+    fs = require('fs')
 
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
   db.game.findAll().then(function(games) {
@@ -34,7 +35,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   console.log(req.body.uploadGameData)
   console.log(req.body)
   console.log('req.body')
-  
+
   var file = req.body.uploadGameData,
   parsed = Baby.parseFiles(file, {
     error: function(error, file) {
