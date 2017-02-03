@@ -8,7 +8,7 @@ form.submit(function(e){
 
 e.preventDefault();
 
-Papa.parse(uploadGameData.files[0], {
+Papa.parse(form.files[0], {
   complete: function(results) {
     console.log(results);
   }

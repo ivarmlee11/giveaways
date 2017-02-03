@@ -34,6 +34,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   console.log(req.body.uploadGameData)
   console.log(req.body)
   console.log('req.body')
+  
   var file = req.body.uploadGameData,
   parsed = Baby.parseFiles(file, {
     error: function(error, file) {
