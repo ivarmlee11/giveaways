@@ -30,6 +30,8 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
+  console.log(req.body)
+  console.log('req.body')
   var file = req.body.uploadGameData,
   parsed = Baby.parseFiles(file, {
     error: function(error, file) {
@@ -47,7 +49,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   dataList = parsed.data,
   gameList = []
 
-  console.log(file)
 
   dataList.forEach(function(game) {
     gameList.push({
