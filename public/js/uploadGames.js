@@ -4,7 +4,9 @@ var form = $('#uploadForm'),
     uploadGameData = $('#uploadGameData'),
     uploadButton = $('#uploadButton')
 
-form.submit(function(){
+form.submit(function(e){
+
+e.preventDefault();
 
 var formData = new FormData($(this)[0]);
 console.log(formData)
