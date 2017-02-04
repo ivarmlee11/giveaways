@@ -32,7 +32,7 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
 
 
-  var file = req.body
+  var file = req.body.data
 
   console.log(file)
 
