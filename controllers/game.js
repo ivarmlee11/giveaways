@@ -36,7 +36,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   // console.log(req.body)
   // console.log('req.body')
 
-  console.log(req.data)
+  console.log(req)
   var file = req.data,
   parsed = Baby.parseFiles(file, {
     error: function(error, file) {
@@ -54,8 +54,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
   dataList = parsed.data,
   gameList = []
 
-  console.log(file)
-  console.log(dataList)
 
   dataList.forEach(function(game) {
     gameList.push({
