@@ -46,21 +46,21 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     })
   })
 
-  // gameList.forEach(function(game) {
-  //   if(game.coderevealed === undefined) {
-  //     return
-  //   } else {
-  //     db.game.create({
-  //       name: game.name,
-  //       code: game.code,
-  //       price: game.price,
-  //       coderevealed: game.coderevealed,
-  //       owned: null,
-  //       userId: null
-  //     }).then(function(data) {
-  //     })
-  //   }
-  // })
+  gameList.forEach(function(game) {
+    if(game.coderevealed === undefined) {
+      return
+    } else {
+      db.game.create({
+        name: game.name,
+        code: game.code,
+        price: game.price,
+        coderevealed: game.coderevealed,
+        owned: null,
+        userId: null
+      }).then(function(data) {
+      })
+    }
+  })
   req.flash('success', 'Games added.')
   res.redirect('/game/gameData')
 })
