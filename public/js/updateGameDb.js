@@ -5,10 +5,9 @@ $(function() {
 var gameTable = $('#gameTable'),
     updateGames = update()
 
-$("#csv-file").change(updateGames)
-update();
+$("#csv-file").on('change', updateGames)
 
-
+update()
 
 function update() {
   $.ajax({
