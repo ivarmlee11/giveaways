@@ -32,25 +32,12 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
 
-  console.log(req.body)
 
-  var file = req.data,
-  parsed = Baby.parseFiles(file, {
-    error: function(error, file) {
-              if(error) {
-                console.log(error)
-              }
-            },
-    complete: function(results, file) {
-              console.log('done parsing file')
-              console.log(file)
-              console.log(results)
-            }
-  
-  }),
+  var file = JSON.parse(req.body),
   dataList = parsed.data,
   gameList = []
 
+  console.log(file)
 
   dataList.forEach(function(game) {
     gameList.push({
