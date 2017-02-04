@@ -5,8 +5,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     db = require('../models'),
     moment = require('moment-timezone'),
-    flash = require('connect-flash'),
-    fs = require('fs')
+    flash = require('connect-flash')
 
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
   db.game.findAll().then(function(games) {
@@ -30,7 +29,6 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
-
 
   var file = req.body.data,
   gameList = []
