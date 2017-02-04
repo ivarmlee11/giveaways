@@ -2,10 +2,12 @@
 
 $(function() {
 
-var gameTable = $('#gameTable'),
-    updateGames = update()
+var gameTable = $('#gameTable')
 
-$("#csv-file").on('change', updateGames)
+$("#csv-file").on('change', function() {
+  console.log('change')
+  update()
+})
 
 update()
 
