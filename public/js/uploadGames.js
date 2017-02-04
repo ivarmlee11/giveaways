@@ -16,6 +16,7 @@ function sendData(dataset) {
     type: 'POST',
     data: dataset,
     success: function() {
+      $('#message').html('File uploaded. Check your game database.')
     }
   })
 }
