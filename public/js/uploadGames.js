@@ -4,7 +4,9 @@ function handleFileSelect(evt) {
   }    
   Papa.parse(evt.target.files[0], {
     error: function (error) {
-      $('#message').html('Make sure your csv is in this format... game name,$,steam code,false')
+      if(error) {
+        $('#message').html('Make sure your csv is in this format... game name,$,steam code,false')
+      }
     },
     complete: function (results) {
       sendData(results)
