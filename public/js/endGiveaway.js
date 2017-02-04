@@ -1,20 +1,20 @@
 $(function() {
   
-var url = window.location.href;
+var url = window.location.href
 
-url = url.split('/');
+url = url.split('/')
 
-var idx = url[url.length -1];
+var idx = url[url.length -1]
 
 $('#endGiveaway').on('click', function() {
-  var url = '/giveaway/adminListEndGiveaway/' + idx;
+  var url = '/giveaway/adminListEndGiveaway/' + idx
   $.ajax({
     url: url,
     type: 'GET',
     success: function(data) {
-      $('#endGiveaway').text('Giveaway ended.');
+      $('#endGiveaway').text('Giveaway ended.')
     }
-  });
-});
+  })
+})
 
-});
+})
