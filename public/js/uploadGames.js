@@ -10,6 +10,7 @@ function handleFileSelect(evt) {
     },
     complete: function (results) {
       sendData(results)
+      $('#message').html('File uploaded. Check your game database.')
     }
   })
 }
@@ -21,7 +22,6 @@ function sendData(dataset) {
     type: 'POST',
     data: dataset,
     success: function() {
-      $('#message').html('File uploaded. Check your game database.')
     }
   })
 }
