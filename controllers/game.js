@@ -6,7 +6,6 @@ var express = require('express'),
     db = require('../models'),
     moment = require('moment-timezone'),
     flash = require('connect-flash'),
-    Baby = require('babyparse'),
     fs = require('fs')
 
 router.get('/gameData', ensureAuthenticated, modCheck, function(req, res) {
@@ -33,7 +32,7 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
 
 
-  var file = JSON.parse(req.body),
+  var file = req.body,
   dataList = parsed.data,
   gameList = []
 
