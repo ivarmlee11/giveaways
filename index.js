@@ -288,6 +288,14 @@ app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
   })
 })
 
+app.get('/playerData/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx
+  db.user.findById(id).then(function(user) {
+    var user = user
+    res.send(user)
+  })
+})
+
 app.get('/getContestWinners/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
   db.giveaway.findById(id).then(function(giveaway) {

@@ -21,19 +21,32 @@ function update() {
 
       gameTable.append(
         '<thead>' + 
-        '<tr><th>Game Name</th><th>Price Range</th><th>Code</th><th>Owned</th></tr>' +
+        '<tr><th>Game Name</th><th>Owned</th></tr>' +
         '<tbody id="tBody">' +
         '</tbody>' + 
         '</thead>' 
       )
 
       data.forEach(function(val) {
+        var ownedId,
+            name
+        if(val.owned) {
+          ownedId = val.owned
+          var url = 'playerData/' + ownedId
+          $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+              name = data.name
+            }
+          })
+        } else {
+          ownedId = 'No'
+        }
         $('#tBody').append(
           '<tr>' +
           '<td>' + val.name + '</td>' + 
-          '<td>' + val.price + '</td>' + 
-          '<td>' + val.code + '</td>' + 
-          '<td>' + val.owned + '</td>' + 
+          '<td>' + name + '</td>' + 
           '</tr>'
         )
       })
