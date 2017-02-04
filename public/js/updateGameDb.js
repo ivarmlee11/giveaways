@@ -15,14 +15,31 @@ function update() {
     url: '/game/gameDataOnly',
     type: 'GET',
     success: function(data) {
-      console.log(data)
       gameTable.html('')
+      
+      var data = data;
+
       gameTable.append(
-        '<thead><tr><th>Game Name</th><th>Price Range</th><th>Code</th><th>Owned</th></thead>'
+        '<thead>' + 
+        '<tr><th>Game Name</th><th>Price Range</th><th>Code</th><th>Owned</th></tr>' +
+        '<tbody id="tBody">' +
+        '</tbody>' + 
+        '</thead>' 
       )
+
+      data.forEach(function(val) {
+        $('#tBody').append(
+          '<tr>' +
+          '<td>' + val.name + '</td>' + 
+          '<td>' + val.price + '</td>' + 
+          '<td>' + val.code + '</td>' + 
+          '<td>' + val.owned + '</td>' + 
+          '</tr>'
+        )
+      })
     }
   })
 }
 
-
+  
 })
