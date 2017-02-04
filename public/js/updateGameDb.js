@@ -37,8 +37,8 @@ function update() {
             url: url,
             type: 'GET',
             success: function(data) {
-              console.log(data)
               name = data.username
+              console.log(name)
             }
           })
         } else {
