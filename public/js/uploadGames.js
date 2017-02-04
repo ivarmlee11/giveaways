@@ -8,9 +8,8 @@ form.submit(function(e){
 
 e.preventDefault();
 var request = new FormData();                   
-$.each(context.prototype.fileData, function(i, obj) { request.append(i, obj.value.files[0]); });    
-request.append('action', 'upload');
-request.append('id', response.obj.id);
+
+console.log(this.val())
 $.ajax({
 
     type        : 'POST',
