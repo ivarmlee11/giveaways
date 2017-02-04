@@ -1,3 +1,15 @@
+
+
+$(function() {
+
+var gameTable = $('#gameTable'),
+    updateGames = update()
+
+$("#csv-file").change(updateGames)
+update();
+
+
+
 function update() {
   $.ajax({
     url: '/game/gameDataOnly',
@@ -12,11 +24,5 @@ function update() {
   })
 }
 
-$(function() {
 
-var gameTable = $('#gameTable'),
-    updateGames = update()
-    
-$("#csv-file").change(updateGames)
-update();
 })
