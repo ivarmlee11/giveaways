@@ -31,17 +31,18 @@ function update() {
         var ownedId,
             name
         if(val.owned) {
-          ownedId = val.owned
+          ownedId = val.userId
           var url = 'playerData/' + ownedId
           $.ajax({
             url: url,
             type: 'GET',
             success: function(data) {
+              console.log(data)
               name = data.name
             }
           })
         } else {
-          ownedId = 'No'
+          name = 'No'
         }
         $('#tBody').append(
           '<tr>' +
