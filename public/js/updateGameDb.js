@@ -38,7 +38,7 @@ function update() {
             type: 'GET',
             success: function(data) {
               console.log(data)
-              name = data.name
+              name = data.username
             }
           })
         } else {
