@@ -4,7 +4,7 @@ $(function() {
 
 var gameTable = $('#gameTable')
 
-$("#csv-file").on('submit', function() {
+$("#csv-file").on('change', function() {
   console.log('submit')
   update()
 })
