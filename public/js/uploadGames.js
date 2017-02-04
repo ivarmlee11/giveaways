@@ -11,7 +11,6 @@ function handleFileSelect(evt) {
 
 function sendData(dataset) {
   // render code here...
-  console.log(dataset)
   $.ajax({
     url: '/game/uploadGameData',
     type: 'POST',
