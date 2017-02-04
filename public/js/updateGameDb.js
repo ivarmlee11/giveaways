@@ -6,7 +6,10 @@ var gameTable = $('#gameTable')
 
 $("#csv-file").on('change', function() {
   console.log('submit')
-  setTimeout(function(){ update() }, 3000);
+  setTimeout(function(){
+    update()
+    console.log('lol')
+  }, 3000);
 })
 
 update()
