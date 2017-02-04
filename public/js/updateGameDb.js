@@ -39,17 +39,23 @@ function update() {
             success: function(data) {
               name = data.username
               console.log(name)
+              $('#tBody').append(
+                '<tr>' +
+                '<td>' + val.name + '</td>' + 
+                '<td>' + name + '</td>' + 
+                '</tr>'
+              )
             }
           })
         } else {
           name = 'No'
-        }
         $('#tBody').append(
           '<tr>' +
           '<td>' + val.name + '</td>' + 
           '<td>' + name + '</td>' + 
           '</tr>'
         )
+        }
       })
     }
   })
