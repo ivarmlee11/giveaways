@@ -32,36 +32,34 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
 
 
-  var file = req.body,
-  dataList = parsed.data,
-  gameList = []
+  var file = req.body
 
   console.log(file)
 
-  dataList.forEach(function(game) {
-    gameList.push({
-      name: game[0],
-      price: game[1],
-      code: game[2],
-      coderevealed: game[3]
-    })
-  })
+  // dataList.forEach(function(game) {
+  //   gameList.push({
+  //     name: game[0],
+  //     price: game[1],
+  //     code: game[2],
+  //     coderevealed: game[3]
+  //   })
+  // })
 
-  gameList.forEach(function(game) {
-    if(game.coderevealed === undefined) {
-      return
-    } else {
-      db.game.create({
-        name: game.name,
-        code: game.code,
-        price: game.price,
-        coderevealed: game.coderevealed,
-        owned: null,
-        userId: null
-      }).then(function(data) {
-      })
-    }
-  })
+  // gameList.forEach(function(game) {
+  //   if(game.coderevealed === undefined) {
+  //     return
+  //   } else {
+  //     db.game.create({
+  //       name: game.name,
+  //       code: game.code,
+  //       price: game.price,
+  //       coderevealed: game.coderevealed,
+  //       owned: null,
+  //       userId: null
+  //     }).then(function(data) {
+  //     })
+  //   }
+  // })
   req.flash('success', 'Games added.')
   res.redirect('/game/gameData')
 })
