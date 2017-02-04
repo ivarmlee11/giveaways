@@ -39,12 +39,9 @@
 </div>
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
-    <form id="uploadForm" action="/game/uploadGameData" method="POST" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="uploadGameData">Upload</label>
-        <input type="file" class="form-control" id="uploadGameData" name="uploadGameData" required>
-      </div>
-      <button id="uploadButton" class="btn btn-success">Upload CSV</button>
-    </form>
+    <div class="graphcontainer">Parser Output:</div>
+    <div class="buttoncontainer">
+        <input type="file" id="csv-file" name="files"/>
+    </div>
   </div>
 </div>
