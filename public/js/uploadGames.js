@@ -3,8 +3,6 @@ function handleFileSelect(evt) {
     return
   }    
   Papa.parse(evt.target.files[0], {
-    header: true,
-    dynamicTyping: true,
     complete: function (results) {
       sendData(results)
     }

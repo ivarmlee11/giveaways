@@ -32,18 +32,19 @@ router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
 router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res) {
 
 
-  var file = req.body.data
+  var file = req.body.data,
+  gameList = []
 
   console.log(file)
 
-  // dataList.forEach(function(game) {
-  //   gameList.push({
-  //     name: game[0],
-  //     price: game[1],
-  //     code: game[2],
-  //     coderevealed: game[3]
-  //   })
-  // })
+  file.forEach(function(game) {
+    gameList.push({
+      name: game[0],
+      price: game[1],
+      code: game[2],
+      coderevealed: game[3]
+    })
+  })
 
   // gameList.forEach(function(game) {
   //   if(game.coderevealed === undefined) {
