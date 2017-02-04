@@ -1,31 +1,49 @@
-$(function() {
+$(function(){
 
-var form = $('#uploadForm'),
-    uploadGameData = $('#uploadGameData'),
-    uploadButton = $('#uploadButton')
+  $("#drop-box").click(function(){
+    $("#upl").click();
+  });
 
-form.submit(function(e){
+  // To prevent Browsers from opening the file when its dragged and dropped on to the page
+  $(document).on('drop dragover', function (e) {
+        e.preventDefault();
+    }); 
 
-e.preventDefault();
-var request = new FormData();                   
+  // Add events
+  $('input[type=file]').on('change', fileUpload);
 
-console.log(this.val())
-$.ajax({
+  // File uploader function
 
-    type        : 'POST',
-    url     : '/game/uploadGameData',
-    data        : request,
-    processData : false,
-    contentType : false,                        
-    success     : function(r) {
-        console.log(r);
-        //if (errors != null) { } else context.close();
-
-    },
-
-    error       : function(r) { alert('jQuery Error'); }
+  function fileUpload(event){  
+    $("#drop-box").html("<p>"+event.target.value+" uploading...</p>");
+    files = event.target.files;
+    var data = new FormData();
+    var error = 0;
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        console.log(file.size);
+      // if(!file.type.match('image.*')) {
+      //     $("#drop-box").html("<p> Images only. Select another file</p>");
+      //     error = 1;
+      //   }else if(file.size > 1048576){
+      //     $("#drop-box").html("<p> Too large Payload. Select another file</p>");
+      //     error = 1;
+      //   }else{
+          data.append('image', file, file.name);
+        // }
+    }
+    // if(!error){
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/game/uploadGameData', true);
+      xhr.send(data);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          $("#drop-box").html("<p> File Uploaded. Select more files</p>");
+        } else {
+          $("#drop-box").html("<p> Error in upload, try again.</p>");
+        }
+      };
+    // }
+  }
 
 });
-
-});
-})
