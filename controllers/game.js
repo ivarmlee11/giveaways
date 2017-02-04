@@ -53,7 +53,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
     }
   })
   req.flash('success', 'Games added.')
-  res.redirect('/game/gameData')
+  res.redirect('back')
 })
 
 router.post('/assignWinnerCard/', ensureAuthenticated, modCheck, function(req, res) {
