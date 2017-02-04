@@ -32,7 +32,7 @@ function update() {
             name
         if(val.owned) {
           ownedId = val.userId
-          var url = 'playerData/' + ownedId
+          var url = '../playerData/' + ownedId
           $.ajax({
             url: url,
             type: 'GET',
