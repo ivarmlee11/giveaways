@@ -1,14 +1,14 @@
 {
   "development": {
-    "username": "ivar",
-    "password": "password",
+    "username": "postgres",
+    "password": "newPassword",
     "database": "tweakgames_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "ivar",
-    "password": "password",
+    "username": "postgres",
+    "password": "newPassword",
     "database": "tweakgames_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
