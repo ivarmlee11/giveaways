@@ -41,11 +41,12 @@ io.use(passportSocketIo.authorize({
 }))
 
 function onAuthorizeSuccess(data, accept){
-  console.log('successful connection to socket.io')
+  console.log('successful connection to socket.io00000')
   accept()
 }
  
 function onAuthorizeFail(data, message, error, accept){
+  console.log('the fuck is going on')
   if(error)  throw new Error(message)
   return accept()
 }

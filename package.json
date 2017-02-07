@@ -27,12 +27,13 @@
     "passport-beam": "^1.0.4",
     "passport-twitchtv": "^0.1.4",
     "passport.socketio": "^3.7.0",
-    "pg": "^6.1.0",
+    "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "request": "^2.78.0",
     "request-ip": "^1.2.3",
     "sequelize": "^3.27.0",
     "sequelize-cli": "^2.4.0",
+    "sessionstore": "^1.2.16",
     "socket.io": "^1.7.2",
     "tmi.js": "^1.1.2"
   }
