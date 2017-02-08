@@ -188,7 +188,7 @@ playerDropDown.on('click', function() {
   $(this).hide()
   console.log('trade info out')
   console.log(tradeInfoOut)
-  console.log(tradeinfoin)
+  console.log(tradeInfoIn)
 })
 
 clearOutTrade.on('click', function() {
