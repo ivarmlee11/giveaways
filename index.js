@@ -41,12 +41,11 @@ io.use(passportSocketIo.authorize({
 }))
 
 function onAuthorizeSuccess(data, accept){
-  console.log('successful connection to socket.io00000')
+  console.log('successful connection to socket.io')
   accept()
 }
  
 function onAuthorizeFail(data, message, error, accept){
-  console.log('the fuck is going on')
   if(error)  throw new Error(message)
   return accept()
 }
@@ -74,6 +73,8 @@ app.locals.moment = require('moment')
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash()
   res.locals.currentUser = req.user
+  console.log('req user')
+  console.log(req.user)
   next()
 })
 
@@ -252,7 +253,7 @@ app.get('/', function(req, res) {
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {
   var user = req.user
-  db.giveaway.findAll().then(function(giveaways) {
+  db.giveaway.findAll({ order: '"updatedAt" DESC' }).then(function(giveaways) {
     var giveaway = giveaways
     res.render('users/giveaways',
       {
