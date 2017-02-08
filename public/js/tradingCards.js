@@ -25,6 +25,7 @@ var tradingArea = $('#tradingArea'),
     playerTradeList = $('#playerTradeList'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
+    acceptedByTrader = $('#acceptedByTrader'),
     tradeInfoOut = new TradeWindow(null, [], null, null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
     offerAccepted = {},
@@ -138,7 +139,7 @@ socket.on('accept offer confirmed', function(acceptObj) {
     data: dataObj,
     success: function() {
       console.log('test')
-      location.reload();
+      location.reload()
     }
   })
   messageBox.html('Other play accepted offer')
