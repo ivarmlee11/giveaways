@@ -130,7 +130,6 @@ socket.on('accept offer confirmed', function(acceptObj) {
   },
   url = '/game/trade/'
 
-
   console.log(dataObj)
 
   $.ajax({
