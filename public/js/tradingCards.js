@@ -191,6 +191,7 @@ playerDropDown.on('click', function() {
 clearOutTrade.on('click', function() {
   acceptTrade.hide()
   playerDropDown.show()
+  console.log(tradeInfoIn)
   tradeInfoOut.gameId = []
   tradeInfoOut.userId = tradeInfoIn.sentFromId
   tradeInfoOut.clearThis = 'out'
