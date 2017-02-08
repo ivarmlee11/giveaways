@@ -7,7 +7,7 @@ var express = require('express'),
     flash = require('connect-flash');
 
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
-  db.giveaway.findAll().then(function(giveaways) {
+  db.giveaway.findAll({ order: '"updatedAt" DESC' }).then(function(giveaways) {
     var giveaway = giveaways;
     res.render('admin/adminGameList', 
       {
