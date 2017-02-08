@@ -31,7 +31,7 @@ var tradingArea = $('#tradingArea'),
     offerAccepted = {},
     tradeInProgress = false,
     tradeInProgressIndicator = $('#tradeInProgress'),
-    sentFromId = $('#sentFromId').text()
+    sentFromId = $('#sentFromId').text(),
     sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text()
 
@@ -186,6 +186,9 @@ playerDropDown.on('click', function() {
     tradeInProgressIndicator.html('Trade not in progress')
   }
   $(this).hide()
+  console.log('trade info out')
+  console.log(tradeinfoout)
+  console.log(tradeinfoin)
 })
 
 clearOutTrade.on('click', function() {
@@ -193,6 +196,7 @@ clearOutTrade.on('click', function() {
   playerDropDown.show()
   console.log(tradeInfoIn)
   tradeInfoOut.gameId = []
+  tradeInfoOut.sentFromId = 
   tradeInfoOut.userId = tradeInfoIn.sentFromId
   tradeInfoOut.clearThis = 'out'
 
