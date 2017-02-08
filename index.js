@@ -209,12 +209,12 @@ io.on('connection', function(socket) {
     console.log('sent from id ' + sentFromId)
 
     tradeObject.gameId = []
-    // tradeObject.sentFromId = clientId
+    tradeObject.sentFromId = clientId
     tradeObject.sendTo = null
     tradeObject.sentFromName = 'Came from clearing'
     tradeObject.clearThis = 'in'
-
-    // console.log(tradeObject)
+    
+    console.log(tradeObject)
 
     if (sentFromId) {
       sendToSocket = clients.filter(function(obj) {
