@@ -65,35 +65,14 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid'),
         id = parseInt(id)
 
-    tradeInfoOut.gameId.push(parseInt(id))
 
-    gameListOut.html(tradeInfoOut.gameId.length + ' items')
-
-    if (tradeInfoOut.sendTo && tradeInfoOut.userId) {
-      socket.emit('trade', tradeInfoOut)
-      messageBox.html('Proposal sent')
-    } else {
-      messageBox.html('To propose a trade you need a recipient')
-    } 
   },
   out: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id)
 
-    tradeInfoOut.gameId = tradeInfoOut.gameId.filter(function(item, index, inputArray) {
-      return item !== id
-    })
 
-    socket.emit('trade', tradeInfoOut)
-    
-    gameListOut.html(tradeInfoOut.gameId.length + ' items')
-
-    if(tradeInfoOut.gameId.length) {
-      messageBox.html('Game removed')
-    } else {
-      messageBox.html('Put your game in the trading area')
-    }
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
