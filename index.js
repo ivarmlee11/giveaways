@@ -150,90 +150,21 @@ io.on('connection', function(socket) {
 
   io.emit('update players', clients)
 
-  socket.on('trade', function(tradeObj) {
-
-    tradeObject = tradeObj
-    console.log(tradeObject)
-    var id = tradeObject.userId,
-        result = clients.filter(function(obj) {
-          return obj.id == id
-        })
-
-    if(result.length) {
-      sendToSocket = result[0].socketId
-      socket.broadcast.to(sendToSocket).emit('get trade', tradeObject)
-    } else {
-      console.log('that user isnt logged on')
-    }
-    // else send message that player isnt online TODO
-  })
-
-  socket.on('trade in progress', function(message) {
-    var id = message.sentToId,
-        clientObj = clients.filter(function(obj) {
-          return obj.id === id
-        })
-
-    if(clientObj.length) {
-      sendToSocket = clientObj[0].socketId
-      socket.broadcast.to(sendToSocket).emit('trade busy', message.message)
-    }
-  })
-
-  socket.on('accept offer', function(acceptObj) {
-    var acceptObJ = acceptObj,
-         clientObj = clients.filter(function(obj) {
-          return obj.id === acceptObj.sendTo
-        })
-     // console.log('accept offer')
-     // console.log(acceptObj)
-     // console.log(clientObj)
-     // console.log(clients)
-    if(clientObj.length) {
-      sendToSocket = clientObj[0].socketId
-      socket.broadcast.to(sendToSocket).emit('accept offer confirmed', acceptObj)
-    }
-  
-  })
-
   socket.on('disconnect', function() {
     console.log('d/c event')
-    // console.log(tradeObject)
 
-    var sentToId = tradeObject.userId,
-        sentFromId = tradeObject.sentFromId,
-        sendToSocket
-
-    console.log('sent to ' + sentToId)
-    console.log('client id ' + clientId)
-    console.log('sent from id ' + sentFromId)
-
-    tradeObject.gameId = []
-    tradeObject.sentFromId = clientId
-    tradeObject.sendTo = null
-    tradeObject.sentFromName = 'Came from clearing'
-    tradeObject.clearThis = 'in'
+    sendToSocket = clients.filter(function(obj) {
+      return obj.id === sentToId
+    })
+  
     
-    console.log(tradeObject)
-
-    if (sentFromId) {
-      sendToSocket = clients.filter(function(obj) {
-        return obj.id === sentToId
-      })
-    }
-    if (sendToSocket) {
-      sendToSocket = sendToSocket[0].socketId 
-      // console.log(clients)
-
-      // console.log(sendToSocket) 
-      socket.broadcast.to(sendToSocket).emit('get trade', tradeObject)
-    }
-
+    sendToSocket = sendToSocket[0].socketId 
+  
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
     })
 
-    io.emit('updateList', clients)
+    io.emit('update players', clients)
   })
 
 })
