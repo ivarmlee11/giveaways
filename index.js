@@ -133,8 +133,9 @@ var clients = []
 io.on('connection', function(socket) {
   // console.log(socket)
   var clientId = socket.request.user.dataValues.id,
-      sendToSocket,
+      clientAuth = socket.request.user.dataValues.auth,
       clientName = socket.request.user.dataValues.username,
+      sendToSocket,
       tradeObject = {}
 
   clients = clients.filter(function(obj) {
@@ -144,7 +145,8 @@ io.on('connection', function(socket) {
   clients.push({
     id: clientId,
     socketId: socket.id,
-    clientName: clientName
+    clientName: clientName,
+    auth: clientAuth
   })
   console.log(socket.request.user.dataValues.username + ' connected')
   console.log(clients)
