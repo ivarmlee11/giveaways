@@ -41,20 +41,24 @@ socket.on('update players', function(connectedPlayers){
   playerTradeList.html('')
   var playerList = connectedPlayers,
       playerNames = playerList.map(function(player) {
-        var rObj = {}
-        rObj[label] = player.id
+        var rObj = {
+          label: player.name,
+          value: player.id
+        }
         return rObj
       })
-  console.log(playerNames)
+  console.log(playerNames)  
 
-playerDropDown.autocomplete({
-  source: playerList
-})
 
   playerList.forEach(function(val) {
     playerTradeList.append('<option userid="' + val.id + '">' + val.clientName + '</option>')
   })
 })
+
+playerDropDown.autocomplete({
+  source: playerList
+})
+
 
 socket.on('get trade', function(trade) {
   acceptTrade.hide()
