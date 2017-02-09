@@ -33,7 +33,8 @@ var tradingArea = $('#tradingArea'),
     tradeInProgressIndicator = $('#tradeInProgress'),
     sentFromId = $('#sentFromId').text(),
     sentFromId = parseInt(sentFromId),
-    sentFromName = $('#sentFromName').text()
+    sentFromName = $('#sentFromName').text(),
+    playerNames
   
 
 socket.on('update players', function(connectedPlayers){
@@ -41,22 +42,21 @@ socket.on('update players', function(connectedPlayers){
   playerTradeList.html('')
   
   var playerList = connectedPlayers,
-      playerNames = playerList.map(function(player) {
-        var rObj = {
-          label: player.username,
-          value: player.id
-        }
-        return rObj
-      })
-  
-  playerDropDown.autocomplete({
-    source: playerList
+  playerNames = playerList.map(function(player) {
+    var rObj = {
+      label: player.username,
+      value: player.id
+    }
+    return rObj
   })
-
 
   playerList.forEach(function(val) {
-    playerTradeList.append('<option userid="' + val.id + '">' + val.clientName + '</option>')
+    currentPlayers.append('<h6 userid="' + val.id + '">' + val.clientName + '</h6><img id="logo" src="/img/' + player.auth + '.png"/>')
   })
+})
+
+playerDropDown.autocomplete({
+  source: playerNames
 })
 
 tradeWindowOut.droppable({
