@@ -26,7 +26,7 @@ var tradingArea = $('#tradingArea'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     acceptedByTrader = $('#acceptedByTrader'),
-    tradeInfoOut = new TradeWindow(null, [], null, null, null, null),
+    tradeIplanfoOut = new TradeWindow(null, [], null, null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
     offerAccepted = {},
     tradeInProgress = false,
@@ -34,7 +34,10 @@ var tradingArea = $('#tradingArea'),
     sentFromId = $('#sentFromId').text(),
     sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text()
-    
+
+playerDropDown.autocomplete({
+  source: playerList
+});
 
 socket.on('update players', function(connectedPlayers){
   // console.log(connectedPlayers)
@@ -42,7 +45,7 @@ socket.on('update players', function(connectedPlayers){
   playerTradeList.html('')
   var playerList = connectedPlayers
   playerList.forEach(function(val) {
-    currentPlayers.append('<h5 clientId="' + val.id + '">' + val.clientName + '</h5>')
+    // currentPlayers.append('<h5 clientId="' + val.id + '">' + val.clientName + '</h5>')
     playerTradeList.append('<option userid="' + val.id + '">' + val.clientName + '</option>')
   })
 })
