@@ -53,7 +53,6 @@ socket.on('update players', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   acceptTrade.hide()
-  console.log('trade')
   // console.log(trade)
 
   if (!tradeInProgress && !trade.clearThis) {
@@ -112,10 +111,11 @@ socket.on('get trade', function(trade) {
     tradeInProgressIndicator.html('Trade not in progress')
     messageBox.html('The other trade reset the trade')
   }
-  // console.log('--------tradeInfo In------')
-  // console.log(tradeInfoIn)
-  // console.log('------ tradeinfo out----')
-  // console.log(tradeInfoOut)
+  console.log('trade info out')
+  console.log(tradeInfoOut)
+    console.log('trade info in')
+
+  console.log(tradeInfoIn)
 })
 
 
@@ -158,7 +158,6 @@ socket.on('trade busy', function(message) {
   tradeWindowIn.html('')
   updateTradeableCards()
   updateOwnedCards()
-  console.log(tradeInfoOut)
   messageBox.html(message)
   tradeInProgressIndicator.html('Trade not in progress')
 })
@@ -196,15 +195,12 @@ playerDropDown.on('click', function() {
     tradeInProgressIndicator.html('Trade not in progress')
   }
   $(this).hide()
-  console.log('trade info out')
-  console.log(tradeInfoOut)
-  console.log(tradeInfoIn)
+
 })
 
 clearOutTrade.on('click', function() {
   acceptTrade.hide()
   playerDropDown.show()
-  console.log(tradeInfoIn)
   tradeInfoOut.gameId = []
   tradeInfoOut.sentFromId = sentFromId
   tradeInfoOut.userId = tradeInfoIn.sentFromId
