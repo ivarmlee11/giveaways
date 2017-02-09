@@ -146,8 +146,11 @@ socket.on('accept offer confirmed', function(acceptObj) {
 
 socket.on('trade busy', function(message) {
   tradeInfoOut.userId = null
-  tradeInfoOut.sentFromId = null
+  tradeInfoOut.gameId = []
   tradeInProgress = false
+  updateTradeableCards()
+  updateOwnedCards()
+  console.log(tradeInfoOut)
   messageBox.html(message)
   tradeInProgressIndicator.html('Trade not in progress')
 })
