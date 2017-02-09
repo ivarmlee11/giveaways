@@ -132,7 +132,6 @@ var clients = []
 
 io.on('connection', function(socket) {
   // console.log(socket)
-  console.log(socket.request.user.dataValues.username)
   var clientId = socket.request.user.dataValues.id,
       sendToSocket,
       clientName = socket.request.user.dataValues.username,
@@ -147,7 +146,8 @@ io.on('connection', function(socket) {
     socketId: socket.id,
     clientName: clientName
   })
-
+  console.log(socket.request.user.dataValues.username + ' connected')
+  console.log(clients)
   io.emit('update players', clients)
 
   socket.on('disconnect', function() {
@@ -156,6 +156,7 @@ io.on('connection', function(socket) {
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
     })
+    console.log(clients)
 
     io.emit('update players', clients)
   })
