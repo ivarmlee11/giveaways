@@ -47,8 +47,6 @@ socket.on('update players', function(connectedPlayers){
       })
   console.log(playerNames)
 
-});
-
 playerDropDown.autocomplete({
   source: playerList
 })
