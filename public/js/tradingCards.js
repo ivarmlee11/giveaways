@@ -34,18 +34,25 @@ var tradingArea = $('#tradingArea'),
     sentFromId = $('#sentFromId').text(),
     sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text()
-
+  
 playerDropDown.autocomplete({
   source: playerList
-});
+})
 
 socket.on('update players', function(connectedPlayers){
-  // console.log(connectedPlayers)
   currentPlayers.html('')
   playerTradeList.html('')
-  var playerList = connectedPlayers
+  var playerList = connectedPlayers,
+      playerNames = playerList.map(function(player) {
+        var rObj = {}
+        rObj[label] = player.id
+        return rObj
+      }
+  console.log(playerNames)
+
+});
+
   playerList.forEach(function(val) {
-    // currentPlayers.append('<h5 clientId="' + val.id + '">' + val.clientName + '</h5>')
     playerTradeList.append('<option userid="' + val.id + '">' + val.clientName + '</option>')
   })
 })
