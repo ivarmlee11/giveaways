@@ -50,8 +50,8 @@ socket.on('update players', function(connectedPlayers){
     return rObj
   })
 
-  playerList.forEach(function(val) {
-    currentPlayers.append('<h6 userid="' + val.id + '">' + val.clientName + '</h6><img id="logo" src="/img/' + player.auth + '.png"/>')
+  playerList.forEach(function(player) {
+    currentPlayers.append('<h6 userid="' + player.id + '">' + player.clientName + '</h6><img id="logo" src="/img/' + player.auth + '.png"/>')
   })
 })
 
