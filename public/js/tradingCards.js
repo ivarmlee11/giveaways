@@ -48,6 +48,9 @@ socket.on('update players', function(connectedPlayers){
         return rObj
       })
   console.log(playerNames)  
+playerDropDown.autocomplete({
+  source: playerList
+})
 
 
   playerList.forEach(function(val) {
@@ -55,9 +58,6 @@ socket.on('update players', function(connectedPlayers){
   })
 })
 
-playerDropDown.autocomplete({
-  source: playerList
-})
 
 
 socket.on('get trade', function(trade) {
