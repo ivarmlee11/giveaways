@@ -51,12 +51,16 @@ socket.on('update players', function(connectedPlayers){
   })
 
   playerList.forEach(function(player) {
-    currentPlayers.append('<h6 userid="' + player.id + '">' + player.clientName + '</h6><img id="logo" src="/img/' + player.auth + '.png"/>')
+    currentPlayers.append('<h6 userid="' + player.id + '">' + player.clientName + '<img id="logo" src="/img/' + player.auth + '.png"/></h6>')
   })
 })
 
+function listPlayerNames(list) {
+  return list
+}
+
 playerDropDown.autocomplete({
-  source: playerNames
+  source: listPlayerNames(playerNames)
 })
 
 tradeWindowOut.droppable({
