@@ -152,13 +152,6 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('d/c event')
-
-    sendToSocket = clients.filter(function(obj) {
-      return obj.id === sentToId
-    })
-  
-    
-    sendToSocket = sendToSocket[0].socketId 
   
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
