@@ -35,9 +35,6 @@ var tradingArea = $('#tradingArea'),
     sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text()
   
-playerDropDown.autocomplete({
-  source: playerList
-})
 
 socket.on('update players', function(connectedPlayers){
   currentPlayers.html('')
@@ -47,10 +44,14 @@ socket.on('update players', function(connectedPlayers){
         var rObj = {}
         rObj[label] = player.id
         return rObj
-      }
+      })
   console.log(playerNames)
 
 });
+
+playerDropDown.autocomplete({
+  source: playerList
+})
 
   playerList.forEach(function(val) {
     playerTradeList.append('<option userid="' + val.id + '">' + val.clientName + '</option>')
