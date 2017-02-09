@@ -148,6 +148,14 @@ socket.on('trade busy', function(message) {
   tradeInfoOut.userId = null
   tradeInfoOut.gameId = []
   tradeInProgress = false
+  playerDropDown.show()
+  gameListOut.html('')
+  playerOut.html('')
+  gameListIn.html('')
+  playerIn.html('')
+  tradingArea.html('')
+  tradeWindowOut.html('')
+  tradeWindowIn.html('')
   updateTradeableCards()
   updateOwnedCards()
   console.log(tradeInfoOut)
