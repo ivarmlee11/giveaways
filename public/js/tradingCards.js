@@ -34,11 +34,7 @@ var tradingArea = $('#tradingArea'),
     sentFromId = $('#sentFromId').text(),
     sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text()
-
-tradeInfoOut.sentFromId = sentFromId
-tradeInfoOut.sentFromName = sentFromName
-tradeInProgressIndicator.html('Trade not in progress')
-acceptTrade.hide()
+    
 
 socket.on('update players', function(connectedPlayers){
   // console.log(connectedPlayers)
