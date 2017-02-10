@@ -74,7 +74,7 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid'),
         id = parseInt(id)
 
-    tradeObject.gameIdList = tradeObject.gameIdList.filter(function(obj) {
+    tradeObject.gameIdList = gameIdList.filter(function(obj) {
       return obj.id !== id
     })
     console.log(tradeObject)
