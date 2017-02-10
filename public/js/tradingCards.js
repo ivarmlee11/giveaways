@@ -38,15 +38,17 @@ socket.on('update players', function(connectedPlayers){
   playerList = connectedPlayers
 
   playerNames = playerList.map(function(player) {
-    if(player.id !== tradeObject.sentFromId) {
-      var playerAuth = player.clientName + ' ' + player.auth,
-      rObj = {
-        value: playerAuth,
-        data: player.id
-      }   
+    var playerAuth = player.clientName + ' ' + player.auth,
+    rObj = {
+      value: playerAuth,
+      data: player.id
+    }  
+    console.log(player.id + ' ' + sentFromIdInt + ' ' + typeof(player.id) + ' ' + typeof(sentFromIdInt))
+    if(player.id !== sentFromIdInt) {
       return rObj
     }
   })
+
 
   playerDropDown.autocomplete({
     lookup: playerNames,
