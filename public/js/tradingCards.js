@@ -57,6 +57,8 @@ socket.on('update players', function(connectedPlayers){
     return rObj
   })
 
+  console.log(playerNames)
+  
   playerDropDown.autocomplete({
     lookup: playerNames,
     onSelect: function (player) {
