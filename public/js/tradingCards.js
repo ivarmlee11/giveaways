@@ -19,8 +19,8 @@ var tradingArea = $('#tradingArea'),
     acceptedByTrader = $('#acceptedByTrader'),
     tradeInProgressIndicator = $('#tradeInProgress'),
     tradeObject = {},
-    tradeObject.sentFromId = $('#sentFromId').text().parseInt(),
-    tradeObject.sentFromName = $('#sentFromName').text(),
+    tradeObject['sentFromId'] = $('#sentFromId').text().parseInt(),
+    tradeObject['sentFromName'] = $('#sentFromName').text(),
     playerNames = [],
     playerList = []
 
