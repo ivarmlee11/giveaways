@@ -173,8 +173,8 @@ io.on('connection', function(socket) {
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
-    io.broadcast.to(socketId.socketId).emit('get trade', tradeObject);
-  })
+    socket.broadcast.to(socketId.socketId).emit('get trade', tradeObject);
+    })
 })
  
 app.use('/admin', adminCtrl)
