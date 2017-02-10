@@ -2,15 +2,6 @@ $(function() {
 
 var socket = io.connect()
 
-function TradeWindow(sendTo, tradeGame, tradeUser, sentFromId, sentFromName, clearThis) {
-  this.sendTo = sendTo,
-  this.gameId = tradeGame,
-  this.userId = tradeUser,
-  this.sentFromId = sentFromId,
-  this.sentFromName = sentFromName,
-  this.clearThis = clearThis
-}
-
 var tradingArea = $('#tradingArea'),
     tradeWindowOut = $('#tradeWindowOut'),
     tradeWindowIn = $('#tradeWindowIn'),
@@ -22,50 +13,42 @@ var tradingArea = $('#tradingArea'),
     currentPlayers =  $('#currentPlayers'),
     playerDropDown = $('#playerDropDown'),
     clearOutTrade = $('#clearOutTrade'),
-    playerTradeList = $('#playerTradeList'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
     acceptedByTrader = $('#acceptedByTrader'),
-    tradeIplanfoOut = new TradeWindow(null, [], null, null, null, null),
-    tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
-    offerAccepted = {},
-    tradeInProgress = false,
     tradeInProgressIndicator = $('#tradeInProgress'),
-    sentFromId = $('#sentFromId').text(),
-    sentFromId = parseInt(sentFromId),
-    sentFromName = $('#sentFromName').text(),
-    playerNames = [
-    { value: 'Andorra', data: 'AD' },
-    // ...
-    { value: 'Zimbabwe', data: 'ZZ' }
-];
+    tradeObject = {},
+    tradeObject.sentFromId = $('#sentFromId').text().parseInt(),
+    tradeObject.sentFromName = $('#sentFromName').text(),
+    playerNames = [],
+    playerList = []
 
-  
+function makeTrade(userId,trade) {
+
+}
 
 socket.on('update players', function(connectedPlayers){
   currentPlayers.html('')
-  playerTradeList.html('')
   
-  var playerList = connectedPlayers
-  console.log(playerList)
+  playerList = connectedPlayers
+
   playerNames = playerList.map(function(player) {
     var playerAuth = player.clientName + ' ' + player.auth,
     rObj = {
       value: playerAuth,
-      data: player.id.toString()
+      data: player.id
     }
     
     return rObj
   })
 
-  console.log(playerNames)
-
   playerDropDown.autocomplete({
     lookup: playerNames,
     onSelect: function (player) {
+      
       suggestion.html('You selected: ' + player.value)
-      $(this).hide()
+      playerDropDown.hide()
     }
   })
 
@@ -74,21 +57,16 @@ socket.on('update players', function(connectedPlayers){
   })
 })  
 
-
 tradeWindowOut.droppable({
   drop: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id)
-
-
   },
   out: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id)
-
-
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
@@ -152,7 +130,7 @@ function updateOwnedCards() {
             '<h5>' + val.code + '</h5>' +
             '</div>'
           )
-        } e
+        }
       })
     }
   })
