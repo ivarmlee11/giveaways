@@ -48,6 +48,7 @@ socket.on('update players', function(connectedPlayers){
       value: player.username,
       data: player.id
     }
+    
     return rObj
   })
 
