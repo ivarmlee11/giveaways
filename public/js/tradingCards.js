@@ -29,7 +29,6 @@ tradeObject['sentFromName'] = $('#sentFromName').text()
 tradeObject['games'] = []
 tradeObject['agreeOnTerms'] = false
 tradeObject['tradeInProgress'] = false
-tradeObject['acceptTrade'] = false
 tradeObject['incomingTrade'] = {}
 tradeObject['clearTrade'] = false
 
@@ -54,7 +53,7 @@ socket.on('update players', function(connectedPlayers){
     lookup: playerNames,
     onSelect: function (player) {
       tradeObject.tradeInProgress = player.data
-      console.log(tradeObject)
+      // console.log(tradeObject)
       sendTrade(tradeObject)
       suggestion.html('Send to ' + player.value)
       playerDropDown.hide()
@@ -84,7 +83,7 @@ tradeWindowOut.droppable({
         id = parseInt(id)
 
     tradeObject.games.push(id)
-    console.log(tradeObject)
+    // console.log(tradeObject)
     sendTrade(tradeObject)
   },
   out: function(event, ui) {
@@ -95,7 +94,7 @@ tradeWindowOut.droppable({
     tradeObject.games = tradeObject.games.filter(function(gameId) {
       return gameId !== id
     })
-    console.log(tradeObject)
+    // console.log(tradeObject)
     sendTrade(tradeObject)
   },
   activeClass: 'highlight',

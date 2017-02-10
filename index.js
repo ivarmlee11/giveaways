@@ -170,8 +170,10 @@ io.on('connection', function(socket) {
   socket.on('send trade', function(tradeObj) {
     console.log('trade sent')
     console.log(tradeObj)
-  })
-
+    var socketId = clients.filter(function(obj) {
+      return obj.id === tradeObj.tradeInProgress
+    })
+    io.broadcast.to(socketId.socketId).emit('get trade', tradeObject);
 })
  
 app.use('/admin', adminCtrl)
