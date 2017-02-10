@@ -47,7 +47,8 @@ socket.on('update players', function(connectedPlayers){
   currentPlayers.html('')
   playerTradeList.html('')
   
-  var playerList = connectedPlayers,
+  var playerList = connectedPlayers
+  console.log(playerList)
   playerNames = playerList.map(function(player) {
     var rObj = {
       value: player.username,
@@ -58,7 +59,7 @@ socket.on('update players', function(connectedPlayers){
   })
 
   console.log(playerNames)
-  
+
   playerDropDown.autocomplete({
     lookup: playerNames,
     onSelect: function (player) {
