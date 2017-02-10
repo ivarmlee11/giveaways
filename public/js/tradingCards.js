@@ -50,8 +50,9 @@ socket.on('update players', function(connectedPlayers){
   var playerList = connectedPlayers
   console.log(playerList)
   playerNames = playerList.map(function(player) {
-    var rObj = {
-      value: player.clientName,
+    var playerAuth = player.clientName + ' ' + player.auth,
+    rObj = {
+      value: playerAuth,
       data: player.id.toString()
     }
     
@@ -63,7 +64,7 @@ socket.on('update players', function(connectedPlayers){
   playerDropDown.autocomplete({
     lookup: playerNames,
     onSelect: function (player) {
-      suggestion.html('You selected: ' + player.value + ', ' + player.data)
+      suggestion.html('You selected: ' + player.value)
     }
   })
 

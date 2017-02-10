@@ -17,6 +17,10 @@ a, a:hover, a:active {
   text-decoration: none;
 }
 
+#playerDropDown {
+  padding-bottom: 100px;
+}
+
 #drop-box{  
   border: 10px solid rgb(14, 56, 119);  
   cursor: pointer;
