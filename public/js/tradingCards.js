@@ -35,7 +35,12 @@ var tradingArea = $('#tradingArea'),
     sentFromId = $('#sentFromId').text(),
     sentFromId = parseInt(sentFromId),
     sentFromName = $('#sentFromName').text(),
-    playerNames = []
+    playerNames = [
+    { value: 'Andorra', data: 'AD' },
+    // ...
+    { value: 'Zimbabwe', data: 'ZZ' }
+];
+
   
 
 socket.on('update players', function(connectedPlayers){
