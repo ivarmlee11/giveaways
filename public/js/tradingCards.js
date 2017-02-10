@@ -88,7 +88,7 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid'),
         id = parseInt(id)
 
-    tradeObject.outgoingGames = tradeObject.outgoingGames.filter(function(gameId) {
+    tradeObject.outgoingGames = tradeObject.games.filter(function(gameId) {
       return gameId !== id
     })
     console.log(tradeObject)
