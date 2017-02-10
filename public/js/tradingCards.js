@@ -26,6 +26,7 @@ var tradingArea = $('#tradingArea'),
 
 tradeObject['sentFromId'] = sentFromId
 tradeObject['sentFromName'] = $('#sentFromName').text()
+tradeObject['gameIdList'] = []
 
 socket.on('update players', function(connectedPlayers){
   
@@ -55,21 +56,28 @@ socket.on('update players', function(connectedPlayers){
   })
 })
 
-socket.on('get trade', function(trade) {
-  var trade = trade
-  
-})
+function sentTrade(tradeObj,sentFromId) {
+
+}
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id)
+
+    tradeObject.gameIdList.push(id)
+    console.log(tradeObject)
   },
   out: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id)
+
+    tradeObject.gameIdList = tradeObject.gameIdList.filter(function(obj) {
+      return obj.id !== id
+    })
+    console.log(tradeObject)
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
