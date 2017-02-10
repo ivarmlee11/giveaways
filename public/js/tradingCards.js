@@ -51,7 +51,7 @@ socket.on('update players', function(connectedPlayers){
   console.log(playerList)
   playerNames = playerList.map(function(player) {
     var rObj = {
-      value: player.username,
+      value: player.clientName,
       data: player.id.toString()
     }
     
