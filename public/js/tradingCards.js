@@ -16,13 +16,15 @@ var tradingArea = $('#tradingArea'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
+    sentFromId = $('#sentFromId').text(),
+    sentFromIdInt = sentFromId.parseInt(),
     acceptedByTrader = $('#acceptedByTrader'),
     tradeInProgressIndicator = $('#tradeInProgress'),
     tradeObject = {},
     playerNames = [],
     playerList = []
 
-tradeObject['sentFromId'] = $('#sentFromId').text().parseInt()
+tradeObject['sentFromId'] = sentFromIdInt
 tradeObject['sentFromName'] = $('#sentFromName').text()
 
 function makeTrade(userId,trade) {
