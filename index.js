@@ -148,7 +148,7 @@ io.on('connection', function(socket) {
     clientName: clientName,
     auth: clientAuth
   })
-  
+
   console.log(socket.request.user.dataValues.username + ' connected')
   console.log(clients)
   io.emit('update players', clients)
@@ -168,8 +168,8 @@ io.on('connection', function(socket) {
   })
 
   socket.on('send trade', function(tradeObj) {
-    // set currentlyInTradeWithSocket
-    // check if trade is busy, being updated
+    console.log('trade sent')
+    console.log(tradeObj)
   })
 
 })

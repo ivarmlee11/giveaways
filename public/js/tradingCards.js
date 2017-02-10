@@ -44,9 +44,7 @@ socket.on('update players', function(connectedPlayers){
       data: player.id
     }  
     console.log(player.id + ' ' + sentFromIdInt + ' ' + typeof(player.id) + ' ' + typeof(sentFromIdInt))
-    if(player.id === sentFromIdInt) {
-      break
-    }
+
     return rObj
     
   })
@@ -57,6 +55,7 @@ socket.on('update players', function(connectedPlayers){
     onSelect: function (player) {
       tradeObject.tradeInProgress = player.data
       console.log(tradeObject)
+      sendTrade(tradeObject)
       suggestion.html('Send to ' + player.value)
       playerDropDown.hide()
     }
