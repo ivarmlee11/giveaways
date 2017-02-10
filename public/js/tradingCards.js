@@ -17,22 +17,17 @@ var tradingArea = $('#tradingArea'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
     sentFromId = $('#sentFromId').text(),
-    sentFromIdInt = sentFromId.parseInt(),
+    sentFromIdInt = parseInt(sentFromId),
     acceptedByTrader = $('#acceptedByTrader'),
     tradeInProgressIndicator = $('#tradeInProgress'),
     tradeObject = {},
     playerNames = [],
     playerList = []
 
-tradeObject['sentFromId'] = sentFromIdInt
+tradeObject['sentFromId'] = sentFromId
 tradeObject['sentFromName'] = $('#sentFromName').text()
 
-function makeTrade(userId,trade) {
-
-}
-
 socket.on('update players', function(connectedPlayers){
-  currentPlayers.html('')
   
   playerList = connectedPlayers
 
@@ -49,16 +44,21 @@ socket.on('update players', function(connectedPlayers){
   playerDropDown.autocomplete({
     lookup: playerNames,
     onSelect: function (player) {
-      
       suggestion.html('You selected: ' + player.value)
       playerDropDown.hide()
     }
   })
 
+  currentPlayers.html('')
   playerList.forEach(function(player) {
     currentPlayers.append('<h6 userid="' + player.id + '">' + player.clientName + '<img id="logo" src="/img/' + player.auth + '.png"/></h6>')
   })
-})  
+})
+
+socket.on('get trade', function(trade) {
+  var trade = trade
+  
+})
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {
