@@ -65,6 +65,7 @@ socket.on('update players', function(connectedPlayers){
     lookup: playerNames,
     onSelect: function (player) {
       suggestion.html('You selected: ' + player.value)
+      $(this).hide()
     }
   })
 
