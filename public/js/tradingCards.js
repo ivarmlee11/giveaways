@@ -25,6 +25,7 @@ var tradingArea = $('#tradingArea'),
     playerTradeList = $('#playerTradeList'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
+    suggestion = $('#suggestion'),
     acceptedByTrader = $('#acceptedByTrader'),
     tradeIplanfoOut = new TradeWindow(null, [], null, null, null, null),
     tradeInfoIn = new TradeWindow(null, [], null, null, null, null),
@@ -44,8 +45,8 @@ socket.on('update players', function(connectedPlayers){
   var playerList = connectedPlayers,
   playerNames = playerList.map(function(player) {
     var rObj = {
-      label: player.username,
-      value: player.id
+      value: player.username,
+      data: player.id
     }
     return rObj
   })
@@ -53,15 +54,14 @@ socket.on('update players', function(connectedPlayers){
   playerList.forEach(function(player) {
     currentPlayers.append('<h6 userid="' + player.id + '">' + player.clientName + '<img id="logo" src="/img/' + player.auth + '.png"/></h6>')
   })
-})
-
-function listPlayerNames(list) {
-  return list
-}
+})  
 
 playerDropDown.autocomplete({
-  source: listPlayerNames(playerNames)
-})
+  lookup: playerNames,
+  onSelect: function (suggestion) {
+      suggestion.html('You selected: ' + suggestion.value + ', ' + suggestion.data)
+  }
+});
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {

@@ -1,5 +1,6 @@
+<script src="/js/autocomplete.js"></script>
 <script src="/js/tradingCards.js"></script>
-
+<!-- https://github.com/devbridge/jQuery-Autocomplete -->
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
     <h1 class="text-center"><span id="sentFromId"><%= user.id %></span> <span id="sentFromName"><%= user.username %></span></h1>
@@ -32,9 +33,11 @@
       </div>
       <div class="text-center">
         <input id="playerDropDown"></input>
-    
+
       </div>
       <div class='text-center'>
+        <div id="suggestion">
+        </div>
         <h4>Sending to: <span id="playerOut"></span></h4>
         <h4>Sending: <span id="gameListOut"></span></h4>
       </div>
