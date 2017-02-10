@@ -163,6 +163,10 @@ io.on('connection', function(socket) {
     io.emit('update players', clients)
   })
 
+  socket.on('send trade', function(trade) {
+    
+  })
+
 })
  
 app.use('/admin', adminCtrl)
