@@ -135,7 +135,7 @@ io.on('connection', function(socket) {
   var clientId = socket.request.user.dataValues.id,
       clientAuth = socket.request.user.dataValues.auth,
       clientName = socket.request.user.dataValues.username,
-      sendToSocket,
+      currentlyInTradeWithSocket,
       tradeObject = {}
 
   clients = clients.filter(function(obj) {
@@ -148,6 +148,7 @@ io.on('connection', function(socket) {
     clientName: clientName,
     auth: clientAuth
   })
+  
   console.log(socket.request.user.dataValues.username + ' connected')
   console.log(clients)
   io.emit('update players', clients)
@@ -161,10 +162,14 @@ io.on('connection', function(socket) {
     console.log(clients)
 
     io.emit('update players', clients)
+    if(currentlyInTradeWithSocket) {
+      // send this to your partner that u ditched
+    }
   })
 
-  socket.on('send trade', function(trade) {
-    
+  socket.on('send trade', function(tradeObj) {
+    // set currentlyInTradeWithSocket
+    // check if trade is busy, being updated
   })
 
 })

@@ -8,8 +8,8 @@ var tradingArea = $('#tradingArea'),
     messageBox = $('#messageBox'),
     playerIn = $('#playerIn'),
     playerOut = $('#playerOut'),
-    gameListIn = $('#gameListIn'),
-    gameListOut = $('#gameListOut'),
+    // gameListIn = $('#gameListIn'),
+    // gameListOut = $('#gameListOut'),
     currentPlayers =  $('#currentPlayers'),
     playerDropDown = $('#playerDropDown'),
     clearOutTrade = $('#clearOutTrade'),
@@ -24,11 +24,13 @@ var tradingArea = $('#tradingArea'),
     playerNames = [],
     playerList = []
 
-tradeObject['myId'] = sentFromIdInt
-tradeObject['myName'] = $('#sentFromName').text()
-tradeObject['outgoingGames'] = []
+tradeObject['sentFromId'] = sentFromIdInt
+tradeObject['sentFromName'] = $('#sentFromName').text()
+tradeObject['games'] = []
 tradeObject['tradeInProgress'] = false
+tradeObject['acceptTrade'] = false
 tradeObject['incomingTrade'] = {}
+tradeObject['clearTrade'] = false
 
 socket.on('update players', function(connectedPlayers){
   
@@ -46,7 +48,7 @@ socket.on('update players', function(connectedPlayers){
   playerDropDown.autocomplete({
     lookup: playerNames,
     onSelect: function (player) {
-      suggestion.html('You selected: ' + player.value)
+      suggestion.html('Send to ' + player.value)
       playerDropDown.hide()
     }
   })
@@ -57,18 +59,18 @@ socket.on('update players', function(connectedPlayers){
   })
 })
 
-function sendTrade(sendToId,sentFromId,games) {
-  var trade = {
-    sender: sentFromId,
-    receiver: sendToId,
-    trade: tradeObject.outgoingGames
-  }
-  socket.emit('send trade', trade)
+function sendTrade(tradeObj) {
+  socket.emit('send trade', tradeObj)
 }
 
 socket.on('get trade', function(trade) {
   console.log('getting trade')
   console.log(trade)
+  switch (trade) {
+    
+  }
+  displayIncomingGames(trade.incomingTrade.games)
+
 })
 
 tradeWindowOut.droppable({
@@ -79,6 +81,7 @@ tradeWindowOut.droppable({
 
     tradeObject.outgoingGames.push(id)
     console.log(tradeObject)
+    sendTrade(tradeObject)
   },
   out: function(event, ui) {
     var draggable = ui.draggable,
@@ -89,12 +92,14 @@ tradeWindowOut.droppable({
       return gameId !== id
     })
     console.log(tradeObject)
+    sendTrade(tradeObject)
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
 })
 
 function displayIncomingGames(gameIdArray) {
+
   var gameIdArray = gameIdArray
 
   tradeWindowIn.html('')
@@ -117,6 +122,9 @@ function displayIncomingGames(gameIdArray) {
 }
 
 function updateTradeableCards() {
+
+  tradingArea.html('')
+
   var url = '/game/winnerCard/'
    $.ajax({
     url: url,
@@ -140,6 +148,9 @@ function updateTradeableCards() {
 }
 
 function updateOwnedCards() {
+
+  ownedGames.html('')
+
   var url = '/game/winnerCard/'
    $.ajax({
     url: url,
