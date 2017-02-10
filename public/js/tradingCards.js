@@ -43,7 +43,10 @@ socket.on('update players', function(connectedPlayers){
       value: playerAuth,
       data: player.id
     }  
-    //console.log(player.id + ' ' + sentFromIdInt + ' ' + typeof(player.id) + ' ' + typeof(sentFromIdInt))
+    console.log(player.id + ' ' + sentFromIdInt + ' ' + typeof(player.id) + ' ' + typeof(sentFromIdInt))
+    if(player.id === sentFromIdInt) {
+      break
+    }
     return rObj
     
   })
