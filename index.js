@@ -168,13 +168,21 @@ io.on('connection', function(socket) {
   })
 
   socket.on('send trade', function(tradeObj) {
-    console.log('trade sent')
+    console.log('trade sent from ' + tradeObj.sentFromId)
     console.log(tradeObj)
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
     socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObject);
+  })
+
+  socket.on('busy', function(trade) {
+    var socketId = clients.filter(function(obj) {
+      return obj.id === trade.sentFromId
     })
+    var message = 'That trader is busy with another trade.'
+    socket.broadcast.to(socketId[0].socketId).emit('busy', message); 
+  })
 })
  
 app.use('/admin', adminCtrl)

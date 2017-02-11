@@ -54,7 +54,7 @@ socket.on('update players', function(connectedPlayers){
       tradeObject.tradeInProgress = player.data
       // console.log(tradeObject)
       sendTrade(tradeObject)
-      suggestion.html('Send to ' + player.value)
+      suggestion.html('Trading with ' + player.value)
       playerDropDown.hide()
     }
   })
@@ -70,9 +70,39 @@ function sendTrade(tradeObj) {
 }
 
 socket.on('get trade', function(trade) {
+  var trade = trade
   console.log('getting trade')
   console.log(trade)
-  
+  if(!tradeObject.tradeInProgress) {
+    console.log('new trade started')
+    tradeObject.tradeInProgress = trade.sentFromId
+    tradeObject.gamesIn = trade.games
+    displayIncomingGames(tradeObject.gamesIn)
+  } else if ((trade.sentFromId === tradeObject.tradeInProgress) && !trade.clearTrade) {
+    console.log('current trade agreement changed')
+    tradeObject.gamesIn = trade.games
+    displayIncomingGames(tradeObject.gamesIn)
+    tradeObject.agreeOnTerms = false
+  } else if ((trade.sentFromId === tradeObject.tradeInProgress) && trade.clearTrade) {
+    console.log('trade cleared')
+  } else if (trade.sentFromId !== tradeObject.tradeInProgress) {
+    console.log('somebody tried trading with you but youa re busy')
+    socket.emit('busy', trade)
+  }
+})
+
+socket.on('busy', function(msg) {
+  tradeWindowIn.html(msg)
+})
+
+clearOutTrade.on('click', function() {
+  tradeObject['games'] = []
+  tradeObject['gamesIn'] = []
+  tradeObject['agreeOnTerms'] = false
+  tradeObject['clearTrade'] = true 
+  socket.emit('send trade', tradeObj)
+  tradeObject['clearTrade'] = false   
+  tradeObject['tradeInProgress'] = false
 })
 
 tradeWindowOut.droppable({
