@@ -72,7 +72,7 @@ function sendTrade(tradeObj) {
 socket.on('get trade', function(trade) {
   console.log('getting trade')
   console.log(trade)
-  sw
+  
 })
 
 tradeWindowOut.droppable({
