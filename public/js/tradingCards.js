@@ -124,7 +124,7 @@ function displayIncomingGames(gameIdArray) {
         }
       })
     })
-  else {
+  } else {
     tradeWindowIn.html('No games were sent')
   } 
 }
