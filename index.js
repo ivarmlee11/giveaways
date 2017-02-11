@@ -173,7 +173,8 @@ io.on('connection', function(socket) {
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
-    console.log(socketId.socketId)
+    console.log(socketId)
+    console.log(clients)
     socket.broadcast.to(socketId.socketId).emit('get trade', tradeObject);
     })
 })
