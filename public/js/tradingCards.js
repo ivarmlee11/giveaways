@@ -108,7 +108,7 @@ function displayIncomingGames(gameIdArray) {
 
   tradeWindowIn.html('')
 
-  if(gameIdArray.length) {
+  if(gameIdArray) {
     gameIdArray.forEach(function(val) {
       var url = '/game/gameData/' + val
 
