@@ -27,9 +27,9 @@ var tradingArea = $('#tradingArea'),
 tradeObject['sentFromId'] = sentFromIdInt
 tradeObject['sentFromName'] = $('#sentFromName').text()
 tradeObject['games'] = []
+tradeObject['gamesIn'] = []
 tradeObject['agreeOnTerms'] = false
 tradeObject['tradeInProgress'] = false
-tradeObject['incomingTrade'] = {}
 tradeObject['clearTrade'] = false
 
 socket.on('update players', function(connectedPlayers){
@@ -47,7 +47,6 @@ socket.on('update players', function(connectedPlayers){
     return rObj
     
   })
-
 
   playerDropDown.autocomplete({
     lookup: playerNames,
@@ -73,8 +72,7 @@ function sendTrade(tradeObj) {
 socket.on('get trade', function(trade) {
   console.log('getting trade')
   console.log(trade)
-  tradeObject.incomingTrade = trade.games
-  displayIncomingGames(trade.games)
+  sw
 })
 
 tradeWindowOut.droppable({
@@ -120,12 +118,12 @@ function displayIncomingGames(gameIdArray) {
             '<div class="cardsStatic">' + 
             '<h3>' + gameInfo.name + '</h3>' + 
             '</div>'
-            )
+          )
         }
       })
     })
   } else {
-    tradeWindowIn.html('No games were sent')
+    tradeWindowIn.html('<div class="text-center">No games were sent</div>')
   } 
 }
 
