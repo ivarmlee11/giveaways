@@ -108,21 +108,25 @@ function displayIncomingGames(gameIdArray) {
 
   tradeWindowIn.html('')
 
-  gameIdArray.forEach(function(val) {
-    var url = '/game/gameData/' + val
+  if(gameIdArray.length) {
+    gameIdArray.forEach(function(val) {
+      var url = '/game/gameData/' + val
 
-    $.ajax({
-      url: url,
-      type: 'GET',
-      success: function(gameInfo) {
-        tradeWindowIn.append(
-          '<div class="cardsStatic">' + 
-          '<h3>' + gameInfo.name + '</h3>' + 
-          '</div>'
-          )
-      }
+      $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(gameInfo) {
+          tradeWindowIn.append(
+            '<div class="cardsStatic">' + 
+            '<h3>' + gameInfo.name + '</h3>' + 
+            '</div>'
+            )
+        }
+      })
     })
-  })  
+  else {
+    tradeWindowIn.html('No games were sent')
+  } 
 }
 
 function updateTradeableCards() {
