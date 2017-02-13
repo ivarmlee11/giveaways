@@ -92,7 +92,8 @@ socket.on('get trade', function(trade) {
 })
 
 socket.on('busy', function(msg) {
-  tradeWindowIn.html(msg)
+  tradeWindowIn.html(msg) 
+  
 })
 
 clearOutTrade.on('click', function() {
