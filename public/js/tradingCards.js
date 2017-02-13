@@ -2,6 +2,10 @@ $(function() {
 
 var socket = io.connect()
 
+socket.on('connect_failed', function() {
+    document.write("Sorry, there seems to be an issue with the connection!");
+})
+
 var tradingArea = $('#tradingArea'),
     tradeWindowOut = $('#tradeWindowOut'),
     tradeWindowIn = $('#tradeWindowIn'),
