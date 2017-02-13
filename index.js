@@ -40,6 +40,11 @@ io.use(passportSocketIo.authorize({
   fail:         onAuthorizeFail     // *optional* callback on fail/error - read more below 
 }))
 
+io.use(function(socket, next){
+  if (socket.request.headers.cookie) return next()
+  next(new Error('Authentication error'))
+})
+
 function onAuthorizeSuccess(data, accept){
   console.log('successful connection to socket.io')
   accept()
