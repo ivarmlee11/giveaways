@@ -63,12 +63,8 @@ a, a:hover, a:active {
   font-size: .9em;
 }
 
-#tradeRow {
-  height: 400px;
-}
-
 #sentFromId {
-  display: none;
+  display: hidden;
 }
 
 #footer {
@@ -92,7 +88,7 @@ a, a:hover, a:active {
 
 #tradeWindowIn {
   border: 3px solid green;
-  height: 300px
+  min-height: 100px
 }
 
 #tradeWindowInfo {
