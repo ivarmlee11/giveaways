@@ -42,6 +42,7 @@ function clearTrade() {
   playerIn.html('')
   playerDropDown.show()
   suggestion.html('')
+  messageBox.html('')
 }
 
 socket.on('update players', function(connectedPlayers){
@@ -67,6 +68,7 @@ socket.on('update players', function(connectedPlayers){
       // console.log(tradeObj)
       sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)
+      messageBox.html('Trade started')
       playerDropDown.hide()
     }
   })
