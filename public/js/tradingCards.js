@@ -250,7 +250,11 @@ function updateTradeableCards() {
           )
           var id = '#reveal' + val.id
           $(id).on('click', function(e) {
+            e.preventDefault()
             console.log(e.target)
+            bootbox.confirm("If you reveal the code you'll no longer be able to trade the game", function(){
+              
+            })
           })
 
 
