@@ -32,6 +32,7 @@ function clearTradeObject() {
   tradeObj['agreeOnTerms'] = false
   tradeObj['tradeInProgress'] = false
   tradeObj['clearTrade'] = false
+  tradeObj['lastTrader'] = null
 }
 clearTradeObject()
 
@@ -79,38 +80,54 @@ socket.on('get trade', function(trade) {
 
   if(!tradeObj.tradeInProgress) {
 
-    console.log(tradeObj)
     console.log('new trade started')
+    console.log(tradeObj)
+    
     tradeObj.tradeInProgress = trade.sentFromId
     tradeObj.gamesIn = trade.games
-    playerDropDown.hide()
+    tradeObj.lastTrader = trade.sentFromId
+    
     playerIn.html(tradeObj.sentFromName)
+    playerDropDown.hide()
     displayIncomingGames(tradeObj.gamesIn)
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
 
-    console.log(tradeObj)
     console.log('current trade agreement changed')
+    console.log(tradeObj)
+
+    tradeWindowIn.html('')
+
     tradeObj.gamesIn = trade.games
-    displayIncomingGames(tradeObj.gamesIn)
+    tradeObj.lastTrader = trade.sentFromId
     tradeObj.agreeOnTerms = false
+
+    displayIncomingGames(tradeObj.gamesIn)
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
 
-    console.log(tradeObj)
     console.log('trade cleared')
+    console.log(tradeObj)
+    
+    tradeObj.agreeOnTerms = false
     clearTradeObject()
+    
+    tradeWindowIn.html('')
+    
 
   } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
 
     console.log('somebody tried trading with you but youa re busy')
+    console.log(tradeObj)
     socket.emit('busy', trade)
 
   }
 })
 
 socket.on('busy', function(msg) {
-  tradeWindowIn.html(msg)   
+  tradeWindowIn.html(msg)
+  clearTradeObject()
+  console.log(tradeObj)
 })
 
 clearOutTrade.on('click', function() {
@@ -121,6 +138,12 @@ clearOutTrade.on('click', function() {
   socket.emit('send trade', tradeObj)
   tradeObj['clearTrade'] = false   
   tradeObj['tradeInProgress'] = false
+
+  tradeWindowIn.html('')
+  tradeWindowOut.html('')
+  playerDropDown.show()
+
+  console.log(tradeObj)
 })
 
 tradeWindowOut.droppable({
