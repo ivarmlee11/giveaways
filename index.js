@@ -179,7 +179,7 @@ io.on('connection', function(socket) {
       return obj.id === tradeObj.tradeInProgress
     })
     if(socketId.length) {
-      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObject);
+      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObj);
     }
   })
 

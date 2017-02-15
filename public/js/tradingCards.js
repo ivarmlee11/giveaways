@@ -20,17 +20,17 @@ var tradingArea = $('#tradingArea'),
     sentFromIdInt = parseInt(sentFromId),
     acceptedByTrader = $('#acceptedByTrader'),
     tradeInProgressIndicator = $('#tradeInProgress'),
-    tradeObject = {},
+    tradeObj = {},
     playerNames = [],
     playerList = []
 
-tradeObject['sentFromId'] = sentFromIdInt
-tradeObject['sentFromName'] = $('#sentFromName').text()
-tradeObject['games'] = []
-tradeObject['gamesIn'] = []
-tradeObject['agreeOnTerms'] = false
-tradeObject['tradeInProgress'] = false
-tradeObject['clearTrade'] = false
+tradeObj['sentFromId'] = sentFromIdInt
+tradeObj['sentFromName'] = $('#sentFromName').text()
+tradeObj['games'] = []
+tradeObj['gamesIn'] = []
+tradeObj['agreeOnTerms'] = false
+tradeObj['tradeInProgress'] = false
+tradeObj['clearTrade'] = false
 
 socket.on('update players', function(connectedPlayers){
   
@@ -51,9 +51,9 @@ socket.on('update players', function(connectedPlayers){
   playerDropDown.autocomplete({
     lookup: playerNames,
     onSelect: function (player) {
-      tradeObject.tradeInProgress = player.data
-      // console.log(tradeObject)
-      sendTrade(tradeObject)
+      tradeObj.tradeInProgress = player.data
+      // console.log(tradeObj)
+      sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)
       playerDropDown.hide()
     }
@@ -73,19 +73,19 @@ socket.on('get trade', function(trade) {
   var trade = trade
   console.log('getting trade')
   console.log(trade)
-  if(!tradeObject.tradeInProgress) {
+  if(!tradeObj.tradeInProgress) {
     console.log('new trade started')
-    tradeObject.tradeInProgress = trade.sentFromId
-    tradeObject.gamesIn = trade.games
-    displayIncomingGames(tradeObject.gamesIn)
-  } else if ((trade.sentFromId === tradeObject.tradeInProgress) && !trade.clearTrade) {
+    tradeObj.tradeInProgress = trade.sentFromId
+    tradeObj.gamesIn = trade.games
+    displayIncomingGames(tradeObj.gamesIn)
+  } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
     console.log('current trade agreement changed')
-    tradeObject.gamesIn = trade.games
-    displayIncomingGames(tradeObject.gamesIn)
-    tradeObject.agreeOnTerms = false
-  } else if ((trade.sentFromId === tradeObject.tradeInProgress) && trade.clearTrade) {
+    tradeObj.gamesIn = trade.games
+    displayIncomingGames(tradeObj.gamesIn)
+    tradeObj.agreeOnTerms = false
+  } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
     console.log('trade cleared')
-  } else if (trade.sentFromId !== tradeObject.tradeInProgress) {
+  } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
     console.log('somebody tried trading with you but youa re busy')
     socket.emit('busy', trade)
   }
@@ -97,13 +97,13 @@ socket.on('busy', function(msg) {
 })
 
 clearOutTrade.on('click', function() {
-  tradeObject['games'] = []
-  tradeObject['gamesIn'] = []
-  tradeObject['agreeOnTerms'] = false
-  tradeObject['clearTrade'] = true 
-  socket.emit('send trade', tradeObject)
-  tradeObject['clearTrade'] = false   
-  tradeObject['tradeInProgress'] = false
+  tradeObj['games'] = []
+  tradeObj['gamesIn'] = []
+  tradeObj['agreeOnTerms'] = false
+  tradeObj['clearTrade'] = true 
+  socket.emit('send trade', tradeObj)
+  tradeObj['clearTrade'] = false   
+  tradeObj['tradeInProgress'] = false
 })
 
 tradeWindowOut.droppable({
@@ -112,20 +112,20 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid'),
         id = parseInt(id)
 
-    tradeObject.games.push(id)
-    // console.log(tradeObject)
-    sendTrade(tradeObject)
+    tradeObj.games.push(id)
+    // console.log(tradeObj)
+    sendTrade(tradeObj)
   },
   out: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id)
 
-    tradeObject.games = tradeObject.games.filter(function(gameId) {
+    tradeObj.games = tradeObj.games.filter(function(gameId) {
       return gameId !== id
     })
-    // console.log(tradeObject)
-    sendTrade(tradeObject)
+    // console.log(tradeObj)
+    sendTrade(tradeObj)
   },
   activeClass: 'highlight',
   hoverClass: 'foundhome'
