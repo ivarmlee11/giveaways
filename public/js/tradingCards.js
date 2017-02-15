@@ -168,6 +168,7 @@ clearOutTrade.on('click', function() {
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {
+    console.log(ui)
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
