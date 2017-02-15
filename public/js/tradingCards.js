@@ -16,7 +16,7 @@ var tradingArea = $('#tradingArea'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
-    // revealLink = $('#reveal'),
+    revealLink = $('#reveal'),
     sentFromId = $('#sentFromId').text(),
     sentFromIdInt = parseInt(sentFromId),
     acceptedByTrader = $('#acceptedByTrader'),
@@ -45,6 +45,17 @@ function clearTrade() {
   suggestion.html('')
   messageBox.html('')
 }
+
+revealLink.on('click', function(e) {
+  e.preventDefault()
+  console.log($(this).attr('href'))
+  var href = $(this).attr('href')
+  console.log(e.target)
+  bootbox.confirm("If you reveal the code you'll no longer be able to trade the game", function(){
+    window.location = href
+  })
+})
+
 
 socket.on('update players', function(connectedPlayers){
   
@@ -178,10 +189,10 @@ tradeWindowOut.droppable({
     reveal.hide()
     // console.log(tradeObj)
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
-      console.log(item + ' item')
-      console.log(index + ' index')
-      console.log(inputArray + ' inputArray')
-      console.log(inputArray.indexOf(item) == index)
+      // console.log(item + ' item')
+      // console.log(index + ' index')
+      // console.log(inputArray + ' inputArray')
+      // console.log(inputArray.indexOf(item) == index)
       return inputArray.indexOf(item) == index
     })
 
@@ -246,19 +257,9 @@ function updateTradeableCards() {
           tradingArea.append(
             '<div gameId="' + val.id + '" class="cards">' + 
             '<h3>' + val.name + '</h3>' + 
-            '<h5><a id="reveal'+ val.id + '" href="/game/claimed/' + val.id + '">Reveal Code</a></h5>' +
+            '<h5><a id="reveal" href="/game/claimed/' + val.id + '">Reveal Code</a></h5>' +
             '</div>'
           )
-          var id = '#reveal' + val.id
-          $(id).on('click', function(e) {
-            e.preventDefault()
-            console.log(e.target)
-            bootbox.confirm("If you reveal the code you'll no longer be able to trade the game", function(){
-
-            })
-          })
-
-
         }
       })
       $('.cards').draggable({
