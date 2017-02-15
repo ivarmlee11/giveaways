@@ -181,7 +181,7 @@ tradeWindowOut.droppable({
 
 function displayIncomingGames(gameIdArray) {
 
-  var gameIdArray = gameIdArraytr
+  var gameIdArray = gameIdArray
 
   tradeWindowIn.html('')
 
