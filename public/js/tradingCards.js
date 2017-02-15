@@ -171,7 +171,7 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
-        reveal = draggable.attr('reveal')
+        reveal = $(this).attr('reveal')
 
     tradeObj.games.push(id)
     reveal.hide()
@@ -190,7 +190,7 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
-        reveal = draggable.attr('reveal')
+        reveal = $(this).attr('reveal')
 
     reveal.show()
     tradeObj.games = tradeObj.games.filter(function(gameId) {
