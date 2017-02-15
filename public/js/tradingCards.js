@@ -16,7 +16,7 @@ var tradingArea = $('#tradingArea'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
-    revealLink = $('#reveal'),
+    // revealLink = $('#reveal'),
     sentFromId = $('#sentFromId').text(),
     sentFromIdInt = parseInt(sentFromId),
     acceptedByTrader = $('#acceptedByTrader'),
@@ -45,16 +45,6 @@ function clearTrade() {
   suggestion.html('')
   messageBox.html('')
 }
-
-revealLink.on('click', function(e) {
-  e.preventDefault()
-  console.log($(this).attr('href'))
-  var href = $(this).attr('href')
-  console.log(e.target)
-  bootbox.confirm("If you reveal the code you'll no longer be able to trade the game", function(){
-    window.location = href
-  })
-})
 
 
 socket.on('update players', function(connectedPlayers){
@@ -179,14 +169,14 @@ clearOutTrade.on('click', function() {
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {
-    console.log(ui)
+    console.log(ui.draggable)
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
         reveal = draggable.attr('id')
 
     tradeObj.games.push(id)
-    reveal.hide()
+    // reveal.hide()
     // console.log(tradeObj)
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
       // console.log(item + ' item')
@@ -204,7 +194,7 @@ tradeWindowOut.droppable({
         id = parseInt(id),
         reveal = draggable.attr('id')
 
-    reveal.show()
+    // reveal.show()
     tradeObj.games = tradeObj.games.filter(function(gameId) {
       return gameId !== id
     })
