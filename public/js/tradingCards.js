@@ -41,6 +41,7 @@ function clearTrade() {
   tradeWindowOut.html('')
   playerIn.html('')
   playerDropDown.show()
+  suggestion.html('')
 }
 
 socket.on('update players', function(connectedPlayers){
@@ -94,7 +95,8 @@ socket.on('get trade', function(trade) {
     tradeObj.gamesIn = trade.games
     tradeObj.lastTrader = trade.sentFromId
     
-    playerIn.html(tradeObj.sentFromName)
+    playerIn.html(trade.sentFromName)
+    suggestion.html('Trading with ' + trade.sentFromName)
     playerDropDown.hide()
     displayIncomingGames(tradeObj.gamesIn)
     messageBox.html('Trade started')
@@ -110,7 +112,7 @@ socket.on('get trade', function(trade) {
     tradeObj.lastTrader = trade.sentFromId
     tradeObj.agreeOnTerms = false
 
-    playerIn.html(tradeObj.sentFromName)
+    playerIn.html(trade.sentFromName)
     displayIncomingGames(tradeObj.gamesIn)
     messageBox.html('Trade updated')
 
