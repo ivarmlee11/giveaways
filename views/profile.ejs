@@ -17,11 +17,6 @@
     </div>
     <div id="tradeWindowIn" class="col-md-4">
     </div>
-    <div class="col-md-4 text-center">
-      <h3>Current Traders</h3>
-      <div id="currentPlayers" class="text-center"> 
-      </div>
-    </div>
   </div>
   <div class="row">
     <div id="tradeWindowOutInfo" class="col-md-4 text-center">
@@ -56,4 +51,9 @@
     <h3><strong><%=contest.name%></strong></h3>
     <h5><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%> PST</strong></h5>  
   <% }); %>  
+</div>
+<div class="col-md-4 text-center">
+  <h3>Current Traders</h3>
+  <div id="currentPlayers" class="text-center"> 
+  </div>
 </div>

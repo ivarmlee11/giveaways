@@ -101,7 +101,7 @@ clearOutTrade.on('click', function() {
   tradeObject['gamesIn'] = []
   tradeObject['agreeOnTerms'] = false
   tradeObject['clearTrade'] = true 
-  socket.emit('send trade', tradeObj)
+  socket.emit('send trade', tradeObject)
   tradeObject['clearTrade'] = false   
   tradeObject['tradeInProgress'] = false
 })
