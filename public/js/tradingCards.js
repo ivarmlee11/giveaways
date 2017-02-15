@@ -16,7 +16,7 @@ var tradingArea = $('#tradingArea'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
-    revealLink = $('#reveal'),
+    // revealLink = $('#reveal'),
     sentFromId = $('#sentFromId').text(),
     sentFromIdInt = parseInt(sentFromId),
     acceptedByTrader = $('#acceptedByTrader'),
@@ -171,7 +171,7 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
-        reveal = $(this).attr('reveal')
+        reveal = $(this).attr('id')
 
     tradeObj.games.push(id)
     reveal.hide()
@@ -190,7 +190,7 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
-        reveal = $(this).attr('reveal')
+        reveal = $(this).attr('id')
 
     reveal.show()
     tradeObj.games = tradeObj.games.filter(function(gameId) {
@@ -222,6 +222,7 @@ function displayIncomingGames(gameIdArray) {
             '<h3>' + gameInfo.name + '</h3>' + 
             '</div>'
           )
+
         }
       })
     })
@@ -241,11 +242,18 @@ function updateTradeableCards() {
     success: function(cardList) {
       cardList.forEach(function(val) {
         if(!val.coderevealed) {
-          tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
-          '<h3>' + val.name + '</h3>' + 
-          '<h5><a id="reveal" href="/game/claimed/' + val.id + '">Reveal Code</a></h5>' +
-          '</div>'
-        )
+          tradingArea.append(
+            '<div gameId="' + val.id + '" class="cards">' + 
+            '<h3>' + val.name + '</h3>' + 
+            '<h5><a id="reveal'+ val.id + '" href="/game/claimed/' + val.id + '">Reveal Code</a></h5>' +
+            '</div>'
+          )
+          var id = '#reveal' + val.id
+          $(id).on('click', function(e) {
+            console.log(e.target)
+          })
+
+
         }
       })
       $('.cards').draggable({
