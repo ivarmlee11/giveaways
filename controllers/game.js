@@ -132,19 +132,27 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
 })
 
 router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
-  var gameId = req.params.idx
+  var gameId = req.params.idx,
+      userId = req.user.dataValues.id;
+  console.log(req.user)
 
   db.game.update({
     coderevealed: true
   }, {
     where: {
-      id: gameId
+      id: gameId,
+      userId: userId
     }
   }).then(function(game) {
-  })
+    req.flash('success', 'Code revealed. You now own this game') 
+    res.redirect('back')
+  }).catch(function (err) {
+    if(err) {
+      req.flash('success', 'You do not own that game you idiot') 
+      res.redirect('back')      
+    }
+  });
 
-  req.flash('success', 'Code revealed. You now own this game') 
-  res.redirect('back')
 })
 
 module.exports = router

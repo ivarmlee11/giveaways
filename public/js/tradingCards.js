@@ -16,7 +16,7 @@ var tradingArea = $('#tradingArea'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
-    // revealLink = $('#reveal'),
+    revealLink = $('#reveal'),
     sentFromId = $('#sentFromId').text(),
     sentFromIdInt = parseInt(sentFromId),
     acceptedByTrader = $('#acceptedByTrader'),
@@ -251,6 +251,9 @@ function updateTradeableCards() {
             '</div>'
           )
         }
+      })
+      $('#reveal').on('click', function() {
+        
       })
       $('.cards').draggable({
         stack: '.cards',
