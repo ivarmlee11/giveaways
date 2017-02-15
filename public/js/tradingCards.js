@@ -169,8 +169,9 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid'),
         id = parseInt(id)
 
-    tradeObj.games.push(id)
-    // console.log(tradeObj)
+    tradeObj.games = tradeObj.games.filter(function(gameId) {
+      return gameId !== id
+    })
     sendTrade(tradeObj)
   },
   out: function(event, ui) {
