@@ -16,6 +16,7 @@ var tradingArea = $('#tradingArea'),
     ownedGames = $('#ownedGames'),
     acceptTrade = $('#acceptTrade'),
     suggestion = $('#suggestion'),
+    revealLink = $('#reveal'),
     sentFromId = $('#sentFromId').text(),
     sentFromIdInt = parseInt(sentFromId),
     acceptedByTrader = $('#acceptedByTrader'),
@@ -100,8 +101,9 @@ socket.on('get trade', function(trade) {
     playerIn.html(trade.sentFromName)
     suggestion.html('Trading with ' + trade.sentFromName)
     playerDropDown.hide()
-    displayIncomingGames(tradeObj.gamesIn)
     messageBox.html('Trade started')
+    
+    displayIncomingGames(tradeObj.gamesIn)
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
 
@@ -115,8 +117,9 @@ socket.on('get trade', function(trade) {
     tradeObj.agreeOnTerms = false
 
     playerIn.html(trade.sentFromName)
-    displayIncomingGames(tradeObj.gamesIn)
     messageBox.html('Trade updated')
+    
+    displayIncomingGames(tradeObj.gamesIn)
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
 
@@ -167,9 +170,11 @@ tradeWindowOut.droppable({
   drop: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
-        id = parseInt(id)
+        id = parseInt(id),
+        reveal = draggable.attr('reveal')
 
     tradeObj.games.push(id)
+    reveal.addClass('hide')
     // console.log(tradeObj)
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
       console.log(item + ' item')
@@ -184,8 +189,10 @@ tradeWindowOut.droppable({
   out: function(event, ui) {
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
-        id = parseInt(id)
+        id = parseInt(id),
+        reveal = draggable.attr('reveal')
 
+    reveal.removeClass('hide')
     tradeObj.games = tradeObj.games.filter(function(gameId) {
       return gameId !== id
     })
@@ -236,7 +243,7 @@ function updateTradeableCards() {
         if(!val.coderevealed) {
           tradingArea.append('<div gameId="' + val.id + '" class="cards">' + 
           '<h3>' + val.name + '</h3>' + 
-          '<h5><a href="/game/claimed/' + val.id + '">Reveal Code</a></h5>' +
+          '<h5><a id="reveal" href="/game/claimed/' + val.id + '">Reveal Code</a></h5>' +
           '</div>'
         )
         }

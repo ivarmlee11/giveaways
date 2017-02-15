@@ -140,6 +140,7 @@ io.on('connection', function(socket) {
   var clientId = socket.request.user.dataValues.id,
       clientAuth = socket.request.user.dataValues.auth,
       clientName = socket.request.user.dataValues.username,
+      lastTrader = null,
       currentlyInTradeWithSocket,
       tradeObject = {}
 
@@ -167,13 +168,18 @@ io.on('connection', function(socket) {
     console.log(clients)
 
     io.emit('update players', clients)
-    if(currentlyInTradeWithSocket) {
-      // send this to your partner that u ditched
+    if(lastTrader) {
+      var socketId = clients.filter(function(obj) {
+        return obj.id === lastTrader
+      })
+      tradeObj.clearThis = true
+      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObj); 
     }
   })
 
   socket.on('send trade', function(tradeObj) {
     console.log('trade sent from ' + tradeObj.sentFromId)
+    lastTrader = tradeObj.sentFromId
     console.log(tradeObj)
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress

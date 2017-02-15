@@ -68,7 +68,7 @@ a, a:hover, a:active {
 }
 
 #sentFromId {
-  display: hidden;
+  display: none;
 }
 
 #footer {
