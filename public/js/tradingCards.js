@@ -102,6 +102,7 @@ socket.on('get trade', function(trade) {
     tradeObj.lastTrader = trade.sentFromId
     tradeObj.agreeOnTerms = false
 
+    playerIn.html(tradeObj.sentFromName)
     displayIncomingGames(tradeObj.gamesIn)
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
@@ -117,7 +118,7 @@ socket.on('get trade', function(trade) {
 
   } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
 
-    console.log('somebody tried trading with you but youa re busy')
+    console.log('somebody tried trading with you but you are busy')
     console.log(tradeObj)
     socket.emit('busy', trade)
 
@@ -142,7 +143,8 @@ clearOutTrade.on('click', function() {
   tradeWindowIn.html('')
   tradeWindowOut.html('')
   playerDropDown.show()
-
+  
+  updateTradeableCards()
   console.log(tradeObj)
 })
 
