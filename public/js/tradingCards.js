@@ -90,6 +90,7 @@ socket.on('get trade', function(trade) {
     playerIn.html(tradeObj.sentFromName)
     playerDropDown.hide()
     displayIncomingGames(tradeObj.gamesIn)
+    messageBox.html('Trade started')
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
 
@@ -104,6 +105,7 @@ socket.on('get trade', function(trade) {
 
     playerIn.html(tradeObj.sentFromName)
     displayIncomingGames(tradeObj.gamesIn)
+    messageBox.html('Trade updated')
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
 
@@ -113,8 +115,11 @@ socket.on('get trade', function(trade) {
     tradeObj.agreeOnTerms = false
     clearTradeObject()
     
+    updateTradeableCards()
     tradeWindowIn.html('')
-    
+    tradeWindowOut.html('')
+    playerIn.html('')
+    messageBox.html('Trade cleared')
 
   } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
 
@@ -127,6 +132,7 @@ socket.on('get trade', function(trade) {
 
 socket.on('busy', function(msg) {
   tradeWindowIn.html(msg)
+  messageBox.html(msg)
   clearTradeObject()
   console.log(tradeObj)
 })
@@ -175,7 +181,7 @@ tradeWindowOut.droppable({
 
 function displayIncomingGames(gameIdArray) {
 
-  var gameIdArray = gameIdArray
+  var gameIdArray = gameIdArraytr
 
   tradeWindowIn.html('')
 
