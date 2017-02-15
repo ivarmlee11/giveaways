@@ -24,13 +24,16 @@ var tradingArea = $('#tradingArea'),
     playerNames = [],
     playerList = []
 
-tradeObj['sentFromId'] = sentFromIdInt
-tradeObj['sentFromName'] = $('#sentFromName').text()
-tradeObj['games'] = []
-tradeObj['gamesIn'] = []
-tradeObj['agreeOnTerms'] = false
-tradeObj['tradeInProgress'] = false
-tradeObj['clearTrade'] = false
+function clearTradeObject() {
+  tradeObj['sentFromId'] = sentFromIdInt
+  tradeObj['sentFromName'] = $('#sentFromName').text()
+  tradeObj['games'] = []
+  tradeObj['gamesIn'] = []
+  tradeObj['agreeOnTerms'] = false
+  tradeObj['tradeInProgress'] = false
+  tradeObj['clearTrade'] = false
+}
+clearTradeObject()
 
 socket.on('update players', function(connectedPlayers){
   
@@ -73,27 +76,41 @@ socket.on('get trade', function(trade) {
   var trade = trade
   console.log('getting trade')
   console.log(trade)
+
   if(!tradeObj.tradeInProgress) {
+
+    console.log(tradeObj)
     console.log('new trade started')
     tradeObj.tradeInProgress = trade.sentFromId
     tradeObj.gamesIn = trade.games
+    playerDropDown.hide()
+    playerIn.html(tradeObj.sentFromName)
     displayIncomingGames(tradeObj.gamesIn)
+
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
+
+    console.log(tradeObj)
     console.log('current trade agreement changed')
     tradeObj.gamesIn = trade.games
     displayIncomingGames(tradeObj.gamesIn)
     tradeObj.agreeOnTerms = false
+
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
+
+    console.log(tradeObj)
     console.log('trade cleared')
+    clearTradeObject()
+
   } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
+
     console.log('somebody tried trading with you but youa re busy')
     socket.emit('busy', trade)
+
   }
 })
 
 socket.on('busy', function(msg) {
-  tradeWindowIn.html(msg) 
-  
+  tradeWindowIn.html(msg)   
 })
 
 clearOutTrade.on('click', function() {
