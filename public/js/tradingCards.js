@@ -172,9 +172,12 @@ tradeWindowOut.droppable({
         id = draggable.attr('gameid'),
         id = parseInt(id),
         reveal = $(this).attr('id')
-
+    console.log(reveal)
+    var test = '#' + reveal
+    console.log(test)
+    console.log($())
     tradeObj.games.push(id)
-    reveal.hide()
+    reveal.addClass('hide')
     // console.log(tradeObj)
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
       console.log(item + ' item')
@@ -253,7 +256,7 @@ function updateTradeableCards() {
             e.preventDefault()
             console.log(e.target)
             bootbox.confirm("If you reveal the code you'll no longer be able to trade the game", function(){
-              
+
             })
           })
 
