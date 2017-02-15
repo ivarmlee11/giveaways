@@ -177,7 +177,7 @@ tradeWindowOut.droppable({
 
     tradeObj.games.push(id)
     reveal.hide()
-    playerIn.html(tradeObj.tradeInProgress)
+    // playerIn.html(tradeObj.tradeInProgress)
     // console.log(tradeObj)
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
       // console.log(item + ' item')

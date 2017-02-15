@@ -88,22 +88,22 @@ a, a:hover, a:active {
 
 #tradeWindowIn {
   border: 3px solid green;
-  min-height: 100px
+  height: 200px;
 }
 
 #tradeWindowInfo {
   border: 3px solid green;
-  height: 200px
+  height: 200px;
 }
 
 #tradeWindowOut {
   border: 3px solid blue;
-  height: 300px
+  height: 300px;
 }
 
 #tradeWindowOutInfo {
   border: 3px solid blue;
-  height: 200px
+  height: 200px;
 }
 
 #messageBox {

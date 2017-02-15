@@ -174,6 +174,8 @@ io.on('connection', function(socket) {
       })
       tradeObject['clearThis'] = true
       tradeObject['sentFromId'] = clientId
+      console.log(socketId[0].socketId)
+      console.log(tradeObject)
       if(socketId.length) {
         socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObject)
       }
