@@ -173,10 +173,10 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
-        reveal = draggable.attr('id')
+        reveal = draggable.find('a')
 
     tradeObj.games.push(id)
-    // reveal.hide()
+    reveal.hide()
     // console.log(tradeObj)
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
       // console.log(item + ' item')
@@ -192,9 +192,9 @@ tradeWindowOut.droppable({
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
-        reveal = draggable.attr('id')
+        reveal = draggable.find('a')
 
-    // reveal.show()
+    reveal.show()
     tradeObj.games = tradeObj.games.filter(function(gameId) {
       return gameId !== id
     })
