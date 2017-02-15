@@ -178,7 +178,9 @@ io.on('connection', function(socket) {
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
-    socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObject);
+    if(socketId.length) {
+      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObject);
+    }
   })
 
   socket.on('busy', function(trade) {
