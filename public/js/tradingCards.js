@@ -252,9 +252,7 @@ function updateTradeableCards() {
           )
         }
       })
-      $('#reveal').on('click', function() {
-        
-      })
+
       $('.cards').draggable({
         stack: '.cards',
         activeClass: 'highlight'

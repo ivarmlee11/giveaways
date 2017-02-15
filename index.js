@@ -172,8 +172,9 @@ io.on('connection', function(socket) {
       var socketId = clients.filter(function(obj) {
         return obj.id === lastTrader
       })
-      tradeObj.clearThis = true
-      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObj); 
+      tradeObject.clearThis = true
+      tradeObject.sentFromId = clientId
+      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObject); 
     }
   })
 
