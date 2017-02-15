@@ -36,6 +36,13 @@ function clearTradeObject() {
 }
 clearTradeObject()
 
+function clearTrade() {
+  tradeWindowIn.html('')
+  tradeWindowOut.html('')
+  playerIn.html('')
+  playerDropDown.show()
+}
+
 socket.on('update players', function(connectedPlayers){
   
   playerList = connectedPlayers
@@ -116,9 +123,7 @@ socket.on('get trade', function(trade) {
     clearTradeObject()
     
     updateTradeableCards()
-    tradeWindowIn.html('')
-    tradeWindowOut.html('')
-    playerIn.html('')
+    clearTrade()
     messageBox.html('Trade cleared')
 
   } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
@@ -133,7 +138,10 @@ socket.on('get trade', function(trade) {
 socket.on('busy', function(msg) {
   tradeWindowIn.html(msg)
   messageBox.html(msg)
+  console.log('trade sent out to a busy client')
+  console.log(tradeObj)
   clearTradeObject()
+  console.log('trade after being cleared')
   console.log(tradeObj)
 })
 
@@ -146,10 +154,7 @@ clearOutTrade.on('click', function() {
   tradeObj['clearTrade'] = false   
   tradeObj['tradeInProgress'] = false
 
-  tradeWindowIn.html('')
-  tradeWindowOut.html('')
-  playerDropDown.show()
-  
+  clearTrade()
   updateTradeableCards()
   console.log(tradeObj)
 })
