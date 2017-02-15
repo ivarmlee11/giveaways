@@ -175,6 +175,7 @@ tradeWindowOut.droppable({
       console.log(item + ' item')
       console.log(index + ' index')
       console.log(inputArray + ' inputArray')
+      console.log(inputArray.indexOf(item) == index)
       return inputArray.indexOf(item) == index
     })
 

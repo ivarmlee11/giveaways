@@ -11,32 +11,32 @@
 </div>
 <h1 class="text-center">Trading Window</h1>
 <h2 class="text-center" id="messageBox"></h2>
-  <div class="row">
-    <div id="tradeWindowOut" class="col-sm-6">
-    </div>
-    <div id="tradeWindowIn" class="col-sm-6">
+<div id="tradeRow" class="row">
+  <div id="tradeWindowOut" class="col-sm-6">
+  </div>
+  <div id="tradeWindowIn" class="col-sm-6">
+  </div>
+</div>
+<div id="tradeWindowOutInfo" class="col-sm-6 text-center">
+  <div class='text-center'>
+    <button id="clearOutTrade" class="btn btn-danger">Clear Outgoing Trade</button>
+    <button id="acceptTrade" class="btn btn-info">Accept Trade Request</button>
+    <div id="acceptedByTrader">
     </div>
   </div>
-  <div id="tradeWindowOutInfo" class="col-sm-6 text-center">
-    <div class='text-center'>
-      <button id="clearOutTrade" class="btn btn-danger">Clear Outgoing Trade</button>
-      <button id="acceptTrade" class="btn btn-info">Accept Trade Request</button>
-      <div id="acceptedByTrader">
-      </div>
-    </div>
-    <div id="playerDropDownContainter" class="text-center">
-      <input type="text" id="playerDropDown"/>
-    </div>
-    <div class='text-center'>
-      <div id="suggestion">
-      </div>
+  <div id="playerDropDownContainter" class="text-center">
+    <input type="text" id="playerDropDown"/>
+  </div>
+  <div class='text-center'>
+    <div id="suggestion">
     </div>
   </div>
-  <div id="tradeWindowInfo" class="col-sm-6 text-center">
-    <div class='text-center'>
-      <h2>Receiving from: <span id="playerIn"></span></h2>
-    </div>
+</div>
+<div id="tradeWindowInfo" class="col-sm-6 text-center">
+  <div class='text-center'>
+    <h2>Receiving from: <span id="playerIn"></span></h2>
   </div>
+</div>
 <h1 id="tradeInProgress" class="text-center"></h1>
 <h1 class="text-center">Owned Games</h1>
 <div id="ownedGames" class="container">
