@@ -177,7 +177,7 @@ io.on('connection', function(socket) {
       console.log(tradeObject)
       if(socketId.length) {
         console.log(socketId[0])
-        socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObject)
+        socket.broadcast.to(socketId[0].socketId).emit('dc', tradeObject)
       }
     }
   })

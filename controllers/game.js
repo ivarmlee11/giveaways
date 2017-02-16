@@ -147,10 +147,7 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
     req.flash('success', 'Code revealed. You now own this game') 
     res.redirect('back')
   }).catch(function (err) {
-    if(err) {
-      req.flash('success', 'You do not own that game you idiot') 
-      // res.redirect('back')      
-    }
+    req.flash('success', 'You do not own that game you idiot') 
   });
 
 })

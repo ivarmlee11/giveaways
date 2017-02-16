@@ -153,6 +153,13 @@ socket.on('busy', function(msg) {
   console.log(tradeObj)
 })
 
+socket.on('dc', function(msg) {
+  console.log('You just got cleared')
+  clearTrade()
+  clearTradeObject()
+  console.log(tradeObj)
+})
+
 clearOutTrade.on('click', function() {
   tradeObj['games'] = []
   tradeObj['gamesIn'] = []
