@@ -31,7 +31,7 @@ a, a:hover, a:active {
   height: 100px;
   border: 2px;
 }
-
+/*
 #drop-box{  
   border: 10px solid rgb(14, 56, 119);  
   cursor: pointer;
@@ -63,6 +63,10 @@ a, a:hover, a:active {
 
 #upl{
   display: none;
+}
+*/
+#playerDropDown {
+  width: 75%;
 }
 
 #loginBox, .well {
