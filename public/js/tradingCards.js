@@ -28,7 +28,7 @@ var tradingArea = $('#tradingArea'),
     colorSample = $('#colorSample')
 
 function showMyColor(id) {
-  var url = '/userInfo/getColor/' + id
+  var url = '/user/getColor/' + id
   $.ajax({
     type: 'GET',
     url: url,
@@ -47,9 +47,9 @@ function showMyColor(id) {
 showMyColor(sentFromIdInt)
 
 function changeMyColor(id, color) {
-  var url = '/userInfo/changeMyColor/' + id
+  var url = '/user/changeMyColor/' + id
   $.ajax({
-    type: 'GET',
+    type: 'POST',
     url: url,
     success: function(color) {
       var myColor; 
@@ -73,7 +73,7 @@ customBox.on('change', function() {
   var color = customBox.val()
   console.log(color)
   changeMyColor(sentFromIdInt, color)
-  colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')
+  colorSample.html('<div style="background-color:' + color + '">')
 
 })
 

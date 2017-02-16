@@ -4,16 +4,23 @@
 <script src='/js/spectrum.js'></script>
 <link rel='stylesheet' href='/styles/spectrum.css' />
 
+<!-- <div class="row"> -->
+<div class="col-md-12 text-center">
+  <span id="sentFromId"><%= user.id %></span> <span id="sentFromName"><%= user.username %></span>
+</div>
 <div class="row">
-  <div class="col-md-10">
-    <h1 class="text-center"><span id="sentFromId"><%= user.id %></span> <span id="sentFromName"><%= user.username %></span></h1>
-  </div>
-  <div id="colorContainer" class="col-sm-2 text-center">
+  <div class="col-sm-6 text-center">
     Choose your wheel color! <input type='text' id="custom" />
     <div id="colorSample">
     </div>
   </div>
+  <div class="col-sm-6 text-center">
+    Image Uploader
+    <div id="imageSample">
+    </div>
+  </div>
 </div>
+<!-- </div> -->
 <h1 class="text-center">Tradable Games</h1>
 <div id="tradingArea" class="container">
 </div>

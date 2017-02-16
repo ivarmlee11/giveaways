@@ -5,7 +5,7 @@ var express = require('express'),
     db = require('../models'),
     flash = require('connect-flash')
 
-router.get('/getColor/:idx', ensureAuthenticated, function(req, res) {
+router.get('/getColor/:idx', function(req, res) {
   var id = req.params.idx
   db.user.find({
     where: {id: id}

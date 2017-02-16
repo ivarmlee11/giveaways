@@ -26,18 +26,11 @@ a, a:hover, a:active {
   margin-top: 15px;
 }
 
-#colorSample, .fixedHeight {
-  padding-top: 30px;
-  padding-left: 30px;
+#colorSample {
+  margin: 0 auto;
   width: 100px;
   height: 100px;
   border: 2px solid black;
-}
-
-#colorContainer {
-  padding-top: 30px;
-  padding-right: 30px;
-  padding-left: 30px;
 }
 
 .autocomplete-suggestion {

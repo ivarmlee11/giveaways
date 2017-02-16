@@ -86,14 +86,14 @@ var adminCtrl = require('./controllers/admin'),
     giveawayCtrl = require('./controllers/giveaway'),
     playerCtrl = require('./controllers/player'),
     gameCtrl = require('./controllers/game')
-    userCtrl = require('./controllers/userInfo')
+    userCtrl = require('./controllers/user')
 
 app.use('/admin', adminCtrl)
 app.use('/player', playerCtrl)
 app.use('/game', gameCtrl)
 app.use('/giveaway', giveawayCtrl)
 app.use('/auth', authCtrl)
-app.use('userInfo', userCtrl)
+app.use('user', userCtrl)
 
 // twitch bot config
 
