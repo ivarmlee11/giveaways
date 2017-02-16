@@ -26,11 +26,7 @@ var tradingArea = $('#tradingArea'),
     playerList = [],
     customBox = $("#custom")
 
-customBox.spectrum({
-  color: "#f00"
-})
-
-customBox.on('change', function() {
+customBox.on('select', function() {
   var color = customBox.val()
   console.log(color)
   $('#colorSample').html('<div style="background-color:' + color + '">')
