@@ -28,13 +28,13 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
       where: {
         id: id
       }
-    }).then(function(game) {
+    }).then(function() {
       req.flash('success', 'Color changed. Check yourself out next time the wheel spins.') 
       res.redirect('back')
-    })
-  } else {
-    req.flash('success', 'Do not try to change stuff that does not belong to you.') 
-    res.redirect('back')    
+    }).catch(function() {
+      req.flash('success', 'Eh, you cannot do that') 
+      res.redirect('back')      
+    }
   }
 })
 
