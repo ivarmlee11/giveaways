@@ -182,6 +182,8 @@ io.on('connection', function(socket) {
   })
 
   socket.on('last trade', function(lastTrader) {
+    console.log(lastTrader)
+    console.log('last trader')
     lastTrader = lastTrader
   })
 
