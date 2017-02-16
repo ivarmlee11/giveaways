@@ -769,13 +769,17 @@ function createWheel() {
           wheel.segments.push({
             username: val.username,
             id: val.id,
-          });
-          wheel.colors.push({
             color: val.color 
           });
         });
+        wheel.segments.forEach(function(val) {
+          wheel.colors.push(val.color)
+        })
         console.log('player list')
         console.log(wheel.segments)
+        console.log('color list')
+        console.log(wheel.colors)
+
         wheel.init(); 
         wheel.update();
       }
