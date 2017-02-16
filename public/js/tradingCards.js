@@ -46,10 +46,6 @@ function clearTrade() {
   messageBox.html('')
 }
 
-function sendTrade(tradeObj) {
-  socket.emit('last trade', tradeObj.tradeInProgress)
-  socket.emit('send trade', tradeObj)
-}
 
 socket.on('update players', function(connectedPlayers){
   
@@ -86,6 +82,10 @@ socket.on('update players', function(connectedPlayers){
   })
 })
 
+function sendTrade(tradeObj) {
+  socket.emit('last trade', tradeObj.tradeInProgress)
+  socket.emit('send trade', tradeObj)
+}
 
 socket.on('get trade', function(trade) {
   var trade = trade
