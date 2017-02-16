@@ -47,9 +47,11 @@ function showMyColor(id) {
 showMyColor(sentFromIdInt)
 
 function changeMyColor(id, color) {
-  var url = '/user/changecolor/' + id
+  var url = '/user/changecolor/' + id,
+      color = color
   $.ajax({
     type: 'POST',
+    data: color,
     url: url,
     success: function(color) {
       var myColor; 

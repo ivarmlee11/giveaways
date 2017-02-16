@@ -86,7 +86,8 @@ var adminCtrl = require('./controllers/admin'),
     giveawayCtrl = require('./controllers/giveaway'),
     playerCtrl = require('./controllers/player'),
     gameCtrl = require('./controllers/game'),
-    userCtrl = require('./controllers/user')
+    userCtrl = require('./controllers/user'),
+    aviCtrl = require('./controllers/avitar')
 
 app.use('/admin', adminCtrl)
 app.use('/player', playerCtrl)
@@ -94,6 +95,7 @@ app.use('/game', gameCtrl)
 app.use('/giveaway', giveawayCtrl)
 app.use('/auth', authCtrl)
 app.use('/user', userCtrl)
+app.use('/avi', aviCtrl)
 
 // twitch bot config
 
