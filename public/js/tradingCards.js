@@ -89,6 +89,7 @@ socket.on('update players', function(connectedPlayers){
       suggestion.html('Trading with ' + player.value)
       messageBox.html('Trade started')
       socket.emit('send trade', tradeObj)
+      playerDropDown.clear()
       playerDropDown.hide()
     }
   })
@@ -162,10 +163,10 @@ socket.on('dc', function(msg) {
 var otherTraderAccepted = false
 
 socket.on('other trader accepted trade conditions', function(tradeObj) {
+  acceptedByTrader.html('Other guy likes the trade conditions')
   if(otherTraderAccepted) {
     acceptedByTrader.html('<h1>Trade finalized</h1>')
   }
-  acceptedByTrader.html('Other guy likes the trade conditions')
   otherTraderAccepted = true
 })
 1
