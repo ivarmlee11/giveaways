@@ -171,7 +171,7 @@ acceptTrade.on('click', function() {
   if(tradeObj.tradeInProgress) {
     socket.emit('accept trade', tradeObj)
   } else {
-    messageBox.('You must be trading with somebody to accept the trade')
+    messageBox.html('You must be trading with somebody to accept the trade')
   }
 })
 
