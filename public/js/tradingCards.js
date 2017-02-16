@@ -33,7 +33,7 @@ customBox.spectrum({
 customBox.on('change', function() {
   var color = customBox.val()
   console.log(color)
-  $('#colorSample').css('background-color', color);
+  $('#colorSample').html('<div style="background-color:' + color + '">')
 
 })
 
