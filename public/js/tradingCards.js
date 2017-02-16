@@ -171,7 +171,7 @@ socket.on('other trader accepted trade conditions', function(tradeObj) {
 })
 
 socket.on('other trader finalized trade conditions', function() {
-  acceptedByTrader.html('<h1>Trade finalized</h1>')
+  messageBox.html('<h1>Trade finalized</h1>')
   setTimeout(function(){
     clearTradeObject()
     updateTradeableCards() 
