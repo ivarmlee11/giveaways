@@ -156,7 +156,7 @@ socket.on('dc', function(msg) {
   clearTrade()
   clearTradeObject()
   updateTradeableCards()
-  messageBox('Homeboy disconnected. Start another trade')
+  messageBox.html('Homeboy disconnected. Start another trade')
 })
 
 var otherTraderAccepted = false
