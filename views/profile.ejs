@@ -6,8 +6,11 @@
   <div class="col-md-10">
     <h1 class="text-center"><span id="sentFromId"><%= user.id %></span> <span id="sentFromName"><%= user.username %></span></h1>
   </div>
-  <div class="col-sm-6">
-    colr pkr
+  <div class="col-sm-2">
+    <h4>Choose your wheel color</h4>
+    <div id="colorSample">
+    </div>
+    <input type="select"/>
   </div>
 </div>
 <h1 class="text-center">Tradable Games</h1>
@@ -22,7 +25,7 @@
   </div>
 </div>
 <div id="tradeWindowOutInfo" class="col-sm-6 text-center">
-  <div class='text-center'>
+  <div id="buttons" class='text-center'>
     <button id="clearOutTrade" class="btn btn-danger">Clear Trade</button>
     <button id="acceptTrade" class="btn btn-info">Accept Trade Request</button>
     <div id="acceptedByTrader">

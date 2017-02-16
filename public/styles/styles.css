@@ -22,6 +22,16 @@ a, a:hover, a:active {
   padding-bottom: 30px;
 }
 
+#buttons {
+  margin-top: 15px;
+}
+
+#colorSample {
+  width: 100px;
+  height: 100px;
+  border: 2px;
+}
+
 #drop-box{  
   border: 10px solid rgb(14, 56, 119);  
   cursor: pointer;
@@ -88,8 +98,7 @@ a, a:hover, a:active {
 }
 
 #tradeWindowIn {
-  border: 3px solid green;
-  background-color: #3B801B;
+  border: 3px solid black;
   height: 300px;
 }
 
