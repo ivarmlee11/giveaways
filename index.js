@@ -179,7 +179,7 @@ io.on('connection', function(socket) {
     lastTrader = tradeObj.tradeInProgress
 
     var clearId = clients.filter(function(obj) {
-      return obj.id === lastTrader
+      return obj.id === clientId
     })
 
     var msg = 'cleared'
