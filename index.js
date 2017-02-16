@@ -165,7 +165,6 @@ io.on('connection', function(socket) {
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
     })
-    console.log(clients)
 
     io.emit('update players', clients)
     if(lastTrader) {

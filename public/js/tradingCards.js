@@ -67,6 +67,7 @@ socket.on('update players', function(connectedPlayers){
     lookup: playerNames,
     onSelect: function (player) {
       tradeObj.tradeInProgress = player.data
+      tradeObj.lastTrader = player.id
       // console.log(tradeObj)
       sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)
@@ -153,7 +154,7 @@ socket.on('busy', function(msg) {
   console.log(tradeObj)
 })
 
-socket.on('dc', function(msg) {
+socket.on('dc', function() {
   console.log('You just got cleared')
   clearTrade()
   clearTradeObject()
