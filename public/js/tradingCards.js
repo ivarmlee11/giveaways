@@ -97,7 +97,7 @@ socket.on('update players', function(connectedPlayers){
 
   playerList.forEach(function(player) {
     currentPlayers.append(
-      '<h4>' + player.clientName + '</h4><img id="logo" src="/img/' + player.auth + '.png"/>'
+      '<div><h4>' + player.clientName + '</h4><img id="logo" src="/img/' + player.auth + '.png"/></div>'
     )
   })
 })
@@ -122,6 +122,7 @@ socket.on('get trade', function(trade) {
 
     tradeObj.gamesIn = trade.games
 
+    playerIn.html(trade.sentFromName)
     tradeWindowIn.html('')
     acceptedByTrader.html('')
     otherTraderAccepted = false
@@ -144,6 +145,7 @@ socket.on('get trade', function(trade) {
 })
 
 socket.on('busy', function(msg) {
+  clearTrade()
   tradeWindowIn.html(msg)
   messageBox.html(msg)
   clearTradeObject()
@@ -160,13 +162,16 @@ socket.on('dc', function(msg) {
 var otherTraderAccepted = false
 
 socket.on('other trader accepted trade conditions', function(tradeObj) {
+  if(otherTraderAccepted) {
+    acceptedByTrader.html('<h1>Trade finalized</h1>')
+  }
   acceptedByTrader.html('Other guy likes the trade conditions')
   otherTraderAccepted = true
 })
-
+1
 socket.on('other trader finalized trade conditions', function() {
-  acceptedByTrader.html('<h1>Trade finalized</h1>')
   setTimeout(function(){
+    clearTradeObject()
     updateTradeableCards() 
     clearTrade()
   }, 10000)     
