@@ -23,12 +23,9 @@ router.get('/colorget/:idx', ensureAuthenticated, function(req, res) {
 router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
   console.log('color change')
-  console.log(req.body.color)
-  console.log(req.user.dataValues.id)
-  console.log(id)
-  console.log(req.user.dataValues.id == id)
-  console.log(req.user.dataValues.id === id)
-
+  var redirect = '/profile/' + id
+  console.log(redirect)
+  
   if(req.user.dataValues.id == id) {
     db.user.update({
       color: req.body.color
@@ -38,7 +35,7 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
       }
     }).then(function() {
       req.flash('success', 'Color changed. Check yourself out next time the wheel spins.') 
-      res.send('Changed!')
+      res.redirect('/giveawayList')
     })
   } else {
     res.send('Bro...')
