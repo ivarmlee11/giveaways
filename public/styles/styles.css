@@ -65,7 +65,7 @@ a, a:hover, a:active {
 }
 
 #sentFromId {
-  display: hidden;
+  color: white;
 }
 
 #footer {
@@ -89,6 +89,7 @@ a, a:hover, a:active {
 
 #tradeWindowIn {
   border: 3px solid green;
+  background-color: #3B801B;
   height: 300px;
 }
 
@@ -125,9 +126,11 @@ a, a:hover, a:active {
 
 .cards, .cardsStatic {
   display: inline-block;
+  margin-left: 10px;
+  border-radius: 10px;
   height: 140px;
   width: 140px;
-  background-color: gray;
+  background-color: #806F77;
 }
 
 .playerList {
