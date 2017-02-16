@@ -173,7 +173,7 @@ io.on('connection', function(socket) {
 
     // clear any outstanding trades
 
-    lastTrader = tradeInProgress.tradeInProgress
+    lastTrader = tradeObject.tradeInProgress
 
     var msg = 'cleared'
     
@@ -182,7 +182,7 @@ io.on('connection', function(socket) {
     var clearId = clients.filter(function(obj) {
       return obj.id === lastTrader
     })
-    
+
     if(clearId.length) {
       console.log(clearId[0])
       socket.broadcast.to(clearId[0].socketId).emit('dc', msg)
