@@ -184,7 +184,7 @@ io.on('connection', function(socket) {
 
     var msg = 'cleared'
     
-    console.log(clientId + ' dcd and was last trading with ' + lastTrader)
+    console.log(lastTrader + ' dcd and was last trading with ' + clientId)
     
     if(clearId.length) {
       console.log(clearId[0])
