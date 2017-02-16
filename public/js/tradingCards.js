@@ -36,6 +36,8 @@ function clearTradeObject() {
   tradeObj['lastTrader'] = null
 }
 
+clearTradeObject()
+
 function clearTrade() {
   acceptedByTrader.html('')
   otherTraderAccepted = false
@@ -56,7 +58,6 @@ function makeTrade(tradeInfo) {
       acceptedByTrader.html('<h1>Trade finalized</h1>')
       setTimeout(function(){ 
         clearTrade()
-        clearTradeObject()
        }, 10000)
     }
   })  
@@ -100,9 +101,11 @@ socket.on('update players', function(connectedPlayers){
 })
 
 socket.on('get trade', function(trade) {
+  var trade = trade
 
   if(!tradeObj.tradeInProgress) {
 
+    
     tradeObj.tradeInProgress = trade.sentFromId
     tradeObj.gamesIn = trade.games
     tradeObj.lastTrader = trade.sentFromId
@@ -146,9 +149,9 @@ socket.on('get trade', function(trade) {
 })
 
 socket.on('busy', function(msg) {
-  clearTradeObject()
   tradeWindowIn.html(msg)
   messageBox.html(msg)
+  clearTradeObject()
 })
 
 socket.on('dc', function(msg) {
