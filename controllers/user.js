@@ -38,10 +38,7 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
       }
     }).then(function() {
       req.flash('success', 'Color changed. Check yourself out next time the wheel spins.') 
-      res.redirect('/giveawayList')
-    }).catch(function() {
-      req.flash('success', 'Eh, you cannot do that') 
-      res.redirect('back')      
+      res.send('Changed!')
     })
   } else {
     res.send('Bro...')

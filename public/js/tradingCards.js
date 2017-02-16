@@ -51,6 +51,7 @@ function changeMyColor(id, color) {
     data: color,
     url: url,
     success: function(color) {
+      console.log('color')
       colorSample.html('')
       colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')   
     }
