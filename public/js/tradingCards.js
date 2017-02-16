@@ -23,7 +23,17 @@ var tradingArea = $('#tradingArea'),
     tradeInProgressIndicator = $('#tradeInProgress'),
     tradeObj = {},
     playerNames = [],
-    playerList = []
+    playerList = [],
+    customBox = $("#custom")
+
+customBox.spectrum({
+  color: "#f00",
+  change: function(color) {
+    color.toHexString(); // #ff0000
+    console.log(color)
+  }
+})
+
 
 function clearTradeObject() {
   tradeObj['sentFromId'] = sentFromIdInt
@@ -164,6 +174,7 @@ var otherTraderAccepted = false
 
 socket.on('other trader accepted trade conditions', function(tradeObj) {
   acceptedByTrader.html('<div><h4>Other guy likes the trade conditions</h4></div>')
+  messageBox.html('If you really want to make this trade, hit accept trade')
   if(otherTraderAccepted) {
     acceptedByTrader.html('<h1>Trade finalized</h1>')
   }
