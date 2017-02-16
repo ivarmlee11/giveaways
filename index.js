@@ -160,6 +160,7 @@ io.on('connection', function(socket) {
   io.emit('update players', clients)
 
   socket.on('disconnect', function() {
+
     console.log('d/c event ' + clientId)
     console.log('last trder was this ' + lastTrader)
   
@@ -182,15 +183,18 @@ io.on('connection', function(socket) {
     }
   })
 
-  socket.on('last trade', function(lastTrader) {
+  socket.on('last trade', function(tradeObj) {
+    lastTrader = tradeObj.lastTrader
     console.log('last trader ' + lastTrader)
-    lastTrader = lastTrader
+    var socketId = clients.filter(function(obj) {
+      return obj.id === tradeObj.tradeInProgress
+    })
+    if(socketId.length) {
+      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObj);
+    }
   })
 
   socket.on('send trade', function(tradeObj) {
-    // console.log('trade sent from ' + tradeObj.sentFromId)
-    lastTrader = tradeObj.trade
-    // console.log(tradeObj)
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })

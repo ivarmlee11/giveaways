@@ -47,7 +47,7 @@ function clearTrade() {
 }
 
 function sendTrade(tradeObj) {
-  socket.emit('last trade', tradeObj.tradeInProgress)
+  socket.emit('last trade', tradeObj)
   socket.emit('send trade', tradeObj)
 }
 
@@ -81,7 +81,7 @@ socket.on('update players', function(connectedPlayers){
   })
 
   currentPlayers.html('')
-  
+
   playerList.forEach(function(player) {
     currentPlayers.append('<h6 userid="' + player.id + '">' + player.clientName + '<img id="logo" src="/img/' + player.auth + '.png"/></h6>')
   })
