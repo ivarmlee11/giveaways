@@ -173,7 +173,6 @@ io.on('connection', function(socket) {
       })
       var msg = 'cleared'
       console.log(clientId + ' dcd and was last trading with ' + lastTrader)
-      console.log(tradeObject)
       if(socketId.length) {
         console.log(socketId[0])
         socket.broadcast.to(socketId[0].socketId).emit('dc', msg)
@@ -183,7 +182,7 @@ io.on('connection', function(socket) {
 
   socket.on('send trade', function(tradeObj) {
     console.log('trade sent from ' + tradeObj.sentFromId)
-    lastTrader = tradeObj.sentFromId
+    lastTrader = tradeObj.tradeInProgress
     console.log(tradeObj)
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
