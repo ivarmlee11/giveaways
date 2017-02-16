@@ -161,15 +161,17 @@ socket.on('dc', function(msg) {
 })
 
 var otherTraderAccepted = false
+
 socket.on('other trader accepted trade conditions', function(tradeObj) {
   acceptedByTrader.html('Other guy likes the trade conditions')
-  // if(otherTraderAccepted) {
-  //         acceptedByTrader.html('<h1>Trade finalized</h1>')
-  //     setTimeout(function(){ 
-  //       clearTrade()
-  //      }, 10000)
-  // }
   otherTraderAccepted = true
+})
+
+socket.on('other trader finalized trade conditions', function() {
+  acceptedByTrader.html('<h1>Trade finalized</h1>')
+  setTimeout(function(){ 
+    clearTrade()
+  }, 10000)     
 })
 
 acceptTrade.on('click', function() {
@@ -180,18 +182,17 @@ acceptTrade.on('click', function() {
       traderA: tradeObj.sentFromId,
       traderB: tradeObj.tradeInProgress
     }
+    socket.emit('confirm trade', tradeObj)
     makeTrade(tradeInfo)
-    if(otherTraderAccepted) {
-      acceptedByTrader.html('<h1>Trade finalized</h1>')
-      setTimeout(function(){ 
-        clearTrade()
-       }, 10000)
-    }
+    acceptedByTrader.html('<h1>Trade finalized</h1>')
+    setTimeout(function(){ 
+      clearTrade()
+    }, 10000)   
   }
   if(tradeObj.tradeInProgress) {
     socket.emit('accept trade', tradeObj)
   } else {
-    messageBox.html('You must be trading with somebody to accept the trade')
+    acceptedByTrader.html('You must be trading with somebody to accept the trade')
   }
 })
 

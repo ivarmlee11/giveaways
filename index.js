@@ -222,6 +222,19 @@ io.on('connection', function(socket) {
     }    
   })
 
+  socket.on('confirm trade', function(tradeObj) {
+    var tradeObject = tradeObj
+    console.log('this guy likes the trade conditions ' + tradeObject.sentFromId)
+
+    var socketId = clients.filter(function(obj) {
+      return obj.id === tradeObj.tradeInProgress
+    })
+
+    if(socketId.length) {
+      socket.broadcast.to(socketId[0].socketId).emit('other trader finalized trade conditions', tradeObject);
+    }    
+  })
+
 })
  
 app.use('/admin', adminCtrl)
