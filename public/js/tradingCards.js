@@ -76,11 +76,8 @@ socket.on('update players', function(connectedPlayers){
     onSelect: function (player) {
       tradeObj.tradeInProgress = player.data
       tradeObj.lastTrader = sentFromIdInt
-      console.log(tradeObj)
-      sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)
       messageBox.html('Trade started')
-      playerDropDown.hide()
     }
   })
 
@@ -191,7 +188,7 @@ socket.on('other trader accepted trade conditions', function(tradeObj) {
     //   /game/trade/
 
   } else {
-    acceptedByTrader.html(msg)
+    acceptedByTrader.html('Other guy likes the trade conditions')
     otherTraderAccepted = true
     console.log(tradeObj)
   }
