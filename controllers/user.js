@@ -1,4 +1,4 @@
-var express = require('express'),
+  var express = require('express'),
     router = express.Router(),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     bodyParser = require('body-parser'),
@@ -18,10 +18,10 @@ router.get('/colorget/:idx', function(req, res) {
 router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
   console.log('color change')
-  console.log(req.body)
+  console.log(req.body.color)
   if(req.user.dataValues.id === id) {
     db.user.update({
-      color: req.body
+      color: req.body.color
     }, {
       where: {
         id: id

@@ -33,14 +33,6 @@ function showMyColor(id) {
     type: 'GET',
     url: url,
     success: function(color) {
-      console.log(color)
-      console.log('first color')
-      var myColor; 
-      if(color) {
-        myColor = color
-      } else {
-        myColor = 'silver'
-      }
       colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')   
     }
   })
@@ -50,18 +42,14 @@ showMyColor(sentFromIdInt)
 
 function changeMyColor(id, color) {
   var url = '/user/changecolor/' + id,
-      color = color
+      color = {
+        color: color
+      }
   $.ajax({
     type: 'POST',
     data: color,
     url: url,
     success: function(color) {
-      var myColor; 
-      if(color) {
-        myColor = color
-      } else {
-        myColor = 'silver'
-      }
       colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')   
     }
   })
