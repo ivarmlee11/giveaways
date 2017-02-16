@@ -35,6 +35,7 @@ function clearTradeObject() {
   tradeObj['clearTrade'] = false
   tradeObj['lastTrader'] = null
 }
+
 clearTradeObject()
 
 function clearTrade() {

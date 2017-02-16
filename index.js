@@ -170,27 +170,32 @@ io.on('connection', function(socket) {
 
     io.emit('update players', clients)
 
-  })
 
-  socket.on('send trade', function(tradeObj) {
-    console.log('trade obj recieved from client ' + tradeObj.sentFromId)
-    console.log(tradeObj)
+    // clear any outstanding trades
 
-    lastTrader = tradeObj.tradeInProgress
-
-    var clearId = clients.filter(function(obj) {
-      return obj.id === clientId
-    })
+    lastTrader = tradeInProgress.tradeInProgress
 
     var msg = 'cleared'
     
-    console.log(lastTrader + ' dcd and was last trading with ' + clientId)
+    console.log(clientId + ' dcd and was last trading with ' + lastTrader)
+    
+    var clearId = clients.filter(function(obj) {
+      return obj.id === lastTrader
+    })
     
     if(clearId.length) {
       console.log(clearId[0])
       socket.broadcast.to(clearId[0].socketId).emit('dc', msg)
     }
-  
+
+
+  })
+
+  socket.on('send trade', function(tradeObj) {
+    tradeObject = tradeObj
+    console.log('trade obj recieved from client ' + tradeObj.sentFromId)
+    console.log(tradeObj)
+
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
