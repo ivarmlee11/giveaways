@@ -5,7 +5,7 @@
     db = require('../models'),
     flash = require('connect-flash')
 
-router.get('/colorget/:idx', function(req, res) {
+router.get('/colorget/:idx', ensureAuthenticated, function(req, res) {
   console.log('color get')
   var id = req.params.idx
   console.log(id)
@@ -36,7 +36,7 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
     }).catch(function() {
       req.flash('success', 'Eh, you cannot do that') 
       res.redirect('back')      
-    }
+    })
   }
 })
 
