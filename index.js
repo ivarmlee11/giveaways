@@ -141,7 +141,6 @@ io.on('connection', function(socket) {
       clientAuth = socket.request.user.dataValues.auth,
       clientName = socket.request.user.dataValues.username,
       lastTrader = null,
-      currentlyInTradeWithSocket,
       tradeObject = {}
 
   clients = clients.filter(function(obj) {
@@ -161,6 +160,8 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('d/c event')
+    console.log('---------- ' + lastTrader)
+    console.log(tradeObject.tradeInProgress + ' -----------')
   
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
