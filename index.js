@@ -181,10 +181,9 @@ io.on('connection', function(socket) {
     }
   })
 
-  
   socket.on('last trade', function(lastTrader) {
     lastTrader = lastTrader
-  }
+  })
 
   socket.on('send trade', function(tradeObj) {
     console.log('trade sent from ' + tradeObj.sentFromId)
