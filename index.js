@@ -93,7 +93,7 @@ app.use('/player', playerCtrl)
 app.use('/game', gameCtrl)
 app.use('/giveaway', giveawayCtrl)
 app.use('/auth', authCtrl)
-app.use('user', userCtrl)
+app.use('/user', userCtrl)
 
 // twitch bot config
 
