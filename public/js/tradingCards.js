@@ -339,8 +339,8 @@ function updateOwnedCards() {
       cardList.forEach(function(val) {
         if(val.coderevealed) {
           ownedGames.append('<div class="cardsStatic">' + 
-            '<h3>' + val.name + '</h3>' + 
-            '<h5>' + val.code + '</h5>' +
+            '<h3 class="text-center">' + val.name + '</h3>' + 
+            '<h6 class="text-center">' + val.code + '</h6>' +
             '</div>'
           )
         }
