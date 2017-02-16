@@ -17,6 +17,9 @@ module.exports = {
       auth: {
         type: Sequelize.STRING
       },
+      admin: {
+        type: Sequelize.BOOLEAN
+      },
       ip: {
         type: Sequelize.STRING
       },
