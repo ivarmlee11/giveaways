@@ -32,6 +32,10 @@ a, a:hover, a:active {
   border: 2px;
 }
 
+#colorContainer {
+  padding-top: 10px;
+}
+
 .autocomplete-suggestion {
   font-size: 2em;
 }
