@@ -8,9 +8,11 @@
 router.get('/colorget/:idx', function(req, res) {
   console.log('color get')
   var id = req.params.idx
+  console.log(id)
   db.user.find({
     where: {id: id}
   }).then(function(user) {
+    console.log('sending ' + user.color)
     res.send(user.color)
   })
 })
