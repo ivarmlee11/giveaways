@@ -210,17 +210,15 @@ io.on('connection', function(socket) {
   })
 
   socket.on('accept trade', function(tradeObj) {
-    // tradeObject = tradeObj
-    console.log('this guy likes the trade conditions ' + tradeObj.sentFromId)
+    var tradeObject = tradeObj
+    console.log('this guy likes the trade conditions ' + tradeObject.sentFromId)
 
     var socketId = clients.filter(function(obj) {
-      return obj.id === tradeObj.tradeInProgress
+      return obj.id === tradeObject.tradeInProgress
     })
 
-    var message = 'The other trader accepted the trade conditions'
-
     if(socketId.length) {
-      socket.broadcast.to(socketId[0].socketId).emit('other trader accepted trade conditions', msg);
+      socket.broadcast.to(socketId[0].socketId).emit('other trader accepted trade conditions', tradeObject);
     }    
   })
 

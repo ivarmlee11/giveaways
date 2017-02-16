@@ -92,18 +92,10 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
   console.log('req.body')
   console.log(req.body)
   var trade = req.body,
-  gamesA = [],
-  gamesB = [],
+  gamesA = trade.gamesA,
+  gamesB = trade.gamesB,
   traderA = trade.traderA,
   traderB = trade.traderB
-
-  if(trade.gamesA) {
-    gamesA = trade.gamesA
-  }
-
-  if(trade.gamesB) {
-    gamesB = trade.gamesB
-  }
 
   gamesA.forEach(function(gameTrade) {
     db.game.update({

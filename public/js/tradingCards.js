@@ -39,6 +39,8 @@ function clearTradeObject() {
 clearTradeObject()
 
 function clearTrade() {
+  acceptedByTrader.html('')
+  otherTraderAccepted = false
   tradeWindowIn.html('')
   tradeWindowOut.html('')
   playerIn.html('')
@@ -163,8 +165,36 @@ socket.on('dc', function(msg) {
   console.log(tradeObj)
 })
 
-socket.on('other trader accepted trade conditions', function(msg) {
-  acceptedByTrader.html(msg)
+var otherTraderAccepted;
+socket.on('other trader accepted trade conditions', function(tradeObj) {
+  if(otherTraderAccepted) {
+    var tradeInfo = {
+      gamesA: tradeObj.games,
+      gamesB: tradeObj.gamesIn,
+      traderA: tradeObj.sentFromId,
+      traderB: tradeObj.tradeInProgress
+    }
+    console.log(tradeObj) // ajax call to trade
+    
+    $.ajax({
+      type: 'POST',
+      url: '/game/trade',
+      data: tradeInfo,
+      success: function(data) {
+        console.log('games traded')
+        acceptedByTrader.html('Trade finalized')
+        clearTrade()
+      }
+    })
+    // ajax 
+    //   post
+    //   /game/trade/
+
+  } else {
+    acceptedByTrader.html(msg)
+    otherTraderAccepted = true
+    console.log(tradeObj)
+  }
 })
 
 acceptTrade.on('click', function() {
