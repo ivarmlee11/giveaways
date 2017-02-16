@@ -183,12 +183,8 @@ io.on('connection', function(socket) {
     }
   })
 
-  socket.on('last trade', function(tradeObj) {
-    lastTrader = tradeObj.lastTrader
-    console.log('last trader ' + lastTrader)
-  })
-
   socket.on('send trade', function(tradeObj) {
+    lastTrader = tradeObj.lastTrader
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
@@ -204,6 +200,7 @@ io.on('connection', function(socket) {
     var message = 'That trader is busy with another trade.'
     socket.broadcast.to(socketId[0].socketId).emit('busy', message); 
   })
+
 })
  
 app.use('/admin', adminCtrl)

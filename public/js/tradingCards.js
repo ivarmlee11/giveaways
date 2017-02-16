@@ -47,7 +47,6 @@ function clearTrade() {
 }
 
 function sendTrade(tradeObj) {
-  socket.emit('last trade', tradeObj)
   socket.emit('send trade', tradeObj)
 }
 
@@ -71,7 +70,7 @@ socket.on('update players', function(connectedPlayers){
     lookup: playerNames,
     onSelect: function (player) {
       tradeObj.tradeInProgress = player.data
-      tradeObj.lastTrader = player.id
+      tradeObj.lastTrader = sentFromId
       // console.log(tradeObj)
       sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)
@@ -96,7 +95,6 @@ socket.on('get trade', function(trade) {
 
   if(!tradeObj.tradeInProgress) {
 
-    console.log('new trade started')
     console.log(tradeObj)
     
     tradeObj.tradeInProgress = trade.sentFromId
@@ -112,7 +110,6 @@ socket.on('get trade', function(trade) {
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
 
-    console.log('current trade agreement changed')
     console.log(tradeObj)
 
     tradeWindowIn.html('')
@@ -128,7 +125,6 @@ socket.on('get trade', function(trade) {
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
 
-    console.log('trade cleared')
     console.log(tradeObj)
     
     tradeObj.agreeOnTerms = false
@@ -140,7 +136,6 @@ socket.on('get trade', function(trade) {
 
   } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
 
-    console.log('somebody tried trading with you but you are busy')
     console.log(tradeObj)
     socket.emit('busy', trade)
 
@@ -189,16 +184,10 @@ tradeWindowOut.droppable({
 
     tradeObj.games.push(id)
     reveal.hide()
-    // playerIn.html(tradeObj.tradeInProgress)
-    // console.log(tradeObj)
+
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
-      // console.log(item + ' item')
-      // console.log(index + ' index')
-      // console.log(inputArray + ' inputArray')
-      // console.log(inputArray.indexOf(item) == index)
       return inputArray.indexOf(item) == index
     })
-
     sendTrade(tradeObj)
   },
   out: function(event, ui) {
