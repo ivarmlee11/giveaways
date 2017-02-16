@@ -169,8 +169,9 @@ socket.on('other trader accepted trade conditions', function(tradeObj) {
   }
   otherTraderAccepted = true
 })
-1
+
 socket.on('other trader finalized trade conditions', function() {
+  acceptedByTrader.html('<h1>Trade finalized</h1>')
   setTimeout(function(){
     clearTradeObject()
     updateTradeableCards() 
@@ -188,8 +189,11 @@ acceptTrade.on('click', function() {
     }
     socket.emit('confirm trade', tradeObj)
     makeTrade(tradeInfo)
+    acceptTrade.hide()
     acceptedByTrader.html('<h1>Trade finalized</h1>')
     setTimeout(function(){
+      acceptTrade.show()
+      clearTradeObject()
       updateTradeableCards()
       clearTrade()
     }, 10000)   
