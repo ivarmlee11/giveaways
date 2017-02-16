@@ -50,8 +50,6 @@ function clearTrade() {
 }
 
 function sendTrade(tradeObj) {
-  console.log('sent to server')
-  console.log(tradeObj)
   socket.emit('send trade', tradeObj)
 }
 
@@ -65,7 +63,6 @@ socket.on('update players', function(connectedPlayers){
       value: playerAuth,
       data: player.id
     }  
-    console.log(player.id + ' ' + sentFromIdInt + ' ' + typeof(player.id) + ' ' + typeof(sentFromIdInt))
 
     return rObj
     
@@ -84,7 +81,6 @@ socket.on('update players', function(connectedPlayers){
   currentPlayers.html('')
 
   playerList.forEach(function(player) {
-    currentPlayers.append('<h6 userid="' + player.id + '">' + player.clientName + '<img id="logo" src="/img/' + player.auth + '.png"/></h6>')
   })
 })
 
@@ -92,12 +88,9 @@ socket.on('update players', function(connectedPlayers){
 
 socket.on('get trade', function(trade) {
   var trade = trade
-  console.log('getting trade')
-  console.log(trade)
 
   if(!tradeObj.tradeInProgress) {
 
-    console.log(tradeObj)
     
     tradeObj.tradeInProgress = trade.sentFromId
     tradeObj.gamesIn = trade.games
@@ -112,7 +105,6 @@ socket.on('get trade', function(trade) {
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
 
-    console.log(tradeObj)
 
     tradeWindowIn.html('')
 
@@ -127,7 +119,6 @@ socket.on('get trade', function(trade) {
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
 
-    console.log(tradeObj)
     
     tradeObj.agreeOnTerms = false
     clearTradeObject()
@@ -138,7 +129,6 @@ socket.on('get trade', function(trade) {
 
   } else if (trade.sentFromId !== tradeObj.tradeInProgress) {
 
-    console.log(tradeObj)
     socket.emit('busy', trade)
 
   }
@@ -147,40 +137,33 @@ socket.on('get trade', function(trade) {
 socket.on('busy', function(msg) {
   tradeWindowIn.html(msg)
   messageBox.html(msg)
-  console.log('trade sent out to a busy client')
-  console.log(tradeObj)
   clearTradeObject()
-  console.log('trade after being cleared')
-  console.log(tradeObj)
 })
 
 socket.on('dc', function(msg) {
-  console.log('You just got cleared')
   clearTrade()
   clearTradeObject()
   updateTradeableCards()
-  console.log(tradeObj)
 })
 
 var otherTraderAccepted;
 socket.on('other trader accepted trade conditions', function(tradeObj) {
   if(otherTraderAccepted) {
+    console.log('trade finalized')
     var tradeInfo = {
       gamesA: tradeObj.games,
       gamesB: tradeObj.gamesIn,
       traderA: tradeObj.sentFromId,
       traderB: tradeObj.tradeInProgress
     }
-    console.log(tradeObj) // ajax call to trade
     
     $.ajax({
       type: 'POST',
-      url: '/game/trade',
+      url: '/game/trade/',
       data: tradeInfo,
       success: function(data) {
-        console.log('games traded')
-        acceptedByTrader.html('Trade finalized')
         clearTrade()
+        acceptedByTrader.html('Trade finalized')
       }
     })
     // ajax 
@@ -190,7 +173,6 @@ socket.on('other trader accepted trade conditions', function(tradeObj) {
   } else {
     acceptedByTrader.html('Other guy likes the trade conditions')
     otherTraderAccepted = true
-    console.log(tradeObj)
   }
 })
 
@@ -213,13 +195,11 @@ clearOutTrade.on('click', function() {
 
   clearTrade()
   updateTradeableCards()
-  console.log(tradeObj)
 })
 
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {
-    console.log(ui.draggable)
     var draggable = ui.draggable,
         id = draggable.attr('gameid'),
         id = parseInt(id),
@@ -243,7 +223,6 @@ tradeWindowOut.droppable({
     tradeObj.games = tradeObj.games.filter(function(gameId) {
       return gameId !== id
     })
-    // console.log(tradeObj)
     sendTrade(tradeObj)
   },
   activeClass: 'highlight',
