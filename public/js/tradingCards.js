@@ -33,6 +33,7 @@ function showMyColor(id) {
     type: 'GET',
     url: url,
     success: function(color) {
+      colorSample.html('')
       colorSample.append('<div class="fixedHeight" style="background-color:' + color + '">')   
     }
   })
@@ -50,6 +51,7 @@ function changeMyColor(id, color) {
     data: color,
     url: url,
     success: function(color) {
+      colorSample.html('')
       colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')   
     }
   })
