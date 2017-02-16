@@ -73,7 +73,7 @@ socket.on('update players', function(connectedPlayers){
     lookup: playerNames,
     onSelect: function (player) {
       tradeObj.tradeInProgress = player.data
-      tradeObj.lastTrader = parseInt(sentFromId)
+      tradeObj.lastTrader = sentFromIdInt
       console.log(tradeObj)
       sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)
@@ -163,6 +163,18 @@ socket.on('dc', function(msg) {
   console.log(tradeObj)
 })
 
+socket.on('other trader accepted trade conditions', function(msg) {
+  acceptedByTrader.html(msg)
+})
+
+acceptTrade.on('click', function() {
+  if(tradeObj.tradeInProgress) {
+    socket.emit('accept trade', tradeObj)
+  } else {
+    messageBox.('You must be trading with somebody to accept the trade')
+  }
+})
+
 clearOutTrade.on('click', function() {
   tradeObj['games'] = []
   tradeObj['gamesIn'] = []
@@ -176,6 +188,7 @@ clearOutTrade.on('click', function() {
   updateTradeableCards()
   console.log(tradeObj)
 })
+
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {

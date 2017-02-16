@@ -160,9 +160,6 @@ io.on('connection', function(socket) {
   io.emit('update players', clients)
 
   socket.on('disconnect', function() {
-
-    console.log('d/c event ' + clientId)
-    console.log('last trder was this ' + lastTrader)
   
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
@@ -210,6 +207,21 @@ io.on('connection', function(socket) {
     })
     var message = 'That trader is busy with another trade.'
     socket.broadcast.to(socketId[0].socketId).emit('busy', message); 
+  })
+
+  socket.on('accept trade'. function(tradeObj) {
+    tradeObject = tradeObj
+    console.log('this guy likes the trade conditions ' + tradeObj.sentFromId)
+
+    var socketId = clients.filter(function(obj) {
+      return obj.id === tradeObj.tradeInProgress
+    })
+
+    var message = 'The other trader accepted the trade conditions'
+
+    if(socketId.length) {
+      socket.broadcast.to(socketId[0].socketId).emit('other trader accepted trade conditions', msg);
+    }    
   })
 
 })
