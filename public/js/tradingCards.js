@@ -146,9 +146,9 @@ socket.on('get trade', function(trade) {
 })
 
 socket.on('busy', function(msg) {
+  clearTradeObject()
   tradeWindowIn.html(msg)
   messageBox.html(msg)
-  clearTradeObject()
 })
 
 socket.on('dc', function(msg) {
