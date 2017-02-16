@@ -72,7 +72,7 @@ socket.on('update players', function(connectedPlayers){
     lookup: playerNames,
     onSelect: function (player) {
       tradeObj.tradeInProgress = player.data
-      tradeObj.lastTrader = sentFromId
+      tradeObj.lastTrader = parseInt(sentFromId)
       console.log(tradeObj)
       sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)

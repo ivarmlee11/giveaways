@@ -186,7 +186,7 @@ io.on('connection', function(socket) {
   socket.on('send trade', function(tradeObj) {
     console.log('trade obj recieved from client ' + tradeObj.sentFromId)
     console.log(tradeObj)
-    lastTrader = tradeObj.sentFromId
+    lastTrader = tradeObj.lastTrader
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
