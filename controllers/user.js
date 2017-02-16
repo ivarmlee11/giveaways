@@ -19,6 +19,8 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
   console.log('color change')
   console.log(req.body.color)
+  console.log(req.user.dataValues.id)
+  console.log(id)
   if(req.user.dataValues.id === id) {
     db.user.update({
       color: req.body.color
