@@ -47,7 +47,8 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           username: user.username,
           id: user.id,
           auth: user.auth,
-          ip: user.ip
+          ip: user.ip,
+          color: user.color
         });
       });
       res.send(playerList);
