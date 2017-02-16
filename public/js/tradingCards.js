@@ -96,6 +96,9 @@ socket.on('update players', function(connectedPlayers){
   currentPlayers.html('')
 
   playerList.forEach(function(player) {
+    currentPlayers.append(
+      '<h4>' + player.clientName + '</h4><img id="logo" src="/img/' + player.auth + '.png"/>'
+    })
   })
 })
 
@@ -151,7 +154,7 @@ socket.on('dc', function(msg) {
   clearTrade()
   clearTradeObject()
   updateTradeableCards()
-  messageBox('Homie disconnected!')
+  messageBox('Homeboy disconnected. Start another trade')
 })
 
 var otherTraderAccepted = false
@@ -164,7 +167,7 @@ socket.on('other trader accepted trade conditions', function(tradeObj) {
 socket.on('other trader finalized trade conditions', function() {
   acceptedByTrader.html('<h1>Trade finalized</h1>')
   setTimeout(function(){
-    updateTradeableCards 
+    updateTradeableCards() 
     clearTrade()
   }, 10000)     
 })
