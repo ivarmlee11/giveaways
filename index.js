@@ -186,12 +186,6 @@ io.on('connection', function(socket) {
   socket.on('last trade', function(tradeObj) {
     lastTrader = tradeObj.lastTrader
     console.log('last trader ' + lastTrader)
-    var socketId = clients.filter(function(obj) {
-      return obj.id === tradeObj.tradeInProgress
-    })
-    if(socketId.length) {
-      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObj);
-    }
   })
 
   socket.on('send trade', function(tradeObj) {
