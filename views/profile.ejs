@@ -14,11 +14,15 @@
     <div id="colorSample">
     </div>
   </div>
-  <div id="thumbNail" class="col-sm-64 text-center">
-  
+  <div id="thumbNail" class="col-sm-4 text-center">
+  Thumbnail preview will go here
   </div>
   <div class="col-sm-4 text-center">
-    Image Uploader <input type="select" />
+    <form enctype="multipart/form-data" action="/avichange/'"<%= user.id %>'" method="POST">
+      <label for="myFile">Thumbnail</label>
+      <input type="file" name="myFile">
+      <input type="submit" class="btn btn-primary">
+    </form>
   </div>
 </div>
 

@@ -1,21 +1,36 @@
 var express = require('express'),
     router = express.Router(),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
+    modCheck = require('../middleware/modCheck.js'),
     bodyParser = require('body-parser'),
     db = require('../models'),
-    flash = require('connect-flash')
+    flash = require('connect-flash'),
+    cloudinary = require('cloudinary')
 
-router.get('/aviget/:idx', function(req, res) {
+router.get('/aviget/:idx', ensureAuthenticated, function(req, res) {
 
 })
 
 router.post('/avichange/:idx', ensureAuthenticated, function(req, res) {
-
+  console.log(req.file.path)
+  var file = req.body.imgUrl,
+      id = parseInt(req.params.idx)
+  if(req.user.dataValues.id === id) {
+    // update the image and change the approve value to false
+  }
 })
 
 // avi approve
 
 // get list of avis that need approval
+router.get('/appproveList/', ensureAuthenticated, function(req, res) {
+
+})
+
+// approve specific images
+router.post('/approveList/:idx', ensureAuthenticated, modCheck, function(req, res) {
+  var id = req.params.idx
+})
 
 // display winner with avi
 
