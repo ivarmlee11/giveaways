@@ -5,7 +5,16 @@ var express = require('express'),
     db = require('../models'),
     flash = require('connect-flash')
 
-router.get('/changeColor/:idx', function(req, res) {
+router.get('/getColor/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx
+  db.user.find({
+    where: {id: id}
+  }).then(function(user) {
+    res.send(user.color)
+  })
+})
+
+router.post('/changeColor/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
   console.log(req.body)
   if(req.user.dataValues.id === id) {
@@ -16,11 +25,11 @@ router.get('/changeColor/:idx', function(req, res) {
         id: id
       }
     }).then(function(game) {
-      req.flash('success', 'Code revealed. You changed your code.') 
+      req.flash('success', 'Color changed. Check yourself out next time the wheel spins.') 
       res.redirect('back')
     })
   } else {
-    req.flash('success', 'Code revealed. You changed your code.') 
+    req.flash('success', 'Do not try to change stuff that does not belong to you.') 
     res.redirect('back')    
   }
 })

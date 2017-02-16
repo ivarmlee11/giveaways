@@ -25,22 +25,45 @@ var tradingArea = $('#tradingArea'),
     playerNames = [],
     playerList = [],
     customBox = $("#custom")
+    colorSample = $('#colorSample')
 
 function showMyColor(id) {
+  var url = '/userInfo/getColor/' + id
   $.ajax({
     type: 'GET',
-    url: '/game/trade/',
-    data: tradeInfo,
-    success: function(data) {
-      acceptedByTrader.html('<h1>Trade finalized</h1>')
-      setTimeout(function(){ 
-        clearTrade()
-       }, 10000)
+    url: url,
+    success: function(color) {
+      var myColor; 
+      if(color) {
+        myColor = color
+      } else {
+        myColor = 'silver'
+      }
+      colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')   
     }
   })
 }
 
 showMyColor(sentFromIdInt)
+
+function changeMyColor(id, color) {
+  var url = '/userInfo/changeMyColor/' + id
+  $.ajax({
+    type: 'GET',
+    url: url,
+    success: function(color) {
+      var myColor; 
+      if(color) {
+        myColor = color
+      } else {
+        myColor = 'silver'
+      }
+      colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')   
+    }
+  })
+}
+
+
 customBox.spectrum({
   color: "#f00",
   preferredFormat: "hex"
@@ -49,7 +72,8 @@ customBox.spectrum({
 customBox.on('change', function() {
   var color = customBox.val()
   console.log(color)
-  $('#colorSample').html('<div class="fixedHeight" style="background-color:' + color + '">')
+  changeMyColor(sentFromIdInt, color)
+  colorSample.html('<div class="fixedHeight" style="background-color:' + color + '">')
 
 })
 
