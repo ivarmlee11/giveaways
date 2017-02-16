@@ -31,8 +31,9 @@ customBox.spectrum({
 })
 
 customBox.on('change', function() {
-  var color = customBox.val().toHexString()
-  console.log(color)
+  var color = customBox.val()
+  console.log(color.toRgbString()
+  color.toRgbString()
   $('#colorSample').html('<div style="background-color:' + color + '">')
 
 })

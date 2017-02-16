@@ -51,14 +51,14 @@
 </div>
 <div class="row">
   <div class="col-sm-6">
+    <h3 class="text-center">Current Traders</h3>
+    <div id="currentPlayers" class="text-center"> 
+  </div>    
+  <div class="col-sm-6">
     <h3 class="text-center">Giveaways Won</h3>
     <% contests.forEach(function(contest) { %>
       <h5 class="text-center"><strong><%=contest.name%></strong></h5>
       <h5 class="text-center"><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%> PST</strong></h5>  
     <% }); %> 
   </div>
-  <div class="col-sm-6">
-    <h3 class="text-center">Current Traders</h3>
-    <div id="currentPlayers" class="text-center"> 
-  </div>    
 </div>
