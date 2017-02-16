@@ -154,8 +154,8 @@ var wheel = {
   
   maxSpeed : Math.PI / 16,
 
-  upTime : 1500, // How long to spin up for (in ms)
-  downTime : Math.floor((Math.random() * 1000) + 7000), // How long to slow down for (in ms)
+  upTime : 5000, // How long to spin up for (in ms)
+  downTime : Math.floor((Math.random() * 1000) + 10000), // How long to slow down for (in ms)
 
   spinStart : 0,
 
@@ -219,7 +219,7 @@ var wheel = {
   init : function(optionList) {
     try {
       wheel.initWheel();
-      // wheel.initAudio();
+      wheel.initAudio();
       wheel.initCanvas();
       wheel.draw();
 
@@ -231,11 +231,11 @@ var wheel = {
 
   },
 
-  // initAudio : function() {
-  //   var sound = document.createElement('audio');
-  //   sound.setAttribute('src', 'wheel.mp3');
-  //   wheel.sound = sound;
-  // },
+  initAudio : function() {
+    var sound = document.createElement('audio');
+    sound.setAttribute('src', '/sounds/wheel.mp3');
+    wheel.sound = sound;
+  },
 
   initCanvas : function() {
     var canvas = $('#playerWheel')[0];
@@ -448,8 +448,8 @@ var gameWheel = {
   
   maxSpeed : Math.PI / 16,
 
-  upTime : 3500, // How long to spin up for (in ms)
-  downTime : Math.floor((Math.random() * 1000) + 7000), // How long to slow down for (in ms)
+  upTime : 5000, // How long to spin up for (in ms)
+  downTime : Math.floor((Math.random() * 1000) + 1000), // How long to slow down for (in ms)
 
   spinStart : 0,
 
