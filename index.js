@@ -171,12 +171,12 @@ io.on('connection', function(socket) {
       var socketId = clients.filter(function(obj) {
         return obj.id === lastTrader
       })
-      tradeObject['clearThis'] = true
-      tradeObject['sentFromId'] = clientId
+      var msg = 'cleared'
+      console.log(clientId + ' dcd and was last trading with ' + lastTrader)
       console.log(tradeObject)
       if(socketId.length) {
         console.log(socketId[0])
-        socket.broadcast.to(socketId[0].socketId).emit('dc', tradeObject)
+        socket.broadcast.to(socketId[0].socketId).emit('dc', msg)
       }
     }
   })
