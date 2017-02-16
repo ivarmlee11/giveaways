@@ -36,8 +36,6 @@ function clearTradeObject() {
   tradeObj['lastTrader'] = null
 }
 
-clearTradeObject()
-
 function clearTrade() {
   acceptedByTrader.html('')
   otherTraderAccepted = false
@@ -47,8 +45,21 @@ function clearTrade() {
   playerDropDown.show()
   suggestion.html('')
   messageBox.html('')
-  otherTraderAccepted = false
-  acceptedByTrader = false
+}
+
+function makeTrade(tradeInfo) {
+  $.ajax({
+    type: 'POST',
+    url: '/game/trade/',
+    data: tradeInfo,
+    success: function(data) {
+      acceptedByTrader.html('<h1>Trade finalized</h1>')
+      setTimeout(function(){ 
+        clearTrade()
+        clearTradeObject()
+       }, 10000)
+    }
+  })  
 }
 
 function sendTrade(tradeObj) {
@@ -88,14 +99,10 @@ socket.on('update players', function(connectedPlayers){
   })
 })
 
-
-
 socket.on('get trade', function(trade) {
-  var trade = trade
 
   if(!tradeObj.tradeInProgress) {
 
-    
     tradeObj.tradeInProgress = trade.sentFromId
     tradeObj.gamesIn = trade.games
     tradeObj.lastTrader = trade.sentFromId
@@ -150,34 +157,23 @@ socket.on('dc', function(msg) {
   updateTradeableCards()
 })
 
-var otherTraderAccepted = false;
+var otherTraderAccepted = false
 socket.on('other trader accepted trade conditions', function(tradeObj) {
+  acceptedByTrader.html('Other guy likes the trade conditions')
+  otherTraderAccepted = true
+  console.log(otherTraderAccepted)
+})
+
+acceptTrade.on('click', function() {
   if(otherTraderAccepted) {
-    console.log('trade finalized')
     var tradeInfo = {
       gamesA: tradeObj.games,
       gamesB: tradeObj.gamesIn,
       traderA: tradeObj.sentFromId,
       traderB: tradeObj.tradeInProgress
     }
-    
-    $.ajax({
-      type: 'POST',
-      url: '/game/trade/',
-      data: tradeInfo,
-      success: function(data) {
-        clearTrade()
-        acceptedByTrader.html('Trade finalized')
-      }
-    })
-
-  } else {
-    acceptedByTrader.html('Other guy likes the trade conditions')
-    otherTraderAccepted = true
+    makeTrade(tradeInfo)
   }
-})
-
-acceptTrade.on('click', function() {
   if(tradeObj.tradeInProgress) {
     socket.emit('accept trade', tradeObj)
   } else {
