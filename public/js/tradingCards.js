@@ -95,10 +95,10 @@ socket.on('update players', function(connectedPlayers){
   })
 
   currentPlayers.html('')
-
+  currentPlayers.append('<li id="players"></li>')
   playerList.forEach(function(player) {
-    currentPlayers.append(
-      '<div><h4>' + player.clientName + '</h4><img id="logo" src="/img/' + player.auth + '.png"/></div>'
+    $('#players').append(
+      '<li><h4>' + player.clientName + '</h4><img id="logo" src="/img/' + player.auth + '.png"/></li>'
     )
   })
 })
@@ -163,7 +163,7 @@ socket.on('dc', function(msg) {
 var otherTraderAccepted = false
 
 socket.on('other trader accepted trade conditions', function(tradeObj) {
-  acceptedByTrader.html('Other guy likes the trade conditions')
+  acceptedByTrader.html('<div><h4>Other guy likes the trade conditions</h4></div>')
   if(otherTraderAccepted) {
     acceptedByTrader.html('<h1>Trade finalized</h1>')
   }
@@ -191,6 +191,12 @@ acceptTrade.on('click', function() {
       traderA: tradeObj.sentFromId,
       traderB: tradeObj.tradeInProgress
     }
+    if(!gamesA) {
+      tradeInfo['gamesA'] = []
+    }
+    if(!gamesB) {
+      tradeInfo['gamesB'] = []
+    }
     socket.emit('confirm trade', tradeObj)
     makeTrade(tradeInfo)
     suggestion.html('')
@@ -209,7 +215,7 @@ acceptTrade.on('click', function() {
     acceptedByTrader.html('Waiting on a response')
     socket.emit('accept trade', tradeObj)
   } else {
-    acceptedByTrader.html('You must be trading with somebody to accept the trade')
+    acceptedByTrader.html('<div><h4>You must be trading with somebody to accept the trade</h4></div>')
   }
 })
 
