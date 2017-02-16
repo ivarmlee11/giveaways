@@ -209,8 +209,8 @@ io.on('connection', function(socket) {
     socket.broadcast.to(socketId[0].socketId).emit('busy', message); 
   })
 
-  socket.on('accept trade'. function(tradeObj) {
-    tradeObject = tradeObj
+  socket.on('accept trade', function(tradeObj) {
+    // tradeObject = tradeObj
     console.log('this guy likes the trade conditions ' + tradeObj.sentFromId)
 
     var socketId = clients.filter(function(obj) {
