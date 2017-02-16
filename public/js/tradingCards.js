@@ -50,14 +50,11 @@ function changeMyColor(id, color) {
     type: 'POST',
     data: color,
     url: url,
-    success: function(color) {
-      console.log(color)
-      colorSample.html('')
-      colorSample.append('<div class="fixedHeight" style="background-color:' + color + '">')   
+    success: function() {
+      location.reload() 
     }
   })
 }
-
 
 customBox.spectrum({
   color: "#f00",

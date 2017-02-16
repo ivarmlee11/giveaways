@@ -19,28 +19,28 @@ var idx = url[url.length -1],
 
 var blackHex = 'black',
     whiteHex = 'white',
-    shuffle = function(o) {
-        for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-            ;
-        return o;
-    },
+    // shuffle = function(o) {
+    //     for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
+    //         ;
+    //     return o;
+    // },
     halfPI = Math.PI / 2,
     doublePI = Math.PI * 2;
 
-String.prototype.hashCode = function(){
-  var hash = 5381,
-          i;
-  for (i = 0; i < this.length; i++) {
-    char = this.charCodeAt(i);
-    hash = ((hash<<5)+hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return hash;
-};
+// String.prototype.hashCode = function(){
+//   var hash = 5381,
+//           i;
+//   for (i = 0; i < this.length; i++) {
+//     char = this.charCodeAt(i);
+//     hash = ((hash<<5)+hash) + char;
+//     hash = hash & hash; // Convert to 32bit integer
+//   }
+//   return hash;
+// };
 
-Number.prototype.mod = function(n) {
-  return ((this%n)+n)%n;
-};
+// Number.prototype.mod = function(n) {
+//   return ((this%n)+n)%n;
+// };
 
 $('#redrawGameWheel').on('click', function() {
   afterFirstSpinWheel = false;
@@ -146,21 +146,7 @@ var wheel = {
 
   canvasContext : null,
 
-  colors :
-  ['#336FD1',
-  '#D277C6',
-  '#C4CCD3',
-  '#d56e49',
-  '#3BD78E',
-  '#FF0000',
-  '#550000',
-  '#2F3BD9',
-  '#550000',
-  '#55AAFF',
-  '#005500',
-  '#d14c45',
-  '#d58a49',
-  '#AA007F'],
+  colors : [],
 
   segments : [],
 
@@ -168,7 +154,7 @@ var wheel = {
   
   maxSpeed : Math.PI / 16,
 
-  upTime : 3500, // How long to spin up for (in ms)
+  upTime : 1500, // How long to spin up for (in ms)
   downTime : Math.floor((Math.random() * 1000) + 7000), // How long to slow down for (in ms)
 
   spinStart : 0,
@@ -258,7 +244,7 @@ var wheel = {
   },
 
   initWheel : function() {
-    shuffle(wheel.colors);
+    return wheel.colors;
   },
 
   // Called when segments have changed
@@ -554,7 +540,7 @@ var gameWheel = {
   },
 
   initWheel : function() {
-    shuffle(gameWheel.colors);
+    return gameWheel.colors;
   },
 
   // Called when segments have changed
@@ -778,12 +764,18 @@ function createWheel() {
           $('#wheel').show();
         }
         wheel.segments = [];
+        wheel.colors = [];
         playerList.forEach(function(val) {
           wheel.segments.push({
             username: val.username,
-            id: val.id
+            id: val.id,
+          });
+          wheel.colors.push({
+            color: val.color 
           });
         });
+        console.log('player list')
+        console.log(wheel.segments)
         wheel.init(); 
         wheel.update();
       }

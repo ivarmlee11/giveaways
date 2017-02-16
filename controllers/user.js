@@ -34,7 +34,6 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
         id: id
       }
     }).then(function(user) {
-      req.flash('success', 'Color changed. Check yourself out next time the wheel spins.') 
       // res.redirect('/giveawayList')
       res.send(user.color)
     })
