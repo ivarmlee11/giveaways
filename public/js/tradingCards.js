@@ -27,15 +27,15 @@ var tradingArea = $('#tradingArea'),
     customBox = $("#custom")
 
 customBox.spectrum({
-  color: "#f00",
-  change: function(color) {
-    color.toHexString(); // #ff0000
-    console.log(color)
-    var colorString = 'background-color:' + color
-    $('#colorSample').css('background-color', colorString);
-  }
+  color: "#f00"
 })
 
+customBox.on('change', function() {
+  var color = customBox.val()
+  console.log(color)
+  $('#colorSample').css('background-color', color);
+
+})
 
 function clearTradeObject() {
   tradeObj['sentFromId'] = sentFromIdInt
