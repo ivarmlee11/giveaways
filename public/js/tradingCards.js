@@ -98,7 +98,7 @@ socket.on('update players', function(connectedPlayers){
   playerList.forEach(function(player) {
     currentPlayers.append(
       '<h4>' + player.clientName + '</h4><img id="logo" src="/img/' + player.auth + '.png"/>'
-    })
+    )
   })
 })
 
@@ -132,7 +132,6 @@ socket.on('get trade', function(trade) {
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
 
     clearTradeObject()
-    
     updateTradeableCards()
     clearTrade()
     messageBox.html('Trade cleared')
@@ -148,6 +147,7 @@ socket.on('busy', function(msg) {
   tradeWindowIn.html(msg)
   messageBox.html(msg)
   clearTradeObject()
+  updateTradeableCards()
 })
 
 socket.on('dc', function(msg) {
