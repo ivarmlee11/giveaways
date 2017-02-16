@@ -86,6 +86,14 @@ var adminCtrl = require('./controllers/admin'),
     giveawayCtrl = require('./controllers/giveaway'),
     playerCtrl = require('./controllers/player'),
     gameCtrl = require('./controllers/game')
+    userCtrl = require('./controllers/userInfo')
+
+app.use('/admin', adminCtrl)
+app.use('/player', playerCtrl)
+app.use('/game', gameCtrl)
+app.use('/giveaway', giveawayCtrl)
+app.use('/auth', authCtrl)
+app.use('userInfo', userCtrl)
 
 // twitch bot config
 
@@ -236,12 +244,6 @@ io.on('connection', function(socket) {
   })
 
 })
- 
-app.use('/admin', adminCtrl)
-app.use('/player', playerCtrl)
-app.use('/game', gameCtrl)
-app.use('/giveaway', giveawayCtrl)
-app.use('/auth', authCtrl)
 
 app.get('/', function(req, res) {
   var currentUser = false

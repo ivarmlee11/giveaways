@@ -26,6 +26,21 @@ var tradingArea = $('#tradingArea'),
     playerList = [],
     customBox = $("#custom")
 
+function showMyColor(id) {
+  $.ajax({
+    type: 'GET',
+    url: '/game/trade/',
+    data: tradeInfo,
+    success: function(data) {
+      acceptedByTrader.html('<h1>Trade finalized</h1>')
+      setTimeout(function(){ 
+        clearTrade()
+       }, 10000)
+    }
+  })
+}
+
+showMyColor(sentFromIdInt)
 customBox.spectrum({
   color: "#f00",
   preferredFormat: "hex"

@@ -37,6 +37,7 @@ a, a:hover, a:active {
 #colorContainer {
   padding-top: 30px;
   padding-right: 30px;
+  padding-left: 30px;
 }
 
 .autocomplete-suggestion {
