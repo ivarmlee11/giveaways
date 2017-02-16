@@ -28,7 +28,7 @@ var tradingArea = $('#tradingArea'),
     colorSample = $('#colorSample')
 
 function showMyColor(id) {
-  var url = '/user/getColor/' + id
+  var url = '/user/colorget/' + id
   $.ajax({
     type: 'GET',
     url: url,
@@ -47,7 +47,7 @@ function showMyColor(id) {
 showMyColor(sentFromIdInt)
 
 function changeMyColor(id, color) {
-  var url = '/user/changeMyColor/' + id
+  var url = '/user/changecolor/' + id
   $.ajax({
     type: 'POST',
     url: url,
