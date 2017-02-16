@@ -180,6 +180,7 @@ io.on('connection', function(socket) {
       }
     }
   })
+
   
   socket.on('last trade', function(lastTrader) {
     lastTrader = lastTrader
