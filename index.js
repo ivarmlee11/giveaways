@@ -87,7 +87,7 @@ var adminCtrl = require('./controllers/admin'),
     playerCtrl = require('./controllers/player'),
     gameCtrl = require('./controllers/game'),
     userCtrl = require('./controllers/user'),
-    aviCtrl = require('./controllers/avitar')
+    aviCtrl = require('./controllers/avatar')
 
 app.use('/admin', adminCtrl)
 app.use('/player', playerCtrl)
