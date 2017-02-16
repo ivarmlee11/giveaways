@@ -155,7 +155,7 @@ io.on('connection', function(socket) {
   })
 
   console.log(socket.request.user.dataValues.username + ' connected')
-  console.log(clients)
+  // console.log(clients)
   io.emit('update players', clients)
 
   socket.on('disconnect', function() {
@@ -168,6 +168,7 @@ io.on('connection', function(socket) {
     })
 
     io.emit('update players', clients)
+
     if(lastTrader) {
       var socketId = clients.filter(function(obj) {
         return obj.id === lastTrader
@@ -188,9 +189,9 @@ io.on('connection', function(socket) {
   })
 
   socket.on('send trade', function(tradeObj) {
-    console.log('trade sent from ' + tradeObj.sentFromId)
+    // console.log('trade sent from ' + tradeObj.sentFromId)
     lastTrader = tradeObj.sentFromId
-    console.log(tradeObj)
+    // console.log(tradeObj)
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
     })
