@@ -773,7 +773,11 @@ function createWheel() {
           });
         });
         wheel.segments.forEach(function(val) {
-          wheel.colors.push(val.color)
+          var color = val.color
+          if(color === null) {
+            color = 'black'
+          }
+          wheel.colors.push(color)
         })
         console.log('player list')
         console.log(wheel.segments)
