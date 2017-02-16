@@ -191,10 +191,10 @@ acceptTrade.on('click', function() {
       traderA: tradeObj.sentFromId,
       traderB: tradeObj.tradeInProgress
     }
-    if(!gamesA) {
+    if(!tradeInfo.gamesA) {
       tradeInfo['gamesA'] = []
     }
-    if(!gamesB) {
+    if(!tradeInfo.gamesB) {
       tradeInfo['gamesB'] = []
     }
     socket.emit('confirm trade', tradeObj)
