@@ -5,7 +5,8 @@ var express = require('express'),
     db = require('../models'),
     flash = require('connect-flash')
 
-router.get('/getColor/:idx', function(req, res) {
+router.get('/colorget/:idx', function(req, res) {
+  console.log('color get')
   var id = req.params.idx
   db.user.find({
     where: {id: id}
@@ -14,8 +15,9 @@ router.get('/getColor/:idx', function(req, res) {
   })
 })
 
-router.post('/changeColor/:idx', ensureAuthenticated, function(req, res) {
+router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
+  console.log('color change')
   console.log(req.body)
   if(req.user.dataValues.id === id) {
     db.user.update({
