@@ -31,6 +31,8 @@ customBox.spectrum({
   change: function(color) {
     color.toHexString(); // #ff0000
     console.log(color)
+    var colorString = 'background-color:' + color
+    $('#colorSample').css('background-color', colorString);
   }
 })
 
