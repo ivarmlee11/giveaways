@@ -89,7 +89,7 @@ socket.on('update players', function(connectedPlayers){
       suggestion.html('Trading with ' + player.value)
       messageBox.html('Trade started')
       socket.emit('send trade', tradeObj)
-      playerDropDown.clear()
+      playerDropDown.val('')
       playerDropDown.hide()
     }
   })
