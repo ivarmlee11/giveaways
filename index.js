@@ -210,7 +210,7 @@ io.on('connection', function(socket) {
   })
 
   socket.on('accept trade', function(tradeObj) {
-    var tradeObject = tradeObj
+    tradeObject = tradeObj
     console.log('this guy likes the trade conditions ' + tradeObject.sentFromId)
 
     var socketId = clients.filter(function(obj) {

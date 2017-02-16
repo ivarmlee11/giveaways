@@ -75,6 +75,7 @@ socket.on('update players', function(connectedPlayers){
       tradeObj.lastTrader = sentFromIdInt
       suggestion.html('Trading with ' + player.value)
       messageBox.html('Trade started')
+      socket.emit('send trade', tradeObj)
     }
   })
 
@@ -166,9 +167,6 @@ socket.on('other trader accepted trade conditions', function(tradeObj) {
         acceptedByTrader.html('Trade finalized')
       }
     })
-    // ajax 
-    //   post
-    //   /game/trade/
 
   } else {
     acceptedByTrader.html('Other guy likes the trade conditions')
@@ -220,6 +218,7 @@ tradeWindowOut.droppable({
         reveal = draggable.find('a')
 
     reveal.show()
+
     tradeObj.games = tradeObj.games.filter(function(gameId) {
       return gameId !== id
     })
