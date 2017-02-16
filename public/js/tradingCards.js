@@ -47,6 +47,8 @@ function clearTrade() {
   playerDropDown.show()
   suggestion.html('')
   messageBox.html('')
+  otherTraderAccepted = false
+  acceptedByTrader = false
 }
 
 function sendTrade(tradeObj) {
@@ -76,6 +78,7 @@ socket.on('update players', function(connectedPlayers){
       suggestion.html('Trading with ' + player.value)
       messageBox.html('Trade started')
       socket.emit('send trade', tradeObj)
+      playerDropDown.hide()
     }
   })
 
@@ -147,7 +150,7 @@ socket.on('dc', function(msg) {
   updateTradeableCards()
 })
 
-var otherTraderAccepted;
+var otherTraderAccepted = false;
 socket.on('other trader accepted trade conditions', function(tradeObj) {
   if(otherTraderAccepted) {
     console.log('trade finalized')
