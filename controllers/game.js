@@ -128,19 +128,26 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
       userId = req.user.dataValues.id;
   console.log(req.user)
 
-  db.game.update({
-    coderevealed: true
-  }, {
-    where: {
-      id: gameId,
-      userId: userId
-    }
+  db.game.find({
+    where: {id: gameId}
   }).then(function(game) {
-    req.flash('success', 'Code revealed. You now own this game') 
-    res.redirect('back')
-  }).catch(function (err) {
-    req.flash('success', 'You do not own that game you idiot') 
-  });
+    if(userId === game.userId) {
+      db.game.update({
+        coderevealed: true
+      }, {
+        where: {
+          id: gameId
+        }
+      }).then(function(game) {
+        req.flash('success', 'Code revealed. You now own this game') 
+        res.redirect('back')
+      })
+    } else {
+      req.flash('success', 'You do not own that game') 
+      res.redirect('back')
+    }
+  })
+
 
 })
 
