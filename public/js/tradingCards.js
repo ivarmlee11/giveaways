@@ -33,6 +33,8 @@ function showMyColor(id) {
     type: 'GET',
     url: url,
     success: function(color) {
+      console.log(color)
+      console.log('first color')
       var myColor; 
       if(color) {
         myColor = color
@@ -73,10 +75,7 @@ customBox.spectrum({
 
 customBox.on('change', function() {
   var color = customBox.val()
-  console.log(color)
   changeMyColor(sentFromIdInt, color)
-  colorSample.html('<div style="background-color:' + color + '">')
-
 })
 
 function clearTradeObject() {
