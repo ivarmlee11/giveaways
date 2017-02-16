@@ -27,7 +27,10 @@ var tradingArea = $('#tradingArea'),
     customBox = $("#custom")
 
 customBox.spectrum({
-  color: "#f00"
+  color: "#f00",
+  change: function(color) {
+    color.toHexString(); // #ff0000
+  }
 })
 
 customBox.on('change', function() {
