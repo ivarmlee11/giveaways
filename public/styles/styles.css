@@ -196,7 +196,7 @@ label,
   clear: both;
 }
 
-#venues ul {
+#venues ul, #players {
   clear:both;
   list-style: none;
   padding: 0 30px;

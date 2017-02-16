@@ -98,7 +98,7 @@ socket.on('update players', function(connectedPlayers){
   currentPlayers.append('<li id="players"></li>')
   playerList.forEach(function(player) {
     $('#players').append(
-      '<li><h4>' + player.clientName + '</h4><img id="logo" src="/img/' + player.auth + '.png"/></li>'
+      '<li>' + player.clientName + '<img id="logo" src="/img/' + player.auth + '.png"/></li>'
     )
   })
 })
@@ -147,8 +147,8 @@ socket.on('get trade', function(trade) {
 
 socket.on('busy', function(msg) {
   clearTrade()
-  tradeWindowIn.html(msg)
-  messageBox.html(msg)
+  tradeWindowIn.html('<h4>' + msg + '</h4>')
+  messageBox.html('<h4>' + msg+ '</h4>')
   clearTradeObject()
   updateTradeableCards()
 })
@@ -157,7 +157,7 @@ socket.on('dc', function(msg) {
   clearTrade()
   clearTradeObject()
   updateTradeableCards()
-  messageBox.html('Homeboy disconnected. Start another trade')
+  messageBox.html('Homeboy disconnected. Start another trade!')
 })
 
 var otherTraderAccepted = false
@@ -240,7 +240,11 @@ tradeWindowOut.droppable({
         id = parseInt(id),
         reveal = draggable.find('a')
 
+    if(tradeObj.tradeInProgress) {
+      messageBox.html('Trade updated')
+    }
     tradeObj.games.push(id)
+    console.log(tradeObj.games)
     reveal.hide()
 
     tradeObj.games = tradeObj.games.filter(function( item, index, inputArray ) {
@@ -259,6 +263,8 @@ tradeWindowOut.droppable({
     tradeObj.games = tradeObj.games.filter(function(gameId) {
       return gameId !== id
     })
+    console.log(tradeObj.games)
+
     sendTrade(tradeObj)
   },
   activeClass: 'highlight',
