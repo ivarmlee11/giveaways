@@ -170,7 +170,7 @@ var wheel = {
       wheel.spinStart = new Date().getTime();
       wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
       wheel.frames = 0;
-      // wheel.sound.play();
+      wheel.sound.play();
       afterFirstSpin = true;
       wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
     }
