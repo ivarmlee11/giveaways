@@ -224,7 +224,7 @@ io.on('connection', function(socket) {
 
   socket.on('confirm trade', function(tradeObj) {
     var tradeObject = tradeObj
-    console.log('this guy likes the trade conditions ' + tradeObject.sentFromId)
+    console.log('this guy cornmed the trade conditions ' + tradeObject.sentFromId)
 
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress

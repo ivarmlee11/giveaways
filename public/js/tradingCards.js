@@ -30,7 +30,6 @@ function clearTradeObject() {
   tradeObj['sentFromName'] = $('#sentFromName').text()
   tradeObj['games'] = []
   tradeObj['gamesIn'] = []
-  tradeObj['agreeOnTerms'] = false
   tradeObj['tradeInProgress'] = false
   tradeObj['clearTrade'] = false
   tradeObj['lastTrader'] = null
@@ -104,7 +103,6 @@ socket.on('get trade', function(trade) {
   var trade = trade
 
   if(!tradeObj.tradeInProgress) {
-
     
     tradeObj.tradeInProgress = trade.sentFromId
     tradeObj.gamesIn = trade.games
@@ -119,22 +117,17 @@ socket.on('get trade', function(trade) {
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && !trade.clearTrade) {
 
+    tradeObj.gamesIn = trade.games
 
     tradeWindowIn.html('')
-
-    tradeObj.gamesIn = trade.games
-    tradeObj.lastTrader = trade.sentFromId
-    tradeObj.agreeOnTerms = false
-
-    playerIn.html(trade.sentFromName)
+    acceptedByTrader.html('')
+    otherTraderAccepted = false
     messageBox.html('Trade updated')
     
     displayIncomingGames(tradeObj.gamesIn)
 
   } else if ((trade.sentFromId === tradeObj.tradeInProgress) && trade.clearTrade) {
 
-    
-    tradeObj.agreeOnTerms = false
     clearTradeObject()
     
     updateTradeableCards()
@@ -185,11 +178,13 @@ acceptTrade.on('click', function() {
     socket.emit('confirm trade', tradeObj)
     makeTrade(tradeInfo)
     acceptedByTrader.html('<h1>Trade finalized</h1>')
-    setTimeout(function(){ 
+    setTimeout(function(){
+      updateTradeableCards()
       clearTrade()
     }, 10000)   
   }
   if(tradeObj.tradeInProgress) {
+    acceptedByTrader.html('Waiting on a response')
     socket.emit('accept trade', tradeObj)
   } else {
     acceptedByTrader.html('You must be trading with somebody to accept the trade')
