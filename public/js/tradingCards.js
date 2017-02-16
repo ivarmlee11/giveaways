@@ -73,7 +73,7 @@ socket.on('update players', function(connectedPlayers){
     onSelect: function (player) {
       tradeObj.tradeInProgress = player.data
       tradeObj.lastTrader = sentFromId
-      // console.log(tradeObj)
+      console.log(tradeObj)
       sendTrade(tradeObj)
       suggestion.html('Trading with ' + player.value)
       messageBox.html('Trade started')

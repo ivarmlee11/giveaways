@@ -140,8 +140,8 @@ io.on('connection', function(socket) {
   var clientId = socket.request.user.dataValues.id,
       clientAuth = socket.request.user.dataValues.auth,
       clientName = socket.request.user.dataValues.username,
-      lastTrader = null,
-      tradeObject = {}
+      tradeObject = {},
+      lastTrader = null
 
   clients = clients.filter(function(obj) {
     return obj.id !== clientId
