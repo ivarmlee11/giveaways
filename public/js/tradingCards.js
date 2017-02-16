@@ -47,7 +47,8 @@ function clearTrade() {
 }
 
 function sendTrade(tradeObj) {
-  consoel.log(tradeObj)
+  console.log('sent to server')
+  console.log(tradeObj)
   socket.emit('send trade', tradeObj)
 }
 
