@@ -17,14 +17,14 @@ module.exports = {
       auth: {
         type: Sequelize.STRING
       },
-      admin: {
-        type: Sequelize.BOOLEAN
-      },
       ip: {
         type: Sequelize.STRING
       },
       color: {
         type: Sequelize.STRING
+      },
+      avatarId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
