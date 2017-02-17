@@ -23,7 +23,7 @@ router.post('/avichange/:idx', ensureAuthenticated, function(req, res) {
 // avi approve
 
 // get list of avis that need approval
-router.get('/appproveList/', ensureAuthenticated, function(req, res) {
+router.get('/approveList', ensureAuthenticated, modCheck,function(req, res) {
   res.render('admin/approveThumbnails')
 })
 
