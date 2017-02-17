@@ -24,7 +24,7 @@ router.post('/avichange/:idx', ensureAuthenticated, function(req, res) {
 
 // get list of avis that need approval
 router.get('/appproveList/', ensureAuthenticated, function(req, res) {
-
+  res.render('admin/approveThumbnails')
 })
 
 // approve specific images
