@@ -7,9 +7,13 @@ var express = require('express'),
     flash = require('connect-flash'),
     cloudinary = require('cloudinary')
 
+// display winner with avi
+
 router.get('/aviget/:idx', ensureAuthenticated, function(req, res) {
 
 })
+
+
 
 router.post('/avichange/:idx', ensureAuthenticated, function(req, res) {
   console.log(req.file.path)
@@ -20,20 +24,19 @@ router.post('/avichange/:idx', ensureAuthenticated, function(req, res) {
   }
 })
 
-// avi approve
+  // avi approve
 
 // get list of avis that need approval
+
 router.get('/approveList', ensureAuthenticated, modCheck,function(req, res) {
   res.render('admin/approveThumbnails')
 })
 
 // approve specific images
+
 router.post('/approveList/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx
 })
-
-// display winner with avi
-
 
 
 module.exports = router;
