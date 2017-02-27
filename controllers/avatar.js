@@ -19,7 +19,7 @@ cloudinary.config({
 
 router.get('/aviget/:idx', ensureAuthenticated, function(req, res) {
   db.user.findById(req.user.id).then(function(user) {
-    res.send(user.cloudinary)
+    res.send(user)
   })
 })
 
