@@ -9,7 +9,7 @@ $.ajax({
   url: url,
   type: 'GET',
   success: function(user) {
-  	if(user.cloudinary === "") {
+  	if(!user.cloudinary) {
   		$thumbNail.html('<img src="../img/guesswho.png"/>')
       $thumbMessage.html('No thumbnail change submitted yet. Upload an image.')
     } else if((user.cloudinary.length > 0) && (user.approvedThumb === null)) {
