@@ -781,27 +781,28 @@ function gameDropDownList(list) {
 function displayWinnerInfo(winnerId) {
   var id = winnerId,
       url = '/player/playerInfo/' + id
-  $.ajax({
-    url: url,
-    method: 'GET',
-    success: function(player) {
-      var name = player.username,
-          auth = player.auth,
-          thumb = '<img src="/img/guesswho.png"/>'
+  if(id) {
+    $.ajax({
+      url: url,
+      method: 'GET',
+      success: function(player) {
+        var name = player.username,
+            auth = player.auth,
+            thumb = '<img src="/img/guesswho.png"/>'
 
-      if(player.cloudinary !== (null || false)) {
-        thumb = '<img src="' + player.cloudinary + '"/>'
+        if(player.cloudinary) {
+          thumb = '<img src="' + player.cloudinary + '"/>' 
+          console.log(thumb)
+        }
+
+        bootbox.alert({
+          message: '<div class="text-center">' +
+                    '<h5>' + name + '<img id="logo" src="/img/' + auth + '.png"/> won!</h5>' +
+                    thumb + 
+                    '</div>'
+        })
+        
       }
-
-      bootbox.alert({
-        message: '<div class="text-center">' +
-                  '<h5>' + name + '<img id="logo" src="/img/' + auth + '.png"/> won!</h5>' +
-                  thumb + 
-                  '</div>'
-      })
-      
-    }
-  })
+    });
+  }
 }
-
-})
