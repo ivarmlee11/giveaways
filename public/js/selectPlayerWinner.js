@@ -790,7 +790,7 @@ function displayWinnerInfo(winnerId) {
             auth = player.auth,
             thumb = '<img src="/img/guesswho.png"/>'
 
-        if(player.cloudinary) {
+        if(player.cloudinary && player.approvedThumb) {
           thumb = '<img src="' + player.cloudinary + '"/>' 
           console.log(thumb)
         }
@@ -807,4 +807,4 @@ function displayWinnerInfo(winnerId) {
   }
 }
 
-});
+})
