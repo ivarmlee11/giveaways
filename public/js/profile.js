@@ -12,7 +12,7 @@ $.ajax({
   	if(!user.cloudinary) {
   		$thumbNail.html('<img src="../img/guesswho.png"/>')
       $thumbMessage.html('No thumbnail change submitted yet. Upload an image.')
-    } else if((user.cloudinary.length > 0) && (user.approvedThumb === null)) {
+    } else if((user.cloudinary) && (user.approvedThumb === null)) {
       $thumbNail.html('<img src="' + user.cloudinary + '"/>')  
       $thumbMessage.html('Awaiting mod approval for this image.')
     } else if ((user.cloudinary.length > 0) && (!user.approvedThumb)) {
