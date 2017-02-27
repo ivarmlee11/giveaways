@@ -29,8 +29,7 @@ router.post('/avichange/:idx', ensureAuthenticated, upload.single('myFile'), fun
   cloudinary.uploader.upload(req.file.path, function(result) {
     console.log(result)
     db.user.update({
-      cloudinary: result.url,
-      approvedThumb: false
+      cloudinary: result.url
     }, {
       where: {
         id: req.user.id
