@@ -5,6 +5,7 @@ createGameWheel()
 
 // jquery selectors
 // coming soon
+var $thumbMessage = $('#thumbMessage')
 
 var url = window.location.href
 
@@ -105,7 +106,6 @@ $('#addWinnerToDb').on('click', function() {
           $('#game').html('')
           afterFirstSpinWheel = false
           createGameWheel()
-
         }
       })
     }  
@@ -790,7 +790,9 @@ function displayWinnerInfo(winnerId) {
           auth = player.auth
 
       if(player.approvedThumb !== true) {
-        thumb = '<img src="/img/guesswho.png"/>'
+        thumbMessage.html('A mod will approve this thumbnail shortly.')
+      } else {
+        thumbMessage.html('')
       }
 
       bootbox.alert({
