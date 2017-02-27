@@ -790,9 +790,9 @@ function displayWinnerInfo(winnerId) {
           auth = player.auth
 
       if(player.approvedThumb !== true) {
-        thumbMessage.html('A mod will approve this thumbnail shortly.')
+        $thumbMessage.html('A mod will approve this thumbnail shortly.')
       } else {
-        thumbMessage.html('')
+        $thumbMessage.html('')
       }
 
       bootbox.alert({
