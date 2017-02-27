@@ -789,11 +789,8 @@ function displayWinnerInfo(winnerId) {
           thumb = '<img src="' + player.cloudinary + '"/>',
           auth = player.auth
 
-      if(player.approvedThumb !== true) {
-        $thumbMessage.html('A mod will approve this thumbnail shortly.')
-        console.log('Mod will approve this thumb shortly')
-      } else {
-        $thumbMessage.html('')
+      if(thumb === null) {
+        thumb === 'guesswho'
       }
 
       bootbox.alert({
