@@ -152,7 +152,7 @@ client.on('join', function (channel, username, self) {
 var clients = []
 
 io.on('connection', function(socket) {
-  console.log(socket.request)
+  console.log(socket.request.user)
   if(socket.request.user.dataValues.id) {
     console.log(socket.request.user)
     var clientId = socket.request.user.dataValues.id,
