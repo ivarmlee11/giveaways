@@ -10,7 +10,8 @@ $.ajax({
   type: 'GET',
   success: function(profilePic) {
     console.log('D'+ profilePic + 'D' + ' profile pic')
-    console.log(typeOf(profilePic))
+    console.log(typeof profilePic)
+    console.log(profilePic.length)
   	if(profilePic === "") {
   		$thumbNail.html('<img src="../img/guesswho.png"/>')
       $thumbMessage.htmk('No thumbnail change submitted yet. Upload an image.')
