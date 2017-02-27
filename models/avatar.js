@@ -6,7 +6,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        models.avatar.belongsTo(models.user)      }
+        models.avatar.belongsTo(models.user)
+      }
     }
   })
   return avatar
