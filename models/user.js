@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
         //   createdUser.password = hash
         //   // continue to save the user, with no errors
         //   cb(null, createdUser)
-        }
+        // }
       },
       classMethods: {
         associate: function(models) {
