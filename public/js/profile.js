@@ -9,8 +9,9 @@ $.ajax({
   url: url,
   type: 'GET',
   success: function(profilePic) {
-    console.log(profilePic + ' profile pic')
-  	if(profilePic === null) {
+    console.log('D'+ profilePic + 'D' + ' profile pic')
+    console.log(typeOf(profilePic))
+  	if(profilePic === "") {
   		$thumbNail.html('<img src="../img/guesswho.png"/>')
       $thumbMessage.htmk('No thumbnail change submitted yet. Upload an image.')
     } else if (profilePic === false) {
