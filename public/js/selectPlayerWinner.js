@@ -803,6 +803,8 @@ function displayWinnerInfo(winnerId) {
         })
         
       }
-    });
+    })
   }
 }
+
+});
