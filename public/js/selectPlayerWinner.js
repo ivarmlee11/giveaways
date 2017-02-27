@@ -786,12 +786,11 @@ function displayWinnerInfo(winnerId) {
     method: 'GET',
     success: function(player) {
       var name = player.username,
-          thumb = '<img src="' + player.cloudinary + '"/>',
-          auth = player.auth
+          auth = player.auth,
+          thumb = '<img src="/img/guesswho.png"/>'
 
-      if(player.cloudinary === (null || false)) {
-
-        thumb === '<img src="/img/guesswho.png"/>'
+      if(player.cloudinary !== (null || false)) {
+        thumb = '<img src="' + player.cloudinary + '"/>'
       }
 
       bootbox.alert({
