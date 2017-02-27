@@ -18,15 +18,17 @@ var express = require('express'),
     requestIp = require('request-ip'),
     tmi = require('tmi.js'),
     botKey = process.env.BOTAPIKEY,
-    flash = require('connect-flash')
+    flash = require('connect-flash'),
+    MemoryStore = require('session-memory-store')(session)
 
 app.use(requestIp.mw())
 
 app.use(cookieParser())
   
 app.use(session({
+  key: 'connect.sid', 
   secret: sessionSecret,
-  store: new (require('connect-pg-simple')(session))(),
+  store: new MemoryStore(),
   resave: false,
   saveUninitialized: false
 }))
@@ -35,10 +37,10 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,       // the same middleware you registrer in express 
   key: 'connect.sid',       // the name of the cookie where express/connect stores its session_id 
   secret: sessionSecret,    // the session_secret to parse the cookie 
-  store: new (require('connect-pg-simple')(session))(),        // we NEED to use a sessionstore. no memorystore please 
+  store: new MemoryStore(),        // we NEED to use a sessionstore. no memorystore please 
   success:      onAuthorizeSuccess,  // *optional* callback on success - read more below 
   fail:         onAuthorizeFail     // *optional* callback on fail/error - read more below 
-}))
+})) 
 
 io.use(function(socket, next){
   if (socket.request.headers.cookie) return next()
@@ -88,6 +90,7 @@ var adminCtrl = require('./controllers/admin'),
     gameCtrl = require('./controllers/game'),
     userCtrl = require('./controllers/user'),
     aviCtrl = require('./controllers/avatar')
+    testCtrl = require('./controllers/testUser')
 
 app.use('/admin', adminCtrl)
 app.use('/player', playerCtrl)
@@ -96,6 +99,7 @@ app.use('/giveaway', giveawayCtrl)
 app.use('/auth', authCtrl)
 app.use('/user', userCtrl)
 app.use('/avatar', aviCtrl)
+app.use('/testUser', testCtrl)
 
 // twitch bot config
 
@@ -146,57 +150,58 @@ client.on('join', function (channel, username, self) {
 var clients = []
 
 io.on('connection', function(socket) {
-  // console.log(socket)
-  var clientId = socket.request.user.dataValues.id,
-      clientAuth = socket.request.user.dataValues.auth,
-      clientName = socket.request.user.dataValues.username,
-      tradeObject = {},
-      lastTrader = null
+  if(socket.request.user.dataValues.id) {
+    console.log(socket.request.user)
+    var clientId = socket.request.user.dataValues.id,
+        clientAuth = socket.request.user.dataValues.auth,
+        clientName = socket.request.user.dataValues.username,
+        tradeObject = {},
+        lastTrader = null
 
-  clients = clients.filter(function(obj) {
-    return obj.id !== clientId
-  })
-
-  clients.push({
-    id: clientId,
-    socketId: socket.id,
-    clientName: clientName,
-    auth: clientAuth
-  })
-
-  console.log(clientName + ' connected')
-  console.log(clients)
-  
-  io.emit('update players', clients)
-
-  socket.on('disconnect', function() {
-  
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
     })
 
-    io.emit('update players', clients)
-
-
-    // clear any outstanding trades
-
-    lastTrader = tradeObject.tradeInProgress
-
-    var msg = 'cleared'
-    
-    console.log(clientId + ' dcd and was last trading with ' + lastTrader)
-    
-    var clearId = clients.filter(function(obj) {
-      return obj.id === lastTrader
+    clients.push({
+      id: clientId,
+      socketId: socket.id,
+      clientName: clientName,
+      auth: clientAuth
     })
 
-    if(clearId.length) {
-      console.log(clearId[0])
-      socket.broadcast.to(clearId[0].socketId).emit('dc', msg)
-    }
+    console.log(clientName + ' connected')
+    console.log(clients)
+    
+    io.emit('update players', clients)
+
+    socket.on('disconnect', function() {
+    
+      clients = clients.filter(function(obj) {
+        return obj.id !== clientId
+      })
+
+      io.emit('update players', clients)
 
 
-  })
+      // clear any outstanding trades
+
+      lastTrader = tradeObject.tradeInProgress
+
+      var msg = 'cleared'
+      
+      console.log(clientId + ' dcd and was last trading with ' + lastTrader)
+      
+      var clearId = clients.filter(function(obj) {
+        return obj.id === lastTrader
+      })
+
+      if(clearId.length) {
+        console.log(clearId[0])
+        socket.broadcast.to(clearId[0].socketId).emit('dc', msg)
+      }
+    })
+  }
+
 
   socket.on('send trade', function(tradeObj) {
     tradeObject = tradeObj
@@ -234,7 +239,7 @@ io.on('connection', function(socket) {
 
   socket.on('confirm trade', function(tradeObj) {
     var tradeObject = tradeObj
-    console.log('this guy cornmed the trade conditions ' + tradeObject.sentFromId)
+    console.log('this guy confirmed the trade conditions ' + tradeObject.sentFromId)
 
     var socketId = clients.filter(function(obj) {
       return obj.id === tradeObj.tradeInProgress
@@ -244,7 +249,6 @@ io.on('connection', function(socket) {
       socket.broadcast.to(socketId[0].socketId).emit('other trader finalized trade conditions', tradeObject);
     }    
   })
-
 })
 
 app.get('/', function(req, res) {

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = function(sequelize, DataTypes) {
   var contestsWinners = sequelize.define('contestsWinners', {
     userId: DataTypes.INTEGER,
@@ -6,9 +6,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
       }
     }
-  });
-  return contestsWinners;
-};
+  })
+  return contestsWinners
+}

@@ -3,37 +3,36 @@ var express = require('express'),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
-    moment = require('moment-timezone'),
-    flash = require('connect-flash');
+    flash = require('connect-flash')
 
 router.get('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
   db.giveaway.findAll({ order: '"updatedAt" DESC' }).then(function(giveaways) {
-    var giveaway = giveaways;
+    var giveaway = giveaways
     res.render('admin/adminGameList', 
       {
         giveaways: giveaway
-    });
-  });
-});
+    })
+  })
+})
 
 router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, res) {
-  var timerOption;
+  var timerOption
   if(req.body.options === '0') {
-    timerOption = null;
+    timerOption = null
   } else {
-    timerOption = req.body.options;
+    timerOption = req.body.options
   }
   db.giveaway.create({
     name: req.body.giveawayName,
     keyphrase: req.body.giveawayKeyPhrase,
     timer: timerOption
   }).then(function(giveaway) {
-    var id = giveaway.id;
+    var id = giveaway.id
     if(giveaway.timer) {
       console.log(giveaway.timer)
-      var time = giveaway.timer * 60;
-      time = time * 1000;
-      console.log('timer ' + time);
+      var time = giveaway.timer * 60
+      time = time * 1000
+      console.log('timer ' + time)
       setTimeout(function() {
         db.giveaway.update({
           ended: true
@@ -42,19 +41,19 @@ router.post('/adminGiveawayList', ensureAuthenticated, modCheck, function(req, r
             id: id
           }
         }).then(function(user) {
-        });
-      }, time);
-      req.flash('success', 'You have created a giveaway with a timer.');
-      res.redirect('/giveaway/adminGiveawayList');
+        })
+      }, time)
+      req.flash('success', 'You have created a giveaway with a timer.')
+      res.redirect('/giveaway/adminGiveawayList')
     } else {
-      req.flash('success', 'You have created a giveaway with no timer.');
-      res.redirect('/giveaway/adminGiveawayList');
+      req.flash('success', 'You have created a giveaway with no timer.')
+      res.redirect('/giveaway/adminGiveawayList')
     }
-  });
-});
+  })
+})
 
 router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
-  var giveawayId = req.params.idx;
+  var giveawayId = req.params.idx
   db.giveaway.update({
     ended: true
   }, {
@@ -62,21 +61,21 @@ router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, modCheck, function
       id: giveawayId
     }
   }).then(function(user) {
-    res.redirect('/giveaway/adminGiveawayList');
-  });
-});
+    res.redirect('/giveaway/adminGiveawayList')
+  })
+})
 
 router.get('/giveawayData/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
+  var id = req.params.idx
   db.giveaway.find({
     where: {id: id}
   }).then(function(giveaway) {
-    res.send(giveaway);
-  });
-});
+    res.send(giveaway)
+  })
+})
 
 router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
-  var id = req.params.idx;
+  var id = req.params.idx
   db.giveaway.update({
     ended: true,
     hidden: true
@@ -85,9 +84,9 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
       id: id
     }
   }).then(function(giveaway) {
-    req.flash('success', 'You have hidden the giveaway.');
-    res.redirect('/giveaway/adminGiveawayList');
-  });
-});
+    req.flash('success', 'You have hidden the giveaway.')
+    res.redirect('/giveaway/adminGiveawayList')
+  })
+})
 
-module.exports = router;
+module.exports = router

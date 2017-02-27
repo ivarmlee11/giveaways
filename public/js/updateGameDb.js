@@ -6,7 +6,7 @@ $("#csv-file").on('change', function() {
   setTimeout(function(){
     console.log('games updated')
     update()
-  }, 3000);
+  }, 3000)
 })
 
 update()
@@ -18,7 +18,7 @@ function update() {
     success: function(data) {
       gameTable.html('')
       
-      var data = data;
+      var data = data
 
       gameTable.append(
         '<thead>' + 

@@ -1,11 +1,14 @@
 $(function() {
 
-createWheel();
-createGameWheel();
+createWheel()
+createGameWheel()
 
-var url = window.location.href;
+// jquery selectors
+// coming soon
 
-url = url.split('/');
+var url = window.location.href
+
+url = url.split('/')
 
 var idx = url[url.length -1],
     winner,
@@ -13,126 +16,109 @@ var idx = url[url.length -1],
     afterFirstSpin = false,
     game,
     gameWheelReset = false,
-    afterFirstSpinWheel = false;
+    afterFirstSpinWheel = false
 
-// helpers
+// wheel colors
 
 var blackHex = 'black',
     whiteHex = 'white',
-    // shuffle = function(o) {
-    //     for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-    //         ;
-    //     return o;
-    // },
     halfPI = Math.PI / 2,
-    doublePI = Math.PI * 2;
+    doublePI = Math.PI * 2
 
-// String.prototype.hashCode = function(){
-//   var hash = 5381,
-//           i;
-//   for (i = 0; i < this.length; i++) {
-//     char = this.charCodeAt(i);
-//     hash = ((hash<<5)+hash) + char;
-//     hash = hash & hash; // Convert to 32bit integer
-//   }
-//   return hash;
-// };
-
-// Number.prototype.mod = function(n) {
-//   return ((this%n)+n)%n;
-// };
 
 $('#redrawGameWheel').on('click', function() {
-  afterFirstSpinWheel = false;
-  finished = false;
-  $('#saveGameToggle').prop('checked', false);
-  createGameWheel();
-});
+  afterFirstSpinWheel = false
+  finished = false
+  $('#saveGameToggle').prop('checked', false)
+  createGameWheel()
+})
 
 $('#redrawWheel').on('click', function() {
-  afterFirstSpin = false;
-  finished = false;
-  createWheel();
-});
+  afterFirstSpin = false
+  finished = false
+  createWheel()
+})
 
 $('#clearGame').on('click', function() {
-  afterFirstSpinWheel = false;
-  finished = false;
-  $('#saveGameToggle').prop('checked', false);
-  createGameWheel();
-});
+  afterFirstSpinWheel = false
+  finished = false
+  $('#saveGameToggle').prop('checked', false)
+  createGameWheel()
+})
 
 $('#dropDown').on('click', function() {
-  $('#game').html('Prize: ' + $(this).val());
-  var userId = $('option:selected', this).attr('userid');
+  $('#game').html('Prize: ' + $(this).val())
+  var userId = $('option:selected', this).attr('userid')
   game = {
     name: $(this).val(),
     userId: $('#winnerId').val(),
     gameId: parseInt(userId) 
-  };
-  afterFirstSpinWheel = true;
-});
+  }
+  afterFirstSpinWheel = true
+})
 
 $('#selectWinner').on('click', function() {
-  var url = '/player/playerListData/' + idx;
+  var url = '/player/playerListData/' + idx
   $.ajax({
     url: url,
     type: 'GET',
     success: function(players) {
-      var playerList = players;
-      winner = playerList[Math.floor(Math.random()*playerList.length)];
+      var playerList = players
+      winner = playerList[Math.floor(Math.random()*playerList.length)]
       if(winner) {
-        winnerReset = true;
-        $('#winner').html('The winner is ' + winner.username + '!');
-        $('#winnerId').html(winner.id);
+        winnerReset = true
+        $('#winner').html('The winner is ' + winner.username + '!')
+        $('#winnerId').html(winner.id)
       } else {
-        $('#winner').html('Nobody has entered the competition yet!');
+        $('#winner').html('Nobody has entered the competition yet!')
       } 
     }
-  });
-});
+  })
+})
 
 $('#addWinnerToDb').on('click', function() {
 
+
   if(winnerReset) {
-    var url = '/player/addToWinHistory/' + idx;
+    displayWinnerInfo(winner.id)
+    var url = '/player/addToWinHistory/' + idx
     $.ajax({
       url: url,
       type: 'POST',
       data: winner,
-      success: function(data) {
-        $('#winner').html(data);
-        $('#saveGameToggle').prop('checked', false);
-        $('#game').html('');
-        afterFirstSpin = false;
+      success: function(winner) {
+        $('#winner').html(winner)
+        $('#saveGameToggle').prop('checked', false)
+        $('#game').html('')
+        afterFirstSpin = false
       }
-    });
+    })
     if($('#saveGameToggle').is(":checked") && afterFirstSpinWheel) {
-      var url = '/game/assignWinnerCard';
-      game.userId = winner.id;
+      var url = '/game/assignWinnerCard'
+      game.userId = winner.id
       $.ajax({
         url: url,
         type: 'POST',
         data: game,
-        success: function(data) {
-          $('#winner').html(data);  
-          $('#saveGameToggle').prop('checked', false);
-          $('#game').html('');
-          afterFirstSpinWheel = false;
-          createGameWheel();
+        success: function(winner) {
+          $('#winner').html(winner)  
+          $('#saveGameToggle').prop('checked', false)
+          $('#game').html('')
+          afterFirstSpinWheel = false
+          createGameWheel()
+
         }
-      });
-    }    
-
+      })
+    }  
   } else {
-    $('#winner').html('Select a winner!');
-  };
+    $('#winner').html('Select a winner!')
+  }
 
-  winnerReset = false;
-  gameWheelReset = false;
-  finished = false;
+  winnerReset = false
+  gameWheelReset = false
+  finished = false
 
-});
+})
     
 // wheel
 var wheel = {
@@ -167,90 +153,90 @@ var wheel = {
   spin : function() {
     // Start the wheel only if it's not already spinning
     if (wheel.timerHandle == 0) {
-      wheel.spinStart = new Date().getTime();
-      wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
-      wheel.frames = 0;
-      wheel.sound.play();
-      afterFirstSpin = true;
-      wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
+      wheel.spinStart = new Date().getTime()
+      wheel.maxSpeed = Math.PI / (16 + Math.random()) // Randomly vary how hard the spin is
+      wheel.frames = 0
+      wheel.sound.play()
+      afterFirstSpin = true
+      wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay)
     }
   },
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - wheel.spinStart),
         finished,
-        progress = 0;
+        progress = 0
 
-    wheel.frames++;
-    wheel.draw();
+    wheel.frames++
+    wheel.draw()
 
     if (duration < wheel.upTime) {
-      progress = duration / wheel.upTime;
+      progress = duration / wheel.upTime
       wheel.angleDelta = wheel.maxSpeed
-          * Math.sin(progress * halfPI);
+          * Math.sin(progress * halfPI)
     } else {
-      progress = duration / wheel.downTime;
+      progress = duration / wheel.downTime
       wheel.angleDelta = wheel.maxSpeed
-          * Math.sin(progress * halfPI + halfPI);
+          * Math.sin(progress * halfPI + halfPI)
               if (progress >= 1){
-                  finished = true;
+                  finished = true
               }
     }
 
-    wheel.angleCurrent += wheel.angleDelta;
+    wheel.angleCurrent += wheel.angleDelta
     while (wheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
-      wheel.angleCurrent -= doublePI;
+      wheel.angleCurrent -= doublePI
       }
     if (finished) {
-      clearInterval(wheel.timerHandle);
-      wheel.timerHandle = 0;
-      wheel.angleDelta = 0;
-      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
+      clearInterval(wheel.timerHandle)
+      wheel.timerHandle = 0
+      wheel.angleDelta = 0
+      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS") }
     }
 
     /*
     // Display RPM
-    var rpm = (wheel.angleDelta * (1000 / wheel.timerDelay) * 60) / (Math.PI * 2);
-    $("#counter").html( Math.round(rpm) + " RPM" );
+    var rpm = (wheel.angleDelta * (1000 / wheel.timerDelay) * 60) / (Math.PI * 2)
+    $("#counter").html( Math.round(rpm) + " RPM" )
      */
   },
 
   init : function(optionList) {
     try {
-      wheel.initWheel();
-      wheel.initAudio();
-      wheel.initCanvas();
-      wheel.draw();
+      wheel.initWheel()
+      wheel.initAudio()
+      wheel.initCanvas()
+      wheel.draw()
 
-      $.extend(wheel, optionList);
+      $.extend(wheel, optionList)
 
     } catch (exceptionData) {
-      // alert('Wheel is not loaded ' + exceptionData);
+      // alert('Wheel is not loaded ' + exceptionData)
     }
 
   },
 
   initAudio : function() {
-    var sound = document.createElement('audio');
-    sound.setAttribute('src', '/sounds/wheel.mp3');
-    wheel.sound = sound;
+    var sound = document.createElement('audio')
+    sound.setAttribute('src', '/sounds/wheel.mp3')
+    wheel.sound = sound
   },
 
   initCanvas : function() {
-    var canvas = $('#playerWheel')[0];
-    canvas.addEventListener("click", wheel.spin, false);
-    wheel.canvasContext = canvas.getContext("2d");
+    var canvas = $('#playerWheel')[0]
+    canvas.addEventListener("click", wheel.spin, false)
+    wheel.canvasContext = canvas.getContext("2d")
   },
 
   initWheel : function() {
-    return wheel.colors;
+    return wheel.colors
   },
 
   // Called when segments have changed
   update : function() {
     // Ensure we start mid way on a item
-    //var r = Math.floor(Math.random() * wheel.segments.length);
+    //var r = Math.floor(Math.random() * wheel.segments.length)
     var r = 0,
         segments = wheel.segments,
         len = segments.length,
@@ -258,24 +244,24 @@ var wheel = {
         colorLen = colors.length,
         seg_color = [], // Generate a color cache (so we have consistant coloring)
               i
-          wheel.angleCurrent = ((r + 0.5) / wheel.segments.length) * doublePI;
+          wheel.angleCurrent = ((r + 0.5) / wheel.segments.length) * doublePI
           
           for (i = 0; i < len; i++){
-      seg_color.push(colors[i]);
+      seg_color.push(colors[i])
           }
-    wheel.seg_color = seg_color;
+    wheel.seg_color = seg_color
 
-    wheel.draw();
+    wheel.draw()
   },
 
   draw : function() {
-    wheel.clear();
-    wheel.drawWheel();
-    wheel.drawNeedle();
+    wheel.clear()
+    wheel.drawWheel()
+    wheel.drawNeedle()
   },
 
   clear : function() {
-    wheel.canvasContext.clearRect(0, 0, 1000, 800);
+    wheel.canvasContext.clearRect(0, 0, 1000, 800)
   },
 
   drawNeedle : function() {
@@ -285,55 +271,55 @@ var wheel = {
               size = wheel.size,
               i,
               centerSize = centerX + size,
-              len = wheel.segments.length;
+              len = wheel.segments.length
 
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = blackHex;
-    ctx.fillStyle = whiteHex;
+    ctx.lineWidth = 2
+    ctx.strokeStyle = blackHex
+    ctx.fillStyle = whiteHex
 
-    ctx.beginPath();
+    ctx.beginPath()
 
-    ctx.moveTo(centerSize - 10, centerY);
-    ctx.lineTo(centerSize + 10, centerY - 10);
-    ctx.lineTo(centerSize + 10, centerY + 10);
-    ctx.closePath();
+    ctx.moveTo(centerSize - 10, centerY)
+    ctx.lineTo(centerSize + 10, centerY - 10)
+    ctx.lineTo(centerSize + 10, centerY + 10)
+    ctx.closePath()
 
-    ctx.stroke();
-    ctx.fill();
+    ctx.stroke()
+    ctx.fill()
 
     // Which segment is being pointed to?
-    i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
+    i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1
 
     // Now draw the winning name
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = blackHex;
-    ctx.font = "2em Lato";
+    ctx.textAlign = "left"
+    ctx.textBaseline = "middle"
+    ctx.fillStyle = blackHex
+    ctx.font = "2em Lato"
 
     if(wheel.segments[i]) {
       winner = {
         username: wheel.segments[i].username,
         id: wheel.segments[i].id
-      };
+      }
       if(afterFirstSpin) {
         // if(finished) {
-          $('#winner').html('The winner is ' + winner.username + '!');
-          $('#winnerId').val(winner.id);
-          winnerReset = true;
+          $('#winner').html('The winner is ' + winner.username + '!')
+          $('#winnerId').val(winner.id)
+          winnerReset = true
         // }
       } else {
-        $('#winner').html('');
+        $('#winner').html('')
       }
         
     } else {
       winner = {
         username: null,
         id: null
-      };
-      $('#winner').html('');
+      }
+      $('#winner').html('')
     }
-    var winnerString = winner.username;
-    ctx.fillText(winnerString, centerSize + 20, centerY);
+    var winnerString = winner.username
+    ctx.fillText(winnerString, centerSize + 20, centerY)
   },
 
   drawSegment : function(key, lastAngle, angle) {
@@ -342,32 +328,32 @@ var wheel = {
               centerY = wheel.centerY,
               size = wheel.size,
               colors = wheel.seg_color,
-              value = wheel.segments[key].username;
+              value = wheel.segments[key].username
     
-    //ctx.save();
-    ctx.beginPath();
+    //ctx.save()
+    ctx.beginPath()
 
     // Start in the centre
-    ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, size, lastAngle, angle, false); // Draw an arc around the edge
-    ctx.lineTo(centerX, centerY); // Now draw a line back to the centre
+    ctx.moveTo(centerX, centerY)
+    ctx.arc(centerX, centerY, size, lastAngle, angle, false) // Draw an arc around the edge
+    ctx.lineTo(centerX, centerY) // Now draw a line back to the centre
 
     // Clip anything that follows to this area
-    //ctx.clip(); // It would be best to clip, but we can double performance without it
-    ctx.closePath();
+    //ctx.clip() // It would be best to clip, but we can double performance without it
+    ctx.closePath()
 
-    ctx.fillStyle = colors[key];
-    ctx.fill();
-    ctx.stroke();
+    ctx.fillStyle = colors[key]
+    ctx.fill()
+    ctx.stroke()
 
     // Now draw the text
-    ctx.save(); // The save ensures this works on Android devices
-    ctx.translate(centerX, centerY);
-    ctx.rotate((lastAngle + angle) / 2);
+    ctx.save() // The save ensures this works on Android devices
+    ctx.translate(centerX, centerY)
+    ctx.rotate((lastAngle + angle) / 2)
 
-    ctx.fillStyle = whiteHex;
-    ctx.fillText(value.substr(0, 20), size-15, 0);
-    ctx.restore();
+    ctx.fillStyle = whiteHex
+    ctx.fillText(value.substr(0, 20), size-15, 0)
+    ctx.restore()
   },
 
   drawWheel : function() {
@@ -379,40 +365,40 @@ var wheel = {
               centerY = wheel.centerY,
               size    = wheel.size,
               angle,
-              i;
+              i
 
-    ctx.lineWidth    = 1;
-    ctx.strokeStyle  = blackHex;
-    ctx.textBaseline = "middle";
-    ctx.textAlign    = "right";
-    ctx.font         = "1em Lato";
+    ctx.lineWidth    = 1
+    ctx.strokeStyle  = blackHex
+    ctx.textBaseline = "middle"
+    ctx.textAlign    = "right"
+    ctx.font         = "1em Lato"
 
     for (i = 1; i <= len; i++) {
-      angle = doublePI * (i / len) + angleCurrent;
-      wheel.drawSegment(i - 1, lastAngle, angle);
-      lastAngle = angle;
+      angle = doublePI * (i / len) + angleCurrent
+      wheel.drawSegment(i - 1, lastAngle, angle)
+      lastAngle = angle
     }
           
     // Draw a center circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, 20, 0, doublePI, false);
-    ctx.closePath();
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, 20, 0, doublePI, false)
+    ctx.closePath()
 
-    ctx.fillStyle   = whiteHex;
-    //ctx.strokeStyle = blackHex;
-    ctx.fill();
-    ctx.stroke();
+    ctx.fillStyle   = whiteHex
+    //ctx.strokeStyle = blackHex
+    ctx.fill()
+    ctx.stroke()
 
     // Draw outer circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, size, 0, doublePI, false);
-    ctx.closePath();
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, size, 0, doublePI, false)
+    ctx.closePath()
 
-    ctx.lineWidth   = 2;
-    // ctx.strokeStyle = blackHex;
-    ctx.stroke();
+    ctx.lineWidth   = 2
+    // ctx.strokeStyle = blackHex
+    ctx.stroke()
   }
-};
+}
 
 var gameWheel = {
   timerHandle : 0,
@@ -462,91 +448,91 @@ var gameWheel = {
 
     // Start the wheel only if it's not already spinning
     if (gameWheel.timerHandle == 0) {
-      gameWheel.spinStart = new Date().getTime();
-      gameWheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
-      gameWheel.frames = 0;
-      // gameWheel.sound.play();
-      afterFirstSpinWheel = true;
-      gameWheel.timerHandle = setInterval(gameWheel.onTimerTick, gameWheel.timerDelay);
+      gameWheel.spinStart = new Date().getTime()
+      gameWheel.maxSpeed = Math.PI / (16 + Math.random()) // Randomly vary how hard the spin is
+      gameWheel.frames = 0
+      // gameWheel.sound.play()
+      afterFirstSpinWheel = true
+      gameWheel.timerHandle = setInterval(gameWheel.onTimerTick, gameWheel.timerDelay)
     }
   },
 
   onTimerTick : function() {
     var duration = (new Date().getTime() - gameWheel.spinStart),
         finished,
-        progress = 0;
+        progress = 0
 
-    gameWheel.frames++;
-    gameWheel.draw();
+    gameWheel.frames++
+    gameWheel.draw()
 
     if (duration < gameWheel.upTime) {
-      progress = duration / gameWheel.upTime;
+      progress = duration / gameWheel.upTime
       gameWheel.angleDelta = gameWheel.maxSpeed
-          * Math.sin(progress * halfPI);
+          * Math.sin(progress * halfPI)
     } else {
-      progress = duration / gameWheel.downTime;
+      progress = duration / gameWheel.downTime
       gameWheel.angleDelta = gameWheel.maxSpeed
-          * Math.sin(progress * halfPI + halfPI);
+          * Math.sin(progress * halfPI + halfPI)
               if (progress >= 1){
-                  finished = true;
+                  finished = true
               }
     }
 
-    gameWheel.angleCurrent += gameWheel.angleDelta;
+    gameWheel.angleCurrent += gameWheel.angleDelta
     while (gameWheel.angleCurrent >= doublePI){
       // Keep the angle in a reasonable range
-      gameWheel.angleCurrent -= doublePI;
+      gameWheel.angleCurrent -= doublePI
       }
     if (finished) {
-      clearInterval(gameWheel.timerHandle);
-      gameWheel.timerHandle = 0;
-      gameWheel.angleDelta = 0;
-      // $('#gameToggleButton').show();
-      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
+      clearInterval(gameWheel.timerHandle)
+      gameWheel.timerHandle = 0
+      gameWheel.angleDelta = 0
+      // $('#gameToggleButton').show()
+      // if (console){ console.log((wheel.frames / duration * 1000) + " FPS") }
     }
 
     /*
     // Display RPM
-    var rpm = (wheel.angleDelta * (1000 / wheel.timerDelay) * 60) / (Math.PI * 2);
-    $("#counter").html( Math.round(rpm) + " RPM" );
+    var rpm = (wheel.angleDelta * (1000 / wheel.timerDelay) * 60) / (Math.PI * 2)
+    $("#counter").html( Math.round(rpm) + " RPM" )
      */
   },
 
   init : function(optionList) {
     try {
-      gameWheel.initWheel();
-      // wheel.initAudio();
-      gameWheel.initCanvas();
-      gameWheel.draw();
+      gameWheel.initWheel()
+      // wheel.initAudio()
+      gameWheel.initCanvas()
+      gameWheel.draw()
 
-      $.extend(gameWheel, optionList);
+      $.extend(gameWheel, optionList)
 
     } catch (exceptionData) {
-      // alert('gameWheel is not loaded ' + exceptionData);
+      // alert('gameWheel is not loaded ' + exceptionData)
     }
 
   },
 
   // initAudio : function() {
-  //   var sound = document.createElement('audio');
-  //   sound.setAttribute('src', 'wheel.mp3');
-  //   wheel.sound = sound;
+  //   var sound = document.createElement('audio')
+  //   sound.setAttribute('src', 'wheel.mp3')
+  //   wheel.sound = sound
   // },
 
   initCanvas : function() {
-    var gameCanvis = $('#gameWheel')[0];
-    gameCanvis.addEventListener("click", gameWheel.spin, false);
-    gameWheel.canvasContext = gameCanvis.getContext("2d");
+    var gameCanvis = $('#gameWheel')[0]
+    gameCanvis.addEventListener("click", gameWheel.spin, false)
+    gameWheel.canvasContext = gameCanvis.getContext("2d")
   },
 
   initWheel : function() {
-    return gameWheel.colors;
+    return gameWheel.colors
   },
 
   // Called when segments have changed
   update : function() {
     // Ensure we start mid way on a item
-    //var r = Math.floor(Math.random() * wheel.segments.length);
+    //var r = Math.floor(Math.random() * wheel.segments.length)
     var r = 0,
         segments = gameWheel.segments,
         len = segments.length,
@@ -554,24 +540,24 @@ var gameWheel = {
         colorLen = colors.length,
         seg_color = [], // Generate a color cache (so we have consistant coloring)
               i
-          gameWheel.angleCurrent = ((r + 0.5) / gameWheel.segments.length) * doublePI;
+          gameWheel.angleCurrent = ((r + 0.5) / gameWheel.segments.length) * doublePI
           
           for (i = 0; i < len; i++){
-      seg_color.push(colors[i]);
+      seg_color.push(colors[i])
           }
-    gameWheel.seg_color = seg_color;
+    gameWheel.seg_color = seg_color
 
-    gameWheel.draw();
+    gameWheel.draw()
   },
 
   draw : function() {
-    gameWheel.clear();
-    gameWheel.drawWheel();
-    gameWheel.drawNeedle();
+    gameWheel.clear()
+    gameWheel.drawWheel()
+    gameWheel.drawNeedle()
   },
 
   clear : function() {
-    gameWheel.canvasContext.clearRect(0, 0, 1000, 800);
+    gameWheel.canvasContext.clearRect(0, 0, 1000, 800)
   },
 
   drawNeedle : function() {
@@ -581,54 +567,54 @@ var gameWheel = {
               size = gameWheel.size,
               i,
               centerSize = centerX + size,
-              len = gameWheel.segments.length;
+              len = gameWheel.segments.length
 
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = blackHex;
-    ctx.fillStyle = whiteHex;
+    ctx.lineWidth = 2
+    ctx.strokeStyle = blackHex
+    ctx.fillStyle = whiteHex
 
-    ctx.beginPath();
+    ctx.beginPath()
 
-    ctx.moveTo(centerSize - 10, centerY);
-    ctx.lineTo(centerSize + 10, centerY - 10);
-    ctx.lineTo(centerSize + 10, centerY + 10);
-    ctx.closePath();
+    ctx.moveTo(centerSize - 10, centerY)
+    ctx.lineTo(centerSize + 10, centerY - 10)
+    ctx.lineTo(centerSize + 10, centerY + 10)
+    ctx.closePath()
 
-    ctx.stroke();
-    ctx.fill();
+    ctx.stroke()
+    ctx.fill()
 
     // Which segment is being pointed to?
-    i = len - Math.floor((gameWheel.angleCurrent / doublePI) * len) - 1;
+    i = len - Math.floor((gameWheel.angleCurrent / doublePI) * len) - 1
 
     // Now draw the winning name
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = blackHex;
-    ctx.font = "2em Lato";
+    ctx.textAlign = "left"
+    ctx.textBaseline = "middle"
+    ctx.fillStyle = blackHex
+    ctx.font = "2em Lato"
     if(gameWheel.segments[i]) {
       game = {
         name: gameWheel.segments[i].name,
         userId: gameWheel.segments[i].userId,
         gameId: gameWheel.segments[i].gameId
-      };
+      }
       if(afterFirstSpinWheel) {
         // if(finished) {
-        $('#game').html('Prize: ' + game.name + '!');
+        $('#game').html('Prize: ' + game.name + '!')
         // }
       } else {
-        $('#game').html('');
+        $('#game').html('')
       }
-      gameWheelReset = true;  
+      gameWheelReset = true  
     } else {
       game = {
         name: null,
         userId: null,
         gameId: null
-      };
-      $('#game').html('');
+      }
+      $('#game').html('')
     }
-    var winnerString = game.name;
-    ctx.fillText(winnerString, centerSize + 10, centerY);
+    var winnerString = game.name
+    ctx.fillText(winnerString, centerSize + 10, centerY)
   },
 
   drawSegment : function(key, lastAngle, angle) {
@@ -637,32 +623,32 @@ var gameWheel = {
               centerY = gameWheel.centerY,
               size = gameWheel.size,
               colors = gameWheel.seg_color,
-              value = gameWheel.segments[key].name;
+              value = gameWheel.segments[key].name
     
-    //ctx.save();
-    ctx.beginPath();
+    //ctx.save()
+    ctx.beginPath()
 
     // Start in the centre
-    ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, size, lastAngle, angle, false); // Draw an arc around the edge
-    ctx.lineTo(centerX, centerY); // Now draw a line back to the centre
+    ctx.moveTo(centerX, centerY)
+    ctx.arc(centerX, centerY, size, lastAngle, angle, false) // Draw an arc around the edge
+    ctx.lineTo(centerX, centerY) // Now draw a line back to the centre
 
     // Clip anything that follows to this area
-    //ctx.clip(); // It would be best to clip, but we can double performance without it
-    ctx.closePath();
+    //ctx.clip() // It would be best to clip, but we can double performance without it
+    ctx.closePath()
 
-    ctx.fillStyle = colors[key];
-    ctx.fill();
-    ctx.stroke();
+    ctx.fillStyle = colors[key]
+    ctx.fill()
+    ctx.stroke()
 
     // Now draw the text
-    ctx.save(); // The save ensures this works on Android devices
-    ctx.translate(centerX, centerY);
-    ctx.rotate((lastAngle + angle) / 2);
+    ctx.save() // The save ensures this works on Android devices
+    ctx.translate(centerX, centerY)
+    ctx.rotate((lastAngle + angle) / 2)
 
-    ctx.fillStyle = whiteHex;
-    ctx.fillText(value.substr(0, 20), size-15, 0);
-    ctx.restore();
+    ctx.fillStyle = whiteHex
+    ctx.fillText(value.substr(0, 20), size-15, 0)
+    ctx.restore()
   },
 
   drawWheel : function() {
@@ -674,104 +660,102 @@ var gameWheel = {
               centerY = gameWheel.centerY,
               size    = gameWheel.size,
               angle,
-              i;
+              i
 
-    ctx.lineWidth    = 1;
-    ctx.strokeStyle  = blackHex;
-    ctx.textBaseline = "middle";
-    ctx.textAlign    = "right";
-    ctx.font         = "1em Lato";
+    ctx.lineWidth    = 1
+    ctx.strokeStyle  = blackHex
+    ctx.textBaseline = "middle"
+    ctx.textAlign    = "right"
+    ctx.font         = "1em Lato"
 
     for (i = 1; i <= len; i++) {
-      angle = doublePI * (i / len) + angleCurrent;
-      gameWheel.drawSegment(i - 1, lastAngle, angle);
-      lastAngle = angle;
+      angle = doublePI * (i / len) + angleCurrent
+      gameWheel.drawSegment(i - 1, lastAngle, angle)
+      lastAngle = angle
     }
           
     // Draw a center circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, 20, 0, doublePI, false);
-    ctx.closePath();
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, 20, 0, doublePI, false)
+    ctx.closePath()
 
-    ctx.fillStyle   = whiteHex;
-    //ctx.strokeStyle = blackHex;
-    ctx.fill();
-    ctx.stroke();
+    ctx.fillStyle   = whiteHex
+    //ctx.strokeStyle = blackHex
+    ctx.fill()
+    ctx.stroke()
 
     // Draw outer circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, size, 0, doublePI, false);
-    ctx.closePath();
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, size, 0, doublePI, false)
+    ctx.closePath()
 
-    ctx.lineWidth   = 2;
-    // ctx.strokeStyle = blackHex;
-    ctx.stroke();
+    ctx.lineWidth   = 2
+    // ctx.strokeStyle = blackHex
+    ctx.stroke()
   }
-};
+}
 
 function createGameWheel() {
-  var url = '/game/gameDataOnly';
+  var url = '/game/gameDataOnly'
   $.ajax({
     url: url,
     method: 'GET',
     success: function(gameList) {
-      var gameList = gameList;
+      var gameList = gameList
 
-      var games = [];
-      gameWheel.segments = [];
+      var games = []
+      gameWheel.segments = []
       gameList.forEach(function(val) {
         if((val.coderevealed !== true) && (val.owned !== true)) {
           gameWheel.segments.push({
             userId: null,
             gameId: val.id,
             name: val.name
-          });
+          })
         }
-      });
-      gameDropDownList(gameWheel.segments);
-      gameWheel.init(); 
-      gameWheel.update();
+      })
+      gameDropDownList(gameWheel.segments)
+      gameWheel.init() 
+      gameWheel.update()
       if(gameList.length === 0) {
-        console.log(gameList)
-        console.log(gameWheel.segments)
-        $('#gameWheel').hide();
-        $('.gameUi').hide();
+        $('#gameWheel').hide()
+        $('.gameUi').hide()
       } else {
-        $('#gameWheel').show();
-        $('.gameUi').show();
+        $('#gameWheel').show()
+        $('.gameUi').show()
       }
     }
-  });
-};
+  })
+}
 
 function createWheel() {
 
   var giveawayIds = $('.numberOfPlayer').map( function() {
-    return $(this).attr('giveawayId');
-  }).get();
+    return $(this).attr('giveawayId')
+  }).get()
     
   giveawayIds.forEach(function(element) {
-    var url = '/player/playerListData/' + element;
+    var url = '/player/playerListData/' + element
     $.ajax({
       url: url,
       method: 'GET',
       success: function(playerList) {
-        var playerList = playerList;
+        var playerList = playerList
 
         if(playerList.length === 0) {
-          $('#wheel').hide();
+          $('#wheel').hide()
         } else {
-          $('#wheel').show();
+          $('#wheel').show()
         }
-        wheel.segments = [];
-        wheel.colors = [];
+        wheel.segments = []
+        wheel.colors = []
         playerList.forEach(function(val) {
           wheel.segments.push({
             username: val.username,
             id: val.id,
             color: val.color 
-          });
-        });
+          })
+        })
         wheel.segments.forEach(function(val) {
           var color = val.color
           if(color === null) {
@@ -779,24 +763,46 @@ function createWheel() {
           }
           wheel.colors.push(color)
         })
-        console.log('player list')
-        console.log(wheel.segments)
-        console.log('color list')
-        console.log(wheel.colors)
 
-        wheel.init(); 
-        wheel.update();
+        wheel.init() 
+        wheel.update()
       }
-    });
-  });
-};
+    })
+  })
+}
 
 function gameDropDownList(list) {
-  var $dropDownArea = $('#gameDropDown');
-  $dropDownArea.html('');
+  var $dropDownArea = $('#gameDropDown')
+  $dropDownArea.html('')
   list.forEach(function(val) {
-    $dropDownArea.append('<option userid="' + val.gameId + '">' + val.name + '</option>');  
-  });
-};
+    $dropDownArea.append('<option userid="' + val.gameId + '">' + val.name + '</option>')  
+  })
+}
 
-});
+function displayWinnerInfo(winnerId) {
+  var id = winnerId,
+      url = '/player/playerInfo/' + id
+  $.ajax({
+    url: url,
+    method: 'GET',
+    success: function(player) {
+      var name = player.username,
+          thumb = '<img src="' + player.cloudinary + '"/>',
+          auth = player.auth
+
+      if(player.approvedThumb !== true) {
+        thumb = '<img src="/img/guesswho.png"/>'
+      }
+
+      bootbox.alert({
+        message: '<div class="text-center">' +
+                  '<h5>' + name + '<img id="logo" src="/img/' + auth + '.png"/> won!</h5>' +
+                  thumb + 
+                  '</div>'
+      })
+      
+    }
+  })
+}
+
+})

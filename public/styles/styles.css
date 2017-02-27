@@ -1,5 +1,6 @@
 html {
   font-family: 'Neuton', serif;
+  background-color: silver;
 }
 
 h1, h2, h5 {
@@ -10,6 +11,11 @@ h1, h2, h5 {
 
 input {
   color: black;
+}
+
+ul.nav-tabs > li {
+  width: 20%;
+  text-align: center;
 }
 
 a, a:hover, a:active {
@@ -30,20 +36,15 @@ a, a:hover, a:active {
   margin: 0 auto;
   width: 300px;
   height: 100px;
-  /*border: 2px solid black;*/
-}
-
-.fixedHeight {
-  width: 250;
-  height: 98px;
-}
-
-.autocomplete-suggestion {
-  font-size: 2em;
 }
 
 #playerDropDown {
   width: 75%;
+}
+
+#thumbNail {
+  padding-left: 15px;
+  margin: 0 auto;
 }
 
 #loginBox, .well {
@@ -83,25 +84,26 @@ a, a:hover, a:active {
   height: 300px;
 }
 
-#tradeWindowInfo {
-  height: 200px;
-}
-
 #tradeWindowOut {
   border: 3px solid blue;
   height: 300px;
 }
 
-#tradeWindowOutInfo {
+#tradeWindowOutInfo, #tradeWindowInfo {
   height: 200px;
 }
 
-#messageBox {
+#messageBox, .nameSpace {
   min-height: 90px;
 }
 
-.nameSpace {
-  height: 90px;
+.fixedHeight {
+  width: 250;
+  height: 98px;
+}
+
+.autocomplete-suggestion {
+  font-size: 2em;
 }
 
 .highlight {
@@ -128,11 +130,6 @@ a, a:hover, a:active {
 
 .hide {
   display: hidden;
-}
-
-ul.nav-tabs > li {
-  width: 20%;
-  text-align: center;
 }
 
 .btn {

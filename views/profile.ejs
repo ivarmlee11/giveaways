@@ -1,6 +1,7 @@
 <script src="/js/autocomplete.js"></script>
 <script src="/js/bootbox.js"></script>
 <script src="/js/tradingCards.js"></script>
+<script src="/js/profilepics.js"></script>
 <script src='/js/spectrum.js'></script>
 <link rel='stylesheet' href='/styles/spectrum.css' />
 
@@ -17,11 +18,12 @@
   <div id="thumbNail" class="col-sm-4 text-center">
     Thumbnail preview will go here
   </div>
-  <div class="col-sm-4 text-center">
-    <form class="form-group" enctype="multipart/form-data" action="/avatar/avichange/<%= user.id %>" method="POST">
-      <label for="myFile">Thumbnail</label>
-      <input class="form-control-file" type="file" name="myFile">
-      <input type="submit" class="btn btn-primary">
+  <div class="col-sm-4">
+    <form class="form-group text-center" enctype="multipart/form-data" action="/avatar/avichange/<%= user.id %>" method="POST">
+      <label class="btn btn-default btn-file">
+        <h3>Upload a Profile Picture</h3>
+        <input type="file" name="myFile" hidden>
+      </label>
     </form>
   </div>
 </div>

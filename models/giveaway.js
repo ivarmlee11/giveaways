@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = function(sequelize, DataTypes) {
   var giveaway = sequelize.define('giveaway', {
     name: DataTypes.STRING,
@@ -9,17 +9,16 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        models.giveaway.belongsToMany(models.user, {through: 'giveawaysUsers'});
-        models.giveaway.belongsToMany(models.user, {as: 'Winners', through: 'contestsWinners'});
+        models.giveaway.belongsToMany(models.user, {through: 'giveawaysUsers'})
+        models.giveaway.belongsToMany(models.user, {as: 'Winners', through: 'contestsWinners'})
       }
     },
     hooks: {
       beforeCreate: function(giveaway, options, cb) {
-        giveaway.keyphrase = giveaway.keyphrase.toLowerCase();
-        //pass the updated giveaway object back
-        cb(null, giveaway);
+        giveaway.keyphrase = giveaway.keyphrase.toLowerCase()
+        cb(null, giveaway)
       }
     }
-  });
-  return giveaway;
-};
+  })
+  return giveaway
+}

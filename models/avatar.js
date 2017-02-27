@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = function(sequelize, DataTypes) {
   var avatar = sequelize.define('avatar', {
     url: DataTypes.STRING,
@@ -6,8 +6,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        models.avatar.belongsTo(models.user);      }
+        models.avatar.belongsTo(models.user)      }
     }
-  });
-  return avatar;
-};
+  })
+  return avatar
+}

@@ -6,9 +6,7 @@
     flash = require('connect-flash')
 
 router.get('/colorget/:idx', ensureAuthenticated, function(req, res) {
-  console.log('color get')
   var id = req.params.idx
-  console.log(id)
   db.user.find({
     where: {id: id}
   }).then(function(user) {
@@ -21,11 +19,8 @@ router.get('/colorget/:idx', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx
-  console.log('color change')
-  var redirect = '/profile/' + id
-  console.log(redirect)
-
+  var id = req.params.idx,
+      redirect = '/profile/' + id
   if(req.user.dataValues.id == id) {
     db.user.update({
       color: req.body.color
@@ -34,7 +29,6 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
         id: id
       }
     }).then(function(user) {
-      // res.redirect('/giveawayList')
       res.send(user.color)
     })
   } else {
@@ -42,5 +36,5 @@ router.post('/changecolor/:idx', ensureAuthenticated, function(req, res) {
   }
 })
 
-module.exports = router;
+module.exports = router
 

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = function(sequelize, DataTypes) {
   var game = sequelize.define('game', {
     name: DataTypes.STRING,
@@ -10,10 +10,9 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
-        models.game.belongsTo(models.user);
+        models.game.belongsTo(models.user)
       }
     }
-  });
-  return game;
-};
+  })
+  return game
+}

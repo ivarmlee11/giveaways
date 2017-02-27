@@ -3,45 +3,55 @@ var express = require('express'),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     db = require('../models'),
-    moment = require('moment-timezone'),
-    flash = require('connect-flash');
+    flash = require('connect-flash')
 
 router.get('/allplayers/', ensureAuthenticated, function(req, res) {
   db.user.findAll().then(function(users) {
-    res.send(users);
-  });
-});
+    res.send(users)
+  })
+})
+
+router.get('/playerInfo/:idx', ensureAuthenticated, function(req, res) {
+  var id = req.params.idx
+  console.log('getting player info for user ' + id)
+  db.user.findById(id).then(function(user) {
+    console.log('found user')
+    console.log(user)
+    console.log('res send user to front end ajax call')
+    res.send(user)
+  })
+})
 
 router.get('/playerList/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
+  var id = req.params.idx
   db.giveaway.find({
     where: {id: id}
   }).then(function(giveaway) {
-    var giveaway = giveaway;
+    var giveaway = giveaway
     giveaway.getUsers().then(function(users) {
-      var playerList = [];
+      var playerList = []
       users.forEach(function(user) {
         playerList.push({
           username: user.username,
           auth: user.auth
-        });
-      });
+        })
+      })
       res.render('admin/adminShowGiveaway', 
         {
         playerList: playerList,
         giveaway: giveaway
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})
 
 router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
-  var id = req.params.idx;
+  var id = req.params.idx
   db.giveaway.find({
     where: {id: id}
   }).then(function(giveaway) {
     giveaway.getUsers().then(function(users) {
-      var playerList = [];
+      var playerList = []
       users.forEach(function(user) {
         playerList.push({
           username: user.username,
@@ -49,24 +59,24 @@ router.get('/playerListData/:idx', ensureAuthenticated, function(req, res) {
           auth: user.auth,
           ip: user.ip,
           color: user.color
-        });
-      });
-      res.send(playerList);
-    });
-  });
-});
+        })
+      })
+      res.send(playerList)
+    })
+  })
+})
 
 router.post('/addToWinHistory/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx,
-    giveaway;
+    giveaway
 
   db.giveaway.findById(id).then(function(giveaway) {
-    giveaway = giveaway;
+    giveaway = giveaway
     db.user.findById(req.body.id).then(function(user) {
-      giveaway.addWinner(user);
-      res.send('Added to winner group!');
-    });
-  });    
-});
+      giveaway.addWinner(user)
+      res.send('Added to winner group!')
+    })
+  })    
+})
 
-module.exports = router;
+module.exports = router

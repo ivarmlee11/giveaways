@@ -1,26 +1,38 @@
 var TwitchtvStrategy = require('passport-twitchtv').Strategy,
     BeamStrategy = require('passport-beam').Strategy,
+    LocalStrategy = require('passport-local').Strategy,
     db = require('../models'),
     passport = require('passport'),
     twitchClientId = process.env.TWITCHCLIENTID,
     twitchClientSecret = process.env.CLIENTSECRETTWITCH,
     beamClientSecret = process.env.CLIENTSECRETBEAM,
     beamClientId = process.env.BEAMCLIENTID
-    // console.log(twitchClientSecret + ' twitch')
-    // console.log(beamClientSecret + ' beam')
-    // console.log(beamClientId + ' beam id')
-    // console.log(twitchClientId + ' twitch id')
 
 passport.serializeUser(function(user, done) {
-  done(null, user)
+  done(null, user.id)
 })
 
-passport.deserializeUser(function(user, cb) {
-  var id = user.id
+passport.deserializeUser(function(id, cb) {
+  var id = id
   db.user.findById(id).then(function(user) {
     cb(null, user)
   }).catch(cb)
 })
+
+passport.use(new LocalStrategy({
+  usernameField: 'username',
+  passwordField: 'password'
+}, function(username, password, cb) {
+  db.user.find({
+    where: { username: username }
+  }).then(function(user) {
+    if (!user || !user.validPassword(password)) {
+      cb(null, false)
+    } else {
+      cb(null, user)
+    }
+  }).catch(cb)
+}))
 
 passport.use(new TwitchtvStrategy({
     clientID: twitchClientId,

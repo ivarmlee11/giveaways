@@ -14,11 +14,11 @@ module.exports = {
       username: {
         type: Sequelize.STRING
       },
-      auth: {
+      password: {
         type: Sequelize.STRING
       },
-      admin: {
-        type: Sequelize.BOOLEAN
+      auth: {
+        type: Sequelize.STRING
       },
       ip: {
         type: Sequelize.STRING
@@ -26,8 +26,14 @@ module.exports = {
       color: {
         type: Sequelize.STRING
       },
-      avatarId: {
-        type: Sequelize.INTEGER
+      admin: {
+        type: Sequelize.BOOLEAN
+      },
+      cloudinary: {
+        type: Sequelize.STRING
+      },
+      approvedThumb: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

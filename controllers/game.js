@@ -4,7 +4,6 @@ var express = require('express'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
     bodyParser = require('body-parser'),
     db = require('../models'),
-    moment = require('moment-timezone'),
     flash = require('connect-flash')
 
 router.get('/gameDataOnly', ensureAuthenticated, modCheck, function(req, res) {
