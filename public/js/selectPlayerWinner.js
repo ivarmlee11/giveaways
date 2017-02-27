@@ -790,6 +790,7 @@ function displayWinnerInfo(winnerId) {
           auth = player.auth
 
       if(player.cloudinary === (null || false)) {
+        
         thumb === 'guesswho'
       }
 
