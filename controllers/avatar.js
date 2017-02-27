@@ -19,7 +19,7 @@ cloudinary.config({
 
 router.get('/aviget/:idx', ensureAuthenticated, function(req, res) {
   db.user.findById(req.user.id).then(function(user) {
-    user.approvedThumb ?  res.send(user.cloudinary) : res.send('Not approved')
+    res.send(user.cloudinary)
   })
 })
 
