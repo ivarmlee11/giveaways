@@ -28,7 +28,8 @@ app.use(cookieParser())
 app.use(session({
   key: 'connect.sid', 
   secret: sessionSecret,
-  store: new MemoryStore(),
+  // store: new MemoryStore(),
+  store: new (require('connect-pg-simple')(session))(),
   resave: false,
   saveUninitialized: false
 }))
@@ -37,7 +38,8 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,       // the same middleware you registrer in express 
   key: 'connect.sid',       // the name of the cookie where express/connect stores its session_id 
   secret: sessionSecret,    // the session_secret to parse the cookie 
-  store: new MemoryStore(),        // we NEED to use a sessionstore. no memorystore please 
+  store: new (require('connect-pg-simple')(session))(),
+  // store: new MemoryStore(),        // we NEED to use a sessionstore. no memorystore please 
   success:      onAuthorizeSuccess,  // *optional* callback on success - read more below 
   fail:         onAuthorizeFail     // *optional* callback on fail/error - read more below 
 })) 
