@@ -78,7 +78,6 @@ $('#selectWinner').on('click', function() {
 
 $('#addWinnerToDb').on('click', function() {
 
-
   if(winnerReset) {
     displayWinnerInfo(winner.id)
     var url = '/player/addToWinHistory/' + idx
