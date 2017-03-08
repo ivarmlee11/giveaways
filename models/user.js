@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
           models.user.belongsToMany(models.giveaway, {through: 'giveawaysUsers'})
           models.user.belongsToMany(models.giveaway, {as: 'Contests', through: 'contestsWinners'})
           models.user.hasMany(models.game)
-          // models.user.hasMany(models.avatar)
+          models.user.hasOne(models.kiwi)
         }
       },
       instanceMethods: {

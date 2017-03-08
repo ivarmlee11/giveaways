@@ -47,9 +47,7 @@ router.post('/login', passport.authenticate('local'),
   function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-    console.log(req.user)
-    console.log(req.isAuthenticated())
-    console.log('what the fuck')
+    console.log(req.isAuthenticated() + ' user authed with passport local')
     res.redirect('/auth/loggedIn')
   })
 

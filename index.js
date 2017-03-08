@@ -16,10 +16,10 @@ var express = require('express'),
     ejsLayouts = require('express-ejs-layouts'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
-    tmi = require('tmi.js'),
-    botKey = process.env.BOTAPIKEY,
     flash = require('connect-flash'),
-    MemoryStore = require('session-memory-store')(session)
+    MemoryStore = require('session-memory-store')(session),
+    twitchBot = require('./chatBots/twitchBot.js'),
+    beamBot = require('./chatBots/beamBot.js')
 
 app.use(requestIp.mw())
 
@@ -102,52 +102,6 @@ app.use('/auth', authCtrl)
 app.use('/user', userCtrl)
 app.use('/avatar', aviCtrl)
 app.use('/testUser', testCtrl)
-
-// twitch bot config
-
-var options = {
-  options: {
-    debug: true
-  },
-  connection: {
-    cluster: 'aws',
-    reconnect: true
-  },
-  identity: {
-    username: 'bigbonesjones69',
-    password: botKey
-  },
-  channels: ['#tweakgames']
-}
-
-var client = new tmi.client(options)
-
-client.connect()
-
-client.on('connected', function(address, port) {
-  console.log('Address ' + address + ' port ' + port)
-})
-
-client.on('chat', function(channel, userstate, message, self) {
-  var messageUser = message.split(' '),
-      messageTo,
-      messageContent
-
-  switch(message) {
-    case '!testbot':
-      client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.')
-      break
-    case '!clear':
-      client.clear("tweakgames")
-      client.action('#tweakgames', 'Chat cleared.')
-      break
-    default: null     
-  }
-})
-
-client.on('join', function (channel, username, self) {
-  // Do your stuff.
-})
 
 var clients = []
 
