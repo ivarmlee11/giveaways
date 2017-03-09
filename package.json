@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.2",
+    "beam-client-node": "^0.11.0",
     "body-parser": "^1.15.2",
     "cloudinary": "^1.7.0",
     "connect-flash": "^0.1.1",

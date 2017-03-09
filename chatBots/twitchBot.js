@@ -1,7 +1,7 @@
 var tmi = require('tmi.js'),
   twitchBotKey = process.env.twitchBotKey,
   db = require('../models'),
-  updateKiwis = require('./cronKiwiTimer/cronKiwiTimer.js')
+  updateKiwis = require('./cronKiwiTimer/cronKiwiTimerTwitch.js')
 
 // twitch bot config
 
