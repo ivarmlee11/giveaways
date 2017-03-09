@@ -2,7 +2,8 @@ var BeamClient = require('beam-client-node'),
     BeamSocket = require('beam-client-node/lib/ws'),
 		beamBotKey = process.env.BEAMBOTKEY,
     tweakBeamId = process.env.tweakBeamId,
-    cronKiwiTimerBeam = require('./cronKiwiTimer/cronKiwiTimerBeam.js')
+    db = require('../models'),
+    updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerBeam.js')
 
 console.log('twitch stream id ' + tweakBeamId)
 
@@ -50,19 +51,60 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       console.log('Oh no! An error occurred!', error)
     })
 
+     socket.on('UserJoin', function(data) {
+      var username = data.username
+      db.user.find({
+        where: {
+          username: username,
+          auth: 'Beam'
+        }
+      }).then(function(user) {
+        if(user) {
+          var foundUsername = user.username
+          console.log(foundUsername + ' user found')
+          user.getKiwi().then(function(kiwi) {
+            if(kiwi) {  
+            var id = kiwi.userId
+            console.log(id + ':userid of kiwi found')
+              db.kiwi.update({
+                watching: true
+              }, {
+                where: {
+                  userId: id
+                }
+              }).then(function(kiwi) {
+                updateKiwisTwitch(id)
+              })
+            } else {
+              user.createKiwi({
+                points: 0,
+                watching: true,
+                userId: user.id
+              }).then(function(kiwi) {
+                console.log('added kiwi object and started adding kiwis to this user over time')
+                updateKiwisTwitch(user.id)
+              })
+            }
+          })
+        } else {
+          console.log(username + ' has not signed up for the web app')
+        }
+      }) 
+    })
+
     // Listen to chat messages, note that you will also receive your own!
     socket.on('ChatMessage', function(data) {
       var msg = data.message.message[0].text,
         sender = data.user_name
-      console.log('chat msg sent!')
-      console.log(data)
-      console.log(data.message)
+      console.log('chat msg sent on beam!')
+      // console.log(data)
+      // console.log(data.message)
       console.log(msg)
       console.log('from ' + sender)
       switch (msg) { 
         case '!kiwis':
-        console.log('getting users')
-        break;
+          console.log('kiwi check incoming')
+        break
       }
     })
 

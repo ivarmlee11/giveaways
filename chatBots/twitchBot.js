@@ -1,7 +1,7 @@
 var tmi = require('tmi.js'),
   twitchBotKey = process.env.twitchBotKey,
   db = require('../models'),
-  updateKiwis = require('./cronKiwiTimer/cronKiwiTimerTwitch.js')
+  updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerTwitch.js')
 
 // twitch bot config
 
@@ -73,7 +73,7 @@ function chat(channel, userstate, message, self) {
               console.log(data)
             }).catch(function(err) {
               console.log(err)
-          });
+          })
         })
       })
     default: null     
@@ -94,9 +94,9 @@ function join (channel, username, self) {
       var foundUsername = user.username
       console.log(foundUsername + ' user found')
       user.getKiwi().then(function(kiwi) {
-        var id = kiwi.userId
-        console.log(id + ':userid of kiwi found')
         if(kiwi) {  
+          var id = kiwi.userId
+          console.log(id + ':userid of kiwi found')
           db.kiwi.update({
             watching: true
           }, {
@@ -104,7 +104,7 @@ function join (channel, username, self) {
               userId: id
             }
           }).then(function(kiwi) {
-            updateKiwis(id)
+            updateKiwisTwitch(id)
           })
         } else {
           user.createKiwi({
@@ -113,7 +113,7 @@ function join (channel, username, self) {
             userId: user.id
           }).then(function(kiwi) {
             console.log('added kiwi object and started adding kiwis to this user over time')
-            updateKiwis(user.id)
+            updateKiwisTwitch(user.id)
           })
         }
       })
