@@ -23,13 +23,13 @@ client.request('GET', 'users/current')
   .then(function(response) {
     // console.log(response.body)
     userInfo = response.body
-    console.log(userInfo)
+    // console.log(userInfo)
 
     return client.chat.join(tweakBeamId)
   })
   .then(function(response) {
     var body = response.body
-    console.log(body)
+    // console.log(body)
     return createChatSocket(userInfo.id, tweakBeamId, body.endpoints, body.authkey)
   })
   .catch(function(err) {
@@ -43,7 +43,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
 
   socket.auth(channelId, userId, authkey)
     .then(function() {
-      console.log('You are now authenticated!')
+      console.log('Beam bot authenticated!')
       // Send a chat message
       return socket.call('msg', ['Hello world!'])
     })
@@ -106,6 +106,33 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
           console.log('kiwi check incoming')
         break
       }
+    })
+
+    socket.on('UserLeave', function(data) {
+      var data = data
+      console.log(data)
+      var username = data.username
+      console.log(username + ' has left the beam channel')
+      db.user.find({
+        where: {
+          username: username,
+          auth: 'Beam'
+        }
+      }).then(function(user) {
+        if(user) {
+          db.kiwi.update({
+            watching: false
+          }, {
+            where: {
+              userId: user.id
+            }
+          }).then(function(kiwi) {
+            console.log(username + ' stopped watching')
+          })     
+        } else {
+          console.log('user left the beam chat that was not part of the web app; ' + username)
+        }    
+      })
     })
 
     // Listen to socket errors, you'll need to handle these!
