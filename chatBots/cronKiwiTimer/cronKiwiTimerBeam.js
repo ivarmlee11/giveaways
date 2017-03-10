@@ -2,20 +2,8 @@ var CronJob = require('cron').CronJob,
     db = require('../../models'),
     request = require('request')
 
-var request = require('request')
- 
 var options = {
   url: 'https://beam.pro/api/v1/channels/tweakgames'
-}
- 
-function callback(error, response, body) {
-  if (!error && response.statusCode == 200) {
-    console.log('request module callback initd for beam')
-    if(body.stream === null) {
-      console.log('homeboy is not logged on beam')
-      job.stop()
-    }
-  }
 }
 
 module.exports = function(userId) {
@@ -26,7 +14,7 @@ module.exports = function(userId) {
         where: { userId: userId }
       }).then(function(kiwi) {
         console.log('kiwi found for this user')
-        var currentKiwiPoints = kiwi.points + 50
+        var currentKiwiPoints = kiwi.points + 1
         request(options, function(err, res, body) {
           if (!err && res.statusCode == 200) {
             console.log('beam request returned')
@@ -52,7 +40,7 @@ module.exports = function(userId) {
                     console.log('user still logged in and gaining points')
                   })
                 } else {
-                  console.log('the user stopped watching so they will stop gaining points')
+                  console.log('the user stopped watching beam so they will stop gaining points')
                   job.stop()
                 }
               })

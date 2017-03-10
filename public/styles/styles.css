@@ -5,7 +5,7 @@ html {
 
 h1, h2, h5 {
   font-weight: 700; 
-  line-height:2; 
+  line-height: 2; 
   font-weight: bold;
 }
 
@@ -71,9 +71,10 @@ a, a:hover, a:active {
   width: 20px;
 }
 
-#beamLogo {
+#beamLogo, #twitchLogo {
   width: 80px;
 }
+
 
 #tradingDiv {
   min-height: 300px;
@@ -95,6 +96,10 @@ a, a:hover, a:active {
 
 #messageBox, .nameSpace {
   min-height: 90px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .fixedHeight {

@@ -13,16 +13,6 @@ var options = {
   }
 }
  
-function callback(error, response, body) {
-  if (!error && response.statusCode == 200) {
-  	console.log('request module callback initd for twitch')
-  	if(body.stream === null) {
-  		console.log('homeboy is not logged on twitch')
-  		job.stop()
-  	}
-  }
-}
- 
 module.exports = function(userId) {
 	var job = new CronJob({
 	  cronTime: '* */5 * * *',
@@ -31,7 +21,7 @@ module.exports = function(userId) {
 	  		where: { userId: userId }
 	  	}).then(function(kiwi) {
         console.log('kiwi found for this user')
-	  		var currentKiwiPoints = kiwi.points + 50
+	  		var currentKiwiPoints = kiwi.points + 1
 	  		request(options, function(err, res, body) {
 	  		  if (!err && res.statusCode == 200) {
 				  	console.log('twitch request returned')

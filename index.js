@@ -17,9 +17,9 @@ var express = require('express'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     flash = require('connect-flash'),
-    MemoryStore = require('session-memory-store')(session),
-    twitchBot = require('./chatBots/twitchBot.js'),
-    beamBot = require('./chatBots/beamBot.js')
+    MemoryStore = require('session-memory-store')(session)
+    // twitchBot = require('./chatBots/twitchBot.js'),
+    // beamBot = require('./chatBots/beamBot.js')
 
 app.use(requestIp.mw())
 
@@ -223,6 +223,10 @@ app.get('/giveawayList', ensureAuthenticated, function(req, res) {
       }
     )
   })
+})
+
+app.get('/commandList', ensureAuthenticated, function(req, res) {
+  res.render('commandList')
 })
 
 app.get('/profile/:idx', ensureAuthenticated, function(req, res) {
