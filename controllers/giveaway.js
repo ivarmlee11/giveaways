@@ -61,7 +61,8 @@ router.get('/adminListEndGiveaway/:idx', ensureAuthenticated, modCheck, function
       id: giveawayId
     }
   }).then(function(user) {
-    res.redirect('/giveaway/adminGiveawayList')
+    req.flash('success', 'You have ended the giveaway.')
+    res.redirect('/giveawayList')
   })
 })
 
@@ -76,6 +77,7 @@ router.get('/giveawayData/:idx', ensureAuthenticated, function(req, res) {
 
 router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx
+  console.log('hide giveaway')
   db.giveaway.update({
     ended: true,
     hidden: true
@@ -85,7 +87,7 @@ router.get('/hideGiveaway/:idx', ensureAuthenticated, modCheck, function(req, re
     }
   }).then(function(giveaway) {
     req.flash('success', 'You have hidden the giveaway.')
-    res.redirect('/giveaway/adminGiveawayList')
+    res.send('giveaway ended')
   })
 })
 

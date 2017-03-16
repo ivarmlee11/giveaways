@@ -1,52 +1,182 @@
 <script src="/js/3rdparty/papaParse.js"></script>
+<script src="/js/3rdparty/bootbox.min.js"></script>
 <script src="/js/uploadGames.js"></script>
 <script src="/js/updateGameDb.js"></script>
 
-<h1 class="text-center">Admin Control Panel</h1>
-
-<div class="container">
-  <div class="col-md-6 col-md-offset-3">
-    <form action="/giveaway/adminGiveawayList" method="POST" accept-charset="utf-8">
-      <div class="form-group">
-        <label for="giveawayName">Giveaway Name</label>
-        <input type="text" class="form-control" id="giveawayName" name="giveawayName" required>
-        <label for="giveawayKeyPhrase">Giveaway Keyphrase</label>
-        <input type="text" class="form-control" id="giveawayKeyPhrase" name="giveawayKeyPhrase" required>
-      </div>
-      <div class="well well-sm text-center">
-        <h3>Timer</h3>
-        <div class="btn-group" data-toggle="buttons">           
-          <label class="btn btn-success active">
-            <input type="radio" name="options" value="0" autocomplete="off" checked>
-            <span class="glyphicon glyphicon-ok">Endless</span>
-          </label>
-          <label class="btn btn-primary">
-            <input type="radio" name="options" value="3" autocomplete="off">
-            <span class="glyphicon glyphicon-ok">3</span>
-          </label>
-          <label class="btn btn-info">
-            <input type="radio" name="options" value="5" autocomplete="off">
-            <span class="glyphicon glyphicon-ok">5</span>
-          </label>
-          <label class="btn btn-default">
-            <input type="radio" name="options" value="10" autocomplete="off">
-            <span class="glyphicon glyphicon-ok">10</span>
-          </label>
-        </div>
-      </div>
-      <button class="btn btn-success">Submit</button>
-    </form>
-  </div>
-</div>
-<div class="container">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="buttoncontainer">
-        <input id="csv-file" class="form-control-file" type="file" name="files"/>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <h2 class="text-center">Giveaway Control</h2>
     </div>
-    <div id="message"></div>
+    <div>
+      <form id="form" action="/giveaway/adminGiveawayList" method="POST">
+
+        <div class="form-group row">
+          <label for="giveawayName" class="col-sm-2 col-form-label">Giveaway Name</label>
+          <div class="col-sm-10">
+            <input id="giveawayName" class="form-control" name="giveawayName" type="text" placeholder="Name" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="giveawayKeyPhrase" class="col-sm-2 col-form-label">Key Phrase</label>
+          <div class="col-sm-10">
+            <input id="giveawayKeyPhrase" class="form-control" name="giveawayKeyPhrase" type="text" placeholder="Pass Phrase" required>
+          </div>
+        </div>
+
+        <fieldset id="auctionLength" class="form-group row">
+          <legend class="col-form-legend col-sm-2">Timer (Minutes)</legend>
+          <div class="col-sm-10">
+            <div class="form-check">  
+              <div class="btn-group" data-toggle="buttons">           
+                <label class="btn btn-success active">
+                  <input type="radio" name="options" value="0" autocomplete="off" checked>
+                  <span class="glyphicon glyphicon-ok">Endless</span>
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="options" value="3" autocomplete="off">
+                  <span class="glyphicon glyphicon-ok">3</span>
+                </label>
+                <label class="btn btn-info">
+                  <input type="radio" name="options" value="5" autocomplete="off">
+                  <span class="glyphicon glyphicon-ok">5</span>
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="options" value="10" autocomplete="off">
+                  <span class="glyphicon glyphicon-ok">10</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <button id="submitButton" type="submit" class="btn-primary success">Submit</button>
+      </form>
+    </div>
   </div>
 </div>
-<div class="container">
-  <table id="gameTable" class="table table-sm table-inverse table-responsive">
-  </table>
+
+<div class="jumbotron">
+<h2 class="text-center">Game Database</h2>
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+      <h3 class="text-center">Upload CSV File</h3>
+      <div class="buttoncontainer">
+        <input id="csv-file" class="form-control-file" type="file" name="files"/>
+      </div>
+      <div id="message"></div>
+    </div>
+  </div>
+  <div class="container">
+    <h3 class="text-center">
+    <table id="gameTable" class="table table-sm table-inverse table-responsive">
+
+    </table>
+  </div>
+
 </div>
+
+<div id="gameEditForm" class="jumbotron hide">
+  <div class="container">
+  <h1 class="text-center">Edit Game</h1>
+    <form action="/game/edit/" method="POST">
+        <div class="form-group row">
+          <label for="editGameName" class="col-sm-2 col-form-label">Game Name</label>
+          <div class="col-sm-10">
+            <input id="editGameName" class="form-control" name="editGameName" type="text" placeholder="Name" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="editGameCode" class="col-sm-2 col-form-label">Key Code for Product</label>
+          <div class="col-sm-10">
+            <input id="editGameCode" class="form-control" name="editGameCode" type="text" placeholder="Include spaces and/or dashes" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="editGameOwner" class="col-sm-2 col-form-label">Edit Owner</label>
+          <div class="col-sm-10">
+            <input id="editGameOwner" class="form-control" name="editGameOwner" type="text" placeholder="Username of owner if applicable">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="currentGameId" class="col-sm-2 col-form-label">Game Id</label>
+          <div class="col-sm-10">
+            <input id="currentGameId" class="form-control" name="currentGameId" type="text" readonly>
+          </div>
+        </div>
+
+        <fieldset id="editAuthChoiceFieldset" class="form-group row hide">
+          <legend class="col-form-legend col-sm-2">User's Auth Portal</legend>
+          <div class="col-sm-10">
+            <div class="form-check">  
+              <div class="btn-group" data-toggle="buttons">           
+                <label class="btn btn-success active">
+                  <input id="editAuthChoiceTwitch" type="radio" name="editAuthChoice" value="Twitch" autocomplete="off">
+                  <h4>Twitch</h4>
+                </label>
+                <label class="btn btn-primary">
+                  <input id="editAuthChoiceBeam" type="radio" name="editAuthChoice" value="Beam" autocomplete="off">
+                  <h4>Beam</h4>
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <button id="editGame" type="submit" class="btn-primary success">Edit Game</button>
+        <button id="refresh" class="btn-danger">Leave Edit Mode</button>
+        <button id="clearEdit" class="btn-info">Clear User Info</button>
+      </form>
+  </div>
+</div>
+
+<div id="gameAddForm" class="jumbotron">
+  <div class="container">
+  <h1 class="text-center">Add Game</h1>
+    <form>
+        <div class="form-group row">
+          <label for="addGameName" class="col-sm-2 col-form-label">Game Name</label>
+          <div class="col-sm-10">
+            <input id="addGameName" class="form-control" name="addGameName" type="text" placeholder="Name" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="editGameCode" class="col-sm-2 col-form-label">Key Code for Product</label>
+          <div class="col-sm-10">
+            <input id="editGameCode" class="form-control" name="editGameCode" type="text" placeholder="Include spaces and/or dashes" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="addGameOwner" class="col-sm-2 col-form-label">Set Owner</label>
+          <div class="col-sm-10">
+            <input id="addGameOwner" class="form-control" name="addGameOwner" type="text" placeholder="Username of owner if applicable">
+          </div>
+        </div>
+
+        <fieldset id="addAuthChoiceFieldset" class="form-group row hide">
+          <legend class="col-form-legend col-sm-2">User's Authentication Portal</legend>
+          <div class="col-sm-10">
+            <div class="form-check">  
+              <div class="btn-group" data-toggle="buttons">           
+                <label class="btn btn-success active">
+                  <input id="addAuthChoiceTwitch" type="radio" name="addAuthChoice" value="Twitch" autocomplete="off">
+                  <h4>Twitch</h4>
+                </label>
+                <label class="btn btn-primary">
+                  <input id="addAuthChoiceBeam" type="radio" name="addAuthChoice" value="Beam" autocomplete="off">
+                  <h4>Beam</h4>
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <button id="editGame" type="submit" class="btn-primary success">Submit</button>
+        <button id="clearAdd" class="btn-info">Clear User Info</button>
+      </form>
+  </div>
+</div>
+

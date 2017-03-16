@@ -11,8 +11,11 @@ $('#hideThis').on('click', function() {
   $.ajax({
     url: url,
     type: 'GET',
-    success: function(data) {       
-      window.location.href = 'https://tweak-game-temp.herokuapp.com' + url      
+    success: function(data) { 
+      console.log(data)
+      $('#endGiveaway').text('Giveaway ended.')
+      $('#timer').hide()
+      // window.location.href = 'https://tweak-game-temp.herokuapp.com' + url      
     }
   })
 })

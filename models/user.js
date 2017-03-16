@@ -4,7 +4,6 @@ var bcrypt = require('bcrypt')
 
 module.exports = function(sequelize, DataTypes) {
   var user = sequelize.define('user', {
-    userid: DataTypes.INTEGER,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     auth: DataTypes.STRING,
@@ -31,7 +30,9 @@ module.exports = function(sequelize, DataTypes) {
           models.user.belongsToMany(models.giveaway, {through: 'giveawaysUsers'})
           models.user.belongsToMany(models.giveaway, {as: 'Contests', through: 'contestsWinners'})
           models.user.hasMany(models.game)
+          models.user.hasMany(models.game)
           models.user.hasOne(models.kiwi)
+          // models.user.hasMany(models.auction)
         }
       },
       instanceMethods: {

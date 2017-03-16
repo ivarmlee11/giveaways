@@ -92,7 +92,9 @@ var adminCtrl = require('./controllers/admin'),
     gameCtrl = require('./controllers/game'),
     userCtrl = require('./controllers/user'),
     aviCtrl = require('./controllers/avatar')
-    testCtrl = require('./controllers/testUser')
+    testCtrl = require('./controllers/testUser'),
+    auctionCtrl = require('./controllers/auction'),
+    kiwiCtrl = require('./controllers/kiwi')
 
 app.use('/admin', adminCtrl)
 app.use('/player', playerCtrl)
@@ -102,6 +104,8 @@ app.use('/auth', authCtrl)
 app.use('/user', userCtrl)
 app.use('/avatar', aviCtrl)
 app.use('/testUser', testCtrl)
+app.use('/auction', auctionCtrl)
+app.use('/kiwi', kiwiCtrl)
 
 var clients = []
 
@@ -138,7 +142,6 @@ io.on('connection', function(socket) {
 
       io.emit('update players', clients)
 
-
       // clear any outstanding trades
 
       lastTrader = tradeObject.tradeInProgress
@@ -157,7 +160,6 @@ io.on('connection', function(socket) {
       }
     })
   }
-
 
   socket.on('send trade', function(tradeObj) {
     tradeObject = tradeObj
@@ -209,7 +211,8 @@ io.on('connection', function(socket) {
 
 app.get('/', function(req, res) {
   var currentUser = false
-  res.render('login', {currentUser: currentUser})
+  // res.render('login', {currentUser: currentUser})
+  res.redirect('/testUser/login')
 })
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {

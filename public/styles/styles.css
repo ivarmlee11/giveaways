@@ -75,7 +75,6 @@ a, a:hover, a:active {
   width: 80px;
 }
 
-
 #tradingDiv {
   min-height: 300px;
 }
@@ -96,6 +95,18 @@ a, a:hover, a:active {
 
 #messageBox, .nameSpace {
   min-height: 90px;
+}
+
+.edit:hover, .remove:hover {
+  background-color: yellow;
+}
+
+.yellow {
+  background-color: yellow;
+}
+.center{
+  width: 150px;
+  margin: 40px auto;
 }
 
 .bold {

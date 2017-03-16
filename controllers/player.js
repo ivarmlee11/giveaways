@@ -13,11 +13,7 @@ router.get('/allplayers/', ensureAuthenticated, function(req, res) {
 
 router.get('/playerInfo/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
-  console.log('getting player info for user ' + id)
   db.user.findById(id).then(function(user) {
-    console.log('found user')
-    console.log(user)
-    console.log('res send user to front end ajax call')
     res.send(user)
   })
 })

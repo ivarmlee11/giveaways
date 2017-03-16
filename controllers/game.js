@@ -13,6 +13,126 @@ router.get('/gameDataOnly', ensureAuthenticated, modCheck, function(req, res) {
   })
 })
 
+router.get('/removeGame/:idx', ensureAuthenticated, modCheck, function(req, res) {
+  console.log('removed game')
+  var id = req.params.idx
+  db.game.destroy({
+    where: {
+      id: id
+    }
+  })
+  .then(function() {
+    req.flash('success', 'You have removed the game.')
+    res.redirect('/admin/makeAGiveaway')
+  })
+})
+
+router.post('/addGame/', ensureAuthenticated, modCheck, function(req, res) {
+  console.log('add game') 
+  console.log(req.body)
+  var name = req.body.name,
+      key = req.body.key,
+      assignedUser = req.body.assignedUser,
+      assignedUserAuth = req.body.authChoice
+
+  if(assignedUser.length) {
+    db.user.find({
+      where: {
+        username: assignedUser,
+        auth: assignedUserAuth
+      }
+    })
+    .then(function(user) {
+      var id = user.id
+      db.game.create({
+        name: name,
+        code: key,
+        owned: true,
+        userId: id
+      })
+      .then(function(game) {
+        console.log('game added with assigned user ' + game.name)
+        res.send(game)
+      })
+    })
+    .catch(function(err) {
+      console.log(err)
+      console.log('error on game add with assigned user')
+      res.render('error', {error: err.message})
+    })
+  } else {
+    db.game.create({
+      name: name,
+      code: key
+    })
+    .then(function(game) {
+      console.log('game added with no assigned user ' + game.name)
+      res.send(game)
+    })
+    .catch(function(err) {
+      console.log(err)
+      console.log('error on game add with no assigned user ')
+      res.render('error', {error: err.message})
+    })
+  }
+})
+
+router.post('/edit/', ensureAuthenticated, modCheck, function(req, res) {
+  console.log('edit')
+  console.log(req.body)
+  var gameId = parseInt(req.body.currentGameId),
+      name = req.body.editGameName,
+      code = req.body.editGameCode,
+      owner = req.body.editGameOwner,
+      auth = req.body.editAuthChoice
+  if(owner.length) {
+    db.user.find({
+      where: {
+        username: owner,
+        auth: auth
+      }
+    })
+    .then(function(user) {
+      var userId = user.id
+      db.game.update({
+        name: name,
+        code: code,
+        userId: userId,
+        owned: true
+      }, {
+        where: {
+          id: gameId
+        }
+      })
+      .then(function(game) {
+        console.log(game)
+        req.flash('success', 'You have edited a game with an owner.')
+        res.redirect('/admin/makeAGiveaway')
+      })
+    })
+    .catch(function(err) {
+      console.log(err)
+      var msg = "There was an error finding that user or updating the game. Refresh the page."
+      res.render('error', {error: msg})
+    })
+  } else {
+    db.game.update({
+      name: name,
+      code: code,
+      owned: false
+    }, {
+      where: {
+        id: gameId
+      }
+    })
+    .then(function(game) {
+      console.log(game)
+      req.flash('success', 'You have edited a game with an owner.')
+      res.redirect('/admin/makeAGiveaway')
+    })
+  }
+})
+
 router.get('/gameData/:idx', ensureAuthenticated, function(req, res) {
   var id = req.params.idx
   db.game.findById(id).then(function(game) {
@@ -24,8 +144,6 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
 
   var file = req.body.data,
   gameList = []
-
-  console.log(file)
 
   file.forEach(function(game) {
     gameList.push({
@@ -47,7 +165,11 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
         coderevealed: game.coderevealed,
         owned: null,
         userId: null
-      }).then(function(data) {
+      })
+      .then(function(data) {
+      })
+      .catch(function(err) {
+        res.render('error', {error: err.msg})
       })
     }
   })
@@ -103,7 +225,12 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
       where: {
         id: gameTrade
       }
-    }).then(function() {
+    })
+    .then(function() {
+    })
+    .catch(function(err) {
+      console.log(err)
+      res.render('error', {error: err.message})
     })
   })
 
@@ -114,7 +241,12 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
       where: {
         id: gameTrade
       }
-    }).then(function() {
+    })
+    .then(function() {
+    })
+    .catch(function(err) {
+      console.log(err)
+      res.render('error', {error: err.message})
     })
   })
 
@@ -124,8 +256,7 @@ router.post('/trade/', ensureAuthenticated, function(req, res) {
 
 router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
   var gameId = req.params.idx,
-      userId = req.user.dataValues.id;
-  console.log(req.user)
+      userId = req.user.dataValues.id
 
   db.game.find({
     where: {id: gameId}
@@ -137,17 +268,20 @@ router.get('/claimed/:idx', ensureAuthenticated, function(req, res) {
         where: {
           id: gameId
         }
-      }).then(function(game) {
+      })
+      .then(function(game) {
         req.flash('success', 'Code revealed. You now own this game') 
         res.redirect('back')
+      })
+      .catch(function(err) {
+        console.log(err)
+        res.render('error', {error: err.message})
       })
     } else {
       req.flash('success', 'You do not own that game') 
       res.redirect('back')
     }
   })
-
-
 })
 
 module.exports = router

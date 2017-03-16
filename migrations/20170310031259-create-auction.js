@@ -1,36 +1,27 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('auctions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      name: {
         type: Sequelize.STRING
       },
-      password: {
-        type: Sequelize.STRING
-      },
-      auth: {
-        type: Sequelize.STRING
-      },
-      ip: {
-        type: Sequelize.STRING
-      },
-      color: {
-        type: Sequelize.STRING
-      },
-      admin: {
+      ended: {
         type: Sequelize.BOOLEAN
       },
-      cloudinary: {
+      timer: {
+        type: Sequelize.INTEGER
+      },
+      prize: {
         type: Sequelize.STRING
       },
-      approvedThumb: {
-        type: Sequelize.BOOLEAN
+      userId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +34,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('auctions');
   }
 };
