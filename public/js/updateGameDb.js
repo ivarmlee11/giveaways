@@ -36,6 +36,7 @@ $clearEdit.on('click', function(e) {
   e.preventDefault()
   $editGameOwner.val('')
   $addAuthChoiceFieldset.attr('checked', false)
+  $editAuthChoiceFieldset.addClass('hide')
 })
 
 $clearAdd.on('click', function(e) {
@@ -55,7 +56,6 @@ $addGameOwner.on('keyup', function() {
   }
 })
 
-$editAuthChoiceFieldset.addClass('hide')
 $editGameOwner.on('keyup', function() {
   if($(this).val().length > 0) {
     $editAuthChoiceFieldset.attr('checked', false)
@@ -78,11 +78,11 @@ var idForUserInfo = function(url, userId, gameId, getAuth) {
     type: 'GET',
     success: function(data) {
       if(!getAuth) {
-        var selector = '#username' + userId
+        var selector = '.username' + userId
         $(selector).text(data.username)
 
       } else {
-        var selector = '#auth' + userId
+        var selector = '.auth' + userId
         $(selector).text(data.auth)
       }
     }
@@ -113,7 +113,6 @@ function update() {
                 userId = val.userId
             idForUserInfo(url, userId, gameId, false)
             idForUserInfo(url, userId, gameId, true)
-            console.log(val.name + ' will be appended')
             $gameTable.append(
               '<tr>' +
                 // removes games
@@ -122,18 +121,17 @@ function update() {
                 // edits games
                 '<span id="' + val.id + '" userId="' + val.userId + '" class="glyphicon glyphicon-pencil edit"></span></td>' +
                 '<td id="game' + val.id + '">' + val.name + '</td>' + 
-                '<td id="username' + val.userId + '"></td>' + 
-                '<td id="auth' + val.userId + '"></td>' + 
+                '<td class="username' + val.userId + '"></td>' + 
+                '<td class="auth' + val.userId + '"></td>' + 
                 '<td id="code' + val.id + '">' + val.code + '</td>' + 
               '</tr>'
             )
           } else { 
-            console.log(val.name + ' will be appended')
             $gameTable.append(
               '<tr>' +
                 // removes games
                 '<td><span id="' + val.id + '" class="glyphicon glyphicon-minus remove"></span>' +
-                '  ' +
+                 '  ' +
                 // edits games
                 '<span id="' + val.id + '" class="glyphicon glyphicon-pencil edit"></span></td>' +
                 '<td id="game' + val.id + '">' + val.name + '</td>' + 
@@ -157,14 +155,15 @@ $(document).on('click', '.edit', function() {
       userId = $(this).attr('userId'),
       gameCodeSelector = '#code' + gameId,
       gameIdSelector = '#game' + gameId,
-      userNameSelector = '#username' + userId,
-      userAuthSelector = '#auth' + userId,
+      userNameSelector = '.username' + userId,
+      userAuthSelector = '.auth' + userId,
       $thisRow = $(this).parent().parent()
 
   $('.glyphicon-pencil').hide()
   $('.glyphicon-minus').hide()
   $gameAddForm.addClass('hide')
   $gameEditForm.removeClass('hide')
+  $editAuthChoiceFieldset.addClass('hide')
   $thisRow.addClass('yellow')
 
   bootbox.confirm('Sure you want to edit this game?', function(result) {
@@ -210,6 +209,8 @@ $(document).on('click', '.edit', function() {
       $('.glyphicon-pencil').show()
       $('.glyphicon-minus').show()
     }
+    $editAuthChoiceFieldset.addClass('hide')
+
   })
 
 })

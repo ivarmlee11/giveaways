@@ -125,7 +125,7 @@
             </div>
           </div>
         </fieldset>
-        <button id="editGame" type="submit" class="btn-primary success">Edit Game</button>
+        <button type="submit" class="btn-primary success">Edit Game</button>
         <button id="refresh" class="btn-danger">Leave Edit Mode</button>
         <button id="clearEdit" class="btn-info">Clear User Info</button>
       </form>
@@ -135,7 +135,7 @@
 <div id="gameAddForm" class="jumbotron">
   <div class="container">
   <h1 class="text-center">Add Game</h1>
-    <form>
+    <form action="/game/addGame/" method="POST">
         <div class="form-group row">
           <label for="addGameName" class="col-sm-2 col-form-label">Game Name</label>
           <div class="col-sm-10">
@@ -144,9 +144,9 @@
         </div>
 
         <div class="form-group row">
-          <label for="editGameCode" class="col-sm-2 col-form-label">Key Code for Product</label>
+          <label for="addGameCode" class="col-sm-2 col-form-label">Key Code for Product</label>
           <div class="col-sm-10">
-            <input id="editGameCode" class="form-control" name="editGameCode" type="text" placeholder="Include spaces and/or dashes" required>
+            <input id="addGameCode" class="form-control" name="addGameCode" type="text" placeholder="Include spaces and/or dashes" required>
           </div>
         </div>
 
@@ -174,7 +174,7 @@
             </div>
           </div>
         </fieldset>
-        <button id="editGame" type="submit" class="btn-primary success">Submit</button>
+        <button type="submit" class="btn-primary success">Submit</button>
         <button id="clearAdd" class="btn-info">Clear User Info</button>
       </form>
   </div>

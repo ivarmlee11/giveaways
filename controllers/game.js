@@ -28,51 +28,48 @@ router.get('/removeGame/:idx', ensureAuthenticated, modCheck, function(req, res)
 })
 
 router.post('/addGame/', ensureAuthenticated, modCheck, function(req, res) {
-  console.log('add game') 
+ console.log('edit')
   console.log(req.body)
-  var name = req.body.name,
-      key = req.body.key,
-      assignedUser = req.body.assignedUser,
-      assignedUserAuth = req.body.authChoice
-
-  if(assignedUser.length) {
+  var name = req.body.addGameName,
+      code = req.body.addGameCode,
+      owner = req.body.addGameOwner,
+      auth = req.body.addAuthChoice
+  if(owner.length) {
     db.user.find({
       where: {
-        username: assignedUser,
-        auth: assignedUserAuth
+        username: owner,
+        auth: auth
       }
     })
     .then(function(user) {
-      var id = user.id
+      var userId = user.id
       db.game.create({
         name: name,
-        code: key,
-        owned: true,
-        userId: id
+        code: code,
+        userId: userId,
+        owned: true
       })
       .then(function(game) {
-        console.log('game added with assigned user ' + game.name)
-        res.send(game)
+        console.log(game)
+        req.flash('success', 'You have added a game with an owner.')
+        res.redirect('/admin/makeAGiveaway')
       })
     })
     .catch(function(err) {
       console.log(err)
-      console.log('error on game add with assigned user')
-      res.render('error', {error: err.message})
+      var msg = "There was an error finding that user or updating the game. Refresh the page."
+      res.render('error', {error: msg})
     })
   } else {
     db.game.create({
       name: name,
-      code: key
+      code: code,
+      owned: false
     })
     .then(function(game) {
-      console.log('game added with no assigned user ' + game.name)
-      res.send(game)
-    })
-    .catch(function(err) {
-      console.log(err)
-      console.log('error on game add with no assigned user ')
-      res.render('error', {error: err.message})
+      console.log(game)
+      req.flash('success', 'You have added a game without an owner.')
+      res.redirect('/admin/makeAGiveaway')
     })
   }
 })
@@ -127,7 +124,7 @@ router.post('/edit/', ensureAuthenticated, modCheck, function(req, res) {
     })
     .then(function(game) {
       console.log(game)
-      req.flash('success', 'You have edited a game with an owner.')
+      req.flash('success', 'The game has no owner.')
       res.redirect('/admin/makeAGiveaway')
     })
   }
