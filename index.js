@@ -18,8 +18,8 @@ var express = require('express'),
     requestIp = require('request-ip'),
     flash = require('connect-flash'),
     MemoryStore = require('session-memory-store')(session)
-    // twitchBot = require('./chatBots/twitchBot.js'),
-    // beamBot = require('./chatBots/beamBot.js')
+    twitchBot = require('./chatBots/twitchBot.js'),
+    beamBot = require('./chatBots/beamBot.js')
 
 app.use(requestIp.mw())
 
@@ -28,8 +28,8 @@ app.use(cookieParser())
 app.use(session({
   key: 'connect.sid', 
   secret: sessionSecret,
-  store: new MemoryStore(), // development 
-  // store: new (require('connect-pg-simple')(session))(), // production
+  // store: new MemoryStore(), // development 
+  store: new (require('connect-pg-simple')(session))(), // production
   resave: false,
   saveUninitialized: false
 }))
@@ -38,8 +38,8 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,  
   key: 'connect.sid',     
   secret: sessionSecret,    
-  // store: new (require('connect-pg-simple')(session))(), // production
-  store: new MemoryStore(),        //  development
+  store: new (require('connect-pg-simple')(session))(), // production
+  // store: new MemoryStore(),        //  development
   success:      onAuthorizeSuccess, 
   fail:         onAuthorizeFail      
 })) 

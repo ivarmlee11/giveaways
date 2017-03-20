@@ -20,10 +20,10 @@ module.exports = function(userId) {
             console.log('beam request returned')
             var bodyParsed = JSON.parse(body)
 
-            // if (bodyParsed.online === false) {
-            //   console.log('homeboy is not logged on for you to watchn and gain points')
-            //   job.stop()
-            // } else {
+            if (bodyParsed.online === false) {
+              console.log('homeboy is not logged on for you to watchn and gain points')
+              job.stop()
+            } else {
               db.kiwi.find({
                 where: {
                   userId: userId
@@ -44,7 +44,7 @@ module.exports = function(userId) {
                   job.stop()
                 }
               })
-            // }
+            }
           }
         })
       })

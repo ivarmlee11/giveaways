@@ -27,10 +27,10 @@ module.exports = function(userId) {
 				  	console.log('twitch request returned')
 				  	var bodyParsed = JSON.parse(body)
 
-				  	// if (bodyParsed.stream === null) {
-				  	// 	console.log('homeboy is not logged on for you to watchn and gain points')
-				  	// 	job.stop()
-  					// } else {
+				  	if (bodyParsed.stream === null) {
+				  		console.log('homeboy is not logged on for you to watchn and gain points')
+				  		job.stop()
+  					} else {
               db.kiwi.find({
                 where: {
                   userId: userId
@@ -51,7 +51,7 @@ module.exports = function(userId) {
                   job.stop()
                 }
               })
-  					// }
+  					}
 					}
 	  		})
   		})
