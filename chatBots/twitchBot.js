@@ -96,7 +96,7 @@ function join (channel, username, self) {
       user.getKiwi().then(function(kiwi) {
         if(kiwi) {  
           var id = kiwi.userId
-          console.log(id + ':userid of kiwi found')
+          console.log(id + ' :userid of kiwi found')
           db.kiwi.update({
             watching: true
           }, {

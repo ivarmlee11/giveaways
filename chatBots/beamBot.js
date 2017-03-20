@@ -39,6 +39,7 @@ client.request('GET', 'users/current')
 function createChatSocket(userId, channelId, endpoints, authkey) {
 
   // connect to chat
+  
   var socket = new BeamSocket(endpoints).boot()
 
   socket.auth(channelId, userId, authkey)

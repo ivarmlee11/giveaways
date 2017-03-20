@@ -24,7 +24,9 @@ module.exports = function(userId) {
               console.log('homeboy is not logged on for you to watch and gain points')
               job.stop()
             } else {
-              db.kiwi.find({
+              db.kiwi.update({
+                watching: TRUE,
+              } , {
                 where: {
                   userId: userId
                 }
@@ -37,7 +39,7 @@ module.exports = function(userId) {
                       userId: userId
                     }
                   }).then(function(kiwi) {
-                    console.log('user still logged in and gaining points')
+                    console.log(user.username + ' user still logged in and gaining points')
                   })
                 } else {
                   console.log('the user stopped watching beam so they will stop gaining points')
