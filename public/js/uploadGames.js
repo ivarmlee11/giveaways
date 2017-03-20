@@ -1,28 +1,31 @@
-function handleFileSelect(evt) {
-  if ( !(evt.target && evt.target.files && evt.target.files[0]) ) {
-    return
-  }    
-  Papa.parse(evt.target.files[0], {
-    error: function (error) {
-      $('#message').html('Make sure your csv is in this format... game name,$,steam code,false')
-    },
-    complete: function (results) {
-      sendData(results)
-      $('#message').html('File uploaded. Check your game database.')
-    }
-  })
-}
-
-function sendData(dataset) {
-  $.ajax({
-    url: '/game/uploadGameData',
-    type: 'POST',
-    data: dataset,
-    success: function() {
-    }
-  })
-}
-
 $(function () {
+
+  function handleFileSelect(evt) {
+    if(evt.target.files[0].type !== 'text/csv') {
+      $('#message').html('That was not a csv file. Try again')
+      return
+    }
+    if ( !(evt.target && evt.target.files && evt.target.files[0]) ) {
+      return
+    }    
+    Papa.parse(evt.target.files[0], {
+      complete: function (results) {
+        console.log(results)
+        sendData(results)
+        $('#message').html('File uploaded.')
+      }
+    })
+  }
+
+  function sendData(dataset) {
+    $.ajax({
+      url: '/game/uploadGameData',
+      type: 'POST',
+      data: dataset,
+      success: function() {
+      }
+    })
+  }
+
   $("#csv-file").change(handleFileSelect)
 })

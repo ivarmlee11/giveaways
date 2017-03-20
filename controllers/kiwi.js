@@ -9,8 +9,6 @@ var express = require('express'),
 router.get('/user/:idx', ensureAuthenticated, function(req, res) {
   var id = parseInt(req.params.idx) 
 
-  console.log(typeof id + ' typeof id')
-
   db.user.findById(id)
     .then(function(user) {
       console.log(user.username + ' found')
@@ -35,6 +33,9 @@ router.get('/user/:idx', ensureAuthenticated, function(req, res) {
             res.send({points: points})
           }
         })
+    })
+    .catch(function(err) {
+      res.render('error', {error: err.msg})
     })
 })
 
@@ -69,7 +70,7 @@ router.post('/user/update/:idx', ensureAuthenticated, modCheck, function(req, re
           }
         })
         .then(function(kiwi) {
-          db.kiwi.findById(kiwi[0])
+          db.kiwi.findById(kiwi.id)
           .then(function(kiwi) {
             console.log('kiwi found')
             console.log(kiwi)

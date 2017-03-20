@@ -61,17 +61,31 @@
   <div class="container">
     <div class="col-md-6 col-md-offset-3">
       <h3 class="text-center">Upload CSV File</h3>
+        <div class="list-group col-lg-12">
+          <div class="list-group-item list-group-item-action list-group-item-info">
+            <span class="bold text-center">
+              CSV Accepted Format
+            </span>
+          </div>
+          <div class="list-group-item list-group-item-action list-group-item-success">
+            <span class="bold">
+              <h6>game name,price(low, medium, high),code(steam key or whatever),coderevealed(true or false)</h6>
+              <h6>game name2,price(low,medium, high),code(steam key or whatever),coderevealed(true or false)</h6>
+            </span>
+          </div>
+      </div>
       <div class="buttoncontainer">
         <input id="csv-file" class="form-control-file" type="file" name="files"/>
       </div>
-      <div id="message"></div>
     </div>
   </div>
+
   <div class="container">
     <h3 class="text-center">
     <table id="gameTable" class="table table-sm table-inverse table-responsive">
 
     </table>
+    <h3 id="message" class="text-center"></h3>
   </div>
 
 </div>

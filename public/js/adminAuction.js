@@ -34,7 +34,7 @@ $.ajax({
     var games = games
     $gameList.append('<option value="" disabled selected style="display:none;">Games</option>')
     games.forEach(function(val) {
-      if(!val.codrevealed) {
+      if(!val.owned) {
         $gameList.append('<option id="' + val.id + '">' + val.name + '</option>')
       }
     })
@@ -58,11 +58,10 @@ $kiwiSubmit.on('click', function(e) {
     method: 'POST',
     url: url,
     data: dataObj,
-    success: function(data) {
-      console.log(url)
-      console.log(data)
-      $kiwiCount.val('')
-      $kiwiCount.val(data.points)
+    success: function(kiwi) {
+      // $kiwiCount.val('')
+      // $kiwiCount.val(kiwi.points)
+      kiwiDisplay(playerId)
     }
   })
 })

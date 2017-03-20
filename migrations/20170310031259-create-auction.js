@@ -20,7 +20,13 @@ module.exports = {
       prize: {
         type: Sequelize.STRING
       },
+      gameId: {
+        type: Sequelize.INTEGER
+      },
       userId: {
+        type: Sequelize.INTEGER
+      },
+      highestBid: {
         type: Sequelize.INTEGER
       },
       createdAt: {

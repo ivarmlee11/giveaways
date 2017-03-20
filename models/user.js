@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
           models.user.hasMany(models.game)
           models.user.hasMany(models.game)
           models.user.hasOne(models.kiwi)
-          // models.user.hasMany(models.auction)
+          models.user.hasOne(models.auction)
         }
       },
       instanceMethods: {

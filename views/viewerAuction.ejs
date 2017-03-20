@@ -3,7 +3,37 @@
 
 <div class="jumbotron text-center">
   <h1>Auction</h1>
+  <div class="list-group-item list-group-item-action list-group-item-info">
+    You currently have <span id="kiwiCoinDisplay" class="bold"></span> Kiwi coins.
+  </div>
+  <div class="list-group-item list-group-item-action list-group-item-danger">
+    <!-- <h3><span id="auctionName" class="bold"></span></h3> -->
+    <h3>Prize: <span id="auctionPrize" class="bold"></span></h3>
+    <h3>Current Bid Leader: <span id="highestBidder" class="bold">None yet</span></h3>
+    <h3>Current Bid: <span id="highestBid" class="bold">None yet</span></h3>
+  </div>
+  <div class="list-group-item list-group-item-action list-group-item-heading">
+
+    <form id="form" action="/auction/viewerAuction/bid" method="POST">
+
+    <div class="form-group row">
+      <label for="bid" class="col-sm-2 col-form-label">Bid</label>
+      <div class="col-sm-10">
+        <input id="bidInput" class="form-control" name="bid" type="number" placeholder="0" required>
+      </div>
+    </div>
+
+    <input id="userId" type="number" name="userId" class="hide">
+
+    <button id="submitBid" type="submit" class="btn-primary success">Submit</button>
+    </form>
+
+  </div>
   <h3 id="timerMessage"></h3>
   <div id="timerDisplay">
   </div>
+</div>
+
+<div id="myId" class="hide">
+  <%= id %>
 </div>
