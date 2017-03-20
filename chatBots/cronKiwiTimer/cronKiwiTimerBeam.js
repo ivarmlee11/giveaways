@@ -21,7 +21,7 @@ module.exports = function(userId) {
             var bodyParsed = JSON.parse(body)
 
             if (bodyParsed.online === false) {
-              console.log('homeboy is not logged on for you to watchn and gain points')
+              console.log('homeboy is not logged on for you to watch and gain points')
               job.stop()
             } else {
               db.kiwi.find({

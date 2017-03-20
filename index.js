@@ -17,7 +17,7 @@ var express = require('express'),
     errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     flash = require('connect-flash'),
-    MemoryStore = require('session-memory-store')(session)
+    MemoryStore = require('session-memory-store')(session),
     twitchBot = require('./chatBots/twitchBot.js'),
     beamBot = require('./chatBots/beamBot.js')
 
