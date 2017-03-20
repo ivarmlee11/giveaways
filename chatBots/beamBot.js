@@ -39,7 +39,7 @@ client.request('GET', 'users/current')
 function createChatSocket(userId, channelId, endpoints, authkey) {
 
   // connect to chat
-  
+
   var socket = new BeamSocket(endpoints).boot()
 
   socket.auth(channelId, userId, authkey)
@@ -62,7 +62,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       }).then(function(user) {
         if(user) {
           var foundUsername = user.username
-          console.log(foundUsername + ' user found')
+          console.log(foundUsername + ' user found on beam')
           user.getKiwi().then(function(kiwi) {
             if(kiwi) {  
             var id = kiwi.userId
@@ -88,7 +88,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
             }
           })
         } else {
-          console.log(username + ' has not signed up for the web app')
+          console.log(username + ' has not signed up for the web app via beam')
         }
       }) 
     })
@@ -103,7 +103,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       console.log(msg)
       console.log('from ' + sender)
       switch (msg) { 
-        case '!kiwis':
+        case '!kiwi':
           console.log('kiwi check incoming')
         break
       }
