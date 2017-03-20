@@ -211,8 +211,8 @@ io.on('connection', function(socket) {
 
 app.get('/', function(req, res) {
   var currentUser = false
-  // res.render('login', {currentUser: currentUser})
-  res.redirect('/testUser/login')
+  res.render('login', {currentUser: currentUser})
+  // res.redirect('/testUser/login')
 })
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {
