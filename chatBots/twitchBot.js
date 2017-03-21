@@ -54,7 +54,7 @@ function chat(channel, userstate, message, self) {
       client.clear("tweakgames")
       client.action('#tweakgames', 'Chat cleared.')
       break
-    case '!kiwi':
+    case '!kiwis':
       console.log(userstate.username)
       var username = userstate.username
       db.user.find({

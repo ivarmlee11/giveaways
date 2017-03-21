@@ -68,7 +68,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
           user.getKiwi().then(function(kiwi) {
             if(kiwi) {  
             var id = kiwi.userId
-            console.log(id + ' :userid of kiwi found')
+            console.log(id + ' userid of kiwi found')
               db.kiwi.update({
                 watching: true
               }, {
@@ -100,13 +100,22 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       var msg = data.message.message[0].text,
         sender = data.user_name
       console.log('chat msg sent on beam!')
-      // console.log(data)
-      // console.log(data.message)
       console.log(msg)
       console.log('from ' + sender)
       switch (msg) { 
-        case '!kiwi':
-          console.log('kiwi check incoming')
+        case '!kiwis'
+          db.user.find({
+            where: {
+              username: sender,
+              auth: 'Beam'
+            }
+          }).then(function(user) {
+            user.getKiwi().then(function(kiwi) {
+              var kiwi = kiwi.dataValues,
+              message = sender + ' has ' + kiwi.points + ' kiwi points'
+              socket.call('msg', [message])
+            })
+          })
         break
       }
     })
