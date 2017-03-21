@@ -40,9 +40,9 @@ function displayAuctionData() {
   })
 }
 
-setInterval(function(){ 
-  displayAuctionData()
-}, 3000)
+// setInterval(function(){ 
+//   displayAuctionData()
+// }, 3000)
 
 displayAuctionData()
 

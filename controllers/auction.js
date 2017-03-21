@@ -43,50 +43,52 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
     limit: 1,
     order: [ [ 'createdAt', 'DESC' ]]
   }).then(function(auction) {
+    console.log('bid made')
+    console.log(auction)
     var auction = auction[0],
     highestBid = auction.highestBid,
     auctionId = auction.id
-    if(auction.ended) {
-      console.log('this auction ended and you tried to bid')
+    if(!auction.ended) {
+      db.kiwi.find({
+        where: {
+          userId: userId
+        }
+      })
+      .then(function(kiwi) {
+        currentKiwis = kiwi.points
+        if (currenBid > highestBid & (currenBid <= currentKiwis)) {
+          auction.update({
+            userId: userId,
+            highestBid: currenBid
+          }, {
+            where: {
+              id: auctionId
+            }
+          })
+          .then(function(auction) {
+            if(currentKiwis >= currenBid) {
+              var kiwiCountAfterBid = currentKiwis - currenBid
+              db.kiwi.update({
+                points: kiwiCountAfterBid
+              } , {
+                where: {
+                  userId: userId
+                }
+              })
+              .then(function(kiwi) {
+                res.redirect('back')
+              })
+            } else {
+              res.redirect('back') 
+            }
+          })
+        } else {
+          res.redirect('back')
+        }
+      })
+    } else {
       res.redirect('back')
     }
-    db.kiwi.find({
-      where: {
-        userId: userId
-      }
-    })
-    .then(function(kiwi) {
-      currentKiwis = kiwi.points
-      if (currenBid > highestBid & (currenBid <= currentKiwis)) {
-        auction.update({
-          userId: userId,
-          highestBid: currenBid
-        }, {
-          where: {
-            id: auctionId
-          }
-        })
-        .then(function(auction) {
-          if(currentKiwis >= currenBid) {
-            var kiwiCountAfterBid = currentKiwis - currenBid
-            db.kiwi.update({
-              points: kiwiCountAfterBid
-            } , {
-              where: {
-                userId: userId
-              }
-            })
-            .then(function(kiwi) {
-              res.redirect('back')
-            })
-          } else {
-            res.redirect('back') 
-          }
-        })
-      } else {
-        res.redirect('back')
-      }
-    })
   })
   .catch(function(err) {
     res.render('error', {error: err.msg})
