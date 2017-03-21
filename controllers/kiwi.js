@@ -22,13 +22,13 @@ router.get('/user/:idx', ensureAuthenticated, function(req, res) {
             })
             .then(function(kiwi) {
               console.log('kiwi created')
-              var points = kiwi.dataValues.points
+              var points = kiwi.points
               console.log('points ' + points)
               res.send({points: points})
             })
           } else {
             console.log('kiwi found')
-            var points = kiwi.dataValues.points
+            var points = kiwi.points
             console.log('points ' + points)
             res.send({points: points})
           }
@@ -57,7 +57,7 @@ router.post('/user/update/:idx', ensureAuthenticated, modCheck, function(req, re
         })
         .then(function(kiwi) {
           console.log('kiwi created')
-          var points = kiwi.dataValues.points
+          var points = kiwi.points
           console.log('points ' + points)
           res.send({points: points})
         }) 
