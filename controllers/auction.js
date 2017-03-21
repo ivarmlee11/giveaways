@@ -37,7 +37,10 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
       currentKiwis
   db.auction.findAll({
     limit: 1,
-    order: [ [ 'createdAt', 'DESC' ]]
+    order: [ [ 'createdAt', 'DESC' ]],
+    where: {
+      ended: false
+    }
   }).then(function(auction) {
     var auction = auction[0],
     highestBid = auction.highestBid

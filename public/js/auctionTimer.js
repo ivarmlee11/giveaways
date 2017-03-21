@@ -38,7 +38,6 @@ function displayAuctionData() {
 
 setTimeout(function(){ 
   displayAuctionData()
-  console.log('set timeout ran')
 }, 10000)
 
 displayAuctionData()

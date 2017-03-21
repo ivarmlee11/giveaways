@@ -2,9 +2,6 @@ var CronJob = require('cron').CronJob,
 		db = require('../../models'),
 		request = require('request'),
 		twitchClientId = process.env.TWITCHCLIENTID
-
-
-var request = require('request')
  
 var options = {
   url: 'https://api.twitch.tv/kraken/streams/tweakgames',
@@ -28,7 +25,7 @@ module.exports = function(userId) {
 				  	var bodyParsed = JSON.parse(body)
 
 				  	if (bodyParsed.stream === null) {
-				  		console.log('homeboy is not logged on for you to watchn and gain points')
+				  		console.log('homeboy is not logged on for you to watch and gain points')
 				  		job.stop()
   					} else {
               db.kiwi.find({
