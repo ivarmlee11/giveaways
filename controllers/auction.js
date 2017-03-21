@@ -21,9 +21,13 @@ router.get('/auctionData', ensureAuthenticated, function(req, res) {
     limit: 1,
     order: [ [ 'createdAt', 'DESC' ]]
   }).then(function(auction){
-    var auction = auction[0]
-    if(auction) {
-      res.send(auction)  
+    if(!auction.ended) {
+      var auction = auction[0]
+      if(auction) {
+        res.send(auction)  
+      } else {
+        res.send('None')
+      }
     } else {
       res.send('None')
     }
@@ -114,7 +118,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
         }
       }).then(function(auction) {
         console.log('auction ended')
-        console.log(auction)
+        console.log(auction.userId)
         console.log('gameListId ' + gameListId)
         db.game.update({
           userId: auction.userId,

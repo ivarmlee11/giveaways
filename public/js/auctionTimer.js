@@ -32,7 +32,7 @@ function displayAuctionData() {
         getGameData(auction.gameId)
         console.log(auction.gameId + " auction game id") 
         getHighestBidderInfo(auction.userId)
-        console.log(' auction userid ' + auction.userId)
+
         kiwiCoinDisplay($myIdInt)
       }
       kiwiCoinDisplay($myIdInt)
@@ -42,6 +42,7 @@ function displayAuctionData() {
 
 setTimeout(function(){ 
   displayAuctionData()
+  console.log('tick')
 }, 3000)
 
 displayAuctionData()
