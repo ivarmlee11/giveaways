@@ -34,15 +34,16 @@ function displayAuctionData() {
         getHighestBidderInfo(auction.userId)
 
         kiwiCoinDisplay($myIdInt)
+        remakeTimer()
       }
       kiwiCoinDisplay($myIdInt)
     }
   })
 }
 
-// setInterval(function(){ 
-//   displayAuctionData()
-// }, 3000)
+setInterval(function(){ 
+  displayAuctionData()
+}, 10000)
 
 displayAuctionData()
 
