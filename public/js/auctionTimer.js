@@ -152,6 +152,7 @@ function remakeTimer() {
           }
         } else {
           $timerMessage.text('This auction has ended.')
+           $timerDisplay.html('')
         }
       }
     }
