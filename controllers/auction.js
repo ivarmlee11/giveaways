@@ -79,7 +79,8 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
               })
               .then(function(kiwi) {
                 db.game.update({
-                  userId: userId
+                  userId: userId,
+                  owned: true
                 }, {
                   where: {
                     id: auctionId
@@ -136,20 +137,6 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           id: auctionId
         }
       }).then(function(auction) {
-        // console.log('auction ended')
-        // console.log(auction.userId)
-        // console.log('gameListId ' + gameListId)
-        db.game.update({
-          // userId: auction.userId,
-          owned: true
-        }, {
-          where: {
-            id: gameListId
-          }
-        })
-        .then(function(game){
-          // console.log('user ' + game.userId + ' won the auction')
-        })
       })
     }, time)
     req.flash('success', 'You have created an auction.')
