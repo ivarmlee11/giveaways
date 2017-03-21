@@ -132,7 +132,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           console.log('user ' + game.userId + ' won the auction')
         })
       })
-    }, time)
+    }, 2000)
     req.flash('success', 'You have created an auction.')
     res.redirect('/auction/viewerAuction')
   })
