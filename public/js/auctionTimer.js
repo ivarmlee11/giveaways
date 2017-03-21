@@ -27,9 +27,12 @@ function displayAuctionData() {
         if(auction.highestBid) {
           points = auction.highestBid
         }
-        $highestBid.text(points)     
+        $highestBid.text(points)
+        console.log("highest bid " + points)     
         getGameData(auction.gameId)
+        console.log(auction.gameId + " auction game id") 
         getHighestBidderInfo(auction.userId)
+        console.log(' auction userid ' + auction.userId)
         kiwiCoinDisplay($myIdInt)
       }
       kiwiCoinDisplay($myIdInt)
