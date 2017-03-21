@@ -44,7 +44,8 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
     order: [ [ 'createdAt', 'DESC' ]]
   }).then(function(auction) {
     var auction = auction[0],
-    highestBid = auction.highestBid
+    highestBid = auction.highestBid,
+    auctionId = auction.id
     if(auction.ended) {
       res.redirect('back')
     }
@@ -59,6 +60,10 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
         auction.update({
           userId: userId,
           highestBid: currenBid
+        }, {
+          where: {
+            id: auctionId
+          }
         })
         .then(function(auction) {
           if(currentKiwis >= currenBid) {
@@ -132,7 +137,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           console.log('user ' + game.userId + ' won the auction')
         })
       })
-    }, 2000)
+    }, 10000)
     req.flash('success', 'You have created an auction.')
     res.redirect('/auction/viewerAuction')
   })
