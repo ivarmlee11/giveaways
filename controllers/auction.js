@@ -154,7 +154,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           })
         })
       })
-    }, 10000)
+    }, time)
     req.flash('success', 'You have created an auction.')
     res.redirect('/auction/viewerAuction')
   })
