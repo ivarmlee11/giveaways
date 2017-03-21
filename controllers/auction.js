@@ -137,19 +137,24 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           id: auctionId
         }
       }).then(function(auction) {
-        db.game.update({
-          userId: userId,
-          owned: true
-        }, {
-          where: {
-            id: gameId
-          }
-        })
-        .then(function() {
-          res.redirect('back')
+        db.auction.findById(auctionId)
+        .then(function(auction) {
+          console.log(auction)
+          var userId = auction.userId
+          db.game.update({
+            userId: userId,
+            owned: true
+          }, {
+            where: {
+              id: gameId
+            }
+          })
+          .then(function() {
+            res.redirect('back')
+          })
         })
       })
-    }, time)
+    }, 10000)
     req.flash('success', 'You have created an auction.')
     res.redirect('/auction/viewerAuction')
   })
