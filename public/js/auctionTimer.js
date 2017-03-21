@@ -20,7 +20,7 @@ function displayAuctionData() {
     type: 'GET',
     url: '/auction/auctionData',
     success: function(auction) {
-      // console.log(auction)
+      console.log(auction)
       if(auction !== 'None') {
         var points = 0
 
@@ -30,6 +30,7 @@ function displayAuctionData() {
         $highestBid.text(points)     
         getGameData(auction.gameId)
         getHighestBidderInfo(auction.userId)
+        kiwiCoinDisplay($myIdInt)
       }
       kiwiCoinDisplay($myIdInt)
     }
@@ -38,7 +39,7 @@ function displayAuctionData() {
 
 setTimeout(function(){ 
   displayAuctionData()
-}, 10000)
+}, 3000)
 
 displayAuctionData()
 
