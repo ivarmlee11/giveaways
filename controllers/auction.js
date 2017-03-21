@@ -47,6 +47,7 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
     highestBid = auction.highestBid,
     auctionId = auction.id
     if(auction.ended) {
+      console.log('this auction ended and you tried to bid')
       res.redirect('back')
     }
     db.kiwi.find({

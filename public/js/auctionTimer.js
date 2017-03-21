@@ -40,9 +40,8 @@ function displayAuctionData() {
   })
 }
 
-setTimeout(function(){ 
+setInterval(function(){ 
   displayAuctionData()
-  console.log('tick')
 }, 3000)
 
 displayAuctionData()
