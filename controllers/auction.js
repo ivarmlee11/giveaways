@@ -78,17 +78,17 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
                 }
               })
               .then(function(kiwi) {
-                db.game.update({
-                  userId: userId,
-                  owned: true
-                }, {
-                  where: {
-                    id: gameId
-                  }
-                })
-                .then(function() {
+                // db.game.update({
+                //   userId: userId,
+                //   owned: true
+                // }, {
+                //   where: {
+                //     id: gameId
+                //   }
+                // })
+                // .then(function() {
                   res.redirect('back')
-                })
+                // })
               })
             } else {
               res.redirect('back') 
@@ -137,6 +137,17 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           id: auctionId
         }
       }).then(function(auction) {
+        db.game.update({
+          userId: userId,
+          owned: true
+        }, {
+          where: {
+            id: gameId
+          }
+        })
+        .then(function() {
+          res.redirect('back')
+        })
       })
     }, time)
     req.flash('success', 'You have created an auction.')
