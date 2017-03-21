@@ -79,7 +79,7 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
               })
               .then(function(kiwi) {
                 db.game.update({
-                  gameId: gameId
+                  userId: userId
                 }, {
                   where: {
                     id: auctionId
