@@ -83,7 +83,7 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
                   owned: true
                 }, {
                   where: {
-                    id: gameListId
+                    id: gameId
                   }
                 })
                 .then(function() {
