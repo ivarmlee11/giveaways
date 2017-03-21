@@ -110,7 +110,7 @@ app.use('/kiwi', kiwiCtrl)
 var clients = []
 
 io.on('connection', function(socket) {
-  console.log(socket.request.user)
+  console.log(socket.request.user.dataValues)
   if(socket.request.user.dataValues.id) {
     var clientId = socket.request.user.dataValues.id,
         clientAuth = socket.request.user.dataValues.auth,

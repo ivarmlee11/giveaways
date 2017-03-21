@@ -3,9 +3,9 @@ var BeamClient = require('beam-client-node'),
 		beamBotKey = process.env.BEAMBOTKEY,
     tweakBeamId = process.env.tweakBeamId,
     db = require('../models'),
-    updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerBeam.js')
+    updateKiwisBeam = require('./cronKiwiTimer/cronKiwiTimerBeam.js')
 
-console.log('twitch stream id ' + tweakBeamId)
+console.log('tweak beam stream id ' + tweakBeamId)
 
 
 var userInfo
@@ -21,13 +21,15 @@ client.use('oauth', {
 
 client.request('GET', 'users/current')
   .then(function(response) {
-    // console.log(response.body)
+    // console.log(response)
+    console.log(response.body)
     userInfo = response.body
     // console.log(userInfo)
 
     return client.chat.join(tweakBeamId)
   })
   .then(function(response) {
+    console.log(response.body)
     var body = response.body
     // console.log(body)
     return createChatSocket(userInfo.id, tweakBeamId, body.endpoints, body.authkey)
@@ -46,7 +48,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
     .then(function() {
       console.log('Beam bot authenticated!')
       // Send a chat message
-      return socket.call('msg', ['Hello world!'])
+      // return socket.call('msg', ['Hello world!'])
     })
     .catch(function(error) {
       console.log('Oh no! An error occurred! ', error)
@@ -74,7 +76,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
                   userId: id
                 }
               }).then(function(kiwi) {
-                updateKiwisTwitch(id)
+                updateKiwisBeam(id)
               })
             } else {
               user.createKiwi({
@@ -83,7 +85,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
                 userId: user.id
               }).then(function(kiwi) {
                 console.log('added kiwi object and started adding kiwis to this user over time')
-                updateKiwisTwitch(user.id)
+                updateKiwisBeam(user.id)
               })
             }
           })
