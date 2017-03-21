@@ -103,7 +103,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       console.log(msg)
       console.log('from ' + sender)
       switch (msg) { 
-        case '!kiwis'
+        case '!kiwis':
           db.user.find({
             where: {
               username: sender,
