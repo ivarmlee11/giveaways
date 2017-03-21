@@ -49,7 +49,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       return socket.call('msg', ['Hello world!'])
     })
     .catch(function(error) {
-      console.log('Oh no! An error occurred!', error)
+      console.log('Oh no! An error occurred! ', error)
     })
 
      socket.on('UserJoin', function(data) {
@@ -66,7 +66,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
           user.getKiwi().then(function(kiwi) {
             if(kiwi) {  
             var id = kiwi.userId
-            console.log(id + ':userid of kiwi found')
+            console.log(id + ' :userid of kiwi found')
               db.kiwi.update({
                 watching: true
               }, {
