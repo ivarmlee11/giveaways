@@ -20,7 +20,7 @@ function displayAuctionData() {
     type: 'GET',
     url: '/auction/auctionData',
     success: function(auction) {
-      console.log(auction)
+      // console.log(auction)
       if(auction !== 'None') {
         var points = 0
 
@@ -36,7 +36,11 @@ function displayAuctionData() {
   })
 }
 
-setTimeout(function(){ displayAuctionData() }, 10000);
+setTimeout(function(){ 
+  displayAuctionData()
+  console.log('set timeout ran')
+}, 10000)
+
 displayAuctionData()
 
 function getHighestBidderInfo(id) {
@@ -92,7 +96,7 @@ function remakeTimer() {
     url: url,
     type: 'GET',
     success: function(auction) {
-      console.log(auction)
+      // console.log(auction)
       if(auction !== 'None') {
         var startTime = moment(auction.createdAt).utc().format(),
             currentTime = moment.utc().format(),

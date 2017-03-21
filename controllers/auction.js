@@ -107,6 +107,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           id: auctionId
         }
       }).then(function(auction) {
+        console.log(auction)
         db.game.update({
           userId: auction.userId
         }, {
@@ -114,8 +115,8 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
             id: gameListId
           }
         })
-        .then(function(auction){
-          console.log('user ' + auction.userId + ' won the auction')
+        .then(function(game){
+          console.log('user ' + game.userId + ' won the auction')
         })
       })
     }, time)

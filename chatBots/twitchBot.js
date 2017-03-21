@@ -64,7 +64,6 @@ function chat(channel, userstate, message, self) {
         }
       }).then(function(user) {
         user.getKiwi().then(function(kiwi) {
-          var kiwi = kiwi.dataValues
           console.log(kiwi)
           console.log(' kiwi')
           var message = username + ' has ' + kiwi.points + ' kiwi points'

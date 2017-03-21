@@ -95,7 +95,6 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       }) 
     })
 
-    // Listen to chat messages, note that you will also receive your own!
     socket.on('ChatMessage', function(data) {
       var msg = data.message.message[0].text,
         sender = data.user_name
