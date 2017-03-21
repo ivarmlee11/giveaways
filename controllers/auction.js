@@ -35,19 +35,21 @@ router.get('/auctionData', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
-  console.log(req.body)
+  // console.log(req.body)
   var userId = req.body.userId,
-      currenBid = req.body.bid,
+      currentBid = req.body.bid,
       currentKiwis
   db.auction.findAll({
     limit: 1,
     order: [ [ 'createdAt', 'DESC' ]]
   }).then(function(auction) {
-    console.log('bid made')
-    console.log(auction)
+    // console.log('bid made')
+    // console.log(auction)
     var auction = auction[0],
-    highestBid = auction.highestBid,
-    auctionId = auction.id
+        highestBid = auction.highestBid,
+        auctionId = auction.id
+        gameId = auction.gameId
+
     if(!auction.ended) {
       db.kiwi.find({
         where: {
@@ -56,18 +58,18 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
       })
       .then(function(kiwi) {
         currentKiwis = kiwi.points
-        if (currenBid > highestBid & (currenBid <= currentKiwis)) {
+        if (currentBid > highestBid & (currentBid <= currentKiwis)) {
           auction.update({
             userId: userId,
-            highestBid: currenBid
+            highestBid: currentBid
           }, {
             where: {
               id: auctionId
             }
           })
           .then(function(auction) {
-            if(currentKiwis >= currenBid) {
-              var kiwiCountAfterBid = currentKiwis - currenBid
+            if(currentKiwis >= currentBid) {
+              var kiwiCountAfterBid = currentKiwis - currentBid
               db.kiwi.update({
                 points: kiwiCountAfterBid
               } , {
@@ -76,7 +78,16 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
                 }
               })
               .then(function(kiwi) {
-                res.redirect('back')
+                db.game.update({
+                  gameId: gameId
+                }, {
+                  where: {
+                    id: auctionId
+                  }
+                })
+                .then(function() {
+                  res.redirect('back')
+                })
               })
             } else {
               res.redirect('back') 
@@ -109,15 +120,15 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
     gameId: gameListId,
     timer: timer
   }).then(function(auction) {
-    console.log('auction created')
-    console.log(auction)
+    // console.log('auction created')
+    // console.log(auction)
     var time = auction.timer * 60
     time = time * 1000
     var auctionId = auction.id
-    console.log('timer ' + time)
+    // console.log('timer ' + time)
     setTimeout(function() {
-      console.log('auction id ' + auctionId)
-      console.log('gameListId ' + gameListId)
+      // console.log('auction id ' + auctionId)
+      // console.log('gameListId ' + gameListId)
       db.auction.update({
         ended: true
       }, {
@@ -125,11 +136,11 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           id: auctionId
         }
       }).then(function(auction) {
-        console.log('auction ended')
-        console.log(auction.userId)
-        console.log('gameListId ' + gameListId)
+        // console.log('auction ended')
+        // console.log(auction.userId)
+        // console.log('gameListId ' + gameListId)
         db.game.update({
-          userId: auction.userId,
+          // userId: auction.userId,
           owned: true
         }, {
           where: {
@@ -137,7 +148,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           }
         })
         .then(function(game){
-          console.log('user ' + game.userId + ' won the auction')
+          // console.log('user ' + game.userId + ' won the auction')
         })
       })
     }, time)
