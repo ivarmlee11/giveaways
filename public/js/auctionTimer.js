@@ -109,7 +109,7 @@ function remakeTimer() {
                 timerString =  '<div id="' + 3 + '" data-timer="' + timerSeconds + '"></div>'
 
 
-            $timerMessage.text('The auction is on a 3 min timer.')
+            // $timerMessage.text('The auction is on a 3 min timer.')
             $timerDisplay.html(timerString)
             if(moment(currentTime).isBefore(endTime, 'seconds')) {
               $('#3').TimeCircles({count_past_zero: false})
@@ -123,7 +123,7 @@ function remakeTimer() {
                 timerString =  '<div id="' + 5 + '" data-timer="' + timerSeconds + '"></div>'
 
 
-            $timerMessage.text('The auction is on a 5 min timer.')
+            // $timerMessage.text('The auction is on a 5 min timer.')
             $timerDisplay.html(timerString)
             if(moment(currentTime).isBefore(endTime, 'seconds')) {
               $('#5').TimeCircles({count_past_zero: false})
@@ -137,7 +137,7 @@ function remakeTimer() {
                 timerString =  '<div id="' + 10 + '" data-timer="' + timerSeconds + '"></div>'
                 
 
-            $timerMessage.text('The auction is on a 10 min timer.')
+            // $timerMessage.text('The auction is on a 10 min timer.')
             $timerDisplay.html(timerString)
             if(moment(currentTime).isBefore(endTime, 'seconds')) {
               $('#10').TimeCircles({count_past_zero: false})

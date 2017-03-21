@@ -97,12 +97,15 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
     gameId: gameListId,
     timer: timer
   }).then(function(auction) {
+    console.log('auction created')
     console.log(auction)
     var time = auction.timer * 60
     time = time * 1000
     var auctionId = auction.id
     console.log('timer ' + time)
     setTimeout(function() {
+      console.log('auction id ' + auctionId)
+      console.log('gameListId ' + gameListId)
       db.auction.update({
         ended: true
       }, {
@@ -110,9 +113,12 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           id: auctionId
         }
       }).then(function(auction) {
+        console.log('auction ended')
         console.log(auction)
+        console.log('gameListId ' + gameListId)
         db.game.update({
-          userId: auction.userId
+          userId: auction.userId,
+          owned: true
         }, {
           where: {
             id: gameListId
