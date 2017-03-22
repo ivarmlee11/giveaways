@@ -25,31 +25,33 @@
           </div>
         </div>
 
+
         <fieldset id="auctionLength" class="form-group row">
           <legend class="col-form-legend col-sm-2">Timer (Minutes)</legend>
           <div class="col-sm-10">
-            <div class="form-check">  
-              <div class="btn-group" data-toggle="buttons">           
-                <label class="btn btn-success active">
-                  <input type="radio" name="options" value="0" autocomplete="off" checked>
-                  <span class="glyphicon glyphicon-ok">Endless</span>
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" value="3" autocomplete="off">
-                  <span class="glyphicon glyphicon-ok">3</span>
-                </label>
-                <label class="btn btn-info">
-                  <input type="radio" name="options" value="5" autocomplete="off">
-                  <span class="glyphicon glyphicon-ok">5</span>
-                </label>
-                <label class="btn btn-default">
-                  <input type="radio" name="options" value="10" autocomplete="off">
-                  <span class="glyphicon glyphicon-ok">10</span>
-                </label>
-              </div>
+            <div class="form-check">
+              <label class="btn btn-success active">
+                <input type="radio" name="timer" value="0" autocomplete="off" checked>
+                  <span class="bold"> Endless </span>
+              </label>
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="timer" id="auction3mins" value="3">
+                  <span class="bold"> 3 </span>
+              </label>
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="timer" id="auction5mins" value="5">
+                  <span class="bold"> 5 </span>
+              </label>
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="timer" id="auction10mins" value="10" checked>
+                  <span class="bold"> 10 </span>
+              </label>
             </div>
           </div>
         </fieldset>
+
+
+
         <button id="submitButton" type="submit" class="btn-primary success">Submit</button>
       </form>
     </div>
