@@ -70,7 +70,7 @@ router.post('/user/update/:idx', ensureAuthenticated, modCheck, function(req, re
           }
         })
         .then(function(kiwi) {
-          db.kiwi.findById(kiwi.id)
+          db.kiwi.findById(id)
           .then(function(kiwi) {
             console.log('kiwi found')
             console.log(kiwi)

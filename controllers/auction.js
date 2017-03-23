@@ -39,16 +39,19 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
   var userId = req.body.userId,
       currentBid = req.body.bid,
       currentKiwis
+
   db.auction.findAll({
     limit: 1,
     order: [ [ 'createdAt', 'DESC' ]]
   }).then(function(auction) {
-    // console.log('bid made')
-    // console.log(auction)
+
     var auction = auction[0],
         highestBid = auction.highestBid,
-        auctionId = auction.id
+        highestBidder = auction.highestBidder,
+        auctionId = auction.id,
         gameId = auction.gameId
+console.log(highestBidder)
+console.log(highestBidder)
 
     if(!auction.ended) {
       db.kiwi.find({
@@ -59,8 +62,28 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
       .then(function(kiwi) {
         currentKiwis = kiwi.points
         if (currentBid > highestBid & (currentBid <= currentKiwis)) {
+          if(highestBidder) {
+            db.kiwi.find({
+              where: {
+                userId: highestBidder
+              }
+            })
+            .then(function(kiwi) {
+              var refund = kiwi.points + highestBid
+              db.kiwi.update({
+                points: refund
+              } , {
+                where: {
+                  userId: highestBidder
+                }
+              })
+              .then(function(kiwi) {
+                console.log('second highest bidder refunded')
+              })
+            })
+          }
           auction.update({
-            userId: userId,
+            highestBidder: userId,
             highestBid: currentBid
           }, {
             where: {
@@ -78,17 +101,7 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
                 }
               })
               .then(function(kiwi) {
-                // db.game.update({
-                //   userId: userId,
-                //   owned: true
-                // }, {
-                //   where: {
-                //     id: gameId
-                //   }
-                // })
-                // .then(function() {
-                  res.redirect('back')
-                // })
+                res.redirect('back')
               })
             } else {
               res.redirect('back') 

@@ -31,7 +31,7 @@ function displayAuctionData() {
         // console.log("highest bid " + points)     
         getGameData(auction.gameId)
         // console.log(auction.gameId + " auction game id") 
-        getHighestBidderInfo(auction.userId)
+        getHighestBidderInfo(auction.highestBidder)
 
         kiwiCoinDisplay($myIdInt)
         remakeTimer()

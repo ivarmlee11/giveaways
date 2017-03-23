@@ -67,7 +67,6 @@ $editGameOwner.on('keyup', function() {
 
 $("#csv-file").on('change', function() {
   setTimeout(function(){
-    console.log('games updated')
     update()
   }, 3000)
 })
@@ -99,8 +98,8 @@ function update() {
       var data = data
 
       $gameTable.append(
-        '<thead>' + 
-        '<tr><th class="text-center">Edit</th><th class="text-center">Game Name</th><th class="text-center">Owned</th><th class="text-center">Auth</th><th>Code</th></tr>' +
+        '<thead class="text-center">' + 
+        '<tr><th class="text-center">Edit</th><th class="text-center">Game Name</th><th class="text-center">Owned</th><th class="text-center">Auth</th><th class="col-lg-3 text-center">Code</th></tr>' +
         '</thead>' 
       )
 
@@ -114,36 +113,40 @@ function update() {
             idForUserInfo(url, userId, gameId, false)
             idForUserInfo(url, userId, gameId, true)
             $gameTable.append(
-              '<tr>' +
+              '<tr class="text-center">' +
                 // removes games
                 '<td><span id="' + val.id + '" class="glyphicon glyphicon-minus remove"></span>' +
                 '  ' +
                 // edits games
-                '<span id="' + val.id + '" userId="' + val.userId + '" class="glyphicon glyphicon-pencil edit"></span></td>' +
+                '<span id="' + val.id + '" userId="' + val.userId + '" class="glyphicon glyphicon-pencil edit"></span>' +
+                '  ' + 
+                // reveal code on this row
+                '<span id="' + val.id + '" userId="' + val.userId + '" class="glyphicon glyphicon-eye-open show"></span></td>' +
                 '<td id="game' + val.id + '">' + val.name + '</td>' + 
                 '<td class="username' + val.userId + '"></td>' + 
                 '<td class="auth' + val.userId + '"></td>' + 
-                '<td id="code' + val.id + '">' + val.code + '</td>' + 
+                '<td><h6 id="code' + val.id + '" class="hide">' + val.code + '</h6></td>' + 
               '</tr>'
             )
           } else { 
             $gameTable.append(
-              '<tr>' +
+              '<tr class="text-center">' +
                 // removes games
                 '<td><span id="' + val.id + '" class="glyphicon glyphicon-minus remove"></span>' +
                  '  ' +
                 // edits games
-                '<span id="' + val.id + '" class="glyphicon glyphicon-pencil edit"></span></td>' +
+                '<span id="' + val.id + '" class="glyphicon glyphicon-pencil edit"></span>' +
+                '  ' + 
+                // reveal code on this row
+                '<span id="' + val.id + '" userId="' + val.userId + '" class="glyphicon glyphicon-eye-open show"></span></td>' +
                 '<td id="game' + val.id + '">' + val.name + '</td>' + 
-                '<td class="text-center">No</td>' + 
+                '<td>No</td>' + 
                 '<td></td>' + 
-                '<td id="code' + val.id + '">' + val.code + '</td>' + 
+                '<td><h6 id="code' + val.id + '" class="hide">' + val.code + '</h6></td>' + 
               '</tr>'
             )
           }
 
-        } else {
-          console.log(val.name + ' had its code revealed by user ' + val.userId)
         }
       })
     }
@@ -170,33 +173,27 @@ $(document).on('click', '.edit', function() {
     if(result) {
       $editAuthChoiceFieldset.removeClass('hide')
       var gameCodeString = $(gameCodeSelector).text()
-      console.log(' game code stinrg ' + gameCodeString)
       $editGameCode.val(gameCodeString)
 
       var gameIdString = gameId.toString()
       $currentGameId.val(gameIdString)
 
       var editGameSelector = $(gameIdSelector).text()
-      console.log(editGameSelector + ' game id selector')
 
       $editGameName.val(editGameSelector)
       
       var editGameOwner = $(userNameSelector).text()
-      console.log(editGameOwner + ' game owner')
 
       if(editGameOwner !== undefined) {
         $editGameOwner.val(editGameOwner)
       }
 
       var editGameAuth = $(userAuthSelector).text()
-      console.log(editGameAuth + ' owners auth choice')
 
       if(editGameAuth === 'Twitch') {
-        console.log('twitch should be checked')
         $editAuthChoiceTwitch.attr('checked', true)
         $editAuthChoiceTwitch.addClass('yellow')
       } else if (editGameAuth === 'Beam') {
-        console.log('beam should be checked')
         $editAuthChoiceBeam.attr('checked', true)
         $editAuthChoiceBeam.addClass('yellow')
 
@@ -231,6 +228,14 @@ $(document).on('click', '.remove', function() {
       })      
     }
   })
+})
+
+$(document).on('click', '.show', function() {
+  var id = $(this).attr('id'),
+    selector = '#code' + id
+
+  $(selector).toggleClass('hide')
+
 })
 
 update()

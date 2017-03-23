@@ -23,12 +23,12 @@ module.exports = {
       gameId: {
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER
-      },
       highestBid: {
         type: Sequelize.INTEGER
       },
+      highestBidder: {
+        type: Sequelize.INTEGER
+      },    
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

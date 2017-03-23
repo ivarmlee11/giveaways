@@ -97,7 +97,7 @@ a, a:hover, a:active {
   min-height: 90px;
 }
 
-.edit:hover, .remove:hover {
+.edit:hover, .remove:hover, .show:hover {
   background-color: yellow;
 }
 

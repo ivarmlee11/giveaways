@@ -25,32 +25,23 @@
           </div>
         </div>
 
-
         <fieldset id="auctionLength" class="form-group row">
           <legend class="col-form-legend col-sm-2">Timer (Minutes)</legend>
           <div class="col-sm-10">
-            <div class="form-check">
-              <label class="btn btn-success active">
-                <input type="radio" name="timer" value="0" autocomplete="off" checked>
-                  <span class="bold"> Endless </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="timer" id="auction3mins" value="3">
-                  <span class="bold"> 3 </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="timer" id="auction5mins" value="5">
-                  <span class="bold"> 5 </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="timer" id="auction10mins" value="10" checked>
-                  <span class="bold"> 10 </span>
-              </label>
+            <div class="form-check">  
+              <div class="btn-group" data-toggle="buttons">           
+                <input type="radio" name="options" value="0" autocomplete="off" checked>
+                <span class="bold"> Endless</span>
+                <input type="radio" name="options" value="3" autocomplete="off">
+                <span class="bold"> 3</span>
+                <input type="radio" name="options" value="5" autocomplete="off">
+                <span class="bold"> 5</span>
+                <input type="radio" name="options" value="10" autocomplete="off">
+                <span class="bold"> 10</span>
+              </div>
             </div>
           </div>
         </fieldset>
-
-
 
         <button id="submitButton" type="submit" class="btn-primary success">Submit</button>
       </form>
@@ -60,41 +51,37 @@
 
 <div class="jumbotron">
 <h2 class="text-center">Game Database</h2>
-  <div class="container">
-    <div class="col-md-6 col-md-offset-3">
-      <h3 class="text-center">Upload CSV File</h3>
-        <div class="list-group col-lg-12">
-          <div class="list-group-item list-group-item-action list-group-item-info">
-            <span class="bold text-center">
-              CSV Accepted Format
-            </span>
-          </div>
-          <div class="list-group-item list-group-item-action list-group-item-success">
-            <span class="bold">
-              <h6>game name,price(low, medium, high),code(steam key or whatever),coderevealed(true or false)</h6>
-              <h6>game name2,price(low,medium, high),code(steam key or whatever),coderevealed(true or false)</h6>
-            </span>
-          </div>
+  <div class="container text-center">
+    <h3>Upload CSV File</h3>
+      <div class="list-group col-lg-12">
+        <div class="list-group-item list-group-item-action list-group-item-info">
+          <span class="bold ">
+            CSV Accepted Format
+          </span>
+        </div>
+        <div class="list-group-item list-group-item-action list-group-item-success">
+          <span class="bold">
+            <h6>game name,price(low, medium, high),code(steam key or whatever),coderevealed(true or false)</h6>
+            <h6>game name2,price(low,medium, high),code(steam key or whatever),coderevealed(true or false)</h6>
+          </span>
+        </div>
       </div>
-      <div class="buttoncontainer">
-        <input id="csv-file" class="form-control-file" type="file" name="files"/>
-      </div>
+    <div class="buttoncontainer">
+      <input id="csv-file" class="form-control-file" type="file" name="files">
     </div>
   </div>
 
   <div class="container">
-    <h3 class="text-center">
     <table id="gameTable" class="table table-sm table-inverse table-responsive">
-
     </table>
-    <h3 id="message" class="text-center"></h3>
-  </div>
 
+    <h3 id="message"></h3>
+  </div>
 </div>
 
 <div id="gameEditForm" class="jumbotron hide">
   <div class="container">
-  <h1 class="text-center">Edit Game</h1>
+  <h4 class="text-center">Edit Game</h4>
     <form action="/game/edit/" method="POST">
         <div class="form-group row">
           <label for="editGameName" class="col-sm-2 col-form-label">Game Name</label>
@@ -150,7 +137,7 @@
 
 <div id="gameAddForm" class="jumbotron">
   <div class="container">
-  <h1 class="text-center">Add Game</h1>
+  <h4 class="text-center">Add Game</h4>
     <form action="/game/addGame/" method="POST">
         <div class="form-group row">
           <label for="addGameName" class="col-sm-2 col-form-label">Game Name</label>

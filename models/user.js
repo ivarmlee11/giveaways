@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
     cloudinary: DataTypes.STRING,
     approvedThumb: DataTypes.BOOLEAN
   },{
-      hooks: {
+      // hooks: {
       //   beforeCreate: function(createdUser, options, cb) {
       //     console.log(createdUser)
       //     console.log('created user')
@@ -33,7 +33,6 @@ module.exports = function(sequelize, DataTypes) {
           models.user.hasMany(models.game)
           models.user.hasMany(models.game)
           models.user.hasOne(models.kiwi)
-          models.user.hasOne(models.auction)
         }
       },
       instanceMethods: {
