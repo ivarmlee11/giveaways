@@ -96,7 +96,7 @@ function join (channel, username, self) {
       var foundUsername = user.username
       console.log(foundUsername + ' user found')
       user.getKiwi().then(function(kiwi) {
-        if(kiwi) {  
+        if(kiwi !== null) {  
           var id = kiwi.userId
           console.log(username + ' kiwi found for this twitch user')
           db.kiwi.update({

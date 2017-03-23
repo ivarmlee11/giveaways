@@ -59,7 +59,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
         var foundUsername = user.username
         console.log(foundUsername + ' user found on beam')
         user.getKiwi().then(function(kiwi) {
-          if(kiwi) {  
+          if(kiwi !== null) {  
           var id = kiwi.userId
           console.log(id + ' userid of kiwi found')
             db.kiwi.update({
