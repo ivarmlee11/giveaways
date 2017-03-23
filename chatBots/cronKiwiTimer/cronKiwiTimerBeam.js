@@ -8,7 +8,7 @@ var options = {
 
 module.exports = function(userId) {
   var job = new CronJob({
-    cronTime: '* */1 * * *',
+    cronTime: '* */5 * * *',
     onTick: function() {
       db.kiwi.find({
         where: { userId: userId }
