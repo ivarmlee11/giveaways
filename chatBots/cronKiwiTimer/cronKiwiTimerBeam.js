@@ -17,8 +17,8 @@ module.exports = function(userId) {
         var currentKiwiPoints = kiwi.points + 1
         // request(options, function(err, res, body) {
           // if (!err && res.statusCode == 200) {
-            console.log('beam request returned')
-            var bodyParsed = JSON.parse(body)
+            // console.log('beam request returned')
+            // var bodyParsed = JSON.parse(body)
 
             // if (bodyParsed.online === false) {
               // console.log('homeboy is not logged on for you to watch and gain points')
