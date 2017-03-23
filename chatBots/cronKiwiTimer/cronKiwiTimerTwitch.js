@@ -4,7 +4,7 @@ var CronJob = require('cron').CronJob,
 		twitchClientId = process.env.TWITCHCLIENTID
  
 var options = {
-  url: 'https://www.twitch.tv/destiny',
+  url: 'https://api.twitch.tv/kraken/streams/tweakgames',
   headers: {
     'client-id': twitchClientId
   }

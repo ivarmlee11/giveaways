@@ -3,7 +3,7 @@ var CronJob = require('cron').CronJob,
     request = require('request')
 
 var options = {
-  url: 'https://beam.pro/Monstercat'
+  url: 'https://beam.pro/api/v1/channels/tweakgames'
 }
 
 module.exports = function(userId) {
