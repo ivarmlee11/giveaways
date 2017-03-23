@@ -33,7 +33,7 @@ module.exports = function(userId) {
                   userId: userId
                 }
               }).then(function(user) {
-
+                  var username = user.username
                   db.kiwi.update({
                     points: currentKiwiPoints
                   }, {
@@ -41,7 +41,7 @@ module.exports = function(userId) {
                       userId: userId
                     }
                   }).then(function(kiwi) {
-                    console.log(user.username + ' still logged in and gaining points')
+                    console.log(username + ' still logged in and gaining points')
                   })
               })
   					// }
