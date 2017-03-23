@@ -64,15 +64,18 @@ function chat(channel, userstate, message, self) {
         }
       }).then(function(user) {
         user.getKiwi().then(function(kiwi) {
-          console.log(kiwi)
-          console.log(' kiwi')
-          var message = username + ' has ' + kiwi.points + ' kiwi points'
-          client.action('#tweakgames', message)
-            .then(function(data) {
-              console.log(data)
-            }).catch(function(err) {
-              console.log(err)
-          })
+          if(user) {
+            var message = username + ' has ' + kiwi.points + ' kiwi points'
+            client.action('#tweakgames', message)
+              .then(function(data) {
+                console.log(data)
+              }).catch(function(err) {
+                console.log(err)
+            })
+          } else {
+            var message = username + ', make sure you are signed up the Tweak Games site'
+            client.action('#tweakgames', message)          
+          }
         })
       })
     default: null     
@@ -95,7 +98,7 @@ function join (channel, username, self) {
       user.getKiwi().then(function(kiwi) {
         if(kiwi) {  
           var id = kiwi.userId
-          console.log(id + ' :userid of kiwi found')
+          console.log(username + ' kiwi found for this twitch user')
           db.kiwi.update({
             watching: true
           }, {
@@ -111,13 +114,13 @@ function join (channel, username, self) {
             watching: true,
             userId: user.id
           }).then(function(kiwi) {
-            console.log('added kiwi object and started adding kiwis to this user over time')
+            console.log(username + ' added kiwi object and started adding kiwis to this user over time')
             updateKiwisTwitch(user.id)
           })
         }
       })
     } else {
-      console.log(username + ' has not signed up for the web app')
+      console.log(username + ', a twitch user, has not signed up for the web app')
     }
   })  
 }
@@ -140,7 +143,7 @@ function part(channel, username, self) {
           userId: user.id
         }
       }).then(function(kiwi) {
-        console.log(username + ' stopped watching')
+        console.log(username + ' stopped watching from twitch')
       })     
     } else {
       console.log('twitch user left that was not part of the web app ' + username)

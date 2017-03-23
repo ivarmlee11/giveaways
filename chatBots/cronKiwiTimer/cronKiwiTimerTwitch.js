@@ -4,7 +4,7 @@ var CronJob = require('cron').CronJob,
 		twitchClientId = process.env.TWITCHCLIENTID
  
 var options = {
-  url: 'https://api.twitch.tv/kraken/streams/tweakgames',
+  url: 'https://www.twitch.tv/destiny',
   headers: {
     'client-id': twitchClientId
   }
@@ -12,7 +12,7 @@ var options = {
  
 module.exports = function(userId) {
 	var job = new CronJob({
-	  cronTime: '* */5 * * *',
+	  cronTime: '* */1 * * *',
 	  onTick: function() {
 	  	db.kiwi.find({
 	  		where: { userId: userId }

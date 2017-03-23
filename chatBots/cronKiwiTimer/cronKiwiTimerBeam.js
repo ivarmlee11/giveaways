@@ -3,12 +3,12 @@ var CronJob = require('cron').CronJob,
     request = require('request')
 
 var options = {
-  url: 'https://beam.pro/api/v1/channels/tweakgames'
+  url: 'https://beam.pro/Monstercat'
 }
 
 module.exports = function(userId) {
   var job = new CronJob({
-    cronTime: '* */5 * * *',
+    cronTime: '* */1 * * *',
     onTick: function() {
       db.kiwi.find({
         where: { userId: userId }
@@ -25,7 +25,7 @@ module.exports = function(userId) {
               job.stop()
             } else {
               db.kiwi.update({
-                watching: TRUE,
+                watching: true,
               } , {
                 where: {
                   userId: userId

@@ -18,17 +18,13 @@ client.use('oauth', {
 
 client.request('GET', 'users/current')
   .then(function(response) {
-    // console.log(response)
-    console.log(response.body)
+
     userInfo = response.body
-    // console.log(userInfo)
 
     return client.chat.join(tweakBeamId)
   })
   .then(function(response) {
-    console.log(response.body)
     var body = response.body
-    // console.log(body)
     return createChatSocket(userInfo.id, tweakBeamId, body.endpoints, body.authkey)
   })
   .catch(function(err) {
@@ -51,102 +47,106 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
       console.log('Oh no! An error occurred! ', error)
     })
 
-     socket.on('UserJoin', function(data) {
-      var username = data.username
-      db.user.find({
-        where: {
-          username: username,
-          auth: 'Beam'
-        }
-      }).then(function(user) {
-        if(user) {
-          var foundUsername = user.username
-          console.log(foundUsername + ' user found on beam')
-          user.getKiwi().then(function(kiwi) {
-            if(kiwi) {  
-            var id = kiwi.userId
-            console.log(id + ' userid of kiwi found')
-              db.kiwi.update({
-                watching: true
-              }, {
-                where: {
-                  userId: id
-                }
-              }).then(function(kiwi) {
-                updateKiwisBeam(id)
-              })
-            } else {
-              user.createKiwi({
-                points: 0,
-                watching: true,
-                userId: user.id
-              }).then(function(kiwi) {
-                console.log('added kiwi object and started adding kiwis to this user over time')
-                updateKiwisBeam(user.id)
-              })
-            }
-          })
-        } else {
-          console.log(username + ' has not signed up for the web app via beam')
-        }
-      }) 
-    })
+  socket.on('UserJoin', function(data) {
+    var username = data.username
+    db.user.find({
+      where: {
+        username: username,
+        auth: 'Beam'
+      }
+    }).then(function(user) {
+      if(user) {
+        var foundUsername = user.username
+        console.log(foundUsername + ' user found on beam')
+        user.getKiwi().then(function(kiwi) {
+          if(kiwi) {  
+          var id = kiwi.userId
+          console.log(id + ' userid of kiwi found')
+            db.kiwi.update({
+              watching: true
+            }, {
+              where: {
+                userId: id
+              }
+            }).then(function(kiwi) {
+              updateKiwisBeam(id)
+            })
+          } else {
+            user.createKiwi({
+              points: 0,
+              watching: true,
+              userId: user.id
+            }).then(function(kiwi) {
+              console.log('added kiwi object and started adding kiwis to this user over time')
+              updateKiwisBeam(user.id)
+            })
+          }
+        })
+      } else {
+        console.log(username + ' has not signed up for the web app via beam')
+      }
+    }) 
+  })
 
-    socket.on('ChatMessage', function(data) {
-      var msg = data.message.message[0].text,
-        sender = data.user_name
-      console.log('chat msg sent on beam!')
-      console.log(msg)
-      console.log('from ' + sender)
-      switch (msg) { 
-        case '!kiwis':
-          db.user.find({
-            where: {
-              username: sender,
-              auth: 'Beam'
-            }
-          }).then(function(user) {
+  socket.on('ChatMessage', function(data) {
+    var msg = data.message.message[0].text,
+      sender = data.user_name
+
+    switch (msg) { 
+      case '!kiwis':
+        db.user.find({
+          where: {
+            username: sender,
+            auth: 'Beam'
+          }
+        }).then(function(user) {
+          if(user) {
             user.getKiwi().then(function(kiwi) {
               var kiwi = kiwi.dataValues,
               message = sender + ' has ' + kiwi.points + ' kiwi points'
               socket.call('msg', [message])
             })
-          })
-        break
+          } else {
+            message = sender + ', make sure you sign up on the Tweak Games site to start getting Kiwi coins'
+            socket.call('msg', [message])            
+          }
+        })
+      break
+    }
+  })
+
+  socket.on('UserLeave', function(data) {
+    var data = data,
+    username = data.username
+    
+    console.log(username + ' has left the beam channel')
+    
+    db.user.find({
+      where: {
+        username: username,
+        auth: 'Beam'
       }
+    }).then(function(user) {
+      if(user) {
+        db.kiwi.update({
+          watching: false
+        }, {
+          where: {
+            userId: user.id
+          }
+        }).then(function(kiwi) {
+          console.log(username + ' stopped watching from beam')
+        })     
+      } else {
+        console.log('beam user left the beam chat that was not part of the web app ' + username)
+      }    
     })
+  })
 
-    socket.on('UserLeave', function(data) {
-      var data = data
-      console.log(data)
-      var username = data.username
-      console.log(username + ' has left the beam channel')
-      db.user.find({
-        where: {
-          username: username,
-          auth: 'Beam'
-        }
-      }).then(function(user) {
-        if(user) {
-          db.kiwi.update({
-            watching: false
-          }, {
-            where: {
-              userId: user.id
-            }
-          }).then(function(kiwi) {
-            console.log(username + ' stopped watching')
-          })     
-        } else {
-          console.log('beam user left the beam chat that was not part of the web app ' + username)
-        }    
-      })
-    })
-
-    // Listen to socket errors, you'll need to handle these!
-    socket.on('error', function(error) {
-      console.error('Socket error', error)
-    })
+  // Listen to socket errors, you'll need to handle these!
+  socket.on('error', function(error) {
+    console.error('Socket error', error)
+  })
 }
 
 
