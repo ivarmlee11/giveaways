@@ -159,7 +159,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
             owned: true
           }, {
             where: {
-              id: gameId
+              id: gameListId
             }
           })
           .then(function() {
