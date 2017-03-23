@@ -155,7 +155,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
           console.log(auction)
           var userId = auction.highestBidder
           db.game.update({
-            userId: highestBidder,
+            userId: userId,
             owned: true
           }, {
             where: {

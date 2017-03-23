@@ -125,7 +125,7 @@ function join (channel, username, self) {
 client.on('part', part)
 
 function part(channel, username, self) {
-  console.log(username + ' has left ' + channel)
+  console.log(username + ', a twitch user, has left ' + channel)
   db.user.find({
     where: {
       username: username,
@@ -143,7 +143,7 @@ function part(channel, username, self) {
         console.log(username + ' stopped watching')
       })     
     } else {
-      console.log('user left that was not part of the web app; ' + username)
+      console.log('twitch user left that was not part of the web app ' + username)
     }    
   })
 }

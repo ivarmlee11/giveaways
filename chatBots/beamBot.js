@@ -5,9 +5,6 @@ var BeamClient = require('beam-client-node'),
     db = require('../models'),
     updateKiwisBeam = require('./cronKiwiTimer/cronKiwiTimerBeam.js')
 
-console.log('tweak beam stream id ' + tweakBeamId)
-
-
 var userInfo
 
 var client = new BeamClient()
@@ -141,7 +138,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
             console.log(username + ' stopped watching')
           })     
         } else {
-          console.log('user left the beam chat that was not part of the web app; ' + username)
+          console.log('beam user left the beam chat that was not part of the web app ' + username)
         }    
       })
     })
