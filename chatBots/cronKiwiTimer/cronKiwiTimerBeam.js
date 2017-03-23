@@ -23,7 +23,15 @@ module.exports = function(userId) {
             if (bodyParsed.online === false) {
 
               console.log('homeboy is not logged on for you to watch and gain points via beam')
-              job.stop()
+              db.kiwi.update({
+                watching: false
+              }, {
+                where: {
+                  userId: userId
+                }
+              }).then(function(kiwi) {
+                job.stop()
+              })
 
             } else {
 
