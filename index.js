@@ -14,7 +14,6 @@ var express = require('express'),
     io = require('socket.io')(server),
     passport = require('./config/ppConfig'),
     ejsLayouts = require('express-ejs-layouts'),
-    errorhandler = require('errorhandler'),
     requestIp = require('request-ip'),
     flash = require('connect-flash'),
     MemoryStore = require('session-memory-store')(session),
@@ -75,7 +74,15 @@ app.use(passport.initialize())
 
 app.use(passport.session())
 
-app.use(errorhandler())
+app.use(function(err, req, res, next) {
+  console.log('error handler')
+  if(err) {
+    res.status(500)
+    res.render('error', { error: err })
+  } else {
+    next()
+  }
+})
 
 app.locals.moment = require('moment')
 
