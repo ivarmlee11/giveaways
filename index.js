@@ -78,7 +78,7 @@ app.use(function(err, req, res, next) {
   console.log('error handler')
   if(err) {
     res.status(500)
-    res.render('error', { error: err })
+    res.render('error', { error: 'There was an error.' })
   } else {
     next()
   }
