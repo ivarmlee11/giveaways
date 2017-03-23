@@ -54,7 +54,6 @@ router.post('/avichange/:idx', ensureAuthenticated, upload.single('myFile'), fun
 router.get('/approveList', ensureAuthenticated, modCheck, function(req, res) {
   var thumbList = []
   db.user.findAll().then(function(users) {
-    console.log('users ' + users.length)
     users.forEach(function(user) {
       if(user.dataValues.approvedThumb === false) {
         thumbList.push(user)

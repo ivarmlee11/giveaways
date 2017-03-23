@@ -20,7 +20,8 @@ router.get('/auctionData', ensureAuthenticated, function(req, res) {
   db.auction.findAll({
     limit: 1,
     order: [ [ 'createdAt', 'DESC' ]]
-  }).then(function(auction){
+  })
+  .then(function(auction){
     if(!auction.ended) {
       var auction = auction[0]
       if(auction) {
@@ -50,8 +51,6 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
         highestBidder = auction.highestBidder,
         auctionId = auction.id,
         gameId = auction.gameId
-console.log(highestBidder)
-console.log(highestBidder)
 
     if(!auction.ended) {
       db.kiwi.find({
@@ -103,20 +102,16 @@ console.log(highestBidder)
               .then(function(kiwi) {
                 res.redirect('back')
               })
-            } else {
-              res.redirect('back') 
             }
           })
-        } else {
-          res.redirect('back')
         }
       })
-    } else {
-      res.redirect('back')
     }
   })
   .catch(function(err) {
-    res.render('error', {error: err.msg})
+    console.log(err)
+    req.flash('error', 'There was an error')
+    res.redirect('/')
   })
 })
 
@@ -170,6 +165,11 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
     }, time)
     req.flash('success', 'You have created an auction.')
     res.redirect('/auction/viewerAuction')
+  })
+  .catch(function(err) {
+    console.log(err)
+    req.flash('error', 'There was an error creating the auction.')
+    res.redirect('/')
   })
 })
 

@@ -19,21 +19,21 @@ module.exports = function(userId) {
 	  	}).then(function(kiwi) {
         console.log('kiwi found for this user')
 	  		var currentKiwiPoints = kiwi.points + 1
-	  		request(options, function(err, res, body) {
-	  		  if (!err && res.statusCode == 200) {
-				  	console.log('twitch request returned')
-				  	var bodyParsed = JSON.parse(body)
+	  		// request(options, function(err, res, body) {
+	  		  // if (!err && res.statusCode == 200) {
+				  	// console.log('twitch request returned')
+				  	// var bodyParsed = JSON.parse(body)
 
-				  	if (bodyParsed.stream === null) {
-				  		console.log('homeboy is not logged on for you to watch and gain points')
-				  		job.stop()
-  					} else {
+				  	// if (bodyParsed.stream === null) {
+				  		// console.log('homeboy is not logged on for you to watch and gain points')
+				  		// job.stop()
+  					// } else {
               db.kiwi.find({
                 where: {
                   userId: userId
                 }
               }).then(function(user) {
-                if (user.watching) {
+
                   db.kiwi.update({
                     points: currentKiwiPoints
                   }, {
@@ -41,16 +41,12 @@ module.exports = function(userId) {
                       userId: userId
                     }
                   }).then(function(kiwi) {
-                    console.log('user still logged in and gaining points')
+                    console.log(user.username + ' still logged in and gaining points')
                   })
-                } else {
-                  console.log('the user stopped watching so they will stop gaining points')
-                  job.stop()
-                }
               })
-  					}
-					}
-	  		})
+  					// }
+					// }
+	  		// })
   		})
 	  },
 	  start: false,

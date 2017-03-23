@@ -15,15 +15,15 @@ module.exports = function(userId) {
       }).then(function(kiwi) {
         console.log('kiwi found for this user')
         var currentKiwiPoints = kiwi.points + 1
-        request(options, function(err, res, body) {
-          if (!err && res.statusCode == 200) {
+        // request(options, function(err, res, body) {
+          // if (!err && res.statusCode == 200) {
             console.log('beam request returned')
             var bodyParsed = JSON.parse(body)
 
-            if (bodyParsed.online === false) {
-              console.log('homeboy is not logged on for you to watch and gain points')
-              job.stop()
-            } else {
+            // if (bodyParsed.online === false) {
+              // console.log('homeboy is not logged on for you to watch and gain points')
+              // job.stop()
+            // } else {
               db.kiwi.update({
                 watching: true,
               } , {
@@ -31,24 +31,21 @@ module.exports = function(userId) {
                   userId: userId
                 }
               }).then(function(user) {
-                if (user.watching) {
-                  db.kiwi.update({
-                    points: currentKiwiPoints
-                  }, {
-                    where: {
-                      userId: userId
-                    }
-                  }).then(function(kiwi) {
-                    console.log(user.username + ' user still logged in and gaining points')
-                  })
-                } else {
-                  console.log('the user stopped watching beam so they will stop gaining points')
-                  job.stop()
-                }
+
+                db.kiwi.update({
+                  points: currentKiwiPoints
+                }, {
+                  where: {
+                    userId: userId
+                  }
+                }).then(function(kiwi) {
+                  console.log(user.username + ' user still logged in and gaining points')
+                })
+                
               })
-            }
-          }
-        })
+            // }
+          // }
+        // })
       })
     },
     start: false,
