@@ -7,11 +7,13 @@ var options = {
 }
 
 module.exports = function(userId) {
-  var job = new CronJob({
+  console.log(userId + ' running a beam cron timer for this guy')
+  
+  var beamJob = new CronJob({
     cronTime: '* */5 * * *',
     onTick: function() {
 
-      console.log(userId + ' running a beam cron timer for this guy')
+      console.log(userId + ' running a beam cron timer for this guy and i hit the 5 min mark')
 
       db.kiwi.find({
         where: { userId: userId }
@@ -44,7 +46,7 @@ module.exports = function(userId) {
                   userId: userId
                 }
               }).then(function(kiwi) {
-                job.stop()
+                job.beamJob()
               })
 
             } else {

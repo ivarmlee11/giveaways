@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express(),
     request = require('request'),
-    morgan = require('morgan')('dev'),
+    // morgan = require('morgan')('dev'),
     ensureAuthenticated = require('./middleware/ensureAuth.js'),
     port = process.env.PORT || 3000,
     db = require('./models'),
