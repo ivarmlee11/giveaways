@@ -69,6 +69,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
                 userId: id
               }
             }).then(function(kiwi) {
+              console.log('running updateKiwisBeam')
               updateKiwisBeam(id)
             })
           } else {
@@ -77,7 +78,8 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
               watching: true,
               userId: user.id
             }).then(function(kiwi) {
-              console.log('added kiwi object and started adding kiwis to this user over time')
+              console.log('added kiwi object to this beam user and started adding kiwis to this user over time')
+              console.log('running updateKiwisBeam')
               updateKiwisBeam(user.id)
             })
           }

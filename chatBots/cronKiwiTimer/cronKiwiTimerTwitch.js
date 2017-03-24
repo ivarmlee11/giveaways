@@ -12,8 +12,10 @@ var options = {
  
 module.exports = function(userId) {
 	var job = new CronJob({
-	  cronTime: '* */1 * * *',
+	  cronTime: '* */5 * * *',
 	  onTick: function() {
+
+      console.log(userId + ' running a twitch cron timer for this guy')
 
 	  	db.kiwi.find({
 	  		where: { userId: userId }
@@ -21,11 +23,11 @@ module.exports = function(userId) {
 
         var currentKiwiPoints = kiwi.points + 1
 
-        console.log('kiwi found for this user ' + currentKiwiPoints)
+        console.log('kiwi found for this user on twitch ' + currentKiwiPoints)
 
-	  		request(options, function(err, res, body) {
-
-          console.log('twitch request sent')
+        console.log('twitch request sent')
+        
+        request(options, function(err, res, body) {
 
 	  		  if (!err && res.statusCode == 200) {
 

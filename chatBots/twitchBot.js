@@ -106,6 +106,7 @@ function join (channel, username, self) {
               userId: id
             }
           }).then(function(kiwi) {
+            console.log('running updateKiwisTwitch')
             updateKiwisTwitch(id)
           })
         } else {
@@ -115,6 +116,7 @@ function join (channel, username, self) {
             userId: user.id
           }).then(function(kiwi) {
             console.log(username + ' added kiwi object and started adding kiwis to this user over time')
+            console.log('running updateKiwisTwitch')
             updateKiwisTwitch(user.id)
           })
         }
