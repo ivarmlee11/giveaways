@@ -21,7 +21,7 @@ module.exports = function(userId) {
 
         var currentKiwiPoints = kiwi.points + 1
 
-        console.log('kiwi found for this user + ' currentKiwiPoints)
+        console.log('kiwi found for this user ' + currentKiwiPoints)
 
 	  		request(options, function(err, res, body) {
 
