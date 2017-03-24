@@ -72,5 +72,5 @@ module.exports = function(userId) {
     start: false,
     timeZone: 'America/Los_Angeles'
   })
-  job.start()
+  beamJob.start()
 }
