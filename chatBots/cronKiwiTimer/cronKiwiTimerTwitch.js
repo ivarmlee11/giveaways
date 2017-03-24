@@ -53,7 +53,7 @@ module.exports = function(userId) {
                   userId: userId
                 }
               }).then(function() {
-                beamJob.stop()
+                job.stop()
               })
 
   					} else {
