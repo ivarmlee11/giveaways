@@ -8,19 +8,28 @@ var options = {
 
 module.exports = function(userId) {
   var job = new CronJob({
-    cronTime: '* */5 * * *',
+    cronTime: '* */1 * * *',
     onTick: function() {
+
       db.kiwi.find({
         where: { userId: userId }
       }).then(function(kiwi) {
-        console.log('kiwi found for this user')
+
         var currentKiwiPoints = kiwi.points + 1
+
+        console.log('kiwi found for this user + ' currentKiwiPoints)
+
         request(options, function(err, res, body) {
+          
+          console.log('beam request sent')
+
           if (!err && res.statusCode == 200) {
+
             console.log('beam request returned')
             var bodyParsed = JSON.parse(body)
+            console.log(bodyParsed)
 
-            if (bodyParsed.online === false) {
+            if (!bodyParsed.online) {
 
               console.log('homeboy is not logged on for you to watch and gain points via beam')
               db.kiwi.update({
@@ -34,6 +43,7 @@ module.exports = function(userId) {
               })
 
             } else {
+              console.log(userId + ' is going to get some points because they are logged on and watching tweak stream ' + currentKiwiPoints)
 
               db.kiwi.update({
                 watching: true,
@@ -42,7 +52,8 @@ module.exports = function(userId) {
                 where: {
                   userId: userId
                 }
-              }).then(function(user) {
+              }).then(function(kiwi) {
+                console.log(kiwi)
               })
 
             }

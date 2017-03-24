@@ -117,7 +117,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
 
   socket.on('UserLeave', function(data) {
     var data = data,
-    username = data.username
+    username = data.user_name
     
     console.log(username + ' has left the beam channel')
     

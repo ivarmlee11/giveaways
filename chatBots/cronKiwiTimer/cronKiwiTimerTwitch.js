@@ -12,22 +12,30 @@ var options = {
  
 module.exports = function(userId) {
 	var job = new CronJob({
-	  cronTime: '* */5 * * *',
+	  cronTime: '* */1 * * *',
 	  onTick: function() {
+
 	  	db.kiwi.find({
 	  		where: { userId: userId }
 	  	}).then(function(kiwi) {
-        console.log('kiwi found for this user')
-	  		var currentKiwiPoints = kiwi.points + 1
+
+        var currentKiwiPoints = kiwi.points + 1
+
+        console.log('kiwi found for this user + ' currentKiwiPoints)
 
 	  		request(options, function(err, res, body) {
+
+          console.log('twitch request sent')
 
 	  		  if (!err && res.statusCode == 200) {
 
 				  	console.log('twitch request returned')
+
 				  	var bodyParsed = JSON.parse(body)
 
-				  	if (bodyParsed.stream === null) {
+            console.log(bodyParsed)
+
+				  	if (!bodyParsed.stream) {
 
 				  		console.log('homeboy is not logged on for you to watch and gain points via twitch')
 
@@ -42,6 +50,7 @@ module.exports = function(userId) {
               })
 
   					} else {
+              console.log(userId + ' is going to get some points because they are logged on and watching tweak stream ' + currentKiwiPoints)
 
               db.kiwi.update({
                 watching: true,
@@ -51,6 +60,7 @@ module.exports = function(userId) {
                   userId: userId
                 }
               }).then(function(kiwi) {
+                console.log(kiwi)
               })
 
   					}
