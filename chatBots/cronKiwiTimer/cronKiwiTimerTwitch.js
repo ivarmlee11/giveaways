@@ -15,7 +15,7 @@ module.exports = function(userId) {
 	console.log(userId + ' running a twitch cron timer for this guy')
 
   var job = new CronJob({
-	  cronTime: '* */1 * * *',
+	  cronTime: '* */5 * * *',
 	  onTick: function() {
 
 	  	db.kiwi.find({
