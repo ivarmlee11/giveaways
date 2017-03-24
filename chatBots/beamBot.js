@@ -106,8 +106,9 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
         }).then(function(user) {
           if(user) {
             user.getKiwi().then(function(kiwi) {
-              var kiwi = kiwi.dataValues,
+              var kiwi = kiwi,
               message = sender + ' has ' + kiwi.points + ' kiwi points'
+              
               socket.call('msg', [message])
             })
           } else {
@@ -122,7 +123,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
   socket.on('UserLeave', function(data) {
     var data = data,
     username = data.username
-    console.log('user left beam chat')
+    console.log('user joined beam chat')
     console.log(data)
     
     console.log(username + ' has left the beam channel')
