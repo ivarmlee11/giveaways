@@ -98,21 +98,12 @@ function join (channel, username, self) {
       user.getKiwi().then(function(kiwi) {
         if(kiwi) {  
           var id = kiwi.userId
-          console.log(username + ' kiwi found for this twitch user')
-          db.kiwi.update({
-            watching: true
-          }, {
-            where: {
-              userId: id
-            }
-          }).then(function(kiwi) {
-            console.log('running updateKiwisTwitch')
-            updateKiwisTwitch(id)
-          })
+          console.log(username + ' kiwi found for this twitch user') 
+          console.log('running updateKiwisTwitch')
+          updateKiwisTwitch(id)
         } else {
           user.createKiwi({
             points: 0,
-            watching: true,
             userId: user.id
           }).then(function(kiwi) {
             console.log(username + ' added kiwi object and started adding kiwis to this user over time')
