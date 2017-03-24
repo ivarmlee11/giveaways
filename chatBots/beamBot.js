@@ -48,6 +48,8 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
     })
 
   socket.on('UserJoin', function(data) {
+    console.log('user joined beam chat')
+    console.log(data)
     var username = data.username
     db.user.find({
       where: {
@@ -119,7 +121,9 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
 
   socket.on('UserLeave', function(data) {
     var data = data,
-    username = data.user_name
+    username = data.username
+    console.log('user left beam chat')
+    console.log(data)
     
     console.log(username + ' has left the beam channel')
     
