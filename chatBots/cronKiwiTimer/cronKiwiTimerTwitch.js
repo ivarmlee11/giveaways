@@ -36,6 +36,7 @@ module.exports = function(userId) {
 				  	var bodyParsed = JSON.parse(body)
 
             console.log(bodyParsed)
+            console.log('body parsed stream ' + bodyParsed.stream)
 
 				  	if (!bodyParsed.stream) {
 
