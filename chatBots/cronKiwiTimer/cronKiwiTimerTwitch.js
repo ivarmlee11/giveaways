@@ -11,11 +11,12 @@ var options = {
 }
  
 module.exports = function(userId) {
-	var job = new CronJob({
-	  cronTime: '* */5 * * *',
-	  onTick: function() {
 
-      console.log(userId + ' running a twitch cron timer for this guy')
+	console.log(userId + ' running a twitch cron timer for this guy')
+
+  var job = new CronJob({
+	  cronTime: '* */1 * * *',
+	  onTick: function() {
 
 	  	db.kiwi.find({
 	  		where: { userId: userId }
@@ -36,6 +37,7 @@ module.exports = function(userId) {
 				  	var bodyParsed = JSON.parse(body)
 
             console.log(bodyParsed)
+
             console.log('body parsed stream ' + bodyParsed.stream)
 
 				  	if (!bodyParsed.stream) {
