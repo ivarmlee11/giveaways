@@ -62,11 +62,24 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
         console.log(foundUsername + ' user found on beam')
         user.getKiwi().then(function(kiwi) {
           if(kiwi) {  
-            var id = kiwi.userId
-            updateKiwisBeam(id)
+          var id = kiwi.userId,
+            points = kiwi.points
+          console.log(id + ' userid of kiwi found')
+          console.log(points + ' :points')
+            db.kiwi.update({
+              watching: true
+            }, {
+              where: {
+                userId: id
+              }
+            }).then(function(kiwi) {
+              console.log('running updateKiwisBeam')
+              updateKiwisBeam(id)
+            })
           } else {
             user.createKiwi({
               points: 0,
+              watching: true,
               userId: user.id
             }).then(function(kiwi) {
               console.log('added kiwi object to this beam user and started adding kiwis to this user over time')

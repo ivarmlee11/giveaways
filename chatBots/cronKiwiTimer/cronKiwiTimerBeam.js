@@ -14,11 +14,15 @@ module.exports = function(userId) {
     cronTime: '* */1 * * *',
     onTick: function() {
 
-      console.log(userId + ' running a beam cron timer for this guy and i hit the 5 min mark')
+      console.log(userId + ' running a beam cron timer for this user every 5 mins')
 
       db.kiwi.find({
         where: { userId: userId }
       }).then(function(kiwi) {
+
+        if(kiwi.watching === false) {
+          beamJob.stop()
+        }
 
         var currentKiwiPoints = kiwi.points + 1
 
@@ -34,8 +38,6 @@ module.exports = function(userId) {
 
             var bodyParsed = JSON.parse(body)
 
-            console.log(bodyParsed)
-
             if (!bodyParsed.online) {
 
               console.log('homeboy is not logged on for you to watch and gain points via beam')
@@ -46,15 +48,14 @@ module.exports = function(userId) {
                 where: {
                   userId: userId
                 }
-              }).then(function(kiwi) {
-                job.beamJob()
+              }).then(function() {
+                beamJob.stop()
               })
 
             } else {
               console.log(userId + ' userId is still getting points while watching on beam. this many points... ' + currentKiwiPoints)
 
               db.kiwi.update({
-                watching: true,
                 points: currentKiwiPoints
               } , {
                 where: {

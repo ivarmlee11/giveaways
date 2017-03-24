@@ -22,6 +22,10 @@ module.exports = function(userId) {
 	  		where: { userId: userId }
 	  	}).then(function(kiwi) {
 
+        if(kiwi.watching === false) {
+          job.stop()
+        }
+
         var currentKiwiPoints = kiwi.points + 1
 
         console.log('kiwi found for this user on twitch ' + currentKiwiPoints)
@@ -36,8 +40,6 @@ module.exports = function(userId) {
 
 				  	var bodyParsed = JSON.parse(body)
 
-            console.log(bodyParsed)
-
             console.log('body parsed stream ' + bodyParsed.stream)
 
 				  	if (!bodyParsed.stream) {
@@ -50,15 +52,14 @@ module.exports = function(userId) {
                 where: {
                   userId: userId
                 }
-              }).then(function(kiwi) {
-				  		  job.stop()
+              }).then(function() {
+                beamJob.stop()
               })
 
   					} else {
               console.log(userId + ' is going to get some points because they are logged on and watching tweak stream ' + currentKiwiPoints)
 
               db.kiwi.update({
-                watching: true,
                 points: currentKiwiPoints
               }, {
                 where: {
