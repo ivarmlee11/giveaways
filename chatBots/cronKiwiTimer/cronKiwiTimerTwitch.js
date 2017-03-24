@@ -12,7 +12,7 @@ var options = {
  
 module.exports = function(userId) {
 	var job = new CronJob({
-	  cronTime: '* */1 * * *',
+	  cronTime: '* */5 * * *',
 	  onTick: function() {
 
       console.log(userId + ' running a twitch cron timer for this guy')
