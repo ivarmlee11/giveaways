@@ -1,7 +1,8 @@
 var tmi = require('tmi.js'),
   twitchBotKey = process.env.twitchBotKey,
   db = require('../models'),
-  updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerTwitch.js')
+  updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerTwitch.js'),
+  twitchRoomCheck = require('./roomCheck/twitchRoomCheck')
 
 // twitch bot config
 
@@ -51,7 +52,7 @@ function chat(channel, userstate, message, self) {
       client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.')
       break
     case '!clear':
-      client.clear("tweakgames")
+      client.clear('tweakgames')
       client.action('#tweakgames', 'Chat cleared.')
       break
     case '!kiwis':
@@ -64,7 +65,7 @@ function chat(channel, userstate, message, self) {
         }
       }).then(function(user) {
         user.getKiwi().then(function(kiwi) {
-          if(user) {
+          if(kiwi) {
             var message = username + ' has ' + kiwi.points + ' kiwi points'
             client.action('#tweakgames', message)
               .then(function(data) {
@@ -86,6 +87,11 @@ client.on('join', join)
 
 function join (channel, username, self) {
   console.log(username + ' joined channel ' + channel)
+
+  if(username === 'dridor') {
+    console.log('dridor logged on to twitch so we are going to turn all idle viewers into watchers')
+    twitchRoomCheck()
+  }
   db.user.find({
     where: {
       username: username,
@@ -112,8 +118,8 @@ function join (channel, username, self) {
         } else {
           user.createKiwi({
             points: 0,
-            watching: true,
-            userId: user.id
+            watching: true
+            // userId: user.id
           }).then(function(kiwi) {
             console.log(username + ' added kiwi object and started adding kiwis to this user over time')
             console.log('running updateKiwisTwitch')
@@ -130,7 +136,7 @@ function join (channel, username, self) {
 client.on('part', part)
 
 function part(channel, username, self) {
-  console.log(username + ', a twitch user, has left ' + channel)
+
   db.user.find({
     where: {
       username: username,

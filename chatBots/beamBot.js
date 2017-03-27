@@ -3,7 +3,8 @@ var BeamClient = require('beam-client-node'),
 		beamBotKey = process.env.BEAMBOTKEY,
     tweakBeamId = process.env.tweakBeamId,
     db = require('../models'),
-    updateKiwisBeam = require('./cronKiwiTimer/cronKiwiTimerBeam.js')
+    updateKiwisBeam = require('./cronKiwiTimer/cronKiwiTimerBeam.js'),
+    beamRoomCheck = require('./roomCheck/beamRoomCheck')
 
 var userInfo
 
@@ -48,9 +49,16 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
     })
 
   socket.on('UserJoin', function(data) {
+
     console.log('user joined beam chat')
     console.log(data)
     var username = data.username
+
+    if(username === 'Dridor') {
+      console.log('dridor logged in so we are going to check beam users for people who are not logged in')
+      beamRoomCheck()
+    }
+
     db.user.find({
       where: {
         username: username,
@@ -79,8 +87,8 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
           } else {
             user.createKiwi({
               points: 0,
-              watching: true,
-              userId: user.id
+              watching: true
+              // userId: user.id
             }).then(function(kiwi) {
               console.log('added kiwi object to this beam user and started adding kiwis to this user over time')
               console.log('running updateKiwisBeam')
@@ -108,13 +116,12 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
         }).then(function(user) {
           if(user) {
             user.getKiwi().then(function(kiwi) {
-              var kiwi = kiwi,
-              message = sender + ' has ' + kiwi.points + ' kiwi points'
+              var message = sender + ' has ' + kiwi.points + ' kiwi points'
               
               socket.call('msg', [message])
             })
           } else {
-            message = sender + ', make sure you sign up on the Tweak Games site to start getting Kiwi coins'
+              var message = sender + ', make sure you sign up on the Tweak Games site to start getting Kiwi coins'
             socket.call('msg', [message])            
           }
         })
@@ -125,8 +132,6 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
   socket.on('UserLeave', function(data) {
     var data = data,
     username = data.username
-    
-    console.log(username + ' has left the beam channel')
     
     db.user.find({
       where: {

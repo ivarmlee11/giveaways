@@ -24,7 +24,7 @@ module.exports = function(userId) {
           beamJob.stop()
         }
 
-        var currentKiwiPoints = kiwi.points + 1
+        var currentKiwiPoints = kiwi.points + .20
 
         console.log('kiwi found for this user on beam ' + currentKiwiPoints)
 

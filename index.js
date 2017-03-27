@@ -27,8 +27,8 @@ app.use(cookieParser())
 app.use(session({
   key: 'connect.sid', 
   secret: sessionSecret,
-  // store: new MemoryStore(), // development 
-  store: new (require('connect-pg-simple')(session))(), // production
+  store: new MemoryStore(), // development 
+  // store: new (require('connect-pg-simple')(session))(), // production
   resave: false,
   saveUninitialized: false
 }))
@@ -37,8 +37,8 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,  
   key: 'connect.sid',     
   secret: sessionSecret,    
-  store: new (require('connect-pg-simple')(session))(), // production
-  // store: new MemoryStore(),        //  development
+  // store: new (require('connect-pg-simple')(session))(), // production
+  store: new MemoryStore(),        //  development
   success:      onAuthorizeSuccess, 
   fail:         onAuthorizeFail      
 })) 
@@ -218,8 +218,8 @@ io.on('connection', function(socket) {
 
 app.get('/', function(req, res) {
   var currentUser = false
-  res.render('login', {currentUser: currentUser})
-  // res.redirect('/testUser/login')
+  // res.render('login', {currentUser: currentUser})
+  res.redirect('/testUser/login')
 })
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {
