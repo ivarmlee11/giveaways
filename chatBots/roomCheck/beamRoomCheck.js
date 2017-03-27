@@ -17,12 +17,53 @@ module.exports = function() {
   })
 
   var url = '/chats/' + tweakBeamId + '/users'
+
+  var viewers = []
   
   client.request('GET', url)
     .then(function(res) {
-      console.log(res.body)
-    })
-    .then(function(res) {
+      res.body.forEach(function(viewer) {
+        viewers.push(viewer.userName)
+      })
+
+      console.log('list of all mods and viewers in beam')
+      console.log(viewers)
+
+      viewers.forEach(function(viewer) {
+        db.user.find({
+          where: {
+            username: viewer,
+            auth: 'Beam'
+          }
+        }).then(function(user) {
+          if(user) {
+            var id = user.id
+            user.getKiwi().
+              then(function(kiwi) {
+              console.log('this kiwi was found attached to this user on beam ' + viewer)
+              console.log(kiwi)
+              if(!kiwi.watching) {
+                db.kiwi.update({
+                  watching: true
+                }, {
+                  where: {
+                    id: id
+                  }
+                })
+                .then(function(kiwi) {
+                  console.log('kiwi watching status changed to true for ' + viewer)
+                  updateKiwisBeam(id)
+                })
+              } else {
+                console.log(viewer + ', a beam user, already has a kiwi that has a watching status of true')
+              }
+            })
+          } else {
+            console.log('tweakgames logged on to beam so a viewer check was run. this viewer does not have an account with my site ' + viewer)
+          }
+        })
+      })
+
 
     })
     .catch(function(err) {
