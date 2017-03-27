@@ -41,7 +41,7 @@ module.exports = function() {
             user.getKiwi().
               then(function(kiwi) {
               console.log('this kiwi was found attached to this user on beam ' + viewer)
-              console.log(kiwi)
+               
               if(!kiwi.watching) {
                 db.kiwi.update({
                   watching: true

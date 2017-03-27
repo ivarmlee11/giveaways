@@ -62,7 +62,7 @@ module.exports = function(userId) {
                   userId: userId
                 }
               }).then(function(kiwi) {
-                console.log(kiwi)
+                 
               })
 
             }
