@@ -54,7 +54,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
     console.log(data)
     var username = data.username
 
-    if(username == ('tweakgames' || 'dridor')) {
+    if(username === ('Tweakgames' || 'Dridor')) {
       console.log('tweakgames (or dridor the dev) logged in so we are going to check beam users for people who are not logged in')
       beamRoomCheck()
     }
