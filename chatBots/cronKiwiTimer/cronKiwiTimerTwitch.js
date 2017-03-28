@@ -40,8 +40,6 @@ module.exports = function(userId) {
 
 				  	var bodyParsed = JSON.parse(body)
 
-            console.log('body parsed stream ' + bodyParsed.stream)
-
 				  	if (!bodyParsed.stream) {
 
 				  		console.log('homeboy is not logged on for you to watch and gain points via twitch')
