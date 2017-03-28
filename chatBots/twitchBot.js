@@ -88,8 +88,8 @@ client.on('join', join)
 function join (channel, username, self) {
   console.log(username + ' joined channel ' + channel)
 
-  if(username === 'dridor') {
-    console.log('dridor logged on to twitch so we are going to turn all idle viewers into watchers')
+  if(username === 'tweakgames') {
+    console.log('tweakgames logged on to twitch so we are going to turn all idle viewers into watchers')
     twitchRoomCheck()
   }
   db.user.find({

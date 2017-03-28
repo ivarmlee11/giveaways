@@ -26,7 +26,7 @@ module.exports = function(userId) {
           job.stop()
         }
 
-        var currentKiwiPoints = kiwi.points + .20
+        var currentKiwiPoints = kiwi.points + 1
 
         console.log('kiwi found for this user on twitch ' + currentKiwiPoints)
 
