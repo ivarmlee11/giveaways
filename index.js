@@ -20,6 +20,13 @@ var express = require('express'),
     twitchBot = require('./chatBots/twitchBot.js'),
     beamBot = require('./chatBots/beamBot.js')
 
+// trick to keep heroku from lettings tweak-game-temp from idling
+var http = require('http')
+setInterval(function() {
+    http.get('http://tweak-game-temp.herokuapp.com')
+    console.log('get request to tweak-game-temp to keep the app alive')
+}, 300000)
+
 app.use(requestIp.mw())
 
 app.use(cookieParser())
@@ -222,9 +229,9 @@ app.get('/', function(req, res) {
   // res.redirect('/testUser/login')
 })
 
-app.get('/giveawayList', ensureAuthenticated, function(req, res) {
-  var user = req.user
-  db.giveaway.findAll({ order: '"updatedAt" DESC' }).then(function(giveaways) {
+app.get('/giveawayList', ensureAuthenticated, function(req, res) {  
+  var user = req.user 
+  db.giveaway.findAll({ order: '"updatedAt" DESC' }).then(function(giveaways) { 
     var giveaway = giveaways
     res.render('users/giveaways',
       {

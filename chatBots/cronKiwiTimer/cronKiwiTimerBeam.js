@@ -9,7 +9,7 @@ var options = {
 module.exports = function(userId) {
   
   var beamJob = new CronJob({
-    cronTime: '* */1 * * *',
+    cronTime: '* */5 * * *',
     onTick: function() {
 
       console.log(userId + ' running a beam cron timer for this user every 5 mins')
@@ -59,8 +59,7 @@ module.exports = function(userId) {
                 where: {
                   userId: userId
                 }
-              }).then(function(kiwi) {
-                 
+              }).then(function(kiwi) {   
               })
 
             }
