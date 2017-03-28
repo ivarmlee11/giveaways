@@ -59,7 +59,7 @@ module.exports = function() {
               }
             })
           } else {
-            console.log('tweakgames logged on to twitch so a viewer check was run. this viewer does not have an account with my site')
+            console.log('tweakgames logged on to twitch so a viewer check was run. this viewer does not have an account with my site ' + viewer)
           }
         })
       })

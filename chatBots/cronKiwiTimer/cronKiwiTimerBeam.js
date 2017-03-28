@@ -7,7 +7,9 @@ var options = {
 }
 
 module.exports = function(userId) {
-  
+
+console.log(userId + ' cron job started for this user on beam')
+
   var beamJob = new CronJob({
     cronTime: '* */5 * * *',
     onTick: function() {
