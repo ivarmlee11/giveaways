@@ -7,8 +7,6 @@ var options = {
 }
 
 module.exports = function(userId) {
-
-  console.log(userId + ' running a beam cron timer for this guy')
   
   var beamJob = new CronJob({
     cronTime: '* */1 * * *',
