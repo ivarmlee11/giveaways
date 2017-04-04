@@ -60,6 +60,8 @@ passport.use(new TwitchtvStrategy({
           auth: 'Twitch'
         }
       }).spread(function(user, created) {
+        console.log(created)
+        console.log(user)
         db.kiwi.find({
           where: {
             userId: profile.id
