@@ -63,11 +63,8 @@ passport.use(new TwitchtvStrategy({
         var id = user.id
         if(created) {
           console.log('user created')
-          console.log(created)
-          console.log(user)
         } else {
           console.log('user logged in')
-          console.log(user)
         }
         
         db.kiwi.find({
@@ -118,9 +115,16 @@ passport.use(new BeamStrategy({
           auth: 'Beam'
         }
       }).spread(function(user, created) {
+        var id = user.id
+        if(created) {
+          console.log('user created')
+        } else {
+          console.log('user logged in')
+        }
+        
         db.kiwi.find({
           where: {
-            userId: profile.id
+            userId: id
           }
         }).then(function(kiwi) {
           if(!kiwi) {
