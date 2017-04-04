@@ -1,8 +1,7 @@
 var tmi = require('tmi.js'),
   twitchBotKey = process.env.twitchBotKey,
   db = require('../models'),
-  updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerTwitch.js'),
-  twitchRoomCheck = require('./roomCheck/twitchRoomCheck')
+  updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerTwitch.js')
 
 // twitch bot config
 
@@ -38,6 +37,8 @@ whisperClient.connect()
 
 client.on('connected', function(address, port) {
   console.log('Address ' + address + ' port ' + port)
+  console.log('starting the cron timer for twitch')
+  updateKiwisTwitch()
 })
 
 client.on('chat', chat)
@@ -74,7 +75,7 @@ function chat(channel, userstate, message, self) {
                 console.log(err)
             })
           } else {
-            var message = username + ', make sure you are signed up the Tweak Games site'
+            var message = username + ', make sure you are signed up the Tweak Games site.'
             client.action('#tweakgames', message)          
           }
         })
@@ -83,80 +84,3 @@ function chat(channel, userstate, message, self) {
   }
 }
 
-client.on('join', join)
-
-function join (channel, username, self) {
-  console.log(username + ' joined channel ' + channel)
-
-  if(username === 'tweakgames') {
-    console.log('tweakgames logged on to twitch so we are going to turn all idle viewers into watchers')
-    twitchRoomCheck()
-  }
-  db.user.find({
-    where: {
-      username: username,
-      auth: 'Twitch'
-    }
-  }).then(function(user) {
-    if(user) {
-      var foundUsername = user.username
-      console.log(foundUsername + ' user found')
-      user.getKiwi().then(function(kiwi) {
-        if(kiwi) {  
-          var id = kiwi.userId
-          console.log(username + ' kiwi found for this twitch user')
-          db.kiwi.update({
-            watching: true
-          }, {
-            where: {
-              userId: id
-            }
-          }).then(function(kiwi) {
-            console.log('running updateKiwisTwitch')
-            updateKiwisTwitch(id)
-          })
-        } else {
-          user.createKiwi({
-            points: 0,
-            watching: true
-            // userId: user.id
-          }).then(function(kiwi) {
-            console.log(username + ' added kiwi object and started adding kiwis to this user over time')
-            console.log('running updateKiwisTwitch')
-            updateKiwisTwitch(user.id)
-          })
-        }
-      })
-    } else {
-      console.log(username + ', a twitch user, has not signed up for the web app')
-    }
-  })  
-}
-
-client.on('part', part)
-
-function part(channel, username, self) {
-
-  db.user.find({
-    where: {
-      username: username,
-      auth: 'Twitch'
-    }
-  }).then(function(user) {
-    if(user) {
-      db.kiwi.update({
-        watching: false
-      }, {
-        where: {
-          userId: user.id
-        }
-      }).then(function(kiwi) {
-        console.log(username + ' stopped watching from twitch')
-      })     
-    } else {
-      console.log('twitch user left that was not part of the web app ' + username)
-    }    
-  })
-}
-
-module.exports = client

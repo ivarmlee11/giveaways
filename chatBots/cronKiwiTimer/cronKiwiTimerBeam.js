@@ -1,76 +1,41 @@
 var CronJob = require('cron').CronJob,
     db = require('../../models'),
-    request = require('request')
+    request = require('request'),
+    beamRoomCheck = require('../roomCheck/beamRoomCheck')
 
 var options = {
   url: 'https://beam.pro/api/v1/channels/tweakgames'
 }
 
-module.exports = function(userId) {
+module.exports = function() {
 
-console.log(userId + ' cron job started for this user on beam')
+console.log('cron job started for beam')
 
   var beamJob = new CronJob({
     cronTime: '*/5 * * * *',
     onTick: function() {
-
-      console.log(userId + ' running a beam cron timer for this user every 5 mins')
-
-      db.kiwi.find({
-        where: { userId: userId }
-      }).then(function(kiwi) {
-
-        if(kiwi.watching === false) {
-          beamJob.stop()
-        }
-
-        var currentKiwiPoints = kiwi.points + 1
-
-        console.log('kiwi found for this user on beam ' + currentKiwiPoints)
-
-        console.log('beam request sent')
         
-        request(options, function(err, res, body) {
+      request(options, function(err, res, body) {
 
-          if (!err && res.statusCode == 200) {
+        if (!err && res.statusCode == 200) {
 
-            console.log('beam request returned')
+          var bodyParsed = JSON.parse(body)
 
-            var bodyParsed = JSON.parse(body)
+          if (!bodyParsed.online) {
 
-            if (!bodyParsed.online) {
+            console.log('tweak is not logged on for users to gain points via beam')
 
-              console.log('homeboy is not logged on for you to watch and gain points via beam')
+          } else {
 
-              db.kiwi.update({
-                watching: false
-              }, {
-                where: {
-                  userId: userId
-                }
-              }).then(function() {
-                beamJob.stop()
-              })
+            console.log('tweak is streaming on beam so we are running a room check for users of beam')
+            beamRoomCheck()
 
-            } else {
-              console.log(userId + ' userId is still getting points while watching on beam. this many points... ' + currentKiwiPoints)
-
-              db.kiwi.update({
-                points: currentKiwiPoints
-              } , {
-                where: {
-                  userId: userId
-                }
-              }).then(function(kiwi) {   
-              })
-
-            }
           }
-        })
+        }
       })
     },
-    start: false,
+    start: true,
     timeZone: 'America/Los_Angeles'
   })
-  beamJob.start()
+
 }

@@ -21,6 +21,7 @@ var express = require('express'),
     beamBot = require('./chatBots/beamBot.js')
 
 // trick to keep heroku from lettings tweak-game-temp from idling
+
 var http = require('http')
 setInterval(function() {
     http.get('http://tweak-game-temp.herokuapp.com')
@@ -34,8 +35,8 @@ app.use(cookieParser())
 app.use(session({
   key: 'connect.sid', 
   secret: sessionSecret,
-  // store: new MemoryStore(), // development 
-  store: new (require('connect-pg-simple')(session))(), // production
+  store: new MemoryStore(), // development 
+  // store: new (require('connect-pg-simple')(session))(), // production
   resave: false,
   saveUninitialized: false
 }))
@@ -44,8 +45,8 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,  
   key: 'connect.sid',     
   secret: sessionSecret,    
-  store: new (require('connect-pg-simple')(session))(), // production
-  // store: new MemoryStore(),        //  development
+  store: new MemoryStore(), // development
+  // store: new (require('connect-pg-simple')(session))(), // production
   success:      onAuthorizeSuccess, 
   fail:         onAuthorizeFail      
 })) 

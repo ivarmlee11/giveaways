@@ -2,8 +2,7 @@ var BeamClient = require('beam-client-node'),
     BeamSocket = require('beam-client-node/lib/ws'),
     beamBotKey = process.env.BEAMBOTKEY,
     tweakBeamId = process.env.tweakBeamId,
-    db = require('../../models'),
-    updateKiwisBeam = require('../cronKiwiTimer/cronKiwiTimerBeam.js')
+    db = require('../../models')
 
 module.exports = function() {  
 
@@ -40,10 +39,17 @@ module.exports = function() {
             var id = user.id
             user.getKiwi().
               then(function(kiwi) {
+              var kiwi = kiwi
+              
+              console.log(kiwi)
+
               console.log('this kiwi was found attached to this user on beam ' + viewer)
-               
+
+              var currentKiwis = kiwi.points + 1
+
               if(!kiwi.watching) {
                 db.kiwi.update({
+                  points: currentKiwis,
                   watching: true
                 }, {
                   where: {
@@ -52,7 +58,7 @@ module.exports = function() {
                 })
                 .then(function(kiwi) {
                   console.log('kiwi watching status changed to true for ' + viewer)
-                  updateKiwisBeam(id)
+                
                 })
               } else {
                 console.log(viewer + ', a beam user, already has a kiwi that has a watching status of true')

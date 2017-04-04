@@ -1,10 +1,10 @@
 var request = require('request'),
-    db = require('../../models'),
-    updateKiwisTwitch = require('../cronKiwiTimer/cronKiwiTimerTwitch.js')
+    db = require('../../models')
 
 module.exports = function() {
 
   request('https://tmi.twitch.tv/group/user/tweakgames/chatters', function (err, res, body) {
+
     console.log('checking twitch viewer list')
 
     if(err) {
@@ -40,10 +40,14 @@ module.exports = function() {
             var id = user.id
             user.getKiwi().
               then(function(kiwi) {
+              console.log(kiwi)
               console.log('this kiwi was found attached to this user on twitch ' + viewer)
+
+              var currentKiwis = kiwi.points + 1 
                
               if(!kiwi.watching) {
                 db.kiwi.update({
+                  points: currentKiwis,
                   watching: true
                 }, {
                   where: {
@@ -52,14 +56,14 @@ module.exports = function() {
                 })
                 .then(function(kiwi) {
                   console.log('kiwi watching status changed to true for ' + viewer)
-                  updateKiwisTwitch(id)
+                  console.log('kiwi points updated for this user on twitch ' + viewer + ' points: ' + kiwi.points)
                 })
               } else {
                 console.log(viewer + ', a twitch user, already has a kiwi that has a watching status of true')
               }
             })
           } else {
-            console.log('tweakgames logged on to twitch so a viewer check was run. this viewer does not have an account with my site ' + viewer)
+            console.log('this viewer does not have an account with my site via twitch ' + viewer)
           }
         })
       })

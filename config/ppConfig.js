@@ -60,7 +60,23 @@ passport.use(new TwitchtvStrategy({
           auth: 'Twitch'
         }
       }).spread(function(user, created) {
-        return done(null, user)
+        db.kiwi.find({
+          where: {
+            userId: profile.id
+          }
+        }).then(function(kiwi) {
+          if(!kiwi) {
+            console.log(user.username + ' does not have a kiwi account')
+            user.createKiwi({
+              points: 0,
+              userId: id
+            })
+            .then(function(kiwi) {
+              console.log('kiwi created for ' + user.username)
+              return done(null, user)      
+            })
+          }
+        })
       })
     }
   }
@@ -92,7 +108,23 @@ passport.use(new BeamStrategy({
           auth: 'Beam'
         }
       }).spread(function(user, created) {
-        return done(null, user)
+        db.kiwi.find({
+          where: {
+            userId: profile.id
+          }
+        }).then(function(kiwi) {
+          if(!kiwi) {
+            console.log(user.username + ' does not have a kiwi account')
+            user.createKiwi({
+              points: 0,
+              userId: id
+            })
+            .then(function(kiwi) {
+              console.log('kiwi created for ' + user.username)
+              return done(null, user)      
+            })
+          }
+        })
       })
     }
   }

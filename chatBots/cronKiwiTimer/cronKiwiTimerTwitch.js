@@ -1,7 +1,8 @@
 var CronJob = require('cron').CronJob,
 		db = require('../../models'),
 		request = require('request'),
-		twitchClientId = process.env.TWITCHCLIENTID
+		twitchClientId = process.env.TWITCHCLIENTID,
+    twitchRoomCheck = require('../roomCheck/twitchRoomCheck')
  
 var options = {
   url: 'https://api.twitch.tv/kraken/streams/tweakgames',
@@ -10,73 +11,35 @@ var options = {
   }
 }
  
-module.exports = function(userId) {
+module.exports = function() {
 
-	console.log(userId + ' running a twitch cron timer for this guy')
+ console.log('cron job started for twitch')
 
   var job = new CronJob({
 	  cronTime: '*/5 * * * *',
 	  onTick: function() {
+  
+      request(options, function(err, res, body) {
 
-      console.log(userId + ' cron job started for this user on twitch')
+  		  if (!err && res.statusCode == 200) {
 
-	  	db.kiwi.find({
-	  		where: { userId: userId }
-	  	}).then(function(kiwi) {
+			  	var bodyParsed = JSON.parse(body)
 
-        if(kiwi.watching === false) {
-          job.stop()
-        }
+			  	if (!bodyParsed.stream) {
 
-        var currentKiwiPoints = kiwi.points + 1
+			  		console.log('tweak is not streaming so users will not be gaining points via twitch')
 
-        console.log('kiwi found for this user on twitch ' + currentKiwiPoints)
+					} else {
 
-        console.log('twitch request sent')
-        
-        request(options, function(err, res, body) {
+            console.log('viewers currently logged into tweaks channel will gain points while tweak is streaming on twitch')
+            twitchRoomCheck()
 
-	  		  if (!err && res.statusCode == 200) {
-
-				  	console.log('twitch request returned')
-
-				  	var bodyParsed = JSON.parse(body)
-
-				  	if (!bodyParsed.stream) {
-
-				  		console.log('homeboy is not logged on for you to watch and gain points via twitch')
-
-              db.kiwi.update({
-                watching: false
-              }, {
-                where: {
-                  userId: userId
-                }
-              }).then(function() {
-                job.stop()
-              })
-
-  					} else {
-              console.log(userId + ' is going to get some points because they are logged on and watching tweak stream ' + currentKiwiPoints)
-
-              db.kiwi.update({
-                points: currentKiwiPoints
-              }, {
-                where: {
-                  userId: userId
-                }
-              }).then(function(kiwi) {
-        
-              })
-
-  					}
 					}
-
-	  		})
-  		})
+				}
+      })
 	  },
-	  start: false,
+	  start: true,
 	  timeZone: 'America/Los_Angeles'
 	})
-	job.start()
+
 }
