@@ -60,7 +60,7 @@ passport.use(new TwitchtvStrategy({
           auth: 'Twitch'
         }
       }).spread(function(user, created) {
-        var id
+        var id = user.id
         if(created) {
           console.log('user created')
           console.log(created)
@@ -72,7 +72,7 @@ passport.use(new TwitchtvStrategy({
         
         db.kiwi.find({
           where: {
-            userId: profile.id
+            userId: id
           }
         }).then(function(kiwi) {
           if(!kiwi) {
