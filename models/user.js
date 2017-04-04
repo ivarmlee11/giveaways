@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
     cloudinary: DataTypes.STRING,
     approvedThumb: DataTypes.BOOLEAN
   },{
-      // hooks: {
+      hooks: {
       //   beforeCreate: function(createdUser, options, cb) {
       //     console.log(createdUser)
       //     console.log('created user')
