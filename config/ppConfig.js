@@ -64,11 +64,12 @@ passport.use(new TwitchtvStrategy({
         if(created) {
           console.log('user created')
           console.log(created)
+          console.log(user)
         } else {
           console.log('user logged in')
           console.log(user)
         }
-   
+        
         db.kiwi.find({
           where: {
             userId: profile.id
