@@ -68,7 +68,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
               socket.call('msg', [message])
             })
           } else {
-            var message = sender + ', make sure you sign up on the Tweak Games site to start getting Kiwi coins.'
+            var message = sender + ', please login to the Tweak site or sign up to start getting Kiwis. Think it works now. Msg April-4.'
             socket.call('msg', [message])            
           }
         })
