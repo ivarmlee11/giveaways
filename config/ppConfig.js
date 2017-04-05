@@ -80,8 +80,10 @@ passport.use(new TwitchtvStrategy({
             })
             .then(function(kiwi) {
               console.log('kiwi created for ' + user.username)
-              return done(null, user)      
+              return done(null, user)    
             })
+          } else {
+            return done(null, user)
           }
         })
       })
@@ -137,6 +139,8 @@ passport.use(new BeamStrategy({
               console.log('kiwi created for ' + user.username)
               return done(null, user)      
             })
+          } else {
+            return done(null, user)
           }
         })
       })
