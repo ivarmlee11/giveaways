@@ -14,12 +14,20 @@ router.get('/user/:idx', ensureAuthenticated, function(req, res) {
       console.log(user.username + ' found')
       user.getKiwi()
         .then(function(kiwi) {
-          
-          console.log('kiwi for ' + user.username)
-          var points = kiwi.points
-          console.log(user.username + ' has this many points... ' + points)
-          res.send({points: points})
-        
+          if(!kiwi) {
+            console.log(user.username + ' does not have a kiwi account')
+            user.createKiwi({
+              points: 0,
+              userId: id
+            })
+            console.log(user.username + ' has this many points... ' + points)
+            res.send({points: points})
+          } else {
+            console.log('kiwi for ' + user.username)
+            var points = kiwi.points
+            console.log(user.username + ' has this many points... ' + points)
+            res.send({points: points})
+          }
         })
     })
     .catch(function(err) {
@@ -48,13 +56,23 @@ router.post('/user/update/:idx', ensureAuthenticated, modCheck, function(req, re
       }
     })
     .then(function(kiwi) {
-      db.kiwi.findById(id)
-      .then(function(kiwi) {
-
-        var points = kiwi.points
-        console.log('points ' + points + ' altered')
-        res.send({points: points})
-      })
+      if(!kiwi) {
+        db.user.findById(id)
+        .then(function(user) {
+          user.createKiwi({
+            points: 0,
+            userId: id
+          })
+        console.log('kiwi created for this user')
+        })
+      } else {
+        db.kiwi.findById(id)
+        .then(function(kiwi) {
+          var points = kiwi.points
+          console.log('points ' + points + ' altered')
+          res.send({points: points})
+        })
+      }
     }) 
     
   })
