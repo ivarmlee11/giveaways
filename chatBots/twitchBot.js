@@ -75,7 +75,7 @@ function chat(channel, userstate, message, self) {
                 console.log(err)
             })
           } else {
-            var message = username + ', please login to the Tweak site or sign up to start getting Kiwis. Think it works now. Msg April-4.'
+            var message = username + ', please login to the Tweak site again or sign up to start getting Kiwis. Think it works now. April-4.'
             client.action('#tweakgames', message)          
           }
         })

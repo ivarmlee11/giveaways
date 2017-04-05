@@ -23,7 +23,7 @@ console.log('cron job started for beam')
 
           if (!bodyParsed.online) {
 
-            console.log('tweak is not logged on for users to gain points via beam')
+            console.log('tweak is not streaming so users will not be gaining points via beam')
 
           } else {
 
