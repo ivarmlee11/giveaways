@@ -1,7 +1,7 @@
 {
   "name": "giveaways",
   "version": "1.0.0",
-  "description": "",
+  "description": "Giveawawy app",
   "main": "index.js",
   "scripts": {
     "start": "nf run nodemon .",
