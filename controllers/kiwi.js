@@ -69,11 +69,11 @@ router.post('/user/update/:idx', ensureAuthenticated, modCheck, function(req, re
           }
         })
         .then(function(kiwi) {
+          console.log('kiwi points updated')
           res.send({points: kiwi.points})
         })
       }
     })
-      
     .catch(function(err) {
       console.log(err)
       req.flash('error', 'There was an error finding the Kiwi account.')

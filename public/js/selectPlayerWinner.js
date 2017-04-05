@@ -47,7 +47,7 @@ $('#clearGame').on('click', function() {
   createGameWheel()
 })
 
-$('#dropDown').on('click', function() {
+$('#dropDown').on('change', function() {
   $('#game').html('Prize: ' + $(this).val())
   var userId = $('option:selected', this).attr('userid')
   game = {
