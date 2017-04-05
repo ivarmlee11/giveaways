@@ -63,9 +63,13 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
         }).then(function(user) {
           if(user) {
             user.getKiwi().then(function(kiwi) {
-              var message = sender + ' has ' + kiwi.points + ' kiwi points'
-              
-              socket.call('msg', [message])
+              if(!kiwi) {
+                var message = sender + ', please login to the Tweak site again or sign up to start getting Kiwis when Tweak is streaming. Think it works now. April-4.'
+                socket.call('msg', [message])    
+              } else {
+                var message = sender + ' has ' + kiwi.points + ' kiwi points'
+                socket.call('msg', [message])
+              }
             })
           } else {
             var message = sender + ', please login to the Tweak site again or sign up to start getting Kiwis when Tweak is streaming. Think it works now. April-4.'
