@@ -6,8 +6,7 @@
   "scripts": {
     "start": "nf run nodemon .",
     "migrate": "heroku run node_modules/.bin/sequelize db:migrate",
-    "updateHeroku": "git add . && git commit -m 'updating heroku' && git push heroku master",
-    "updateHerokuDB": "heroku run node_modules/.bin/sequelize db:migrate"
+    "updateHeroku": "git add . && git commit -m 'updating heroku' && git push heroku master"
   },
   "keywords": [],
   "author": "",
