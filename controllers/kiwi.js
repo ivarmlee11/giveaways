@@ -41,7 +41,11 @@ router.post('/user/update/:idx', ensureAuthenticated, modCheck, function(req, re
   var id = parseInt(req.params.idx),
       kiwiCoins = parseInt(req.body.points)
 
-  db.kiwi.findById(id)
+  db.kiwi.find({
+      where: {
+        userId: id
+      }
+    })
     .then(function(kiwi) {
       if(!kiwi) {
         db.user.findById(id)
