@@ -53,6 +53,7 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
         gameId = auction.gameId
 
     if(auction.ended) {
+      console.log('auction ended and sombody tried to bid on it ' + userId)
       res.redirect('back')
     } else {
       db.kiwi.find({
