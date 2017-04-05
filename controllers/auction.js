@@ -52,7 +52,9 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
         auctionId = auction.id,
         gameId = auction.gameId
 
-    if(!auction.ended) {
+    if(auction.ended) {
+      res.redirect('back')
+    } else {
       db.kiwi.find({
         where: {
           userId: userId
@@ -107,6 +109,7 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
         }
       })
     }
+    
   })
   .catch(function(err) {
     console.log(err)
