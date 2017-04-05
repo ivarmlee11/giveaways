@@ -11,7 +11,6 @@ router.get('/user/:idx', ensureAuthenticated, function(req, res) {
 
   db.user.findById(id)
     .then(function(user) {
-      console.log(user.username + ' found')
       user.getKiwi()
         .then(function(kiwi) {
           if(!kiwi) {
@@ -20,13 +19,14 @@ router.get('/user/:idx', ensureAuthenticated, function(req, res) {
               points: 0,
               userId: id
             })
-            console.log(user.username + ' now has a kiwi account')
-            res.send({points: points})
+            .then(function(kiwi) {
+              console.log(user.username + ' now has a kiwi account')
+              res.send({points: kiwi.points})
+            })
           } else {
-            console.log('kiwi for ' + user.username)
-            var points = kiwi.points
-            console.log(user.username + ' has this many points... ' + points)
-            res.send({points: points})
+            console.log('kiwi account found for ' + user.username)
+            console.log(user.username + ' has this many points... ' + kiwi.points)
+            res.send({points: kiwi.points})
           }
         })
     })
@@ -50,9 +50,11 @@ router.post('/user/update/:idx', ensureAuthenticated, modCheck, function(req, re
               points: kiwiCoins,
               userId: id
             })
+            .then(function(kiwi) {
             console.log('a kiwi account was created for this user '
-             + user.username + ' with this many points: ' + kiwiCoins )
-            res.send({points: kiwiCoins})
+              + user.username + ' with this many points: ' + kiwi.points )
+            res.send({points: kiwi.points})
+            })
           })
       } else {
         db.kiwi.update({

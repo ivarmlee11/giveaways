@@ -115,8 +115,6 @@ passport.use(new BeamStrategy({
           auth: 'Beam'
         }
       }).spread(function(user, created) {
-        console.log('user created withn beam')
-        console.log(user)
         var id = user.id
         if(created) {
           console.log('user created')
