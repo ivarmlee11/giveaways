@@ -25,7 +25,7 @@ router.get('/user/:idx', ensureAuthenticated, function(req, res) {
             })
           } else {
             console.log('kiwi account found for ' + user.username)
-            console.log(user.username + ' has this many points... ' + kiwi.points)
+            console.log(user.username + ' has this many points: ' + kiwi.points)
             res.send({points: kiwi.points})
           }
         })
