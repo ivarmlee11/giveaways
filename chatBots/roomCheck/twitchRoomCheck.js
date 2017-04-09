@@ -40,9 +40,10 @@ module.exports = function() {
             var id = user.id
             user.getKiwi().
               then(function(kiwi) {
+              var kiwi = JSON.parse(kiwi)
+              
               console.log(kiwi)
               console.log('this kiwi was found attached to this user on twitch ' + viewer)
-              var kiwi = kiwi
 
               var currentKiwis = kiwi.points + 1 
                
