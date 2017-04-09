@@ -45,7 +45,7 @@ module.exports = function() {
                 var kiwi = kiwi
 
                 // console.log(kiwi)
-                
+
                 console.log('this kiwi was found attached to this user on twitch ' + viewer)
 
                 var currentKiwis = kiwi.points + 1 
@@ -55,7 +55,7 @@ module.exports = function() {
                   watching: true
                 }, {
                   where: {
-                    id: id
+                    userId: id
                   }
                 })
                 .then(function(kiwi) {

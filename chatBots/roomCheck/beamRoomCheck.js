@@ -53,7 +53,7 @@ module.exports = function() {
                   watching: true
                 }, {
                   where: {
-                    id: id
+                    userId: id
                   }
                 })
                 .then(function(kiwi) {
