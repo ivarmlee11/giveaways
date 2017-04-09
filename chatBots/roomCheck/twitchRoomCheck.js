@@ -1,4 +1,4 @@
-var request = require('request'),
+  var request = require('request'),
     db = require('../../models')
 
 module.exports = function() {
@@ -42,6 +42,7 @@ module.exports = function() {
               then(function(kiwi) {
               console.log(kiwi)
               console.log('this kiwi was found attached to this user on twitch ' + viewer)
+              var kiwi = kiwi
 
               var currentKiwis = kiwi.points + 1 
                

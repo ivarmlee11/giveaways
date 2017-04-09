@@ -45,6 +45,8 @@ module.exports = function() {
 
               console.log('this kiwi was found attached to this user on beam ' + viewer)
 
+              var kiwi = kiwi
+
               var currentKiwis = kiwi.points + 1
 
               if(!kiwi.watching) {
