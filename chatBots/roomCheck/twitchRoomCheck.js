@@ -41,28 +41,28 @@ module.exports = function() {
             user.getKiwi().
               then(function(kiwi) {
               if(kiwi) {
+
                 var kiwi = kiwi
-                console.log(kiwi)
+
+                // console.log(kiwi)
+                
                 console.log('this kiwi was found attached to this user on twitch ' + viewer)
 
                 var currentKiwis = kiwi.points + 1 
-                 
-                if(!kiwi.watching) {
-                  db.kiwi.update({
-                    points: currentKiwis,
-                    watching: true
-                  }, {
-                    where: {
-                      id: id
-                    }
-                  })
-                  .then(function(kiwi) {
-                    console.log('kiwi watching status changed to true for ' + viewer)
-                    console.log('kiwi points updated for this user on twitch ' + viewer + ' points: ' + kiwi.points)
-                  })
-                } else {
-                  console.log(viewer + ', a twitch user, already has a kiwi that has a watching status of true')
-                }
+
+                db.kiwi.update({
+                  points: currentKiwis,
+                  watching: true
+                }, {
+                  where: {
+                    id: id
+                  }
+                })
+                .then(function(kiwi) {
+                  console.log('kiwi updated +1 for this viewer on twitch' + viewer)
+                  console.log(kiwi)
+                })
+
               } else {
                 console.log(viewer + ' does not have a kiwi account')
               }
