@@ -39,29 +39,33 @@ module.exports = function() {
             var id = user.id
             user.getKiwi().
               then(function(kiwi) {
-              var kiwi = JSON.parse(kiwi)
-              
-              console.log(kiwi)
-
-              console.log('this kiwi was found attached to this user on beam ' + viewer)
-
-              var currentKiwis = kiwi.points + 1
-
-              if(!kiwi.watching) {
-                db.kiwi.update({
-                  points: currentKiwis,
-                  watching: true
-                }, {
-                  where: {
-                    id: id
-                  }
-                })
-                .then(function(kiwi) {
-                  console.log('kiwi watching status changed to true for ' + viewer)
+              if(kiwi) {
+                var kiwi = kiwi
                 
-                })
+                console.log(kiwi)
+
+                console.log('this kiwi was found attached to this user on beam ' + viewer)
+
+                var currentKiwis = kiwi.points + 1
+
+                if(!kiwi.watching) {
+                  db.kiwi.update({
+                    points: currentKiwis,
+                    watching: true
+                  }, {
+                    where: {
+                      id: id
+                    }
+                  })
+                  .then(function(kiwi) {
+                    console.log('kiwi watching status changed to true for ' + viewer)
+                  
+                  })
+                } else {
+                  console.log(viewer + ', a beam user, already has a kiwi that has a watching status of true')
+                } 
               } else {
-                console.log(viewer + ', a beam user, already has a kiwi that has a watching status of true')
+                console.log(viewer + ' does not have a kiwi account')
               }
             })
           } else {
