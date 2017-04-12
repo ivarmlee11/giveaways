@@ -1,36 +1,40 @@
 <script src="/js/3rdparty/TimeCircles.js"></script>
 <script src="/js/auctionTimer.js"></script>
 
-<div class="jumbotron text-center">
+<div class="container col-lg-4 col-lg-offset-4 text-center">
   <h1>Auction</h1>
-  <div class="list-group-item list-group-item-action list-group-item-info">
+  <div class="list-group-item list-group-item-action list-group-item-success">
     You currently have <span id="kiwiCoinDisplay" class="bold"></span> Kiwi coins.
   </div>
-  <div class="list-group-item list-group-item-action list-group-item-danger">
-    <!-- <h3><span id="auctionName" class="bold"></span></h3> -->
-    <h3>Prize: <span id="auctionPrize" class="bold"></span></h3>
-    <h3>Current Bid Leader: <span id="highestBidder" class="bold">None yet</span></h3>
-    <h3>Current Bid: <span id="highestBid" class="bold">None yet</span></h3>
+  <div>
+  <div class="list-group">   
+    <div class="list-group-item list-group-item-action list-group-item-info">
+      Prize: <span id="auctionPrize" class="bold">None yet</span>
+    </div>
+    <div class="list-group-item list-group-item-action list-group-item-info">
+      Current Bid Leader: <span id="highestBidder" class="bold">None yet</span>
+    </div>
+    <div class="list-group-item list-group-item-action list-group-item-info">
+      Current Bid: <span id="highestBid" class="bold">None yet</span>
+    </div>
   </div>
+
   <div class="list-group-item list-group-item-action list-group-item-heading">
 
     <form id="form" action="/auction/viewerAuction/bid" method="POST">
 
-    <div class="form-group row">
-      <label for="bid" class="col-sm-3 col-sm-offset-2 col-form-label">Bid</label>
-      <div class="col-sm-2">
-        <input id="bidInput" class="form-control" name="bid" type="number" placeholder="0" required>
-      </div>
-    </div>
-
+    <input id="bidInput" class="form-control" name="bid" type="number" placeholder="0" required>
+ 
     <input id="userId" type="number" name="userId" class="hide">
 
     <button id="submitBid" type="submit" class="btn-primary success">Bid!</button>
     </form>
 
   </div>
-  <h3 id="timerMessage"></h3>
-  <div id="timerDisplay">
+  <div class="list-group-item list-group-item-action list-group-item-success">
+    <h3 id="timerMessage"></h3>
+    <div id="timerDisplay">
+    </div>  
   </div>
 </div>
 

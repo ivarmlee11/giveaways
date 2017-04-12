@@ -53,8 +53,8 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
         gameId = auction.gameId
 
     if(auction.ended) {
-      console.log('auction ended and sombody tried to bid on it ' + userId)
-      res.redirect('back')
+      req.flash('error', 'Auction ended.')
+      res.redirect('/auction/viewerAuction')
     } else {
       db.kiwi.find({
         where: {
@@ -103,14 +103,17 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
                 }
               })
               .then(function(kiwi) {
-                res.redirect('back')
+                req.flash('success', 'You made a bid.')
+                res.redirect('/auction/viewerAuction')
               })
             }
           })
+        } else {
+          req.flash('error', 'You lack sufficient Kiwi coins.')
+          res.redirect('/auction/viewerAuction')
         }
       })
     }
-    
   })
   .catch(function(err) {
     console.log(err)
@@ -120,12 +123,12 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
+  console.log(req.user)
 
   var auctionName = req.body.auctionName,
       prize = req.body.prize,
       timer = parseInt(req.body.timer),
-      gameListId = parseInt(req.body.gameListId),
-      auctionId
+      gameListId = parseInt(req.body.gameListId)
 
   db.auction.create({
     name: auctionName,
@@ -162,7 +165,13 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
             }
           })
           .then(function() {
-            res.redirect('back')
+            if(userId === req.user.id) {
+              req.flash('success', 'You have created an auction.')
+              res.redirect('/auction/viewerAuction')
+            } else {
+              req.flash('error', 'The auction has ended.')
+              res.redirect('/auction/viewerAuction')
+            }
           })
         })
       })
@@ -173,7 +182,7 @@ router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
   .catch(function(err) {
     console.log(err)
     req.flash('error', 'There was an error creating the auction.')
-    res.redirect('/')
+    res.redirect('/auction/viewerAuction')
   })
 })
 

@@ -1,64 +1,63 @@
 <script src="/js/adminAuction.js"></script>
 
-<div class="jumbotron">
-  <div class="container">
-    <div class="row">
-      <h2 class="text-center">Auction Control</h2>
-    </div>
-    <div>
-      <form id="form" action="/auction/adminAuction" method="POST">
 
-        <div class="form-group row">
-          <label for="auctionName" class="col-sm-2 col-form-label">Auction Name</label>
-          <div class="col-sm-10">
-            <input id="auctionName" class="form-control" name="auctionName" type="text" placeholder="Name" required>
+<div class="container">
+  <div class="row">
+    <h2 class="text-center">Auction Control</h2>
+  </div>
+  <div>
+    <form id="form" action="/auction/adminAuction" method="POST">
+
+      <div class="form-group row">
+        <label for="auctionName" class="col-sm-2 col-form-label">Auction Name</label>
+        <div class="col-sm-10">
+          <input id="auctionName" class="form-control" name="auctionName" type="text" placeholder="Name" required>
+        </div>
+      </div>
+
+      <fieldset class="form-group row">
+        <legend class="col-form-legend col-sm-2">Prize</legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="prize" id="prize" value="games" checked>
+                Games 
+            </label>
+          </div>
+          <select id="gameList" name="game" class="selectpicker">
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset id="auctionLength" class="form-group row">
+        <legend class="col-form-legend col-sm-2">Timer (Minutes)</legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="timer" id="auction3mins" value="3">
+                <span class="bold"> 3 </span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="timer" id="auction5mins" value="5">
+                <span class="bold"> 5 </span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="timer" id="auction10mins" value="10" checked>
+                <span class="bold"> 10 </span>
+            </label>
           </div>
         </div>
+      </fieldset>
 
-        <fieldset class="form-group row">
-          <legend class="col-form-legend col-sm-2">Prize</legend>
-          <div class="col-sm-10">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="prize" id="prize" value="games" checked>
-                  Games 
-              </label>
-            </div>
-            <select id="gameList" name="game" class="selectpicker">
-            </select>
-          </div>
-        </fieldset>
-
-        <fieldset id="auctionLength" class="form-group row">
-          <legend class="col-form-legend col-sm-2">Timer (Minutes)</legend>
-          <div class="col-sm-10">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="timer" id="auction3mins" value="3">
-                  <span class="bold"> 3 </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="timer" id="auction5mins" value="5">
-                  <span class="bold"> 5 </span>
-              </label>
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="timer" id="auction10mins" value="10" checked>
-                  <span class="bold"> 10 </span>
-              </label>
-            </div>
-          </div>
-        </fieldset>
-
-        <input id="hiddenGameIdInput" class="form-control hide" name="gameListId" type="text">
-      
-        <button id="submitButton" type="submit" class="btn-primary success hide">Submit</button>
-      </form>
-    </div>
+      <input id="hiddenGameIdInput" class="form-control hide" name="gameListId" type="text">
+    
+      <button id="submitButton" type="submit" class="btn-primary success hide">Submit</button>
+    </form>
   </div>
 </div>
 
-<div class="jumbotron">
-  <h2 class="text-center">Kiwi Controller</h2>
+<div class="container">
+  <h2 class="text-center">Kiwi Coins For Each User</h2>
   <div class="row text-center">
     <select id="playerSelect"></select>
   </div>

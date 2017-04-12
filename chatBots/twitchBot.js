@@ -49,13 +49,6 @@ function chat(channel, userstate, message, self) {
       messageContent
 
   switch(message) {
-    case '!testbot':
-      client.action('#tweakgames', 'This bot is ready to rock. I am not that useful yet.')
-      break
-    case '!clear':
-      client.clear('tweakgames')
-      client.action('#tweakgames', 'Chat cleared.')
-      break
     case '!kiwis':
       console.log(userstate.username)
       var username = userstate.username
@@ -65,20 +58,25 @@ function chat(channel, userstate, message, self) {
           auth: 'Twitch'
         }
       }).then(function(user) {
-        user.getKiwi().then(function(kiwi) {
-          if(kiwi) {
-            var message = username + ' has ' + kiwi.points + ' kiwi points'
-            client.action('#tweakgames', message)
-              .then(function(data) {
-                console.log(data)
-              }).catch(function(err) {
-                console.log(err)
-            })
-          } else {
-            var message = username + ', please login to the Tweak site again or sign up to start getting Kiwis. Think it works now. April-4.'
-            client.action('#tweakgames', message)          
-          }
-        })
+        if(user) {
+          user.getKiwi().then(function(kiwi) {
+            if(kiwi) {
+              var message = username + ' has ' + kiwi.points + ' Kiwi Coins.'
+              client.action('#tweakgames', message)
+                .then(function(data) {
+                  console.log(data)
+                }).catch(function(err) {
+                  console.log(err)
+              })
+            } else {
+              var message = username + ', please make sure to sign up or re-login to the Tweak Stream Site.'
+              client.action('#tweakgames', message)          
+            }
+          })
+        } else {
+          var message = sender + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi coins.'
+          socket.call('msg', [message])            
+        }
       })
     default: null     
   }

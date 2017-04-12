@@ -24,7 +24,6 @@ var tradingArea = $('#tradingArea'),
     playerNames = [],
     playerList = [],
     customBox = $("#custom")
-    colorSample = $('#colorSample')
 
 function showMyColor(id) {
   var url = '/user/colorget/' + id
@@ -32,8 +31,7 @@ function showMyColor(id) {
     type: 'GET',
     url: url,
     success: function(color) {
-      colorSample.html('')
-      colorSample.append('<div class="fixedHeight" style="background-color:' + color + '">')   
+      customBox.attr('value', color)
     }
   })
 }
