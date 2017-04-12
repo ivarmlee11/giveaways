@@ -27,7 +27,7 @@ router.get('/loggedIn', ensureAuthenticated, function(req, res) {
     req.flash('success', 'Admin logged in.')
     res.redirect('/admin/makeAGiveaway')
   } else {
-    req.flash('success', 'Welcome back.')
+    req.flash('success', 'User logged in.')
     res.redirect('/giveawayList')
   }
 })
