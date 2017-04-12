@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
             // store the hash as the user's password
             createdUser.password = hash
             // continue to save the user, with no errors
-            // cb(null, createdUser)
+            cb(null, createdUser)
           } else {
             cb(null, createdUser)
           }
