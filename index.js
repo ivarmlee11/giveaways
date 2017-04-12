@@ -35,8 +35,8 @@ app.use(cookieParser())
 app.use(session({
   key: 'connect.sid', 
   secret: sessionSecret,
-  store: new MemoryStore(), // development 
-  // store: new (require('connect-pg-simple')(session))(), // production
+  // store: new MemoryStore(), // development 
+  store: new (require('connect-pg-simple')(session))(), // production
   resave: false,
   saveUninitialized: false
 }))
@@ -45,8 +45,8 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,  
   key: 'connect.sid',     
   secret: sessionSecret,    
-  store: new MemoryStore(), // development
-  // store: new (require('connect-pg-simple')(session))(), // production
+  // store: new MemoryStore(), // development
+  store: new (require('connect-pg-simple')(session))(), // production
   success:      onAuthorizeSuccess, 
   fail:         onAuthorizeFail      
 })) 
