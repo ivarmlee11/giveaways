@@ -129,6 +129,15 @@ a, a:hover, a:active {
   background-color: gray;
 }
 
+.button-text {
+  background:none!important;
+  color:inherit;
+  border:none; 
+  padding:0!important;
+  font: inherit;
+  font-weight: bold;
+}
+
 .cards, .cardsStatic {
   display: inline-block;
   margin-left: 10px;

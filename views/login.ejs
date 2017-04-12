@@ -1,13 +1,16 @@
-<script src="/js/loginUi.js"></script>
+<script src="/js/login.js"></script>
+<h1 class="text-center">Tweak's Stream</h1>
 
-<div id="myModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-        <a href="/auth/twitch"><img class="center-block" src="/img/connect-twitch.png"/></a>
-        <hr>
-        <a href="/auth/beam"><img class="center-block" id="beamLogo" src="/img/connect-beam.png"/></a>
-      </div>
-    </div>
-  </div>
+<div class="text-center jumbotron col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+  <h5><a href="/auth/twitch">Authorize via Twitch</a></h5>
+  <h5><a href="/auth/beam">Authorize via Beam</a></h5>
+  <form action="/testUser/login" method="POST" accept-charset="utf-8">
+    <input class="hide" type="hidden" name="username" value="guest">
+    <input class="hide" type="hidden" name="password" value="guest">
+    <input type="submit" class="button-text" value="Guest">
+  </form>
 </div>
+
+
+
+

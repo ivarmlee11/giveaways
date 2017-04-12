@@ -18,14 +18,15 @@ var express = require('express'),
     flash = require('connect-flash'),
     MemoryStore = require('session-memory-store')(session),
     twitchBot = require('./chatBots/twitchBot.js'),
-    beamBot = require('./chatBots/beamBot.js')
+    beamBot = require('./chatBots/beamBot.js'),
+    passport = require('./config/ppConfig')
 
 // trick to keep heroku from lettings tweak-game-temp from idling
 
 var http = require('http')
 setInterval(function() {
     http.get('http://tweak-game-temp.herokuapp.com')
-    console.log('get request to tweak-game-temp to keep the app alive')
+    console.log('keeping the app out of dorment mode')
 }, 300000)
 
 app.use(requestIp.mw())
@@ -35,8 +36,8 @@ app.use(cookieParser())
 app.use(session({
   key: 'connect.sid', 
   secret: sessionSecret,
-  // store: new MemoryStore(), // development 
-  store: new (require('connect-pg-simple')(session))(), // production
+  store: new MemoryStore(), // development 
+  // store: new (require('connect-pg-simple')(session))(), // production
   resave: false,
   saveUninitialized: false
 }))
@@ -45,8 +46,8 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,  
   key: 'connect.sid',     
   secret: sessionSecret,    
-  // store: new MemoryStore(), // development
-  store: new (require('connect-pg-simple')(session))(), // production
+  store: new MemoryStore(), // development
+  // store: new (require('connect-pg-simple')(session))(), // production
   success:      onAuthorizeSuccess, 
   fail:         onAuthorizeFail      
 })) 
@@ -228,6 +229,14 @@ app.get('/', function(req, res) {
   var currentUser = false
   res.render('login', {currentUser: currentUser})
   // res.redirect('/testUser/login')
+})
+
+app.post('/login', passport.authenticate('local'),
+  function(req, res) {
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
+  console.log(req.isAuthenticated() + ' user authed with passport local')
+  res.redirect('/auth/loggedIn')
 })
 
 app.get('/giveawayList', ensureAuthenticated, function(req, res) {  

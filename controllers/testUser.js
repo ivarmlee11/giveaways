@@ -24,7 +24,7 @@ router.post('/signup', function(req, res) {
   }).spread(function(user, created) {
     if (created) {
       // if created, success and redirect home
-      console.log('ADMIN created!')
+      console.log('ADMIN created')
       res.redirect('/testUser/login')
 
     } else {
@@ -34,7 +34,7 @@ router.post('/signup', function(req, res) {
     }
   }).catch(function(error) {
     // if an error occurs, let's see what the error is
-    console.log('An error occurred you dumb ass: ', error.message)
+    console.log('An error occurred: ', error.message)
     res.redirect('/testUser/signup')
   })
 })
@@ -45,11 +45,11 @@ router.get('/login', function(req, res) {
 
 router.post('/login', passport.authenticate('local'),
   function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    console.log(req.isAuthenticated() + ' user authed with passport local')
-    res.redirect('/auth/loggedIn')
-  })
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
+  console.log(req.isAuthenticated() + ' user authed with passport local')
+  res.redirect('/auth/loggedIn')
+})
 
 
  module.exports = router
