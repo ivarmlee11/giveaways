@@ -10,8 +10,8 @@
   <h6><span id="sentFromId"><%= user.id %></span></h6>
 </div>
 
-<div class="row text-center">
-  <div id="matchedHeight" class="list-group-item list-group-item-action list-group-item-success col-sm-6 col-md-6 col-lg-6">
+<div class="row text-center matchedHeight">
+  <div class="list-group-item list-group-item-action list-group-item-success col-sm-6 col-md-6 col-lg-6 max-height">
     <h3>Giveaway Wheel Color Picker</h3>
     <h6>This color will appear on the giveaway wheel with your username.</h6>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="list-group-item list-group-item-action list-group-item-info col-sm-6 col-md-6 col-lg-6">
+  <div class="list-group-item list-group-item-action list-group-item-info col-sm-6 col-md-6 col-lg-6 max-height">
     <form class="form-group text-center" enctype="multipart/form-data" action="/avatar/avichange/<%= user.id %>" method="POST">
       <h3>Upload a Profile Picture</h3>
       <label class="btn btn-default btn-file">

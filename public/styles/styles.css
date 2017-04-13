@@ -99,8 +99,12 @@ a, a:hover, a:active {
   min-height: 90px;
 }
 
-#matchedHeight {
-  height: 377px;
+.matchedHeight {
+  height: 500px;
+}
+
+.max-height {
+  height: 100%;
 }
 
 .edit:hover, .remove:hover, .show:hover {
