@@ -27,7 +27,8 @@ var tradingArea = $('#tradingArea'),
     colorSwitch = $('#colorSwitch'),
     imageInput = $('#imageInput'),
     hideSubmit = $('#hideSubmit')
-
+    
+hideSubmit.hide()
 imageInput.on('click', function() {
   hideSubmit.show()
 })
