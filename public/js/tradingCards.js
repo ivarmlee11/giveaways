@@ -23,7 +23,8 @@ var tradingArea = $('#tradingArea'),
     tradeObj = {},
     playerNames = [],
     playerList = [],
-    customBox = $("#custom")
+    customBox = $("#custom"),
+    colorSwitch = $('#colorSwitch')
 
 function showMyColor(id) {
   var url = '/user/colorget/' + id
@@ -31,7 +32,8 @@ function showMyColor(id) {
     type: 'GET',
     url: url,
     success: function(color) {
-      customBox.attr('value', color)
+
+      colorSwitch.css('background-color', color)
     }
   })
 }

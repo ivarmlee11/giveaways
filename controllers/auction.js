@@ -117,8 +117,8 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
   })
   .catch(function(err) {
     console.log(err)
-    req.flash('error', 'There was an error')
-    res.redirect('/')
+    req.flash('error', 'There is no auction running.')
+    res.redirect('back')
   })
 })
 
