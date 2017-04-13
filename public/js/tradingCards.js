@@ -24,7 +24,13 @@ var tradingArea = $('#tradingArea'),
     playerNames = [],
     playerList = [],
     customBox = $("#custom"),
-    colorSwitch = $('#colorSwitch')
+    colorSwitch = $('#colorSwitch'),
+    imageInput = $('#imageInput'),
+    hideSubmit = $('#hideSubmit')
+
+imageInput.on('change', function() {
+  hideSubmit.show()
+})
 
 function showMyColor(id) {
   var url = '/user/colorget/' + id
@@ -272,7 +278,6 @@ clearOutTrade.on('click', function() {
   clearTrade()
   updateTradeableCards()
 })
-
 
 tradeWindowOut.droppable({
   drop: function(event, ui) {

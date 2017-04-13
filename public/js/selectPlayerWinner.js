@@ -433,8 +433,9 @@ var gameWheel = {
   
   maxSpeed : Math.PI / 16,
 
-  upTime : 5000, // How long to spin up for (in ms)
-  downTime : Math.floor((Math.random() * 1000) + 1000), // How long to slow down for (in ms)
+  upTime : 15000, // How long to spin up for (in ms)
+  downTime : Math.floor((Math.random() * 5000) + 21000), // How long to slow down for (in ms)
+
 
   spinStart : 0,
 
