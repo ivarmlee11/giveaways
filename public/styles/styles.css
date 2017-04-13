@@ -8,6 +8,10 @@ h1, h2, h5 {
   font-weight: bold;
 }
 
+h3 {
+  color: black;
+}
+
 input {
   color: black;
 }
@@ -99,7 +103,7 @@ a, a:hover, a:active {
   min-height: 90px;
 }
 
-.matchedHeight {
+#matchedHeight {
   height: 500px;
 }
 
