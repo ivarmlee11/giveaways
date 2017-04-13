@@ -1,19 +1,21 @@
 <% if(currentUser) { %>
 
-  <nav class="container-fluid" id="nav">
-    <ul class="nav nav-tabs">
-      <% if(currentUser.admin) { %>
-        <li role="presentation"><a href="/admin/adminList">Admin Control</a></li>
-        <li role="presentation"><a href="/admin/makeAGiveaway">Make A Giveaway</a></li>
-        <li role="presentation"><a href="/giveaway/adminGiveawayList">Manage Giveaways</a></li>
-        <li id="approveThumbnail" role="presentation"><a href="/auction/adminAuction">Make An Auction</a></li>
-        <li id="approveThumbnail" role="presentation"><a href="/avatar/approveList">Approve Thumbnails</a></li>
-      <% } %>
-      <li role="presentation"><a href="/giveawayList">Join A Giveaway</a></li>
-      <li role="presentation"><a href="/commandList">Chat Command List</a></li>
-      <li role="presentation"><a href="/profile/<%= currentUser.id %>"><%= currentUser.username %>'s Profile</a></li>
-      <li role="presentation"><a href="/auction/viewerAuction">Current Auction</a></li>      
-    </ul>
+  <nav class="navbar navbar-default" id="nav">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <% if(currentUser.admin) { %>
+          <li role="presentation"><a href="/admin/adminList">Admin Control</a></li>
+          <li role="presentation"><a href="/admin/makeAGiveaway">Make A Giveaway</a></li>
+          <li role="presentation"><a href="/giveaway/adminGiveawayList">Manage Giveaways</a></li>
+          <li id="approveThumbnail" role="presentation"><a href="/auction/adminAuction">Make An Auction</a></li>
+          <li id="approveThumbnail" role="presentation"><a href="/avatar/approveList">Approve Thumbnails</a></li>
+        <% } %>
+        <li role="presentation"><a href="/giveawayList">Join A Giveaway</a></li>
+        <li role="presentation"><a href="/commandList">Chat Command List</a></li>
+        <li role="presentation"><a href="/profile/<%= currentUser.id %>"><%= currentUser.username %>'s Profile</a></li>
+        <li role="presentation"><a href="/auction/viewerAuction">Current Auction</a></li> 
+      </ul>
+    </div>
   </nav>
 
 <% } %>

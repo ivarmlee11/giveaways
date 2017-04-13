@@ -4,33 +4,23 @@
 
 <h1 class="text-center">Current Running Giveaways</h1>
 
-<div class="container">
-
-  <div class="row">
-
-    <div class="col-md-12">
-      <% giveaways.forEach(function(giveaway) { %>
-        <% if(!giveaway.hidden) { %>
-          <div class="well text-center">
-            <h3><strong><%=giveaway.name%></strong></h3>
-            <h4 data="ids" giveawayId="<%=giveaway.id%>"><%=moment(giveaway.createdAt).tz("America/Los_Angeles").format('LLL')%> PST</h4>
-            <a href="/player/playerList/<%=giveaway.id%>"><h4>Select This Giveaway</h4></a>
-            <a target="_blank" href="/player/playerList/<%=giveaway.id%>"><h4>Create Overlay for this Giveaway</h4></a>
-            <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
-            </span>
-            <h3 class="text-center">Player Group</h3>
-            <ul class="playerList" playerListId="<%=giveaway.id%>">
-            </ul>
-            <h3 class="text-center">Winner Group</h3>
-            <ul class="playerList" winnerListId="<%=giveaway.id%>">
-            </ul>
-            <h6 id="timer<%=giveaway.id%>" class="text-center"></h6>
-            <h6 id="timerDisplay<%=giveaway.id%>" class="text-center" data="display"></h6>  
-          </div>
-        <% } %>
-      <% }); %>
-    </div>
-
-  </div>
-
+<div class="container col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 text-center">
+  <% giveaways.forEach(function(giveaway) { %>
+    <% if(!giveaway.hidden) { %>
+      <h3><strong><%=giveaway.name%></strong></h3>
+      <h6 data="ids" giveawayId="<%=giveaway.id%>"><%=moment(giveaway.createdAt).tz("America/Los_Angeles").format('LLL')%> PST</h6>
+      <a href="/player/playerList/<%=giveaway.id%>"><h6>Select This Giveaway</h6></a>
+      <a target="_blank" href="/player/playerList/<%=giveaway.id%>"><h6>Create Overlay for this Giveaway</h6></a>
+      <span class="numberOfPlayer" giveawayId="<%=giveaway.id%>">
+      </span>
+      <h3 class="text-center">Player Group</h3>
+      <ul class="playerList" playerListId="<%=giveaway.id%>">
+      </ul>
+      <h3 class="text-center">Winner Group</h3>
+      <ul class="playerList" winnerListId="<%=giveaway.id%>">
+      </ul>
+      <h6 id="timer<%=giveaway.id%>" class="text-center"></h6>
+      <h6 id="timerDisplay<%=giveaway.id%>" class="text-center" data="display"></h6>  
+    <% } %>
+  <% }); %>
 </div>

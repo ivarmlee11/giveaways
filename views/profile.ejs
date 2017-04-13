@@ -5,86 +5,90 @@
 <script src='/js/3rdparty/spectrum.js'></script>
 <link rel='stylesheet' href='/styles/spectrum.css' />
 
-
 <div class="col-sm-12 col-md-12 col-lg-12 col text-center">
   <h1><span id="sentFromName"><%= user.username %></span></h1>
-  <h2><span id="sentFromId"><%= user.id %></span></h2>
+  <h6><span id="sentFromId"><%= user.id %></span></h6>
 </div>
 
 <div class="row text-center">
-  <div class="col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset4">
-  <h3>Giveaway Wheel Color Picker</h3>
-  <h6>This color will appear on the giveaway wheel with your username.</h6>
-  <div id="colorSwitch">
-    <input type='text' id="custom" />
+  <div id="matchedHeight" class="list-group-item list-group-item-action list-group-item-success col-sm-6 col-md-6 col-lg-6">
+    <h3>Giveaway Wheel Color Picker</h3>
+    <h6>This color will appear on the giveaway wheel with your username.</h6>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div id="colorSwitch">
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">    
+      <input type='text' id="custom" />
+    </div>
   </div>
-</div>
 
-<div>
-
-</div>
-
-<div class="row text-center">
-  <div class="col-sm-12 col-md-12 col-lg-12">
+  <div class="list-group-item list-group-item-action list-group-item-info col-sm-6 col-md-6 col-lg-6">
     <form class="form-group text-center" enctype="multipart/form-data" action="/avatar/avichange/<%= user.id %>" method="POST">
+      <h3>Upload a Profile Picture</h3>
       <label class="btn btn-default btn-file">
-        <h3>Upload a Profile Picture</h3>
         <input id="imageInput" type="file" name="myFile" hidden>
         <button id="hideSubmit" type="submit">Submit</button>
       </label>
     </form>
+    <div id="thumbNail">
+      Thumbnail preview will go here.
+    </div>
   </div>
-  <div id="thumbNail" class="col-sm-12 col-md-12 col-lg-12">
-    Thumbnail preview will go here.
-  </div>
+
 </div>
 
-<h1 class="text-center">Trading Window</h1>
-<h2 class="text-center" id="messageBox"></h2>
-<div id="tradeRow" class="row">
-  <div id="tradeWindowOut" class="col-sm-6">
-  </div>
-  <div id="tradeWindowIn" class="col-sm-6">
-  </div>
-</div>
-<div id="tradeWindowOutInfo" class="col-sm-6 text-center">
-  <div id="buttons" class='text-center'>
-    <button id="clearOutTrade" class="btn btn-danger">Clear Trade</button>
-    <button id="acceptTrade" class="btn btn-info">Accept Trade Request</button>
-    <div id="acceptedByTrader">
+<div class="list-group-item list-group-item-action list-group-item-danger row">
+  <div id="tradeRow">
+    <h1 class="text-center">Trading Window</h1>
+    <h2 class="text-center" id="messageBox"></h2>
+    <div id="tradeWindowOut" class="col-sm-6">
+    </div>
+    <div id="tradeWindowIn" class="col-sm-6">
     </div>
   </div>
-  <div id="playerDropDownContainter" class="text-center">
-    <input type="text" id="playerDropDown"/>
-  </div>
-  <div class='text-center'>
-    <div id="suggestion">
+  <div id="tradeWindowOutInfo" class="col-sm-6 text-center">
+    <div id="buttons" class='text-center'>
+      <button id="clearOutTrade" class="btn btn-danger">Clear Trade</button>
+      <button id="acceptTrade" class="btn btn-info">Accept Trade Request</button>
+      <div id="acceptedByTrader">
+      </div>
+    </div>
+    <div id="playerDropDownContainter" class="text-center">
+      <input type="text" id="playerDropDown"/>
+    </div>
+    <div class='text-center'>
+      <div id="suggestion">
+      </div>
     </div>
   </div>
-</div>
-<div id="tradeWindowInfo" class="col-sm-6 text-center">
-  <div class='text-center'>
-    <h2>Receiving from: <span id="playerIn"></span></h2>
-  </div>
-</div>
-<h1 id="tradeInProgress" class="text-center"></h1>
-<h1 class="text-center">Tradable Games</h1>
-<div id="tradingArea" class="container">
-</div>
-<h1 class="text-center">Owned Games</h1>
-<div id="ownedGames" class="container">
-</div>
-<div class="row">
-  <div class="col-sm-6 text-center">
-    <h3>Current Traders</h3>
-    <div id="currentPlayers" class="text-center"> 
+  <div id="tradeWindowInfo" class="col-sm-6 text-center">
+    <div class='text-center'>
+      <h2>Receiving from: <span id="playerIn"></span></h2>
     </div>
-  </div>    
-  <div class="col-sm-6 text-center">
-    <h3>Giveaways Won</h3>
-    <% contests.forEach(function(contest) { %>
-      <h5 class="text-center"><strong><%=contest.name%></strong></h5>
-      <h5 class="text-center"><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%> PST</strong></h5>  
-    <% }); %> 
+  </div>
+  <h1 id="tradeInProgress" class="text-center"></h1>
+</div>
+
+<div class="list-group-item list-group-item-action list-group-item-warning">
+  <h1 class="text-center">Tradable Games</h1>
+  <div id="tradingArea" class="container">
+  </div>
+  <h1 class="text-center">Owned Games</h1>
+  <div id="ownedGames" class="container">
+  </div>
+  <div class="row">
+    <div class="col-sm-6 text-center">
+      <h3>Current Traders</h3>
+      <div id="currentPlayers" class="text-center"> 
+      </div>
+    </div>    
+    <div class="col-sm-6 text-center">
+      <h3>Giveaways Won</h3>
+      <% contests.forEach(function(contest) { %>
+        <h5 class="text-center"><strong><%=contest.name%></strong></h5>
+        <h5 class="text-center"><strong>Ended <%=moment(contest.updatedAt).tz("America/Los_Angeles").format('LLL')%> PST</strong></h5>  
+      <% }); %> 
+    </div>
   </div>
 </div>

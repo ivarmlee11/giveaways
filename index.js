@@ -48,8 +48,8 @@ io.use(passportSocketIo.authorize({
   secret: sessionSecret,    
   // store: new MemoryStore(), // development
   store: new (require('connect-pg-simple')(session))(), // production
-  success:      onAuthorizeSuccess, 
-  fail:         onAuthorizeFail      
+  success: onAuthorizeSuccess, 
+  fail: onAuthorizeFail      
 })) 
 
 io.use(function(socket, next){
