@@ -38,6 +38,9 @@ router.post('/avichange/:idx', ensureAuthenticated, upload.single('myFile'), fun
     }).then(function(user) {
       req.flash('success', 'Profile picture changed, waiting for approval.')
       res.redirect('back')
+    }).catch(function(err) {
+      req.flash('error', 'Select a picture to upload.')
+      res.redirect('back')
     })
   },  
   {
