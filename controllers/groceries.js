@@ -6,9 +6,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     flash = require('connect-flash'),
     twitchBot = require('../chatBots/twitchBot.js'),
-    // beamBot = require('../chatBots/beamBot.js'), // only emitting channel wide stuff twitch
-
     binarySearch = require('../helpers/search.js')
+    // beamBot = require('../chatBots/beamBot.js'), // only emitting channel wide stuff twitch
 
 router.get('/', ensureAuthenticated, modCheck, function(req, res) {
   var total = 0,
