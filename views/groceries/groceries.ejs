@@ -1,0 +1,111 @@
+<script src="/js/gameList.js"></script>
+
+<div class="container col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 text-center">
+  <h1>Grocery Guess</h1>
+
+  <div class="list-group-item list-group-item-action list-group-item-heading">
+
+    <%if(!isGameRunning) { %>
+
+      <h4>Start A Guessing Game</h4>
+      <form action="/groceries/guessingPeriod/start" method="POST">
+
+        <legend class="col-form-legend col-sm-2">Prize</legend>
+        <fieldset class="form-group row">
+          <div class="col-sm-10">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input id="gameSelect" class="form-check-input" type="radio" name="prize" id="prizeGrocery" value="games">
+                  Games 
+              </label>
+              <label class="form-check-label">
+                <input id="noneSelect" class="form-check-input" type="radio" name="prize" id="noPrizeGrocery" value="none" checked>
+                  None
+              </label>
+            </div>
+            <select id="gameListGrocery" name="game" class="selectpicker hide">
+            </select>
+          </div>
+        </fieldset>
+
+        <input id="gameIdInput" class="hide" name="gameId" type="number">
+
+        <div class="btn-group-justified">
+          <button type="submit" class="btn-lg btn-success btn-block">Start A Guessing Game</button>
+        </div>
+
+      </form>
+
+    <% } %>
+
+    <% if(isGameRunning) { %>
+
+      <h4>End A Guessing Game</h4>
+      <form action="/groceries/guessingPeriod/end" method="POST">
+
+        <legend class="col-form-legend col-sm-4">Total</legend>
+        <fieldset class="form-group row">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-control input-lg" type="password" name="groceryPrice" required>
+            </label>
+          </div>
+        </fieldset>
+     
+        <div class="btn-group-justified">
+          <button type="submit" class="btn-lg btn-primary btn-block">Submit Price and End the Guessing Game</button>
+        </div>
+
+      </form>
+
+    <% } %>
+
+  </div>
+
+</div>
+
+<div class="container col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 text-center">
+
+  <% if(isGameRunning) { %>
+    
+    <h1>Game Is Running</h1>
+
+    <h3>Enter your total and end the game to see the user guesses.</h3>
+
+  <% } else { %>
+    
+    <h1>Game Results</h1>
+    
+    <% if ((users.length > 0) || (users === null)) { %>
+
+      <% if (winnerString) { %>
+
+        <h3><strong><%= winnerString %></strong></h3>
+
+      <% } %>
+    
+      <div class="list-group-item list-group-item-action list-group-item-heading">
+
+        <% users.forEach(function(user) { %>
+
+          <h3><strong><%=user.username%>, a <%=user.auth%> user, guessed $<%=user.guess%>!</strong></h3>
+           
+        <% }); %>
+
+        <% if(total > 0) { %>
+
+          <h3><strong>The total price of groceries was $<%= total %>.</strong></h3>
+        
+        <% } %>
+
+      </div>
+
+    <% } else { %>
+
+      <h3><strong><%= lastWinner %></strong></h3>
+
+    <% } %>
+
+  <% } %>
+
+</div>

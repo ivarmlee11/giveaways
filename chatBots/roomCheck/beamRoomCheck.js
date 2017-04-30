@@ -41,8 +41,6 @@ module.exports = function() {
               then(function(kiwi) {
               if(kiwi) {
                 var kiwi = kiwi
-                
-                // console.log(kiwi)
 
                 console.log('this kiwi was found attached to this user on beam ' + viewer)
 
@@ -70,8 +68,6 @@ module.exports = function() {
           }
         })
       })
-
-
     })
     .catch(function(err) {
       console.log(err)

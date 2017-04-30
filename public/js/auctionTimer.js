@@ -84,7 +84,6 @@ function kiwiCoinDisplay(myUserId) {
   })
 }
 
-
 function diffInSeconds(string) {
   var splitString = string.split(':'),
       mins = parseInt(splitString[0]),

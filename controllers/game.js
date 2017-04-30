@@ -22,12 +22,12 @@ router.get('/removeGame/:idx', ensureAuthenticated, modCheck, function(req, res)
   })
   .then(function() {
     req.flash('success', 'You have removed the game.')
-    res.redirect('/admin/makeAGiveaway')
+    res.redirect('/admin/')
   })
   .catch(function(err) {
     console.log(err)
     req.flash('error', 'There was an error removing that user.')
-    res.redirect('/admin/makeAGiveaway')
+    res.redirect('/admin/')
   })
 })
 
@@ -53,13 +53,13 @@ router.post('/addGame/', ensureAuthenticated, modCheck, function(req, res) {
       })
       .then(function(game) {
         req.flash('success', 'You have added a game with an owner.')
-        res.redirect('/admin/makeAGiveaway')
+        res.redirect('/admin/')
       })
     })
     .catch(function(err) {
       console.log(err)
       req.flash('error', 'There was an error finding that user.')
-      res.redirect('/admin/makeAGiveaway')
+      res.redirect('/admin/')
     })
   } else {
     db.game.create({
@@ -69,7 +69,7 @@ router.post('/addGame/', ensureAuthenticated, modCheck, function(req, res) {
     })
     .then(function(game) {
       req.flash('success', 'You have added a game without an owner.')
-      res.redirect('/admin/makeAGiveaway')
+      res.redirect('/admin/')
     })
   }
 })
@@ -101,13 +101,13 @@ router.post('/edit/', ensureAuthenticated, modCheck, function(req, res) {
       })
       .then(function(game) {
         req.flash('success', 'You have edited a game with an owner.')
-        res.redirect('/admin/makeAGiveaway')
+        res.redirect('/admin/')
       })
     })
     .catch(function(err) {
       console.log(err)
       req.flash('error', 'There was an error finding that user.')
-      res.redirect('/admin/makeAGiveaway')
+      res.redirect('/admin/')
     })
   } else {
     db.game.update({
@@ -121,7 +121,7 @@ router.post('/edit/', ensureAuthenticated, modCheck, function(req, res) {
     })
     .then(function(game) {
       req.flash('success', 'The game has no owner.')
-      res.redirect('/admin/makeAGiveaway')
+      res.redirect('/admin/')
     })
   }
 })
@@ -164,7 +164,7 @@ router.post('/uploadGameData', ensureAuthenticated, modCheck, function(req, res)
       .catch(function(err) {
         console.log(err)
         req.flash('error', 'There was an error uploading that game data.')
-        res.redirect('/admin/makeAGiveaway')
+        res.redirect('/admin/')
       })
     }
   })

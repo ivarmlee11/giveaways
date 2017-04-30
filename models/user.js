@@ -34,6 +34,7 @@ module.exports = function(sequelize, DataTypes) {
         associate: function(models) {
           models.user.belongsToMany(models.giveaway, {through: 'giveawaysUsers'})
           models.user.belongsToMany(models.giveaway, {as: 'Contests', through: 'contestsWinners'})
+          models.user.belongsToMany(models.grocerygame, {through: 'usersGrocerygames'})
           models.user.hasMany(models.game)
           models.user.hasMany(models.game)
           models.user.hasOne(models.kiwi)

@@ -7,9 +7,9 @@ var express = require('express'),
     flash = require('connect-flash'),
 		passport = require('../config/ppConfig')
 
- router.get('/signup', function(req, res) {
- 	res.render('maintenance/signup')
- })
+router.get('/signup', function(req, res) {
+  res.render('maintenance/signup')
+})
 
 router.post('/signup', function(req, res) {
 	console.log(req.body)
@@ -43,13 +43,9 @@ router.get('/login', function(req, res) {
 	res.render('maintenance/login')
 })
 
-router.post('/login', passport.authenticate('local'),
-  function(req, res) {
-  // If this function gets called, authentication was successful.
-  // `req.user` contains the authenticated user.
+router.post('/login', passport.authenticate('local'), function(req, res) {
   console.log(req.isAuthenticated() + ' user authed with passport local')
   res.redirect('/auth/loggedIn')
 })
 
-
- module.exports = router
+module.exports = router

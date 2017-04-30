@@ -25,7 +25,7 @@ router.get('/beam/callback',
 router.get('/loggedIn', ensureAuthenticated, function(req, res) {
   if (req.user.admin) {
     req.flash('success', 'Admin logged in.')
-    res.redirect('/admin/makeAGiveaway')
+    res.redirect('/admin/')
   } else {
     req.flash('success', 'User logged in.')
     res.redirect('/giveawayList')

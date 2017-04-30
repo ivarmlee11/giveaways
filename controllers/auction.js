@@ -123,66 +123,78 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
 })
 
 router.post('/adminAuction', ensureAuthenticated, modCheck, function(req, res) {
-  console.log(req.user)
 
   var auctionName = req.body.auctionName,
       prize = req.body.prize,
       timer = parseInt(req.body.timer),
       gameListId = parseInt(req.body.gameListId)
 
-  db.auction.create({
-    name: auctionName,
-    prize: prize,
-    gameId: gameListId,
-    timer: timer
+
+  db.auction.findOne({
+    where: {
+      ended: null
+    }
   }).then(function(auction) {
-    // console.log('auction created')
-    // console.log(auction)
-    var time = auction.timer * 60
-    time = time * 1000
-    var auctionId = auction.id
-    // console.log('timer ' + time)
-    setTimeout(function() {
-      // console.log('auction id ' + auctionId)
-      // console.log('gameListId ' + gameListId)
-      db.auction.update({
-        ended: true
-      }, {
-        where: {
-          id: auctionId
-        }
+    if(auction) {
+      req.flash('error', 'There is already an auciton running.')
+      res.redirect('/auction/adminAuction')
+    } else {
+
+      db.auction.create({
+        name: auctionName,
+        prize: prize,
+        gameId: gameListId,
+        timer: timer
       }).then(function(auction) {
-        db.auction.findById(auctionId)
-        .then(function(auction) {
-          console.log(auction)
-          var userId = auction.highestBidder
-          db.game.update({
-            userId: userId,
-            owned: true
+        // console.log('auction created')
+        // console.log(auction)
+        var time = auction.timer * 60
+        time = time * 1000
+        var auctionId = auction.id
+        // console.log('timer ' + time)
+        setTimeout(function() {
+          // console.log('auction id ' + auctionId)
+          // console.log('gameListId ' + gameListId)
+          db.auction.update({
+            ended: true
           }, {
             where: {
-              id: gameListId
+              id: auctionId
             }
+          }).then(function(auction) {
+            db.auction.findById(auctionId)
+            .then(function(auction) {
+              console.log(auction)
+              var userId = auction.highestBidder
+              db.game.update({
+                userId: userId,
+                owned: true
+              }, {
+                where: {
+                  id: gameListId
+                }
+              })
+              .then(function() {
+                if(userId === req.user.id) {
+                  req.flash('success', 'You have created an auction.')
+                  res.redirect('/auction/viewerAuction')
+                } else {
+                  req.flash('error', 'The auction has ended.')
+                  res.redirect('/auction/viewerAuction')
+                }
+              })
+            })
           })
-          .then(function() {
-            if(userId === req.user.id) {
-              req.flash('success', 'You have created an auction.')
-              res.redirect('/auction/viewerAuction')
-            } else {
-              req.flash('error', 'The auction has ended.')
-              res.redirect('/auction/viewerAuction')
-            }
-          })
-        })
+        }, time)
+        req.flash('success', 'You have created an auction.')
+        res.redirect('/auction/viewerAuction')
       })
-    }, time)
-    req.flash('success', 'You have created an auction.')
-    res.redirect('/auction/viewerAuction')
-  })
-  .catch(function(err) {
-    console.log(err)
-    req.flash('error', 'There was an error creating the auction.')
-    res.redirect('/auction/viewerAuction')
+      .catch(function(err) {
+        console.log(err)
+        req.flash('error', 'There was an error creating the auction.')
+        res.redirect('/auction/viewerAuction')
+      })
+    }
   })
 })
 

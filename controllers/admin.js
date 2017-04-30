@@ -6,7 +6,7 @@ var express = require('express'),
     moment = require('moment-timezone'),
     flash = require('connect-flash')
 
-router.get('/makeAGiveaway', ensureAuthenticated, modCheck, function(req, res) {
+router.get('/', ensureAuthenticated, modCheck, function(req, res) {
   res.render('admin/adminControl')
 })
 

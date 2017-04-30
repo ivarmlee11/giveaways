@@ -19,38 +19,52 @@ var express = require('express'),
     MemoryStore = require('session-memory-store')(session),
     twitchBot = require('./chatBots/twitchBot.js'),
     beamBot = require('./chatBots/beamBot.js'),
-    passport = require('./config/ppConfig')
+    passport = require('./config/ppConfig'),
+    dev = process.env.NODE_ENV
 
-// trick to keep heroku from lettings tweak-game-temp from idling
+var sessionObj = {
+      key: 'connect.sid', 
+      secret: sessionSecret,
+      store: null,
+      resave: false,
+      saveUninitialized: false
+    }
 
-var http = require('http')
-setInterval(function() {
-    http.get('http://tweak-game-temp.herokuapp.com')
-    console.log('keeping the app out of dorment mode')
-}, 300000)
+var passportSocketIoAuthObject = {
+      cookieParser: cookieParser,  
+      key: 'connect.sid',     
+      store: null,
+      secret: sessionSecret,    
+      success: onAuthorizeSuccess, 
+      fail: onAuthorizeFail      
+    }
+
+if (dev === 'development') {
+  console.log('development only')
+
+  sessionObj.store = new MemoryStore()
+
+  app.use(session(sessionObj))
+
+  passportSocketIoAuthObject.store = new MemoryStore()
+
+  io.use(passportSocketIo.authorize(passportSocketIoAuthObject)) 
+
+} else {
+  console.log(dev + ' is the NODE_ENV')
+
+  sessionObj.store = new (require('connect-pg-simple')(session))()
+
+  app.use(session(sessionObj))
+  
+  passportSocketIoAuthObject.store = new (require('connect-pg-simple')(session))()
+
+  io.use(passportSocketIo.authorize(passportSocketIoAuthObject)) 
+}
 
 app.use(requestIp.mw())
 
 app.use(cookieParser())
-  
-app.use(session({
-  key: 'connect.sid', 
-  secret: sessionSecret,
-  // store: new MemoryStore(), // development 
-  store: new (require('connect-pg-simple')(session))(), // production
-  resave: false,
-  saveUninitialized: false
-}))
-
-io.use(passportSocketIo.authorize({
-  cookieParser: cookieParser,  
-  key: 'connect.sid',     
-  secret: sessionSecret,    
-  // store: new MemoryStore(), // development
-  store: new (require('connect-pg-simple')(session))(), // production
-  success: onAuthorizeSuccess, 
-  fail: onAuthorizeFail      
-})) 
 
 io.use(function(socket, next){
   if (socket.request.headers.cookie) return next()
@@ -110,7 +124,8 @@ var adminCtrl = require('./controllers/admin'),
     aviCtrl = require('./controllers/avatar')
     testCtrl = require('./controllers/testUser'),
     auctionCtrl = require('./controllers/auction'),
-    kiwiCtrl = require('./controllers/kiwi')
+    kiwiCtrl = require('./controllers/kiwi'),
+    groceryCtrl = require('./controllers/groceries')
 
 app.use('/admin', adminCtrl)
 app.use('/player', playerCtrl)
@@ -122,6 +137,7 @@ app.use('/avatar', aviCtrl)
 app.use('/testUser', testCtrl)
 app.use('/auction', auctionCtrl)
 app.use('/kiwi', kiwiCtrl)
+app.use('/groceries', groceryCtrl)
 
 var clients = []
 
@@ -134,6 +150,8 @@ io.on('connection', function(socket) {
         tradeObject = {},
         lastTrader = null
 
+    tradeObject[tradeInProgress] = 'nobody'
+    
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
     })
@@ -231,10 +249,7 @@ app.get('/', function(req, res) {
   // res.redirect('/testUser/login')
 })
 
-app.post('/login', passport.authenticate('local'),
-  function(req, res) {
-  // If this function gets called, authentication was successful.
-  // `req.user` contains the authenticated user.
+app.post('/login', passport.authenticate('local'), function(req, res) {
   console.log(req.isAuthenticated() + ' user authed with passport local')
   res.redirect('/auth/loggedIn')
 })

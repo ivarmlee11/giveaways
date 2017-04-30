@@ -9,7 +9,7 @@ var TwitchtvStrategy = require('passport-twitchtv').Strategy,
     beamClientId = process.env.BEAMCLIENTID
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id)
+  return done(null, user.id)
 })
 
 passport.deserializeUser(function(id, cb) {

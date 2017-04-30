@@ -1,9 +1,9 @@
 var tmi = require('tmi.js'),
   twitchBotKey = process.env.twitchBotKey,
   db = require('../models'),
-  updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerTwitch.js')
-
-// twitch bot config
+  updateKiwisTwitch = require('./cronKiwiTimer/cronKiwiTimerTwitch.js'),
+  request = require('request'),
+  dev = process.env.NODE_ENV
 
 var options = {
   options: {
@@ -36,22 +36,91 @@ client.connect()
 whisperClient.connect()
 
 client.on('connected', function(address, port) {
-  console.log('Address ' + address + ' port ' + port)
+  console.log('Address ' + address + ' port ' + port + ' connected to twitch messaging service')
   console.log('starting the cron timer for twitch')
   updateKiwisTwitch()
 })
 
 client.on('chat', chat)
+whisperClient.on('whisper', whisper)
+
+function whisper(from, userstate, message, self) {
+  var username = userstate.username,
+      userId   = null,
+      message = message
+
+  console.log(message)
+  console.log('whisper on twitch from ' + from)
+  console.log('message is in money format ' + betIsCorrectCurrency(message))
+
+  if(betIsCorrectCurrency(message)) {
+
+    var firstCharacter = message.slice(0,1),
+        bet
+
+    if(firstCharacter === '$') {
+      bet = message.slice(1, message.length)
+      console.log(bet + ' $ was removed from the message, ' + message)
+    } else {
+      bet = message
+    }
+
+    var guessEndPoint
+
+    if (dev === 'development') {
+      guessEndPoint = 'http://localhost:3000/groceries/guessingPeriod/' + username + '/Twitch/' + message
+    } else {
+      guessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + username + '/Twitch/' + message
+    }
+
+    var options = {
+      url: guessEndPoint
+    }
+
+    request(options, function(err, res, body) {
+      if (!err && res.statusCode == 200) {
+        console.log(body)
+        var msg = body
+        client.whisper(from, msg)
+      }
+    })
+
+  }
+
+  switch(message) {
+    case '!guessCheck':
+
+      var myGuessEndPoint
+
+      if (dev === 'development') {
+        myGuessEndPoint = 'http://localhost:3000/groceries/guessingPeriod/' + username + '/Twitch/'
+      } else {
+        myGuessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + username + '/Twitch/'
+      }
+
+      var urlOptions = {
+        url: myGuessEndPoint
+      }
+      
+      console.log(username + ' is checking their guess')
+
+      request(urlOptions, function(err, res, body) {
+        if (!err && res.statusCode == 200) {
+          var message = body
+          client.whisper(from, message) 
+        }
+      })
+
+      break
+    default: null     
+  }
+}
 
 function chat(channel, userstate, message, self) {
-  var messageUser = message.split(' '),
-      messageTo,
-      messageContent
+  var username = userstate.username
 
   switch(message) {
     case '!kiwis':
-      console.log(userstate.username)
-      var username = userstate.username
       db.user.find({
         where: {
           username: username,
@@ -63,11 +132,6 @@ function chat(channel, userstate, message, self) {
             if(kiwi) {
               var message = username + ' has ' + kiwi.points + ' Kiwi Coins.'
               client.action('#tweakgames', message)
-                .then(function(data) {
-                  console.log(data)
-                }).catch(function(err) {
-                  console.log(err)
-              })
             } else {
               var message = username + ', please make sure to sign up or re-login to the Tweak Stream Site.'
               client.action('#tweakgames', message)          
@@ -78,7 +142,14 @@ function chat(channel, userstate, message, self) {
           socket.call('msg', [message])            
         }
       })
+      break 
     default: null     
   }
 }
+
+function betIsCorrectCurrency(str) {
+  return str.search(/^\$?[\d,]+(\.\d*)?$/) >= 0 ? true : false
+}
+
+module.exports = client
 
