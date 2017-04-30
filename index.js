@@ -150,8 +150,7 @@ io.on('connection', function(socket) {
         tradeObject = {},
         lastTrader = null
 
-    console.log(tradeObject)
-    tradeObject[tradeInProgress] = null
+    tradeObject['tradeInProgress'] = 'nobody'
     
     clients = clients.filter(function(obj) {
       return obj.id !== clientId
