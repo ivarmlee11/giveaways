@@ -223,7 +223,8 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
               } else {
                 winnerString = 'Nobody won.'
               }
-              twitchBot.action('#tweakgames', '====>WINNER' +  closest.username + ' ' + closest.auth)
+              // if()
+              // twitchBot.action('#tweakgames', '====>WINNER' +  closest.username + ' ' + closest.auth)
               if(gameId && (allUsers.length > 0)) {
                 db.grocerygame.update({
                   winner: closest.userId
