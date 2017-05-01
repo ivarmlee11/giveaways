@@ -119,6 +119,9 @@ router.get('/guessingPeriod/:username/:auth/', function(req,res) {
 })
 
 router.get('/guessingPeriod/:username/:auth/:guess', function(req, res) {
+  console.log(req.user)
+  // console.log(req.params.username)
+  // req.user.username !== req.params.username ? res.send('This endpoint is protected') : console.log('user is able to see th')
   var username = req.params.username,
       auth   = req.params.auth,
       guess  = req.params.guess
