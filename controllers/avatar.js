@@ -13,17 +13,13 @@ cloudinary.config({
   cloud_name: process.env.cloud_name, 
   api_key: process.env.cloud_key, 
   api_secret: process.env.cloud_secret 
-});
-
-// display winner with avi
+})
 
 router.get('/aviget/:idx', ensureAuthenticated, function(req, res) {
   db.user.findById(req.user.id).then(function(user) {
     res.send(user)
   })
 })
-
-// player uploads avi via cloudinary
 
 router.post('/avichange/:idx', ensureAuthenticated, upload.single('myFile'), function(req, res) {
   cloudinary.uploader.upload(req.file.path, function(result) {
@@ -50,10 +46,6 @@ router.post('/avichange/:idx', ensureAuthenticated, upload.single('myFile'), fun
 )
 })
 
-  // avi approve
-
-// get list of avis that need approval
-
 router.get('/approveList', ensureAuthenticated, modCheck, function(req, res) {
   var thumbList = []
   db.user.findAll().then(function(users) {
@@ -65,8 +57,6 @@ router.get('/approveList', ensureAuthenticated, modCheck, function(req, res) {
     res.render('admin/approveThumbnails', {thumbList: thumbList})
   })
 })
-
-// approve specific images
 
 router.post('/approveList/:idx', ensureAuthenticated, modCheck, function(req, res) {
   var id = req.params.idx

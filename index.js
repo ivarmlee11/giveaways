@@ -1,30 +1,32 @@
 var express = require('express'),
-    app = express(),
-    request = require('request'),
-    morgan = require('morgan')('dev'),
-    ensureAuthenticated = require('./middleware/ensureAuth.js'),
-    port = process.env.PORT || 3000,
-    db = require('./models'),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    sessionSecret = process.env.SESSION,
-    session = require('express-session'),
-    server  = require('http').Server(app),
-    passportSocketIo = require('passport.socketio'),
-    io = require('socket.io')(server),
-    passport = require('./config/ppConfig'),
-    ejsLayouts = require('express-ejs-layouts'),
-    requestIp = require('request-ip'),
-    flash = require('connect-flash'),
-    MemoryStore = require('session-memory-store')(session),
-    twitchBot = require('./chatBots/twitchBot.js'),
-    beamBot = require('./chatBots/beamBot.js'),
-    passport = require('./config/ppConfig'),
-    dev = process.env.NODE_ENV
-
+	app = express(),
+	request = require('request'),
+	morgan = require('morgan')('dev'),
+	ensureAuthenticated = require('./middleware/ensureAuth.js'),
+	port = process.env.PORT || 3000,
+	db = require('./models'),
+	bodyParser = require('body-parser'),
+	cookieParser = require('cookie-parser'),
+	sessionSecret = process.env.SESSION,
+	session = require('express-session'),
+	server  = require('http').Server(app),
+	passportSocketIo = require('passport.socketio'),
+	io = require('socket.io')(server),
+	passport = require('./config/ppConfig'),
+	ejsLayouts = require('express-ejs-layouts'),
+	requestIp = require('request-ip'),
+	flash = require('connect-flash'),
+	MemoryStore = require('session-memory-store')(session),
+	twitchBot = require('./chatBots/twitchBot.js'),
+	beamBot = require('./chatBots/beamBot.js'),
+	passport = require('./config/ppConfig'),
+	dev = process.env.NODE_ENV
 
 setInterval(function() {
-  console.log('keep heroku from idling')
+	request('https://tweak-game-temp.herokuapp.com/', function (error, response, body) {
+		console.log('error:', error) // Print the error if one occurred 
+		console.log('statusCode:', response.statusCode) // Print the response status code if a response was received 
+	})
 }, 300000)
 
 var sessionObj = {
@@ -209,7 +211,7 @@ io.on('connection', function(socket) {
       return obj.id === tradeObj.tradeInProgress
     })
     if(socketId.length) {
-      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObj);
+      socket.broadcast.to(socketId[0].socketId).emit('get trade', tradeObj)
     }
   })
 
@@ -218,7 +220,7 @@ io.on('connection', function(socket) {
       return obj.id === trade.sentFromId
     })
     var message = 'That trader is busy with another trade.'
-    socket.broadcast.to(socketId[0].socketId).emit('busy', message); 
+    socket.broadcast.to(socketId[0].socketId).emit('busy', message) 
   })
 
   socket.on('accept trade', function(tradeObj) {
@@ -230,7 +232,7 @@ io.on('connection', function(socket) {
     })
 
     if(socketId.length) {
-      socket.broadcast.to(socketId[0].socketId).emit('other trader accepted trade conditions', tradeObject);
+      socket.broadcast.to(socketId[0].socketId).emit('other trader accepted trade conditions', tradeObject)
     }    
   })
 
@@ -243,7 +245,7 @@ io.on('connection', function(socket) {
     })
 
     if(socketId.length) {
-      socket.broadcast.to(socketId[0].socketId).emit('other trader finalized trade conditions', tradeObject);
+      socket.broadcast.to(socketId[0].socketId).emit('other trader finalized trade conditions', tradeObject)
     }    
   })
 })

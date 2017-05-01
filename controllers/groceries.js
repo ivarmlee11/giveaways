@@ -113,6 +113,8 @@ router.get('/guessingPeriod/:username/:auth/', function(req,res) {
     } else {
       res.send('You are not signed up for the Tweak web application! Sign up and you can start playing!')
     }
+  }).catch(function(error) {
+    res.send('Error')
   })
 })
 
@@ -154,6 +156,8 @@ router.get('/guessingPeriod/:username/:auth/:guess', function(req, res) {
     } else {
       res.send('The guessing game is not running at this time.')
     }
+  }).catch(function(error) {
+    res.send('Error')
   })
 })
 
@@ -287,7 +291,6 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
           })
         })     
       } else {
-        req.flash('error', 'There is no guessing game to end!')
         res.redirect('/groceries/')   
       }
     })
