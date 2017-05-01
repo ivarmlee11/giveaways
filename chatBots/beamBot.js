@@ -94,7 +94,7 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
             bet
 
         if(firstCharacter === '$') {
-          bet = message.slice(1, msg.length)
+          bet = msg.slice(1, msg.length)
           console.log(bet + ' $ was removed from the message, ' + msg)
         } else {
           bet = msg
