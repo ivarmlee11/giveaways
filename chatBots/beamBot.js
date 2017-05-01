@@ -109,7 +109,10 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
         }
 
         var options = {
-          url: guessEndPoint
+          url: guessEndPoint,
+          headers: {
+            'verify': 'safe'
+          }
         }
 
         request(options, function(err, res, body) {
@@ -133,8 +136,11 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
               myGuessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + sender + '/Beam/'
             }
 
-            var urlOptions = {
-              url: myGuessEndPoint
+            var options = {
+              url: guessEndPoint,
+              headers: {
+                'verify': 'safe'
+              }
             }
             
             console.log(sender + ' is checking their guess')

@@ -74,7 +74,10 @@ function whisper(from, userstate, message, self) {
     }
 
     var options = {
-      url: guessEndPoint
+      url: guessEndPoint,
+      headers: {
+        'verify': 'from a bot'
+      }
     }
 
     request(options, function(err, res, body) {
@@ -98,8 +101,11 @@ function whisper(from, userstate, message, self) {
         myGuessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + username + '/Twitch/'
       }
 
-      var urlOptions = {
-        url: myGuessEndPoint
+      var options = {
+        url: guessEndPoint,
+        headers: {
+          'verify': 'from a bot'
+        }
       }
       
       console.log(username + ' is checking their guess')

@@ -2,6 +2,7 @@ var express = require('express'),
     router = express.Router(),
     modCheck = require('../middleware/modCheck.js'),
     ensureAuthenticated = require('../middleware/ensureAuth.js'),
+    isFromBot = require('../middleware/isFromBot.js'),
     db = require('../models'),
     bodyParser = require('body-parser'),
     flash = require('connect-flash'),
@@ -80,7 +81,7 @@ router.get('/', ensureAuthenticated, modCheck, function(req, res) {
   })
 })
 
-router.get('/guessingPeriod/:username/:auth/', function(req,res) {
+router.get('/guessingPeriod/:username/:auth/', isFromBot, function(req,res) {
   var username = req.params.username,
       auth     = req.params.auth
   db.user.find({
@@ -118,10 +119,8 @@ router.get('/guessingPeriod/:username/:auth/', function(req,res) {
   })
 })
 
-router.get('/guessingPeriod/:username/:auth/:guess', function(req, res) {
-  console.log(req.user)
-  // console.log(req.params.username)
-  // req.user.username !== req.params.username ? res.send('This endpoint is protected') : console.log('user is able to see th')
+router.get('/guessingPeriod/:username/:auth/:guess', isFromBot, function(req, res) {
+  console.log(req.headers)
   var username = req.params.username,
       auth   = req.params.auth,
       guess  = req.params.guess
