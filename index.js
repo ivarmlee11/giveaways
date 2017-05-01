@@ -22,6 +22,11 @@ var express = require('express'),
     passport = require('./config/ppConfig'),
     dev = process.env.NODE_ENV
 
+
+setInterval(function() {
+  console.log('keep heroku from idling')
+}, 300000)
+
 var sessionObj = {
       key: 'connect.sid', 
       secret: sessionSecret,
