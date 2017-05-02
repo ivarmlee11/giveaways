@@ -216,7 +216,7 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
                 })
               })
               console.log('all users unsorted')
-              consoel.log(allUsers)
+              console.log(allUsers)
               allUsers.sort(function(a,b) {
                 return a.guess - b.guess
               })
