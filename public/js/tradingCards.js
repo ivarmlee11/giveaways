@@ -1,7 +1,6 @@
 $(function() {
 
 var socket = io.connect()
-// var socket = io.connect('http://24.113.68.99:3000')
 
 var tradingArea = $('#tradingArea'),
     tradeWindowOut = $('#tradeWindowOut'),

@@ -8,7 +8,7 @@
 
   <% giveaways.forEach(function(giveaway) { %>
     <% if(!giveaway.hidden) { %>
-      <div class="text-center">
+      <div class="text-center well">
         <h3><strong><%=giveaway.name%></strong></h3>
         <h4 data="ids"  giveawayId="<%=giveaway.id%>">
           <%=moment(giveaway.createdAt).tz("America/Los_Angeles").format('LLL')%> PST
@@ -17,7 +17,7 @@
         <form action="/keyPhrase/<%=giveaway.id%>" method="POST" accept-charset="utf-8">
           <div class="form-group">
             <% if(!giveaway.ended) { %>
-              <input name="keyphrase" type="text" class="form-control"/>
+              <input name="keyphrase" type="text" class="form-control" placeholder="Enter The Password" required/>
               <button type="submit" class="btn btn-info">Enter Giveaway</button>
             <%}%>
             <% if(giveaway.ended) { %>

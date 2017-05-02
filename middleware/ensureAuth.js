@@ -1,7 +1,5 @@
 module.exports = function (req, res, next) {
-  if (req.isAuthenticated()) {
-    return next() 
-  }
-  console.log('you are not authed')
+  if (req.isAuthenticated()) { return next() }
+  console.log('Unauthorized user tried to reach a protected endpoint.')
   res.redirect('/')
 }

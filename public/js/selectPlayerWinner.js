@@ -3,8 +3,6 @@ $(function() {
 createWheel()
 createGameWheel()
 
-// jquery selectors
-// coming soon
 var $thumbMessage = $('#thumbMessage')
 
 var url = window.location.href

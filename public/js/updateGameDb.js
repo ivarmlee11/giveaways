@@ -46,7 +46,6 @@ $clearAdd.on('click', function(e) {
   $editAuthChoiceFieldset.addClass('hide')
 })
 
-
 $addGameOwner.on('keyup', function() {
   if($(this).val().length > 0) {
     $addAuthChoiceFieldset.attr('checked', false)

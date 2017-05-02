@@ -1,5 +1,5 @@
 module.exports = function (req, res, next) {
   if (req.user.admin) { return next() }
-  console.log('you are not a mod')
+  console.log('Unauthorized source made a request to a protected admin endpoint.')
   res.redirect('/')
 }
