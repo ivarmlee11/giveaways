@@ -215,15 +215,21 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
                   guess: parseFloat(user.usersGrocerygames.dataValues.guess)
                 })
               })
+              console.log('all users unsorted')
+              consoel.log(allUsers)
               allUsers.sort(function(a,b) {
                 return a.guess - b.guess
               })
+              console.log('all users sorted')
+              console.log(allUser)
               if(allUsers.length > 1) {
                 closest = binarySearch(allUsers, total)
+              console.log('closest user')
+              console.log(closest)
               } else if (allUsers.length === 1){
                 closest = allUsers[0]
               }
-              if(allUsers.length > 0) {
+              if(closest) {
                 console.log(closest.username + ', a ' + closest.auth + ' user, won with the guess of $' + closest.guess + '.')
                 winnerString = closest.username + ', a ' + closest.auth + ' user, won with the guess of $' + closest.guess + '.'
               } else {
