@@ -221,7 +221,7 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
                 return a.guess - b.guess
               })
               console.log('all users sorted')
-              console.log(allUser)
+              console.log(allUsers)
               if(allUsers.length > 1) {
                 closest = binarySearch(allUsers, total)
               console.log('closest user')
