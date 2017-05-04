@@ -68,9 +68,9 @@ function whisper(from, userstate, message, self) {
     var guessEndPoint
 
     if (dev === 'development') {
-      guessEndPoint = 'http://localhost:3000/groceries/guessingPeriod/' + username + '/Twitch/' + message
+      guessEndPoint = 'http://localhost:3000/groceries/guessingPeriod/' + username + '/Twitch/' + bet
     } else {
-      guessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + username + '/Twitch/' + message
+      guessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + username + '/Twitch/' + bet
     }
 
     var options = {

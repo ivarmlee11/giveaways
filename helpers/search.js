@@ -1,30 +1,20 @@
 module.exports = function (array, key) {
-  var newArray = array
-  var lo = 0,
-      hi = array.length - 1,
-      mid,
-      element,
-      smallestDiff = null,
-      closestUser = null
+  
+  var newArray = array.map(function(element) {
+    var diff = Math.abs(element.guess - key)
+    return {
+      userId: element.userId,
+      username: element.username,
+      guess: element.guess,
+      diff: diff
+    }
+  })
 
-  while(newArray[lo].guess <= newArray[hi].guess) {        
-    mid = Math.floor((lo + hi) / 2)
-    element = newArray[mid]
-    if (element.guess < key) {
-        lo = mid + 1
-    } else if (element.guess > key) {
-        hi = mid - 1
-    } else {
-        return mid
-    }
-    var dif = Math.abs(element.guess - key)
-    
-    if((dif < smallestDiff) || (smallestDiff === null)) {
-      smallestDiff = dif
-      closestUser = newArray[mid]
-      return closestUser
-    }
-  }
+  newArray.sort(function(a,b) {
+    return a.diff - b.diff
+  })
+  console.log(newArray)
+
+  return newArray[0]
    
-  return closestUser
 }

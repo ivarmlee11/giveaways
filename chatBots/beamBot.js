@@ -103,9 +103,9 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
         var guessEndPoint
 
         if (dev === 'development') {
-          guessEndPoint = 'http://localhost:3000/groceries/guessingPeriod/' + sender + '/Beam/' + msg
+          guessEndPoint = 'http://localhost:3000/groceries/guessingPeriod/' + sender + '/Beam/' + bet
         } else {
-          guessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + sender + '/Beam/' + msg
+          guessEndPoint = 'https://tweak-game-temp.herokuapp.com/groceries/guessingPeriod/' + sender + '/Beam/' + bet
         }
 
         var options = {

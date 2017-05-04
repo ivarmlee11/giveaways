@@ -164,16 +164,18 @@ router.get('/guessingPeriod/:username/:auth/:guess', isFromBot, function(req, re
 })
 
 router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, res) {
-  var totalPrice = parseFloat(req.body.groceryPrice)
-  var totalPriceInt = null
-  if(!isNaN(totalPrice)) {
-    totalPriceInt = totalPrice
+  var firstCharacter = req.body.groceryPrice.slice(0,1)
+  var finalPrice = 'none'
+  
+  if(firstCharacter === '$') {
+    finalPriceCheck = req.body.groceryPrice.slice(1, req.body.groceryPrice.length)
+    finalPrice = parseFloat(finalPriceCheck)
+  } else {
+    finalPrice = parseFloat(req.body.groceryPrice)
   }
-  console.log(totalPrice)
-  console.log(totalPriceInt)
-  console.log(typeof totalPrice)
-  if(totalPriceInt === null) {
-    req.flash('error', 'Make sure you enter a positive number!')
+
+  if(isNaN(finalPrice)) {
+    req.flash('error', 'Enter the final price like so; $45.50 or 45.50.')
     res.redirect('/groceries/')
   } else {
     db.grocerygame.findOne({
@@ -185,7 +187,7 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
         var grocerygame = grocerygame
         db.grocerygame.update({
             ended: true,
-            total: totalPrice
+            total: finalPrice
           }, {
             where: {
               id: grocerygame.id
@@ -224,8 +226,8 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
               console.log(allUsers)
               if(allUsers.length > 1) {
                 closest = binarySearch(allUsers, total)
-              console.log('closest user')
-              console.log(closest)
+                console.log('closest user')
+                console.log(closest)
               } else if (allUsers.length === 1){
                 closest = allUsers[0]
               }
