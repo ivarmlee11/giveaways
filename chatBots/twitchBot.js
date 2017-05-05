@@ -110,7 +110,7 @@ function whisper(from, userstate, message, self) {
       
       console.log(username + ' is checking their guess')
 
-      request(urlOptions, function(err, res, body) {
+      request(options, function(err, res, body) {
         if (!err && res.statusCode == 200) {
           var message = body
           client.whisper(from, message) 
