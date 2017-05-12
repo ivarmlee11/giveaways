@@ -7,7 +7,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     flash = require('connect-flash'),
     twitchBot = require('../chatBots/twitchBot.js'),
-    binarySearch = require('../helpers/search.js')
+    closestSearch = require('../helpers/search.js')
     // beamBot = require('../chatBots/beamBot.js'), // only emitting channel wide stuff twitch
 
 router.get('/', ensureAuthenticated, modCheck, function(req, res) {
@@ -225,7 +225,7 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
               console.log('all users sorted')
               console.log(allUsers)
               if(allUsers.length > 1) {
-                closest = binarySearch(allUsers, total)
+                closest = closestSearch(allUsers, total)
                 console.log('closest user')
                 console.log(closest)
               } else if (allUsers.length === 1){

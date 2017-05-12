@@ -6,6 +6,7 @@ module.exports = function (array, key) {
       userId: element.userId,
       username: element.username,
       guess: element.guess,
+      auth: element.auth,
       diff: diff
     }
   })
