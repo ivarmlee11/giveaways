@@ -145,8 +145,10 @@ function chat(channel, userstate, message, self) {
             }
           })
         } else {
-          var message = sender + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi coins.'
-          socket.call('msg', [message])            
+          var message = username + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi coins.'
+          console.log('a user with no twitch account just typed !kiwis')
+          console.log(message)
+          client.whisper(username, message)
         }
       })
       break 

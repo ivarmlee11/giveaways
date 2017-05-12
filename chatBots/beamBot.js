@@ -79,7 +79,9 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
               })
             } else {
               var message = sender + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi coins.'
-              socket.call('msg', [message])            
+              console.log('a user with no beam account just typed !kiwis')
+              console.log(message)
+              socket.call('whisper', [sender, message])          
             }
           })
         break
