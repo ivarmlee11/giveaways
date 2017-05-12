@@ -109,7 +109,7 @@ router.post('/viewerAuction/bid', ensureAuthenticated, function(req, res) {
             }
           })
         } else {
-          req.flash('error', 'You lack sufficient Kiwi coins.')
+          req.flash('error', 'You lack sufficient Kiwi Coins.')
           res.redirect('/auction/viewerAuction')
         }
       })

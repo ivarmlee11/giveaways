@@ -141,11 +141,11 @@ function chat(channel, userstate, message, self) {
               client.action('#tweakgames', message)
             } else {
               var message = username + ', please make sure to sign up or re-login to the Tweak Stream Site.'
-              client.action('#tweakgames', message)          
+              client.whisper(username, message)
             }
           })
         } else {
-          var message = username + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi coins.'
+          var message = username + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi Coins.'
           console.log('a user with no twitch account just typed !kiwis')
           console.log(message)
           client.whisper(username, message)

@@ -70,15 +70,15 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
             if(user) {
               user.getKiwi().then(function(kiwi) {
                 if(!kiwi) {
-                  var message = sender + ', please re-login at Tweak\'s Gaming Stream site to start getting Kiwi coins.'
-                  socket.call('msg', [message])    
+                  var message = sender + ', please re-login at Tweak\'s Gaming Stream site to start getting Kiwi Coins.'
+                  socket.call('whisper', [sender, message])
                 } else {
-                  var message = sender + ' has ' + kiwi.points + ' Kiwi coins.'
+                  var message = sender + ' has ' + kiwi.points + ' Kiwi Coins.'
                   socket.call('msg', [message])
                 }
               })
             } else {
-              var message = sender + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi coins.'
+              var message = sender + ', sign up at Tweak\'s Gaming Stream Site to start getting Kiwi Coins.'
               console.log('a user with no beam account just typed !kiwis')
               console.log(message)
               socket.call('whisper', [sender, message])          
