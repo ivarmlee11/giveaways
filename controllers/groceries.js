@@ -232,11 +232,13 @@ router.post('/guessingPeriod/end', ensureAuthenticated, modCheck, function(req, 
                 closest = allUsers[0]
               }
               if(closest) {
-                console.log(closest.username + ', a ' + closest.auth + ' user, won with the guess of $' + closest.guess + '.')
                 winnerString = closest.username + ', a ' + closest.auth + ' user, won with the guess of $' + closest.guess + '.'
               } else {
                 winnerString = 'Nobody won.'
               }
+              console.log('message intended to be broadcast to the twitch server')
+              console.log(typeof winnerString)
+              console.log(winnerString)
               twitchBot.action('#tweakgames', winnerString)
               if(gameId && (allUsers.length > 0)) {
                 db.grocerygame.update({
