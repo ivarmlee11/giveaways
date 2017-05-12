@@ -102,15 +102,16 @@ function whisper(from, userstate, message, self) {
       }
 
       var options = {
-        url: guessEndPoint,
+        url: myGuessEndPoint,
         headers: {
           'verify': 'from a bot'
         }
       }
       
-      console.log(username + ' is checking their guess')
+      console.log(username + ' is checking their guess via twitch')
 
       request(options, function(err, res, body) {
+        console.log(err, body)
         if (!err && res.statusCode == 200) {
           var message = body
           client.whisper(from, message) 

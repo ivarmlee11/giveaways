@@ -137,15 +137,16 @@ function createChatSocket(userId, channelId, endpoints, authkey) {
             }
 
             var options = {
-              url: guessEndPoint,
+              url: myGuessEndPoint,
               headers: {
                 'verify': 'safe'
               }
             }
             
-            console.log(sender + ' is checking their guess')
+            console.log(sender + ' is checking their guess via beam')
 
             request(options, function(err, res, body) {
+              console.log(err, body)
               if (!err && res.statusCode == 200) {
                 var message = body
                 console.log('trying to send  ' + message)
