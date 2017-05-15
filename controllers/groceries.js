@@ -159,7 +159,7 @@ router.get('/guessingPeriod/:username/:auth/:guess', isFromBot, function(req, re
       res.send('The guessing game is not running at this time.')
     }
   }).catch(function(error) {
-    res.send('Error')
+    res.send(error)
   })
 })
 
